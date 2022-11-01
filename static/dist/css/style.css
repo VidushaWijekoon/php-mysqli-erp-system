@@ -1,0 +1,87 @@
+.page-titles {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #ced4da;
+  font-weight: 300;
+  box-sizing: inherit;
+  outline: none;
+  display: contents;
+  flex-wrap: wrap;
+  background: transparent;
+  position: relative;
+  z-index: 10;
+  box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1);
+  padding: 7px;
+  width: 0;
+  margin-top: 5px;
+  font-family: "Poppins", sans-serif;
+}
+
+.content-header {
+  padding: 0;
+}
+
+.info-box {
+  background: #4e586c !important;
+  box-shadow: 0 0 1px rgb(0 0 0 / 13%), 3px 3px 5px rgb(0 0 0 / 20%) !important;
+  font-family: "Poppins", sans-serif;
+}
+
+.info-box-text {
+  font-family: "Poppins", sans-serif;
+}
+
+.elevation-1 {
+  box-shadow: 3px 4px 5px 1px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24) !important;
+  background-color: #246c4e;
+}
+
+.access {
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: auto;
+}
+
+thead {
+  font-size: 12px;
+  background-color: black;
+}
+
+tbody {
+  font-size: 14px;
+}
+
+td {
+  background-color: #343a40;
+  color: #f1eded;
+  text-transform: uppercase;
+}
+
+.btn {
+  font-size: 13px;
+}
+
+.dataTables_wrapper .dataTables_filter {
+  color: #ced4da;
+}
+
+.paginate_button {
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+label {
+  color: #ffffff;
+}
+
+.dataTables_info {
+  color: #ffffff;
+}
+
+.example1_paginate {
+  color: #ced4da;
+}
