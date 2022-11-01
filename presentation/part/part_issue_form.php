@@ -14,82 +14,78 @@ if (!isset($_SESSION['user_id'])) {
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 
-if($role_id = 1 && $department == 11 || $role_id == 4 && $department ==22) {
-    $item_brand=null;
-    $item_model =null;
-    $item_generation =null;
-    $sales_order_id =null;
-    $inventory_id =null;
-    $date =null;
-    $emp_id =null;
-    $location =null;
-    $keyboard =null;
-    $speakers =null;
-    $camera =null;
-    $bazel =null;
-    $lan_cover =null;
-    $mousepad =null;
-    $mouse_pad_button =null;
-    $camera_cable =null;
-    $back_cover =null;
-    $wifi_card =null;
-    $lcd_cable =null;
-    $battery =null;
-    $battery_cable =null;
-    $dvd_rom =null;
-    $dvd_caddy =null;
-    $hdd_caddy =null;
-    $hdd_cable_connector =null;
-    $c_panel_palm_rest =null;
-    $mb_base =null;
-    $hings_cover  =null;
-    $rp_id =null;$item_brand=null;
-    $item_model =null;
-    $item_generation =null;
-    $sales_order_id =null;
-    $inventory_id =null;
-    $date =null;
-    $emp_id =null;
-    $location =null;
-    $keyboard =null;
-    $speakers =null;
-    $camera =null;
-    $bazel =null;
-    $lan_cover =null;
-    $mousepad =null;
-    $mouse_pad_button =null;
-    $camera_cable =null;
-    $back_cover =null;
-    $wifi_card =null;
-    $lcd_cable =null;
-    $battery =null;
-    $battery_cable =null;
-    $dvd_rom =null;
-    $dvd_caddy =null;
-    $hdd_caddy =null;
-    $hdd_cable_connector =null;
-    $c_panel_palm_rest =null;
-    $mb_base =null;
-    $hings_cover  =null;
     
-    if(empty($_SESSION['rp_id'])){
-        $rp_id =null;
-    }else{
-    $rp_id =$_SESSION['rp_id'];
-    }
+$item_brand=null;
+$item_model =null;
+$item_generation =null;
+$sales_order_id =null;
+$inventory_id =null;
+$date =null;
+$emp_id =null;
+$location =null;
+$keyboard =null;
+$speakers =null;
+$camera =null;
+$bazel =null;
+$lan_cover =null;
+$mousepad =null;
+$mouse_pad_button =null;
+$camera_cable =null;
+$back_cover =null;
+$wifi_card =null;
+$lcd_cable =null;
+$battery =null;
+$battery_cable =null;
+$dvd_rom =null;
+$dvd_caddy =null;
+$hdd_caddy =null;
+$hdd_cable_connector =null;
+$c_panel_palm_rest =null;
+$mb_base =null;
+$hings_cover  =null;
+$rp_id =null;$item_brand=null;
+$item_model =null;
+$item_generation =null;
+$sales_order_id =null;
+$inventory_id =null;
+$date =null;
+$emp_id =null;
+$location =null;
+$keyboard =null;
+$speakers =null;
+$camera =null;
+$bazel =null;
+$lan_cover =null;
+$mousepad =null;
+$mouse_pad_button =null;
+$camera_cable =null;
+$back_cover =null;
+$wifi_card =null;
+$lcd_cable =null;
+$battery =null;
+$battery_cable =null;
+$dvd_rom =null;
+$dvd_caddy =null;
+$hdd_caddy =null;
+$hdd_cable_connector =null;
+$c_panel_palm_rest =null;
+$mb_base =null;
+$hings_cover  =null;
+
+if(empty($_SESSION['rp_id'])){
+    $rp_id =null;
+}else{
+$rp_id =$_SESSION['rp_id'];
+}
 ?>
 
 <div class="row page-titles m-2">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i> Part warehouse
-            Dashboard </h3>
+        <h3 class="text-themecolor"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i> Part Issue Form
+        </h3>
     </div>
 </div>
-<?php 
-$query ="SELECT * FROM `part_stock`";
-$query_run = mysqli_query($connection, $query);
-if($rp_id != null){
-?>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-2">
@@ -239,92 +235,5 @@ if($rp_id != null){
         </div>
     </div>
 </div>
-<?php 
-}
-?>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-2">
-            <div class="card mt-3">
-                <div class="card-header bg-secondary">
-                    <h5 class="text-uppercase m-0 p-0">Parts Report</h5>
-                </div>
-                <div class="card-body">
 
-                    <table id="example1" class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>Part ID</th>
-                                <th>Name</th>
-                                <th>Model</th>
-                                <th>Brand</th>
-                                <th>Generation</th>
-                                <th>Capacity</th>
-                                <th>Item QTY</th>
-                                <th>Location</th>
-                            </tr>
-                        </thead>
-                        <tbody class="tbody_1">
-                            <?php
-                            $query = "SELECT * FROM part_stock";
-                            $query_run = mysqli_query($connection, $query);
-                            foreach($query_run as $a){
-                           
-                                ?>
-                            <tr>
-                                <td><?php echo $a['part_inventory_id'] ?></td>
-                                <td><?php echo $a['part_name'] ?></td>
-                                <td><?php echo $a['part_model'] ?></td>
-                                <td><?php echo $a['part_brand'] ?></td>
-                                <td><?php echo $a['part_gen'] ?></td>
-                                <td><?php echo $a['capacity'] ?></td>
-                                <td><?php echo $a['qty'] ?></td>
-                                <td><?php echo $a['location'] ?></td>
-
-                            </tr>
-                            <?php 
-                                    }
-                                
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
-<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-<script>
-$(document).ready(function() {
-    $('#example1').dataTable();
-});
-</script>
-
-<style>
-#example1_length {
-    color: #ced4da;
-}
-
-
-[type='search'] {
-    width: 50%;
-    height: 22px;
-    margin: inherit;
-    margin-top: 4px;
-    font-size: 10px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-    font-size: 12px;
-}
-</style>
-
-
-<?php include_once('../includes/footer.php'); }else{
-        die(access_denied());
-} ?>
+<?php include_once('../includes/footer.php'); ?>

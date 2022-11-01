@@ -43,15 +43,20 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                                 <tr>
                                     <th>SO</th>
                                     <th>Inventory ID</th>
-                                    <th>Sanding</th>
                                     <th>Motherboard</th>
                                     <th>Combine</th>
                                     <th>LCD</th>
                                     <th>Bodywork</th>
+                                    <th>Sanding</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php 
+                                $sanding_count =0;
+                                $motherboard_count=0;
+                                $combine_count=0;
+                                $lcd_count=0;
+                                $bodywork_count=0;
                                 
                                 $query = "SELECT
                                     *
@@ -69,15 +74,27 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                                 <tr>
                                     <td><?php echo $row['sales_order'] ?></td>
                                     <td><?php echo $row['inventory_id'] ?></td>
-                                    <td><?php if($row['issue_type' ] ==1){echo "1"; }?></td>
-                                    <td><?php if($row['issue_type'] == 2){echo "1"; }?></td>
-                                    <td><?php if($row['issue_type' ]== 3){echo "1"; }?></td>
-                                    <td><?php if($row['issue_type']== 4){echo "1"; }?></td>
-                                    <td><?php if($row['issue_type']== 5){echo "1"; }?></td>
+                                    <td><?php if($row['issue_type' ] ==1){$motherboard_count++;echo "1"; }?></td>
+                                    <td><?php if($row['issue_type'] == 2){$combine_count++;echo "1"; }?></td>
+                                    <td><?php if($row['issue_type' ]== 3){$lcd_count++;echo "1"; }?></td>
+                                    <td><?php if($row['issue_type']== 4){$bodywork_count++;echo "1"; }?></td>
+                                    <td><?php if($row['issue_type']== 5){$sanding_count++;echo "1"; }?></td>
+
 
                                 </tr>
                                 <?php } } ?>
+
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2">Total</td>
+                                    <td><?php echo $motherboard_count ?></td>
+                                    <td><?php echo $combine_count ?></td>
+                                    <td><?php echo $lcd_count ?></td>
+                                    <td><?php echo $bodywork_count ?></td>
+                                    <td><?php echo $sanding_count ?></td>
+                                </tr>
+                            </tfoot>
 
                         </table>
                     </div>
