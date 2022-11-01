@@ -43,37 +43,6 @@ $item_brand=null;
     $mb_base =null;
     $hings_cover  =null;
     $rp_id =null;
-// $query = "SELECT * FROM `requested_part_from_production`WHERE created_date = $created_date' AND status =1;";
-// $query_run = mysqli_query($connection, $query);
-// foreach($query_run as $a){
-//     $item_brand = $a['item_brand'];
-//     $item_model = $a['item_model'];
-//     $item_generation = $a['item_generation'];
-//     $sales_order_id = $a['sales_order_id'];
-//     $inventory_id = $a['inventory_id'];
-//     $emp_id =$a['emp_id'];
-//     $location =$a['location'];
-//     $keyboard =$a['keyboard'];
-//     $speakers =$a['speakers'];
-//     $camera =$a['camera'];
-//     $bazel =$a['bazel'];
-//     $lan_cover =$a['lan_cover'];
-//     $mousepad =$a['mousepad'];
-//     $mouse_pad_button =$a['mouse_pad_button'];
-//     $camera_cable =$a['camera_cable'];
-//     $back_cover =$a['back_cover'];
-//     $wifi_card =$a['wifi_card'];
-//     $lcd_cable =$a['lcd_cable'];
-//     $battery =$a['battery'];
-//     $battery_cable =$a['battery_cable'];
-//     $dvd_rom =$a['dvd_rom'];
-//     $dvd_caddy =$a['dvd_caddy'];
-//     $hdd_caddy =$a['hdd_caddy'];
-//     $hdd_cable_connector =$a['hdd_cable_connector'];
-//     $c_panel_palm_rest =$a['c_panel_palm_rest'];
-//     $mb_base =$a['mb_base'];
-//     $hings_cover =$a['hings_cover'];
-// }
 ?>
 
 <div class="row page-titles m-2">
@@ -225,11 +194,9 @@ $item_brand=null;
                                     <?php
                                 $_SESSION['rp_id'] =$rp_id;
                                 ?>
-                                    <!-- <form action=" " method="POST">
-                                        <div class=" mb-2 mt-2">
-                                            <input type="submit" name="submit" style="width: 25%;">
-                                        </div>
-                                    </form> -->
+                                    <a class="btn btn-sm btn-info mt-2" href="./part_stock_report.php">
+                                        Request
+                                    </a>
 
                                 </td>
                             </tr>
