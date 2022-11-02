@@ -16,102 +16,39 @@ $department = $_SESSION['department'];
 if($role_id = 1 && $department == 11) {
 
 $user_id = '';
-$first_name = '';
-$last_name = '';
+$location = '';
 $epf = '';
-$username = '';
-$department = '';
-$email = '';
-$password = '';
-$role = '';
+$user_id = $_GET['user_id'];
 
 if (isset($_GET['user_id'])) {
     // getting the user information
     $user_id = mysqli_real_escape_string($connection, $_GET['user_id']);
     $query = "SELECT * FROM users WHERE user_id = {$user_id} LIMIT 1";
-
     $result_set = mysqli_query($connection, $query);
 
-    if ($result_set) {
-        if (mysqli_num_rows($result_set) == 1) {
-            // user found
-            $result = mysqli_fetch_assoc($result_set);
-            $first_name = $result['first_name'];
-            $last_name = $result['last_name'];
-            $EPF = $result['epf'];
-            $username = $result['username'];
-            $department = $result['department'];
-            $email = $result['email'];
-            $password = $result['password'];
-            $role = $result['role'];
-
-        } else {
-            // user not found
-            header('Location: users.php?err=user_not_found');
-        }
-    } else {
-        // query unsuccessful
-        // header('Location: users.php?err=query_failed');
+    foreach($result_set as $rows){
+        $first_name = $rows['first_name'];
+        $last_name = $rows['last_name'];
+        $epf = $rows['epf'];
+        $username = $rows['username'];
+        $department = $rows['department'];
+        $password = $rows['password'];
+        $role = $rows['role'];
     }
 }
 
 if (isset($_POST['submit'])) {
-    $user_id = $_POST['user_id'];
-    $department = $_POST['department'];
+    $location = $_POST['location'];
 
     if (empty($errors)) {
-        // no errors found... adding new record
-        $first_name = mysqli_real_escape_string($connection, $_POST['first_name']);
-        $last_name = mysqli_real_escape_string($connection, $_POST['last_name']);
-        // email address is already sanitized
-
-        $query = "UPDATE users SET ";
-        $query .= "username = '{$username}' ";
-        $query .= "department = '{$department}' ";
-        $query .= "WHERE user_id = {$user_id} LIMIT 1";
-
+        $query = "UPDATE users SET 'location' = '$location' WHERE user_id = '$user_id'";
+        echo $query;
         $result = mysqli_query($connection, $query);
 
         if ($result) {
-            // query successful... redirecting to users page
-            header('Location: users.php?user_modified=true');
+            echo '<script>alert("Update Location Successfully")</script>';
         } else {
             $errors[] = 'Failed to modify the record.';
-        }
-    }
-
-    if (isset($_POST['submit'])) {
-        $user_id = $_POST['user_id'];
-        $department = $_POST['department'];
-        $username = $_POST['username'];
-
-        // checking required fields
-        $req_fields = array('user_id', 'department');
-        $errors = array_merge($errors, check_req_fields($req_fields));
-
-        // checking max length
-        $max_len_fields = array('department' => 40);
-        $errors = array_merge($errors, check_max_len($max_len_fields));
-
-        if (empty($errors)) {
-            // no errors found... adding new record
-            $department = mysqli_real_escape_string($connection, $_POST['department']);
-            $username = mysqli_real_escape_string($connection, $_POST['username']);
-
-            // $hashed_password = sha1($password);
-
-            $query = "UPDATE users SET ";
-            $query .= "department = '{$department}', username = '{$username}' ";
-            $query .= "WHERE user_id = {$user_id} LIMIT 1";
-
-            $result = mysqli_query($connection, $query);
-
-            if ($result) {
-                // query successful... redirecting to users page
-                // header('Location: users.php?user_changepassword=true');
-            } else {
-                $errors[] = 'Failed to update the department.';
-            }
         }
     }
 }
@@ -193,13 +130,28 @@ if (isset($_POST['submit'])) {
                                 </div>
                             </div>
 
+                            <?php 
+                            
+                            $query1 = "SELECT department, role FROM users WHERE user_id = {$user_id}";
+                            $set = mysqli_query($connection, $query1);
+
+                            foreach($set as $x){
+                                $department1 = $x['department'];       
+                                $role1 = $x['role'];  
+                                
+                                if($department1 == 1 && $role1 == 6){
+                            ?>
                             <div class="row">
-                                <label class="col-sm-3 col-form-label">Email</label>
+                                <label class="col-sm-3 col-form-label">Location</label>
                                 <div class="col-sm-8">
-                                    <input type="text" <?php echo 'value="' . $email . '"'; ?> readonly
-                                        class="form-control" name="email">
+                                    <input type="text" class="form-control" placeholder="Technician Location"
+                                        name="location">
                                 </div>
                             </div>
+
+                            <?php } else {
+                                
+                            } } ?>
 
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Password</label>
@@ -210,6 +162,11 @@ if (isset($_POST['submit'])) {
                                 </div>
                             </div>
 
+                            <?php if($department1 == 1 && $role1 == 6){ ?>
+                            <button type="submit" name="submit"
+                                class="btn mb-2 mt-4 btn-primary btn-sm d-block mx-auto text-center"><i
+                                    class="fa-solid fa-user" style="margin-right: 5px;"></i>Update Location</button>
+                            <?php } ?>
                         </fieldset>
                     </form>
                 </div>

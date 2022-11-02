@@ -17,13 +17,6 @@ if($role_id == 1 && $department == 11 || $role_id == 10 && $department == 2 ||  
 
 ?>
 
-<!-- <div class="row page-titles">
-    <div class="col-md-5 align-self-center"><a href="./warehouse_dashboard.php">
-            <i class="fa-solid fa-home fa-2x m-2" style="color: #ced4da;"></i>
-        </a>
-    </div>
-</div> -->
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-5">
@@ -83,9 +76,8 @@ if($role_id == 1 && $department == 11 || $role_id == 10 && $department == 2 ||  
                                     echo $data['completed_count'];
                                 }
                                 
-                                ?></td>
-
-
+                                ?>
+                                </td>
                                 <td>
                                     <?php
 
@@ -123,20 +115,16 @@ if($role_id == 1 && $department == 11 || $role_id == 10 && $department == 2 ||  
                                 </td>
                                 <td>
                                     <?php 
-                                    echo "<a class='btn btn-xs bg-teal' href=\"warehouse_to_production.php?sales_order_id={$values['sales_order_id']}\"><i
-                                        class='fas fa-eye'></i> </a>";
+                                    echo "<a class='btn btn-xs bg-teal' href=\"warehouse_to_production.php?sales_order_id={$values['sales_order_id']}\">
+                                    <i class='fas fa-eye'></i> </a>";
                                 ?>
                                 </td>
 
                                 <?php }}} ?>
 
                             </tr>
-
-
                         </tbody>
-
                     </table>
-
                 </div>
                 <!-- /.card-body -->
             </div>
@@ -193,4 +181,4 @@ $(document).ready(function() {
 
 <?php include_once('../includes/footer.php'); }else{
         die(access_denied());
-} ?>>
+} ?>

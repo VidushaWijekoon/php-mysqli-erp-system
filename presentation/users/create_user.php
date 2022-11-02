@@ -23,9 +23,8 @@ $last_name = '';
 $epf = '';
 $username = '';
 $department = '';
-$email = '';
-$password = '';
 $role = '';
+$location = '';
 
 if (isset($_POST['submit'])) {
 
@@ -34,34 +33,16 @@ if (isset($_POST['submit'])) {
     $epf = mysqli_real_escape_string($connection, $_POST['epf']);
     $username = mysqli_real_escape_string($connection, $_POST['username']);
     $department = mysqli_real_escape_string($connection, $_POST['department']);
-    $email = mysqli_real_escape_string($connection, $_POST['email']);
     $password = mysqli_real_escape_string($connection, $_POST['password']);
     $role = mysqli_real_escape_string($connection, $_POST['role']);
 
     // checking required fields
-    $req_fields = array('first_name', 'last_name', 'epf', 'username', 'department', 'email', 'password', 'role');
+    $req_fields = array('first_name', 'last_name', 'epf', 'username', 'department', 'password', 'role');
     $errors = array_merge($errors, check_req_fields($req_fields));
 
     // checking max length
-    $max_len_fields = array('first_name' => 50, 'last_name' => 100, 'email' => 100, 'password' => 40, 'username' => 25, 'role' => 25);
+    $max_len_fields = array('first_name' => 50, 'last_name' => 100, 'password' => 40, 'username' => 25, 'role' => 25);
     $errors = array_merge($errors, check_max_len($max_len_fields));
-
-    // checking email address
-    if (!is_email($_POST['email'])) {
-        $errors[] = 'Email address is invalid.';
-    }
-
-    // checking if email address already exists
-    $email = mysqli_real_escape_string($connection, $_POST['email']);
-    $query = "SELECT * FROM users WHERE email = '{$email}' LIMIT 1";
-
-    $result_set = mysqli_query($connection, $query);
-
-    if ($result_set) {
-        if (mysqli_num_rows($result_set) == 1) {
-            $errors[] = 'Email address already exists';
-        }
-    }
 
     // checking if username already exists
     $epf = mysqli_real_escape_string($connection, $_POST['epf']);
@@ -87,29 +68,23 @@ if (isset($_POST['submit'])) {
     }
 
     if (empty($errors)) {
-        // no errors found... adding new record
         $first_name = mysqli_real_escape_string($connection, $_POST['first_name']);
         $last_name = mysqli_real_escape_string($connection, $_POST['last_name']);
         $epf = mysqli_real_escape_string($connection, $_POST['epf']);
         $username = mysqli_real_escape_string($connection, $_POST['username']);
         $department = mysqli_real_escape_string($connection, $_POST['department']);
-        $email = mysqli_real_escape_string($connection, $_POST['email']);
         $password = mysqli_real_escape_string($connection, $_POST['password']);
         $role = mysqli_real_escape_string($connection, $_POST['role']);
 
-        // email address is already sanitized
-        // $hashed_password = sha1($password);
-
         $query = "INSERT INTO users ( ";
-        $query .= "first_name, last_name, epf, username, department, email, password, is_deleted, role, isActive";
+        $query .= "first_name, last_name, epf, username, department, password, is_deleted, role, isActive, location";
         $query .= ") VALUES (";
-        $query .= "'{$first_name}', '{$last_name}', '{$epf}', '{$username}', '{$department}', '{$email}', '{$password}', 0, '{$role}', 0";
+        $query .= "'{$first_name}', '{$last_name}', '{$epf}', '{$username}', '{$department}', '{$password}', 0, '{$role}', 0, 0";
         $query .= ")";
         $result = mysqli_query($connection, $query);
 
         $new = $connection->insert_id;
-        // echo (int)$new;
-
+        
         if ($result) {
             echo '<script>alert("User Added Successfully")</script>';
         } else {
@@ -132,10 +107,29 @@ if (isset($_POST['submit'])) {
         <div class="col-lg-6 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card mt-3">
                 <div class="card-header">
-
                     <form action="" method="POST">
+                        <?php if (!empty($errors)) { display_errors($errors); } ?>
                         <fieldset>
                             <legend>Create New User</legend>
+
+                            <div class="row">
+                                <label class="col-sm-3 col-form-label">Department</label>
+                                <div class="col-sm-8">
+                                    <select name="epf" style="border-radius: 5px;">
+                                        <option selected>--Select Department--</option>
+                                        <?php
+                                            $query = "SELECT emp_id FROM employees ORDER BY `emp_id` DESC";
+                                            $result = mysqli_query($connection, $query);
+
+                                            while ($emp_id = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
+                                            ?>
+                                        <option value="<?php echo $emp_id["emp_id"]; ?>">
+                                            <?php echo strtoupper($emp_id["emp_id"]); ?>
+                                        </option>
+                                        <?php endwhile; ?>
+                                    </select>
+                                </div>
+                            </div>
 
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">First Name</label>
@@ -150,14 +144,6 @@ if (isset($_POST['submit'])) {
                                     <input type="text" class="form-control" placeholder="Last Name" name="last_name">
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <label class="col-sm-3 col-form-label">epf</label>
-                                <div class="col-sm-8">
-                                    <input type="number" class="form-control" placeholder="epf" name="epf">
-                                </div>
-                            </div>
-
 
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Username</label>
@@ -180,12 +166,11 @@ if (isset($_POST['submit'])) {
                                         <option value="<?php echo $department["department_id"]; ?>">
                                             <?php echo strtoupper($department["department"]); ?>
                                         </option>
-                                        <?php
-                                            endwhile;
-                                            ?>
+                                        <?php endwhile; ?>
                                     </select>
                                 </div>
                             </div>
+
 
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Role</label>
@@ -193,25 +178,16 @@ if (isset($_POST['submit'])) {
                                     <select name="role" style="border-radius: 5px;">
                                         <option selected>--Select Role --</option>
                                         <?php
-                                                $query = "SELECT * FROM tbl_roles ORDER BY `role` ASC";
-                                                $result = mysqli_query($connection, $query);
+                                            $query = "SELECT * FROM tbl_roles ORDER BY `role` ASC";
+                                            $result = mysqli_query($connection, $query);
 
-                                                while ($categories = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                                ?>
+                                            while ($categories = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
+                                            ?>
                                         <option value="<?php echo $categories["role_id"]; ?>">
                                             <?php echo strtoupper($categories["role"]); ?>
                                         </option>
-                                        <?php
-                                                endwhile;
-                                                ?>
+                                        <?php endwhile; ?>
                                     </select>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <label class="col-sm-3 col-form-label">Email</label>
-                                <div class="col-sm-8">
-                                    <input type="email" class="form-control" placeholder="Email" name="email">
                                 </div>
                             </div>
 
@@ -226,16 +202,7 @@ if (isset($_POST['submit'])) {
                                 class="btn mb-2 mt-4 btn-primary btn-sm d-block mx-auto text-center"><i
                                     class="fa-solid fa-user" style="margin-right: 5px;"></i>Create User</button>
 
-
-
                         </fieldset>
-                        <?php
-
-                    if (!empty($errors)) {
-                        display_errors($errors);
-                    }
-
-                    ?>
                     </form>
 
                 </div>
@@ -244,7 +211,6 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
 </div>
-
 
 <style>
 fieldset,
