@@ -117,7 +117,7 @@ if (isset($_GET['emp_id'])) {
                                 <td class="text-capitalize"><?php echo $items['gender'] ?></td>
                                 <td class="text-capitalize"><?php echo $items['resident_country'] ?></td>
                                 <td class="text-center">
-                                    <span class="badge badge-lg badge-info text-white px-5">Active</span>
+                                    <span class="badge badge-lg badge-info text-white p-1 px-3">Active</span>
                                 </td>
                                 <td class="text-capitalize"><?php echo $items['join_date'] ?></td>
                                 <td>
@@ -156,11 +156,10 @@ $(document).ready(function() {
 </script>
 
 <style>
- 
 #example1_length {
     color: #ced4da;
 }
- 
+
 [type='search'] {
     width: 50%;
     height: 22px;
@@ -172,7 +171,6 @@ $(document).ready(function() {
     border-radius: 5px;
     font-size: 12px;
 }
- 
 </style>
 
 <?php include_once('../includes/footer.php'); }else{

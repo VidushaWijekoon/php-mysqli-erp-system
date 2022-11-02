@@ -40,7 +40,7 @@ if($role_id = 1 && $department == 11) {
                                 <th>EPF</th>
                                 <th>Username</th>
                                 <th>Department</th>
-                                <th>Email</th>
+                                <th>Location</th>
                                 <th>Role</th>
                                 <th>Status</th>
                                 <th>&nbsp;</th>
@@ -66,13 +66,13 @@ if($role_id = 1 && $department == 11) {
                                 <td><?php echo $users['epf'] ?></td>
                                 <td><?php echo $users['username'] ?></td>
                                 <td><?php echo $users['department'] ?></td>
-                                <td><?php echo $users['email'] ?></td>
+                                <td><?php echo $users['location'] ?></td>
                                 <td><?php echo $users['role'] ?></td>
                                 <td class="text-center">
                                     <?php if($users['is_deleted'] == 0) { ?>
-                                    <span class="badge badge-lg badge-info text-white px-3">Active</span>
+                                    <span class="badge badge-lg badge-info text-white p-1 px-3">Active</span>
                                     <?php } elseif($users['is_deleted'] == 1) { ?>
-                                    <span class="badge badge-lg badge-danger text-white px-3">In Active</span>
+                                    <span class="badge badge-lg badge-danger text-white p-1 px-3">In Active</span>
                                     <?php } ?>
                                 </td>
                                 <td>
@@ -106,7 +106,6 @@ $(document).ready(function() {
 </script>
 
 <style>
-
 #example1_length {
     color: #ced4da;
 }
