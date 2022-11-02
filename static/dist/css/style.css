@@ -85,3 +85,11 @@ label {
 .example1_paginate {
   color: #ced4da;
 }
+
+.col-form-label {
+  font-weight: 400 !important;
+}
+
+.label_values {
+  font-weight: 400 !important;
+}
