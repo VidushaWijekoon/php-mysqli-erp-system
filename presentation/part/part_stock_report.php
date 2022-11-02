@@ -71,12 +71,9 @@ if($role_id = 1 && $department == 11 || $role_id == 4 && $department ==22) {
     $c_panel_palm_rest =null;
     $mb_base =null;
     $hings_cover  =null;
+     
     
-    if(empty($_SESSION['rp_id'])){
-        $rp_id =null;
-    }else{
-    $rp_id =$_SESSION['rp_id'];
-    }
+    $rp_id = $_GET['id'];
 ?>
 
 <div class="row page-titles m-2">
@@ -222,8 +219,9 @@ if($rp_id != null){
                                     $count++;
                                     echo $count .": LAN Cover </br>";
                                 }?>
-                                    <a class="btn btn-sm btn-info mt-2" href="./part_issue_form.php">
-                                        Issue
+                                    <a class="btn btn-sm btn-info mt-2"
+                                        href="./part_issue_form.php?id=<?php echo $rp_id ?>">
+                                        Prepare
                                     </a>
 
                                 </td>

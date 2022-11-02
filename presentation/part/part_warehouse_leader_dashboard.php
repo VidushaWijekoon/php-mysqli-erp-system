@@ -39,54 +39,61 @@ $day;
             $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
             $date = $date1->format('Y-m-d');
                 foreach($query_run as $a){
+                    $created_date = $a['date'];
+                    $date0=date_create($created_date);
+                    date_sub($date0,date_interval_create_from_date_string("7 days"));
+                    $past_7_days= date_format($date0,"Y-m-d");
+                    $created_date = $a['date'];
+                    $date14=date_create($created_date);
+                    date_sub($date14,date_interval_create_from_date_string("14 days"));
+                    $past_14_days= date_format($date14,"Y-m-d");
+
+                    $query1 ="SELECT COUNT(1) AS entries7
+                        FROM requested_part_from_production
+                        WHERE status =1 AND created_date ='$past_7_days'
+                        GROUP BY DATE(created_date) ORDER BY DATE(created_date);";
+                    $query_run1 = mysqli_query($connection, $query1);
+
+                    $query2 ="SELECT COUNT(1) AS entries14 
+                        FROM requested_part_from_production
+                        WHERE status =1 AND created_date ='$past_14_days'
+                        GROUP BY DATE(created_date) ORDER BY DATE(created_date);";
+                    $query_run2 = mysqli_query($connection, $query2);
+                    $last_7_dayes_entry =0;
+                    $last_14_dayes_entry = 0;
+                    if(empty($query_run1)){}else{foreach($query_run1 as $b){ $last_7_dayes_entry = $b['entries7'];}}
+                    if(empty($query_run2)){}else{foreach($query_run2 as $c){ $last_14_dayes_entry = $c['entries14'];}}
                 $day = $a['date'];
                 $timestamp = strtotime($day);
                 $day = date('D', $timestamp);
+                $datedb = $created_date;
+                $today = date('l', strtotime($datedb));
                 // echo $a['date'];
                 $date2=date_create($a['date']);
                 $date1=date_create($date);
                 $diff=date_diff($date1,$date2);
                 $date_diff = $diff->format("%a ");
                 if($date_diff <7){
+                    $request = $a['entries'] + $last_7_dayes_entry + $last_14_dayes_entry;
+
                     ?>
-            <a href="part_warehouse_task_view.php?date=<?php echo $a['date']?>">
+            <a href="part_task_list_by_technician.php?date=<?php echo $a['date'] ?>&day=<?php echo $day ?>">
                 <div class="card">
                     <div class="card-header bg-info" style="color:black !important">
-                        <?php echo $day ?>
+                        <?php echo $today ?>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">You have <?php echo $a['entries']; ?> parts request</h5>
+                        <h5 class="card-title">You have <?php echo $request; ?> parts request</h5>
                     </div>
                 </div>
             </a>
             <?php
-                } elseif($date_diff >7 && $date_diff <14) { 
+                } 
                 ?>
-            <a href="part_warehouse_task_view.php?date=<?php echo $a['date']?>">
-                <div class="card">
-                    <div class="card-header bg-warning " style="color:black !important">
-                        <?php echo $day ?>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">You have <?php echo $a['entries']; ?> parts request</h5>
-                    </div>
-                </div>
-            </a>
+
+
             <?php
-                }else{
-                    ?>
-            <a href="part_warehouse_task_view.php?date=<?php echo $a['date']?>">
-                <div class="card">
-                    <div class="card-header bg-danger " style="color:white !important">
-                        <?php echo $day ?>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">You have <?php echo $a['entries']; ?> parts request</h5>
-                    </div>
-                </div>
-            </a>
-            <?php
-                }
+                
                 }
             ?>
         </div>
