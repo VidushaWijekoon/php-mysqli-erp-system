@@ -40,7 +40,7 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
 
 <!-- Info boxes -->
 <?php $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-                                                $date = $date1->format('Y-m-d H:i:s');
+        $date = $date1->format('Y-m-d H:i:s');
                                                 $dt = new DateTime;
                                                 $dt->setTime(0, 0);
                                                 $dt->format('Y-m-d H:i:s');
@@ -223,18 +223,20 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                                     $sql = "SELECT SUM(item_quantity) AS No_of_Records FROM sales_order_add_items WHERE sales_order_id ={$items['sales_order_id']} ";
                                     $row = mysqli_fetch_assoc($connection->query($sql) );
                                     $sum = $row['No_of_Records'];
-                                      $query_1 ="SELECT COUNT(tech_id) AS tech_id FROM `prod_info` WHERE sales_order ={$items['sales_order_id']} AND status = 0 ";
-                                     $query_run_new = mysqli_query($connection, $query_1);
-                                     foreach($query_run_new as $a){
+                                    
+                                    $query_1 ="SELECT COUNT(tech_id) AS tech_id FROM `prod_info` WHERE sales_order ={$items['sales_order_id']} AND status = 0 ";
+                                    $query_run_new = mysqli_query($connection, $query_1);
+                                    foreach($query_run_new as $a){
                                             $tested_unit = $a['tech_id'];
-                                     }
+                                    }
                                      /////////////////////////////////////////////
                                      //retrive production team leader scanned item
-                                      $query_2 = "SELECT COUNT(production_id) AS production_id FROM `production` WHERE sales_order_id={$items['sales_order_id']};";
-                                            $query_result2 = mysqli_query($connection,$query_2);
-                                            foreach($query_result2 as $a){
-                                                $received_unit = $a['production_id'];
-                                            }
+                                    $query_2 = "SELECT COUNT(production_id) AS production_id FROM `production` WHERE sales_order_id={$items['sales_order_id']};";
+                                    $query_result2 = mysqli_query($connection,$query_2);
+                                        foreach($query_result2 as $a){
+                                            $received_unit = $a['production_id'];
+                                            
+                                        }
                                             ///////////////////////////////////////////////
                             ?>
 
@@ -327,7 +329,6 @@ $(document).ready(function() {
 </script>
 
 <style>
- 
 [type='search'] {
     height: 22px;
     margin: inherit;
@@ -338,7 +339,6 @@ $(document).ready(function() {
     border-radius: 5px;
     font-size: 12px;
 }
- 
 </style>
 
 <?php include_once('../includes/footer.php'); }else{

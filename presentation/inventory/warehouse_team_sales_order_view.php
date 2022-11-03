@@ -154,12 +154,6 @@ if (isset($_GET['sales_order_id'])) {
 
 
 <style>
-fieldset,
-legend {
-    all: revert;
-    font-size: 12px;
-}
-
 select,
 input[type="text"] {
     width: 100%;

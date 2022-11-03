@@ -1606,56 +1606,6 @@ $(document).ready(function() {
 .modal-content {
     margin-top: 8rem;
 }
-
-.table.dataTable tbody tr {
-    background-color: #212529;
-}
-
-#example1_length {
-    color: #ced4da;
-}
-
-.dataTables_wrapper .dataTables_filter {
-    color: #ced4da;
-}
-
-.paginate_button {
-    border-radius: 12px;
-    font-size: 12px;
-}
-
-[type='search'] {
-    height: 22px;
-    margin: inherit;
-    margin-top: 4px;
-    font-size: 10px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-    font-size: 12px;
-}
-
-.tbody_1 {
-    font-family: 'Bree Serif', serif;
-
-}
-
-.dataTables_length {
-    color: red;
-}
-
-label {
-    color: #fff;
-}
-
-select {
-    border-radius: 10px;
-    margin: 0 5px;
-}
-
-option {
-    padding: 0 5px;
-}
 </style>
 
 <?php include_once('../includes/footer.php'); }else{

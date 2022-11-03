@@ -108,35 +108,6 @@ if($role_id = 1 && $department == 11 || $role_id = 6 && $department == 1) {
     </div>
 </div>
 
-<style>
-fieldset,
-legend {
-    all: revert;
-    font-size: 12px;
-}
-
-textarea {
-    text-transform: uppercase;
-}
-
-select,
-input[type="text"],
-[type="search"] {
-    height: 22px;
-    width: 50%;
-    margin: inherit;
-    margin-top: 4px;
-    font-size: 10px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 10px;
-    padding-left: 15px;
-    margin-bottom: 10px;
-    color: black;
-
-}
-</style>
-
 <?php include_once('../includes/footer.php'); }else{
         die(access_denied());
 } ?>

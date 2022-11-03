@@ -455,12 +455,6 @@ if (isset($_POST['submit'])) {
 
 
 <style>
-fieldset,
-legend {
-    all: revert;
-    font-size: 12px;
-}
-
 textarea {
     text-transform: uppercase;
 }

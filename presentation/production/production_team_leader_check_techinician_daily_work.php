@@ -11,9 +11,55 @@ if (!isset($_SESSION['user_id'])) {
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 
+$emp_id = $_GET['emp_id'];
+$first_name = $_GET['first_name'];
+
 if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
 
+$date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+        $date = $date1->format('Y-m-d H:i:s');
+
+        $dt = new DateTime;
+        $dt->setTime(0, 0);
+        $dt->format('Y-m-d H:i:s');
+        $dt->add(new DateInterval('PT4H'));
+        $start_time= $dt->format('H:i:s');
+        $current_time= $date;
+                                                 
+        $query ="SELECT issue_type FROM prod_info WHERE end_date_time BETWEEN '$start_time' AND '$current_time'";
+        $query_e6 = mysqli_query($connection, $query);
+        $motherboard =0;
+        $combind =0;
+        $lcd =0;
+        $bodywork =0;
+        $qc =0;
+                                               
+         foreach($query_e6 as $data){
+            if(empty($data)){
+                
+            }else{
+            if($data['issue_type'] ==1){
+                $motherboard++;
+            }
+             if($data['issue_type'] ==2){
+                $combind++;
+            }
+            if($data['issue_type'] ==3){
+                $lcd++;
+            }
+            if($data['issue_type'] ==4){
+                $bodywork++;
+            }
+            if($data['issue_type'] ==5){
+                $qc++;
+            }
+        }
+    }                                      
+
+
 ?>
+
+
 
 <div class="row page-titles m-2">
     <div class="col-md-5 align-self-center">
@@ -23,6 +69,79 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
     </div>
 </div>
 
+<!-- Light Box -->
+<div class="row m-2 mx-auto justify-content-center">
+    <div class="col-12 col-sm-6 col-md-2 mt-3">
+        <div class="info-box">
+            <span class="info-box-icon bg-gradient-info elevation-1"><i class="fa-solid fa-keyboard"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Send to Motherboard</span>
+                <span class="info-box-number"><?php echo $motherboard ?> </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-12 col-sm-6 col-md-2 mt-3">
+        <div class="info-box mb-3">
+            <span class="info-box-icon bg-gradient-secondary elevation-1">
+                <i class="fa-solid fa-object-group"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Combine</span>
+                <span class="info-box-number"><?php echo $combind ?> </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+
+    <!-- fix for small devices only -->
+    <div class="clearfix hidden-md-up"></div>
+
+    <div class="col-12 col-sm-6 col-md-2 mt-3">
+        <div class="info-box mb-3">
+            <span class="info-box-icon bg-gradient-danger elevation-1"><i class="fas fa-tv"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Send to LCD</span>
+                <span class="info-box-number"> <?php echo $lcd ?> </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-12 col-sm-6 col-md-2 mt-3">
+        <div class="info-box mb-3">
+            <span class="info-box-icon bg-gradient-dark elevation-1"><i class="fas fa-laptop"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Send to Bodywork</span>
+                <span class="info-box-number"> <?php echo $bodywork ?> </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-12 col-sm-6 col-md-2 mt-3">
+        <div class="info-box mb-3">
+            <span class="info-box-icon bg-gradient-success elevation-1"><i class="fas fa-stethoscope"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Sanding</span>
+                <span class="info-box-number"> <?php echo $qc ?> </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+
+</div>
+<!-- /.row -->
+
 <div class="container-fluid mt-3">
     <div class="row">
         <!-- ============================================================== -->
@@ -31,9 +150,22 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
         <div
             class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 grid-margin stretch-card justify-content-center mx-auto">
             <div class="card">
-                <div class="card-header">
-                    <h5 class="mb-0">Technician Daily Work</h5>
+                <div class="card-header d-flex">
+                    <form action="" method="GET">
+                        <div id="reportrange">
+                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                            <span></span> <b class="caret"></b>
+                        </div>
+                    </form>
+
+                    <div class="ml-auto d-flex">
+                        <span class="mx-2 mt-1">Search</span>
+                        <input type="search" id="search" name="search" value="<?php if (isset($_GET['search'])) {
+                                                                                        echo $_GET['search'];
+                                                                                    } ?>" placeholder="Search">
+                    </div>
                 </div>
+
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="example4" class="table table-striped table-bordered" style="width:100%">
@@ -50,8 +182,9 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                             </thead>
                             <tbody>
                                 <?php
-
-
+                                    if(isset($_GET['Today'])){
+                                        echo isset($_GET['Today']);
+                                    }
                                         $query = "SELECT
                                                     employees.emp_id,
                                                     employees.department,
@@ -141,6 +274,62 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
         <!-- ============================================================== -->
     </div>
 </div>
+
+<script type="text/javascript">
+$(function() {
+
+    var start = moment().subtract(29, 'days');
+    var end = moment();
+
+    function cb(start, end) {
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    }
+
+    $('#reportrange').daterangepicker({
+        startDate: start,
+        endDate: end,
+        ranges: {
+            'Today': [moment(), moment()],
+            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'This Month': [moment().startOf('month'), moment().endOf('month')],
+            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month')
+                .endOf('month')
+            ]
+        }
+    }, cb);
+
+    cb(start, end);
+
+});
+</script>
+
+<style>
+[type='search'] {
+    width: 75%;
+    height: 22px;
+    margin: inherit;
+    margin-top: 4px;
+    font-size: 10px;
+    text-transform: uppercase;
+    border: 1px solid #f1f1f1;
+    border-radius: 5px;
+    font-size: 10px;
+    padding: 7px;
+}
+
+#reportrange {
+    background: #6c757d;
+    border-radius: 5px;
+    padding: 3px 10px;
+}
+
+.ranges {
+    font-family: "Poppins", sans-serif;
+
+}
+</style>
 
 <?php include_once('../includes/footer.php'); }else{
         die("<h3 class='text-danger'><<<<<< Access Denied >>>>></h3>");

@@ -275,26 +275,6 @@ if (isset($_GET['sales_order_id'])) {
 <!-- /.modal -->
 
 <style>
-fieldset,
-legend {
-    all: revert;
-    font-size: 12px;
-}
-
-select,
-input[type="text"] {
-    width: 100%;
-    height: 30px;
-    margin: inherit;
-    margin-top: 4px;
-    font-size: 10px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-    font-size: 12px;
-    background-color: black;
-}
-
 .btn {
     margin: auto;
     float: right;
