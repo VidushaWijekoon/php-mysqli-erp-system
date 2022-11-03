@@ -25,7 +25,7 @@ if (!isset($_SESSION['user_id'])) {
                     <h5 class="text-uppercase m-0 p-0">Invoices</h5>
                 </div>
                 <div class="card-body">
-                    <table id="example1" class="table table-bordered table-striped">
+                    <table id="example2" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -77,17 +77,5 @@ if (!isset($_SESSION['user_id'])) {
     </div>
 </div>
 
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
-<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-
-<script>
-$(document).ready(function() {
-    $('#example1').dataTable();
-});
-</script>
 
 <?php include_once('../includes/footer.php'); ?>

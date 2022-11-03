@@ -75,11 +75,24 @@ if (isset($_GET['emp_id'])) {
     <div class="row">
         <div class="col-lg-11 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card mt-3">
-                <div class="card-header bg-secondary">
-                    <p class="text-uppercase m-0 p-0">Employees</p>
+                <div class="card-header d-flex bg-secondary">
+                    <div class="mr-auto">
+                        <div class="text-center mx-auto mt-1 text-uppercase" style="font-size: 14px;">
+                            Employees
+                        </div>
+                    </div>
+                    <form action="" method="GET">
+                        <div class="input-group">
+                            <span class="mt-1 mx-3" style="font-size: 14px;">Search :</span>
+                            <input type="search" name="search"
+                                value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" class="form-control"
+                                placeholder="Search data">
+                        </div>
+                    </form>
                 </div>
+
                 <div class="card-body">
-                    <table id="example1" class="table table-bordered table-striped">
+                    <table id="example2" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -97,14 +110,16 @@ if (isset($_GET['emp_id'])) {
                         <tbody class="tbody_1">
 
                             <?php 
-                                $employee_list = '';
 
-                                // getting the list of users
-                                $query = "SELECT * FROM employees  ORDER BY emp_id ASC";
+                                if (isset($_GET['search'])) {
+                                    $filtervalues = $_GET['search'];
+
+                                $query = "SELECT * FROM employees 
+                                WHERE CONCAT(first_name, last_name, department, emp_id, birthday, current_passport, labour_category) LIKE '%$filtervalues%'
+                                ORDER BY emp_id ASC";
                                 $results = mysqli_query($connection, $query);
 
-                                if ($rowcount = mysqli_fetch_assoc($results)) {
-                                    foreach ($results as $items) {
+                                     foreach ($results as $items) {
 
                                  ?>
 
@@ -127,13 +142,38 @@ if (isset($_GET['emp_id'])) {
                                                                            
                                 ?>
                                 </td>
-
                             </tr>
 
-                            <?php
-                                    }
-                                }
+                            <?php }
+                                }else{
+                                    $query = "SELECT * FROM employees";
+                                    $results = mysqli_query($connection, $query);
+
+                                        foreach ($results as $items) {
+                                    ?>
+
+                            <tr>
+                                <td class="text-capitalize"><?php echo $items['emp_id'] ?></td>
+                                <td class="text-capitalize"><?php echo $items['first_name'] ?></td>
+                                <td class="text-capitalize"><?php echo $items['last_name'] ?></td>
+                                <td class="text-capitalize"><?php echo $items['current_passport'] ?></td>
+                                <td class="text-capitalize"><?php echo $items['department'] ?></td>
+                                <td class="text-capitalize"><?php echo $items['gender'] ?></td>
+                                <td class="text-capitalize"><?php echo $items['resident_country'] ?></td>
+                                <td class="text-center">
+                                    <span class="badge badge-lg badge-info text-white p-1 px-3">Active</span>
+                                </td>
+                                <td class="text-capitalize"><?php echo $items['join_date'] ?></td>
+                                <td>
+                                    <?php 
+                                    echo "<a class='btn btn-xs bg-primary mx-2' href=\"employee_details.php?emp_id={$items['emp_id']}\"><i class='fas fa-eye'></i> </a>";
+                                    echo "<a class='btn btn-xs bg-warning mx-2' href=\"edit_employee.php?emp_id={$items['emp_id']}\"><i class='fa-solid fa-pen'></i> </a>";
+                                                                           
                                 ?>
+                                </td>
+                            </tr>
+
+                            <?php } } ?>
                         </tbody>
 
                     </table>
@@ -143,18 +183,6 @@ if (isset($_GET['emp_id'])) {
         </div>
     </div>
 </div>
-
-<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
-<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-
-<script>
-$(document).ready(function() {
-    $('#example1').dataTable();
-});
-</script>
-
 
 <?php include_once('../includes/footer.php'); }else{
         die(access_denied());
