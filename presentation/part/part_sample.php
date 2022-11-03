@@ -46,7 +46,7 @@ if (!isset($_SESSION['user_id'])) {
                                         <tr>
                                             <td>#</td>
                                             <td>Keyboard</td>
-                                            <td>000100</td>
+                                            <td><input type="number"></td>
                                             <td><input type="number"></td>
                                             <td>&nbsp;</td>
                                         </tr>

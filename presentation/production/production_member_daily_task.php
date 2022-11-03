@@ -262,8 +262,16 @@ foreach($query_tech as $data){
                                                         if ($values['issue_type'] ==1) {
                                                             echo '<span class="badge badge-lg badge-danger text-white px-2">Motherboard Issue</span>';
                                                         }if ($values['issue_type'] ==2) {
+                                                            
                                                             $query_1 ="SELECT  `status`FROM `requested_part_from_production` WHERE inventory_id = $inventory_id";
                                                             $query_run = mysqli_query($connection, $query_1);
+
+                                                            $query_2 ="SELECT  `status`FROM `combine_check` WHERE inventory_id = $inventory_id";
+                                                            $query_run_2 = mysqli_query($connection, $query_2);
+                                                            $combine_status;
+                                                            foreach($query_run_2 as $c){
+                                                                $combine_status = $c['status'];
+                                                            }
                                                             $received =null;
                                                             if(empty($query_run)){
                                                                 $received ='1';
@@ -271,9 +279,9 @@ foreach($query_tech as $data){
                                                                 foreach($query_run as $a){
                                                                     $received = $a['status'];
                                                                 }
-                                                            }
-                                                            
-                                                            if($received == 0){
+                                                            }if($combine_status == 0 && $received == 0){
+                                                                echo "combine ok";
+                                                            }elseif($received == 0){
                                                                 echo "<a class='btn btn-sm '
                                                                 href=\"production_checklist.php?emp_id={$emp_id}&inventory_id={$values['inventory_id']}&sales_order_id={$values['sales_order_id']}\">
                                                                 <span class='badge badge-lg badge-warning text-white px-2'>Combine Issue</span>
