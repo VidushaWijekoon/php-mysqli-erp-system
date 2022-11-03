@@ -22,11 +22,23 @@ if (!isset($_SESSION['user_id'])) {
     <div class="row">
         <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card mt-3">
-                <div class="card-header bg-secondary">
-                    <h4 class="text-uppercase m-0 p-0">Quotation List</h4>
+                <div class="card-header d-flex bg-secondary">
+                    <div class="mr-auto">
+                        <div class="text-center mx-auto mt-1 text-uppercase" style="font-size: 14px;">
+                            Quotations
+                        </div>
+                    </div>
+                    <form action="" method="GET">
+                        <div class="input-group">
+                            <span class="mt-1 mx-3" style="font-size: 14px;">Search :</span>
+                            <input type="search" name="search"
+                                value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" class="form-control"
+                                placeholder="Search data">
+                        </div>
+                    </form>
                 </div>
                 <div class="card-body">
-                    <table id="example1" class="table table-bordered table-striped">
+                    <table id="example2" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -36,16 +48,25 @@ if (!isset($_SESSION['user_id'])) {
                                 <th>&nbsp;</th>
                             </tr>
                         </thead>
-                        <tbody class="tbody_1">
+                        <tbody>
                             <?php 
-                                // getting the list of users
+
+                                if (isset($_GET['search'])) {
+                                    $filtervalues = $_GET['search'];
+
                                 $query = "SELECT * FROM sales_quatation
-                                        INNER JOIN sales_quatation_items ON sales_quatation.created_date = sales_quatation_items.created_date 
-                                        GROUP BY sales_quatation.quatation_id;";
+                                        INNER JOIN sales_quatation_items ON sales_quatation.created_date = sales_quatation_items.created_date
+                                        WHERE CONCAT(
+                                                sales_quatation.quatation_id,
+                                                sales_quatation_items.sales_quatations_items_id,
+                                                sales_quatation.customer_name,
+                                                sales_quatation.contact_number,
+                                                sales_quatation.company_name,
+                                                sales_quatation.contact_person
+                                            ) LIKE '%$filtervalues%' GROUP BY sales_quatation.quatation_id ";
                                 $results = mysqli_query($connection, $query);
 
-                                if (mysqli_fetch_assoc($results)) {
-                                    foreach ($results as $items) {
+                                foreach ($results as $items) {
                             ?>
                             <tr>
                                 <td><?php echo $items['quatation_id']; ?></td>
@@ -61,6 +82,39 @@ if (!isset($_SESSION['user_id'])) {
                                     ?>
                                 </td>
                             </tr>
+                            <?php }  
+                            
+                                }else{
+                                        $query = "SELECT * FROM sales_quatation
+                                                INNER JOIN sales_quatation_items ON sales_quatation.created_date = sales_quatation_items.created_date
+                                                WHERE CONCAT(
+                                                        sales_quatation.quatation_id,
+                                                        sales_quatation_items.sales_quatations_items_id,
+                                                        sales_quatation.customer_name,
+                                                        sales_quatation.contact_number,
+                                                        sales_quatation.company_name,
+                                                        sales_quatation.contact_person
+                                                    ) GROUP BY sales_quatation.quatation_id";
+
+                                                $results = mysqli_query($connection, $query);
+                                                foreach ($results as $items) {
+                                
+                            ?>
+                            <tr>
+                                <td><?php echo $items['quatation_id']; ?></td>
+                                <td><?php echo $items['customer_name']; ?></td>
+                                <td><?php echo $items['created_date']; ?></td>
+                                <td><?php echo $items['item_delivery_date']; ?></td>
+                                <td class='text-center'>
+                                    <?php 
+                                        echo "<a class='btn btn-xs btn-secondary mx-1' href=\"quatation_view.php?quatation_id={$items['quatation_id']}\"><i class='fa-solid fa-eye'></i> </a>";
+                                        echo "<a class='btn btn-xs btn-success mx-1' href=\"\"><i class='fa-solid fa-download'></i> </a>";
+                                        echo "<a class='btn btn-xs btn-primary mx-1' href=\"\"><i class='fa-solid fa-envelope'></i> </a>";
+                                        echo "<a class='btn btn-xs btn-danger mx-1' href=\"\"><i class='fa-solid fa-trash-can'></i> </a>";
+                                    ?>
+                                </td>
+                            </tr>
+
                             <?php } } ?>
                         </tbody>
 
@@ -72,20 +126,6 @@ if (!isset($_SESSION['user_id'])) {
         </div>
     </div>
 </div>
-
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
-<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-
-<script>
-$(document).ready(function() {
-    $('#example1').dataTable();
-});
-</script>
-
 
 
 <?php include_once('../includes/footer.php'); ?>

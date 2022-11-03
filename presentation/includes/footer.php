@@ -43,6 +43,7 @@ $.widget.bridge('uibutton', $.ui.button)
        <script src="../../static/dist/js/adminlte.js"></script>
        <!-- AdminLTE for demo purposes -->
        <script src="../../static/dist/js/demo.js"></script>
+       <script src="../../static/dist/js/app.js"></script>
        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
        <script src="../../static/dist/js/pages/dashboard2.js"></script>
        <!-- jQuery Mapael -->
@@ -50,6 +51,20 @@ $.widget.bridge('uibutton', $.ui.button)
        <script src="../../static/plugins/raphael/raphael.min.js"></script>
        <script src="../../static/plugins/jquery-mapael/jquery.mapael.min.js"></script>
        <script src="../../static/plugins/jquery-mapael/maps/usa_states.min.js"></script>
+       <script src="../../plugins/jquery/jquery.min.js"></script>
+       <!-- DataTables  & Plugins -->
+       <script src="../../static/plugins/datatables/jquery.dataTables.min.js"></script>
+       <script src="../../static/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+       <script src="../../static/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+       <script src="../../static/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+       <script src="../../static/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+       <script src="../../static/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+       <script src="../../static/plugins/jszip/jszip.min.js"></script>
+       <script src="../../static/plugins/pdfmake/pdfmake.min.js"></script>
+       <script src="../../static/plugins/pdfmake/vfs_fonts.js"></script>
+       <script src="../../static/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+       <script src="../../static/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+       <script src="../../static/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
        </body>
 
        </html>
