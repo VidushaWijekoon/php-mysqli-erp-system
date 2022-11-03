@@ -129,7 +129,7 @@ if (isset($_GET['sales_order_id'])) {
         $speakers = $data['speakers'];
         $camera = $data['camera'];
         $bazel = $data['bazel'];
-         $keys= $data['keys'];
+        //  $keys= $data['keys'];
         $mousepad= $data['mousepad'];
         $mouse_pad_button= $data['mouse_pad_button'];
         $camera_cable= $data['camera_cable'];
@@ -146,6 +146,28 @@ if (isset($_GET['sales_order_id'])) {
         $mb_base= $data['mb_base'];
         $hings_cover= $data['hings_cover'];
         $lan_cover= $data['lan_cover'];
+
+        if($keyboard ==1){ $keyboard1 =1; } 
+    if($speakers ==1){$speakers1 =1;} 
+    if($camera ==1){$camera1 =1;} 
+    if($bazel ==1){$bazel1 =1;} 
+    if($keys ==1){$keys1 =1;} 
+    if($mousepad==1){$mousepad1 =1;}  
+    if($mouse_pad_button==1){$mouse_pad_button1 =1;}  
+    if($camera_cable==1){$camera_cable1 =1;}  
+    if($back_cover==1){$back_cover1 =1;} 
+    if($wifi_card==1){$wifi_card1 =1;}  
+    if($lcd_cable==1){$lcd_cable1 =1;} 
+    if($battery==1){$battery1 =1;}  
+    if($battery_cable==1){$battery_cable1 =1;} 
+    if($dvd_rom==1){$dvd_rom1 =1;} 
+    if($dvd_caddy==1){$dvd_caddy1 =1;}  
+    if($hdd_caddy==1){$hdd_caddy1 =1;} 
+    if($hdd_cable_connector==1){$hdd_cable_connector1 =1;} 
+    if($c_panel_palm_rest==1){$c_panel_palm_rest1 =1;} 
+    if($mb_base==1){$mb_base1 =1;} 
+    if($hings_cover==1){$hings_cover1 =1;} 
+    if($lan_cover==1){$lan_cover1 =1;} 
        
         if($comb_status == 0){
             $lunch_combine = 0;
@@ -340,7 +362,7 @@ if(isset($_POST['submit'])){
                             </div>
                         </div>
                         <div class="row">
-                            <label class="col-sm-3 col-form-label">Windows</label>
+                            <label class="col-sm-3 col-form-label">Operating System</label>
                             <div class="col-sm-8">
                                 <input type="text" readonly class="form-control text-uppercase" name="customer_name"
                                     placeholder="Dell"
@@ -695,7 +717,7 @@ if(isset($_POST['motherboard_submit'])){
 <?php 
 
 if(isset($_POST['combine_form'])){
-    
+    $scan_id =0;
     $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
     $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
     $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
@@ -720,6 +742,16 @@ if(isset($_POST['combine_form'])){
     $mb_base= mysqli_real_escape_string($connection,  $_POST['mb_base']);
     $hings_cover= mysqli_real_escape_string($connection,  $_POST['hings_cover']);
     $lan_cover= mysqli_real_escape_string($connection,  $_POST['lan_cover']);
+    $scan_id= mysqli_real_escape_string($connection,  $_POST['scan_id']);
+
+
+    $query = "SELECT location FROM users WHERE epf = '$emp_id'";
+    $query_run = mysqli_query($connection, $query);
+    $location10;
+    foreach($query_run as $a){
+        $location10 = $a['location'];
+    }
+    
 
 
     $status = 0;
@@ -761,6 +793,7 @@ if(isset($_POST['combine_form'])){
             c_panel_palm_rest,
             mb_base,
             hings_cover
+
         )
         VALUES(
             '$item_brand',
@@ -770,7 +803,7 @@ if(isset($_POST['combine_form'])){
             '$inventory_id',
             '$date',
             '$emp_id',
-            '$location',
+            '$location10',
             '1',
             '$keyboard',
             '$speakers',
@@ -796,14 +829,148 @@ if(isset($_POST['combine_form'])){
          $query_new = mysqli_query($connection, $query_6);
      }
     if($lunch_combine == 1){
-    $query = "INSERT INTO combine_check (inventory_id, emp_id, sales_order_id, keyboard, speakers, camera, bazel, status, damage_keys, mousepad, 
+        
+    $query_com = "INSERT INTO combine_check (inventory_id, emp_id, sales_order_id, keyboard, speakers, camera, bazel, status, damage_keys, mousepad, 
     mouse_pad_button, camera_cable, back_cover, wifi_card, lcd_cable, battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, 
-    c_panel_palm_rest, mb_base, hings_cover, lan_cover) 
+    c_panel_palm_rest, mb_base, hings_cover, lan_cover,combined_id) 
                 VALUES ('$inventory_id', '$emp_id', '$sales_order_id', '$keyboard', '$speakers', '$camera', '$bazel','$status','$keys','$mousepad','$mouse_pad_button',
                 '$camera_cable','$back_cover','$wifi_card','$lcd_cable','$battery','$battery_cable','$dvd_rom','$dvd_caddy','$hdd_caddy','$hdd_cable_connector',
-                '$c_panel_palm_rest','$mb_base','$hings_cover','$lan_cover')";
+                '$c_panel_palm_rest','$mb_base','$hings_cover','$lan_cover','$scan_id')";
 
-    $query_run = mysqli_query($connection, $query);
+    $query_run = mysqli_query($connection, $query_com);
+   
+    if($scan_id !=0){
+       ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    $com_inventory_id = $scan_id;
+//check inventory is exist
+    $query_check="SELECT `id`, `inventory_id` FROM `combine_check` WHERE inventory_id ='$com_inventory_id'";
+   
+    $query_run = mysqli_query($connection, $query_check);
+        $test=0;
+    foreach($query_run as $k){
+        $test = $k['inventory_id'];
+    }
+    
+    
+    //if not exist then insert new record with switch machine missing parts 
+        if( $test == 0){ 
+         
+        $query_in ="INSERT INTO combine_check(
+            inventory_id,
+            emp_id,
+            sales_order_id,
+            keyboard,
+            speakers,
+            camera,
+            bazel,
+            status,
+            damage_keys,
+            mousepad,
+            mouse_pad_button,
+            camera_cable,
+            back_cover,
+            wifi_card,
+            lcd_cable,
+            battery,
+            battery_cable,
+            dvd_rom,
+            dvd_caddy,
+            hdd_caddy,
+            hdd_cable_connector,
+            c_panel_palm_rest,
+            mb_base,
+            hings_cover,
+            lan_cover,
+            combined_id
+        )
+        VALUES(
+            '$scan_id',
+            '$emp_id',
+            '$sales_order_id',
+            '$keyboard1',
+            '$speakers1',
+            '$camera1',
+            '$bazel1',
+            '$status1',
+            '$keys1',
+            '$mousepad1',
+            '$mouse_pad_button1',
+            '$camera_cable1',
+            '$back_cover1',
+            '$wifi_card1',
+            '$lcd_cable1',
+            '$battery1',
+            '$battery_cable1',
+            '$dvd_rom1',
+            '$dvd_caddy1',
+            '$hdd_caddy1',
+            '$hdd_cable_connector1',
+            '$c_panel_palm_rest1',
+            '$mb_base1',
+            '$hings_cover1',
+            '$lan_cover1',
+            '$inventory_id1'
+        )";
+        $query_run = mysqli_query($connection, $query_in);
+    }else{
+        //if machine is exist update missing parts
+        $query_update ="UPDATE
+        `combine_check`
+    SET
+        `keyboard` = '$keyboard1',
+        `speakers` = '$speakers1',
+        `camera` = '$camera1',
+        `bazel` = '$bazel1',
+        `status` = '$status1',
+        `damage_keys` = '$damage_keys1',
+        `mousepad` = '$mousepad1',
+        `mouse_pad_button` = '$mouse_pad_button1',
+        `camera_cable` = '$camera_cable1',
+        `back_cover` = '$back_cover1',
+        `wifi_card` = '$wifi_card1',
+        `lcd_cable` = '$lcd_cable1',
+        `battery` = '$battery1',
+        `battery_cable` = '$battery_cable1',
+        `dvd_rom` = '$dvd_rom1',
+        `dvd_caddy` = '$dvd_caddy1',
+        `hdd_caddy` = '$hdd_caddy1',
+        `hdd_cable_connector` = '$hdd_cable_connector1',
+        `c_panel_palm_rest` = '$c_panel_palm_rest1',
+        `mb_base` = '$mb_base1',
+        `hings_cover` = '$hings_cover1',
+        `lan_cover` = '$lan_cover1',
+        `combined_id` = '$combined_id1'
+        
+    WHERE
+        inventory_id = '$inventory_id'";
+        $query_run = mysqli_query($connection, $query_update);
+    }
+    $query_update_part = "UPDATE `requested_part_from_production` SET `status`='0' WHERE `inventory_id`='$inventory_id';";
+    $query_run = mysqli_query($connection, $query_update_part);
+    $query_1 ="SELECT  `status`FROM `requested_part_from_production` WHERE inventory_id = $inventory_id";
+                                                            $query_run = mysqli_query($connection, $query_1);
+
+                                                            $query_2 ="SELECT  `status`FROM `combine_check` WHERE inventory_id = $inventory_id";
+                                                            $query_run_2 = mysqli_query($connection, $query_2);
+                                                            $combine_status;
+                                                            foreach($query_run_2 as $c){
+                                                                $combine_status = $c['status'];
+                                                            }
+                                                            $received =null;
+                                                            if(empty($query_run)){
+                                                                $received ='1';
+                                                            }else{
+                                                                foreach($query_run as $a){
+                                                                    $received = $a['status'];
+                                                                }
+                                                            }if($combine_status == 0 && $received == 0){
+                                                                header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
+                                                            }
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
     if($status == 1){
      $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                                 $date = $date1->format('Y-m-d H:i:s');
@@ -816,8 +983,10 @@ if(isset($_POST['combine_form'])){
     }else{
         echo "already checked";
     }
-}
 
+    
+}
+ 
 ?>
 
 <!-- Combine Form -->
@@ -831,6 +1000,27 @@ if(isset($_POST['combine_form'])){
                 </button>
             </div>
             <form method="POST">
+                <?php $query = "SELECT  COUNT(`inventory_id`) AS exist_count FROM combine_check WHERE inventory_id ='$inventory_id'";
+                
+                $query_run = mysqli_query($connection, $query);
+                $exist_count;
+                foreach($query_run as $count){
+                    $exist_count = $count['exist_count'];
+                }
+                if($exist_count ==0){ }else{
+                ?>
+                <div class="row mx-2">
+                    <div class="col-md-3">
+
+                        <fieldset class="mt-2">
+                            <div class="input-group mb-2 mt-2">
+                                <lable>Switch Parts</lable>
+                                <input type="text" name="scan_id" id="scan_id" value="">
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <?php } ?>
                 <div class="modal-body d-flex mx-5">
                     <div class="col col-md-6 col-lg-6">
                         <div class="row">
@@ -2553,3 +2743,10 @@ if(isset($_POST['production_form'])){
 <!-- /.modal -->
 
 <?php include_once('../includes/footer.php'); } ?>
+<style>
+fieldset,
+legend {
+    all: revert;
+    font-size: 12px;
+}
+</style>
