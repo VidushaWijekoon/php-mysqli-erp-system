@@ -72,11 +72,7 @@ $c_panel_palm_rest =null;
 $mb_base =null;
 $hings_cover  =null;
 
-if(empty($_SESSION['rp_id'])){
-    $rp_id =null;
-}else{
-$rp_id =$_SESSION['rp_id'];
-}
+$rp_id =$_GET['id'];
 ?>
 
 <div class="row page-titles m-2">
@@ -105,7 +101,6 @@ $rp_id =$_SESSION['rp_id'];
                                 <th>Brand</th>
                                 <th>Model</th>
                                 <th>Generation</th>
-                                <th>Item List</th>
                             </tr>
                         </thead>
                         <tbody class="tbody_1">
@@ -150,79 +145,6 @@ $rp_id =$_SESSION['rp_id'];
                                 <td><?php echo $item_brand ?></td>
                                 <td><?php echo $item_model ?></td>
                                 <td><?php echo $item_generation ?></td>
-                                <td><?php 
-                                $count =0;
-                                if($keyboard==1){
-                                    $count++;
-                                    echo $count .": Keyboard </br>";
-                                }
-                                // if($keys==1){
-                                //     $count++;
-                                //     echo $count .": Keys </br>";
-                                // }
-                                if($speakers==1){
-                                    $count++;
-                                    echo $count .": speakers </br>";
-                                }if($camera==1){
-                                    $count++;
-                                    echo $count .": camera </br>";
-                                }if($bazel==1){
-                                    $count++;
-                                    echo $count .": Bazel </br>";
-                                }if($mousepad==1){
-                                    $count++;
-                                    echo $count .": Pouse Pad </br>";
-                                }if($mouse_pad_button==1){
-                                    $count++;
-                                    echo $count .": Mouse Pad Button </br>";
-                                }if($camera_cable==1){
-                                    $count++;
-                                    echo $count .": Camera Cable  </br>";
-                                }if($back_cover==1){
-                                    $count++;
-                                    echo $count .": Back Cover </br>";
-                                }if($wifi_card==1){
-                                    $count++;
-                                    echo $count .": WIFI Card </br>";
-                                }if($lcd_cable==1){
-                                    $count++;
-                                    echo $count .": LCD Cable </br>";
-                                }if($battery==1){
-                                    $count++;
-                                    echo $count .": Battery </br>";
-                                }if($battery_cable==1){
-                                    $count++;
-                                    echo $count .": Battery Cable </br>";
-                                }if($dvd_rom==1){
-                                    $count++;
-                                    echo $count .": DVD ROM </br>";
-                                }if($dvd_caddy==1){
-                                    $count++;
-                                    echo $count .": DVD Caddy </br>";
-                                }if($hdd_caddy==1){
-                                    $count++;
-                                    echo $count .": HDD Caddy </br>";
-                                }if($hdd_cable_connector==1){
-                                    $count++;
-                                    echo $count .": HDD Cable Connetor </br>";
-                                }if($c_panel_palm_rest==1){
-                                    $count++;
-                                    echo $count .": C Panel / Palm Rest </br>";
-                                }if($mb_base==1){
-                                    $count++;
-                                    echo $count .": D / MB Base </br>";
-                                }if($hings_cover==1){
-                                    $count++;
-                                    echo $count .": Hings Cover </br>";
-                                }if($lan_cover==1){
-                                    $count++;
-                                    echo $count .": LAN Cover </br>";
-                                }?>
-                                    <a class="btn btn-sm btn-info mt-2" href="./part_issue_form.php">
-                                        Issue
-                                    </a>
-
-                                </td>
                             </tr>
                             <?php 
                                     }
@@ -235,5 +157,320 @@ $rp_id =$_SESSION['rp_id'];
         </div>
     </div>
 </div>
+<div class="container-fliud ">
+    <div class="row">
+        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-2">
+            <div class="card">
+                <div class="card-header bg-secondary text-uppercase">
+                    <i class="fa-solid fa-hand-holding-medical bg-warning fa-2x p-2"></i>
+                    Issue Form
+                </div>
+                <form action="" method="POST">
+                    <div class="row m-1">
+                        <div class="col-md-10 mx-auto">
+                            <fieldset class="mt-2 mb-2">
+                                <legend>Part Information</legend>
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Device Type</th>
+                                            <th>Inventory ID</th>
+                                            <th style="width: 150px;">QTY</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                            foreach($query_run as $a){
+                                $item_brand = $a['brand'];
+                                $item_model = $a['model'];
+                                $item_generation = $a['generation'];
+                                $sales_order_id = $a['sales_order_id'];
+                                $inventory_id = $a['inventory_id'];
+                                $emp_id =$a['emp_id'];
+                                $location =$a['location'];
+                                $keyboard =$a['keyboard'];
+                                $speakers =$a['speakers'];
+                                $camera =$a['camera'];
+                                $bazel =$a['bazel'];
+                                $lan_cover =$a['lan_cover'];
+                                $mousepad =$a['mousepad'];
+                                $mouse_pad_button =$a['mouse_pad_button'];
+                                $camera_cable =$a['camera_cable'];
+                                $back_cover =$a['back_cover'];
+                                $wifi_card =$a['wifi_card'];
+                                $lcd_cable =$a['lcd_cable'];
+                                $battery =$a['battery'];
+                                $battery_cable =$a['battery_cable'];
+                                $dvd_rom =$a['dvd_rom'];
+                                $dvd_caddy =$a['dvd_caddy'];
+                                $hdd_caddy =$a['hdd_caddy'];
+                                $hdd_cable_connector =$a['hdd_cable_connector'];
+                                $c_panel_palm_rest =$a['c_panel_palm_rest'];
+                                $mb_base =$a['mb_base'];
+                                $hings_cover =$a['hings_cover'];
+                                $rp_id = $a['rp_id'];
+                                ?>
+                                        <?php 
+                                $count =0;
+                                if($keyboard==1){
+                                    $count++;
+                                    ?> <tr>
+                                            <td><?php echo $count; ?></td>
+                                            <td>Keyboard</td>
+                                            <td><input type="number"></td>
+                                            <td><input type="number"></td>
+                                        </tr>
+                                        <?php
+                                }
+                                // if($keys==1){
+                                //     $count++;
+                                //     echo $count .": Keys </br>";
+                                // }
+                                if($speakers==1){
+                                    $count++;
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $count; ?></td>
+                                            <td>Speakers</td>
+                                            <td><input type="number"></td>
+                                            <td><input type="number"></td>
+                                        </tr>
+                                        <?php
+                                }if($camera==1){
+                                    $count++;
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $count; ?></td>
+                                            <td>Camera</td>
+                                            <td><input type="number"></td>
+                                            <td><input type="number"></td>
+                                        </tr>
+                                        <?php
+                                }if($bazel==1){
+                                    $count++;
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $count; ?></td>
+                                            <td>Bazel</td>
+                                            <td><input type="number"></td>
+                                            <td><input type="number"></td>
+                                        </tr>
+                                        <?php
+                                }if($mousepad==1){
+                                    $count++;
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $count; ?></td>
+                                            <td>Pouse Pad</td>
+                                            <td><input type="number"></td>
+                                            <td><input type="number"></td>
+                                        </tr>
+                                        <?php
+                                }if($mouse_pad_button==1){
+                                    $count++;
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $count; ?></td>
+                                            <td>Mouse Pad Button</td>
+                                            <td><input type="number"></td>
+                                            <td><input type="number"></td>
+                                        </tr>
+                                        <?php
+                                }if($camera_cable==1){
+                                    $count++;
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $count; ?></td>
+                                            <td>Camera Cable</td>
+                                            <td><input type="number"></td>
+                                            <td><input type="number"></td>
+                                        </tr>
+                                        <?php
+                                }if($back_cover==1){
+                                    $count++;
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $count; ?></td>
+                                            <td>Back Cover</td>
+                                            <td><input type="number"></td>
+                                            <td><input type="number"></td>
+                                        </tr>
+                                        <?php
+                                }if($wifi_card==1){
+                                    $count++;
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $count; ?></td>
+                                            <td>WIFI Card</td>
+                                            <td><input type="number"></td>
+                                            <td><input type="number"></td>
+                                        </tr>
+                                        <?php
+                                }if($lcd_cable==1){
+                                    $count++;
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $count; ?></td>
+                                            <td>LCD Cable</td>
+                                            <td><input type="number"></td>
+                                            <td><input type="number"></td>
+                                        </tr>
+                                        <?php
+                                }if($battery==1){
+                                    $count++;
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $count; ?></td>
+                                            <td>Battery</td>
+                                            <td><input type="number"></td>
+                                            <td><input type="number"></td>
+                                        </tr>
+                                        <?php
+                                }if($battery_cable==1){
+                                    $count++;
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $count; ?></td>
+                                            <td>Battery Cable</td>
+                                            <td><input type="number"></td>
+                                            <td><input type="number"></td>
+                                        </tr>
+                                        <?php
+                                }if($dvd_rom==1){
+                                    $count++;
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $count; ?></td>
+                                            <td>DVD ROM</td>
+                                            <td><input type="number"></td>
+                                            <td><input type="number"></td>
+                                        </tr>
+                                        <?php
+                                }if($dvd_caddy==1){
+                                    $count++;
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $count; ?></td>
+                                            <td>DVD Caddy</td>
+                                            <td><input type="number"></td>
+                                            <td><input type="number"></td>
+                                        </tr>
+                                        <?php
+                                }if($hdd_caddy==1){
+                                    $count++;
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $count; ?></td>
+                                            <td>HDD Caddy</td>
+                                            <td><input type="number"></td>
+                                            <td><input type="number"></td>
+                                        </tr>
+                                        <?php
+                                }if($hdd_cable_connector==1){
+                                    $count++;
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $count; ?></td>
+                                            <td>HDD Cable Connetor</td>
+                                            <td><input type="number"></td>
+                                            <td><input type="number"></td>
+                                        </tr>
+                                        <?php
+                                }if($c_panel_palm_rest==1){
+                                    $count++;
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $count; ?></td>
+                                            <td>C Panel / Palm Rest</td>
+                                            <td><input type="number"></td>
+                                            <td><input type="number"></td>
+                                        </tr>
+                                        <?php
+                                }if($mb_base==1){
+                                    $count++;
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $count; ?></td>
+                                            <td>D / MB Base</td>
+                                            <td><input type="number"></td>
+                                            <td><input type="number"></td>
+                                        </tr>
+                                        <?php
+                                }if($hings_cover==1){
+                                    $count++;
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $count; ?></td>
+                                            <td>Hings Cover</td>
+                                            <td><input type="number"></td>
+                                            <td><input type="number"></td>
+                                        </tr>
+                                        <?php
+                                }if($lan_cover==1){
+                                    $count++;
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $count; ?></td>
+                                            <td>LAN Cover</td>
+                                            <td><input type="number"></td>
+                                            <td><input type="number"></td>
+                                        </tr>
+                                        <?php
+                                }?>
 
-<?php include_once('../includes/footer.php'); ?>
+                                        <?php 
+                                    }
+                                
+                            ?>
+
+
+                                    </tbody>
+                                </table>
+                                <a class="btn btn-sm btn-info mt-2 "
+                                    href="./part_issue_form.php?id=<?php echo $rp_id ?>">
+                                    Issue
+                                </a>
+                            </fieldset>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+fieldset,
+legend {
+    all: revert;
+    font-size: 12px;
+}
+
+textarea {
+    text-transform: uppercase;
+}
+
+select,
+[type="number"] {
+    width: 100%;
+    height: 22px;
+    margin: inherit;
+    margin-top: 4px;
+    font-size: 10px;
+    text-transform: uppercase;
+    border: 1px solid #f1f1f1;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.custom-select {
+    font-size: 12px;
+}
+
+#exampleFormControlTextarea1 {
+    font-size: 12px;
+}
+
+<?php include_once('../includes/footer.php');
+?>
