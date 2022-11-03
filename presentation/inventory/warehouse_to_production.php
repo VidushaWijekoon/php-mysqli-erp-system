@@ -13,7 +13,7 @@ if (!isset($_SESSION['user_id'])) {
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 
-if($role_id == 1 && $department == 11 || $role_id == 10 && $department == 2){
+if($role_id == 1 && $department == 11 || $role_id == 10 && $department == 2 || $role_id == 4 && $department == 2){
  
 
 $sales_order_id = '';
@@ -99,8 +99,8 @@ if (isset($_GET['sales_order_id'])) {
                         if (mysqli_fetch_assoc($query_run4)) {
                             
                             foreach ($query_run4 as $items) {
-                                $received_count = $items['received_count'];
-                                $item_quantity = $items['item_quantity'];
+                                    $received_count = $items['received_count'];
+                                    $item_quantity = $items['item_quantity'];
                                     $item_type = $items['item_type'];
                                     $item_brand = $items['item_brand'];
                                     $item_model = $items['item_model'];
@@ -144,7 +144,7 @@ if (isset($_GET['sales_order_id'])) {
                                     }
                                 }
                                 if($type == null){
-                                    echo "<span class='text-danger text-uppercase'>Not in exists inventory ID </span>";
+                                    echo "<span class='exists'>Not in exists inventory ID </span>";
                                     break;
                                 }
                                 if($type!= $item_type || $brand != $item_brand || $model != $item_model || $processor!=$item_processor || $core != $item_core || $generation!= $item_generation){
@@ -179,12 +179,13 @@ if (isset($_GET['sales_order_id'])) {
                             <legend>Scan QR</legend>
 
                             <form action="#" method="POST">
-                                <div class="input-group mb-2 mt-2">
-                                    
-                                    <input type="text" id="search" name="search"  required value="<?php if (isset($_POST['search'])) {
+                                <div class="input-group mb-2 mt-2 d-flex">
+
+                                    <input type="text" id="search" name="search" required value="<?php if (isset($_POST['search'])) {
                                                                                         echo $_POST['search'];
                                                                                     } ?>" placeholder="Search QR">
                                     <!-- <button type="submit" class="btn btn-primary">Search</button> -->
+
                                 </div>
 
                             </form>
@@ -334,65 +335,6 @@ if (isset($_GET['sales_order_id'])) {
     </div>
 </div>
 
-<style>
-fieldset,
-legend {
-    all: revert;
-    font-size: 12px;
-}
-
-textarea {
-    text-transform: uppercase;
-}
-
-select,
-input[type="text"],
-[type="search"] {
-    height: 22px;
-    margin: inherit;
-    margin-top: 4px;
-    font-size: 10px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 10px;
-    padding-left: 15px;
-    margin-bottom: 10px;
-
-}
-
-.table.dataTable tbody tr {
-    background-color: #212529;
-}
-
-#example1_length {
-    color: #ced4da;
-}
-
-.dataTables_wrapper .dataTables_filter {
-    color: #ced4da;
-}
-
-.paginate_button {
-    border-radius: 12px;
-    font-size: 12px;
-}
-
-[type='search'] {
-    height: 22px;
-    margin: inherit;
-    margin-top: 4px;
-    font-size: 10px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-    font-size: 12px;
-}
-
-.tbody_1 {
-    font-family: 'Bree Serif', serif;
-
-}
-</style>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
@@ -400,7 +342,7 @@ input[type="text"],
 <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 <script>
-    let searchbar = document.querySelector('input[name="search"]');
+let searchbar = document.querySelector('input[name="search"]');
 searchbar.focus();
 search.value = '';
 </script>

@@ -27,7 +27,7 @@ $quantity = "";
 $sales_order_id = "";
 $user_id = $_SESSION['username'];
 $int_qty = 0;
-$rack ="";
+
 $query_last_id = "SELECT inventory_id FROM warehouse_information_sheet ORDER BY inventory_id DESC LIMIT 1; ";
  $result_last_id = mysqli_query($connection, $query_last_id);
  foreach($result_last_id as $data){
@@ -44,7 +44,6 @@ for ($i = 0; $i <= $int_qty; $i++) {
         $model = $_POST["model"];
         $location = $_POST["location"];
         $quantity = $_POST["quantity"];
-        $rack = $_POST["rack"];
         $int_qty = (int)$quantity - 1;
 
          // checking required fields
@@ -68,47 +67,44 @@ for ($i = 0; $i <= $int_qty; $i++) {
         $filename = $PNG_TEMP_DIR  . uniqid() . '.png';
         $last_id = $connection->insert_id;
 
-        $sql = strtolower("INSERT INTO warehouse_information_sheet  (device, brand, processor, core, generation, model, qr_image, location, send_to_production, create_by_inventory_id, send_time_to_production, sales_order_id, start_production, end_production, emp_id) VALUES 
-					('$device', '$brand', '$processor', '$core', '$generation', '$model', '$filename', '$location', 0, '$user_id', 0, 0, 0, 0, 0)");
-                  
-                         header("location: ./indexnew.php?last_id={$last_id}");            
+        $sql = strtolower("INSERT INTO warehouse_information_sheet  (device, brand, processor, core, generation, model, qr_image, location, send_to_production, create_by_inventory_id, send_time_to_production, sales_order_id) VALUES 
+					('$device', '$brand', '$processor', '$core', '$generation', '$model', '$filename', '$location', 0, '$user_id', 0, 0)");
+        // echo $sql; 
+        $result_1 = mysqli_query($connection, $sql);
+        header("location: ./indexnew.php?last_id={$last_id}");            
                                     
 
 
-        if (mysqli_multi_query($connection, $sql)) {
-            // $query = "SELECT inventory_id from warehouse_information_sheet";
-            // $result = mysqli_query($connection, $query);
+        // if (mysqli_multi_query($connection, $sql)) {
+        //     // $query = "SELECT inventory_id from warehouse_information_sheet";
+        //     // $result = mysqli_query($connection, $query);
 
-            // $query = "SELECT inventory_id,brand,model,core,location,generation FROM warehouse_information_sheet ORDER BY inventory_id DESC LIMIT 1";
-            // $query_run = mysqli_query($connection, $query);
+        //     // $query = "SELECT inventory_id,brand,model,core,location,generation FROM warehouse_information_sheet ORDER BY inventory_id DESC LIMIT 1";
+        //     // $query_run = mysqli_query($connection, $query);
 
-            // $print_data = mysqli_fetch_row($query_run);
-            // $brand;
-            // $model;
-            // $core;
-            // $location;
-            // $generation;
-            // $i =0;
+        //     // $print_data = mysqli_fetch_row($query_run);
+        //     // $brand;
+        //     // $model;
+        //     // $core;
+        //     // $location;
+        //     // $generation;
+        //     // $i =0;
 
-            foreach ($result as $result) {
-                // $i++;
-                // $codeString = $print_data[0];
-                // $brand = $print_data[1];
-                // $model = $print_data[2];
-                // $core = $print_data[3];
-                // $location = $print_data[4];
-                // $filename = $PNG_TEMP_DIR  .$codeString . '.png';
-                //  QRcode::png($codeString, $filename, QR_ECLEVEL_Q, 12, 1);
+        //     foreach ($result as $result) {
+        //         // $i++;
+        //         // $codeString = $print_data[0];
+        //         // $brand = $print_data[1];
+        //         // $model = $print_data[2];
+        //         // $core = $print_data[3];
+        //         // $location = $print_data[4];
+        //         // $filename = $PNG_TEMP_DIR  .$codeString . '.png';
+        //         //  QRcode::png($codeString, $filename, QR_ECLEVEL_Q, 12, 1);
                 
-                // file_get_contents("warehouese_qr_print.php");
-            }
-            if($codeString != 0){
-            ?>
-
-
-<?php
-            }
-        } 
+        //         // file_get_contents("warehouese_qr_print.php");
+        //     }
+        //     if($codeString != 0){
+        //     
+     
         // getting current Date Time OOP way
         $currentDateTime = new \DateTime();
 
@@ -141,7 +137,7 @@ for ($i = 0; $i <= $int_qty; $i++) {
 
                     ?>
 
-                    <form action="warehouse_information_sheet" method="POST">
+                    <form method="POST">
                         <fieldset>
                             <legend>Create Warehouse Information Sheet</legend>
 
@@ -301,7 +297,7 @@ for ($i = 0; $i <= $int_qty; $i++) {
                                     <input class="form-control" type="hidden" readonly <?php echo 'value="ALSAKB-' . $print_data[0] . '"';
                                          ?> style="margin: 0; font-size: 12px; border: 1px solid black; height: 25px;">
 
-                                    <?php echo "<div class='mt-1'>ALSAKB-".$print_data[0]."</div>";
+                                    <?php echo "<div class='mt-1 inventory'>ALSAKB-".$print_data[0]."</div>";
                                          ?>
 
                                 </div>
@@ -334,36 +330,7 @@ $_SESSION['location'] = $location ;
 
 
 <style>
-fieldset,
-legend {
-    all: revert;
-    font-size: 20px;
-}
 
-textarea {
-    text-transform: uppercase;
-}
-
-select,
-input[type="text"],
-[type="number"] {
-    width: 100%;
-    height: 30px;
-    margin: inherit;
-    margin-top: 4px;
-    font-size: 16px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-}
-
-.custom-select {
-    font-size: 12px;
-}
-
-#exampleFormControlTextarea1 {
-    font-size: 16px;
-}
 </style>
 
 <script>
@@ -374,20 +341,6 @@ setTimeout(function() {
 }, 10000)
 </script>
 <style>
-@media screen and (orientation: landscape) {
-    .toolbar {
-        position: fixed;
-        width: 2.65em;
-        height: 100%;
-    }
-
-    .sheet {
-        box-sizing: border-box;
-        background-color: #FFF;
-        height: 25.00mm;
-        width: 50.00mm;
-        overflow: hidden;
-    }
 </style>
 
 

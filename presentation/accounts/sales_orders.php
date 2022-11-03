@@ -90,20 +90,4 @@ $(document).ready(function() {
 });
 </script>
 
-<style>
-[type='search'] {
-    width: 50%;
-    height: 22px;
-    margin: inherit;
-    margin-top: 4px;
-    font-size: 10px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-    font-size: 12px;
-}
- 
-</style>
-
-
 <?php include_once('../includes/footer.php'); ?>

@@ -85,15 +85,15 @@ foreach($query_run as $data){
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-5 grid-margin stretch-card justify-content-center mx-auto mt-5">
-            <div class="card mt-5">
+            <div class="card mt-5" style="background: #3f4156;">
                 <div class="card-header bg-secondary d-flex">
                     <h4 class="card-title text-uppercase">Sale Order <?php echo $sales_order_id .' &nbsp '.  $model;?>
                     </h4>
 
                 </div>
                 <div class="card-body">
-                    <table id="example1" class="table table-bordered table-striped">
-                        <thead>
+                    <table id="example1" class="table table-striped">
+                        <thead class="bg-secondary text-uppercase">
                             <tr>
                                 <th>Technician</th>
                                 <th>Model</th>
@@ -133,10 +133,10 @@ foreach($query_run as $data){
                     </table>
                 </div>
                 <!-- /.card-body -->
-                <div class="justify-content-between mx-auto mt-3 mb-3 text-center">
+                <div class="justify-content-between mx-auto mb-3 text-center">
                     <a href="../production/production_team_leader_summery.php?sales_order_id=<?php echo $sales_order_id?>"
-                        class="btn btn-secondary">Close</a>
-                    <input class="btn btn-primary" type="submit" name="submit" vlaue="Choose options">
+                        class="btn btn-secondary btn-sm">Close</a>
+                    <input class="btn btn-success btn-sm" type="submit" name="submit" value="Save Changes">
                     <?php
                         if(isset($_POST['submit'])){
                            
@@ -265,6 +265,11 @@ html {
     padding: 5px 25px;
     border: 5px;
     border-radius: 10px;
+}
+
+.btn {
+    font-size: 14px;
+    text-transform: uppercase;
 }
 </style>
 

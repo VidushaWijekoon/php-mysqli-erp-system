@@ -296,12 +296,6 @@ if (isset($_GET['emp_id'])) {
 
 
 <style>
-fieldset,
-legend {
-    all: revert;
-    font-size: 12px;
-}
-
 textarea {
     text-transform: uppercase;
 }
