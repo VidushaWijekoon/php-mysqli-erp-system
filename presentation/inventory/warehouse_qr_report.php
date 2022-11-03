@@ -283,12 +283,6 @@ $(document).ready(function() {
 </script>
 
 <style>
-fieldset,
-legend {
-    all: revert;
-    font-size: 12px;
-}
-
 textarea {
     text-transform: uppercase;
 }
@@ -325,7 +319,7 @@ setTimeout(function() {
 }, 10000)
 </script>
 <script>
-    let searchbar = document.querySelector('input[name="search"]');
+let searchbar = document.querySelector('input[name="search"]');
 searchbar.focus();
 search.value = '';
 </script>

@@ -1,3 +1,9 @@
+fieldset,
+legend {
+  all: revert;
+  font-size: 12px;
+}
+
 .page-titles {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
@@ -69,9 +75,18 @@ td {
   color: #ced4da;
 }
 
+.dataTables_info {
+  color: #ffffff !important;
+}
+
 .paginate_button {
   border-radius: 12px;
   font-size: 12px;
+}
+
+.example1_length select {
+  border-radius: 5px !important;
+  padding: 0 5px !important;
 }
 
 label {
@@ -79,7 +94,7 @@ label {
 }
 
 .dataTables_info {
-  color: #ffffff;
+  color: #beb4b4 !important;
 }
 
 .example1_paginate {
@@ -92,4 +107,45 @@ label {
 
 .label_values {
   font-weight: 400 !important;
+}
+
+[type="search"] {
+  height: 22px;
+  margin: inherit;
+  margin-top: 4px;
+  font-size: 10px;
+  text-transform: uppercase;
+  border: 1px solid #f1f1f1;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+[type="text"] {
+  height: 22px;
+  margin-top: 4px;
+  font-size: 10px;
+  text-transform: uppercase;
+  border: 1px solid #f1f1f1;
+  border-radius: 5px;
+  font-size: 12px;
+  padding: 10px;
+}
+
+.exists {
+  background: red;
+  text-align: center;
+  margin: auto;
+  justify-content: center;
+  display: flex;
+  color: aliceblue;
+  padding: 7px;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.received_qty {
+  padding: 8px 0;
+  font-size: 14px;
+  margin-bottom: 10px;
+  font-weight: 300;
 }

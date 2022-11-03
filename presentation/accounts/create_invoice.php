@@ -296,7 +296,7 @@ if (isset($_POST['submit'])) {
 
                         <div class="mt-3 mb-3 text-center">
                             <button type="submit" name="submit" class="btn btn-sm btn-info mx-2"><i
-                                    class="fa-solid fa-plus mx-1"></i>Create  Invoice</button>
+                                    class="fa-solid fa-plus mx-1"></i>Create Invoice</button>
                             <button class="btn btn-sm btn-warning mx-2"><i
                                     class="fa-solid fa-broom mx-1"></i>Clear</button>
                         </div>
@@ -318,7 +318,7 @@ function addItem() {
     html +=
         "<td><select name='item_type[]' class='form-select form-select-sm' aria-label='.form-select-sm example'><option selected>--Select Type--</option> <option value='laptop'>Laptop</option></select></td >";
     html +=
-        "<td><select name='item_brand[]' class='form-select form-select-sm' aria-label='.form-select-sm example'><option selected>--Select Brand--</option> <option value='dell'>Dell</option><option value='hp'>HP</option><option value='lenovo'>Lenovo</option><option value='apple'>Apple</option><option value='acer'>acer</option><option value='asus'>Asus</option><option value='fujitsu'>Fujitsu</option><option value='msi'>MSI</option><option value='microsfot'>Microsoft</option><option value='samsung'>Samsung</option><option value='razer'>Razer</option><option value='gigabyte'>Gigabyte</option><option value='lg'>LG</option></select></td >";
+        "<td><select name='item_brand[]' class='form-select form-select-sm' aria-label='.form-select-sm example'><option selected>--Select Brand--</option> <option value='dell'>Dell</option><option value='hp'>HP</option><option value='lenovo'>Lenovo</option><option value='apple'>Apple</option><option value='acer'>acer</option><option value='asus'>Asus</option><option value='fujitsu'>Fujitsu</option><option value='msi'>MSI</option><option value='microsoft'>Microsoft</option><option value='samsung'>Samsung</option><option value='razer'>Razer</option><option value='gigabyte'>Gigabyte</option><option value='lg'>LG</option></select></td >";
 
     html += "<td><input name='item_model[]' class='form-control' type='text' ></td>";
 

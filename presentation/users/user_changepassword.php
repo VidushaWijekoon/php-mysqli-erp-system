@@ -23,7 +23,6 @@ $last_name = '';
 $EPF = '';
 $username = '';
 $department = '';
-$email = '';
 $password = '';
 $role = '';
 
@@ -43,7 +42,6 @@ if (isset($_GET['user_id'])) {
             $EPF = $result['epf'];
             $username = $result['username'];
             $department = $result['department'];
-            $email = $result['email'];
             $password = $result['password'];
             $role = $result['role'];
         } else {
@@ -191,15 +189,6 @@ if (isset($_POST['submit'])) {
                             </div>
 
                             <div class="row">
-                                <label class="col-sm-3 col-form-label">Email</label>
-                                <div class="col-sm-8">
-                                    <input type="text" <?php echo 'value="' . $email . '"'; ?> readonly
-                                        class="form-control" name="email">
-                                </div>
-                            </div>
-
-
-                            <div class="row">
                                 <label class="col-sm-3 col-form-label">New Password</label>
                                 <div class="col-sm-8">
                                     <input type="password" id="password" class="form-control" placeholder="New Password"
@@ -232,12 +221,6 @@ if (isset($_POST['submit'])) {
 </div>
 
 <style>
-fieldset,
-legend {
-    all: revert;
-    font-size: 12px;
-}
-
 textarea {
     text-transform: uppercase;
 }

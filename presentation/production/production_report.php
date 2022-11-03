@@ -37,28 +37,29 @@ if(isset($_GET['emp_id'])){
         <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 mx-auto justify-content-center">
             <div class="card mt-5">
                 <div class="card-header bg-secondary">
-                    <p class="text-uppercase m-0 p-0">Production Technician Daily Task (<?php echo $emp_id ."-" .$_GET['name'] ;?>)</p>
+                    <p class="text-uppercase m-0 p-0">Production Technician Daily Task
+                        (<?php echo $emp_id ."-" .$_GET['name'] ;?>)</p>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                     <table id="example1" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Inventory ID</th>
-                                            <th>S/O ID</th>
-                                            <th>Brand</th>
-                                            <th>Core</th>
-                                            <th>Genaration</th>
-                                            <th>Model</th>
-                                            <th>Starting Time</th>
-                                            <th>End Time</th>
-                                            <th>Minutes to Complete</th>
-                                            <th>&nbsp;</th>
+                        <thead>
+                            <tr>
+                                <th>Inventory ID</th>
+                                <th>S/O ID</th>
+                                <th>Brand</th>
+                                <th>Core</th>
+                                <th>Genaration</th>
+                                <th>Model</th>
+                                <th>Starting Time</th>
+                                <th>End Time</th>
+                                <th>Minutes to Complete</th>
+                                <th>&nbsp;</th>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody class="table-dark text-uppercase">
-                                        <?php 
+                            </tr>
+                        </thead>
+                        <tbody class="table-dark text-uppercase">
+                            <?php 
                                         $sales_order_id = '';
 
                                         // getting the list of users
@@ -76,57 +77,59 @@ if(isset($_GET['emp_id'])){
                                                 foreach($query_run as $values) {
                                         ?>
 
-                                        <tr>
-                                            <td><?php echo $values['inventory_id'] ?></td>
-                                            <td><?php echo $values['sales_order'] ?></td>
-                                            <td><?php echo $values['brand'] ?></td>
-                                            <td><?php echo $values['core'] ?></td>
-                                            <td><?php echo $values['generation'] ?></td>
-                                            <td><?php echo $values['model'] ?></td>
-                                            <td><?php echo $values['start_date_time'] ?></td>
-                                            <td>
-                                                <?php if( $values['end_date_time'] == '0000-00-00 00:00:00') {?>
-                                                <span class="badge badge-lg badge-danger text-white">Not Finished</span>
-                                                <?php } else { ?>
-                                                <span><?php echo $values['start_date_time'] ?></span>
-                                                <?php } ?>
-                                            </td>
-                                            <td>
-                                                <?php if( $values['end_date_time'] == '0000-00-00 00:00:00') {?>
-                                                <span class="badge badge-lg badge-danger text-white">0 Minutes</span>
-                                                <?php } elseif( $values['start_date_time'] != '0000-00-00 00:00:00') {?>
-                                                <span class="badge badge-lg badge-success text-white">
-                                                    <?php $working_time_in_seconds = strtotime($values['end_date_time']) - strtotime($values['start_date_time']);
+                            <tr>
+                                <td><?php echo $values['inventory_id'] ?></td>
+                                <td><?php echo $values['sales_order'] ?></td>
+                                <td><?php echo $values['brand'] ?></td>
+                                <td><?php echo $values['core'] ?></td>
+                                <td><?php echo $values['generation'] ?></td>
+                                <td><?php echo $values['model'] ?></td>
+                                <td><?php echo $values['start_date_time'] ?></td>
+                                <td>
+                                    <?php if( $values['end_date_time'] == '0000-00-00 00:00:00') {?>
+                                    <span class="badge badge-lg badge-danger text-white">Not Finished</span>
+                                    <?php } else { ?>
+                                    <span><?php echo $values['start_date_time'] ?></span>
+                                    <?php } ?>
+                                </td>
+                                <td>
+                                    <?php if( $values['end_date_time'] == '0000-00-00 00:00:00') {?>
+                                    <span class="badge badge-lg badge-danger text-white">0 Minutes</span>
+                                    <?php } elseif( $values['start_date_time'] != '0000-00-00 00:00:00') {?>
+                                    <span class="badge badge-lg badge-success text-white">
+                                        <?php $working_time_in_seconds = strtotime($values['end_date_time']) - strtotime($values['start_date_time']);
                                                        echo date('H:i:s', $working_time_in_seconds ); 
                                                     ?>
-                                                </span>
-                                                <?php } ?>
-                                            </td>
-                                            <td>
-                                                <?php if($values['status'] == 1){ echo "<a class='btn btn-sm bg-teal'
-                                                    href=\"production_checklist.php?emp_id={$emp_id}&inventory_id={$values['inventory_id']}&sales_order_id={$values['sales_order_id']}\"><i
-                                                        class='fas fa-eye'></i> </a>";}else{ 
-                                                        if ($values['issue_type'] ==1) {
-                                                            echo '<span class="badge badge-lg badge-danger text-white px-2">Motherboard Issue</span>';
-                                                        }if ($values['issue_type'] ==2) {
-                                                            echo '<span class="badge badge-lg badge-danger text-white px-2">Combine Issue</span>';
-                                                        }if ($values['issue_type'] ==3) {
-                                                            echo '<span class="badge badge-lg badge-danger text-white px-2">LCD Issue</span>';
-                                                        }if ($values['issue_type'] ==4) {
-                                                            echo '<span class="badge badge-lg badge-danger text-white px-2">Bodywork Issue</span>';
-                                                        }if ($values['issue_type'] ==5) {
-                                                            echo '<span class="badge badge-lg badge-danger text-white px-2">Ready to QC</span>';
-                                                        } 
-                                                        }?>
-                                            </td>
-                                        </tr>
-                                        <?php }} ?>
-                                    </tbody>
-                                </table>
+                                    </span>
+                                    <?php } ?>
+                                </td>
+                                <td>
+                                    <?php if($values['status'] == 1){ 
+                                        }else{ 
+                                            if ($values['issue_type'] ==1) {
+                                                echo '<span class="badge badge-lg badge-danger text-white px-2">Motherboard Issue</span>';
+                                            }if ($values['issue_type'] ==2) {
+                                                echo '<span class="badge badge-lg badge-danger text-white px-2">Combine Issue</span>';
+                                            }if ($values['issue_type'] ==3) {
+                                                echo '<span class="badge badge-lg badge-danger text-white px-2">LCD Issue</span>';
+                                            }if ($values['issue_type'] ==4) {
+                                                echo '<span class="badge badge-lg badge-danger text-white px-2">Bodywork Issue</span>';
+                                            }if ($values['issue_type'] ==5) {
+                                                echo '<span class="badge badge-lg badge-danger text-white px-2">Ready to QC</span>';
+                                            } 
+                                    }?>
+                                </td>
+                            </tr>
+                            <?php }} ?>
+                        </tbody>
+                    </table>
 
                 </div>
                 <!-- /.card-body -->
-
-                <?php include_once('../includes/footer.php'); }else{
+            </div>
+        </div>
+    </div>
+</div>
+<?php include_once('../includes/footer.php'); }else{
         die(access_denied());
 } ?>

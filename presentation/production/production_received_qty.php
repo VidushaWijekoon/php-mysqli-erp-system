@@ -42,14 +42,11 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                             VALUES ('$inventory_id', '$sales_order_id', '$username', CURRENT_TIMESTAMP)";
             $production = mysqli_query($connection, $query_insert);
             }else{
-                echo "It's Existing Item";
+                echo "<div class='exists'>It's Existing Item</div>";
             }
         }
-        }   
-               
-            
-        
-    
+    }   
+             
 }
 ?>
 
@@ -120,7 +117,7 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                                             $received_qty =0;
                                             foreach($query_result2 as $a){
                                                 $received_qty = $a['production_id'];
-                                                echo $received_qty;
+                                                echo '<span class="badge badge-lg badge-info text-white px-2 received_qty">Receiving Total: '.$received_qty.'</span>';
                                             }
                                             ////////////////////////////////////////////////////
                                             $i = 0;
@@ -152,37 +149,8 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
     </div>
 </div>
 
-
-<style>
-fieldset,
-legend {
-    all: revert;
-    font-size: 12px;
-}
-
-textarea {
-    text-transform: uppercase;
-}
-
-select,
-input[type="text"],
-[type="search"] {
-    height: 22px;
-    width: 50%;
-    margin: inherit;
-    margin-top: 4px;
-    font-size: 10px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 10px;
-    padding-left: 15px;
-    margin-bottom: 10px;
-    color: black;
-
-}
-</style>
 <script>
-    let searchbar = document.querySelector('input[name="search"]');
+let searchbar = document.querySelector('input[name="search"]');
 searchbar.focus();
 search.value = '';
 </script>
