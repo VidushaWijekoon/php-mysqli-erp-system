@@ -193,7 +193,7 @@ if (isset($_GET['sales_order_id'])) {
                         <fieldset class="mt-4 mb-4">
                             <legend>Achieved</legend>
 
-                            <table id="" class="table table-bordered table-striped">
+                            <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>Brand</th>
@@ -291,7 +291,7 @@ if (isset($_GET['sales_order_id'])) {
                         <fieldset class="mb-4 mt-4">
                             <legend>Order Summerizing</legend>
 
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="example2" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>SO Number</th>
@@ -335,23 +335,13 @@ if (isset($_GET['sales_order_id'])) {
     </div>
 </div>
 
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
-<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
 <script>
 let searchbar = document.querySelector('input[name="search"]');
 searchbar.focus();
 search.value = '';
 </script>
 
-<script>
-$(document).ready(function() {
-    $('#example1').dataTable();
-});
-</script>
+
 
 <?php include_once('../includes/footer.php'); }else{
         die(access_denied());

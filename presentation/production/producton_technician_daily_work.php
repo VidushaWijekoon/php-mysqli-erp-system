@@ -22,12 +22,27 @@ if($role_id = 1 && $department == 11 || $role_id = 6 && $department == 1) {
     <div class="row">
         <div class="col-lg-11 grid-margin stretch-card justify-content-center mx-auto mt-5">
             <div class="card">
+                <div class="card-header d-flex bg-secondary">
+                    <div class="mr-auto">
+                        <div class="text-center mx-auto mt-1 text-uppercase" style="font-size: 14px;">
+                            Users
+                        </div>
+                    </div>
+                    <form action="" method="GET">
+                        <div class="input-group">
+                            <span class="mt-1 mx-3" style="font-size: 14px;">Search :</span>
+                            <input type="search" name="search"
+                                value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" class="form-control"
+                                placeholder="Search data">
+                        </div>
+                    </form>
+                </div>
                 <div class="row mx-2">
                     <div class="col col-lg-12 mb-3">
                         <fieldset>
                             <legend>Production Team Members Daily View</legend>
 
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="example2" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>Inventory ID</th>

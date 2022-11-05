@@ -245,3 +245,16 @@ input[type="number"] {
 .custom-control {
   min-height: 0 !important;
 }
+
+.custom-control-label {
+  color: #f1f1f1 !important;
+  font-weight: 300 !important;
+  margin-top: 2px !important;
+  margin-right: 10px !important;
+}
+
+.col-values {
+  color: #a69ccd;
+  font-weight: bold;
+  font-size: 14px;
+}
