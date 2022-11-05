@@ -41,7 +41,7 @@ if (isset($_GET['sales_order_id'])) {
                 </div>
                 <div class="card-body">
 
-                    <table id="example1" class="table table-bordered table-striped">
+                    <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>Brand</th>
@@ -163,7 +163,7 @@ if (isset($_GET['sales_order_id'])) {
                     <!-- /.card-header -->
                     <div class="card-body p-0">
 
-                        <table id="example1" class="table table-striped">
+                        <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>#</th>

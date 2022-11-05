@@ -289,7 +289,7 @@ if(isset($_POST['submit'])){
 
 <div class="container-fluid mt-3">
     <div class="row">
-        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-2">
+        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-5">
             <div class="card-header bg-secondary">
                 <h3 class="card-title p-2">Inventory ID <?php echo $_GET['inventory_id']; ?></h3>
             </div>
@@ -835,7 +835,7 @@ if(isset($_POST['combine_form'])){
     c_panel_palm_rest, mb_base, hings_cover, lan_cover,combined_id) 
                 VALUES ('$inventory_id', '$emp_id', '$sales_order_id', '$keyboard', '$speakers', '$camera', '$bazel','$status','$keys','$mousepad','$mouse_pad_button',
                 '$camera_cable','$back_cover','$wifi_card','$lcd_cable','$battery','$battery_cable','$dvd_rom','$dvd_caddy','$hdd_caddy','$hdd_cable_connector',
-                '$c_panel_palm_rest','$mb_base','$hings_cover','$lan_cover','$scan_id')";
+                '$c_panel_palm_rest','$mb_base','$hings_cover','$lan_cover','0')";
 
     $query_run = mysqli_query($connection, $query_com);
    
@@ -2370,7 +2370,7 @@ for($i =0; $i< sizeof($result);$i++){
      $checkBox = implode(',', $_POST['work']);
     $query = "INSERT INTO bodywork(id, inventory_id, emp_id, sales_order_id, a_scratch, a_broken, a_dent, b_scratch, b_broken, b_logo, b_color, c_scratch, c_broken, c_dent, d_scratch, d_broken, d_dent, status) 
     VALUES (null,'$inventory_id','$emp_id','$sales_order_id','$a_scratch','$a_broken','$a_dent','$b_scratch','$b_broken','$b_logo','$b_color','$c_scratch','$c_broken','$c_dent','$d_scratch','$d_broken','$d_dent','$status')";
-
+    echo $query;
     $query_run = mysqli_query($connection, $query);
 header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
     if($status == 1){

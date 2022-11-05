@@ -34,7 +34,7 @@ if($role_id == 1 && $department == 11 || $role_id == 6 && $department == 1) {
                     <p class="text-uppercase m-0 p-0">My Task</p>
                 </div>
                 <div class="card-body">
-                    <table id="example1" class="table table-bordered ">
+                    <table class="table table-bordered ">
                         <thead>
                             <tr>
                                 <th>#</th>

@@ -66,7 +66,7 @@ if (isset($_GET['sales_order_id'])) {
 
                     </div>
 
-                    <table id="example1" class="table table-bordered table-striped mt-5">
+                    <table class="table table-bordered table-striped mt-5">
                         <thead>
                             <tr>
                                 <th>Device</th>

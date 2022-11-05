@@ -101,7 +101,7 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                                     <?php 
                                             $query = "SELECT * FROM `production`
                                                         LEFT JOIN warehouse_information_sheet ON 
-                                                        warehouse_information_sheet.inventory_id = production.inventory_id;";
+                                                        warehouse_information_sheet.inventory_id = production.inventory_id ORDER BY received_date DESC;";
                                             $result = mysqli_query($connection, $query);
                                             ////////////////////////////////////////////////
                                             //retrive order qty 

@@ -148,10 +148,11 @@ body {
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
                                             <a href="../users/users_dashboard.php" class="nav-link">
-                                                <i class="fa-solid fa-user-secret nav-icon" style="font-size: 12px;"></i>
+                                                <i class="fa-solid fa-user-secret nav-icon"
+                                                    style="font-size: 12px;"></i>
                                                 <p>Admin Dashboard</p>
                                             </a>
-                                        </li>                                        
+                                        </li>
 
                                     </ul>
                                 </li>
@@ -710,7 +711,7 @@ body {
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="pages/search/simple.html" class="nav-link">
+                                    <a href="../search/general_search" class="nav-link">
                                         <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
                                         <p> Search </p>
                                     </a>

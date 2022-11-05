@@ -194,7 +194,7 @@ if (isset($_POST['submit'])) {
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Gender</label>
                                     <div class="col-sm-10">
-                                        <select name="gender" style="border-radius: 5px;">
+                                        <select name="gender" class="info_select" style="border-radius: 5px;">
                                             <option selected>--Select Gender--</option>
                                             <?php
                                                 $query = "SELECT * FROM `gender` ORDER BY gender_id";
@@ -241,7 +241,7 @@ if (isset($_POST['submit'])) {
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label mt-2">Visa Type</label>
                                     <div class="col-sm-10">
-                                        <select name="visa_type" style="border-radius: 5px;">
+                                        <select name="visa_type" class="info_select" style="border-radius: 5px;">
                                             <option selected>--Select Visa Type--</option>
                                             <?php
                                                 $query = "SELECT * FROM `visa_type` ORDER BY visa_id";
@@ -268,14 +268,14 @@ if (isset($_POST['submit'])) {
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Contact Number</label>
                                     <div class="col-sm-10">
-                                        <input type="number" class="form-control" placeholder="Contact Number"
+                                        <input type="number" min="0" class="form-control" placeholder="Contact Number"
                                             name="contact_number">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label for="relationship" class="col-sm-2 col-form-label">Relationship</label>
                                     <div class="col-sm-10">
-                                        <select name="relationship" style="border-radius: 5px;">
+                                        <select name="relationship" class="info_select" style="border-radius: 5px;">
                                             <option selected>--Select relationship--</option>
                                             <?php
                                                 $query = "SELECT * FROM `relationship` ORDER BY relationship_id";
@@ -306,7 +306,7 @@ if (isset($_POST['submit'])) {
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Current Country</label>
                                     <div class="col-sm-10">
-                                        <select name="current_country" style="border-radius: 5px;">
+                                        <select name="current_country" class="info_select" style="border-radius: 5px;">
                                             <option selected>--Select Country--</option>
                                             <?php
                                                 $query = "SELECT * FROM countries ORDER BY 'country_name' ASC";
@@ -333,7 +333,7 @@ if (isset($_POST['submit'])) {
                                 <div class="row">
                                     <label for="country" class="col-sm-2 col-form-label">Resident Country</label>
                                     <div class="col-sm-10">
-                                        <select name="resident_country" style="border-radius: 5px;">
+                                        <select name="resident_country" class="info_select" style="border-radius: 5px;">
                                             <option selected>--Select Country--</option>
                                             <?php
                                                 $query = "SELECT * FROM countries ORDER BY 'country_name' ASC";
@@ -353,8 +353,8 @@ if (isset($_POST['submit'])) {
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Emergency</label>
                                     <div class="col-sm-10">
-                                        <input type="number" class="form-control" placeholder="Emergency Contact Number"
-                                            name="emergency_contact">
+                                        <input type="number" min="1" class="form-control"
+                                            placeholder="Emergency Contact Number" name="emergency_contact">
                                     </div>
                                 </div>
                             </fieldset>
@@ -380,7 +380,7 @@ if (isset($_POST['submit'])) {
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Department</label>
                                     <div class="col-sm-10">
-                                        <select name="department" style="border-radius: 5px;">
+                                        <select name="department" class="info_select" style="border-radius: 5px;">
                                             <option selected>--Select Department--</option>
                                             <?php
                                                 $query = "SELECT * FROM departments ORDER BY `department` ASC";
@@ -400,7 +400,7 @@ if (isset($_POST['submit'])) {
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Labour Category</label>
                                     <div class="col-sm-10">
-                                        <select name="labour_category" style="border-radius: 5px;">
+                                        <select name="labour_category" class="info_select" style="border-radius: 5px;">
                                             <option selected>--Select Labour Category--</option>
                                             <?php
                                                 $query = "SELECT * FROM tbl_roles ORDER BY role ASC";
@@ -452,45 +452,6 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
 </div>
-
-
-<style>
-textarea {
-    text-transform: uppercase;
-}
-
-select,
-input[type="text"],
-[type="number"],
-[type="email"],
-[type="date"],
-[type='password'] {
-    width: 100%;
-    height: 22px;
-    margin: inherit;
-    margin-top: 4px;
-    font-size: 10px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-    font-size: 12px;
-}
-
-.custom-select {
-    font-size: 12px;
-}
-
-#exampleFormControlTextarea1 {
-    font-size: 12px;
-}
-
-.form-control-file {
-    justify-content: center;
-    text-align: center;
-    margin: auto;
-    margin-left: 15px;
-}
-</style>
 
 <?php include_once('../includes/footer.php'); }else{
         die(access_denied());

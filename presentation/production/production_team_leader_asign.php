@@ -92,7 +92,7 @@ foreach($query_run as $data){
 
                 </div>
                 <div class="card-body">
-                    <table id="example1" class="table table-striped">
+                    <table class="table table-striped">
                         <thead class="bg-secondary text-uppercase">
                             <tr>
                                 <th>Technician</th>

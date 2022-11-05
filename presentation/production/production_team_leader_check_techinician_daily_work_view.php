@@ -146,17 +146,21 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
         <div
             class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 grid-margin stretch-card justify-content-center mx-auto">
             <div class="card">
-                <div class="card-header d-flex">
-                    <div id="reportrange">
-                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
-                        <span></span> <b class="caret"></b>
-                    </div>
-
-                    <div class="ml-auto d-flex">
-                        <div class="text-center mx-auto mt-1 text-uppercase" style="font-size: 14px;">
-                            Technician Daily Work
+                <div class="card-header d-flex bg-secondary">
+                    <div class="mr-auto">
+                        <div id="reportrange">
+                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                            <span></span> <b class="caret"></b>
                         </div>
                     </div>
+                    <form action="" method="GET">
+                        <div class="input-group">
+                            <span class="mt-1 mx-3" style="font-size: 14px;">Search :</span>
+                            <input type="search" name="search"
+                                value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" class="form-control"
+                                placeholder="Search data">
+                        </div>
+                    </form>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -223,62 +227,6 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
     </div>
 </div>
 
-
-<script type="text/javascript">
-$(function() {
-
-    var start = moment().subtract(29, 'days');
-    var end = moment();
-
-    function cb(start, end) {
-        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-    }
-
-    $('#reportrange').daterangepicker({
-        startDate: start,
-        endDate: end,
-        ranges: {
-            'Today': [moment(), moment()],
-            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-            'This Month': [moment().startOf('month'), moment().endOf('month')],
-            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month')
-                .endOf('month')
-            ]
-        }
-    }, cb);
-
-    cb(start, end);
-
-});
-</script>
-
-<style>
-[type='search'] {
-    width: 75%;
-    height: 22px;
-    margin: inherit;
-    margin-top: 4px;
-    font-size: 10px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-    font-size: 10px;
-    padding: 7px;
-}
-
-#reportrange {
-    background: #6c757d;
-    border-radius: 5px;
-    padding: 3px 10px;
-}
-
-.ranges {
-    font-family: "Poppins", sans-serif;
-
-}
-</style>
 
 <?php include_once('../includes/footer.php'); }else{
         die("<h3 class='text-danger'><<<<<< Access Denied >>>>></h3>");
