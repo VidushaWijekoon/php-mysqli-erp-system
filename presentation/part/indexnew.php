@@ -6,14 +6,24 @@ include_once('../../dataAccess/functions.php');
 require_once("sanitizer.php");
 
 session_start();
+// $last_update_id =0;
+// $quantity = $_SESSION['quantity'];
+// $brand = $_SESSION['brand'];
+// $model = $_SESSION['model'];
+// $generation = $_SESSION['generation'];
+// $core = $_SESSION['core'];
+// $location = $_SESSION['location'];
+// $last_id = $_SESSION['last_id'] ;
+
 $last_update_id =0;
-$quantity = $_SESSION['quantity'];
-$brand = $_SESSION['brand'];
-$model = $_SESSION['model'];
-$generation = $_SESSION['generation'];
-$core = $_SESSION['core'];
-$location = $_SESSION['location'];
-$last_id = $_SESSION['last_id'] ;
+$quantity = 1;
+$brand = "HP";
+$model = "840 g3";
+$generation = 10;
+$core = 'Keyboard';
+$location = "WH-1";
+$last_id = 1 ;
+
 if(empty($_SESSION['last_update_id'])){ $last_update_id =0;}else{
 
 	$last_update_id = $_SESSION['last_update_id'];
@@ -34,7 +44,7 @@ if($last_update_id != 0){
 	$start = $last_id; 
 	$overText = $brand."  ".$model ;
 	$secondPart = $core." GEN".$generation;
-	$downText = $generation."-".$model;
+	$downText = $generation."-".$model."-".$core;
 	$rack = $location; 
 	$hideText = null;
 
@@ -42,21 +52,21 @@ if($last_update_id != 0){
 
 	$height = $howManyCodes*100;
 
-	$pageWidth =  "200mm";
+	$pageWidth =  "400mm";
 	$pageHeight =  "$height.mm";
 
-	$itemWidth = "200mm";
+	$itemWidth = "400mm";
 	$itemHeight = "105mm";
 
 	$pageMarginLeft ="0mm";
-	$pageMarginTop ="0mm";
+	$pageMarginTop ="10mm";
 	$pageMarginRight = "0mm";
 	$pageMarginBottom =  "0mm";;
 
 	$itemMarginBottom =  "45mm";
 	$itemMarginRight = "10mm";
 
-	$barCodeHeight ="170px";
+	$barCodeHeight ="270px";
 	$codetype = "qrcode";
 	// echo "<br>Barcode type: <input type='text' name='codetype' value='{$codetype}'> (Valid codetypes: code128, code39, code25, codabar, qrcode)";
 	if($last_update_id != 0){
@@ -82,9 +92,14 @@ function write($code, $overText, $rack, $barCodeHeight, $downText,$secondPart) {
     	if ($overText != "") {
 			$abc= strtoupper( $overText);
     		echo  "</br> &nbsp </br> <div  ><p class = 'text-uppercase' style='font-size: 40; color:black;text-weight:bold;text-align: left;margin:0'>$abc &nbsp$secondPart</p></div>";
+			echo "</br>";
+			echo "</br>";
+			echo "</br>";
+			echo "</br>";
+			echo "</br>";
     	} 
 		?><table>
-    <th><?php echo "<img src='barcode.php?codetype=qrcode&size={$barCodeHeight}&text={$code}'align='left'width='350' height='350'> "; ?>
+    <th><?php echo "<img src='barcode.php?codetype=qrcode&size='600px'&text={$code}'align='left'width='350' height='350'> "; ?>
     </th>
     <th height: 370px;><?php 
 		echo strtoupper("<div style = 'font-size: 40; color:black;text-weight:bold;text-align: left;'>$rack");
