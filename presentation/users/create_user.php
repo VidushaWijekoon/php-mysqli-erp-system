@@ -106,141 +106,109 @@ if (isset($_POST['submit'])) {
     <div class="row">
         <div class="col-lg-6 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card mt-3">
-                <div class="card-header">
-                    <form action="" method="POST">
-                        <?php if (!empty($errors)) { display_errors($errors); } ?>
-                        <fieldset>
-                            <legend>Create New User</legend>
+                <form action="" method="POST">
+                    <?php if (!empty($errors)) { display_errors($errors); } ?>
+                    <fieldset class="mx-3 my-2">
+                        <legend>Create New User</legend>
 
-                            <div class="row">
-                                <label class="col-sm-3 col-form-label">Department</label>
-                                <div class="col-sm-8">
-                                    <select name="epf" style="border-radius: 5px;">
-                                        <option selected>--Select Department--</option>
-                                        <?php
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label">Department</label>
+                            <div class="col-sm-8">
+                                <select name="epf" class="info_select" style="border-radius: 5px;">
+                                    <option selected>--Select Department--</option>
+                                    <?php
                                             $query = "SELECT emp_id FROM employees ORDER BY `emp_id` DESC";
                                             $result = mysqli_query($connection, $query);
 
                                             while ($emp_id = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
                                             ?>
-                                        <option value="<?php echo $emp_id["emp_id"]; ?>">
-                                            <?php echo strtoupper($emp_id["emp_id"]); ?>
-                                        </option>
-                                        <?php endwhile; ?>
-                                    </select>
-                                </div>
+                                    <option value="<?php echo $emp_id["emp_id"]; ?>">
+                                        <?php echo strtoupper($emp_id["emp_id"]); ?>
+                                    </option>
+                                    <?php endwhile; ?>
+                                </select>
                             </div>
+                        </div>
 
-                            <div class="row">
-                                <label class="col-sm-3 col-form-label">First Name</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" placeholder="First Name" name="first_name">
-                                </div>
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label">First Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" placeholder="First Name" name="first_name">
                             </div>
+                        </div>
 
-                            <div class="row">
-                                <label class="col-sm-3 col-form-label">Last Name</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" placeholder="Last Name" name="last_name">
-                                </div>
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label">Last Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" placeholder="Last Name" name="last_name">
                             </div>
+                        </div>
 
-                            <div class="row">
-                                <label class="col-sm-3 col-form-label">Username</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" placeholder="Username" name="username">
-                                </div>
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label">Username</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" placeholder="Username" name="username">
                             </div>
+                        </div>
 
-                            <div class="row">
-                                <label class="col-sm-3 col-form-label">Department</label>
-                                <div class="col-sm-8">
-                                    <select name="department" style="border-radius: 5px;">
-                                        <option selected>--Select Department--</option>
-                                        <?php
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label">Department</label>
+                            <div class="col-sm-8">
+                                <select name="department" class="info_select" style="border-radius: 5px;">
+                                    <option selected>--Select Department--</option>
+                                    <?php
                                             $query = "SELECT * FROM departments ORDER BY `department` ASC";
                                             $all_departments = mysqli_query($connection, $query);
 
                                             while ($department = mysqli_fetch_array($all_departments, MYSQLI_ASSOC)) :;
                                             ?>
-                                        <option value="<?php echo $department["department_id"]; ?>">
-                                            <?php echo strtoupper($department["department"]); ?>
-                                        </option>
-                                        <?php endwhile; ?>
-                                    </select>
-                                </div>
+                                    <option value="<?php echo $department["department_id"]; ?>">
+                                        <?php echo strtoupper($department["department"]); ?>
+                                    </option>
+                                    <?php endwhile; ?>
+                                </select>
                             </div>
+                        </div>
 
 
-                            <div class="row">
-                                <label class="col-sm-3 col-form-label">Role</label>
-                                <div class="col-sm-8">
-                                    <select name="role" style="border-radius: 5px;">
-                                        <option selected>--Select Role --</option>
-                                        <?php
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label">Role</label>
+                            <div class="col-sm-8">
+                                <select name="role" class="info_select" style="border-radius: 5px;">
+                                    <option selected>--Select Role --</option>
+                                    <?php
                                             $query = "SELECT * FROM tbl_roles ORDER BY `role` ASC";
                                             $result = mysqli_query($connection, $query);
 
                                             while ($categories = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
                                             ?>
-                                        <option value="<?php echo $categories["role_id"]; ?>">
-                                            <?php echo strtoupper($categories["role"]); ?>
-                                        </option>
-                                        <?php endwhile; ?>
-                                    </select>
-                                </div>
+                                    <option value="<?php echo $categories["role_id"]; ?>">
+                                        <?php echo strtoupper($categories["role"]); ?>
+                                    </option>
+                                    <?php endwhile; ?>
+                                </select>
                             </div>
+                        </div>
 
-                            <div class="row">
-                                <label class="col-sm-3 col-form-label">Password</label>
-                                <div class="col-sm-8">
-                                    <input type="password" class="form-control" placeholder="Password" name="password">
-                                </div>
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label">Password</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" placeholder="Password" name="password">
                             </div>
+                        </div>
 
-                            <button type="submit" name="submit"
-                                class="btn mb-2 mt-4 btn-primary btn-sm d-block mx-auto text-center"><i
-                                    class="fa-solid fa-user" style="margin-right: 5px;"></i>Create User</button>
+                        <button type="submit" name="submit"
+                            class="btn mb-2 mt-4 btn-primary btn-sm d-block mx-auto text-center"><i
+                                class="fa-solid fa-user" style="margin-right: 5px;"></i>Create User</button>
 
-                        </fieldset>
-                    </form>
+                    </fieldset>
+                </form>
 
-                </div>
-                <!--/col-->
             </div>
+            <!--/col-->
         </div>
     </div>
 </div>
-
-<style>
-textarea {
-    text-transform: uppercase;
-}
-
-select,
-input[type="text"],
-[type="number"],
-[type="email"],
-[type='password'] {
-    width: 100%;
-    height: 22px;
-    margin: inherit;
-    margin-top: 4px;
-    font-size: 10px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-    font-size: 12px;
-}
-
-.custom-select {
-    font-size: 12px;
-}
-
-#exampleFormControlTextarea1 {
-    font-size: 12px;
-}
-</style>
 
 <?php include_once('../includes/footer.php'); }else{
         die(access_denied());

@@ -132,6 +132,55 @@ label {
   padding: 10px;
 }
 
+[type="password"] {
+  height: 22px;
+  margin-top: 4px;
+  font-size: 10px;
+  text-transform: uppercase;
+  border: 1px solid #f1f1f1;
+  border-radius: 5px;
+  font-size: 12px;
+  padding: 10px;
+}
+
+[type="number"] {
+  height: 22px;
+  margin-top: 4px;
+  font-size: 10px;
+  text-transform: uppercase;
+  border: 1px solid #f1f1f1;
+  border-radius: 5px;
+  font-size: 12px;
+  padding: 10px;
+}
+
+[type="email"] {
+  height: 22px;
+  margin-top: 4px;
+  font-size: 10px;
+  text-transform: uppercase;
+  border: 1px solid #f1f1f1;
+  border-radius: 5px;
+  font-size: 12px;
+  padding: 10px;
+}
+
+[type="date"] {
+  height: 22px;
+  margin-top: 4px;
+  font-size: 10px;
+  text-transform: uppercase;
+  border: 1px solid #f1f1f1;
+  border-radius: 5px;
+  font-size: 12px;
+  padding: 10px;
+}
+
+.info_select {
+  width: 100%;
+  height: 22px;
+}
+
 .exists {
   background: red;
   text-align: center;
@@ -157,4 +206,42 @@ label {
 
 #example2_paginate {
   float: right;
+}
+
+.dataTables_empty {
+  background: #af3232;
+  color: #ffffff;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.form-control-file {
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  margin-left: 15px;
+}
+
+#reportrange {
+  background: #6c757d;
+  border-radius: 5px;
+  padding: 3px 10px;
+}
+
+.ranges {
+  font-family: "Poppins", sans-serif;
+}
+
+.custom-control {
+  min-height: 0 !important;
 }

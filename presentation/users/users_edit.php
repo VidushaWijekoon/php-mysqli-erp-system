@@ -66,71 +66,63 @@ if (isset($_POST['submit'])) {
     <div class="row">
         <div class="col-lg-6 grid-margin stretch-card justify-content-center mx-auto mt-5">
             <div class="card mt-5">
-                <div class="card-header">
+                <form action="" method="POST">
+                    <fieldset class="mx-3 my-2">
+                        <?php if (!empty($errors)) { display_errors($errors); } ?>
+                        <legend>Create Warehouse Information Sheet</legend>
 
-                    <form action="" method="POST">
-                        <fieldset>
-                            <?php
-
-                                    if (!empty($errors)) {
-                                        display_errors($errors);
-                                    }
-
-                                ?>
-                            <legend>Create Warehouse Information Sheet</legend>
-
-                            <div class="row">
-                                <label class="col-sm-3 col-form-label">First Name</label>
-                                <div class="col-sm-8">
-                                    <input type="text" <?php echo 'value="' . $first_name . '"'; ?> readonly
-                                        class="form-control" name="first_name">
-                                </div>
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label">First Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" <?php echo 'value="' . $first_name . '"'; ?> readonly
+                                    class="form-control" name="first_name">
                             </div>
+                        </div>
 
-                            <div class="row">
-                                <label class="col-sm-3 col-form-label">Last Name</label>
-                                <div class="col-sm-8">
-                                    <input type="text" <?php echo 'value="' . $last_name . '"'; ?> readonly
-                                        class="form-control" name="last_name">
-                                </div>
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label">Last Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" <?php echo 'value="' . $last_name . '"'; ?> readonly
+                                    class="form-control" name="last_name">
                             </div>
+                        </div>
 
-                            <div class="row">
-                                <label class="col-sm-3 col-form-label">EPF</label>
-                                <div class="col-sm-8">
-                                    <input type="text" <?php echo 'value="' . $epf . '"'; ?> readonly
-                                        class="form-control" name="epf">
-                                </div>
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label">EPF</label>
+                            <div class="col-sm-8">
+                                <input type="text" <?php echo 'value="' . $epf . '"'; ?> readonly class="form-control"
+                                    name="epf">
                             </div>
+                        </div>
 
 
-                            <div class="row">
-                                <label class="col-sm-3 col-form-label">Username</label>
-                                <div class="col-sm-8">
-                                    <input type="text" <?php echo 'value="' . $username . '"'; ?> readonly
-                                        class="form-control" name="username">
-                                </div>
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label">Username</label>
+                            <div class="col-sm-8">
+                                <input type="text" <?php echo 'value="' . $username . '"'; ?> readonly
+                                    class="form-control" name="username">
                             </div>
+                        </div>
 
 
-                            <div class="row">
-                                <label class="col-sm-3 col-form-label">Department</label>
-                                <div class="col-sm-8">
-                                    <input type="text" <?php echo 'value="' . $department . '"'; ?> readonly
-                                        class="form-control" name="department">
-                                </div>
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label">Department</label>
+                            <div class="col-sm-8">
+                                <input type="text" <?php echo 'value="' . $department . '"'; ?> readonly
+                                    class="form-control" name="department">
                             </div>
+                        </div>
 
 
-                            <div class="row">
-                                <label class="col-sm-3 col-form-label">Role</label>
-                                <div class="col-sm-8">
-                                    <input type="text" <?php echo 'value="' . $role . '"'; ?> readonly
-                                        class="form-control" name="role">
-                                </div>
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label">Role</label>
+                            <div class="col-sm-8">
+                                <input type="text" <?php echo 'value="' . $role . '"'; ?> readonly class="form-control"
+                                    name="role">
                             </div>
+                        </div>
 
-                            <?php 
+                        <?php 
                             
                             $query1 = "SELECT department, role FROM users WHERE user_id = {$user_id}";
                             $set = mysqli_query($connection, $query1);
@@ -141,76 +133,41 @@ if (isset($_POST['submit'])) {
                                 
                                 if($department1 == 1 && $role1 == 6){
                             ?>
-                            <div class="row">
-                                <label class="col-sm-3 col-form-label">Location</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" placeholder="Technician Location"
-                                        name="location">
-                                </div>
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label">Location</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" placeholder="Technician Location"
+                                    name="location">
                             </div>
+                        </div>
 
-                            <?php } else {
+                        <?php } else {
                                 
                             } } ?>
 
-                            <div class="row">
-                                <label class="col-sm-3 col-form-label">Password</label>
-                                <div class="col-sm-8">
-                                    <span class="mx-2">******</span> | <a class="text-warning mx-2"
-                                        href="user_changepassword.php?user_id=<?php echo $user_id; ?>">Change
-                                        Password</a>
-                                </div>
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label">Password</label>
+                            <div class="col-sm-8">
+                                <span class="mx-2">******</span> | <a class="text-warning mx-2"
+                                    href="user_changepassword.php?user_id=<?php echo $user_id; ?>">Change
+                                    Password</a>
                             </div>
+                        </div>
 
-                            <?php if($department1 == 1 && $role1 == 6){ ?>
-                            <button type="submit" name="submit"
-                                class="btn mb-2 mt-4 btn-primary btn-sm d-block mx-auto text-center"><i
-                                    class="fa-solid fa-user" style="margin-right: 5px;"></i>Update Location</button>
-                            <?php } ?>
-                        </fieldset>
-                    </form>
-                </div>
-                <!--/col-->
+                        <?php if($department1 == 1 && $role1 == 6){ ?>
+                        <button type="submit" name="submit"
+                            class="btn mb-2 mt-4 btn-primary btn-sm d-block mx-auto text-center"><i
+                                class="fa-solid fa-user" style="margin-right: 5px;"></i>Update Location</button>
+                        <?php } ?>
+                    </fieldset>
+                </form>
             </div>
+            <!--/col-->
         </div>
     </div>
-
 </div>
 
-
-
-<style>
-textarea {
-    text-transform: uppercase;
-}
-
-select,
-input[type="text"],
-[type="number"],
-[type="email"],
-[type='password'] {
-    width: 100%;
-    height: 22px;
-    margin: inherit;
-    margin-top: 4px;
-    font-size: 10px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-}
-
-#exampleFormControlTextarea1 {
-    font-size: 12px;
-}
-</style>
-
-<script>
-setTimeout(function() {
-    if ($('#msg').length > 0) {
-        $('#msg').remove();
-    }
-}, 10000)
-</script>
+</div>
 
 <?php include_once('../includes/footer.php'); }else{
         die(access_denied());
