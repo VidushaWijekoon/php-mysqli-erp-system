@@ -946,7 +946,7 @@ if(isset($_POST['combine_form'])){
         inventory_id = '$inventory_id'";
         $query_run = mysqli_query($connection, $query_update);
     }
-    $query_update_part = "UPDATE `requested_part_from_production` SET `status`='0' WHERE `inventory_id`='$inventory_id';";
+    $query_update_part = "UPDATE `requested_part_from_production` SET `status`='0' ,switch = '1',switch_id ='$scan_id' WHERE `inventory_id`='$inventory_id';";
     $query_run = mysqli_query($connection, $query_update_part);
     $query_1 ="SELECT  `status`FROM `requested_part_from_production` WHERE inventory_id = $inventory_id";
                                                             $query_run = mysqli_query($connection, $query_1);
@@ -2313,8 +2313,11 @@ if(isset($_POST['bodywork'])){
    $checkBox = implode(',', $_POST['work']); 
 $result=explode(",",$checkBox);
 
-for($i =0; $i<= sizeof($result);$i++){
-    echo $result[$i];
+
+for($i =0; $i< sizeof($result);$i++){
+    // echo $result[$i];
+    // echo "</br>";
+
     if($result[$i] == "a_scratch"){
         $a_scratch ="1";
     }
@@ -2365,12 +2368,11 @@ for($i =0; $i<= sizeof($result);$i++){
         $status = 1;
      } 
      $checkBox = implode(',', $_POST['work']);
-     echo $checkBox;
     $query = "INSERT INTO bodywork(id, inventory_id, emp_id, sales_order_id, a_scratch, a_broken, a_dent, b_scratch, b_broken, b_logo, b_color, c_scratch, c_broken, c_dent, d_scratch, d_broken, d_dent, status) 
     VALUES (null,'$inventory_id','$emp_id','$sales_order_id','$a_scratch','$a_broken','$a_dent','$b_scratch','$b_broken','$b_logo','$b_color','$c_scratch','$c_broken','$c_dent','$d_scratch','$d_broken','$d_dent','$status')";
-    echo $query;
-    // $query_run = mysqli_query($connection, $query);
-// header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
+
+    $query_run = mysqli_query($connection, $query);
+header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
     if($status == 1){
         $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
         $date = $date1->format('Y-m-d H:i:s');
