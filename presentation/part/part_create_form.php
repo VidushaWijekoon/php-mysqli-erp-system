@@ -10,6 +10,36 @@ include_once('../includes/header.php');
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
+if(isset($_POST['submit'])){
+        $device = mysqli_real_escape_string($connection, $_POST['device']);
+        $brand = mysqli_real_escape_string($connection, $_POST['brand']);
+        $generation = mysqli_real_escape_string($connection, $_POST['generation']);
+        $model = mysqli_real_escape_string($connection, $_POST['model']);
+        $quantity = mysqli_real_escape_string($connection, $_POST['quantity']);
+        $location = mysqli_real_escape_string($connection, $_POST['location']);
+        $capacity = mysqli_real_escape_string($connection, $_POST['capacity']);
+        echo "Finally im here";
+        $query = "INSERT INTO `part_stock`(
+            `part_name`,
+            `part_model`,
+            `part_brand`,
+            `part_gen`,
+            `capacity`,
+            `qty`,
+            `location`
+        )
+        VALUES(
+            '$device',
+            '$model',
+            '$brand',
+            '$generation',
+            '$capacity',
+            '$quantity',
+            '$location'
+        )";
+        $query_run = mysqli_query($connection, $query);
+
+}
 ?>
 
 <div class="row page-titles">
@@ -30,18 +60,18 @@ if (!isset($_SESSION['user_id'])) {
                             <legend>Create Part Information Sheet</legend>
 
                             <div class="row">
-                                <label class="col-sm-3 col-form-label">Device</label>
+                                <label class="col-sm-3 col-form-label">Device Type</label>
                                 <div class="col-sm-8">
                                     <select name="device" style="border-radius: 5px;" required>
                                         <option selected>--Select Item Type--</option>
                                         <?php
-                                            $query = "SELECT * FROM device ORDER BY device ASC";
+                                            $query = "SELECT part_name FROM part_list ORDER BY part_name ASC";
                                             $all_devices = mysqli_query($connection, $query);
 
                                             while ($devices = mysqli_fetch_array($all_devices, MYSQLI_ASSOC)) :;
                                             ?>
-                                        <option value="<?php echo $devices["device"]; ?>">
-                                            <?php echo strtoupper($devices["device"]); ?>
+                                        <option value="<?php echo $devices["part_name"]; ?>">
+                                            <?php echo strtoupper($devices["part_name"]); ?>
                                         </option>
                                         <?php
                                             endwhile;
@@ -102,13 +132,13 @@ if (!isset($_SESSION['user_id'])) {
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Location</label>
                                 <div class="col-sm-8">
-                                    <input type="number" class="form-control" placeholder="Location" name="quantity">
+                                    <input type="text" class="form-control" placeholder="Location" name="location">
                                 </div>
                             </div>
 
                             <button type="submit" name="submit" id="submit"
                                 class="btn mb-2 mt-4 btn-primary btn-sm d-block mx-auto text-center"><i
-                                    class="fa-solid fa-qrcode" style="margin-right: 5px;"></i>Genarate QR</button>
+                                    class="fa-solid fa-qrcode" style="margin-right: 5px;"></i>Submit</button>
 
 
                         </fieldset>
