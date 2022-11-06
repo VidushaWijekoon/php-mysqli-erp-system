@@ -1,5 +1,21 @@
-<form action="insert.php" method="post">
-    Name: <input type="text" name="username" /><br />
-    Email: <input type="text" name="email" /><br />
-    <input type="submit" name="submit" value="Submit me!" />
-</form>
+echo $keyboard."</br>";
+echo $key."</br>";
+echo $speakers."</br>";
+echo $camera."</br>";
+echo $bazel."</br>";
+echo $mousepad."</br>";
+echo $mouse_pad_button."</br>";
+echo $camera_cable."</br>";
+echo $back_cover."</br>";
+echo $wifi_card."</br>";
+echo $lcd_cable."</br>";
+echo $battery."</br>";
+echo $battery_cable."</br>";
+echo $dvd_rom."</br>";
+echo $dvd_caddy."</br>";
+echo $hdd_caddy."</br>";
+echo $hdd_cable_connector."</br>";
+echo $c_panel_palm_rest."</br>";
+echo $mb_base."</br>";
+echo $hings_cover."</br>";
+echo $lan_cover."</br>";

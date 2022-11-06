@@ -1,14 +1,16 @@
 <?php  
- //insert.php  
-//  $host = "localhost";  
-//  $username = "root";  
-//  $password = "";  
-//  $database = "wms";
 ob_start();
-session_start();  
+session_start();
+$emp_id = $_SESSION['epf'];  
 include_once('../../dataAccess/connection.php');
 $data = json_decode(stripslashes($_POST['key']));
 $inventory_id = $_GET['com_id'];
+$query_run_get_location = "SELECT location FROM users WHERE epf = $emp_id";
+$query_run_get_location = mysqli_query($connection, $query_run_get_location);
+$emp_location ;
+foreach($query_run_get_location as $d){
+    $emp_location = $d['location'];
+}
 $i=0;
 $name;
 $scan_id = 0;
@@ -35,7 +37,7 @@ $mb_base;
 $hings_cover;
 $lan_cover;
 
-$emp_id = $_SESSION['epf'];
+
   foreach($data as $key=>$value){
     if($i ==0){
         $name = $value;
@@ -231,8 +233,6 @@ $emp_id = $_SESSION['epf'];
             1
             
         )"; 
-        // $query_run = mysqli_query($connection, $query_new_record);
-        // $count = $query_run->rowCount(); 
            if(mysqli_query($connection, $query_new_record))  
            {  
                 echo "Inserted Successfully!";  
@@ -244,6 +244,53 @@ $emp_id = $_SESSION['epf'];
         }else{
             echo "Please Scan the Switch Machine ";
         }
+        $query_update_part = "UPDATE `requested_part_from_production` SET `status`='$status',$name='0' ,switch = '1',switch_id ='$scan_id' WHERE `inventory_id`='$inventory_id';";
+       
+        $query_run = mysqli_query($connection, $query_update_part);
+       
+        $query_select = "SELECT brand,model,generation,sales_order_id FROM warehouse_information_sheet WHERE inventory_id = $inventory_id;";
+        
+        $query_run1 = mysqli_query($connection, $query_select);
+        
+        $brand;
+        $model;
+        $generation;
+        $sales_order_id;
+        
+        foreach($query_run1 as $d){
+            $brand = $d['brand'];
+            $model =$d['model'];
+            $generation = $d['generation'];
+            $sales_order_id =$d['sales_order_id'];
+        }
+        $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+        $date = $date1->format('Y-m-d H:i:s');
+        $query_inventory_record = "INSERT INTO requested_part_from_production(
+            brand,
+            model,
+            generation,
+            sales_order_id,
+            created_date,
+            inventory_id,
+            emp_id,
+            location,
+            $name,
+            status
+        )
+        VALUES(
+            '$brand',
+            '$model',
+            $generation,
+            $sales_order_id,
+            '$date',
+            $scan_id,
+            $emp_id,
+            '$emp_location',
+            1,
+            1
+            
+        )"; 
+        $query_run = mysqli_query($connection, $query_inventory_record);
     }
     
  ?>
