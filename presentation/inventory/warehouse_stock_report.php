@@ -1250,7 +1250,7 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
 
             </div>
             <div class="modal-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="example2" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>&nbsp;</th>

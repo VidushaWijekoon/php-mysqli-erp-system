@@ -14,7 +14,8 @@ $department = $_SESSION['department'];
 if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
 
     $emp_id = $_GET['emp_id'];
-
+    $emp_name = $_GET['emp_name'];
+    
     $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
     $date = $date1->format('Y-m-d H:i:s');
 
@@ -148,18 +149,45 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
             <div class="card">
                 <div class="card-header d-flex bg-secondary">
                     <div class="mr-auto">
-                        <div id="reportrange">
-                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
-                            <span></span> <b class="caret"></b>
+                        <div class="text-center mx-auto mt-1 text-uppercase" style="font-size: 14px;">
+                            <?php  echo $emp_id . " " . $emp_name;   ?>
+
+
+                            Daily Work
                         </div>
                     </div>
                     <form action="" method="GET">
-                        <div class="input-group">
-                            <span class="mt-1 mx-3" style="font-size: 14px;">Search :</span>
-                            <input type="search" name="search"
-                                value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" class="form-control"
-                                placeholder="Search data">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <input type="date" name="from_date"
+                                        value="<?php if(isset($_GET['from_date'])){ echo $_GET['from_date']; } ?>"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <input type="date" name="to_date"
+                                        value="<?php if(isset($_GET['to_date'])){ echo $_GET['to_date']; } ?>"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-xs btn-primary">Choose Date</button>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group d-flex">
+                                    <span class="mx-2" style="margin-top: 5px;">Search</span>
+                                    <input type="search" name="search"
+                                        value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>"
+                                        class="form-control" placeholder="Search data">
+                                </div>
+                            </div>
+
                         </div>
+
                     </form>
                 </div>
                 <div class="card-body">
@@ -178,17 +206,20 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                             </thead>
                             <tbody>
                                 <?php 
-                                $sanding_count = 0;
-                                $motherboard_count = 0;
-                                $combine_count = 0;
-                                $lcd_count = 0;
-                                $bodywork_count = 0;
-                                
-                                $query = "SELECT * FROM prod_info WHERE emp_id = {$emp_id} ";                  
-                                $query_read = mysqli_query($connection, $query);
 
-                                if(mysqli_fetch_assoc($query_read)){
-                                    foreach($query_read as $row){                               
+                                    $sanding_count = 0;
+                                    $motherboard_count = 0;
+                                    $combine_count = 0;
+                                    $lcd_count = 0;
+                                    $bodywork_count = 0;
+                                    
+                                    if (isset($_GET['search'])) {
+                                        $filtervalues = $_GET['search'];                                     
+                                                                
+                                        $query = "SELECT * FROM prod_info WHERE emp_id = {$emp_id} AND CONCAT(inventory_id) LIKE '%$filtervalues%' ";
+                                                            
+                                        $query_read = mysqli_query($connection, $query);
+                                        foreach($query_read as $row){                               
                                         
                                 ?>
                                 <tr>
@@ -201,6 +232,23 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                                     <td><?php if($row['issue_type']== 5){$sanding_count++;echo "1"; }?></td>
 
 
+                                </tr>
+                                <?php } } else {     
+                                                                 
+                                        $query = "SELECT * FROM prod_info WHERE emp_id = {$emp_id} ";
+                                                            
+                                        $query_read = mysqli_query($connection, $query);
+                                        foreach($query_read as $row){  
+                                ?>
+
+                                <tr>
+                                    <td><?php echo $row['sales_order'] ?></td>
+                                    <td><?php echo $row['inventory_id'] ?></td>
+                                    <td><?php if($row['issue_type' ] ==1){$motherboard_count++;echo "1"; }?></td>
+                                    <td><?php if($row['issue_type'] == 2){$combine_count++;echo "1"; }?></td>
+                                    <td><?php if($row['issue_type' ]== 3){$lcd_count++;echo "1"; }?></td>
+                                    <td><?php if($row['issue_type']== 4){$bodywork_count++;echo "1"; }?></td>
+                                    <td><?php if($row['issue_type']== 5){$sanding_count++;echo "1"; }?></td>
                                 </tr>
                                 <?php } } ?>
 

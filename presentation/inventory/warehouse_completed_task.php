@@ -31,7 +31,7 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
                 <h5 class="text-uppercase m-0 p-0">Inventory Member Completed Task</h5>
             </div>
             <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="example2" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>Sales Order</th>
@@ -103,18 +103,6 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
         </div>
     </div>
 </div>
-
-
-<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
-<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-<script>
-$(document).ready(function() {
-    $('#example1').dataTable();
-});
-</script>
-
 
 <?php include_once('../includes/footer.php'); }else{
         die(access_denied());
