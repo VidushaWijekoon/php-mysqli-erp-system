@@ -124,6 +124,7 @@ if (isset($_GET['sales_order_id'])) {
       $query_mc = "SELECT * FROM combine_check WHERE inventory_id =$inventory_id AND sales_order_id=$sales_order_id";
     $query_run_c = mysqli_query($connection, $query_mc);
     foreach($query_run_c as $data){
+        $com_id = $data['inventory_id'];
         $comb_status = $data['status'];
         $keyboard = $data['keyboard'];
         $speakers = $data['speakers'];
@@ -989,6 +990,57 @@ if(isset($_POST['combine_form'])){
  
 ?>
 
+<script>
+$(document).ready(function() {
+    $('input[type="radio"]').click(function() {
+        var value = $(this).val();
+        info = [];
+        info[0] = $(this).val();
+        info[1] = $('#scan_id').val();
+        var jsonString = JSON.stringify(info);
+        $.ajax({
+            url: "insert.php?com_id=<?php echo $com_id ?>&scan_id=<?php echo $com_id ?>",
+            method: "POST",
+            data: {
+                key: jsonString
+            },
+            success: function(data) {
+                $('#result').html(data);
+            },
+
+
+        });
+        document.getElementById("scan_id").value = '';
+    });
+
+
+});
+
+//////////////////////////////////////////////////////////////////
+// setInterval(
+//     function() {
+//         document.getElementById("scan_id").value = "";
+//     }, 30000);
+
+function ClearInputField() {
+    document.getElementsByName('scan_id').val("");
+}
+
+/////////////////////////////////////////////////////////////////
+</script>
+<script type="text/javascript">
+function clearText(a) {
+    if (a.defaultValue == a.value) {
+        a.value = ""
+    } else {
+        if (a.value == "") {
+            a.value = a.defaultValue
+        }
+    }
+};
+</script>
+
+
 <!-- Combine Form -->
 <div class="modal fade" id="modal-combine">
     <div class="modal-dialog modal-xl">
@@ -1015,7 +1067,8 @@ if(isset($_POST['combine_form'])){
                         <fieldset class="mt-2">
                             <div class="input-group mb-2 mt-2">
                                 <lable>Switch Parts</lable>
-                                <input type="text" name="scan_id" id="scan_id" value="">
+                                <input type="text" name="scan_id" id="scan_id" class="scan_id"
+                                    onfocus="clearInput(this)" value="">
                             </div>
                         </fieldset>
                     </div>
@@ -1051,13 +1104,14 @@ if(isset($_POST['combine_form'])){
                             <?php } elseif($keyboard == 1){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="r7" name="keyboard" value="0">
+                                    <input type="radio" id="r7" class="keyboard" name="keyboard" value="keyboard">
                                     <label class="label_values" for="r7" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="r8" name="keyboard" value="1" checked="checked">
                                     <label class="label_values" for="r8">No </label>
                                 </div>
+                                <div id="result"></div>
                             </div>
                             <?php } ?>
                         </div>
@@ -1088,13 +1142,14 @@ if(isset($_POST['combine_form'])){
                             <?php }elseif($keys == 1){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="c31" name="keys" value="0">
+                                    <input type="radio" id="c31" name="keys" class="keys" value="keys">
                                     <label class="label_values" for="c31" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="c32" name="keys" value="1" checked="checked">
                                     <label class="label_values" for="c32">No </label>
                                 </div>
+                                <div id="result"></div>
                             </div>
                             <?php } ?>
 
@@ -1127,13 +1182,14 @@ if(isset($_POST['combine_form'])){
                             <?php } elseif($speakers == 1){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="r9" name="speakers" value="0">
+                                    <input type="radio" id="r9" class="speakers" name="speakers" value="speakers">
                                     <label class="label_values" for="r9" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="r10" name="speakers" value="1" checked="checked">
                                     <label class="label_values" for="r10">No </label>
                                 </div>
+                                <div id="result"></div>
                             </div>
                             <?php }?>
 
@@ -1166,13 +1222,14 @@ if(isset($_POST['combine_form'])){
                             <?php }elseif($camera == 1){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="r11" name="camera" value="0">
+                                    <input type="radio" id="r11" name="camera" class="camera" value="camera">
                                     <label class="label_values" for="r11" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="r12" name="camera" value="1" checked="checked">
                                     <label class="label_values" for="r12">No </label>
                                 </div>
+                                <div id="result"></div>
                             </div>
                             <?php } ?>
 
@@ -1203,13 +1260,14 @@ if(isset($_POST['combine_form'])){
                             </div><?php }elseif($bazel ==1){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="13" name="bazel" value="0">
+                                    <input type="radio" id="13" name="bazel" class="bazel" value="bazel">
                                     <label class="label_values" for="13" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="r14" name="bazel" value="1" checked="checked">
                                     <label class="label_values" for="r14">No </label>
                                 </div>
+                                <div id="result"></div>
                             </div>
                             <?php } ?>
                         </div>
@@ -1240,13 +1298,14 @@ if(isset($_POST['combine_form'])){
                             <?php }elseif($mousepad == 1){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="c1" name="mousepad" value="0">
+                                    <input type="radio" id="c1" name="mousepad" class="mousepad" value="mousepad">
                                     <label class="label_values" for="c1" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="c2" name="mousepad" value="1" checked="checked">
                                     <label class="label_values" for="c2">No </label>
                                 </div>
+                                <div id="result"></div>
                             </div>
                             <?php } ?>
 
@@ -1278,13 +1337,15 @@ if(isset($_POST['combine_form'])){
                             <?php }elseif($mouse_pad_button == 1){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="c3" name="mouse_pad_button" value="0">
+                                    <input type="radio" id="c3" name="mouse_pad_button" class="mouse_pad_button"
+                                        value="mouse_pad_button">
                                     <label class="label_values" for="c3" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="c4" name="mouse_pad_button" value="1" checked="checked">
                                     <label class="label_values" for="c4">No </label>
                                 </div>
+                                <div id="result"></div>
                             </div>
                             <?php } ?>
 
@@ -1316,13 +1377,15 @@ if(isset($_POST['combine_form'])){
                             <?php }elseif($camera_cable == 1){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="c5" name="camera_cable" value="0">
+                                    <input type="radio" id="c5" name="camera_cable" class="camera_cable"
+                                        value="camera_cable">
                                     <label class="label_values" for="c5" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="c6" name="camera_cable" value="1" checked="checked">
                                     <label class="label_values" for="c6">No </label>
                                 </div>
+                                <div id="result"></div>
                             </div>
                             <?php } ?>
 
@@ -1354,13 +1417,14 @@ if(isset($_POST['combine_form'])){
                             <?php }elseif($back_cover == 1){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="c7" name="back_cover" value="0">
+                                    <input type="radio" id="c7" name="back_cover" class="back_cover" value="back_cover">
                                     <label class="label_values" for="c7" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="c8" name="back_cover" value="1" checked="checked">
                                     <label class="label_values" for="c8">No </label>
                                 </div>
+                                <div id="result"></div>
                             </div>
                             <?php } ?>
 
@@ -1392,13 +1456,14 @@ if(isset($_POST['combine_form'])){
                             <?php }elseif($wifi_card == 1){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="c9" name="wifi_card" value="0">
+                                    <input type="radio" id="c9" name="wifi_card" class="wifi_card" value="wifi_card">
                                     <label class="label_values" for="c9" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="c10" name="wifi_card" value="1" checked="checked">
                                     <label class="label_values" for="c10">No </label>
                                 </div>
+                                <div id="result"></div>
                             </div>
                             <?php } ?>
 
@@ -1430,13 +1495,14 @@ if(isset($_POST['combine_form'])){
                             <?php }elseif($lcd_cable == 1){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="c11" name="lcd_cable" value="0">
+                                    <input type="radio" id="c11" name="lcd_cable" class="lcd_cable" value="lcd_cable">
                                     <label class="label_values" for="c11" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="c12" name="lcd_cable" value="1" checked="checked">
                                     <label class="label_values" for="c12">No </label>
                                 </div>
+                                <div id="result"></div>
                             </div>
                             <?php } ?>
 
@@ -1470,13 +1536,14 @@ if(isset($_POST['combine_form'])){
                             <?php }elseif($battery == 1){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="c13" name="battery" value="0">
+                                    <input type="radio" id="c13" name="battery" class="battery" value="battery">
                                     <label class="label_values" for="c13" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="c14" name="battery" value="1" checked="checked">
                                     <label class="label_values" for="c14">No </label>
                                 </div>
+                                <div id="result"></div>
                             </div>
                             <?php } ?>
 
@@ -1508,13 +1575,15 @@ if(isset($_POST['combine_form'])){
                             <?php }elseif($battery_cable == 1){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="c15" name="battery_cable" value="0">
+                                    <input type="radio" id="c15" name="battery_cable" class="battery_cable"
+                                        value="battery_cable">
                                     <label class="label_values" for="c15" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="c16" name="battery_cable" value="1" checked="checked">
                                     <label class="label_values" for="c16">No </label>
                                 </div>
+                                <div id="result"></div>
                             </div>
                             <?php } ?>
 
@@ -1547,13 +1616,14 @@ if(isset($_POST['combine_form'])){
                             <?php }elseif($dvd_rom == 1){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="c17" name="dvd_rom" value="0">
+                                    <input type="radio" id="c17" name="dvd_rom" class="dvd_rom" value="dvd_rom">
                                     <label class="label_values" for="c17" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="c18" name="dvd_rom" value="1" checked="checked">
                                     <label class="label_values" for="c18">No </label>
                                 </div>
+                                <div id="result"></div>
                             </div>
                             <?php } ?>
 
@@ -1586,13 +1656,14 @@ if(isset($_POST['combine_form'])){
                             <?php }elseif($dvd_caddy == 1){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="c19" name="dvd_caddy" value="0">
+                                    <input type="radio" id="c19" name="dvd_caddy" class="dvd_caddy" value="dvd_caddy">
                                     <label class="label_values" for="c19" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="c20" name="dvd_caddy" value="1" checked="checked">
                                     <label class="label_values" for="c20">No </label>
                                 </div>
+                                <div id="result"></div>
                             </div>
                             <?php } ?>
 
@@ -1625,13 +1696,14 @@ if(isset($_POST['combine_form'])){
                             <?php }elseif($hdd_caddy == 1){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="c21" name="hdd_caddy" value="0">
+                                    <input type="radio" id="c21" name="hdd_caddy" class="hdd_caddy" value="hdd_caddy">
                                     <label class="label_values" for="c21" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="c22" name="hdd_caddy" value="1" checked="checked">
                                     <label class="label_values" for="c22">No </label>
                                 </div>
+                                <div id="result"></div>
                             </div>
                             <?php } ?>
 
@@ -1663,13 +1735,15 @@ if(isset($_POST['combine_form'])){
                             <?php }elseif($hdd_cable_connector == 1){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="c23" name="hdd_cable_connector" value="0">
+                                    <input type="radio" id="c23" name="hdd_cable_connector" class="hdd_cable_connector"
+                                        value="hdd_cable_connector">
                                     <label class="label_values" for="c23" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="c24" name="hdd_cable_connector" value="1" checked="checked">
                                     <label class="label_values" for="c24">No </label>
                                 </div>
+                                <div id="result"></div>
                             </div>
                             <?php } ?>
 
@@ -1701,13 +1775,15 @@ if(isset($_POST['combine_form'])){
                             <?php }elseif($c_panel_palm_rest == 1){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="c25" name="c_panel_palm_rest" value="0">
+                                    <input type="radio" id="c25" name="c_panel_palm_rest" class="c_panel_palm_rest"
+                                        value="c_panel_palm_rest">
                                     <label class="label_values" for="c25" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="c26" name="c_panel_palm_rest" value="1" checked="checked">
                                     <label class="label_values" for="c26">No </label>
                                 </div>
+                                <div id="result"></div>
                             </div>
                             <?php } ?>
 
@@ -1739,13 +1815,14 @@ if(isset($_POST['combine_form'])){
                             <?php }elseif($mb_base == 1){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="c33" name="mb_base" value="0">
+                                    <input type="radio" id="c33" name="mb_base" class="mb_base" value="mb_base">
                                     <label class="label_values" for="c33" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="c34" name="mb_base" value="1" checked="checked">
                                     <label class="label_values" for="c34">No </label>
                                 </div>
+                                <div id="result"></div>
                             </div>
                             <?php } ?>
 
@@ -1777,13 +1854,15 @@ if(isset($_POST['combine_form'])){
                             <?php }elseif($hings_cover == 1){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="c27" name="hings_cover" value="0">
+                                    <input type="radio" id="c27" name="hings_cover" class="hings_cover"
+                                        value="hings_cover">
                                     <label class="label_values" for="c27" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="c28" name="hings_cover" value="1" checked="checked">
                                     <label class="label_values" for="c28">No </label>
                                 </div>
+                                <div id="result"></div>
                             </div>
                             <?php } ?>
 
@@ -1815,13 +1894,14 @@ if(isset($_POST['combine_form'])){
                             <?php }elseif($lan_cover == 1){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="c29" name="lan_cover" value="0">
+                                    <input type="radio" id="c29" name="lan_cover" class="lan_cover" value="lan_cover">
                                     <label class="label_values" for="c29" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="c30" name="lan_cover" value="1" checked="checked">
                                     <label class="label_values" for="c30">No </label>
                                 </div>
+                                <div id="result"></div>
                             </div>
                             <?php } ?>
 
