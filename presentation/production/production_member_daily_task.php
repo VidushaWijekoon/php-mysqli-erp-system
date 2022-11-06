@@ -191,7 +191,7 @@ foreach($query_tech as $data){
                             <fieldset>
                                 <legend>My Task</legend>
 
-                                <table id="example2" class="table table-bordered table-striped">
+                                <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>Inventory ID</th>

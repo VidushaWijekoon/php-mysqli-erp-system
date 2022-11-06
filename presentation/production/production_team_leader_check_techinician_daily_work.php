@@ -11,9 +11,6 @@ if (!isset($_SESSION['user_id'])) {
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 
-$emp_id = $_GET['emp_id'];
-$first_name = $_GET['first_name'];
-
 if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
 
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
@@ -54,12 +51,9 @@ $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                 $qc++;
             }
         }
-    }                                      
-
-
+    }     
+       
 ?>
-
-
 
 <div class="row page-titles m-2">
     <div class="col-md-5 align-self-center">
@@ -150,20 +144,38 @@ $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
         <div
             class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 grid-margin stretch-card justify-content-center mx-auto">
             <div class="card">
-                <div class="card-header d-flex">
-                    <form action="" method="GET">
-                        <div id="reportrange">
-                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
-                            <span></span> <b class="caret"></b>
+                <div class="card-header d-flex bg-secondary">
+                    <div class="mr-auto">
+                        <div class="text-center mx-auto mt-1 text-uppercase" style="font-size: 14px;">
+                            Daily Work
                         </div>
-                    </form>
-
-                    <div class="ml-auto d-flex">
-                        <span class="mx-2 mt-1">Search</span>
-                        <input type="search" id="search" name="search" value="<?php if (isset($_GET['search'])) {
-                                                                                        echo $_GET['search'];
-                                                                                    } ?>" placeholder="Search">
                     </div>
+                    <form action="" method="GET">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input type="date" name="from_date"
+                                        value="<?php if(isset($_GET['from_date'])){ echo $_GET['from_date']; } ?>"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input type="date" name="to_date"
+                                        value="<?php if(isset($_GET['to_date'])){ echo $_GET['to_date']; } ?>"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-xs btn-primary">Choose Date</button>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </form>
                 </div>
 
                 <div class="card-body">
@@ -182,19 +194,22 @@ $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                             </thead>
                             <tbody>
                                 <?php
-                                    if(isset($_GET['Today'])){
-                                        echo isset($_GET['Today']);
-                                    }
-                                        $query = "SELECT
-                                                    employees.emp_id,
-                                                    employees.department,
-                                                    employees.first_name,
-                                                    SUM(prod_technician_assign_info.tech_assign_qty) AS Total_Assign,
-                                                    COUNT(prod_technician_assign_info.sales_order_id) AS Total_SO
-                                                FROM employees
-                                                INNER JOIN prod_technician_assign_info ON prod_technician_assign_info.emp_id = employees.emp_id
-                                                WHERE employees.department = 1
-                                                GROUP BY employees.emp_id";         
+
+                                if(isset($_GET['from_date']) && isset($_GET['to_date']) && isset($_GET['search'])){
+
+                                    $from_date = $_GET['from_date'];
+                                    $to_date = $_GET['to_date'];
+                                    $filtervalues = $_GET['search'];
+
+                                    
+                                        $query = "SELECT *, SUM(prod_technician_assign_info.tech_assign_qty) AS Total_Assign,
+                                                COUNT(prod_technician_assign_info.sales_order_id) AS Total_SO
+                                            FROM employees
+                                            INNER JOIN prod_technician_assign_info ON prod_technician_assign_info.emp_id = employees.emp_id
+                                            LEFT JOIN prod_info ON prod_info.emp_id = employees.emp_id
+                                            WHERE prod_technician_assign_info.created_time BETWEEN '$from_date' AND '$to_date'
+                                            AND CONCAT(prod_info.inventory_id) LIKE '$filtervalues' 
+                                            GROUP BY employees.emp_id";         
                                                                              
                                             $query_run = mysqli_query($connection, $query);
 
@@ -262,7 +277,81 @@ $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                         <?php echo "<a class='btn btn-xs btn-primary mx-1' href=\"production_team_leader_check_techinician_daily_work_view.php?emp_id={$values['emp_id']}\"><i class='fa-solid fa-eye'></i> </a>" ?>
                                     </td>
                                 </tr>
-                                <?php } } ?>
+                                <?php } } }else{                             
+
+                                    $query = "SELECT *, SUM(prod_technician_assign_info.tech_assign_qty) AS Total_Assign,
+                                                        COUNT(prod_technician_assign_info.sales_order_id) AS Total_SO
+                                    FROM employees INNER JOIN prod_technician_assign_info ON prod_technician_assign_info.emp_id = employees.emp_id
+                                    WHERE employees.department = 1 AND prod_technician_assign_info.created_time GROUP BY employees.emp_id";
+
+                                    $query_run = mysqli_query($connection, $query);
+
+                                    if ($rowcount = mysqli_fetch_assoc($query_run)) {
+                                        foreach ($query_run as $values) {
+                                    ?>
+                                <tr>
+                                    <td><?php echo $values['emp_id']?></td>
+                                    <td><?php echo $values['first_name']?></td>
+                                    <td><?php echo $values['Total_Assign'] ?></td>
+                                    <td><?php echo $values['Total_SO'] ?></td>
+                                    <td>
+                                        <?php 
+                                    
+                                            $query1 = "SELECT
+                                                        employees.emp_id,
+                                                        employees.department,
+                                                        employees.first_name,
+                                                        prod_info.emp_id,
+                                                        prod_info.inventory_id,                                                        
+                                                        COUNT(prod_info.inventory_id) AS Total_Completed FROM employees
+                                                        INNER JOIN prod_info ON employees.emp_id = prod_info.emp_id WHERE employees.department = 1 "; 
+                                                           
+                                            $query_run1 = mysqli_query($connection, $query1);
+                                                foreach ($query_run1 as $values1) {                                                    
+                                                    echo $values1['Total_Completed'];
+                                                }
+                                        ?>
+                                    </td>
+                                    <td style="width: 250px;">
+                                        <?php
+
+                                            $percentage = round( ($values1['Total_Completed'] /  $values['Total_Assign']) * 100);
+
+                                            if($percentage == 100)
+                                            {
+                                                $progress_bar_class = 'bg-success progress-bar-striped';
+                                            }
+                                            else if($percentage >= 50 && $percentage < 99)
+                                            {
+                                                $progress_bar_class = 'bg-info progress-bar-striped';
+                                            }
+                                            else if($percentage >= 11 && $percentage < 49)
+                                            {
+                                                $progress_bar_class = 'bg-warning progress-bar-striped';
+                                            }
+                                            else if($percentage >= 0 && $percentage < 10)
+                                            {
+                                                $progress_bar_class = 'bg-danger progress-bar-striped';
+                                            }
+                                            else
+                                            {
+                                                $progress_bar_class = 'bg-danger progress-bar-striped';
+                                            }
+                                                                                
+                                            echo  
+                                            '<div class="progress text-bold">
+                                                <div class="progress-bar '.$progress_bar_class.'" role="progressbar" aria-valuenow="'.$percentage.'" aria-valuemin="0" aria-valuemax="100" style="width:'.$percentage.'%">
+                                                    '.$percentage.' % 
+                                                </div>
+                                            </div>'
+                                            ?>
+                                    </td>
+                                    <td>
+                                        <?php echo "<a class='btn btn-xs btn-primary mx-1' href=\"production_team_leader_check_techinician_daily_work_view.php?emp_id={$values['emp_id']}&emp_name={$values['first_name']}\"><i class='fa-solid fa-eye'></i> </a>" ?>
+                                    </td>
+                                </tr>
+                                <?php } } } ?>
+
                             </tbody>
                         </table>
                     </div>
@@ -275,62 +364,6 @@ $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
     </div>
 </div>
 
-<script type="text/javascript">
-$(function() {
-
-    var start = moment().subtract(29, 'days');
-    var end = moment();
-
-    function cb(start, end) {
-        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-    }
-
-    $('#reportrange').daterangepicker({
-        startDate: start,
-        endDate: end,
-        ranges: {
-            'Today': [moment(), moment()],
-            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-            'This Month': [moment().startOf('month'), moment().endOf('month')],
-            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month')
-                .endOf('month')
-            ]
-        }
-    }, cb);
-
-    cb(start, end);
-
-});
-</script>
-
-<style>
-[type='search'] {
-    width: 75%;
-    height: 22px;
-    margin: inherit;
-    margin-top: 4px;
-    font-size: 10px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-    font-size: 10px;
-    padding: 7px;
-}
-
-#reportrange {
-    background: #6c757d;
-    border-radius: 5px;
-    padding: 3px 10px;
-}
-
-.ranges {
-    font-family: "Poppins", sans-serif;
-
-}
-</style>
-
-<?php include_once('../includes/footer.php'); }else{
+<?php include_once('../includes/footer.php'); } else{
         die("<h3 class='text-danger'><<<<<< Access Denied >>>>></h3>");
 }  ?>

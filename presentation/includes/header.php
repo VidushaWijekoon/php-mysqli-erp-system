@@ -148,10 +148,11 @@ body {
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
                                             <a href="../users/users_dashboard.php" class="nav-link">
-                                                <i class="fa-solid fa-user-secret nav-icon" style="font-size: 12px;"></i>
+                                                <i class="fa-solid fa-user-secret nav-icon"
+                                                    style="font-size: 12px;"></i>
                                                 <p>Admin Dashboard</p>
                                             </a>
-                                        </li>                                        
+                                        </li>
 
                                     </ul>
                                 </li>
@@ -342,6 +343,12 @@ body {
                                             <a href="../part/part_warehouse_member_dashbaord.php" class="nav-link">
                                                 <i class="fa-solid fa-user nav-icon" style="font-size: 12px;"></i>
                                                 <p>Member Dashboard</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="../part/part_warehouse_member_dashbaord.php" class="nav-link">
+                                                <i class="fa-solid fa-user nav-icon" style="font-size: 12px;"></i>
+                                                <p>Part Stock Report</p>
                                             </a>
                                         </li>
 
@@ -710,7 +717,7 @@ body {
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="pages/search/simple.html" class="nav-link">
+                                    <a href="../search/general_search" class="nav-link">
                                         <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
                                         <p> Search </p>
                                     </a>

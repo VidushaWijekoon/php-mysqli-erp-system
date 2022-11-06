@@ -14,7 +14,8 @@ $department = $_SESSION['department'];
 if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
 
     $emp_id = $_GET['emp_id'];
-
+    $emp_name = $_GET['emp_name'];
+    
     $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
     $date = $date1->format('Y-m-d H:i:s');
 
@@ -146,17 +147,48 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
         <div
             class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 grid-margin stretch-card justify-content-center mx-auto">
             <div class="card">
-                <div class="card-header d-flex">
-                    <div id="reportrange">
-                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
-                        <span></span> <b class="caret"></b>
-                    </div>
-
-                    <div class="ml-auto d-flex">
+                <div class="card-header d-flex bg-secondary">
+                    <div class="mr-auto">
                         <div class="text-center mx-auto mt-1 text-uppercase" style="font-size: 14px;">
-                            Technician Daily Work
+                            <?php  echo $emp_id . " " . $emp_name;   ?>
+
+
+                            Daily Work
                         </div>
                     </div>
+                    <form action="" method="GET">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <input type="date" name="from_date"
+                                        value="<?php if(isset($_GET['from_date'])){ echo $_GET['from_date']; } ?>"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <input type="date" name="to_date"
+                                        value="<?php if(isset($_GET['to_date'])){ echo $_GET['to_date']; } ?>"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-xs btn-primary">Choose Date</button>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group d-flex">
+                                    <span class="mx-2" style="margin-top: 5px;">Search</span>
+                                    <input type="search" name="search"
+                                        value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>"
+                                        class="form-control" placeholder="Search data">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </form>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -174,17 +206,20 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                             </thead>
                             <tbody>
                                 <?php 
-                                $sanding_count = 0;
-                                $motherboard_count = 0;
-                                $combine_count = 0;
-                                $lcd_count = 0;
-                                $bodywork_count = 0;
-                                
-                                $query = "SELECT * FROM prod_info WHERE emp_id = {$emp_id} ";                  
-                                $query_read = mysqli_query($connection, $query);
 
-                                if(mysqli_fetch_assoc($query_read)){
-                                    foreach($query_read as $row){                               
+                                    $sanding_count = 0;
+                                    $motherboard_count = 0;
+                                    $combine_count = 0;
+                                    $lcd_count = 0;
+                                    $bodywork_count = 0;
+                                    
+                                    if (isset($_GET['search'])) {
+                                        $filtervalues = $_GET['search'];                                     
+                                                                
+                                        $query = "SELECT * FROM prod_info WHERE emp_id = {$emp_id} AND CONCAT(inventory_id) LIKE '%$filtervalues%' ";
+                                                            
+                                        $query_read = mysqli_query($connection, $query);
+                                        foreach($query_read as $row){                               
                                         
                                 ?>
                                 <tr>
@@ -197,6 +232,23 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                                     <td><?php if($row['issue_type']== 5){$sanding_count++;echo "1"; }?></td>
 
 
+                                </tr>
+                                <?php } } else {     
+                                                                 
+                                        $query = "SELECT * FROM prod_info WHERE emp_id = {$emp_id} ";
+                                                            
+                                        $query_read = mysqli_query($connection, $query);
+                                        foreach($query_read as $row){  
+                                ?>
+
+                                <tr>
+                                    <td><?php echo $row['sales_order'] ?></td>
+                                    <td><?php echo $row['inventory_id'] ?></td>
+                                    <td><?php if($row['issue_type' ] ==1){$motherboard_count++;echo "1"; }?></td>
+                                    <td><?php if($row['issue_type'] == 2){$combine_count++;echo "1"; }?></td>
+                                    <td><?php if($row['issue_type' ]== 3){$lcd_count++;echo "1"; }?></td>
+                                    <td><?php if($row['issue_type']== 4){$bodywork_count++;echo "1"; }?></td>
+                                    <td><?php if($row['issue_type']== 5){$sanding_count++;echo "1"; }?></td>
                                 </tr>
                                 <?php } } ?>
 
@@ -223,62 +275,6 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
     </div>
 </div>
 
-
-<script type="text/javascript">
-$(function() {
-
-    var start = moment().subtract(29, 'days');
-    var end = moment();
-
-    function cb(start, end) {
-        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-    }
-
-    $('#reportrange').daterangepicker({
-        startDate: start,
-        endDate: end,
-        ranges: {
-            'Today': [moment(), moment()],
-            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-            'This Month': [moment().startOf('month'), moment().endOf('month')],
-            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month')
-                .endOf('month')
-            ]
-        }
-    }, cb);
-
-    cb(start, end);
-
-});
-</script>
-
-<style>
-[type='search'] {
-    width: 75%;
-    height: 22px;
-    margin: inherit;
-    margin-top: 4px;
-    font-size: 10px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-    font-size: 10px;
-    padding: 7px;
-}
-
-#reportrange {
-    background: #6c757d;
-    border-radius: 5px;
-    padding: 3px 10px;
-}
-
-.ranges {
-    font-family: "Poppins", sans-serif;
-
-}
-</style>
 
 <?php include_once('../includes/footer.php'); }else{
         die("<h3 class='text-danger'><<<<<< Access Denied >>>>></h3>");

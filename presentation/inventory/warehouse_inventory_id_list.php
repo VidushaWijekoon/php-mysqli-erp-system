@@ -17,7 +17,7 @@ $department = $_SESSION['department'];
 if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $role_id == 2 && $department == 18){
 
 $brand = $_GET['brand'];
-$model = $_GET['model'];
+$model = $_GET['model'];                            
 
 ?>
 
@@ -32,11 +32,25 @@ $model = $_GET['model'];
     <div class="row">
         <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card mt-3">
-                <div class="card-header bg-secondary">
-                    <p class="text-uppercase m-0 p-0"><?php echo $brand . "-" . $model ?></p>
+                <div class="card-header d-flex bg-secondary">
+                    <div class="mr-auto">
+                        <div class="text-center mx-auto mt-1 text-uppercase" style="font-size: 14px;">
+                            <?php echo $brand . "-" . $model ?>
+                            <?php if(isset($_GET['search'])){echo $brand . "-" . $model; } ?>
+                        </div>
+                    </div>
+                    <form action="" method="GET">
+                        <div class="input-group">
+                            <span class="mt-1 mx-3" style="font-size: 14px;">Search :</span>
+                            <input type="search" name="search"
+                                value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" class="form-control"
+                                placeholder="Search data">
+                        </div>
+                    </form>
                 </div>
+
                 <div class="card-body">
-                    <table id="example1" class="table table-bordered table-striped">
+                    <table id="example2" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -47,15 +61,39 @@ $model = $_GET['model'];
                                 <th>Created Date</th>
                             </tr>
                         </thead>
-                        <tbody class="tbody_1">
-                            <?php                                
+                        <tbody>
+                            <?php 
+                            $brand;
+                            $model;
+                            
+                                if(isset($_GET['search'])){
+                                    $filtervalues = $_GET['search'];
+                                        $query = "SELECT * FROM warehouse_information_sheet 
+                                                WHERE send_to_production = 0 AND CONCAT(inventory_id, brand = '$brand' AND model = '$model') LIKE '%$filtervalues%' ";                                
+                                        $query_run = mysqli_query($connection, $query);
 
-                                $query = "SELECT * FROM warehouse_information_sheet WHERE brand = '$brand' AND model = '$model' AND send_to_production = 0";                                
+                                        foreach ($query_run as $items) {
+                            ?>
+
+                            <tr class="text-uppercase">
+                                <td>#</td>
+                                <td><?php echo $items['model'] ?></td>
+                                <td><?php echo $items['inventory_id'] ?></td>
+                                <td>&nbsp;</td>
+                                <td>
+                                    <?php echo $items['location']."-".$items['generation']."-".$items['model'] ?>
+                                </td>
+                                <td><?php echo $items['create_date']; ?></td>
+                            </tr>
+                            <?php } } else{
+                                
+                                $query = "SELECT * FROM warehouse_information_sheet 
+                                        WHERE brand = '$brand' AND model = '$model' AND send_to_production = 0 ";                                
                                 $query_run = mysqli_query($connection, $query);
 
-                                if($rowcount = mysqli_fetch_assoc($query_run)) {
-                                    foreach ($query_run as $items) {
-                                ?>
+                                foreach ($query_run as $items) {
+                            ?>
+
                             <tr class="text-uppercase">
                                 <td>#</td>
                                 <td><?php echo $items['model'] ?></td>
@@ -74,16 +112,6 @@ $model = $_GET['model'];
         </div>
     </div>
 </div>
-
-<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
-<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-<script>
-$(document).ready(function() {
-    $('#example1').dataTable();
-});
-</script>
 
 <?php include_once('../includes/footer.php'); }else{
         die(access_denied());

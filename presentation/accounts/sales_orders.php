@@ -21,51 +21,111 @@ if (!isset($_SESSION['user_id'])) {
     <div class="row">
         <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card mt-3">
-                <div class="card-header bg-secondary">
-                    <h5 class="text-uppercase m-0 p-0">Invoices</h5>
+                <div class="card-header d-flex bg-secondary">
+                    <div class="mr-auto">
+                        <div class="text-center mx-auto mt-1 text-uppercase" style="font-size: 14px;">
+                            Invoices
+                        </div>
+                    </div>
+                    <form action="" method="GET">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <input type="date" name="from_date"
+                                        value="<?php if(isset($_GET['from_date'])){ echo $_GET['from_date']; } ?>"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <input type="date" name="to_date"
+                                        value="<?php if(isset($_GET['to_date'])){ echo $_GET['to_date']; } ?>"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Filter</button>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <input type="search" name="search"
+                                        value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>"
+                                        class="form-control" placeholder="Search data">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </form>
                 </div>
                 <div class="card-body">
                     <table id="example2" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Brand</th>
-                                <th>In Total</th>
-                                <th>In Stock</th>
-                                <th>Dispatch</th>
+                                <th>Delivery</th>
+                                <th>Order Creaed Date</th>
+                                <th>Delivery Date</th>
+                                <th>Order QTY</th>
                                 <th>&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody class="tbody_1">
 
                             <?php 
-                                $sales_order_list = '';
+                            
+                            if(isset($_GET['search'])){
+                                $filtervalues = $_GET['search'];
 
-                                // getting the list of users
                                 $query = "SELECT *, SUM(item_quantity) AS No_of_Records FROM sales_order_information
                                         INNER JOIN sales_order_add_items ON sales_order_information.sales_order_id = sales_order_add_items.sales_order_id
-                                        GROUP BY sales_order_information.sales_order_id;";
+                                        WHERE CONCAT(sales_order_information.sales_order_id, sales_order_add_items.item_delivery_date) LIKE '%$filtervalues%'
+                                        GROUP BY sales_order_information.sales_order_id";
                                 $results = mysqli_query($connection, $query);
 
+                                foreach($results as $items){                                  
 
-                                while ($sales = mysqli_fetch_assoc($results)) {
-                                    $sales_order_list .= "<tr>";
-                                    $sales_order_list .= "<td>{$sales['sales_order_id']}</td>";
-                                    $sales_order_list .= "<td>{$sales['shipping_country']}</td>";
-                                    $sales_order_list .= "<td>{$sales['created_time']}</td>";
-                                    $sales_order_list .= "<td>{$sales['item_delivery_date']}</td>";
-                                    $sales_order_list .= "<td>{$sales['No_of_Records']}</td>";
-                                    $sales_order_list .= "<td class='text-center'><a class='btn btn-xs bg-info mx-2' name='submit' type='submit' href=\"sales_order_view.php?sales_order_id={$sales['sales_order_id']}\"><i class='fas fa-eye'></i> </a>";
-                                    $sales_order_list .= "<a class='btn btn-xs bg-success mx-2' name='submit' type='submit' href=\"invoice.php?sales_order_id={$sales['sales_order_id']}\"><i class='fas fa-download'></i> </a>";
-                                    $sales_order_list .= "<a class='btn btn-xs bg-primary mx-2' name='submit' type='submit' href=\"sales_order_view.php?sales_order_id={$sales['sales_order_id']}\"><i class='fas fa-envelope'></i> </a>";
-                                    $sales_order_list .= "<a class='btn btn-xs bg-danger mx-2' href=\"user_delete.php?sales_order_id={$sales['sales_order_id']}\" 
-                                                        onclick=\"return confirm('Are you sure?');\"> <i class='fa-solid fa-trash-can'></i></a></td>";
-                                    $sales_order_list .= "</tr>";
-                                }
-                                
-
-                                echo $sales_order_list;
                             ?>
+                            <tr>
+                                <td><?php echo $items['sales_order_id'] ?></td>
+                                <td><?php echo $items['shipping_country'] ?></td>
+                                <td><?php echo $items['created_time'] ?></td>
+                                <td><?php echo $items['item_delivery_date'] ?></td>
+                                <td><?php echo $items['No_of_Records'] ?></td>
+                                <td><?php echo "<a class='btn btn-xs bg-info mx-2' name='submit' type='submit' href=\"sales_order_view.php?sales_order_id={$items['sales_order_id']}\"><i class='fas fa-eye'></i> </a>";
+                                    "<a class='btn btn-xs bg-success mx-2' name='submit' type='submit' href=\"invoice.php?sales_order_id={$items['sales_order_id']}\"><i class='fas fa-download'></i> </a>";
+                                    "<a class='btn btn-xs bg-primary mx-2' name='submit' type='submit' href=\"sales_order_view.php?sales_order_id={$items['sales_order_id']}\"><i class='fas fa-envelope'></i> </a>";
+                                    "<a class='btn btn-xs bg-danger mx-2' href=\"user_delete.php?sales_order_id={$items['sales_order_id']}\" 
+                                        onclick=\"return confirm('Are you sure?');\"> <i class='fa-solid fa-trash-can'></i></a> " ?>
+                                </td>
+                            </tr>
+
+                            <?php }
+                            }else{
+                                $query = "SELECT *, SUM(item_quantity) AS No_of_Records FROM sales_order_information
+                                        INNER JOIN sales_order_add_items ON sales_order_information.sales_order_id = sales_order_add_items.sales_order_id                                        
+                                        GROUP BY sales_order_information.sales_order_id";
+                                $results = mysqli_query($connection, $query);
+
+                                foreach($results as $items){
+                                                   
+                            ?>
+                            <tr>
+                                <td><?php echo $items['sales_order_id'] ?></td>
+                                <td><?php echo $items['shipping_country'] ?></td>
+                                <td><?php echo $items['created_time'] ?></td>
+                                <td><?php echo $items['item_delivery_date'] ?></td>
+                                <td><?php echo $items['No_of_Records'] ?></td>
+                                <td><?php echo "<a class='btn btn-xs bg-info mx-2' name='submit' type='submit' href=\"sales_order_view.php?sales_order_id={$items['sales_order_id']}\"><i class='fas fa-eye'></i> </a>";
+                                    "<a class='btn btn-xs bg-success mx-2' name='submit' type='submit' href=\"invoice.php?sales_order_id={$items['sales_order_id']}\"><i class='fas fa-download'></i> </a>";
+                                    "<a class='btn btn-xs bg-primary mx-2' name='submit' type='submit' href=\"sales_order_view.php?sales_order_id={$items['sales_order_id']}\"><i class='fas fa-envelope'></i> </a>";
+                                    "<a class='btn btn-xs bg-danger mx-2' href=\"user_delete.php?sales_order_id={$items['sales_order_id']}\" 
+                                        onclick=\"return confirm('Are you sure?');\"> <i class='fa-solid fa-trash-can'></i></a> " ?>
+                                </td>
+                            </tr>
+                            <?php } } ?>
                         </tbody>
 
                     </table>

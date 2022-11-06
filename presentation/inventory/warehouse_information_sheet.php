@@ -128,15 +128,8 @@ for ($i = 0; $i <= $int_qty; $i++) {
     <div class="row">
         <div class="col-lg-8 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card mt-3 w-100">
-                <div class="card-header">
-                    <?php
-
-                    if (!empty($errors)) {
-                        display_errors($errors);
-                    }
-
-                    ?>
-
+                <div class="card-body">
+                    <?php if (!empty($errors)) { display_errors($errors); } ?>
                     <form method="POST">
                         <fieldset>
                             <legend>Create Warehouse Information Sheet</legend>
@@ -144,7 +137,7 @@ for ($i = 0; $i <= $int_qty; $i++) {
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Device</label>
                                 <div class="col-sm-8">
-                                    <select name="device" style="border-radius: 5px;" required>
+                                    <select name="device" class="info_select" style="border-radius: 5px;" required>
                                         <option selected>--Select Device Type--</option>
                                         <?php
                                             $query = "SELECT * FROM device ORDER BY device ASC";
@@ -165,7 +158,7 @@ for ($i = 0; $i <= $int_qty; $i++) {
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Brand</label>
                                 <div class="col-sm-8">
-                                    <select name="brand" style="border-radius: 5px;" required>
+                                    <select name="brand" class="info_select" style="border-radius: 5px;" required>
                                         <option selected>--Select Brand--</option>
                                         <?php
                                             $query = "SELECT * FROM brand ORDER BY brand ASC";
@@ -186,7 +179,7 @@ for ($i = 0; $i <= $int_qty; $i++) {
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Processor</label>
                                 <div class="col-sm-8">
-                                    <select name="processor" style="border-radius: 5px;" required>
+                                    <select name="processor" class="info_select" style="border-radius: 5px;" required>
                                         <option selected>--Select Processor--</option>
                                         <?php
                                             $query = "SELECT * FROM processor ";
@@ -207,7 +200,7 @@ for ($i = 0; $i <= $int_qty; $i++) {
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Core</label>
                                 <div class="col-sm-8">
-                                    <select name="core" style="border-radius: 5px;" required>
+                                    <select name="core" class="info_select" style="border-radius: 5px;" required>
                                         <option selected>--Select Type--</option>
                                         <?php
                                             $query = "SELECT * FROM core ORDER BY core_id";
@@ -228,7 +221,7 @@ for ($i = 0; $i <= $int_qty; $i++) {
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Generation</label>
                                 <div class="col-sm-8">
-                                    <select name="generation" style="border-radius: 5px;" required>
+                                    <select name="generation" class="info_select" style="border-radius: 5px;" required>
                                         <option selected>--Select Generation--</option>
                                         <?php
                                             $query = "SELECT * FROM generation ORDER BY generation_id";
@@ -257,14 +250,15 @@ for ($i = 0; $i <= $int_qty; $i++) {
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Quantity</label>
                                 <div class="col-sm-8">
-                                    <input type="number" class="form-control" placeholder="Quantity" name="quantity">
+                                    <input type="number" min="1" class="form-control" placeholder="Quantity"
+                                        name="quantity">
                                 </div>
                             </div>
 
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Location</label>
                                 <div class="col-sm-8">
-                                    <select name="location" style="border-radius: 5px;" required>
+                                    <select name="location" class="info_select" style="border-radius: 5px;" required>
                                         <option selected>--Select Location--</option>
                                         <?php
                                             $query = "SELECT * FROM location ORDER BY location_id";
@@ -327,22 +321,6 @@ $_SESSION['core'] = $core ;
 $_SESSION['location'] = $location ;
 // echo "test here".$quantity 
 ?>
-
-
-<style>
-
-</style>
-
-<script>
-setTimeout(function() {
-    if ($('#msg').length > 0) {
-        $('#msg').remove();
-    }
-}, 10000)
-</script>
-<style>
-</style>
-
 
 <?php include_once('../includes/footer.php'); }else{
         die(access_denied());

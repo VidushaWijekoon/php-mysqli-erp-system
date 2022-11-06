@@ -58,7 +58,7 @@ if($role_id = 1 && $department == 11) {
                                 <th>&nbsp;</th>
                             </tr>
                         </thead>
-                        <tbody class="tbody_1">
+                        <tbody>
                             <?php
 
                                 if (isset($_GET['search'])) {

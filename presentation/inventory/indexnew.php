@@ -1,5 +1,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Taviraj:ital,wght@0,300;1,400&display=swap"
     rel="stylesheet">
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
 <?php
 include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
@@ -78,27 +83,29 @@ echo "</form>";
 * THE SHEET
 */
 function write($code, $overText, $rack, $barCodeHeight, $downText,$secondPart) {
-	echo "<div class ='item'>";
-    	if ($overText != "") {
+	?>
+
+<div class="card mb-3" style="max-width: 940px;">
+    <div class="row g-0">
+        <h5 style="margin: 5px 0 -30px 20px; position: absolute; font-size: 32px;">
+            <?php if ($overText != "") {
 			$abc= strtoupper( $overText);
-    		echo  "</br> &nbsp </br> <div  ><p class = 'text-uppercase' style='font-size: 40; color:black;text-weight:bold;text-align: left;margin:0'>$abc &nbsp$secondPart</p></div>";
+    		echo  "$abc &nbsp $secondPart ";
     	} 
 		?><table>
-    <th><?php echo "<img src='barcode.php?codetype=qrcode&size={$barCodeHeight}&text={$code}'align='left'width='450' height='450'> "; ?>
-    </th>
-    <th height: 370px;><?php 
+                <th><?php echo "<img src='barcode.php?codetype=qrcode&size={$barCodeHeight}&text={$code}'align='left'width='450' height='450'> "; ?>
+                </th>
+                <th height: 370px;><?php 
 		echo strtoupper("<div style = 'font-size: 40; color:black;text-weight:bold;text-align: left;'>$rack");
 		echo strtoupper("<div style = 'font-size: 40; color:black;text-weight:bold;text-align: left;'>$downText");
     	echo strtoupper("<div style = 'font-size: 40; color:black;text-weight:bold;text-align: left;'>ALSAKB$code</div></br> ");
 		echo "<p style='page-break-after:always'></p>";
 		?></th>
-</table>
+            </table>
 
-<?php
+            <?php
     	
     	
-    echo "</div>";
-}
 
 echo "<div class='sheet'>";
 	if ($codeArray != "") { // Specified array of codes
