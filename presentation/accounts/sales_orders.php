@@ -28,12 +28,36 @@ if (!isset($_SESSION['user_id'])) {
                         </div>
                     </div>
                     <form action="" method="GET">
-                        <div class="input-group">
-                            <span class="mt-1 mx-3" style="font-size: 14px;">Search :</span>
-                            <input type="search" name="search"
-                                value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" class="form-control"
-                                placeholder="Search data">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <input type="date" name="from_date"
+                                        value="<?php if(isset($_GET['from_date'])){ echo $_GET['from_date']; } ?>"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <input type="date" name="to_date"
+                                        value="<?php if(isset($_GET['to_date'])){ echo $_GET['to_date']; } ?>"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Filter</button>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <input type="search" name="search"
+                                        value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>"
+                                        class="form-control" placeholder="Search data">
+                                </div>
+                            </div>
+
                         </div>
+
                     </form>
                 </div>
                 <div class="card-body">

@@ -345,6 +345,12 @@ body {
                                                 <p>Member Dashboard</p>
                                             </a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a href="../part/part_warehouse_member_dashbaord.php" class="nav-link">
+                                                <i class="fa-solid fa-user nav-icon" style="font-size: 12px;"></i>
+                                                <p>Part Stock Report</p>
+                                            </a>
+                                        </li>
 
                                     </ul>
                                 </li>
