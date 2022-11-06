@@ -84,7 +84,7 @@ function write($code, $overText, $rack, $barCodeHeight, $downText,$secondPart) {
     		echo  "</br> &nbsp </br> <div  ><p class = 'text-uppercase' style='font-size: 40; color:black;text-weight:bold;text-align: left;margin:0'>$abc &nbsp$secondPart</p></div>";
     	} 
 		?><table>
-    <th><?php echo "<img src='barcode.php?codetype=qrcode&size={$barCodeHeight}&text={$code}'align='left'width='350' height='350'> "; ?>
+    <th><?php echo "<img src='barcode.php?codetype=qrcode&size={$barCodeHeight}&text={$code}'align='left'width='450' height='450'> "; ?>
     </th>
     <th height: 370px;><?php 
 		echo strtoupper("<div style = 'font-size: 40; color:black;text-weight:bold;text-align: left;'>$rack");

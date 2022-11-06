@@ -191,7 +191,7 @@ foreach($query_tech as $data){
                             <fieldset>
                                 <legend>My Task</legend>
 
-                                <table id="example1" class="table table-bordered table-striped">
+                                <table id="example2" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>Inventory ID</th>
@@ -219,7 +219,8 @@ foreach($query_tech as $data){
                                         prod_info
                                     LEFT JOIN warehouse_information_sheet ON prod_info.inventory_id = warehouse_information_sheet.inventory_id
                                     WHERE
-                                          prod_info.emp_id ='{$emp_id}' AND prod_info.tech_id ='{$tech_id}' ; ";
+                                          prod_info.emp_id ='{$emp_id}' AND prod_info.tech_id ='{$tech_id}' ORDER BY prod_info.inventory_id DESC limit 1; ";
+                                          echo $query;
                                         $query_run = mysqli_query($connection, $query);
 
                                             if ($rowcount = mysqli_fetch_assoc($query_run)) {

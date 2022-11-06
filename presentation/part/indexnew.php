@@ -1,9 +1,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Taviraj:ital,wght@0,300;1,400&display=swap"
     rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+<link rel="stylesheet" href="../../static/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
 <?php
 include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
 require_once("sanitizer.php");
+
 
 session_start();
 // $last_update_id =0;
@@ -19,7 +22,7 @@ $last_update_id =0;
 $quantity = 1;
 $brand = "HP";
 $model = "840 g3";
-$generation = 10;
+// $generation = 10;
 $core = 'Keyboard';
 $location = "WH-1";
 $last_id = 1 ;
@@ -43,8 +46,8 @@ if($last_update_id != 0){
 	$digits = 6;
 	$start = $last_id; 
 	$overText = $brand."  ".$model ;
-	$secondPart = $core." GEN".$generation;
-	$downText = $generation."-".$model."-".$core;
+	$secondPart = $core;
+	$downText = "-".$model;
 	$rack = $location; 
 	$hideText = null;
 
@@ -52,21 +55,21 @@ if($last_update_id != 0){
 
 	$height = $howManyCodes*100;
 
-	$pageWidth =  "400mm";
-	$pageHeight =  "$height.mm";
+	$pageWidth =  "450mm";
+	$pageHeight =  "250mm";
 
-	$itemWidth = "400mm";
-	$itemHeight = "105mm";
+	$itemWidth = "200mm";
+	$itemHeight = "205mm";
 
 	$pageMarginLeft ="0mm";
-	$pageMarginTop ="10mm";
+	$pageMarginTop ="0mm";
 	$pageMarginRight = "0mm";
 	$pageMarginBottom =  "0mm";;
 
-	$itemMarginBottom =  "45mm";
-	$itemMarginRight = "10mm";
+	$itemMarginBottom =  "0mm";
+	$itemMarginRight = "0mm";
 
-	$barCodeHeight ="270px";
+	$barCodeHeight ="1000";
 	$codetype = "qrcode";
 	// echo "<br>Barcode type: <input type='text' name='codetype' value='{$codetype}'> (Valid codetypes: code128, code39, code25, codabar, qrcode)";
 	if($last_update_id != 0){
@@ -79,7 +82,6 @@ if($last_update_id != 0){
 
 	echo '<input type="submit" name="production_form" value="Print" onClick="window.print()">';
 
-	echo "<h2>Preview:</h2>";
 echo "</form>";
 
 
@@ -87,32 +89,46 @@ echo "</form>";
 /*
 * THE SHEET
 */
+
 function write($code, $overText, $rack, $barCodeHeight, $downText,$secondPart) {
-	echo "<div class ='item'>";
-    	if ($overText != "") {
+	?>
+<style>
+p.ex1 {
+    margin-top: 0px;
+}
+</style>
+<table class="ex1">
+    <tr>
+        <th><?php echo "<div style = 'font-size: 60; color:black;text-weight:bold;text-align: center;' ><i class='fa-solid fa-keyboard fa-4x'> </i></div>"; ?>
+
+        </th>
+        <th><?php echo  "<div  ><p class = 'text-uppercase' style='font-size: 80; color:black;text-weight:bold;text-align: left;margin:0' >$secondPart</p></div>"; ?>
+        </th>
+    </tr>
+    <tr>
+        <td><?php echo "<img src='barcode.php?codetype=qrcode&size='100'&text={$code}'align='left' width='900' height='900'> </br></br></br></br></br></br> "; ?>
+        </td>
+        <td>
+            <?php 
+		if ($overText != "") {
 			$abc= strtoupper( $overText);
-    		echo  "</br> &nbsp </br> <div  ><p class = 'text-uppercase' style='font-size: 40; color:black;text-weight:bold;text-align: left;margin:0'>$abc &nbsp$secondPart</p></div>";
-			echo "</br>";
-			echo "</br>";
-			echo "</br>";
-			echo "</br>";
-			echo "</br>";
-    	} 
-		?><table>
-    <th><?php echo "<img src='barcode.php?codetype=qrcode&size='600px'&text={$code}'align='left'width='350' height='350'> "; ?>
-    </th>
-    <th height: 370px;><?php 
-		echo strtoupper("<div style = 'font-size: 40; color:black;text-weight:bold;text-align: left;'>$rack");
-		echo strtoupper("<div style = 'font-size: 40; color:black;text-weight:bold;text-align: left;'>$downText");
-    	echo strtoupper("<div style = 'font-size: 40; color:black;text-weight:bold;text-align: left;'>ALSAKB$code</div></br> ");
-		echo "<p style='page-break-after:always'></p>";
-		?></th>
+			echo  "<div  ><p class = 'text-uppercase' style='font-size: 80; color:black;text-weight:bold;text-align: left;margin:0' >$abc</p></div>";	
+		} 
+		?>
+            <?php
+			echo strtoupper("<div style = 'font-size: 80; color:black;text-weight:bold;text-align: left;'>$rack");
+		echo strtoupper("<div style = 'font-size: 80; color:black;text-weight:bold;text-align: left;'>$downText");
+    	echo strtoupper("<div style = 'font-size: 80; color:black;text-weight:bold;text-align: left;'>ALSAKB$code</div></br></br></br> ");
+		?>
+        </td>
+    </tr>
+    </br>
+
+
 </table>
 
 <?php
     	
-    	
-    echo "</div>";
 }
 
 echo "<div class='sheet'>";
@@ -151,7 +167,7 @@ echo <<<STYLE
 			padding-left: $pageMarginLeft;
 			padding-top: $pageMarginTop;
 			padding-right: $pageMarginRight;
-			padding-bottom: 0;
+			padding-bottom: 10;
 		}
 		.item {
 			float: left;
