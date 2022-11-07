@@ -36,6 +36,7 @@ $c_panel_palm_rest;
 $mb_base;
 $hings_cover;
 $lan_cover;
+$status = 0;
 
 
   foreach($data as $key=>$value){
@@ -244,10 +245,11 @@ $lan_cover;
         }else{
             echo "Please Scan the Switch Machine ";
         }
+        if($status != null){
         $query_update_part = "UPDATE `requested_part_from_production` SET `status`='$status',$name='0' ,switch = '1',switch_id ='$scan_id' WHERE `inventory_id`='$inventory_id';";
        
         $query_run = mysqli_query($connection, $query_update_part);
-       
+        }
         $query_select = "SELECT brand,model,generation,sales_order_id FROM warehouse_information_sheet WHERE inventory_id = $inventory_id;";
         
         $query_run1 = mysqli_query($connection, $query_select);

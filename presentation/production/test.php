@@ -1,21 +1,21 @@
-echo $keyboard."</br>";
-echo $key."</br>";
-echo $speakers."</br>";
-echo $camera."</br>";
-echo $bazel."</br>";
-echo $mousepad."</br>";
-echo $mouse_pad_button."</br>";
-echo $camera_cable."</br>";
-echo $back_cover."</br>";
-echo $wifi_card."</br>";
-echo $lcd_cable."</br>";
-echo $battery."</br>";
-echo $battery_cable."</br>";
-echo $dvd_rom."</br>";
-echo $dvd_caddy."</br>";
-echo $hdd_caddy."</br>";
-echo $hdd_cable_connector."</br>";
-echo $c_panel_palm_rest."</br>";
-echo $mb_base."</br>";
-echo $hings_cover."</br>";
-echo $lan_cover."</br>";
+keyboard
+key
+speakers
+camera
+bazel
+mousepad
+mouse_pad_button
+camera_cable
+back_cover
+wifi_card
+lcd_cable
+battery
+battery_cable
+dvd_rom
+dvd_caddy
+hdd_caddy
+hdd_cable_connector
+c_panel_palm_rest
+mb_base
+hings_cover
+lan_cover

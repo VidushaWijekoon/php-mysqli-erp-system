@@ -648,7 +648,7 @@ $item_brand=0;
                                 <th>Stock</th>
                                 <?php
                             $query2 = "SELECT * FROM `part_stock`WHERE part_model='$model' AND part_brand = '$item_brand' AND part_gen = '$item_generation' ;";
-                            
+                            echo $query2;
                             $query_run2 = mysqli_query($connection, $query2);
                            
                             foreach($query_run2 as $a){
@@ -886,26 +886,6 @@ $item_brand=0;
                                     $c_panel_palm_rest = mysqli_real_escape_string($connection, $_POST['c_panel_palm_rest']);
                                     $mb_base = mysqli_real_escape_string($connection, $_POST['mb_base']);
                                     $hings_cover = mysqli_real_escape_string($connection, $_POST['hings_cover']);
-                                    // echo $keyboard . "</br>" ;
-                                    // echo $speacker . "</br>" ;
-                                    // echo $camera . "</br>" ;
-                                    // echo $bazel . "</br>" ;
-                                    // echo $lan_cover . "</br>" ;
-                                    // echo $mousepad . "</br>" ;
-                                    // echo $mouse_pad_button . "</br>" ;
-                                    // echo $camera_cable . "</br>" ;
-                                    // echo $back_cover . "</br>" ;
-                                    // echo $wifi_card . "</br>" ;
-                                    // echo $lcd_cable . "</br>" ;
-                                    // echo $battery . "</br>" ;
-                                    // echo $battery_cable . "</br>" ;
-                                    // echo $dvd_rom . "</br>" ;
-                                    // echo $dvd_caddy . "</br>" ;
-                                    // echo $hdd_caddy . "</br>" ;
-                                    // echo $hdd_cable_connector . "</br>" ;
-                                    // echo $c_panel_palm_rest . "</br>" ;
-                                    // echo $mb_base . "</br>" ;
-                                    // echo $hings_cover . "</br>" ;
 
                                 $query="INSERT INTO `prepared_part`(
                                     `location`,
@@ -959,10 +939,13 @@ $item_brand=0;
                                     '$hings_cover'
                                 )";
                                 $query_run = mysqli_query($connection, $query);
+                                $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+                                $date = $date1->format('Y-m-d H:i:s');
+
                                 $query_update="UPDATE
                                 `requested_part_from_production`
                             SET
-                                `delivery_date` = '2022-11-03',
+                                `delivery_date` = '$date',
                                 `status` = '0'
                             WHERE
                                 `model` = '$model'AND
@@ -970,8 +953,92 @@ $item_brand=0;
                                 `emp_id` = '$emp_id'AND
                                 `location` = '$location1'
                                 ";
-                                echo $query_update;
                                  $query_run_update = mysqli_query($connection, $query_update);
+                                 $balance_stock_keyboard = $stock_keyboard - number_format($keyboard );
+                                 $balance_stock_speakers = $stock_speakers - number_format($speakers );
+                                 $balance_stock_camera =  $stock_camera - number_format($camera );
+                                 $balance_stock_bazel =  $stock_bazel-  number_format($bazel );
+                                 $balance_stock_lan_cover =  $stock_lan_cover - number_format($lan_cover );
+                                 $balance_stock_mousepad =  $stock_mousepad - number_format($mousepad );
+                                 $balance_stock_mouse_pad_button =  $stock_mouse_pad_button - number_format($mouse_pad_button );
+                                 $balance_stock_camera_cable =  $stock_camera_cable - number_format($camera_cable );
+                                 $balance_stock_back_cover =  $stock_back_cover - number_format($back_cover );
+                                 $balance_stock_wifi_card =  $stock_wifi_card - number_format($wifi_card );
+                                 $balance_stock_lcd_cable =  $stock_lcd_cable - number_format($lcd_cable );
+                                 $balance_stock_battery =  $stock_battery - number_format($battery );
+                                 $balance_stock_battery_cable = $stock_battery_cable - number_format($battery_cable );
+                                 $balance_stock_dvd_rom =  $stock_dvd_rom - number_format($dvd_rom );
+                                 $balance_stock_dvd_caddy =  $stock_dvd_caddy - number_format($dvd_caddy );
+                                 $balance_stock_hdd_caddy =  $stock_hdd_caddy - number_format($hdd_caddy );
+                                 $balance_stock_hdd_cable_connector =  $stock_hdd_cable_connector - number_format($hdd_cable_connector );
+                                 $balance_stock_c_panel_palm_rest = $stock_c_panel_palm_rest - number_format($c_panel_palm_rest );
+                                 $balance_stock_mb_base =  $stock_mb_base - number_format($mb_base );
+                                // $balance_stock_hings_cover  =  $stock_hings_cover - $hings_cover ;
+                                $array = array(
+                                    "keyboard" => $balance_stock_keyboard  ,
+                                    "speakers" => $balance_stock_speakers  ,
+                                    "camera" => $balance_stock_camera  ,
+                                    "bazel" => $balance_stock_bazel  ,
+                                    "mousepad" => $balance_stock_mousepad  ,
+                                    "mouse_pad_button" => $balance_stock_mouse_pad_button  ,
+                                    "camera_cable" => $balance_stock_camera_cable  ,
+                                    "back_cover" => $balance_stock_back_cover  ,
+                                    "wifi_card" => $balance_stock_wifi_card  ,
+                                    "lcd_cable" => $balance_stock_lcd_cable  ,
+                                    "battery" => $balance_stock_battery  ,
+                                    "battery_cable" => $balance_stock_battery_cable  ,
+                                    "dvd_rom" => $balance_stock_dvd_rom  ,
+                                    "dvd_caddy" => $balance_stock_dvd_caddy  ,
+                                    "hdd_caddy" => $balance_stock_hdd_caddy  ,
+                                    "hdd_cable_connector" => $balance_stock_hdd_cable_connector  ,
+                                    "c_panel_palm_rest" => $balance_stock_c_panel_palm_rest  ,
+                                    "mb_base" => $balance_stock_mb_base  ,
+                                    // "hings_cover" => $balance_stock_hings_cover  ,
+                                    "lan_cover" => $balance_stock_lan_cover  ,
+                                );
+                                foreach ($array as $key => $value) {
+                                    $query="UPDATE
+                                                `part_stock`
+                                            SET
+                                                `qty` = $value
+                                            WHERE
+                                                part_model = '$item_model' AND part_brand ='$item_brand' AND part_gen ='$item_generation' AND part_name = '$key' ;";
+                                                
+                                                $query_stock_update = mysqli_query($connection, $query);
+
+                                                if($value == 0){
+                                                    $query ="SELECT
+                                                                `rack_number`,
+                                                                `slot_name`
+                                                            FROM
+                                                                `part_stock`
+                                                            WHERE
+                                                            part_model = '$item_model' AND part_brand ='$item_brand' AND part_gen ='$item_generation' AND part_name = '$key' ;";
+                                             $query_data_retrive = mysqli_query($connection, $query);
+                                             foreach($query_data_retrive as $d){
+                                                $slot_name =$d['slot_name'];
+                                                $rack_number =$d['rack_number'];
+                                                $query="UPDATE
+                                                            `rack_slots`
+                                                        SET
+                                                            `status` = '0'
+                                                        WHERE
+                                                        slot_name = '$slot_name'
+                                                        ";             
+                                                    $query_data_update = mysqli_query($connection, $query);    
+                                                    
+                                                    $query="UPDATE
+                                                    `rack`
+                                                SET
+                                                    `status` = '0'
+                                                WHERE
+                                                rack_number = '$rack_number'
+                                                ";             
+                                            $query_data_update = mysqli_query($connection, $query);    
+                                                    }    
+                                            }
+                                }
+
                             }?>
                                 <form action="" method="POST">
                                     <td>Prepared</td>
