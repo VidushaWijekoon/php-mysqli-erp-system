@@ -9,8 +9,21 @@ include_once('../includes/header.php');
 // checking if a user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
-}
+
+    clearstatcache();}
+$device ="";
+$brand="";
+$generation ="";
+$model ="";
+$quantity ="";
+$location="";
+$capacity ="";
+$rack_number ="";
+$slot_name =""; 
 if(isset($_POST['submit'])){
+
+    
+
         $device = mysqli_real_escape_string($connection, $_POST['device']);
         $brand = mysqli_real_escape_string($connection, $_POST['brand']);
         $generation = mysqli_real_escape_string($connection, $_POST['generation']);
@@ -18,7 +31,15 @@ if(isset($_POST['submit'])){
         $quantity = mysqli_real_escape_string($connection, $_POST['quantity']);
         $location = mysqli_real_escape_string($connection, $_POST['location']);
         $capacity = mysqli_real_escape_string($connection, $_POST['capacity']);
-        echo "Finally im here";
+        $rack_number = mysqli_real_escape_string($connection, $_POST['rack_number']);
+        $slot_name = mysqli_real_escape_string($connection, $_POST['slot_name']);
+        $_POST = "";
+        $_SESSION['device'] = $device;
+        $_SESSION['slot_name'] = $slot_name;
+        $_SESSION['modal'] = $modal;
+        $_SESSION['rack_number'] = $rack_number;
+        
+        
         $query = "INSERT INTO `part_stock`(
             `part_name`,
             `part_model`,
@@ -26,7 +47,9 @@ if(isset($_POST['submit'])){
             `part_gen`,
             `capacity`,
             `qty`,
-            `location`
+            rack_number,
+            slot_name
+
         )
         VALUES(
             '$device',
@@ -35,9 +58,13 @@ if(isset($_POST['submit'])){
             '$generation',
             '$capacity',
             '$quantity',
-            '$location'
+            '$rack_number',
+            '$slot_name'
         )";
         $query_run = mysqli_query($connection, $query);
+        $last_id = $connection->insert_id;
+        $_SESSION['last_id'] = $last_id;
+        header("location: ./indexnew.php?last_id={$last_id}"); 
 
 }
 ?>
@@ -55,7 +82,7 @@ if(isset($_POST['submit'])){
             <div class="card mt-3 w-100">
                 <div class="card-header">
                     <?php if (!empty($errors)) { display_errors($errors); } ?>
-                    <form method="POST">
+                    <form action="" method="POST">
                         <fieldset>
                             <legend>Create Part Information Sheet</legend>
 
@@ -135,6 +162,51 @@ if(isset($_POST['submit'])){
                                     <input type="text" class="form-control" placeholder="Location" name="location">
                                 </div>
                             </div>
+                            <div class="row">
+                                <label class="col-sm-3 col-form-label">Rack</label>
+                                <div class="col-sm-8">
+                                    <?php    
+                                            
+                                            ?>
+                                    <select name="rack_number" style="border-radius: 5px;" required>
+                                        <option selected>--Select Rack--</option>
+                                        <?php
+                                            $query = "SELECT  rack_number FROM rack WHERE status = 0 ";
+                                            $query_rack = mysqli_query($connection, $query);
+                                            while ($rack_id = mysqli_fetch_array($query_rack, MYSQLI_ASSOC)) :;
+                                            ?>
+                                        <option value="<?php echo $rack_id["rack_number"]; ?>">
+                                            <?php echo strtoupper($rack_id["rack_number"]); ?>
+                                        </option>
+                                        <?php
+                                            endwhile;
+                                            ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-sm-3 col-form-label">Rack</label>
+                                <div class="col-sm-8">
+                                    <?php    
+                                                
+                                            ?>
+                                    <select name="slot_name" style="border-radius: 5px;" required>
+                                        <option selected>--Select slot--</option>
+                                        <?php
+                                            $querys = "SELECT  slot_name FROM rack_slots WHERE status = 0 ";
+                                            $query_slot = mysqli_query($connection, $querys);
+                                            while ($slot_id = mysqli_fetch_array($query_slot, MYSQLI_ASSOC)) :;
+                                            ?>
+                                        <option value="<?php echo $slot_id["slot_name"]; ?>">
+                                            <?php echo strtoupper($slot_id["slot_name"]); ?>
+                                        </option>
+                                        <?php
+                                            endwhile;
+                                            ?>
+                                    </select>
+                                </div>
+                            </div>
 
                             <button type="submit" name="submit" id="submit"
                                 class="btn mb-2 mt-4 btn-primary btn-sm d-block mx-auto text-center"><i
@@ -150,7 +222,6 @@ if(isset($_POST['submit'])){
         </div>
     </div>
 </div>
-
 <style>
 fieldset,
 legend {
