@@ -17,11 +17,19 @@ if($role_id = 1 && $department == 11 || $role_id == 4 && $department ==22) {
 
     $query = "SELECT * FROM part_stock";
     $query_run = mysqli_query($connection, $query);
+   
     if(mysqli_num_rows($query_run) > 0){
         foreach($query_run as $rows){
-
+                        
+            $part_name = $rows['part_name'];
+            $part_model = $rows['part_model'];
+            $part_brand = $rows['part_brand'];
+            $rack_number = $rows['rack_number'];
+            $slot_name = $rows['slot_name'];
+            $qty = $rows['qty'];            
             
-        } }
+        } 
+    }
             
 ?>
 
