@@ -212,7 +212,7 @@ foreach($query_tech as $data){
                                         $sales_order_id = '';
 
                                         // getting the list of users
-                                        $query = "SELECT
+                                        $query = "SELECT 
                                         *,
                                         brand,core,model,generation,processor,device
                                     FROM
@@ -220,6 +220,7 @@ foreach($query_tech as $data){
                                     LEFT JOIN warehouse_information_sheet ON prod_info.inventory_id = warehouse_information_sheet.inventory_id
                                     WHERE
                                           prod_info.emp_id ='{$emp_id}' AND prod_info.tech_id ='{$tech_id}' ; ";
+                                          echo $query;
                                         $query_run = mysqli_query($connection, $query);
 
                                             if ($rowcount = mysqli_fetch_assoc($query_run)) {

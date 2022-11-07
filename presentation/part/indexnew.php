@@ -1,85 +1,71 @@
 <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Taviraj:ital,wght@0,300;1,400&display=swap"
     rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+<link rel="stylesheet" href="../../static/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
 <?php
 include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
 require_once("sanitizer.php");
 
+
 session_start();
 // $last_update_id =0;
-// $quantity = $_SESSION['quantity'];
-// $brand = $_SESSION['brand'];
-// $model = $_SESSION['model'];
-// $generation = $_SESSION['generation'];
+$rack_id = $_SESSION['rack_number'];
+$slot_id = $_SESSION['slot_name'];
+$model = $_SESSION['model'];
+$device = $_SESSION['device'];
 // $core = $_SESSION['core'];
 // $location = $_SESSION['location'];
-// $last_id = $_SESSION['last_id'] ;
+$last_id = $_SESSION['last_id'] ;
 
 $last_update_id =0;
 $quantity = 1;
-$brand = "HP";
-$model = "840 g3";
-$generation = 10;
-$core = 'Keyboard';
-$location = "WH-1";
-$last_id = 1 ;
-
-if(empty($_SESSION['last_update_id'])){ $last_update_id =0;}else{
-
-	$last_update_id = $_SESSION['last_update_id'];
-}
-
-// $query = "SELECT inventory_id FROM warehouse_information_sheet ORDER BY inventory_id DESC LIMIT 1";
-//                                             $query_run = mysqli_query($connection, $query);
-//                                             $print_data = mysqli_fetch_row($query_run);
+// $rack_id="RACK-A";
+// $slot_id = " A-1";
+// $model = "840 g3";
+$core = $device;
+$item_id = 1 ;
 echo "<form action=''  method='get'>";
-if($last_update_id != 0){
-	$last_id = $last_update_id  ;
-	
-}else{
-	$last_id = $last_id + 1;
-}
+
 	$howManyCodes =$quantity;
 	$digits = 6;
 	$start = $last_id; 
-	$overText = $brand."  ".$model ;
-	$secondPart = $core." GEN".$generation;
-	$downText = $generation."-".$model."-".$core;
-	$rack = $location; 
+	$overText = $rack_id . "".$slot_id."  ".$model ;
+	$secondPart = $core;
+	$downText = "-".$model;
 	$hideText = null;
 
 	$codeArray = (filterRaw('codeArray') != "") ? filterRaw('codeArray') : "";
 
 	$height = $howManyCodes*100;
 
-	$pageWidth =  "400mm";
-	$pageHeight =  "$height.mm";
+	$pageWidth =  "450mm";
+	$pageHeight =  "250mm";
 
-	$itemWidth = "400mm";
-	$itemHeight = "105mm";
+	$itemWidth = "200mm";
+	$itemHeight = "205mm";
 
 	$pageMarginLeft ="0mm";
-	$pageMarginTop ="10mm";
+	$pageMarginTop ="0mm";
 	$pageMarginRight = "0mm";
 	$pageMarginBottom =  "0mm";;
 
-	$itemMarginBottom =  "45mm";
-	$itemMarginRight = "10mm";
+	$itemMarginBottom =  "0mm";
+	$itemMarginRight = "0mm";
 
-	$barCodeHeight ="270px";
+	$barCodeHeight ="1000";
 	$codetype = "qrcode";
 	// echo "<br>Barcode type: <input type='text' name='codetype' value='{$codetype}'> (Valid codetypes: code128, code39, code25, codabar, qrcode)";
 	if($last_update_id != 0){
-	echo "<br><a href='./warehouse_qr_report.php'> Back</a>";
+	echo "<br><a href='./part_create_form.php'> Back</a>";
 	
 }else{
-	echo "<br><a href='./warehouse_information_sheet.php'> Back</a>";
+	echo "<br><a href='./part_create_form.php'> Back</a>";
 }
 	
 
 	echo '<input type="submit" name="production_form" value="Print" onClick="window.print()">';
 
-	echo "<h2>Preview:</h2>";
 echo "</form>";
 
 
@@ -87,43 +73,132 @@ echo "</form>";
 /*
 * THE SHEET
 */
-function write($code, $overText, $rack, $barCodeHeight, $downText,$secondPart) {
-	echo "<div class ='item'>";
-    	if ($overText != "") {
+
+function write($code, $overText,$device,  $barCodeHeight, $downText,$secondPart) {
+	?>
+<style>
+p.ex1 {
+    margin-top: 0px;
+}
+</style>
+<table class="ex1">
+    <tr>
+        <th><?php
+            if($device == 'keyboard'){
+            echo "<div style='font-size: 60; color:black;text-weight:bold;text-align: center;'><i
+                    class='fa-solid fa-keyboard fa-4x'> </i></div>";
+            }
+            if($device == 'camera'){
+            echo "<div style='font-size: 60; color:black;text-weight:bold;text-align: center;'><i
+                    class='fa-solid fa-camera fa-4x'> </i></div>";
+            }
+            if($device == 'bazel'){
+            echo "<div style='font-size: 60; color:black;text-weight:bold;text-align: center;'><i
+                    class='fa-solid fa-camera fa-4x'> </i></div>";
+            }
+            if($device == 'mousepad'){
+            echo "<div style='font-size: 60; color:black;text-weight:bold;text-align: center;'><i
+                    class='fa-solid fa-keyboard fa-4x'> </i></div>";
+            }
+            if($device == 'speakers'){
+            echo "<div style='font-size: 60; color:black;text-weight:bold;text-align: center;'><i
+                    class='fa-solid fa-camera fa-4x'> </i></div>";
+            }
+            if($device == 'mouse_pad_button'){
+            echo "<div style='font-size: 60; color:black;text-weight:bold;text-align: center;'><i
+                    class='fa-solid fa-camera fa-4x'> </i></div>";
+            }
+            if($device == 'camera_cable'){
+            echo "<div style='font-size: 60; color:black;text-weight:bold;text-align: center;'><i
+                    class='fa-solid fa-keyboard fa-4x'> </i></div>";
+            }
+            if($device == 'back_cover'){
+            echo "<div style='font-size: 60; color:black;text-weight:bold;text-align: center;'><i
+                    class='fa-solid fa-camera fa-4x'> </i></div>";
+            }
+            if($device == 'wifi_card'){
+            echo "<div style='font-size: 60; color:black;text-weight:bold;text-align: center;'><i
+                    class='fa-solid fa-camera fa-4x'> </i></div>";
+            }
+            if($device == 'lcd_cable'){
+            echo "<div style='font-size: 60; color:black;text-weight:bold;text-align: center;'><i
+                    class='fa-solid fa-keyboard fa-4x'> </i></div>";
+            }
+            if($device == 'battery_cable'){
+            echo "<div style='font-size: 60; color:black;text-weight:bold;text-align: center;'><i
+                    class='fa-solid fa-camera fa-4x'> </i></div>";
+            }
+            if($device == 'dvd_rom'){
+            echo "<div style='font-size: 60; color:black;text-weight:bold;text-align: center;'><i
+                    class='fa-solid fa-camera fa-4x'> </i></div>";
+            }
+            if($device == 'dvd_caddy'){
+            echo "<div style='font-size: 60; color:black;text-weight:bold;text-align: center;'><i
+                    class='fa-solid fa-camera fa-4x'> </i></div>";
+            }
+            if($device == 'hdd_caddy'){
+            echo "<div style='font-size: 60; color:black;text-weight:bold;text-align: center;'><i
+                    class='fa-solid fa-keyboard fa-4x'> </i></div>";
+            }
+            if($device == 'hdd_cable_connector'){
+            echo "<div style='font-size: 60; color:black;text-weight:bold;text-align: center;'><i
+                    class='fa-solid fa-camera fa-4x'> </i></div>";
+            }
+            if($device == 'c_panel_palm_rest'){
+            echo "<div style='font-size: 60; color:black;text-weight:bold;text-align: center;'><i
+                    class='fa-solid fa-camera fa-4x'> </i></div>";
+            }
+            if($device == 'mb_base'){
+            echo "<div style='font-size: 60; color:black;text-weight:bold;text-align: center;'><i
+                    class='fa-solid fa-keyboard fa-4x'> </i></div>";
+            }
+            if($device == 'hings_cover'){
+            echo "<div style='font-size: 60; color:black;text-weight:bold;text-align: center;'><i
+                    class='fa-solid fa-camera fa-4x'> </i></div>";
+            }
+            if($device == 'lan_cover'){
+            echo "<div style='font-size: 60; color:black;text-weight:bold;text-align: center;'><i
+                    class='fa-solid fa-camera fa-4x'> </i></div>";
+            }
+            ?>
+
+        </th>
+        <th><?php echo  "<div  ><p class = 'text-uppercase' style='font-size: 80; color:black;text-weight:bold;text-align: left;margin:0' >$secondPart</p></div>"; ?>
+        </th>
+    </tr>
+    <tr>
+        <td><?php echo "<img src='barcode.php?codetype=qrcode&size='100'&text={$code}'align='left' width='900' height='900'> </br></br></br></br></br></br> "; ?>
+        </td>
+        <td>
+            <?php 
+		if ($overText != "") {
 			$abc= strtoupper( $overText);
-    		echo  "</br> &nbsp </br> <div  ><p class = 'text-uppercase' style='font-size: 40; color:black;text-weight:bold;text-align: left;margin:0'>$abc &nbsp$secondPart</p></div>";
-			echo "</br>";
-			echo "</br>";
-			echo "</br>";
-			echo "</br>";
-			echo "</br>";
-    	} 
-		?><table>
-    <th><?php echo "<img src='barcode.php?codetype=qrcode&size='600px'&text={$code}'align='left'width='350' height='350'> "; ?>
-    </th>
-    <th height: 370px;><?php 
-		echo strtoupper("<div style = 'font-size: 40; color:black;text-weight:bold;text-align: left;'>$rack");
-		echo strtoupper("<div style = 'font-size: 40; color:black;text-weight:bold;text-align: left;'>$downText");
-    	echo strtoupper("<div style = 'font-size: 40; color:black;text-weight:bold;text-align: left;'>ALSAKB$code</div></br> ");
-		echo "<p style='page-break-after:always'></p>";
-		?></th>
+			echo  "<div  ><p class = 'text-uppercase' style='font-size: 80; color:black;text-weight:bold;text-align: left;margi-top:20mm' >$abc</p></div>";	
+		} 
+		?>
+            <?php
+    	echo strtoupper("<div style = 'font-size: 80; color:black;text-weight:bold;text-align: left;'>ALSAKB$code</div></br></br></br> ");
+		?>
+        </td>
+    </tr>
+    </br>
+
+
 </table>
 
 <?php
     	
-    	
-    echo "</div>";
 }
 
 echo "<div class='sheet'>";
 	if ($codeArray != "") { // Specified array of codes
 		foreach (json_decode($codeArray) as $secondPart) {
-			write($code, $overText, $rack, $barCodeHeight, $downText,$secondPart);
+			write($code, $overText,$device, $barCodeHeight, $downText,$secondPart);
 		}
 	} else { // Unspecified codes, let's go incremental
 		for ($i = $start; $i < $howManyCodes + $start; $i++) {
 			$code = str_pad($i, $digits, "0", STR_PAD_LEFT);
-			write($code, $overText, $rack, $barCodeHeight, $downText,$secondPart);
+			write($code, $overText,$device, $barCodeHeight, $downText,$secondPart);
 		}
 	}
 echo "</div>";
@@ -151,7 +226,7 @@ echo <<<STYLE
 			padding-left: $pageMarginLeft;
 			padding-top: $pageMarginTop;
 			padding-right: $pageMarginRight;
-			padding-bottom: 0;
+			padding-bottom: 10;
 		}
 		.item {
 			float: left;

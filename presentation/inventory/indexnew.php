@@ -92,31 +92,20 @@ function write($code, $overText, $rack, $barCodeHeight, $downText,$secondPart) {
 			$abc= strtoupper( $overText);
     		echo  "$abc &nbsp $secondPart ";
     	} 
-		?>
-        </h5>
-        <div class="col-md-4">
-            <?php echo "<img src='barcode.php?codetype=qrcode&size={$barCodeHeight}&text={$code}'align='left'width='350' height='350'> "; ?>
+		?><table>
+                <th><?php echo "<img src='barcode.php?codetype=qrcode&size={$barCodeHeight}&text={$code}'align='left'width='450' height='450'> "; ?>
+                </th>
+                <th height: 370px;><?php 
+		echo strtoupper("<div style = 'font-size: 40; color:black;text-weight:bold;text-align: left;'>$rack");
+		echo strtoupper("<div style = 'font-size: 40; color:black;text-weight:bold;text-align: left;'>$downText");
+    	echo strtoupper("<div style = 'font-size: 40; color:black;text-weight:bold;text-align: left;'>ALSAKB$code</div></br> ");
+		echo "<p style='page-break-after:always'></p>";
+		?></th>
+            </table>
 
-        </div>
-        <div class="col-md-8">
-            <div class="card-body" style="border: 0;
-    top: 0;
-    margin: 135px 0 0 50px;
-    font-size: 45px;
-    text-transform: uppercase;
-">
-                <h5 style="font-size: 35px; font-weight: bold;"><?php echo $rack; ?></h5>
-                <h5 style="font-size: 35px; font-weight: bold;"><?php echo $downText; ?></h5>
-                <h5 style="font-size: 35px; font-weight: bold;"><?php echo "ALSAKB".$code; ?></h5>
-            </div>
-        </div>
-    </div>
-</div>
-
-<?php } 
+            <?php
     	
     	
-     
 
 echo "<div class='sheet'>";
 	if ($codeArray != "") { // Specified array of codes
