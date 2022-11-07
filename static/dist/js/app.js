@@ -87,3 +87,135 @@ $(function () {
 
   cb(start, end);
 });
+
+// // When the user clicks on div, open the popup
+// function myFunction() {
+//   var popup = document.getElementById("myPopup");
+//   popup.classList.toggle("show");
+// }
+
+// // When the user clicks on div, open the popup
+// // R1A
+// function myFunctionR1A1() {
+//   var popup = document.getElementById("myPopupR1A1");
+//   popup.classList.toggle("show");
+// }
+
+// function myFunctionR1A2() {
+//   var popup = document.getElementById("myPopupR1A2");
+//   popup.classList.toggle("show");
+// }
+
+// function myFunctionR1A3() {
+//   var popup = document.getElementById("myPopupR1A3");
+//   popup.classList.toggle("show");
+// }
+
+// function myFunctionR1A4() {
+//   var popup = document.getElementById("myPopupR1A4");
+//   popup.classList.toggle("show");
+// }
+
+// function myFunctionR1A5() {
+//   var popup = document.getElementById("myPopupR1A5");
+//   popup.classList.toggle("show");
+// }
+
+// // R1B
+// function myFunctionR1B1() {
+//   var popup = document.getElementById("myPopupR1B1");
+//   popup.classList.toggle("show");
+// }
+
+// function myFunctionR1B2() {
+//   var popup = document.getElementById("myPopupR1B2");
+//   popup.classList.toggle("show");
+// }
+
+// function myFunctionR1B3() {
+//   var popup = document.getElementById("myPopupR1B3");
+//   popup.classList.toggle("show");
+// }
+
+// function myFunctionR1B4() {
+//   var popup = document.getElementById("myPopupR1B4");
+//   popup.classList.toggle("show");
+// }
+
+// function myFunctionR1B5() {
+//   var popup = document.getElementById("myPopupR1B5");
+//   popup.classList.toggle("show");
+// }
+
+// // R1C
+// function myFunctionR1C1() {
+//   var popup = document.getElementById("myPopupR1C1");
+//   popup.classList.toggle("show");
+// }
+
+// function myFunctionR1C2() {
+//   var popup = document.getElementById("myPopupR1C2");
+//   popup.classList.toggle("show");
+// }
+
+// function myFunctionR1C3() {
+//   var popup = document.getElementById("myPopupR1C3");
+//   popup.classList.toggle("show");
+// }
+
+// function myFunctionR1C4() {
+//   var popup = document.getElementById("myPopupR1C4");
+//   popup.classList.toggle("show");
+// }
+
+// function myFunctionR1C5() {
+//   var popup = document.getElementById("myPopupR1C5");
+//   popup.classList.toggle("show");
+// }
+
+// // R1C
+// function myFunctionR1C1() {
+//   var popup = document.getElementById("myPopupR1C1");
+//   popup.classList.toggle("show");
+// }
+
+// function myFunctionR1C2() {
+//   var popup = document.getElementById("myPopupR1C2");
+//   popup.classList.toggle("show");
+// }
+
+// function myFunctionR1C3() {
+//   var popup = document.getElementById("myPopupR1C3");
+//   popup.classList.toggle("show");
+// }
+
+// function myFunctionR1C4() {
+//   var popup = document.getElementById("myPopupR1C4");
+//   popup.classList.toggle("show");
+// }
+
+// // R1D
+// function myFunctionR1D1() {
+//   var popup = document.getElementById("myPopupR1D1");
+//   popup.classList.toggle("show");
+// }
+
+// function myFunctionR1D2() {
+//   var popup = document.getElementById("myPopupR1D2");
+//   popup.classList.toggle("show");
+// }
+
+// function myFunctionR1D3() {
+//   var popup = document.getElementById("myPopupR1D3");
+//   popup.classList.toggle("show");
+// }
+
+// function myFunctionR1D4() {
+//   var popup = document.getElementById("myPopupR1D4");
+//   popup.classList.toggle("show");
+// }
+
+// function myFunctionR1D5() {
+//   var popup = document.getElementById("myPopupR1D5");
+//   popup.classList.toggle("show");
+// }
