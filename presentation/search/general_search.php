@@ -68,9 +68,11 @@ if (!isset($_SESSION['user_id'])) {
                               
                                 foreach($result as $rows){      
                                     //  Motherboard
+                                    $bios_check =1;
                                     $bios_check = $rows['bios_check'];
                                     $no_power = $rows['no_power'];
                                     $usb_connection = $rows['usb_connection'];
+                                    
                                     // LCD
                                     $whitespot = $rows['whitespot'];
                                     $scratch = $rows['scratch'];
@@ -317,18 +319,9 @@ if (!isset($_SESSION['user_id'])) {
                                                         <div class="form-check form-check-inline text-capitalize">
                                                             <div class="custom-control custom-checkbox">
                                                                 <div class="form-group">
-                                                                    <?php if($bios_check == NULL){ ?>
-                                                                    <div class="custom-control custom-switch">
-                                                                        <input type="checkbox"
-                                                                            class="custom-control-input"
-                                                                            id="customSwitch3" disabled>
-                                                                        <label class="custom-control-label"
-                                                                            for="customSwitch3">
-                                                                        </label>
-                                                                    </div>
-                                                                    <?php }elseif($bios_check == 0){ ?>
+                                                                    <?php if($bios_check == 0){ ?>
                                                                     <div
-                                                                        class="custom-control custom-switch custom-switch-on-success custom-switch-off-success">
+                                                                        class="custom-control custom-switch custom-switch-on-danger custom-switch-off-success">
                                                                         <input type="checkbox"
                                                                             class="custom-control-input"
                                                                             id="customSwitch3" disabled>
@@ -689,17 +682,9 @@ if (!isset($_SESSION['user_id'])) {
                                                     <label class="col-sm-3 col-form-label text-capitalize">A/Top
                                                         Cover</label>
                                                     <div class="col-sm-9 mt-2 d-flex">
-                                                        <?php if($a_scratch == NULL){ ?>
-                                                        <div class="custom-control custom-switch">
-                                                            <input type="checkbox" class="custom-control-input"
-                                                                id="customSwitch3" disabled>
-                                                            <label class="custom-control-label"
-                                                                for="customSwitch3">Scratch
-                                                            </label>
-                                                        </div>
-                                                        <?php }elseif($a_scratch == 0){ ?>
+                                                        <?php if($a_scratch == 0){ ?>
                                                         <div
-                                                            class="custom-control custom-switch custom-switch-on-success custom-switch-off-success">
+                                                            class="custom-control custom-switch custom-switch-on-danger custom-switch-off-success">
                                                             <input type="checkbox" class="custom-control-input"
                                                                 id="customSwitch3" disabled>
                                                             <label class="custom-control-label"
@@ -716,18 +701,9 @@ if (!isset($_SESSION['user_id'])) {
                                                             </label>
                                                         </div>
                                                         <?php } ?>
-
-                                                        <?php if($a_broken == NULL){ ?>
-                                                        <div class="custom-control custom-switch">
-                                                            <input type="checkbox" class="custom-control-input"
-                                                                id="customSwitch3" disabled>
-                                                            <label class="custom-control-label"
-                                                                for="customSwitch3">Broken
-                                                            </label>
-                                                        </div>
-                                                        <?php }elseif($a_broken == 0){ ?>
+                                                        <?php if($a_broken == 0){ ?>
                                                         <div
-                                                            class="custom-control custom-switch custom-switch-on-success custom-switch-off-success">
+                                                            class="custom-control custom-switch custom-switch-on-danger custom-switch-off-success">
                                                             <input type="checkbox" class="custom-control-input"
                                                                 id="customSwitch3" disabled>
                                                             <label class="custom-control-label"
@@ -744,17 +720,9 @@ if (!isset($_SESSION['user_id'])) {
                                                             </label>
                                                         </div>
                                                         <?php } ?>
-
-                                                        <?php if($a_dent == NULL){ ?>
-                                                        <div class="custom-control custom-switch">
-                                                            <input type="checkbox" class="custom-control-input"
-                                                                id="customSwitch3" disabled>
-                                                            <label class="custom-control-label" for="customSwitch3">Dent
-                                                            </label>
-                                                        </div>
-                                                        <?php }elseif($a_dent == 0){ ?>
+                                                        <?php if($a_dent == 0){ ?>
                                                         <div
-                                                            class="custom-control custom-switch custom-switch-on-success custom-switch-off-success">
+                                                            class="custom-control custom-switch custom-switch-on-danger custom-switch-off-success">
                                                             <input type="checkbox" class="custom-control-input"
                                                                 id="customSwitch3" disabled>
                                                             <label class="custom-control-label" for="customSwitch3">Dent
