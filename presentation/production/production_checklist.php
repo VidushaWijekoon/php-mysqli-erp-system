@@ -1115,7 +1115,7 @@ function clearText(a) {
                             </div>
                             <?php } ?>
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                             <label class="col-sm-4 col-form-label text-capitalize">02 Keys:</label>
                             <?php if($keys == null){ ?>
                             <div class="col-sm-8 mt-2">
@@ -1153,10 +1153,10 @@ function clearText(a) {
                             </div>
                             <?php } ?>
 
-                        </div>
+                        </div> -->
 
                         <div class="row">
-                            <label class="col-sm-4 col-form-label text-capitalize">03 Speakers:</label>
+                            <label class="col-sm-4 col-form-label text-capitalize">02 Speakers:</label>
                             <?php if($speakers == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
@@ -1196,7 +1196,7 @@ function clearText(a) {
                         </div>
 
                         <div class="row">
-                            <label class="col-sm-4 col-form-label text-capitalize">04 Camera:</label>
+                            <label class="col-sm-4 col-form-label text-capitalize">03 Camera:</label>
                             <?php if($camera == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
@@ -1236,7 +1236,7 @@ function clearText(a) {
                         </div>
 
                         <div class="row">
-                            <label class="col-sm-4 col-form-label text-capitalize">05 Bazel:</label>
+                            <label class="col-sm-4 col-form-label text-capitalize">04 Bazel:</label>
                             <?php if($bazel == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
@@ -1272,7 +1272,7 @@ function clearText(a) {
                             <?php } ?>
                         </div>
                         <div class="row">
-                            <label class="col-sm-4 col-form-label text-capitalize">07 Mouse Pad:</label>
+                            <label class="col-sm-4 col-form-label text-capitalize">05 Mouse Pad:</label>
                             <?php if($mousepad == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
@@ -1311,7 +1311,7 @@ function clearText(a) {
 
                         </div>
                         <div class="row">
-                            <label class="col-sm-4 col-form-label text-capitalize">08 Mouse Pad Button:</label>
+                            <label class="col-sm-4 col-form-label text-capitalize">06 Mouse Pad Button:</label>
                             <?php if($mouse_pad_button == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
@@ -1351,7 +1351,7 @@ function clearText(a) {
 
                         </div>
                         <div class="row">
-                            <label class="col-sm-4 col-form-label text-capitalize">09 Camera Cable:</label>
+                            <label class="col-sm-4 col-form-label text-capitalize">07 Camera Cable:</label>
                             <?php if($camera_cable == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
@@ -1391,7 +1391,7 @@ function clearText(a) {
 
                         </div>
                         <div class="row">
-                            <label class="col-sm-4 col-form-label text-capitalize">10 Back Cover:</label>
+                            <label class="col-sm-4 col-form-label text-capitalize">8 Back Cover:</label>
                             <?php if($back_cover == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
@@ -1430,7 +1430,7 @@ function clearText(a) {
 
                         </div>
                         <div class="row">
-                            <label class="col-sm-4 col-form-label text-capitalize">11 WIFI Card: </label>
+                            <label class="col-sm-4 col-form-label text-capitalize">9 WIFI Card: </label>
                             <?php if($wifi_card == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
@@ -1469,7 +1469,7 @@ function clearText(a) {
 
                         </div>
                         <div class="row">
-                            <label class="col-sm-4 col-form-label text-capitalize">12 LCD Cable:</label>
+                            <label class="col-sm-4 col-form-label text-capitalize">10 LCD Cable:</label>
                             <?php if($lcd_cable == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
@@ -1510,7 +1510,7 @@ function clearText(a) {
                     </div>
                     <div class="col col-md-6 col-lg-6">
                         <div class="row">
-                            <label class="col-sm-4 col-form-label text-capitalize">13 Battery:</label>
+                            <label class="col-sm-4 col-form-label text-capitalize">11 Battery:</label>
                             <?php if($battery == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
@@ -1549,7 +1549,7 @@ function clearText(a) {
 
                         </div>
                         <div class="row">
-                            <label class="col-sm-4 col-form-label text-capitalize">14 Battery Cable:</label>
+                            <label class="col-sm-4 col-form-label text-capitalize">12 Battery Cable:</label>
                             <?php if($battery_cable == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
@@ -1589,7 +1589,7 @@ function clearText(a) {
 
                         </div>
                         <div class="row">
-                            <label class="col-sm-4 col-form-label text-capitalize">15 DVD ROM: </label>
+                            <label class="col-sm-4 col-form-label text-capitalize">13 DVD ROM: </label>
                             <?php if($dvd_rom == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
@@ -1630,7 +1630,7 @@ function clearText(a) {
                         </div>
 
                         <div class="row">
-                            <label class="col-sm-4 col-form-label text-capitalize">16 DVD Caddy:</label>
+                            <label class="col-sm-4 col-form-label text-capitalize">14 DVD Caddy:</label>
                             <?php if($dvd_caddy == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
@@ -1670,7 +1670,7 @@ function clearText(a) {
                         </div>
 
                         <div class="row">
-                            <label class="col-sm-4 col-form-label text-capitalize">17 HDD Caddy:</label>
+                            <label class="col-sm-4 col-form-label text-capitalize">15 HDD Caddy:</label>
                             <?php if($hdd_caddy == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
@@ -1709,7 +1709,7 @@ function clearText(a) {
 
                         </div>
                         <div class="row">
-                            <label class="col-sm-4 col-form-label text-capitalize">18 HDD Cable Connector:</label>
+                            <label class="col-sm-4 col-form-label text-capitalize">16 HDD Cable Connector:</label>
                             <?php if($hdd_cable_connector == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
@@ -1749,7 +1749,7 @@ function clearText(a) {
 
                         </div>
                         <div class="row">
-                            <label class="col-sm-4 col-form-label text-capitalize">19 C Panel / Palm Rest:</label>
+                            <label class="col-sm-4 col-form-label text-capitalize">17 C Panel / Palm Rest:</label>
                             <?php if($c_panel_palm_rest == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
@@ -1789,7 +1789,7 @@ function clearText(a) {
 
                         </div>
                         <div class="row">
-                            <label class="col-sm-4 col-form-label text-capitalize">20 D / MB Base:</label>
+                            <label class="col-sm-4 col-form-label text-capitalize">18 D / MB Base:</label>
                             <?php if($mb_base == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
@@ -1828,7 +1828,7 @@ function clearText(a) {
 
                         </div>
                         <div class="row">
-                            <label class="col-sm-4 col-form-label text-capitalize">21 Hings Cover:</label>
+                            <label class="col-sm-4 col-form-label text-capitalize">19 Hings Cover:</label>
                             <?php if($hings_cover == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
@@ -1868,7 +1868,7 @@ function clearText(a) {
 
                         </div>
                         <div class="row">
-                            <label class="col-sm-4 col-form-label text-capitalize">22 LAN Cover:</label>
+                            <label class="col-sm-4 col-form-label text-capitalize">20 LAN Cover:</label>
                             <?php if($lan_cover == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
