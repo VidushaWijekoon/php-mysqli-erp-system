@@ -104,7 +104,7 @@ function write($code, $overText, $rack, $barCodeHeight, $downText,$secondPart) {
             </table>
 
             <?php
-    	
+}
     	
 
 echo "<div class='sheet'>";
