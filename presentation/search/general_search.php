@@ -52,9 +52,11 @@ if (!isset($_SESSION['user_id'])) {
                               
                                 foreach($result as $rows){      
                                     //  Motherboard
+                                    $bios_check =1;
                                     $bios_check = $rows['bios_check'];
                                     $no_power = $rows['no_power'];
                                     $usb_connection = $rows['usb_connection'];
+                                    
                                     // LCD
                                     $whitespot = $rows['whitespot'];
                                     $scratch = $rows['scratch'];
@@ -127,7 +129,8 @@ if (!isset($_SESSION['user_id'])) {
                                                 <div class="form-check form-check-inline text-capitalize">
                                                     <div class="custom-control custom-checkbox">
                                                         <div class="form-group">
-                                                            <?php if($bios_check == 0){ ?>
+                                                            <?php 
+                                                            if($bios_check == 0){ ?>
                                                             <div
                                                                 class="custom-control custom-switch custom-switch-on-danger custom-switch-off-success">
                                                                 <input type="checkbox" class="custom-control-input"
@@ -395,7 +398,15 @@ if (!isset($_SESSION['user_id'])) {
                                         <div class="row">
                                             <label class="col-sm-3 col-form-label text-capitalize">A/Top Cover</label>
                                             <div class="col-sm-9 mt-2 d-flex">
-                                                <?php if($a_scratch == 0){ ?>
+                                                <?php if($a_scratch == null){ ?>
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" class="custom-control-input"
+                                                        id="customSwitch3" disabled>
+                                                    <label class="custom-control-label" for="customSwitch3">Scratch
+                                                    </label>
+                                                </div>
+                                                <?php }    
+                                             if($a_scratch == 0){ ?>
                                                 <div
                                                     class="custom-control custom-switch custom-switch-on-danger custom-switch-off-success">
                                                     <input type="checkbox" class="custom-control-input"
@@ -655,12 +666,6 @@ if (!isset($_SESSION['user_id'])) {
                                     </div>
                                 </div>
                             </div>
-                            <!-- ============================================================== -->
-                            <!-- end total followers   -->
-                            <!-- ============================================================== -->
-                            <!-- ============================================================== -->
-                            <!-- partnerships   -->
-                            <!-- ============================================================== -->
                         </div>
 
                         <!-- ============================================================== -->

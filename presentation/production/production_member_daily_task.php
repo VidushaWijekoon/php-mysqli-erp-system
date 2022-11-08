@@ -38,14 +38,20 @@ foreach($query_tech as $data){
         
         $query_assign_count = "SELECT tech_assign_qty AS assign_qty FROM `prod_technician_assign_info` WHERE prod_technician_assign_info.tech_id = '$tech_id';";
         $query_scanned_count = "SELECT COUNT(prod_info.tech_id) AS completed_count FROM `prod_info` WHERE prod_info.tech_id = '$tech_id';";
+        $query_scanned_inventory_count = "SELECT COUNT(prod_info.inventory_id) AS inventory_id_count FROM `prod_info` WHERE prod_info.inventory_id = '$inventory_id';";
 
         $query_assign_count_run = mysqli_query($connection, $query_assign_count);
         $query_scanned_count_run = mysqli_query($connection, $query_scanned_count);
+        $query_scanned_inventory_count = mysqli_query($connection, $query_scanned_inventory_count);
         foreach($query_assign_count_run as $data){
             $assign_qty = $data['assign_qty'];
         }
              foreach($query_scanned_count_run as $data){
             $scaned_qty = $data['completed_count'];
+           
+        }
+        foreach($query_scanned_inventory_count as $data){
+            $inventory_id_count = $data['inventory_id_count'];
            
         }
         
@@ -74,7 +80,8 @@ foreach($query_tech as $data){
 
             if(empty($query_run)){
             }else{
-           if($assign_qty >= $scaned_qty){
+           if(($assign_qty*2 )>= $scaned_qty){
+            if($inventory_id_count >3){
                 foreach($query_run as $data1){
                     // $query_insert = "INSERT INTO prod_info(p_id, inventory_id, start_date_time, end_date_time,sales_order, emp_id, tech_id,status, issue_type) VALUES (0 ,0 , 0, 0, 0, 0, 0, 0, 0)";
 
@@ -84,6 +91,7 @@ foreach($query_tech as $data){
                     $query_prod_info = mysqli_query($connection, $query_insert);
                     header("Location: production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id} ");
                 }
+            }else{ echo 'can not scan more than two time';}
             }else{
                 echo " cannot scan over qty";
             }
@@ -220,7 +228,6 @@ foreach($query_tech as $data){
                                     LEFT JOIN warehouse_information_sheet ON prod_info.inventory_id = warehouse_information_sheet.inventory_id
                                     WHERE
                                           prod_info.emp_id ='{$emp_id}' AND prod_info.tech_id ='{$tech_id}' ; ";
-                                          echo $query;
                                         $query_run = mysqli_query($connection, $query);
 
                                             if ($rowcount = mysqli_fetch_assoc($query_run)) {
