@@ -216,7 +216,7 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
                                 $query = "SELECT *, SUM(sales_order_add_items.item_quantity) AS No_of_Records FROM sales_order_information
                                         INNER JOIN sales_order_add_items ON sales_order_information.sales_order_id = sales_order_add_items.sales_order_id
                                         WHERE sales_order_information.created_time BETWEEN ('$from_date' AND '$to_date')  
-                                        AND CONCAT(sales_order_information.sales_order_id, sales_order_add_items.sales_order_id) OR  sales_order_add_items.sales_order_id
+                                        AND CONCAT(sales_order_information.sales_order_id, sales_order_add_items.sales_order_id) OR (sales_order_add_items.sales_order_id)
                                         LIKE '%$search%'
                                         GROUP BY sales_order_information.sales_order_id ";
                                 $query_run = mysqli_query($connection, $query);                                
