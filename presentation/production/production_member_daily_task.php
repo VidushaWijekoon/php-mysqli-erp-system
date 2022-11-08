@@ -81,7 +81,7 @@ foreach($query_tech as $data){
             if(empty($query_run)){
             }else{
            if(($assign_qty*2 )>= $scaned_qty){
-            if($inventory_id_count >3){
+            // if($inventory_id_count >3){
                 foreach($query_run as $data1){
                     // $query_insert = "INSERT INTO prod_info(p_id, inventory_id, start_date_time, end_date_time,sales_order, emp_id, tech_id,status, issue_type) VALUES (0 ,0 , 0, 0, 0, 0, 0, 0, 0)";
 
@@ -91,7 +91,7 @@ foreach($query_tech as $data){
                     $query_prod_info = mysqli_query($connection, $query_insert);
                     header("Location: production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id} ");
                 }
-            }else{ echo 'can not scan more than two time';}
+            // }else{ echo 'can not scan more than'}
             }else{
                 echo " cannot scan over qty";
             }

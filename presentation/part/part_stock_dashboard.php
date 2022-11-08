@@ -1,3 +1,4 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <?php 
 session_start();
 include_once('../../dataAccess/connection.php');
@@ -9,106 +10,106 @@ include_once('../includes/header.php');
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
-$A1="A-1_0_0";
-$A2="A-2_0_0";
-$A3="A-3_0_0";
-$A4="A-4_0_0";
-$A5="A-5_0_0";
-$B1="B-1_0_0";
-$B2="B-2_0_0";
-$B3="B-3_0_0";
-$B4="B-4_0_0";
-$B5="B-5_0_0";
-$C1="C-1_0_0";
-$C2="C-2_0_0";
-$C3="C-3_0_0";
-$C4="C-4_0_0";
-$C5="C-5_0_0";
-$D1="D-1_0_0";
-$D2="D-2_0_0";
-$D3="D-3_0_0";
-$D4="D-4_0_0";
-$D5="D-5_0_0";
-$E1="E-1_0_0";
-$E2="E-2_0_0";
-$E3="E-3_0_0";
-$E4="E-4_0_0";
-$E5="E-5_0_0";
-$F1="F-1_0_0";
-$F2="F-2_0_0";
-$F3="F-3_0_0";
-$F4="F-4_0_0";
-$F5="F-5_0_0";
-$G1="G-1_0_0";
-$G2="G-2_0_0";
-$G3="G-3_0_0";
-$G4="G-4_0_0";
-$G5="G-5_0_0";
-$H1="H-1_0_0";
-$H2="H-2_0_0";
-$H3="H-3_0_0";
-$H4="H-4_0_0";
-$H5="H-5_0_0";
-$I1="I-1_0_0";
-$I2="I-2_0_0";
-$I3="I-3_0_0";
-$I4="I-4_0_0";
-$I5="I-5_0_0";
-$J1="J-1_0_0";
-$J2="J-2_0_0";
-$J3="J-3_0_0";
-$J4="J-4_0_0";
-$J5="J-5_0_0";
-$K1="K-1_0_0";
-$K2="K-2_0_0";
-$K3="K-3_0_0";
-$K4="K-4_0_0";
-$K5="K-5_0_0";
-$L1="L-1_0_0";
-$L2="L-2_0_0";
-$L3="L-3_0_0";
-$L4="L-4_0_0";
-$L5="L-5_0_0";
-$M1="M-1_0_0";
-$M2="M-2_0_0";
-$M3="M-3_0_0";
-$M4="M-4_0_0";
-$M5="M-5_0_0";
-$N1="N-1_0_0";
-$N2="N-2_0_0";
-$N3="N-3_0_0";
-$N4="N-4_0_0";
-$N5="N-5_0_0";
-$O1="O-1_0_0";
-$O2="O-2_0_0";
-$O3="O-3_0_0";
-$O4="O-4_0_0";
-$O5="O-5_0_0";
-$P1="P-1_0_0";
-$P2="P-2_0_0";
-$P3="P-3_0_0";
-$P4="P-4_0_0";
-$P5="P-5_0_0";
-$Q1="Q-1_0_0";
-$Q2="Q-2_0_0";
-$Q3="Q-3_0_0";
-$Q4="Q-4_0_0";
-$Q5="Q-5_0_0";
-$R1="R-1_0_0";
-$R2="R-2_0_0";
-$R3="R-3_0_0";
-$R4="R-4_0_0";
-$R5="R-5_0_0";
-$S1="S-1_0_0";
-$S2="S-2_0_0";
-$S3="S-3_0_0";
-$S4="S-4_0_0";
-$S5="S-5_0_0";
-$T1="T-1_0_0";
-$T2="T-2_0_0";
-$T3="T-3_0_0";
-$T4="T-4_0_0";
-$T5="T-5_0_0";
+$A1="A-1_0_0_0";
+$A2="A-2_0_0_0";
+$A3="A-3_0_0_0";
+$A4="A-4_0_0_0";
+$A5="A-5_0_0_0";
+$B1="B-1_0_0_0";
+$B2="B-2_0_0_0";
+$B3="B-3_0_0_0";
+$B4="B-4_0_0_0";
+$B5="B-5_0_0_0";
+$C1="C-1_0_0_0";
+$C2="C-2_0_0_0";
+$C3="C-3_0_0_0";
+$C4="C-4_0_0_0";
+$C5="C-5_0_0_0";
+$D1="D-1_0_0_0";
+$D2="D-2_0_0_0";
+$D3="D-3_0_0_0";
+$D4="D-4_0_0_0";
+$D5="D-5_0_0_0";
+$E1="E-1_0_0_0";
+$E2="E-2_0_0_0";
+$E3="E-3_0_0_0";
+$E4="E-4_0_0_0";
+$E5="E-5_0_0_0";
+$F1="F-1_0_0_0";
+$F2="F-2_0_0_0";
+$F3="F-3_0_0_0";
+$F4="F-4_0_0_0";
+$F5="F-5_0_0_0";
+$G1="G-1_0_0_0";
+$G2="G-2_0_0_0";
+$G3="G-3_0_0_0";
+$G4="G-4_0_0_0";
+$G5="G-5_0_0_0";
+$H1="H-1_0_0_0";
+$H2="H-2_0_0_0";
+$H3="H-3_0_0_0";
+$H4="H-4_0_0_0";
+$H5="H-5_0_0_0";
+$I1="I-1_0_0_0";
+$I2="I-2_0_0_0";
+$I3="I-3_0_0_0";
+$I4="I-4_0_0_0";
+$I5="I-5_0_0_0";
+$J1="J-1_0_0_0";
+$J2="J-2_0_0_0";
+$J3="J-3_0_0_0";
+$J4="J-4_0_0_0";
+$J5="J-5_0_0_0";
+$K1="K-1_0_0_0";
+$K2="K-2_0_0_0";
+$K3="K-3_0_0_0";
+$K4="K-4_0_0_0";
+$K5="K-5_0_0_0";
+$L1="L-1_0_0_0";
+$L2="L-2_0_0_0";
+$L3="L-3_0_0_0";
+$L4="L-4_0_0_0";
+$L5="L-5_0_0_0";
+$M1="M-1_0_0_0";
+$M2="M-2_0_0_0";
+$M3="M-3_0_0_0";
+$M4="M-4_0_0_0";
+$M5="M-5_0_0_0";
+$N1="N-1_0_0_0";
+$N2="N-2_0_0_0";
+$N3="N-3_0_0_0";
+$N4="N-4_0_0_0";
+$N5="N-5_0_0_0";
+$O1="O-1_0_0_0";
+$O2="O-2_0_0_0";
+$O3="O-3_0_0_0";
+$O4="O-4_0_0_0";
+$O5="O-5_0_0_0";
+$P1="P-1_0_0_0";
+$P2="P-2_0_0_0";
+$P3="P-3_0_0_0";
+$P4="P-4_0_0_0";
+$P5="P-5_0_0_0";
+$Q1="Q-1_0_0_0";
+$Q2="Q-2_0_0_0";
+$Q3="Q-3_0_0_0";
+$Q4="Q-4_0_0_0";
+$Q5="Q-5_0_0_0";
+$R1="R-1_0_0_0";
+$R2="R-2_0_0_0";
+$R3="R-3_0_0_0";
+$R4="R-4_0_0_0";
+$R5="R-5_0_0_0";
+$S1="S-1_0_0_0";
+$S2="S-2_0_0_0";
+$S3="S-3_0_0_0";
+$S4="S-4_0_0_0";
+$S5="S-5_0_0_0";
+$T1="T-1_0_0_0";
+$T2="T-2_0_0_0";
+$T3="T-3_0_0_0";
+$T4="T-4_0_0_0";
+$T5="T-5_0_0_0";
 
 $values = array(
    $A1 => [1, 20],
@@ -176,7 +177,7 @@ $values = array(
    $M3 => [3, 8],
    $M4 => [4, 8],
    $M5 => [5, 8],
-   $N1 => [1, 8],
+   $N1 => [1, 7],
    $N2 => [2, 7],
    $N3 => [3, 7],
    $N4 => [4, 7],
@@ -212,17 +213,18 @@ $values = array(
    $T4 => [4, 1],
    $T5 => [5, 1],
 );
-$query = "SELECT slot_name,part_name,part_model FROM part_stock WHERE rack_number = 'RACK-B'";
+$query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'RACK-B'";
 $result_set = mysqli_query($connection, $query);
 foreach($result_set as $a){
    $slot_name = $a['slot_name'];
-   $slot_name_change = $a['slot_name']."_0_0";
+   $slot_name_change = $a['slot_name']."_0_0_0";
    $part_name= $a['part_name'];
    $part_model= $a['part_model'];
+   $qty= $a['qty'];
    foreach($values as $k => $v){
     
        if($k == $slot_name_change){
-           $name= $slot_name."_".$part_name."_".$part_model;
+           $name= $slot_name."_".$part_name."_".$part_model."_".$qty;
            $values[$name] = $values[$k];
            unset($values[$k]);
        }
@@ -256,6 +258,7 @@ function renderGrid($grid)
 {
    $grid = array_reverse($grid);
    ?>
+
 <div class="container-fluid">
     <div class="row mx-3">
         <div class="col-4 mt-5">
@@ -265,26 +268,138 @@ function renderGrid($grid)
                 </div>
                 <div class="card-body mx-auto justify-content-center">
                     <?php  foreach ($grid as $row) { 
-                        foreach ($row as $cell) {
+                        foreach ($row as $k=>$v) {
                             
-                             ?>
+                            $substring = explode("_", $v);
+                            if($substring[3] == 0){ ?>
 
-                    <a class="btn  bg-white" style="padding = 0px 2px 18px 44px">
+                    <a class="btn  bg-secondary mt-2" style="  width: 88px !important;">
                         <i class="fas fa-inbox"></i>
                         <?php 
-                        $substring = explode("_", "$cell");
-                        forEach($substring as $line){
-                            echo $line."</br>";
-                        }
+                        echo $substring[0]."</br>";
+                        echo "</br>";
+                        echo "</br>";
+                        echo "</br>";
                          ?>
                     </a>
+                    <?php }else{ ?>
+                    <a class="btn  bg-success mt-2" style="width: 88px !important; padding = 10px 12px 18px 44px">
+                        <i class="fas fa-inbox"></i>
+                        <?php
+                        echo $substring[0]."</br>";
+                        echo $substring[1]."</br>";
+                        echo $substring[2]."</br>";
+                        echo $substring[3]."</br>";
+                         ?>
+                    </a>
+                    <?php }
+                             ?>
+
+                    <?php } }  ?>
+                </div>
+            </div>
+        </div>
+        <?php
+}           
+?>
+        <?php
+$query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'RACK-C'";
+$result_set = mysqli_query($connection, $query);
+foreach($result_set as $a){
+   $slot_name = $a['slot_name'];
+   $slot_name_change = $a['slot_name']."_0_0_0";
+   $part_name= $a['part_name'];
+   $part_model= $a['part_model'];
+   $qty= $a['qty'];
+   foreach($values as $k => $v){
+    
+       if($k == $slot_name_change){
+           $name= $slot_name."_".$part_name."_".$part_model."_".$qty;
+           $values[$name] = $values[$k];
+           unset($values[$k]);
+       }
+   }
+}
+
+   ?>
+
+        <div class="col-4 mt-5">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h4 class="card-title">Rack 02</h4>
+                </div>
+                <div class="card-body mx-auto justify-content-center">
+                    <?php  foreach ($grid as $row) { 
+                        foreach ($row as $k=>$v) {
+                            $substring = explode("_", $v);
+                            if($substring[3] == 0){ ?>
+
+                    <a class="btn  bg-secondary mt-2" style="  width: 88px !important;">
+                        <i class="fas fa-inbox"></i>
+                        <?php 
+                        echo $substring[0]."</br>";
+                        echo "</br>";
+                        echo "</br>";
+                        echo "</br>";
+                         ?>
+                    </a>
+                    <?php }else{ ?>
+                    <a class="btn  bg-success mt-2" style="width: 88px !important; padding = 10px 12px 18px 44px">
+                        <i class="fas fa-inbox"></i>
+                        <?php
+                        echo $substring[0]."</br>";
+                        echo $substring[1]."</br>";
+                        echo $substring[2]."</br>";
+                        echo $substring[3]."</br>";
+                         ?>
+                    </a>
+                    <?php }
+                             ?>
+
+                    <?php } }  ?>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 mt-5">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h4 class="card-title">Rack 03</h4>
+                </div>
+                <div class="card-body mx-auto justify-content-center">
+                    <?php  foreach ($grid as $row) { 
+                        foreach ($row as $k=>$v) {
+                            $substring = explode("_", $v);
+                            if($substring[3] == 0){ ?>
+
+                    <a class="btn  bg-secondary mt-2 " style="  width: 88px !important;">
+                        <i class="fas fa-inbox"></i>
+                        <?php 
+                        echo $substring[0]."</br>";
+                        echo "</br>";
+                        echo "</br>";
+                        echo "</br>";
+                         ?>
+                    </a>
+                    <?php }else{ ?>
+                    <a class="btn  bg-success mt-2" style="width: 88px !important; padding = 10px 12px 18px 44px">
+                        <i class="fas fa-inbox"></i>
+                        <?php
+                        echo $substring[0]."</br>";
+                        echo $substring[1]."</br>";
+                        echo $substring[2]."</br>";
+                        echo $substring[3]."</br>";
+                         ?>
+                    </a>
+                    <?php }
+                             ?>
+
                     <?php } }  ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<?php
-}           
+<?php          
 ?>
+
 <?php    include_once('../includes/footer.php'); ?>
