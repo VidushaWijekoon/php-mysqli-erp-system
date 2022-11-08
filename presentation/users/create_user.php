@@ -112,12 +112,14 @@ if (isset($_POST['submit'])) {
                         <legend>Create New User</legend>
 
                         <div class="row">
-                            <label class="col-sm-3 col-form-label">Department</label>
+                            <label class="col-sm-3 col-form-label">Employee ID</label>
                             <div class="col-sm-8">
                                 <select name="epf" class="info_select" style="border-radius: 5px;">
-                                    <option selected>--Select Department--</option>
+                                    <option selected>--Select Employee ID--</option>
                                     <?php
-                                            $query = "SELECT emp_id FROM employees ORDER BY `emp_id` DESC";
+                                            $query = "SELECT emp_id FROM employees LEFT OUTER JOIN users  ON emp_id = epf WHERE epf IS NULL
+                                            UNION ALL
+                                            SELECT epf FROM users LEFT OUTER JOIN employees  ON epf = emp_id WHERE epf IS NULL;";
                                             $result = mysqli_query($connection, $query);
 
                                             while ($emp_id = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
