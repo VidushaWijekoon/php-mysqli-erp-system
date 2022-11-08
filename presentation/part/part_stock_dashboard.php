@@ -26,8 +26,11 @@ if($role_id = 1 && $department == 11 || $role_id == 4 && $department ==22) {
             $part_brand = $rows['part_brand'];
             $rack_number = $rows['rack_number'];
             $slot_name = $rows['slot_name'];
-            $qty = $rows['qty'];            
+            $qty = $rows['qty'];  
+
             
+            
+                     
         } 
     }
             
@@ -38,7 +41,7 @@ if($role_id = 1 && $department == 11 || $role_id == 4 && $department ==22) {
         <div class="col-4 mt-5">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4 class="card-title">Rack 01</h4>
+                    <h4 class="card-title">Rack 02</h4>
                 </div>
                 <div class="card-body mx-auto justify-content-center">
                     <?php for ($column='A'; $column!='U'; $column++){ 

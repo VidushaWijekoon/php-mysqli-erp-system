@@ -40,12 +40,14 @@ if (!isset($_SESSION['user_id'])) {
                                 if (isset($_GET['search'])) {
                                     $filtervalues = $_GET['search'];
 
-                                $query = "SELECT * FROM motherboard_check
-                                        INNER JOIN lcd_check ON lcd_check.inventory_id = motherboard_check.inventory_id
-                                        INNER JOIN bodywork ON motherboard_check.inventory_id = bodywork.inventory_id
-                                        INNER JOIN combine_check ON motherboard_check.inventory_id = combine_check.inventory_id
-                                        LEFT JOIN production_check ON motherboard_check.inventory_id = production_check.inventory_id
-                                        WHERE CONCAT(motherboard_check.inventory_id) LIKE '%$filtervalues%' ";
+                                $query = "SELECT * FROM warehouse_information_sheet
+                                            LEFT JOIN motherboard_check ON warehouse_information_sheet.inventory_id = motherboard_check.inventory_id
+                                            LEFT JOIN lcd_check ON warehouse_information_sheet.inventory_id = lcd_check.inventory_id
+                                            LEFT JOIN bodywork ON warehouse_information_sheet.inventory_id = bodywork.inventory_id
+                                            LEFT JOIN combine_check ON warehouse_information_sheet.inventory_id = combine_check.inventory_id
+                                            LEFT JOIN production_check ON warehouse_information_sheet.inventory_id = production_check.inventory_id
+                                            WHERE CONCAT(warehouse_information_sheet.inventory_id) LIKE '%$filtervalues%'  
+                                            LIMIT 1";
                                 $result = mysqli_query($connection, $query);                                
                               
                                 foreach($result as $rows){      
