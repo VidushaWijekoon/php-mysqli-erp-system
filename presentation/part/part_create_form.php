@@ -131,7 +131,8 @@ if(isset($_POST['submit'])){
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Generation</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" placeholder="Generation" name="generation">
+                                    <input type="number" class="form-control" placeholder="Generation"
+                                        name="generation">
                                 </div>
                             </div>
 
@@ -153,13 +154,6 @@ if(isset($_POST['submit'])){
                                 <label class="col-sm-3 col-form-label">Capacity</label>
                                 <div class="col-sm-8">
                                     <input type="number" class="form-control" placeholder="Capacity" name="capacity">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <label class="col-sm-3 col-form-label">Location</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" placeholder="Location" name="location">
                                 </div>
                             </div>
                             <div class="row">
@@ -186,7 +180,7 @@ if(isset($_POST['submit'])){
                             </div>
 
                             <div class="row">
-                                <label class="col-sm-3 col-form-label">Rack</label>
+                                <label class="col-sm-3 col-form-label">Slot</label>
                                 <div class="col-sm-8">
                                     <?php    
                                                 

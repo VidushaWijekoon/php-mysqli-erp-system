@@ -129,6 +129,7 @@ if (isset($_POST['submit'])) {
         $join_date = mysqli_real_escape_string($connection, $_POST['join_date']);
         $note = mysqli_real_escape_string($connection, $_POST['note']);
         $old_passport = mysqli_real_escape_string($connection, $_POST['old_passport']);
+        $_POST = "";
  
         $query = strtolower("INSERT INTO employees (first_name, last_name, full_name, email, gender, birthday, current_passport, passport_expiring_date, visa_type, visa_expiring_date,contact_number, relationship, current_address, current_country, permanent_address, resident_country, emergency_contact, profile_photo, department, labour_category, join_date, note, discontinuation_date, old_passport, created_by, is_active) 
         VALUES ('$first_name', '$last_name', '$full_name', '$email' , '$gender', '$birthday', '$current_passport', '$passport_expiring_date', '$visa_type', '$visa_expiring_date', '$contact_number' ,'$relationship', '$current_address', '$current_country', '$permanent_address', '$resident_country', '$emergency_contact', '$profile_photo', '$department', '$labour_category', '$join_date', '$note', '$discontinuation_date', '$old_passport', '$created_by', 0)");
@@ -136,9 +137,6 @@ if (isset($_POST['submit'])) {
        $result = mysqli_query($connection, $query);
 
         if ($result) {
-            // query successful... redirecting to users page
-            // header('Location: users.php?user_added=true');
-            echo "Query Add Successfully";
         } else {
             $errors[] = 'Failed to add the new record.';
         }
