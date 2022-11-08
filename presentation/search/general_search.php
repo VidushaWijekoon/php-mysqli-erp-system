@@ -40,7 +40,7 @@ if (!isset($_SESSION['user_id'])) {
                                 if (isset($_GET['search'])) {
                                     $filtervalues = $_GET['search'];
 
-                                $query = "SELECT * FROM warehouse_information_sheet, COUNT(warehouse_information_sheet.inventory_id, lcd_check.inventory_id, bodywork.inventory_id, combine_check.inventory_id, production_check.inventory_id)
+                                $query = "SELECT * FROM warehouse_information_sheet
                                             LEFT JOIN motherboard_check ON warehouse_information_sheet.inventory_id = motherboard_check.inventory_id
                                             LEFT JOIN lcd_check ON warehouse_information_sheet.inventory_id = lcd_check.inventory_id
                                             LEFT JOIN bodywork ON warehouse_information_sheet.inventory_id = bodywork.inventory_id
