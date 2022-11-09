@@ -319,9 +319,18 @@ if (!isset($_SESSION['user_id'])) {
                                                         <div class="form-check form-check-inline text-capitalize">
                                                             <div class="custom-control custom-checkbox">
                                                                 <div class="form-group">
-                                                                    <?php if($bios_check == 0){ ?>
+                                                                    <?php if($bios_check == NULL){ ?>
+                                                                    <div class="custom-control custom-switch">
+                                                                        <input type="checkbox"
+                                                                            class="custom-control-input"
+                                                                            id="customSwitch3" disabled>
+                                                                        <label class="custom-control-label"
+                                                                            for="customSwitch3">
+                                                                        </label>
+                                                                    </div>
+                                                                    <?php }elseif($bios_check == 0){ ?>
                                                                     <div
-                                                                        class="custom-control custom-switch custom-switch-on-danger custom-switch-off-success">
+                                                                        class="custom-control custom-switch custom-switch-on-success custom-switch-off-success">
                                                                         <input type="checkbox"
                                                                             class="custom-control-input"
                                                                             id="customSwitch3" disabled>
@@ -572,48 +581,35 @@ if (!isset($_SESSION['user_id'])) {
                                                                     <?php } ?>
                                                                 </div>
 
-                                                            </div>
-
-                                                        </div>
                                                     </div>
+
                                                 </div>
-                                                <div class="row">
-                                                    <label class="col-sm-3 col-form-label">Line</label>
-                                                    <div class="col-sm-8">
-                                                        <div class="form-check form-check-inline text-capitalize">
-                                                            <div class="custom-control custom-checkbox">
-                                                                <div class="form-group">
-                                                                    <?php if($line_lcd == NULL){ ?>
-                                                                    <div class="custom-control custom-switch">
-                                                                        <input type="checkbox"
-                                                                            class="custom-control-input"
-                                                                            id="customSwitch3" disabled>
-                                                                        <label class="custom-control-label"
-                                                                            for="customSwitch3">
-                                                                        </label>
-                                                                    </div>
-                                                                    <?php }elseif($line_lcd == 0){ ?>
-                                                                    <div
-                                                                        class="custom-control custom-switch custom-switch-on-success custom-switch-off-success">
-                                                                        <input type="checkbox"
-                                                                            class="custom-control-input"
-                                                                            id="customSwitch3" disabled>
-                                                                        <label class="custom-control-label"
-                                                                            for="customSwitch3">
-                                                                        </label>
-                                                                    </div>
-                                                                    <?php }elseif($line_lcd == 1){ ?>
-                                                                    <div
-                                                                        class="custom-control custom-switch custom-switch-on-danger custom-switch-off-danger">
-                                                                        <input type="checkbox"
-                                                                            class="custom-control-input"
-                                                                            id="customSwitch3" disabled>
-                                                                        <label class="custom-control-label"
-                                                                            for="customSwitch3">
-                                                                        </label>
-                                                                    </div>
-                                                                    <?php } ?>
-                                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-3 col-form-label">Line</label>
+                                            <div class="col-sm-8">
+                                                <div class="form-check form-check-inline text-capitalize">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <div class="form-group">
+                                                            <?php if($line_lcd == 0){ ?>
+                                                            <div
+                                                                class="custom-control custom-switch custom-switch-on-danger custom-switch-off-success">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="customSwitch3" disabled>
+                                                                <label class="custom-control-label" for="customSwitch3">
+                                                                </label>
+                                                            </div>
+                                                            <?php }elseif($line_lcd == 1){ ?>
+                                                            <div
+                                                                class="custom-control custom-switch custom-switch-on-danger custom-switch-off-danger">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="customSwitch3" disabled>
+                                                                <label class="custom-control-label" for="customSwitch3">
+                                                                </label>
+                                                            </div>
+                                                            <?php } ?>
+                                                        </div>
 
                                                             </div>
 
@@ -682,9 +678,17 @@ if (!isset($_SESSION['user_id'])) {
                                                     <label class="col-sm-3 col-form-label text-capitalize">A/Top
                                                         Cover</label>
                                                     <div class="col-sm-9 mt-2 d-flex">
-                                                        <?php if($a_scratch == 0){ ?>
+                                                        <?php if($a_scratch == NULL){ ?>
+                                                        <div class="custom-control custom-switch">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="customSwitch3" disabled>
+                                                            <label class="custom-control-label"
+                                                                for="customSwitch3">Scratch
+                                                            </label>
+                                                        </div>
+                                                        <?php }elseif($a_scratch == 0){ ?>
                                                         <div
-                                                            class="custom-control custom-switch custom-switch-on-danger custom-switch-off-success">
+                                                            class="custom-control custom-switch custom-switch-on-success custom-switch-off-success">
                                                             <input type="checkbox" class="custom-control-input"
                                                                 id="customSwitch3" disabled>
                                                             <label class="custom-control-label"
@@ -701,9 +705,18 @@ if (!isset($_SESSION['user_id'])) {
                                                             </label>
                                                         </div>
                                                         <?php } ?>
-                                                        <?php if($a_broken == 0){ ?>
+
+                                                        <?php if($a_broken == NULL){ ?>
+                                                        <div class="custom-control custom-switch">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="customSwitch3" disabled>
+                                                            <label class="custom-control-label"
+                                                                for="customSwitch3">Broken
+                                                            </label>
+                                                        </div>
+                                                        <?php }elseif($a_broken == 0){ ?>
                                                         <div
-                                                            class="custom-control custom-switch custom-switch-on-danger custom-switch-off-success">
+                                                            class="custom-control custom-switch custom-switch-on-success custom-switch-off-success">
                                                             <input type="checkbox" class="custom-control-input"
                                                                 id="customSwitch3" disabled>
                                                             <label class="custom-control-label"
@@ -720,9 +733,17 @@ if (!isset($_SESSION['user_id'])) {
                                                             </label>
                                                         </div>
                                                         <?php } ?>
-                                                        <?php if($a_dent == 0){ ?>
+
+                                                        <?php if($a_dent == NULL){ ?>
+                                                        <div class="custom-control custom-switch">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="customSwitch3" disabled>
+                                                            <label class="custom-control-label" for="customSwitch3">Dent
+                                                            </label>
+                                                        </div>
+                                                        <?php }elseif($a_dent == 0){ ?>
                                                         <div
-                                                            class="custom-control custom-switch custom-switch-on-danger custom-switch-off-success">
+                                                            class="custom-control custom-switch custom-switch-on-success custom-switch-off-success">
                                                             <input type="checkbox" class="custom-control-input"
                                                                 id="customSwitch3" disabled>
                                                             <label class="custom-control-label" for="customSwitch3">Dent
@@ -1063,48 +1084,38 @@ if (!isset($_SESSION['user_id'])) {
                                                 <div class="row">
                                                     <div class="col-sm-6">
 
-                                                        <div class="row">
-                                                            <label class="col-sm-6 col-form-label">Keyboard</label>
-                                                            <div class="col-sm-6">
-                                                                <div
-                                                                    class="form-check form-check-inline text-capitalize">
-                                                                    <div class="custom-control custom-checkbox">
-                                                                        <div class="form-group">
-                                                                            <?php if($keyboard == NULL){ ?>
-                                                                            <div class="custom-control custom-switch">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    id="customSwitch3" disabled>
-                                                                                <label class="custom-control-label"
-                                                                                    for="customSwitch3">
-                                                                                </label>
-                                                                            </div>
-                                                                            <?php }elseif($keyboard == 0){ ?>
-                                                                            <div
-                                                                                class="custom-control custom-switch custom-switch-on-success custom-switch-off-success">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    id="customSwitch3" disabled>
-                                                                                <label class="custom-control-label"
-                                                                                    for="customSwitch3">
-                                                                                </label>
-                                                                            </div>
-                                                                            <?php }elseif($keyboard == 1){ ?>
-                                                                            <div
-                                                                                class="custom-control custom-switch custom-switch-on-danger custom-switch-off-danger">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    id="customSwitch3" disabled>
-                                                                                <label class="custom-control-label"
-                                                                                    for="customSwitch3">
-                                                                                </label>
-                                                                            </div>
-                                                                            <?php } ?>
-                                                                        </div>
+                                                <div class="row">
+                                                    <label class="col-sm-6 col-form-label">Keyboard</label>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-check form-check-inline text-capitalize">
+                                                            <div class="custom-control custom-checkbox">
+                                                                <div class="form-group">
+                                                                    <?php if($keyboard == 0){ ?>
+                                                                    <div
+                                                                        class="custom-control custom-switch custom-switch-on-danger custom-switch-off-success">
+                                                                        <input type="checkbox"
+                                                                            class="custom-control-input"
+                                                                            id="customSwitch3" disabled>
+                                                                        <label class="custom-control-label"
+                                                                            for="customSwitch3">
+                                                                        </label>
                                                                     </div>
+                                                                    <?php }elseif($keyboard == 1){ ?>
+                                                                    <div
+                                                                        class="custom-control custom-switch custom-switch-on-danger custom-switch-off-danger">
+                                                                        <input type="checkbox"
+                                                                            class="custom-control-input"
+                                                                            id="customSwitch3" disabled>
+                                                                        <label class="custom-control-label"
+                                                                            for="customSwitch3">
+                                                                        </label>
+                                                                    </div>
+                                                                    <?php } ?>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                </div>
 
                                                         <div class="row">
                                                             <label class="col-sm-6 col-form-label">Bazel</label>
@@ -2061,6 +2072,33 @@ if (!isset($_SESSION['user_id'])) {
                                                     <?php echo $wh_brand ?>
                                                 </div>
                                             </div>
+                            </fieldset>
+                        </div>
+
+                        <?php } ?>
+
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="card">
+                                <div class="card-header bg-secondary">
+                                    <h6>Inventory Laptop Checklist</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-6 text-uppercase">
+
+                                            <div class="row">
+                                                <label class="col-sm-4 col-form-label">Device</label>
+                                                <div class="col-sm-8 mt-2 col-values">
+                                                    <?php echo $wh_device ?>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <label class="col-sm-4 col-form-label">Brand</label>
+                                                <div class="col-sm-8 mt-2 col-values">
+                                                    <?php echo $wh_brand ?>
+                                                </div>
+                                            </div>
 
                                             <div class="row">
                                                 <label class="col-sm-4 col-form-label">Processor</label>
@@ -2068,50 +2106,5 @@ if (!isset($_SESSION['user_id'])) {
                                                     <?php echo $wh_processor ?>
                                                 </div>
                                             </div>
-
-                                            <div class="row">
-                                                <label class="col-sm-4 col-form-label">Core</label>
-                                                <div class="col-sm-8 mt-2 col-values">
-                                                    <?php echo $wh_core ?>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                        <div class="col-sm-6 text-uppercase">
-
-                                            <div class="row">
-                                                <label class="col-sm-4 col-form-label">Generation</label>
-                                                <div class="col-sm-8 mt-2 col-values">
-                                                    <?php echo $wh_generation ?>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <label class="col-sm-4 col-form-label">Model</label>
-                                                <div class="col-sm-8 mt-2 col-values">
-                                                    <?php echo $wh_model ?>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <label class="col-sm-4 col-form-label">Location</label>
-                                                <div class="col-sm-8 mt-2 col-values">
-                                                    <?php echo $wh_location."-".$wh_generation."-".$wh_model ?>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <?php include_once('../includes/footer.php');  ?>
