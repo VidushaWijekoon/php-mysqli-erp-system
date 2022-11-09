@@ -37,7 +37,7 @@ if (!isset($_SESSION['user_id'])) {
                                 if (isset($_GET['search'])) {
                                     $filtervalues = $_GET['search'];
 
-                                $query = "SELECT *, (warehouse_information_sheet.processor) AS w_processor, 
+                                $query = "SELECT *, (warehouse_information_sheet.processor) AS w_processor,
                                                     (warehouse_information_sheet.generation) AS w_gen,
                                                     (production_check.processor) AS pro_pro,
                                                     (production_check.generation) AS pro_gen,
@@ -46,24 +46,24 @@ if (!isset($_SESSION['user_id'])) {
                                                     (bodywork_dep.inventory_id) AS bodywork_dep_inventory_id,
                                                     (sanding_dep.inventory_id) AS sanding_dep_inventory_id,
                                                     (painting_dep.inventory_id) AS painting_dep_inventory_id,
-                                                    (qc_id.inventory_id) AS qc_idpacking_dep,
-                                                    (packing_dep.inventory_id) AS packing_deppacking_dep                                                  
-                                    FROM warehouse_information_sheet 
-                                    LEFT JOIN motherboard_check ON warehouse_information_sheet.inventory_id = motherboard_check.inventory_id
-                                    LEFT JOIN lcd_check ON warehouse_information_sheet.inventory_id = lcd_check.inventory_id
-                                    LEFT JOIN bodywork ON warehouse_information_sheet.inventory_id = bodywork.inventory_id
-                                    LEFT JOIN combine_check ON warehouse_information_sheet.inventory_id = combine_check.inventory_id
-                                    LEFT JOIN production_check ON warehouse_information_sheet.inventory_id = production_check.inventory_id
-                                    LEFT JOIN prod_info ON warehouse_information_sheet.inventory_id = prod_info.inventory_id
-                                    LEFT JOIN motherbaord_dep ON warehouse_information_sheet.inventory_id = motherbaord_dep.inventory_id
-                                    LEFT JOIN lcd_dep ON warehouse_information_sheet.inventory_id = lcd_dep.inventory_id
-                                    LEFT JOIN bodywork_dep ON warehouse_information_sheet.inventory_id = bodywork_dep.inventory_id
-                                    LEFT JOIN sanding_dep ON warehouse_information_sheet.inventory_id = sanding_dep.inventory_id
-                                    LEFT JOIN painting_dep ON warehouse_information_sheet.inventory_id = painting_dep.inventory_id
-                                    LEFT JOIN qc_id ON warehouse_information_sheet.inventory_id = qc_id.inventory_id
-                                    LEFT JOIN packing_dep ON warehouse_information_sheet.inventory_id = packing_dep.inventory_id
-                                    WHERE CONCAT(warehouse_information_sheet.inventory_id) LIKE '%$filtervalues%'  
-                                    LIMIT 1";
+                                                    (qc_dep.inventory_id) AS qc_dep_inventory_id,
+                                                    (packing_dep.inventory_id) AS packing_dep_inventory_id
+                                        FROM warehouse_information_sheet
+                                        LEFT JOIN motherboard_check ON warehouse_information_sheet.inventory_id = motherboard_check.inventory_id
+                                        LEFT JOIN lcd_check ON warehouse_information_sheet.inventory_id = lcd_check.inventory_id
+                                        LEFT JOIN bodywork ON warehouse_information_sheet.inventory_id = bodywork.inventory_id
+                                        LEFT JOIN combine_check ON warehouse_information_sheet.inventory_id = combine_check.inventory_id
+                                        LEFT JOIN production_check ON warehouse_information_sheet.inventory_id = production_check.inventory_id
+                                        LEFT JOIN prod_info ON warehouse_information_sheet.inventory_id = prod_info.inventory_id
+                                        LEFT JOIN motherbaord_dep ON warehouse_information_sheet.inventory_id = motherbaord_dep.inventory_id
+                                        LEFT JOIN lcd_dep ON warehouse_information_sheet.inventory_id = lcd_dep.inventory_id
+                                        LEFT JOIN bodywork_dep ON warehouse_information_sheet.inventory_id = bodywork_dep.inventory_id
+                                        LEFT JOIN sanding_dep ON warehouse_information_sheet.inventory_id = sanding_dep.inventory_id
+                                        LEFT JOIN painting_dep ON warehouse_information_sheet.inventory_id = painting_dep.inventory_id
+                                        LEFT JOIN qc_dep ON warehouse_information_sheet.inventory_id = qc_dep.inventory_id
+                                        LEFT JOIN packing_dep ON warehouse_information_sheet.inventory_id = packing_dep.inventory_id
+                                        WHERE CONCAT(warehouse_information_sheet.inventory_id) LIKE '%$filtervalues%'
+                                        LIMIT 1";
                                 $result = mysqli_query($connection, $query);                                
                               
                                 foreach($result as $rows){      
@@ -146,9 +146,9 @@ if (!isset($_SESSION['user_id'])) {
                                     // Painting Department
                                     $painting_dep_inventory_id = $rows['painting_dep_inventory_id'];
                                     // QC Department
-                                    $qc_idpacking_dep = $rows['qc_idpacking_dep'];
+                                    $qc_dep_inventory_id = $rows['qc_dep_inventory_id'];
                                     // Packing Department
-                                    $packing_deppacking_dep = $rows['packing_deppacking_dep'];
+                                    $packing_dep_inventory_id = $rows['packing_dep_inventory_id'];
                                   
                             ?>
 
@@ -240,7 +240,7 @@ if (!isset($_SESSION['user_id'])) {
                                                 </li>
 
                                                 <li class="list-inline-item items-list">
-                                                    <?php if($packing_deppacking_dep == NULL){ ?>
+                                                    <?php if($painting_dep_inventory_id == NULL){ ?>
                                                     <div class="px-4">
                                                         <div class="event-date badge bg-secondary">Painting</div>
                                                         <a class="btn  bg-secondary rounded-circle">
@@ -251,7 +251,7 @@ if (!isset($_SESSION['user_id'])) {
                                                 </li>
 
                                                 <li class="list-inline-item items-list">
-                                                    <?php if($qc_idpacking_dep == NULL){ ?>
+                                                    <?php if($qc_dep_inventory_id == NULL){ ?>
                                                     <div class="px-4">
                                                         <div class="event-date badge bg-secondary">QC</div>
                                                         <a class="btn  bg-secondary rounded-circle">
@@ -262,7 +262,7 @@ if (!isset($_SESSION['user_id'])) {
                                                 </li>
 
                                                 <li class="list-inline-item items-list">
-                                                    <?php if($packing_deppacking_dep == NULL){ ?>
+                                                    <?php if($packing_dep_inventory_id == NULL){ ?>
                                                     <div class="px-4">
                                                         <div class="event-date badge bg-secondary">Packing</div>
                                                         <a class="btn  bg-secondary rounded-circle">
@@ -273,7 +273,7 @@ if (!isset($_SESSION['user_id'])) {
                                                 </li>
 
                                                 <li class="list-inline-item items-list">
-                                                    <?php if($packing_deppacking_dep == NULL){ ?>
+                                                    <?php if($packing_dep_inventory_id == NULL){ ?>
                                                     <div class="px-4">
                                                         <div class="event-date badge bg-secondary">Destroyed</div>
                                                         <a class="btn  bg-secondary rounded-circle">
