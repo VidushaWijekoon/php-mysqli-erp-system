@@ -10,7 +10,7 @@ include_once('../includes/header.php');
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 
-    clearstatcache();}
+clearstatcache();}
 $device ="";
 $brand="";
 $generation ="";
@@ -20,9 +20,8 @@ $location="";
 $capacity ="";
 $rack_number ="";
 $slot_name =""; 
-if(isset($_POST['submit'])){
 
-    
+if(isset($_POST['submit'])){    
 
         $device = mysqli_real_escape_string($connection, $_POST['device']);
         $brand = mysqli_real_escape_string($connection, $_POST['brand']);
@@ -37,8 +36,7 @@ if(isset($_POST['submit'])){
         $_SESSION['device'] = $device;
         $_SESSION['slot_name'] = $slot_name;
         $_SESSION['modal'] = $modal;
-        $_SESSION['rack_number'] = $rack_number;
-        
+        $_SESSION['rack_number'] = $rack_number;        
         
         $query = "INSERT INTO `part_stock`(
             `part_name`,
@@ -49,7 +47,6 @@ if(isset($_POST['submit'])){
             `qty`,
             rack_number,
             slot_name
-
         )
         VALUES(
             '$device',
@@ -80,7 +77,7 @@ if(isset($_POST['submit'])){
     <div class="row">
         <div class="col-lg-8 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card mt-3 w-100">
-                <div class="card-header">
+                <div class="card-body">
                     <?php if (!empty($errors)) { display_errors($errors); } ?>
                     <form action="" method="POST">
                         <fieldset>
@@ -89,20 +86,18 @@ if(isset($_POST['submit'])){
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Device Type</label>
                                 <div class="col-sm-8">
-                                    <select name="device" style="border-radius: 5px;" required>
+                                    <select class="w-100" name="device" style="border-radius: 5px;" required>
                                         <option selected>--Select Item Type--</option>
                                         <?php
                                             $query = "SELECT part_name FROM part_list ORDER BY part_name ASC";
                                             $all_devices = mysqli_query($connection, $query);
 
-                                            while ($devices = mysqli_fetch_array($all_devices, MYSQLI_ASSOC)) :;
+                                                while ($devices = mysqli_fetch_array($all_devices, MYSQLI_ASSOC)) :;
                                             ?>
                                         <option value="<?php echo $devices["part_name"]; ?>">
                                             <?php echo strtoupper($devices["part_name"]); ?>
                                         </option>
-                                        <?php
-                                            endwhile;
-                                            ?>
+                                        <?php endwhile; ?>
                                     </select>
                                 </div>
                             </div>
@@ -110,20 +105,18 @@ if(isset($_POST['submit'])){
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Brand</label>
                                 <div class="col-sm-8">
-                                    <select name="brand" style="border-radius: 5px;" required>
+                                    <select class="w-100" name="brand" style="border-radius: 5px;" required>
                                         <option selected>--Select Brand--</option>
                                         <?php
                                             $query = "SELECT * FROM brand ORDER BY brand ASC";
                                             $all_devices = mysqli_query($connection, $query);
 
-                                            while ($brands = mysqli_fetch_array($all_devices, MYSQLI_ASSOC)) :;
+                                                while ($brands = mysqli_fetch_array($all_devices, MYSQLI_ASSOC)) :;
                                             ?>
                                         <option value="<?php echo $brands["brand"]; ?>">
                                             <?php echo strtoupper($brands["brand"]); ?>
                                         </option>
-                                        <?php
-                                            endwhile;
-                                            ?>
+                                        <?php endwhile; ?>
                                     </select>
                                 </div>
                             </div>
@@ -159,22 +152,17 @@ if(isset($_POST['submit'])){
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Rack</label>
                                 <div class="col-sm-8">
-                                    <?php    
-                                            
-                                            ?>
-                                    <select name="rack_number" style="border-radius: 5px;" required>
+                                    <select class="w-100" name="rack_number" style="border-radius: 5px;" required>
                                         <option selected>--Select Rack--</option>
                                         <?php
                                             $query = "SELECT  rack_number FROM rack WHERE status = 0 ";
                                             $query_rack = mysqli_query($connection, $query);
-                                            while ($rack_id = mysqli_fetch_array($query_rack, MYSQLI_ASSOC)) :;
+                                                while ($rack_id = mysqli_fetch_array($query_rack, MYSQLI_ASSOC)) :;
                                             ?>
                                         <option value="<?php echo $rack_id["rack_number"]; ?>">
                                             <?php echo strtoupper($rack_id["rack_number"]); ?>
                                         </option>
-                                        <?php
-                                            endwhile;
-                                            ?>
+                                        <?php endwhile; ?>
                                     </select>
                                 </div>
                             </div>
@@ -182,22 +170,17 @@ if(isset($_POST['submit'])){
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Slot</label>
                                 <div class="col-sm-8">
-                                    <?php    
-                                                
-                                            ?>
-                                    <select name="slot_name" style="border-radius: 5px;" required>
+                                    <select class="w-100" name="slot_name" style="border-radius: 5px;" required>
                                         <option selected>--Select slot--</option>
                                         <?php
                                             $querys = "SELECT  slot_name FROM rack_slots WHERE status = 0 ";
                                             $query_slot = mysqli_query($connection, $querys);
-                                            while ($slot_id = mysqli_fetch_array($query_slot, MYSQLI_ASSOC)) :;
+                                                while ($slot_id = mysqli_fetch_array($query_slot, MYSQLI_ASSOC)) :;
                                             ?>
                                         <option value="<?php echo $slot_id["slot_name"]; ?>">
                                             <?php echo strtoupper($slot_id["slot_name"]); ?>
                                         </option>
-                                        <?php
-                                            endwhile;
-                                            ?>
+                                        <?php endwhile; ?>
                                     </select>
                                 </div>
                             </div>
@@ -209,42 +192,11 @@ if(isset($_POST['submit'])){
 
                         </fieldset>
                     </form>
-
                 </div>
                 <!--/col-->
             </div>
         </div>
     </div>
 </div>
-<style>
-fieldset,
-legend {
-    all: revert;
-    font-size: 12px;
-}
 
-textarea {
-    text-transform: uppercase;
-}
-
-select,
-[type="number"],
-[type="text"] {
-    width: 100%;
-    height: 22px;
-    margin: inherit;
-    margin-top: 4px;
-    font-size: 10px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-    font-size: 12px;
-}
-
-.custom-select {
-    font-size: 12px;
-}
-
-#exampleFormControlTextarea1 {
-    font-size: 12px;
-}
+<?php include_once('../includes/footer.php'); ?>

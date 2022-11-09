@@ -13,7 +13,6 @@ if (!isset($_SESSION['user_id'])) {
 
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
-
     
 $item_brand=null;
 $item_model =null;
@@ -146,10 +145,7 @@ $rp_id =$_GET['id'];
                                 <td><?php echo $item_model ?></td>
                                 <td><?php echo $item_generation ?></td>
                             </tr>
-                            <?php 
-                                    }
-                                
-                            ?>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -181,105 +177,105 @@ $rp_id =$_GET['id'];
                                     </thead>
                                     <tbody>
                                         <?php
-                            foreach($query_run as $a){
-                                $item_brand = $a['brand'];
-                                $item_model = $a['model'];
-                                $item_generation = $a['generation'];
-                                $sales_order_id = $a['sales_order_id'];
-                                $inventory_id = $a['inventory_id'];
-                                $emp_id =$a['emp_id'];
-                                $location =$a['location'];
-                                $keyboard =$a['keyboard'];
-                                $speakers =$a['speakers'];
-                                $camera =$a['camera'];
-                                $bazel =$a['bazel'];
-                                $lan_cover =$a['lan_cover'];
-                                $mousepad =$a['mousepad'];
-                                $mouse_pad_button =$a['mouse_pad_button'];
-                                $camera_cable =$a['camera_cable'];
-                                $back_cover =$a['back_cover'];
-                                $wifi_card =$a['wifi_card'];
-                                $lcd_cable =$a['lcd_cable'];
-                                $battery =$a['battery'];
-                                $battery_cable =$a['battery_cable'];
-                                $dvd_rom =$a['dvd_rom'];
-                                $dvd_caddy =$a['dvd_caddy'];
-                                $hdd_caddy =$a['hdd_caddy'];
-                                $hdd_cable_connector =$a['hdd_cable_connector'];
-                                $c_panel_palm_rest =$a['c_panel_palm_rest'];
-                                $mb_base =$a['mb_base'];
-                                $hings_cover =$a['hings_cover'];
-                                $rp_id = $a['rp_id'];
-                                ?>
-                                        <?php 
-                                $count =0;
-                                if($keyboard==1){
-                                    $count++;
-                                    ?> <tr>
+                                            foreach($query_run as $a){
+                                                $item_brand = $a['brand'];
+                                                $item_model = $a['model'];
+                                                $item_generation = $a['generation'];
+                                                $sales_order_id = $a['sales_order_id'];
+                                                $inventory_id = $a['inventory_id'];
+                                                $emp_id =$a['emp_id'];
+                                                $location =$a['location'];
+                                                $keyboard =$a['keyboard'];
+                                                $speakers =$a['speakers'];
+                                                $camera =$a['camera'];
+                                                $bazel =$a['bazel'];
+                                                $lan_cover =$a['lan_cover'];
+                                                $mousepad =$a['mousepad'];
+                                                $mouse_pad_button =$a['mouse_pad_button'];
+                                                $camera_cable =$a['camera_cable'];
+                                                $back_cover =$a['back_cover'];
+                                                $wifi_card =$a['wifi_card'];
+                                                $lcd_cable =$a['lcd_cable'];
+                                                $battery =$a['battery'];
+                                                $battery_cable =$a['battery_cable'];
+                                                $dvd_rom =$a['dvd_rom'];
+                                                $dvd_caddy =$a['dvd_caddy'];
+                                                $hdd_caddy =$a['hdd_caddy'];
+                                                $hdd_cable_connector =$a['hdd_cable_connector'];
+                                                $c_panel_palm_rest =$a['c_panel_palm_rest'];
+                                                $mb_base =$a['mb_base'];
+                                                $hings_cover =$a['hings_cover'];
+                                                $rp_id = $a['rp_id'];  
+                                         
+                                            $count =0;
+                                            if($keyboard==1){
+                                                $count++;
+                                        ?>
+                                        <tr>
                                             <td><?php echo $count; ?></td>
                                             <td>Keyboard</td>
                                             <td><input type="number"></td>
                                             <td><input type="number"></td>
                                         </tr>
-                                        <?php
-                                }
-                                // if($keys==1){
-                                //     $count++;
-                                //     echo $count .": Keys </br>";
-                                // }
-                                if($speakers==1){
-                                    $count++;
-                                    ?>
+                                        <?php  } 
+                                   
+                                            // if($keys==1){
+                                            //     $count++;
+                                            //     echo $count .": Keys </br>";
+                                            // }
+                                        if($speakers==1){
+                                            $count++;
+                                            ?>
                                         <tr>
                                             <td><?php echo $count; ?></td>
                                             <td>Speakers</td>
                                             <td><input type="number"></td>
                                             <td><input type="number"></td>
                                         </tr>
-                                        <?php
-                                }if($camera==1){
-                                    $count++;
-                                    ?>
+                                        <?php }
+                                            if($camera==1){
+                                                $count++;
+                                                ?>
                                         <tr>
                                             <td><?php echo $count; ?></td>
                                             <td>Camera</td>
                                             <td><input type="number"></td>
                                             <td><input type="number"></td>
                                         </tr>
-                                        <?php
-                                }if($bazel==1){
-                                    $count++;
-                                    ?>
+                                        <?php }
+                                        if($bazel==1){
+                                            $count++;
+                                            ?>
                                         <tr>
                                             <td><?php echo $count; ?></td>
                                             <td>Bazel</td>
                                             <td><input type="number"></td>
                                             <td><input type="number"></td>
                                         </tr>
-                                        <?php
-                                }if($mousepad==1){
-                                    $count++;
-                                    ?>
+                                        <?php }
+                                            if($mousepad==1){
+                                                $count++;
+                                                ?>
                                         <tr>
                                             <td><?php echo $count; ?></td>
                                             <td>Pouse Pad</td>
                                             <td><input type="number"></td>
                                             <td><input type="number"></td>
                                         </tr>
-                                        <?php
-                                }if($mouse_pad_button==1){
-                                    $count++;
-                                    ?>
+                                        <?php }
+                                            if($mouse_pad_button==1){
+                                                $count++;
+                                                ?>
                                         <tr>
                                             <td><?php echo $count; ?></td>
                                             <td>Mouse Pad Button</td>
                                             <td><input type="number"></td>
                                             <td><input type="number"></td>
                                         </tr>
-                                        <?php
-                                }if($camera_cable==1){
-                                    $count++;
-                                    ?>
+                                        <?php }
+                                            if($camera_cable==1){
+                                                $count++;
+                                                ?>
                                         <tr>
                                             <td><?php echo $count; ?></td>
                                             <td>Camera Cable</td>
@@ -287,9 +283,9 @@ $rp_id =$_GET['id'];
                                             <td><input type="number"></td>
                                         </tr>
                                         <?php
-                                }if($back_cover==1){
-                                    $count++;
-                                    ?>
+                                            }if($back_cover==1){
+                                                $count++;
+                                                ?>
                                         <tr>
                                             <td><?php echo $count; ?></td>
                                             <td>Back Cover</td>
@@ -297,9 +293,9 @@ $rp_id =$_GET['id'];
                                             <td><input type="number"></td>
                                         </tr>
                                         <?php
-                                }if($wifi_card==1){
-                                    $count++;
-                                    ?>
+                                            }if($wifi_card==1){
+                                                $count++;
+                                                ?>
                                         <tr>
                                             <td><?php echo $count; ?></td>
                                             <td>WIFI Card</td>
@@ -307,9 +303,9 @@ $rp_id =$_GET['id'];
                                             <td><input type="number"></td>
                                         </tr>
                                         <?php
-                                }if($lcd_cable==1){
-                                    $count++;
-                                    ?>
+                                            }if($lcd_cable==1){
+                                                $count++;
+                                                ?>
                                         <tr>
                                             <td><?php echo $count; ?></td>
                                             <td>LCD Cable</td>
@@ -317,9 +313,9 @@ $rp_id =$_GET['id'];
                                             <td><input type="number"></td>
                                         </tr>
                                         <?php
-                                }if($battery==1){
-                                    $count++;
-                                    ?>
+                                            }if($battery==1){
+                                                $count++;
+                                                ?>
                                         <tr>
                                             <td><?php echo $count; ?></td>
                                             <td>Battery</td>
@@ -327,9 +323,9 @@ $rp_id =$_GET['id'];
                                             <td><input type="number"></td>
                                         </tr>
                                         <?php
-                                }if($battery_cable==1){
-                                    $count++;
-                                    ?>
+                                            }if($battery_cable==1){
+                                                $count++;
+                                                ?>
                                         <tr>
                                             <td><?php echo $count; ?></td>
                                             <td>Battery Cable</td>
@@ -337,9 +333,9 @@ $rp_id =$_GET['id'];
                                             <td><input type="number"></td>
                                         </tr>
                                         <?php
-                                }if($dvd_rom==1){
-                                    $count++;
-                                    ?>
+                                            }if($dvd_rom==1){
+                                                $count++;
+                                                ?>
                                         <tr>
                                             <td><?php echo $count; ?></td>
                                             <td>DVD ROM</td>
@@ -347,9 +343,9 @@ $rp_id =$_GET['id'];
                                             <td><input type="number"></td>
                                         </tr>
                                         <?php
-                                }if($dvd_caddy==1){
-                                    $count++;
-                                    ?>
+                                            }if($dvd_caddy==1){
+                                                $count++;
+                                                ?>
                                         <tr>
                                             <td><?php echo $count; ?></td>
                                             <td>DVD Caddy</td>
@@ -357,9 +353,9 @@ $rp_id =$_GET['id'];
                                             <td><input type="number"></td>
                                         </tr>
                                         <?php
-                                }if($hdd_caddy==1){
-                                    $count++;
-                                    ?>
+                                            }if($hdd_caddy==1){
+                                                $count++;
+                                                ?>
                                         <tr>
                                             <td><?php echo $count; ?></td>
                                             <td>HDD Caddy</td>
@@ -367,9 +363,9 @@ $rp_id =$_GET['id'];
                                             <td><input type="number"></td>
                                         </tr>
                                         <?php
-                                }if($hdd_cable_connector==1){
-                                    $count++;
-                                    ?>
+                                            }if($hdd_cable_connector==1){
+                                                $count++;
+                                                ?>
                                         <tr>
                                             <td><?php echo $count; ?></td>
                                             <td>HDD Cable Connetor</td>
@@ -377,9 +373,9 @@ $rp_id =$_GET['id'];
                                             <td><input type="number"></td>
                                         </tr>
                                         <?php
-                                }if($c_panel_palm_rest==1){
-                                    $count++;
-                                    ?>
+                                            }if($c_panel_palm_rest==1){
+                                                $count++;
+                                                ?>
                                         <tr>
                                             <td><?php echo $count; ?></td>
                                             <td>C Panel / Palm Rest</td>
@@ -387,9 +383,9 @@ $rp_id =$_GET['id'];
                                             <td><input type="number"></td>
                                         </tr>
                                         <?php
-                                }if($mb_base==1){
-                                    $count++;
-                                    ?>
+                                            }if($mb_base==1){
+                                                $count++;
+                                                ?>
                                         <tr>
                                             <td><?php echo $count; ?></td>
                                             <td>D / MB Base</td>
@@ -397,9 +393,9 @@ $rp_id =$_GET['id'];
                                             <td><input type="number"></td>
                                         </tr>
                                         <?php
-                                }if($hings_cover==1){
-                                    $count++;
-                                    ?>
+                                            }if($hings_cover==1){
+                                                $count++;
+                                                ?>
                                         <tr>
                                             <td><?php echo $count; ?></td>
                                             <td>Hings Cover</td>
@@ -407,23 +403,16 @@ $rp_id =$_GET['id'];
                                             <td><input type="number"></td>
                                         </tr>
                                         <?php
-                                }if($lan_cover==1){
-                                    $count++;
-                                    ?>
+                                            }if($lan_cover==1){
+                                                $count++;
+                                                ?>
                                         <tr>
                                             <td><?php echo $count; ?></td>
                                             <td>LAN Cover</td>
                                             <td><input type="number"></td>
                                             <td><input type="number"></td>
                                         </tr>
-                                        <?php
-                                }?>
-
-                                        <?php 
-                                    }
-                                
-                            ?>
-
+                                        <?php } } ?>
 
                                     </tbody>
                                 </table>
@@ -440,37 +429,4 @@ $rp_id =$_GET['id'];
     </div>
 </div>
 
-<style>
-fieldset,
-legend {
-    all: revert;
-    font-size: 12px;
-}
-
-textarea {
-    text-transform: uppercase;
-}
-
-select,
-[type="number"] {
-    width: 100%;
-    height: 22px;
-    margin: inherit;
-    margin-top: 4px;
-    font-size: 10px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-    font-size: 12px;
-}
-
-.custom-select {
-    font-size: 12px;
-}
-
-#exampleFormControlTextarea1 {
-    font-size: 12px;
-}
-
-<?php include_once('../includes/footer.php');
-?>
+<?php include_once('../includes/footer.php'); ?>
