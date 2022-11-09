@@ -87,7 +87,7 @@ $day = $_GET['day'];
                         echo "Model : ".$d['model']." /";
                         echo " Count :".$d['request'];
                         }
-                ?>
+                    ?>
                                     </span>
                                     <?php  ?>
             </div>
@@ -105,34 +105,4 @@ $day = $_GET['day'];
 <!-- /.row -->
 <?php } ?>
 
-<style>
-fieldset,
-legend {
-    all: revert;
-    font-size: 12px;
-}
-
-textarea {
-    text-transform: uppercase;
-}
-
-select,
-[type="number"] {
-    width: 100%;
-    height: 22px;
-    margin: inherit;
-    margin-top: 4px;
-    font-size: 10px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-    font-size: 12px;
-}
-
-.custom-select {
-    font-size: 12px;
-}
-
-#exampleFormControlTextarea1 {
-    font-size: 12px;
-}
+<?php include_once('../includes/footer.php'); ?>

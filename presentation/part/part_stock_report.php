@@ -292,37 +292,6 @@ if($rp_id != null){
     </div>
 </div>
 
-
-<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
-<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-<script>
-$(document).ready(function() {
-    $('#example1').dataTable();
-});
-</script>
-
-<style>
-#example1_length {
-    color: #ced4da;
-}
-
-
-[type='search'] {
-    width: 50%;
-    height: 22px;
-    margin: inherit;
-    margin-top: 4px;
-    font-size: 10px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-    font-size: 12px;
-}
-</style>
-
-
 <?php include_once('../includes/footer.php'); }else{
         die(access_denied());
 } ?>

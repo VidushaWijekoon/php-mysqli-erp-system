@@ -1325,19 +1325,4 @@ $item_brand=0;
 // }
 ?>
 
-<?php include_once('../includes/footer.php'); 
- ?>
-
-<style>
-[type='text'] {
-    width: 40px;
-    height: 22px;
-    margin: auto;
-    margin-top: 4px;
-    font-size: 10px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-    font-size: 12px;
-}
-</style>
+<?php include_once('../includes/footer.php'); ?>
