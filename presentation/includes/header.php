@@ -366,6 +366,14 @@ body {
                                 </li>
 
                                 <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="fa-sharp fa-solid fa-chalkboard-user nav-icon"
+                                            style="font-size: 12px;"></i>
+                                        <p> Motherboard Member </p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
                                     <a href="../motherboard/motherboard_technician.php" class="nav-link">
                                         <i class="fa-sharp fa-solid fa-chalkboard-user nav-icon"
                                             style="font-size: 12px;"></i>
