@@ -35,6 +35,7 @@ if (isset($_POST['submit'])) {
     $department = mysqli_real_escape_string($connection, $_POST['department']);
     $password = mysqli_real_escape_string($connection, $_POST['password']);
     $role = mysqli_real_escape_string($connection, $_POST['role']);
+    $_POST['submit'] = " ";
 
     // checking required fields
     $req_fields = array('first_name', 'last_name', 'epf', 'username', 'department', 'password', 'role');
