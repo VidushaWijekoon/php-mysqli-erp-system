@@ -139,22 +139,11 @@ body {
                             </a>
 
                             <ul class="nav nav-treeview">
-
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="../users/users_dashboard.php" class="nav-link">
                                         <i class="fa fa-user-circle nav-icon" style="font-size: 12px;"></i>
-                                        <p> Admin <i class="right fas fa-angle-left"></i> </p>
+                                        <p> Admin </p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="../users/users_dashboard.php" class="nav-link">
-                                                <i class="fa-solid fa-user-secret nav-icon"
-                                                    style="font-size: 12px;"></i>
-                                                <p>Admin Dashboard</p>
-                                            </a>
-                                        </li>
-
-                                    </ul>
                                 </li>
                             </ul>
                         </li>
@@ -169,38 +158,23 @@ body {
                                 <i class="nav-icon fas fa-users"></i>
                                 <p> HR <i class="right fas fa-angle-left"></i> </p>
                             </a>
+
                             <ul class="nav nav-treeview">
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
-                                        <p> HR <i class="right fas fa-angle-left"></i>
+                                    <a href="../employee/employee_dashboard.php" class="nav-link">
+                                        <i class="fa-solid fa-person nav-icon" style="font-size: 12px;"></i>
+                                        <p> HR </i>
                                         </p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="../employee/employee_dashboard.php" class="nav-link">
-                                                <i class="far fa-dot-circle nav-icon" style="font-size: 12px;"></i>
-                                                <p>Employee Dashboard</p>
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li>
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
-                                        <p> Payroll <i class="right fas fa-angle-left"></i>
+                                        <i class="fa-solid fa-comment-dollar nav-icon" style="font-size: 12px;"></i>
+                                        <p> Payroll</i>
                                         </p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                <i class="far fa-dot-circle nav-icon" style="font-size: 12px;"></i>
-                                                <p>Payroll Dashboard</p>
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li>
 
                             </ul>
@@ -219,18 +193,18 @@ body {
                             <ul class="nav nav-treeview">
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="../sales/sales_dashboard.php" class="nav-link">
                                         <i class="fa-solid fa-landmark nav-icon" style="font-size: 12px;"></i>
-                                        <p> Sales <i class="right fas fa-angle-left"></i> </p>
+                                        <p> Sales </p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="../sales/sales_dashboard.php" class="nav-link">
-                                                <i class="far fa-dot-circle nav-icon" style="font-size: 12px;"></i>
-                                                <p>Sales Dashboard</p>
-                                            </a>
-                                        </li>
-                                    </ul>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../e-commerce/e-commerce_dashboard.php" class="nav-link">
+                                        <i class="fa-solid fa-earth-americas fa-user nav-icon"
+                                            style="font-size: 12px;"></i>
+                                        <p>E-Commerce </p>
+                                    </a>
                                 </li>
 
                             </ul>
@@ -246,24 +220,16 @@ body {
                                 <i class="nav-icon fas fa-coins"></i>
                                 <p> Finance <i class="right fas fa-angle-left"></i> </p>
                             </a>
+
                             <ul class="nav nav-treeview">
-
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="../accounts/accounts_dashboard.php" class="nav-link">
                                         <i class="fa-solid fa-coins nav-icon" style="font-size: 12px;"></i>
-                                        <p> Accounts <i class="right fas fa-angle-left"></i> </p>
+                                        <p> Accounts </p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="../accounts/accounts_dashboard.php" class="nav-link">
-                                                <i class="far fa-dot-circle nav-icon" style="font-size: 12px;"></i>
-                                                <p>Accounts Dashboard</p>
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li>
-
                             </ul>
+
                         </li>
 
                         <?php } ?>
@@ -280,7 +246,6 @@ body {
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-
                                         <i class="fa-solid fa-warehouse nav-icon" style="font-size: 12px;"></i>
                                         <p> Inventory <i class="right fas fa-angle-left"></i> </p>
                                     </a>
@@ -288,17 +253,15 @@ body {
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
                                             <a href="../inventory/warehouse_dashboard.php" class="nav-link">
-                                                <i class="fa-solid fa-person-cane nav-icon"
+                                                <i class="fa-solid fa-people-line nav-icon"
                                                     style="font-size: 12px;"></i>
-
                                                 <p>Team Leader</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="../inventory/warehouse_member_sales_order.php" class="nav-link">
-                                                <i class="fa-sharp fa-solid fa-user nav-icon"
+                                                <i class="fa-sharp fa-solid fa-chalkboard-user nav-icon"
                                                     style="font-size: 12px;"></i>
-                                                <!-- <i class="far fa-dot-circle nav-icon" style="font-size: 12px;"></i> -->
                                                 <p>Team Member </p>
                                             </a>
                                         </li>
@@ -309,19 +272,12 @@ body {
                                 <?php if(($role_id == 1 && $department == 11) || ($role_id == 4 || $department == 2)) { ?>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa-solid fa-book nav-icon" style="font-size: 12px;"></i>
-                                        <p> Stock Report <i class="right fas fa-angle-left"></i> </p>
+                                    <a href="../inventory/warehouse_stock_report.php" class="nav-link">
+                                        <i class="fa-solid fa-cubes-stacked nav-icon" style="font-size: 12px;"></i>
+                                        <p> Stock Report </p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="../inventory/warehouse_stock_report.php" class="nav-link">
-                                                <i class="fa-solid fa-table-list nav-icon" style="font-size: 12px;"></i>
-                                                <p>Stock Report</p>
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li>
+
                                 <?php } ?>
 
                                 <?php if(($role_id == 1 && $department == 11) || ($role_id == 4 || $department == 22) || ($role_id == 11 && $department == 22))  { ?>
@@ -334,20 +290,20 @@ body {
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
                                             <a href="../part/part_warehouse_leader_dashboard.php" class="nav-link">
-                                                <i class="fa-solid fa-person-cane nav-icon"
+                                                <i class="fa-solid fa-people-line nav-icon"
                                                     style="font-size: 12px;"></i>
                                                 <p>Leader Dashboard</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="../part/part_create_form.php" class="nav-link">
-                                                <i class="fa-solid fa-user nav-icon" style="font-size: 12px;"></i>
+                                                <i class="fa-solid fa-plus nav-icon" style="font-size: 12px;"></i>
                                                 <p>Add Part</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="../part/part_stock_dashboard.php" class="nav-link">
-                                                <i class="fa-solid fa-user nav-icon" style="font-size: 12px;"></i>
+                                                <i class="fa-solid fa-cubes nav-icon" style="font-size: 12px;"></i>
                                                 <p>Part Stock Report</p>
                                             </a>
                                         </li>
@@ -373,37 +329,18 @@ body {
                             <ul class="nav nav-treeview">
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
-                                        <p> Team Leader <i class="right fas fa-angle-left"></i> </p>
+                                    <a href="../production/production_team_leader_dashboard.php" class="nav-link">
+                                        <i class="fa-solid fa-people-line nav-icon" style="font-size: 12px;"></i>
+                                        <p> Team Leader </p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="../production/production_team_leader_dashboard.php"
-                                                class="nav-link">
-                                                <i class="far fa-dot-circle nav-icon" style="font-size: 12px;"></i>
-                                                <p>Team Leader Dashboard</p>
-                                            </a>
-                                        </li>
-
-
-                                    </ul>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
-                                        <p> Technician <i class="right fas fa-angle-left"></i> </p>
+                                    <a href="../production/production_technician_dashboard.php" class="nav-link">
+                                        <i class="fa-sharp fa-solid fa-chalkboard-user nav-icon"
+                                            style="font-size: 12px;"></i>
+                                        <p> Technician </p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="../production/production_technician_dashboard.php"
-                                                class="nav-link">
-                                                <i class="far fa-dot-circle nav-icon" style="font-size: 12px;"></i>
-                                                <p>Technician Dashboard</p>
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li>
 
                             </ul>
@@ -422,24 +359,26 @@ body {
                             <ul class="nav nav-treeview">
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
-                                        <p> Motherboard <i class="right fas fa-angle-left"></i> </p>
+                                    <a href="../motherboard/motherboard_dashboard.php" class="nav-link">
+                                        <i class="fa-solid fa-people-line nav-icon" style="font-size: 12px;"></i>
+                                        <p> Motherboard Leader </p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="../motherboard/motherboard_dashboard.php" class="nav-link">
-                                                <i class="far fa-dot-circle nav-icon" style="font-size: 12px;"></i>
-                                                <p>Motherboard Dashboard</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="../motherboard/motherboard_technician.php" class="nav-link">
-                                                <i class="far fa-dot-circle nav-icon" style="font-size: 12px;"></i>
-                                                <p>Motherboard Technician</p>
-                                            </a>
-                                        </li>
-                                    </ul>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="fa-sharp fa-solid fa-chalkboard-user nav-icon"
+                                            style="font-size: 12px;"></i>
+                                        <p> Motherboard Member </p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../motherboard/motherboard_technician.php" class="nav-link">
+                                        <i class="fa-sharp fa-solid fa-chalkboard-user nav-icon"
+                                            style="font-size: 12px;"></i>
+                                        <p> Motherboard Technician </p>
+                                    </a>
                                 </li>
 
                             </ul>
@@ -456,26 +395,15 @@ body {
                                 <p> LCD <i class="right fas fa-angle-left"></i> </p>
                             </a>
                             <ul class="nav nav-treeview">
-
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
-                                        <p> LCD <i class="right fas fa-angle-left"></i> </p>
+                                        <i class="fa-solid fa-display nav-icon" style="font-size: 12px;"></i>
+                                        <p> LCD </p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                <i class="far fa-dot-circle nav-icon" style="font-size: 12px;"></i>
-                                                <p>LCD Dashboard</p>
-                                            </a>
-                                        </li>
-
-
-                                    </ul>
                                 </li>
-
                             </ul>
                         </li>
+
 
                         <?php } ?>
 
@@ -491,23 +419,14 @@ body {
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
-                                        <p> Battery <i class="right fas fa-angle-left"></i> </p>
+                                        <i class="fa-solid fa-battery nav-icon" style="font-size: 12px;"></i>
+                                        <p> Battery </p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                <i class="far fa-dot-circle nav-icon" style="font-size: 12px;"></i>
-                                                <p>Battery Dashboard</p>
-                                            </a>
-                                        </li>
 
-
-                                    </ul>
                                 </li>
-
                             </ul>
                         </li>
+
 
                         <?php } ?>
 
@@ -523,21 +442,10 @@ body {
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
-                                        <p> Bodywork <i class="right fas fa-angle-left"></i> </p>
+                                        <i class="fa-solid fa-laptop nav-icon" style="font-size: 12px;"></i>
+                                        <p> Bodywork </p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                <i class="far fa-dot-circle nav-icon" style="font-size: 12px;"></i>
-                                                <p>Bodywork Dashboard</p>
-                                            </a>
-                                        </li>
-
-
-                                    </ul>
                                 </li>
-
                             </ul>
                         </li>
 
@@ -555,21 +463,10 @@ body {
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
-                                        <p> Sanding <i class="right fas fa-angle-left"></i> </p>
+                                        <i class="fa-solid fa-soap nav-icon" style="font-size: 12px;"></i>
+                                        <p> Sanding </p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                <i class="far fa-dot-circle nav-icon" style="font-size: 12px;"></i>
-                                                <p>Sanding Dashboard</p>
-                                            </a>
-                                        </li>
-
-
-                                    </ul>
                                 </li>
-
                             </ul>
                         </li>
 
@@ -587,19 +484,9 @@ body {
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
-                                        <p> Painting <i class="right fas fa-angle-left"></i> </p>
+                                        <i class="fa-solid fa-spray-can nav-icon" style="font-size: 12px;"></i>
+                                        <p> Painting </p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                <i class="far fa-dot-circle nav-icon" style="font-size: 12px;"></i>
-                                                <p>Painting Dashboard</p>
-                                            </a>
-                                        </li>
-
-
-                                    </ul>
                                 </li>
 
                             </ul>
@@ -619,19 +506,9 @@ body {
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
-                                        <p> QC <i class="right fas fa-angle-left"></i> </p>
+                                        <i class="fa-solid fa-stethoscope nav-icon" style="font-size: 12px;"></i>
+                                        <p> QC </p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                <i class="far fa-dot-circle nav-icon" style="font-size: 12px;"></i>
-                                                <p>QC Dashboard</p>
-                                            </a>
-                                        </li>
-
-
-                                    </ul>
                                 </li>
 
                             </ul>
@@ -652,19 +529,9 @@ body {
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
-                                        <p> Packing <i class="right fas fa-angle-left"></i> </p>
+                                        <i class="fa-solid fa-boxes nav-icon" style="font-size: 12px;"></i>
+                                        <p> Packing </p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                <i class="far fa-dot-circle nav-icon" style="font-size: 12px;"></i>
-                                                <p>Packing Dashboard</p>
-                                            </a>
-                                        </li>
-
-
-                                    </ul>
                                 </li>
 
                             </ul>
@@ -678,7 +545,7 @@ body {
                         <?php if($role_id == 1 && $department == 11) { ?>
 
                         <!-- Email -->
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon far fa-envelope"></i>
                                 <p> Mailbox <i class="fas fa-angle-left right"></i>
@@ -704,7 +571,7 @@ body {
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
 
                         <?php } ?>
 
@@ -718,7 +585,7 @@ body {
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="../search/general_search" class="nav-link">
-                                        <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
+                                        <i class="fa-solid fa-search nav-icon" style="font-size: 12px;"></i>
                                         <p> Search </p>
                                     </a>
                                 </li>
