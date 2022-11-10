@@ -435,6 +435,28 @@ $values1 = array(
         </div>
 
     </form>
+    <!-- <form action="" method="POST">
+                    
+                    <fieldset class="mx-3 my-2">
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label">First Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" placeholder="First Name" name="first_name">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label">Last Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" placeholder="Last Name" name="last_name">
+                            </div>
+                        </div>
+                        <button type="submit" name="submit"
+                            class="btn mb-2 mt-4 btn-primary btn-sm d-block mx-auto text-center"><i
+                                class="fa-solid fa-user" style="margin-right: 5px;"></i>Create User</button>
+
+                    </fieldset>
+                </form> -->
 </fieldset>
 <?php 
                         $part_model =0;
@@ -479,15 +501,18 @@ $values1 = array(
                                                         $search_qty_C =$data['qty'];
                                                         }
                                             }
-                                        //     if(empty($test)){}else{
-                                        //     foreach($test as $test){
-                                        //         echo $test[0];
-                                        //         $i++;
-                                        //     }
-                                        // }
+                                            if(empty($test)){}else{
+                                            foreach($test as $test){
+                                                echo $test[0];
+                                                // echo "</br>";
+                                               
+                                                $i++;
+                                            }
+                                        }
                                            
                         }
                     ?>
+
 
 
 
@@ -549,17 +574,18 @@ $values1 = array(
                 <div class="card-header" ;>
                     <h4 class=" card-title">Rack 01</h4>
 
+
                 </div>
                 <div class="card-body mx-auto justify-content-center">
                     <?php  foreach ($grid as $row) { 
-                        foreach ($row as $k=>$v) {
-                            
+                        foreach ($row as $k=>$v) { 
                             $substring = explode("_", $v);
                             //   empty qty 
                             if($substring[3] == 0){ 
                                  ?>
                     <!-- // slot name with empty qty -->
                     <?php if(($slot_name_search == $substring[0] && $search_qty ==  $substring[3]) || ($common_slot == $substring[0])){ ?>
+
 
                     <a class="btn  bg-red mt-2"
                         style="  width: 88px !important; padding = 10px 12px 18px 44px !important;">
@@ -587,17 +613,12 @@ $values1 = array(
                           
                         ?>
                     <!-- slot with value -->
-                    <?php if(empty($test)){}else{} ?>
+                    <?php if(empty($test)){?>
                     <?php if($slot_name_search == $substring[0] && $search_qty ==  $substring[3]){ ?>
                     <a class="btn  bg-red mt-2 " style="width: 88px !important;">
                         <i class="fas fa-inbox"></i>
                         <?php
-                        // $i =0;
-                        // foreach($test as $test){
-                        //     echo $test[0];
-                        //     $i++;
-                        // }
-                        $test[0];
+                       
                         echo $substring[0]."</br>";
                         echo $substring[1]."</br>";
                         echo $substring[2]."</br>";
@@ -614,7 +635,33 @@ $values1 = array(
                         echo $substring[3]."</br>";
                          ?>
                     </a>
-                    <?php } }?>
+                    <?php } ?>
+                    <?php }else{  ?>
+                    <?php if($slot_name_search == $substring[0] && $search_qty ==  $substring[3]){ ?>
+                    <a class="btn  bg-red mt-2 " style="width: 88px !important;">
+                        <i class="fas fa-inbox"></i>
+                        <?php
+                        
+                        echo $substring[0]."</br>";
+                        echo $substring[1]."</br>";
+                        echo $substring[2]."</br>";
+                        echo $substring[3]."</br>";
+                         ?>
+                    </a>
+                    <?php }else{ ?>
+                    <a class="btn  bg-success mt-2 " style="width: 88px !important;">
+                        <i class="fas fa-inbox"></i>
+                        <?php
+                        echo $substring[0]."</br>";
+                        echo $substring[1]."</br>";
+                        echo $substring[2]."</br>";
+                        echo $substring[3]."</br>";
+                         ?>
+                    </a>
+                    <?php } ?>
+                    <?php } ?>
+
+                    <?php }?>
 
                     <?php } }  ?>
                 </div>
