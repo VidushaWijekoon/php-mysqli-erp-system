@@ -76,10 +76,10 @@ if (!isset($_SESSION['user_id'])) {
 
                         if ($result = mysqli_query($connection, $query)) {
 
-                            // Return the number of rows in result set
                             $rowcount = mysqli_num_rows($result);
+                            echo "$rowcount";
                         }
-                        ?><?php echo "$rowcount"; ?>
+                        ?>
                 </span>
             </div>
             <!-- /.info-box-content -->
@@ -92,35 +92,51 @@ if (!isset($_SESSION['user_id'])) {
 
 <div class="col col-lg-12 justify-content-center m-auto">
     <div class="row">
-        <div class="col-lg-6 grid-margin stretch-card justify-content-center mx-auto mt-2">
+        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card mt-3">
                 <div class="card-header bg-secondary">
                     <p class="text-uppercase m-0 p-0">Motherboard Leader</p>
                 </div>
 
                 <div class="card-body">
-                    <table id="example1" class="table table-bordered table-striped">
+                    <table id="example2" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>Inventory ID</th>
                                 <th>SO Delivery Date</th>
                                 <th>Production End Time</th>
                                 <th>Receive Time</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>&nbsp;</th>
                                 <th>&nbsp;</th>
                             </tr>
                         </thead>
-                        <tbody class="tbody_1">
+                        <tbody>
+                            <?php 
+                            
+                                $query = "SELECT * FROM motherboard_check ";
+                                        
+                                $result = mysqli_query($connection, $query);
+
+                                if(mysqli_num_rows($result) > 0){
+                                    foreach($result as $x){
+                                                             
+                            ?>
                             <tr>
-                                <td>000100</td>
-                                <td>2022-10-24 10:23:45</td>
-                                <td>2022-10-24 10:23:45</td>
-                                <td>2022-10-24 10:23:45</td>
-                                <td>2022-10-24 10:23:45</td>
+                                <td><?= $x['inventory_id']; ?></td>
+                                <td>NULL</td>
+                                <td><?= $x['completed_time']; ?></td>
+                                <td>NULL</td>
+                                <td>NULL</td>
+                                <td>NULL</td>
+                                <td><span class="badge badge-lg badge-danger text-white p-1 px-3">25 Minutes</span></td>
                                 <td>
                                     <button class='btn btn-xs btn-primary mx-1'><i data-toggle="modal"
                                             data-target="#modal-sm" class='fas fa-eye'></i> </button>
                                 </td>
                             </tr>
+                            <?php } } ?>
                         </tbody>
 
                     </table>
@@ -129,38 +145,7 @@ if (!isset($_SESSION['user_id'])) {
                 <!-- /.card-body -->
             </div>
         </div>
-        <div class="col-lg-6 grid-margin stretch-card justify-content-center mx-auto mt-2">
-            <div class="card mt-3">
-                <div class="card-header bg-secondary">
-                    <p class="text-uppercase m-0 p-0">Motherboard Technician</p>
-                </div>
 
-                <div class="card-body">
-                    <table id="example1" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Inventory ID</th>
-                                <th>SO Delivery Date</th>
-                                <th>Production End Time</th>
-                                <th>Receive Time</th>
-                            </tr>
-                        </thead>
-                        <tbody class="tbody_1">
-                            <tr>
-                                <td>000100</td>
-                                <td>2022-10-24 10:23:45</td>
-                                <td>2022-10-24 10:23:45</td>
-                                <td>2022-10-24 10:23:45</td>
-                                <td>2022-10-24 10:23:45</td>
-                            </tr>
-                        </tbody>
-
-                    </table>
-
-                </div>
-                <!-- /.card-body -->
-            </div>
-        </div>
     </div>
 </div>
 

@@ -82,7 +82,7 @@ if (!isset($_SESSION['user_id'])) {
                                                                                             
                             $query_run = mysqli_query($connection, $query);
 
-                            if ($rowcount = mysqli_fetch_assoc($query_run)) {
+                            if ($rowcount = mysqli_num_rows($query_run)) {
                                 foreach ($query_run as $values) {  
                                      if(empty($values)){}else{
                                         if($values['issue_type'] == 1){
@@ -281,7 +281,7 @@ if (!isset($_SESSION['user_id'])) {
                                                                                             
                             $query_run = mysqli_query($connection, $query);
 
-                            if ($rowcount = mysqli_fetch_assoc($query_run)) {
+                            if ($rowcount = mysqli_num_rows($query_run)) {
                                 foreach ($query_run as $values) {
                                     if(empty($values)){}else{
                                         if($values['issue_type'] == 1){
