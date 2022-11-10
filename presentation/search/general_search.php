@@ -34,6 +34,14 @@ if (!isset($_SESSION['user_id'])) {
 
                 <?php 
 
+                    $wh_device = NULL;
+                    $wh_brand = NULL;
+                    $wh_processor = NULL;
+                    $wh_core = NULL;
+                    $wh_generation = NULL;
+                    $wh_model = NULL;
+                    $wh_location = NULL;
+
                                 if (isset($_GET['search'])) {
                                     $filtervalues = $_GET['search'];
 
@@ -64,7 +72,9 @@ if (!isset($_SESSION['user_id'])) {
                                         LEFT JOIN packing_dep ON warehouse_information_sheet.inventory_id = packing_dep.inventory_id
                                         WHERE CONCAT(warehouse_information_sheet.inventory_id) LIKE '%$filtervalues%'
                                         LIMIT 1";
-                                $result = mysqli_query($connection, $query);                                
+                                $result = mysqli_query($connection, $query);
+                                
+                                if(empty($result)){}else{
                               
                                 foreach($result as $rows){      
                                     //  Motherboard
@@ -2140,6 +2150,8 @@ if (!isset($_SESSION['user_id'])) {
                         </div>
                     </div>
                 </div>
+
+                <?php } ?>
             </div>
         </div>
     </div>
