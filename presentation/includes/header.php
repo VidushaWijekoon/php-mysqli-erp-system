@@ -361,7 +361,7 @@ body {
                                 <li class="nav-item">
                                     <a href="../motherboard/motherboard_dashboard.php" class="nav-link">
                                         <i class="fa-solid fa-people-line nav-icon" style="font-size: 12px;"></i>
-                                        <p> Motherboard Leader </p>
+                                        <p> Leader Leader</p>
                                     </a>
                                 </li>
 
@@ -369,15 +369,14 @@ body {
                                     <a href="#" class="nav-link">
                                         <i class="fa-sharp fa-solid fa-chalkboard-user nav-icon"
                                             style="font-size: 12px;"></i>
-                                        <p> Motherboard Member </p>
+                                        <p> Motherboard Technician </p>
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a href="../motherboard/motherboard_technician.php" class="nav-link">
-                                        <i class="fa-sharp fa-solid fa-chalkboard-user nav-icon"
-                                            style="font-size: 12px;"></i>
-                                        <p> Motherboard Technician </p>
+                                        <i class="fa-sharp fa-solid fa-laptop nav-icon" style="font-size: 12px;"></i>
+                                        <p> Laptop Technician </p>
                                     </a>
                                 </li>
 
