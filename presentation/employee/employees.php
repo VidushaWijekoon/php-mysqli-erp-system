@@ -114,7 +114,7 @@ if (isset($_GET['emp_id'])) {
                                 if (isset($_GET['search'])) {
                                     $filtervalues = $_GET['search'];
 
-                                $query = "SELECT * FROM employees 
+                                $query = "SELECT *,(departments.department) AS department_name FROM `employees` LEFT JOIN departments ON departments.department_id = employees.department 
                                 WHERE CONCAT(first_name, last_name, department, emp_id, birthday, current_passport, labour_category) LIKE '%$filtervalues%'
                                 ORDER BY emp_id ASC";
                                 $results = mysqli_query($connection, $query);
@@ -128,7 +128,7 @@ if (isset($_GET['emp_id'])) {
                                 <td class="text-capitalize"><?php echo $items['first_name'] ?></td>
                                 <td class="text-capitalize"><?php echo $items['last_name'] ?></td>
                                 <td class="text-capitalize"><?php echo $items['current_passport'] ?></td>
-                                <td class="text-capitalize"><?php echo $items['department'] ?></td>
+                                <td class="text-capitalize"><?php echo $items['department_name'] ?></td>
                                 <td class="text-capitalize"><?php echo $items['gender'] ?></td>
                                 <td class="text-capitalize"><?php echo $items['resident_country'] ?></td>
                                 <td class="text-center">
@@ -146,7 +146,7 @@ if (isset($_GET['emp_id'])) {
 
                             <?php }
                                 }else{
-                                    $query = "SELECT * FROM employees";
+                                    $query = "SELECT *,(departments.department) AS department_name FROM `employees` LEFT JOIN departments ON departments.department_id = employees.department ";
                                     $results = mysqli_query($connection, $query);
 
                                         foreach ($results as $items) {
