@@ -115,54 +115,54 @@ label {
   margin: inherit;
   margin-top: 4px;
   font-size: 10px;
-  text-transform: uppercase;
   border: 1px solid #f1f1f1;
   border-radius: 5px;
   font-size: 12px;
+  font-family: "Poppins", sans-serif;
 }
 
 [type="text"] {
   height: 22px;
   margin-top: 4px;
   font-size: 10px;
-  text-transform: uppercase;
   border: 1px solid #f1f1f1;
   border-radius: 5px;
   font-size: 12px;
   padding: 10px;
+  font-family: "Poppins", sans-serif;
 }
 
 [type="password"] {
   height: 22px;
   margin-top: 4px;
   font-size: 10px;
-  text-transform: uppercase;
   border: 1px solid #f1f1f1;
   border-radius: 5px;
   font-size: 12px;
   padding: 10px;
+  font-family: "Poppins", sans-serif;
 }
 
 [type="number"] {
   height: 22px;
   margin-top: 4px;
   font-size: 10px;
-  text-transform: uppercase;
   border: 1px solid #f1f1f1;
   border-radius: 5px;
   font-size: 12px;
   padding: 10px;
+  font-family: "Poppins", sans-serif;
 }
 
 [type="email"] {
   height: 22px;
   margin-top: 4px;
   font-size: 10px;
-  text-transform: uppercase;
   border: 1px solid #f1f1f1;
   border-radius: 5px;
   font-size: 12px;
   padding: 10px;
+  font-family: "Poppins", sans-serif;
 }
 
 [type="date"] {
@@ -174,6 +174,7 @@ label {
   border-radius: 5px;
   font-size: 12px;
   padding: 10px;
+  font-family: "Poppins", sans-serif;
 }
 
 .info_select {
@@ -373,4 +374,11 @@ input[type="number"] {
   .horizontal-timeline .items .items-list .event-date {
     top: -40px;
   }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #43484d inset !important;
 }

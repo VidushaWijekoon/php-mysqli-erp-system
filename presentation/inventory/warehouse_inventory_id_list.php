@@ -39,12 +39,12 @@ $model = $_GET['model'];
                             <?php if(isset($_GET['search'])){echo $brand . "-" . $model; } ?>
                         </div>
                     </div>
-                    <form action="" method="GET">
+                    <form action="" method="POST">
                         <div class="input-group">
                             <span class="mt-1 mx-3" style="font-size: 14px;">Search :</span>
                             <input type="search" name="search"
-                                value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" class="form-control"
-                                placeholder="Search data">
+                                value="<?php if(isset($_POST['search'])){echo $_POST['search']; } ?>"
+                                class="form-control" placeholder="Search data">
                         </div>
                     </form>
                 </div>
@@ -66,8 +66,8 @@ $model = $_GET['model'];
                             $brand;
                             $model;
                             
-                                if(isset($_GET['search'])){
-                                    $filtervalues = $_GET['search'];
+                                if(isset($_POST['search'])){
+                                    $filtervalues = $_POST['search'];
                                         $query = "SELECT * FROM warehouse_information_sheet 
                                                 WHERE send_to_production = 0 AND CONCAT(inventory_id, brand = '$brand' AND model = '$model') LIKE '%$filtervalues%' ";                                
                                         $query_run = mysqli_query($connection, $query);

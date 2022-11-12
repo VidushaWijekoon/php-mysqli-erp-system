@@ -1,4 +1,3 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <?php 
 session_start();
 include_once('../../dataAccess/connection.php');
@@ -416,44 +415,41 @@ $values1 = array(
     $T3 => [3, 1],
     $T4 => [4, 1],
     $T5 => [5, 1],
- );
+    );
 
-   ?>
+?>
 
-<fieldset class="mt-4 mb-2">
-    <legend>Find Me !!</legend>
-    <!-- <form action="#" method="POST">
-        <div class="input-group mb-2 mt-2 d-flex">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col col-md-4 col-lg-4">
+            <fieldset class="mt-4 mb-2 mx-4">
+                <legend>Find Me !!</legend>
+                <form name="form" action="#" method="POST">
+                    <div class="col-sm-8">
+                        <select name="part_name" class="info_select w-25 mx-1" style="border-radius: 5px;">
+                            <option selected>--Select Item--</option>
+                            <?php
+                                $query = "SELECT * FROM part_list";
+                                $result = mysqli_query($connection, $query);
 
-            <input type="text" id="search" name="search" value="<?php if (isset($_POST['search'])) {
-                                                                                        echo $_POST['search'];
-                                                                                    } ?>">
+                                while ($selection = mysqli_fetch_array($result, MYSQLI_ASSOC)) :; ?>
 
+                            <option value="<?php echo $selection["part_name"]; ?>">
+                                <?php echo strtoupper($selection["part_name"]); ?>
+                            </option>
+                            <?php endwhile; ?>
+                        </select>
+                        <input type="text" class="w-25" name="model">
+                        <button type="submit" name="submit" class="btn btn-primary btn-xs mx-2"><i
+                                class="fa-solid fa-search" style="margin-right: 5px;"></i>Search</button>
+                    </div>
+                </form>
+            </fieldset>
         </div>
 
-    </form> -->
-    <form name="form" action="#" method="POST">
-        <div class="col-sm-8">
-            <select name="part_name" class="info_select" style="border-radius: 5px;">
-                <option selected>--Select Item--</option>
-                <?php
-                                            $query = "SELECT * FROM part_list";
-                                            $result = mysqli_query($connection, $query);
+        <div class="mt-5 text-center">
 
-                                            while ($selection = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                            ?>
-                <option value="<?php echo $selection["part_name"]; ?>">
-                    <?php echo strtoupper($selection["part_name"]); ?>
-                </option>
-                <?php endwhile; ?>
-            </select>
-            <input type="text" name="model">
-        </div>
-        <input type="submit" name="submit" value="Submit">
-
-    </form>
-</fieldset>
-<?php 
+            <?php 
                         $part_model =0;
                         $part_name =0;
                         $slot_name_search = null;
@@ -477,67 +473,67 @@ $values1 = array(
                             $item_name = mysqli_real_escape_string($connection, $_POST['part_name']);
                             $model = mysqli_real_escape_string($connection, $_POST['model']);
                             $common_slot =  $item_name;
-                            echo $common_slot."";
+
+                            echo "<span class='badge badge-lg badge-primary text-white p-2 px-5 text-uppercase'>$common_slot</span>";
                             
                             $query = "SELECT * FROM part_stock WHERE  part_model = '{$model}' AND part_name ='{$item_name}' ";
                                             $result_set = mysqli_query($connection, $query);
                                            $i =0;
-                                            foreach($result_set as $data){
-                                                
+                                            foreach($result_set as $data){                                                
                                                 $part_model = $data['part_model'];
                                                 $part_name = $data['part_name'];
 
-                                                if($data['rack_number'] == $rack_number_a){
-                                                   
-                                                $slot_name_search = $data['slot_name'];
-                                                $search_qty =$data['qty'];
-                                                $test[$i] =array($data['slot_name']);
-                                                $i++;
+                                                if($data['rack_number'] == $rack_number_a){                                                   
+                                                    $slot_name_search = $data['slot_name'];
+                                                    $search_qty =$data['qty'];
+                                                    $test[$i] =array($data['slot_name']);
+                                                    $i++;
                                                 }
                                                 elseif($data['rack_number'] == $rack_number_b){
-                                                    $slot_name_search_B = $data['slot_name'];
-                                                    $search_qty_B =$data['qty'];
-                                                    $test_b[$i] =array($data['slot_name']);
-                                                    $i++;
+                                                        $slot_name_search_B = $data['slot_name'];
+                                                        $search_qty_B =$data['qty'];
+                                                        $test_b[$i] =array($data['slot_name']);
+                                                        $i++;
                                                     }
                                                     elseif($data['rack_number'] == $rack_number_c){
                                                         $slot_name_search_C = $data['slot_name'];
                                                         $search_qty_C =$data['qty'];
                                                         $test_c[$i] =array($data['slot_name']);
                                                         $i++;
-                                                        }
+                                                    }
                                             }
                                             if(empty($test)){}else{
                                                 echo "</br>";
-                                                echo $rack_number_a;
+                                                echo "Rack-01";
                                             foreach($test as $test1){
                                                 echo " "."-->"." ".$test1[0];
                                             }
-                                        }  
-                                        if(empty($test_b)){}else{
-                                            echo "</br>";
-                                            echo $rack_number_b;
-                                            foreach($test_b as $test1){
-                                                echo " "."-->"." ".$test1[0];
-                                            }
-                                        }  
-                                        if(empty($test_c)){}else{
-                                            echo "</br>";
-                                                echo $rack_number_c;
-                                            foreach($test_c as $test1){
-                                                echo " "."-->"." ".$test1[0];
-                                            }
-                                        }       
+                                            }  
+                                            if(empty($test_b)){}else{
+                                                echo "</br>";
+                                                echo "Rack-02";
+                                                foreach($test_b as $test1){
+                                                    echo " "."-->"." ".$test1[0];
+                                                }
+                                            }  
+                                            if(empty($test_c)){}else{
+                                                echo "</br>";
+                                                    echo "Rack-03";
+                                                foreach($test_c as $test1){
+                                                    echo " "."-->"." ".$test1[0];
+                                                }
+                                            }       
                         }
                     ?>
+        </div>
 
-<div class="container-fluid">
-    <div class="row mx-3">
+        <div class="container-fluid">
+            <div class="row mx-3">
 
 
-        <!-- // rack 01 -->
-        <div class="col-4 mt-5">
-            <?php  
+                <!-- // rack 01 -->
+                <div class="col-4 mt-5 text-uppercase">
+                    <?php  
                     $query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'RACK-A'";
                     $result_set = mysqli_query($connection, $query);
                     foreach($result_set as $a){
@@ -547,127 +543,115 @@ $values1 = array(
                     $part_model= $a['part_model'];
                     $qty= $a['qty'];
                     foreach($values as $k => $v){
-                        
-                        if($k == $slot_name_change){
-                            $name= $slot_name."_".$part_name."_".$part_model."_".$qty;
-                            $values[$name] = $values[$k];
-                            unset($values[$k]);
+                            if($k == $slot_name_change){
+                                $name= $slot_name."_".$part_name."_".$part_model."_".$qty;
+                                $values[$name] = $values[$k];
+                                unset($values[$k]);
+                            }
                         }
                     }
-                    }
-                    $grid = createGrid(5, 20);
-                    $grid = plotGridValues($grid, $values);
-                    echo renderGrid($grid ,$slot_name_search,$search_qty,$common_slot,$test);
+                        $grid = createGrid(5, 20);
+                        $grid = plotGridValues($grid, $values);
+                        echo renderGrid($grid ,$slot_name_search,$search_qty,$common_slot,$test);
                     function createGrid($columns, $rows)
                     {
-                    $grid = [];
-                    $cell = 1;
-                    for ($r = 0; $r < $rows; $r++) {
-                        $row = [];
-                        for ($c = 0; $c < $columns; $c++) {
-                            $row[] = $cell++;
+                        $grid = [];
+                        $cell = 1;
+                        for ($r = 0; $r < $rows; $r++) {
+                            $row = [];
+                            for ($c = 0; $c < $columns; $c++) {
+                                $row[] = $cell++;
+                            }
+                            $grid[] = $row;
                         }
-                        $grid[] = $row;
+                        return $grid;
                     }
-                    return $grid;
-                    }
-                    function plotGridValues($grid, $values)
+                        function plotGridValues($grid, $values)
                     {
-                    foreach ($values as $value => $coordinates) {
-                        list($x, $y) = $coordinates;
-                        $grid[$y - 1][$x - 1] = $value;
+                        foreach ($values as $value => $coordinates) {
+                            list($x, $y) = $coordinates;
+                            $grid[$y - 1][$x - 1] = $value;
                     }
-                    return $grid;
+                        return $grid;
                     }
-                    function renderGrid($grid ,$slot_name_search,$search_qty,$common_slot,$test)
+                        function renderGrid($grid ,$slot_name_search,$search_qty,$common_slot,$test)
                     {
-                    $grid = array_reverse($grid); 
-                    $i =0;
+                        $grid = array_reverse($grid); 
+                        $i =0;
                     
                ?>
-            <div class="card card-primary">
-                <div class="card-header" ;>
-                    <h4 class=" card-title">Rack 01</h4>
+                    <div class="card card-primary">
+                        <div class="card-header" ;>
+                            <h4 class=" card-title">Rack 01</h4>
 
 
-                </div>
-                <div class="card-body mx-auto justify-content-center">
-                    <?php  foreach ($grid as $row) { 
+                        </div>
+                        <div class="card-body mx-auto justify-content-center">
+                            <?php  foreach ($grid as $row) { 
                         
-                        foreach ($row as $k=>$v) { 
-                            $substring = explode("_", $v);
-                            //   empty qty 
-                            if($substring[3] == 0){ 
-                                 ?>
-                    <!-- // slot name with empty qty -->
+                                foreach ($row as $k=>$v) { 
+                                    $substring = explode("_", $v);
+                                    //   empty qty 
+                                    if($substring[3] == 0){ ?>
+                            <!-- // slot name with empty qty -->
 
-                    <a class="btn  bg-secondary mt-2"
-                        style="  width: 88px !important; padding = 10px 12px 18px 44px !important;">
-                        <i class="fas fa-inbox"></i>
-                        <?php 
-                        echo $substring[0]."</br>";
-                        echo "</br>";
-                        echo "</br>";
-                        echo "</br>";
-                         ?>
-                    </a>
-                    <?php  ?>
-                    <?php }else{
-                          
-                        ?>
-                    <!-- slot with value -->
-                    <?php if(empty($test)){?>
+                            <a class="btn grid_btn bg-secondary mt-2">
+                                <i class="fas fa-inbox"></i>
+                                <?php 
+                                            echo $substring[0]."</br>";
+                                            echo "</br>";
+                                            echo "</br>";
+                                            echo "</br>";
+                                        ?>
+                            </a>
+                            <?php }else{ ?>
 
-                    <a class="btn  bg-success mt-2 " style="width: 88px !important;">
-                        <i class="fas fa-inbox"></i>
-                        <?php
+                            <!-- slot with value -->
+                            <?php if(empty($test)){?>
+
+                            <a class="btn grid_btn bg-success mt-2 ">
+                                <i class="fas fa-inbox"></i>
+                                <?php
                         echo $substring[0]."</br>";
                         echo $substring[1]."</br>";
                         echo $substring[2]."</br>";
                         echo $substring[3]."</br>";
                          ?>
-                    </a>
-                    <?php  ?>
-                    <?php }else{  ?>
-                    <?php 
+                            </a>
+                            <?php }else{   
                      foreach($test as $a){
                         if($substring[0] == $a[0] ){ ?>
-                    <a class="btn  bg-red mt-2 " style="width: 88px !important;">
-                        <i class="fas fa-inbox"></i>
-                        <?php
+                            <a class="btn grid_btn bg-red mt-2 ">
+                                <i class="fas fa-inbox"></i>
+                                <?php
                                 echo $substring[0]."</br>";
                                 echo $substring[1]."</br>";
                                 echo $substring[2]."</br>";
                                 echo $substring[3]."</br>";
                                 $substring[0] =5;
                                  ?>
-                    </a><?php
+                            </a><?php
                         // echo $a[0]."----".$slot_name_search;
                         // echo "</br>";
                     } } if($substring[0] != 5){ ?>
-                    <a class="btn  bg-secondary mt-2"
-                        style="  width: 88px !important; padding = 10px 12px 18px 44px !important;">
-                        <i class="fas fa-inbox"></i>
-                        <?php 
+                            <a class="btn grid_btn bg-secondary mt-2">
+                                <i class="fas fa-inbox"></i>
+                                <?php 
                         echo $substring[0]."</br>";
                         echo "</br>";
                         echo "</br>";
                         echo "</br>";
                          ?>
-                    </a>
+                            </a>
 
-                    <?php } 
-                                } 
-                             } 
-                         }
-                  }  ?>
+                            <?php } } } } }  ?>
+                        </div>
+                    </div>
+                    <?php } ?>
                 </div>
-            </div>
-            <?php } ?>
-        </div>
-        <!-- // rack 02 -->
-        <div class="col-4 mt-5">
-            <?php
+                <!-- // rack 02 -->
+                <div class="col-4 mt-5 text-uppercase">
+                    <?php
             $query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'RACK-B'";
             $result_set = mysqli_query($connection, $query);
             foreach($result_set as $a){
@@ -715,89 +699,81 @@ $values1 = array(
             $i =0;
             
        ?>
-            <div class="card card-primary">
-                <div class="card-header" ;>
-                    <h4 class=" card-title">Rack 02</h4>
+                    <div class="card card-primary">
+                        <div class="card-header" ;>
+                            <h4 class=" card-title">Rack 02</h4>
 
 
-                </div>
-                <div class="card-body mx-auto justify-content-center">
-                    <?php  foreach ($grid1 as $row) { 
+                        </div>
+                        <div class="card-body mx-auto justify-content-center">
+                            <?php  foreach ($grid1 as $row) { 
                 
                 foreach ($row as $k=>$v) { 
                     $substring = explode("_", $v);
                     //   empty qty 
                     if($substring[3] == 0){ 
                         ?>
-                    <!-- // slot name with empty qty -->
+                            <!-- // slot name with empty qty -->
 
-                    <a class="btn  bg-secondary mt-2"
-                        style="  width: 88px !important; padding = 10px 12px 18px 44px !important;">
-                        <i class="fas fa-inbox"></i>
-                        <?php 
+                            <a class="btn grid_btn bg-secondary mt-2">
+                                <i class="fas fa-inbox"></i>
+                                <?php 
                echo $substring[0]."</br>";
                echo "</br>";
                echo "</br>";
                echo "</br>";
                 ?>
-                    </a>
-                    <?php  ?>
-                    <?php }else{
-                 
-               ?>
-                    <!-- slot with value -->
-                    <?php if(empty($test_b)){?>
+                            </a>
+                            <?php }else{ ?>
 
-                    <a class="btn  bg-success mt-2 " style="width: 88px !important;">
-                        <i class="fas fa-inbox"></i>
-                        <?php
+
+                            <!-- slot with value -->
+                            <?php if(empty($test_b)){?>
+
+                            <a class="btn grid_btn  bg-success mt-2 ">
+                                <i class="fas fa-inbox"></i>
+                                <?php
                echo $substring[0]."</br>";
                echo $substring[1]."</br>";
                echo $substring[2]."</br>";
                echo $substring[3]."</br>";
                 ?>
-                    </a>
-                    <?php  ?>
-                    <?php }else{  ?>
-                    <?php 
+                            </a>
+                            <?php }else{  
             foreach($test_b as $a){
                if($substring[0] == $a[0] ){ ?>
-                    <a class="btn  bg-red mt-2 " style="width: 88px !important;">
-                        <i class="fas fa-inbox"></i>
-                        <?php
+                            <a class="btn grid_btn  bg-red mt-2 ">
+                                <i class="fas fa-inbox"></i>
+                                <?php
                        echo $substring[0]."</br>";
                        echo $substring[1]."</br>";
                        echo $substring[2]."</br>";
                        echo $substring[3]."</br>";
                        $substring[0] =5;
                         ?>
-                    </a><?php
+                            </a><?php
                // echo $a[0]."----".$slot_name_search;
                // echo "</br>";
            } } if($substring[0] != 5){ ?>
-                    <a class="btn  bg-secondary mt-2"
-                        style="  width: 88px !important; padding = 10px 12px 18px 44px !important;">
-                        <i class="fas fa-inbox"></i>
-                        <?php 
+                            <a class="btn grid_btn  bg-secondary mt-2">
+                                <i class="fas fa-inbox"></i>
+                                <?php 
                echo $substring[0]."</br>";
                echo "</br>";
                echo "</br>";
                echo "</br>";
                 ?>
-                    </a>
+                            </a>
 
-                    <?php } 
-                       } 
-                    } ?>
+                            <?php } } } } } ?>
 
-                    <?php } }  ?>
+                        </div>
+                    </div>
+                    <?php } ?>
                 </div>
-            </div>
-            <?php } ?>
-        </div>
-        <!-- // rack 03 -->
-        <div class="col-4 mt-5">
-            <?php
+                <!-- // rack 03 -->
+                <div class="col-4 mt-5 text-uppercase">
+                    <?php
             $query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'RACK-C'";
             $result_set = mysqli_query($connection, $query);
             foreach($result_set as $a){
@@ -845,167 +821,88 @@ $values1 = array(
             $i =0;
             
        ?>
-            <div class="card card-primary">
-                <div class="card-header" ;>
-                    <h4 class=" card-title">Rack 03</h4>
+                    <div class="card card-primary">
+                        <div class="card-header" ;>
+                            <h4 class=" card-title">Rack 03</h4>
 
 
-                </div>
-                <div class="card-body mx-auto justify-content-center">
-                    <?php  foreach ($grid2 as $row) { 
+                        </div>
+                        <div class="card-body mx-auto justify-content-center">
+                            <?php  foreach ($grid2 as $row) { 
                 
                 foreach ($row as $k=>$v) { 
                     $substring = explode("_", $v);
                     //   empty qty 
-                    if($substring[3] == 0){ 
-                        ?>
-                    <!-- // slot name with empty qty -->
+                    if($substring[3] == 0){ ?>
+                            <!-- // slot name with empty qty -->
 
-                    <a class="btn  bg-secondary mt-2"
-                        style="  width: 88px !important; padding = 10px 12px 18px 44px !important;">
-                        <i class="fas fa-inbox"></i>
-                        <?php 
+                            <a class="btn grid_btn bg-secondary mt-2">
+                                <i class="fas fa-inbox"></i>
+                                <?php 
                echo $substring[0]."</br>";
                echo "</br>";
                echo "</br>";
                echo "</br>";
                 ?>
-                    </a>
-                    <?php  ?>
-                    <?php }else{
+                            </a>
+                            <?php }else{
                  
                ?>
-                    <!-- slot with value -->
-                    <?php if(empty($test_c)){?>
+                            <!-- slot with value -->
+                            <?php if(empty($test_c)){?>
 
-                    <a class="btn  bg-success mt-2 " style="width: 88px !important;">
-                        <i class="fas fa-inbox"></i>
-                        <?php
+                            <a class="btn grid_btn bg-success mt-2 ">
+                                <i class="fas fa-inbox"></i>
+                                <?php
                echo $substring[0]."</br>";
                echo $substring[1]."</br>";
                echo $substring[2]."</br>";
                echo $substring[3]."</br>";
                 ?>
-                    </a>
-                    <?php  ?>
-                    <?php }else{  ?>
-                    <?php 
+                            </a>
+                            <?php }else{ 
             foreach($test_c as $a){
                if($substring[0] == $a[0] ){ ?>
-                    <a class="btn  bg-red mt-2 " style="width: 88px !important;">
-                        <i class="fas fa-inbox"></i>
-                        <?php
+                            <a class="btn grid_btn  bg-red mt-2 ">
+                                <i class="fas fa-inbox"></i>
+                                <?php
                        echo $substring[0]."</br>";
                        echo $substring[1]."</br>";
                        echo $substring[2]."</br>";
                        echo $substring[3]."</br>";
                        $substring[0] =5;
                         ?>
-                    </a><?php
+                            </a><?php
                // echo $a[0]."----".$slot_name_search;
                // echo "</br>";
            } } if($substring[0] != 5){ ?>
-                    <a class="btn  bg-secondary mt-2"
-                        style="  width: 88px !important; padding = 10px 12px 18px 44px !important;">
-                        <i class="fas fa-inbox"></i>
-                        <?php 
+                            <a class="btn  bg-secondary mt-2">
+                                <i class="fas fa-inbox"></i>
+                                <?php 
                echo $substring[0]."</br>";
                echo "</br>";
                echo "</br>";
                echo "</br>";
                 ?>
-                    </a>
+                            </a>
 
-                    <?php } 
-                     } 
-                    } 
-                    } 
-                    }  ?>
+                            <?php } } } } } ?>
+
+
+                        </div>
+                    </div>
+                    <?php } ?>
                 </div>
             </div>
-            <?php } ?>
         </div>
     </div>
 </div>
+
 <style>
-body {
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-/* The Modal (background) */
-.modal {
-    display: none;
-    /* Hidden by default */
-    position: fixed;
-    /* Stay in place */
-    z-index: 1;
-    /* Sit on top */
-    padding-top: 100px;
-    /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%;
-    /* Full width */
-    height: 100%;
-    /* Full height */
-    overflow: auto;
-    /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0);
-    /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4);
-    /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-}
-
-/* The Close Button */
-.close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
+.grid_btn {
+    width: 90px;
+    font-size: 10px;
 }
 </style>
-<script>
-// Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("search");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-    modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-</script>
 
 <?php    include_once('../includes/footer.php'); ?>

@@ -25,17 +25,18 @@ if($role_id = 1 && $department == 11 || $role_id == 4 && $department ==22) {
     </div>
 </div>
 <?php 
-$query ="SELECT COUNT(1) AS entries, DATE(`created_date`) as date
-            FROM requested_part_from_production
-            WHERE status =1
-            GROUP BY DATE(created_date) ORDER BY DATE(created_date);";
-$query_run = mysqli_query($connection, $query);
-$day;
+    $query ="SELECT COUNT(1) AS entries, DATE(`created_date`) as date
+                FROM requested_part_from_production
+                WHERE status =1
+                GROUP BY DATE(created_date) ORDER BY DATE(created_date);";
+    $query_run = mysqli_query($connection, $query);
+    $day;
 ?>
-<div class="container-fluid d-flex w-75 ">
-    <div class="col-lg-4 col-md-6 col-sm-12 d-flex">
-        <div class="row d-flex">
-            <?php
+<div class="container-fluid w-75">
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="row">
+            <div class="col">
+                <?php
             $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
             $date = $date1->format('Y-m-d');
                 foreach($query_run as $a){
@@ -77,25 +78,19 @@ $day;
                     $request = $a['entries'] + $last_7_dayes_entry + $last_14_dayes_entry;
 
                     ?>
-            <a href="part_task_list_by_technician.php?date=<?php echo $a['date'] ?>&day=<?php echo $day ?>">
-                <div class="card">
-                    <div class="card-header bg-info" style="color:black !important">
-                        <?php echo $today ?>
+                <a href="part_task_list_by_technician.php?date=<?php echo $a['date'] ?>&day=<?php echo $day ?>">
+                    <div class="card">
+                        <div class="card-header bg-info" style="color:black !important">
+                            <?php echo $today ?>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">You have <?php echo $request; ?> parts request</h5>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title">You have <?php echo $request; ?> parts request</h5>
-                    </div>
-                </div>
-            </a>
-            <?php
-                } 
-                ?>
+                </a>
+                <?php } } ?>
 
-
-            <?php
-                
-                }
-            ?>
+            </div>
         </div>
     </div>
 </div>
