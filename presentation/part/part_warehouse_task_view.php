@@ -140,7 +140,7 @@ $item_brand=0;
                 </div>
                 <div class="card-body">
 
-                    <table id="example1" class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>Sales Order</th>
@@ -508,10 +508,7 @@ $item_brand=0;
                                     ?>
                                 </td>
                                 <td>
-                                    <a class="btn btn-sm btn-info mt-2"
-                                        href="./part_issue_form.php?id<=?php echo $rp_id ?>">
-                                        Done
-                                    </a>
+                                    &nbsp;
                                 </td>
 
                             </tr>
@@ -648,7 +645,7 @@ $item_brand=0;
                                 <th>Stock</th>
                                 <?php
                             $query2 = "SELECT * FROM `part_stock`WHERE part_model='$model' AND part_brand = '$item_brand' AND part_gen = '$item_generation' ;";
-                            echo $query2;
+                            // echo $query2;
                             $query_run2 = mysqli_query($connection, $query2);
                            
                             foreach($query_run2 as $a){
@@ -849,6 +846,7 @@ $item_brand=0;
                                 </td>
                                 <?php
                                     }
+                                    
                                     if($part_name == 'lan_cover'){
                                     ?>
                                 <td>
@@ -1062,7 +1060,8 @@ $item_brand=0;
                                     <td><input type="text" id="c_panel_palm_rest" name="c_panel_palm_rest"></td>
                                     <td><input type="text" id="mb_base" name="mb_base"></td>
                                     <td><input type="text" id="hings_cover" name="hings_cover"></td>
-                                    <td><input type="submit" name="submit" value="Send"></td>
+                                    <td><input type="submit" class="btn btn-xs bg-gradient-info" name="submit"
+                                            value="Send"></td>
 
                                 </form>
 
@@ -1305,7 +1304,7 @@ $item_brand=0;
                                         </td>
 
                                         <td><button type="submit" name="sorting_submit"
-                                                class="btn btn-primary">Submit</button></td>
+                                                class="btn btn-xs bg-gradient-blue">Submit</button></td>
 
                                     </form>
 
@@ -1324,5 +1323,11 @@ $item_brand=0;
 //     header("Refresh:0");
 // }
 ?>
+
+<style>
+[type="text"] {
+    width: 37px;
+}
+</style>
 
 <?php include_once('../includes/footer.php'); ?>

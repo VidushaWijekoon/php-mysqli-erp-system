@@ -181,7 +181,7 @@ if (isset($_GET['sales_order_id'])) {
                             <form action="#" method="POST">
                                 <div class="input-group mb-2 mt-2 d-flex">
 
-                                    <input type="text" id="search" name="search" required value="<?php if (isset($_POST['search'])) {
+                                    <input type="number" min="1" id="search" name="search" required value="<?php if (isset($_POST['search'])) {
                                                                                         echo $_POST['search'];
                                                                                     } ?>" placeholder="Search QR">
                                     <!-- <button type="submit" class="btn btn-primary">Search</button> -->

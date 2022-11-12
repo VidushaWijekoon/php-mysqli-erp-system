@@ -8,6 +8,17 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
 
+$date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+$date = $date1->format('Y-m-d H:i:s');
+$dt = new DateTime;
+$dt->setTime(0, 0);
+$dt->format('Y-m-d H:i:s');
+$dt->add(new DateInterval('PT4H'));
+$start_time= $dt->format('H:i:s');
+$current_time= $date;
+$query ="SELECT * FROM prod_info WHERE end_date_time BETWEEN '$start_time' AND '$current_time'";
+$query_e6 = mysqli_query($connection, $query);
+
 ?>
 
 <div class="row page-titles m-2">
@@ -255,7 +266,7 @@ if (!isset($_SESSION['user_id'])) {
                                             ?>
                                     </td>
                                     <td>
-                                        <?php echo "<a class='btn btn-xs btn-primary mx-1' href=\"production_team_leader_check_techinician_daily_work_view.php?emp_id={$values['emp_id']}\"><i class='fa-solid fa-eye'></i> </a>" ?>
+                                        <?php echo "<a class='btn btn-xs btn-primary mx-1' href=\"production_team_leader_check_techinician_daily_work_view.php?emp_name={$values['first_name']}&emp_id={$values['emp_id']}\"><i class='fa-solid fa-eye'></i> </a>" ?>
                                     </td>
                                 </tr>
 
@@ -456,7 +467,7 @@ if (!isset($_SESSION['user_id'])) {
                                             ?>
                                     </td>
                                     <td>
-                                        <?php echo "<a class='btn btn-xs btn-primary mx-1' href=\"production_team_leader_check_techinician_daily_work_view.php?emp_id={$values['emp_id']}\"><i class='fa-solid fa-eye'></i> </a>" ?>
+                                        <?php echo "<a class='btn btn-xs btn-primary mx-1' href=\"production_team_leader_check_techinician_daily_work_view.php?emp_name={$values['first_name']}&emp_id={$values['emp_id']}\"><i class='fa-solid fa-eye'></i> </a>" ?>
                                     </td>
                                 </tr>
 

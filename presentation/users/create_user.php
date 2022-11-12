@@ -86,8 +86,9 @@ if (isset($_POST['submit'])) {
 
         $new = $connection->insert_id;
         
-        if ($result) {
+        if ($result) {            
             echo '<script>alert("User Added Successfully")</script>';
+            header('Location: users_dashboard.php');
         } else {
             $errors[] = 'Failed to add the new record.';
         }
