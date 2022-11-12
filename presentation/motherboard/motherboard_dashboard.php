@@ -15,7 +15,13 @@ if (!isset($_SESSION['user_id'])) {
     <div class="col-md-5 align-self-center">
         <h3 class="text-themecolor"><i class="fa fa-industry" aria-hidden="true"></i> Motherboard Dashboard </h3>
     </div>
+</div>
 
+<div class="row m-2">
+    <div class="col-12 mt-3">
+        <a class="btn bg-gradient-success mx-2 text-white" type="button" href="#"><i class="fa-solid fa-check"></i><span
+                class="mx-1">Completed Task</span></a>
+    </div>
 </div>
 
 <!-- Info boxes -->
@@ -92,51 +98,88 @@ if (!isset($_SESSION['user_id'])) {
 
 <div class="col col-lg-12 justify-content-center m-auto">
     <div class="row">
-        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-2">
+        <div class="col-lg-11 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card mt-3">
-                <div class="card-header bg-secondary">
-                    <p class="text-uppercase m-0 p-0">Motherboard Leader</p>
+                <div class="card-header d-flex bg-secondary">
+                    <div class="mr-auto">
+                        <div class="text-center mx-auto mt-1 text-uppercase" style="font-size: 14px;">
+                            Daily Work
+                        </div>
+                    </div>
+                    <form action="" method="POST">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input type="date" name="from_date"
+                                        value="<?php if(isset($_POST['from_date'])){ echo $_POST['from_date']; } ?>"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input type="date" name="to_date"
+                                        value="<?php if(isset($_POST['to_date'])){ echo $_POST['to_date']; } ?>"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-xs btn-primary px-2"
+                                        style=" font-size: 9px; margin-top: 4px; border-radius: 5px;">Select
+                                        Date</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
 
                 <div class="card-body">
                     <table id="example2" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Inventory ID</th>
-                                <th>SO Delivery Date</th>
-                                <th>Production End Time</th>
-                                <th>Receive Time</th>
-                                <th>Start Time</th>
-                                <th>End Time</th>
-                                <th>&nbsp;</th>
+                                <th>S/O</th>
+                                <th>SO Created Date</th>
+                                <th>Delivery Date</th>
+                                <th>Received QTY</th>
+                                <th>Prepared QTY from Production</th>
+                                <th>Tested QTY form Motherboard</th>
+                                <th style="width: 250px;">&nbsp;</th>
                                 <th>&nbsp;</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <?php 
-                            
-                                $query = "SELECT * FROM motherboard_check ";
-                                        
-                                $result = mysqli_query($connection, $query);
+                        <tbody class="tbody_1">
 
-                                if(mysqli_num_rows($result) > 0){
-                                    foreach($result as $x){
-                                                             
+                            <?php 
+
+                                $select_query = "SELECT *, COUNT(sales_order_id) AS Sales_Orders 
+                                                FROM motherboard_check 
+                                                LEFT JOIN sales_order_add_items ON sales_order_add_items.sales_order_id = motherboard_check.sales_order_id
+                                                GROUP BY sales_order_id";
+                                $result = mysqli_query($connection, $select_query);
+
+                                    foreach($result as $sr){
+                                        
+                               
                             ?>
+
+
+                            <tr class='bg-warning'>
                             <tr>
-                                <td><?= $x['inventory_id']; ?></td>
-                                <td>NULL</td>
-                                <td><?= $x['completed_time']; ?></td>
-                                <td>NULL</td>
-                                <td>NULL</td>
-                                <td>NULL</td>
-                                <td><span class="badge badge-lg badge-danger text-white p-1 px-3">25 Minutes</span></td>
-                                <td>
-                                    <button class='btn btn-xs btn-primary mx-1'><i data-toggle="modal"
-                                            data-target="#modal-sm" class='fas fa-eye'></i> </button>
+                                <td><?= $sr['sales_order_id'] ?></td>
+                                <td><?= $sr['created_date'] ?></td>
+                                <td><?= $sr['item_delivery_date'] ?></td>
+                                <td><?= $sr['Sales_Orders']; ?></td>
+                                <td>6</td>
+                                <td>4</td>
+                                <td></td>
+                                <td class="d-flex">
+
+                                    <a class='btn btn-xs bg-primary' href='motherboard_received_laptop.php'>
+                                        <i class='fa-solid fa-qrcode'></i> </a>
                                 </td>
                             </tr>
-                            <?php } } ?>
+
+                            <?php }  ?>
                         </tbody>
 
                     </table>
@@ -145,73 +188,54 @@ if (!isset($_SESSION['user_id'])) {
                 <!-- /.card-body -->
             </div>
         </div>
-
     </div>
 </div>
 
-<div class="modal fade" id="modal-sm">
+<!-- Received Modal -->
+<div class="modal fade" id="modal-assign">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                Motherboard Team Leader
+                <h4 class="modal-title"><i class="fa-solid fa-user-plus mx-2 bg-warning p-2"></i>SO
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
             </div>
             <div class="modal-body">
-                <fieldset class="mt-2">
-                    <legend>QR Scan</legend>
+                <div class="card-body p-0">
+                    <table id="tb1" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Member</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                            <tr>
+                                <td>#</td>
+                                <td><select name="cars" id="cars">
+                                        <option value="volvo">1037 - Moses</option>
+                                        <option value="saab">1139 - Vigin</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-                    <div class="input-group mb-2 mt-2">
-                        <input type="text" name="search" id="search" required value="<?php if (isset($_POST['search'])) {
-                                                                                        echo $_POST['search'];
-                                                                                    } ?>" placeholder="Search QR">
-                        <!-- <button type="submit" class="btn btn-primary">Search</button> -->
-                    </div>
-                </fieldset>
+
+                </div>
             </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <a type="button" href="./motherboard_task.php" class="btn btn-primary">Save changes</a>
+                <input class="btn btn-primary" type="submit" name="submit" vlaue="Choose options">
+
             </div>
         </div>
+        </form>
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
 
-
-<style>
-fieldset,
-legend {
-    all: revert;
-    font-size: 12px;
-}
-
-textarea {
-    text-transform: uppercase;
-}
-
-select,
-input[type="text"],
-[type="search"] {
-    height: 22px;
-    width: 100%;
-    margin: inherit;
-    margin-top: 4px;
-    font-size: 10px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 10px;
-    padding-left: 15px;
-    margin-bottom: 10px;
-    color: black;
-
-}
-</style>
-
-<script>
-let searchbar = document.querySelector('input[name="search"]');
-searchbar.focus();
-search.value = '';
-</script>
 
 <?php include_once('../includes/footer.php'); ?>

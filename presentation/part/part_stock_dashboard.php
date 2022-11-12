@@ -586,7 +586,7 @@ $values1 = array(
 
 
                         </div>
-                        <div class="card-body mx-auto justify-content-center">
+                        <div class="card-body mx-auto justify-content-center mx-auto text-center">
                             <?php  foreach ($grid as $row) { 
                         
                                 foreach ($row as $k=>$v) { 
@@ -705,7 +705,7 @@ $values1 = array(
 
 
                         </div>
-                        <div class="card-body mx-auto justify-content-center">
+                        <div class="card-body mx-auto justify-content-center mx-auto text-center">
                             <?php  foreach ($grid1 as $row) { 
                 
                 foreach ($row as $k=>$v) { 
@@ -827,7 +827,7 @@ $values1 = array(
 
 
                         </div>
-                        <div class="card-body mx-auto justify-content-center">
+                        <div class="card-body mx-auto justify-content-center mx-auto text-center">
                             <?php  foreach ($grid2 as $row) { 
                 
                 foreach ($row as $k=>$v) { 

@@ -2,7 +2,6 @@
 session_start();
 include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
-include_once('../../dataAccess/403.php');
 include_once('../includes/header.php');
 
 // checking if a user is logged in
@@ -11,3 +10,5 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 ?>
+
+<?php include_once('../includes/footer.php'); ?>
