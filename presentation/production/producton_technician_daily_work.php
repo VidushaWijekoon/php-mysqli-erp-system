@@ -15,6 +15,18 @@ $department = $_SESSION['department'];
 $epf_id = $_SESSION['epf'];
 
 if($role_id = 1 && $department == 11 || $role_id = 6 && $department == 1) {
+
+    $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+    $date = $date1->format('Y-m-d H:i:s');
+    $dt = new DateTime;
+    $dt->setTime(0, 0);
+    $dt->format('Y-m-d H:i:s');
+    $dt->add(new DateInterval('PT4H'));
+    $start_time= $dt->format('H:i:s');
+    $current_time= $date;
+
+    $query ="SELECT * FROM prod_info WHERE end_date_time BETWEEN '$start_time' AND '$current_time'";
+    $query_e6 = mysqli_query($connection, $query);
     
 ?>
 
@@ -54,6 +66,7 @@ if($role_id = 1 && $department == 11 || $role_id = 6 && $department == 1) {
                                         <th>Starting Time</th>
                                         <th>End Time</th>
                                         <th>Minutes to Complete</th>
+                                        <th>&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-dark text-uppercase">

@@ -361,12 +361,12 @@ body {
                                 <li class="nav-item">
                                     <a href="../motherboard/motherboard_dashboard.php" class="nav-link">
                                         <i class="fa-solid fa-people-line nav-icon" style="font-size: 12px;"></i>
-                                        <p> Leader Leader</p>
+                                        <p> Team Leader</p>
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="../motherboard/motherboard_technician.php" class="nav-link">
                                         <i class="fa-sharp fa-solid fa-chalkboard-user nav-icon"
                                             style="font-size: 12px;"></i>
                                         <p> Motherboard Technician </p>
