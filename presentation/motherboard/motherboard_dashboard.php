@@ -19,8 +19,10 @@ if (!isset($_SESSION['user_id'])) {
 
 <div class="row m-2">
     <div class="col-12 mt-3">
-        <a class="btn bg-gradient-success mx-2 text-white" type="button" href="#"><i class="fa-solid fa-check"></i><span
-                class="mx-1">Completed Task</span></a>
+        <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./motherboard_received_laptop.php"><i
+                class="fa-solid fa-plus"></i><span class="mx-1">Received Items</span></a>
+        <a class="btn bg-gradient-success mx-2 text-white" type="button" href="./motherboard_weekly_report.php"><i
+                class="fa-solid fa-cogs"></i><span class="mx-1">Team Work</span></a>
     </div>
 </div>
 
@@ -141,49 +143,81 @@ if (!isset($_SESSION['user_id'])) {
                                 <th>SO Created Date</th>
                                 <th>Delivery Date</th>
                                 <th>Received QTY</th>
-                                <th>Prepared QTY from Production</th>
-                                <th>Tested QTY form Motherboard</th>
+                                <th>Prepared </th>
+                                <th>Completed</th>
                                 <th style="width: 250px;">&nbsp;</th>
                                 <th>&nbsp;</th>
                             </tr>
                         </thead>
-                        <tbody class="tbody_1">
-
+                        <tbody>
                             <?php 
+                                
+                                $query = "SELECT *, 
+                                        COUNT(motherboard_dep.inventory_id) AS Total_received,
+                                        (motherboard_dep.sales_order_id) AS MIID
+                                        FROM motherboard_dep
+                                        LEFT JOIN sales_order_add_items ON sales_order_add_items.sales_order_id = motherboard_dep.sales_order_id
+                                        GROUP BY motherboard_dep.sales_order_id";
+                                $results = mysqli_query($connection, $query);
 
-                                $select_query = "SELECT *, COUNT(sales_order_id) AS Sales_Orders 
-                                                FROM motherboard_check 
-                                                LEFT JOIN sales_order_add_items ON sales_order_add_items.sales_order_id = motherboard_check.sales_order_id
-                                                GROUP BY sales_order_id";
-                                $result = mysqli_query($connection, $select_query);
-
-                                    foreach($result as $sr){
-                                        
-                               
-                            ?>
-
-
-                            <tr class='bg-warning'>
+                                if(mysqli_num_rows($results) > 0){
+                                    foreach($results as $r){                              
+                                
+                                ?>
                             <tr>
-                                <td><?= $sr['sales_order_id'] ?></td>
-                                <td><?= $sr['created_date'] ?></td>
-                                <td><?= $sr['item_delivery_date'] ?></td>
-                                <td><?= $sr['Sales_Orders']; ?></td>
+
+                                <td><?= $r['MIID'] ?></td>
+                                <td><?= $r['sales_order_created_date'] ?></td>
+                                <td><?= $r['item_delivery_date'] ?></td>
+                                <td><?= $r['Total_received'] ?></td>
                                 <td>6</td>
                                 <td>4</td>
-                                <td></td>
-                                <td class="d-flex">
+                                <td>
+                                    <?php
+                               
 
-                                    <a class='btn btn-xs bg-primary' href='motherboard_received_laptop.php'>
-                                        <i class='fa-solid fa-qrcode'></i> </a>
+                                            $percentage = round(( 100 / 5) * 100);
+
+                                            if($percentage == 100)
+                                            {
+                                                $progress_bar_class = 'bg-success progress-bar-striped';
+                                            }
+                                            else if($percentage >= 50 && $percentage < 99)
+                                            {
+                                                $progress_bar_class = 'bg-info progress-bar-striped';
+                                            }
+                                            else if($percentage >= 11 && $percentage < 49)
+                                            {
+                                                $progress_bar_class = 'bg-warning progress-bar-striped';
+                                            }
+                                            else if($percentage >= 0 && $percentage < 10)
+                                            {
+                                                $progress_bar_class = 'bg-danger progress-bar-striped';
+                                            }
+                                            else
+                                            {
+                                                $progress_bar_class = 'bg-danger progress-bar-striped';
+                                            }
+                                                                                
+                                            echo  
+                                            '<div class="progress text-bold">
+                                                <div class="progress-bar '.$progress_bar_class.'" role="progressbar" aria-valuenow="'.$percentage.'" aria-valuemin="0" aria-valuemax="100" style="width:'.$percentage.'%">
+                                                    '.$percentage.' % 
+                                                </div>
+                                            </div>'
+                                            ?>
+
                                 </td>
+                                <td class="d-flex">
+                                    <a class='btn btn-xs bg-warning' href='#.php' data-toggle="modal"
+                                        data-target="#modal-assign">
+                                        <i class='fa-solid fa-bullseye'></i> </a>
+                                </td>
+
                             </tr>
-
-                            <?php }  ?>
+                            <?php } } ?>
                         </tbody>
-
                     </table>
-
                 </div>
                 <!-- /.card-body -->
             </div>
@@ -193,47 +227,58 @@ if (!isset($_SESSION['user_id'])) {
 
 <!-- Received Modal -->
 <div class="modal fade" id="modal-assign">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"><i class="fa-solid fa-user-plus mx-2 bg-warning p-2"></i>SO
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <?= $r['sales_order_id']; ?>
             </div>
             <div class="modal-body">
                 <div class="card-body p-0">
-                    <table id="tb1" class="table table-striped">
+                    <table id="tb1" class="table table-striped text-center">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Member</th>
+                                <th>Assign QTY</th>
                             </tr>
                         </thead>
                         <tbody id="tbody">
                             <tr>
                                 <td>#</td>
-                                <td><select name="cars" id="cars">
-                                        <option value="volvo">1037 - Moses</option>
-                                        <option value="saab">1139 - Vigin</option>
-                                    </select>
+                                <td>
+                                    <form action="" method="post">
+                                        <select name="emp_id">
+                                            <option value="" class="w-50" selected>--Select Team Member--</option>
+                                            <?php
+                                                    $query = "SELECT epf,first_name FROM users WHERE department = '9' ";
+                                                    $result = mysqli_query($connection, $query);
+
+                                                    while ($technicians = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
+                                                    ?>
+                                            <option value="<?php echo $technicians["epf"]; ?>">
+                                                <?php echo strtoupper($technicians["epf"].'-'.$technicians["first_name"]); ?>
+                                            </option>
+                                            <?php
+                                                    endwhile;
+                                                    ?>
+                                        </select>
+                                </td>
+                                <td><input type="number" min="1" placeholder="Assign QTY" name="motherboard_assign_qty">
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-
-
+                    <span class="text-uppercase bg-info mx-auto text-center d-flex justify-content-center">Please
+                        Assign the task for the motherboard techinician</span>
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
-                <input class="btn btn-primary" type="submit" name="submit" vlaue="Choose options">
+                <input class="btn btn-primary mx-auto" type="submit" name="submit" vlaue="Choose options">
 
             </div>
         </div>
-        </form>
-        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
 

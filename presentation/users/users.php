@@ -137,10 +137,6 @@ if($role_id = 1 && $department == 11) {
     </div>
 </div>
 
-<script>
-
-</script>
-
 <?php include_once('../includes/footer.php'); }else{
         die(access_denied());
 } ?>

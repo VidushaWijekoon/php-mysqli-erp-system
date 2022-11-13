@@ -42,7 +42,7 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                             VALUES ('$inventory_id', '$sales_order_id', '$username', CURRENT_TIMESTAMP)";
             $production = mysqli_query($connection, $query_insert);
             }else{
-                echo "<div class='exists'>It's Existing Item</div>";
+                echo '<span class="badge badge-lg badge-danger w-100 text-white px-2 received_qty">This Item Already Scanned</span>';
             }
         }
     }   
