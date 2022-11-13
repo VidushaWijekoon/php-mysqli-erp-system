@@ -19,8 +19,8 @@ if (!isset($_SESSION['user_id'])) {
 
 <div class="row m-2">
     <div class="col-12 mt-3">
-        <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./motherboard_received_laptop.php"><i
-                class="fa-solid fa-plus"></i><span class="mx-1">Received Items</span></a>
+        <!-- <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./motherboard_received_laptop.php"><i
+                class="fa-solid fa-plus"></i><span class="mx-1">Received Items</span></a> -->
         <a class="btn bg-gradient-success mx-2 text-white" type="button" href="./motherboard_weekly_report.php"><i
                 class="fa-solid fa-cogs"></i><span class="mx-1">Team Work</span></a>
     </div>
@@ -151,30 +151,35 @@ if (!isset($_SESSION['user_id'])) {
                         </thead>
                         <tbody>
                             <?php 
-                                
-                                $query = "SELECT *, 
-                                        COUNT(motherboard_dep.inventory_id) AS Total_received,
-                                        (motherboard_dep.sales_order_id) AS MIID
-                                        FROM motherboard_dep
-                                        LEFT JOIN sales_order_add_items ON sales_order_add_items.sales_order_id = motherboard_dep.sales_order_id
-                                        GROUP BY motherboard_dep.sales_order_id";
-                                $results = mysqli_query($connection, $query);
 
+                                $received_unit = NULL;
+                                $prepared = NULL;
+                                $complted = NULL;
+                                
+                                $query = "SELECT * FROM motherboard_check
+                                        LEFT JOIN sales_order_add_items ON motherboard_check.sales_order_id = sales_order_add_items.sales_order_id
+                                        GROUP BY motherboard_check.sales_order_id";
+                                $results = mysqli_query($connection, $query);
+                        
                                 if(mysqli_num_rows($results) > 0){
-                                    foreach($results as $r){                              
+                                    foreach($results as $r){   
+                                        
+                                        $d = "SELECT *, COUNT(motherboard_id) AS Total_received FROM motherboard_dep WHERE sales_order_id ={$r['sales_order_id']}" ;
+                                        $q = mysqli_query($connection, $d);
+                                        foreach($q as $l){
+                                            $total = $l['Total_received'];
                                 
                                 ?>
                             <tr>
 
-                                <td><?= $r['MIID'] ?></td>
+                                <td><?= $r['sales_order_id'] ?></td>
                                 <td><?= $r['sales_order_created_date'] ?></td>
                                 <td><?= $r['item_delivery_date'] ?></td>
-                                <td><?= $r['Total_received'] ?></td>
+                                <td><?= $total; ?></td>
                                 <td>6</td>
                                 <td>4</td>
                                 <td>
-                                    <?php
-                               
+                                    <?php                               
 
                                             $percentage = round(( 100 / 5) * 100);
 
@@ -208,14 +213,17 @@ if (!isset($_SESSION['user_id'])) {
                                             ?>
 
                                 </td>
-                                <td class="d-flex">
-                                    <a class='btn btn-xs bg-warning' href='#.php' data-toggle="modal"
-                                        data-target="#modal-assign">
-                                        <i class='fa-solid fa-bullseye'></i> </a>
+                                <td class="text-center">
+
+                                    <?php 
+                                        echo "<a class='btn btn-xs bg-primary mx-2' href=\"motherboard_received_laptop.php?sales_order_id={$r['sales_order_id']}\"><i class='fa-solid fa-qrcode'></i> </a>";
+                                        echo "<a class='btn btn-xs bg-warning' href=\"motherboard_team_leader_summery.php?sales_order_id={$r['sales_order_id']}\"><i class='fa-solid fa-bullseye'></i> </a>";
+                                    ?>
                                 </td>
 
+
                             </tr>
-                            <?php } } ?>
+                            <?php } } }?>
                         </tbody>
                     </table>
                 </div>

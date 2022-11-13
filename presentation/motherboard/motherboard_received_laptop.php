@@ -14,37 +14,39 @@ $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 
 $username = $_SESSION['username'];
+$sales_order_id = $_GET['sales_order_id'];
 
     if(isset($_POST['search'])){
-        $search_inventory_id = $_POST['search'];
+        $inventory_id = $_POST['search'];
 
-        $search_query = "SELECT * FROM motherboard_check WHERE inventory_id = {$search_inventory_id}";
+        $search_query = "SELECT * FROM motherboard_dep WHERE inventory_id = {$inventory_id}";
         $result = mysqli_query($connection, $search_query);
-            
-        if(mysqli_num_rows($result) > 0){
-            foreach($result as $sr){
-                
-            $motherboard_check_inventory_id = $sr['inventory_id'];
-            $sales_order_id = $sr['sales_order_id'];
-            $insert_query = "INSERT INTO motherboard_dep(inventory_id, sales_order_id, created_by, received_date) 
-                        VALUES ('$motherboard_check_inventory_id', '$sales_order_id', '$username', 'CURRENT_TIMESTAMP')";
-            echo $insert_query;
-            $query = mysqli_query($connection, $insert_query);
 
-            $exists_check = "SELECT * FROM motherboard_dep";
-            $query_check = mysqli_query($connection, $exists_check);
-            foreach($query_check as $ex){
-                $ex_inventory_id = $ex['inventory_id'];
-                if($ex_inventory_id == $motherboard_check_inventory_id){
-                    echo '<span class="badge badge-lg badge-danger w-100 text-white px-2 received_qty">This Item Already Scanned</span>';
-                    }
-                }
+        $exist_id = 0;
+        foreach($result as $a){
+            if(empty($a)){
+                $exist_id = 0;
+            }else{
+                $exist_id = 1;
+            };
+        }
+
+        $query = "SELECT * FROM motherboard_check WHERE sales_order_id = $sales_order_id AND inventory_id = $inventory_id";
+        $query_run = mysqli_query($connection, $query); 
+        foreach($query_run as $data){
+            if(empty($data)){
+               
+            }else{
+                if($exist_id == 0){
+                $query_insert = "INSERT INTO motherboard_dep(inventory_id, sales_order_id,  created_by, received_date, status) 
+                            VALUES ('$inventory_id', '$sales_order_id', '$username', CURRENT_TIMESTAMP, 0)";
+                $production = mysqli_query($connection, $query_insert);
+            }else{
+                echo '<span class="badge badge-lg badge-danger w-100 text-white px-2 received_qty">This Item Already Scanned</span>';
             }
         }
-    }
-
-                 
-
+    }         
+}
 ?>
 
 <div class="row page-titles">
@@ -95,21 +97,33 @@ $username = $_SESSION['username'];
 
                                     <?php                                    
 
-                                        $select_to_result = "SELECT *, COUNT(motherboard_dep.inventory_id) AS Total_received
-                                                            FROM motherboard_dep
-                                                            INNER JOIN warehouse_information_sheet ON motherboard_dep.inventory_id = warehouse_information_sheet.inventory_id";
+                                        $select_to_result = "SELECT * FROM motherboard_dep
+                                                            INNER JOIN warehouse_information_sheet ON motherboard_dep.inventory_id = warehouse_information_sheet.inventory_id
+                                                            WHERE  motherboard_dep.sales_order_id = $sales_order_id
+                                                            ORDER BY received_date DESC";
                                         $x = mysqli_query($connection, $select_to_result);
-                                        $i = 0;
-                                            foreach($x as $d){   
-                                                $i++; 
-                                                $received_qty = $d['Total_received'];                                                 
-                                                echo '<span class="badge badge-lg badge-info text-white px-2 received_qty">Receiving Total: '.$received_qty.'</span>';
 
+
+                                        ///////// COUNT ///////// 
+                                        $query_2 = "SELECT *, COUNT(motherboard_id) AS received FROM `motherboard_dep` WHERE sales_order_id = $sales_order_id;";
+                                        $query_result2 = mysqli_query($connection,$query_2);
+                                        $received_qty =0;
+                                            
+                                        foreach($query_result2 as $a){
+                                            $received_qty = $a['received'];
+                                            echo '<span class="badge badge-lg badge-info text-white px-2 received_qty">Receiving Total: '.$received_qty.'</span>';
+                                        }
+                                        
+                                        $i = 0;
+                                        if(mysqli_num_rows($x)){
+                                            foreach($x as $d){
+                                                $i++;
+                                            
                                     ?>
 
                                     <tr class="text-uppercase">
                                         <td><?= $i ?></td>
-                                        <td><?= $d['sales_order_id'] ?></td>
+                                        <td><?= $a['sales_order_id'] ?></td>
                                         <td><?= $d['inventory_id'] ?></td>
                                         <td><?= $d['brand'] ?></td>
                                         <td><?= $d['processor'] ?></td>
@@ -119,7 +133,7 @@ $username = $_SESSION['username'];
                                         <td><?= $d['received_date'] ?></td>
 
                                     </tr>
-                                    <?php }?>
+                                    <?php } } ?>
                                 </tbody>
                             </table>
                         </fieldset>

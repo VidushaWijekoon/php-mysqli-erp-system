@@ -61,7 +61,6 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
     <div class="row">
         <div class="col-lg-11 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card">
-                <?php if (!empty($errors)) { display_errors($errors); } ?>
                 <div class="row mx-2">
                     <div class="col-md-3">
                         <form action="" method="POST">
@@ -99,19 +98,21 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                                 <tbody class="tbody_1">
 
                                     <?php 
+                                    
                                             $query = "SELECT * FROM `production`
-                                                        LEFT JOIN warehouse_information_sheet ON 
-                                                        warehouse_information_sheet.inventory_id = production.inventory_id ORDER BY received_date DESC;";
+                                                        LEFT JOIN warehouse_information_sheet ON warehouse_information_sheet.inventory_id = production.inventory_id 
+                                                        WHERE production.sales_order_id = $sales_order_id 
+                                                        ORDER BY received_date DESC";
                                             $result = mysqli_query($connection, $query);
-                                            ////////////////////////////////////////////////
-                                            //retrive order qty 
-                                            $query_1 = "SELECT SUM(item_quantity) AS item_quantity FROM `sales_order_add_items` WHERE sales_order_id=$sales_order_id;";
-                                            $query_result = mysqli_query($connection,$query_1);
-                                            $orderd_qty =0;
-                                            foreach($query_result as $a){
-                                                $orderd_qty = $a['item_quantity'];
-                                            }
-                                            ///////////////////////////////////////////////////
+                                            // ////////////////////////////////////////////////
+                                            // //retrive order qty 
+                                            // $query_1 = "SELECT SUM(item_quantity) AS item_quantity FROM `sales_order_add_items` WHERE sales_order_id=$sales_order_id;";
+                                            // $query_result = mysqli_query($connection,$query_1);
+                                            // $orderd_qty =0;
+                                            // foreach($query_result as $a){
+                                            //     $orderd_qty = $a['item_quantity'];
+                                            // }
+                                            // ///////////////////////////////////////////////////
                                             $query_2 = "SELECT COUNT(production_id) AS production_id FROM `production` WHERE sales_order_id=$sales_order_id;";
                                             $query_result2 = mysqli_query($connection,$query_2);
                                             $received_qty =0;
@@ -120,10 +121,12 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                                                 echo '<span class="badge badge-lg badge-info text-white px-2 received_qty">Receiving Total: '.$received_qty.'</span>';
                                             }
                                             ////////////////////////////////////////////////////
+                                            
                                             $i = 0;
                                             if (mysqli_fetch_assoc($result)) {
                                                 foreach ($result as $items) {
                                                     $i++;
+                                                    
                                         ?>
 
                                     <tr class="text-uppercase">
