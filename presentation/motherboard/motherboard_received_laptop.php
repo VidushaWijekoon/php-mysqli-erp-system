@@ -1,4 +1,5 @@
 <?php 
+ob_start();
 session_start();
 include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
@@ -13,45 +14,41 @@ $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 
 $username = $_SESSION['username'];
-$sales_order_id = $_GET['sales_order_id'];
 
-if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
-        
-    if (isset($_POST['search'])) {
-        $inventory_id = $_POST['search'];
+    if(isset($_POST['search'])){
+        $search_inventory_id = $_POST['search'];
 
-        $query_6 = "SELECT `inventory_id`  FROM `production` WHERE inventory_id={$inventory_id}";
-        $query_recheck = mysqli_query($connection, $query_6); 
-        $exist_id = 0;
-        foreach($query_recheck as $a){
-            if(empty($a)){
-                $exist_id = 0;
-            }else{
-                $exist_id = 1;
-            };
-        }
+        $search_query = "SELECT * FROM motherboard_check WHERE inventory_id = {$search_inventory_id}";
+        $result = mysqli_query($connection, $search_query);
+            
+        if(mysqli_num_rows($result) > 0){
+            foreach($result as $sr){
+                
+            $motherboard_check_inventory_id = $sr['inventory_id'];
+            $sales_order_id = $sr['sales_order_id'];
+            $insert_query = "INSERT INTO motherboard_dep(inventory_id, sales_order_id, created_by, received_date) 
+                        VALUES ('$motherboard_check_inventory_id', '$sales_order_id', '$username', 'CURRENT_TIMESTAMP')";
+            echo $insert_query;
+            $query = mysqli_query($connection, $insert_query);
 
-        $query = "SELECT model,brand,core,generation,processor,device FROM warehouse_information_sheet WHERE send_to_production = 1 AND sales_order_id = {$sales_order_id} AND inventory_id = {$inventory_id}";
-        $query_run = mysqli_query($connection, $query); 
-        foreach($query_run as $data){
-            if(empty($data)){
-               
-            }else{
-                if($exist_id == 0){
-                 $query_insert = "INSERT INTO production(inventory_id, sales_order_id,  created_by, received_date) 
-                            VALUES ('$inventory_id', '$sales_order_id', '$username', CURRENT_TIMESTAMP)";
-            $production = mysqli_query($connection, $query_insert);
-            }else{
-                echo "<div class='exists'>It's Existing Item</div>";
+            $exists_check = "SELECT * FROM motherboard_dep";
+            $query_check = mysqli_query($connection, $exists_check);
+            foreach($query_check as $ex){
+                $ex_inventory_id = $ex['inventory_id'];
+                if($ex_inventory_id == $motherboard_check_inventory_id){
+                    echo '<span class="badge badge-lg badge-danger w-100 text-white px-2 received_qty">This Item Already Scanned</span>';
+                    }
+                }
             }
         }
-    }   
-             
-}
+    }
+
+                 
+
 ?>
 
 <div class="row page-titles">
-    <div class="col-md-5 align-self-center"><a href="./production_team_leader_dashboard.php">
+    <div class="col-md-5 align-self-center"><a href="./motherboard_dashboard.php">
             <i class="fa-regular fa-circle-left fa-2x m-2" style="color: #ced4da;"></i>
         </a>
     </div>
@@ -61,7 +58,6 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
     <div class="row">
         <div class="col-lg-11 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card">
-                <?php if (!empty($errors)) { display_errors($errors); } ?>
                 <div class="row mx-2">
                     <div class="col-md-3">
                         <form action="" method="POST">
@@ -72,7 +68,6 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                                     <input type="search" id="search" name="search" required value="<?php if (isset($_POST['search'])) {
                                                                                         echo $_POST['search'];
                                                                                     } ?>" placeholder="Search QR">
-                                    <!-- <button type="submit" class="btn btn-primary">Search</button> -->
                                 </div>
                             </fieldset>
                         </form>
@@ -96,48 +91,35 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                                         <th>Received Date And Time</th>
                                     </tr>
                                 </thead>
-                                <tbody class="tbody_1">
+                                <tbody>
 
-                                    <?php 
-                                            $query = "SELECT * FROM `production`
-                                                        LEFT JOIN warehouse_information_sheet ON 
-                                                        warehouse_information_sheet.inventory_id = production.inventory_id ORDER BY received_date DESC;";
-                                            $result = mysqli_query($connection, $query);
-                                            ////////////////////////////////////////////////
-                                            //retrive order qty 
-                                            $query_1 = "SELECT SUM(item_quantity) AS item_quantity FROM `sales_order_add_items` WHERE sales_order_id=$sales_order_id;";
-                                            $query_result = mysqli_query($connection,$query_1);
-                                            $orderd_qty =0;
-                                            foreach($query_result as $a){
-                                                $orderd_qty = $a['item_quantity'];
-                                            }
-                                            ///////////////////////////////////////////////////
-                                            $query_2 = "SELECT COUNT(production_id) AS production_id FROM `production` WHERE sales_order_id=$sales_order_id;";
-                                            $query_result2 = mysqli_query($connection,$query_2);
-                                            $received_qty =0;
-                                            foreach($query_result2 as $a){
-                                                $received_qty = $a['production_id'];
+                                    <?php                                    
+
+                                        $select_to_result = "SELECT *, COUNT(motherboard_dep.inventory_id) AS Total_received
+                                                            FROM motherboard_dep
+                                                            INNER JOIN warehouse_information_sheet ON motherboard_dep.inventory_id = warehouse_information_sheet.inventory_id";
+                                        $x = mysqli_query($connection, $select_to_result);
+                                        $i = 0;
+                                            foreach($x as $d){   
+                                                $i++; 
+                                                $received_qty = $d['Total_received'];                                                 
                                                 echo '<span class="badge badge-lg badge-info text-white px-2 received_qty">Receiving Total: '.$received_qty.'</span>';
-                                            }
-                                            ////////////////////////////////////////////////////
-                                            $i = 0;
-                                            if (mysqli_fetch_assoc($result)) {
-                                                foreach ($result as $items) {
-                                                    $i++;
-                                        ?>
+
+                                    ?>
 
                                     <tr class="text-uppercase">
-                                        <td><?php echo $i; ?></td>
-                                        <td><?php echo $items['sales_order_id'] ?></td>
-                                        <td><?php echo $items['inventory_id'] ?></td>
-                                        <td><?php echo $items['brand'] ?></td>
-                                        <td><?php echo $items['processor'] ?></td>
-                                        <td><?php echo $items['core'] ?></td>
-                                        <td><?php echo $items['generation'] ?></td>
-                                        <td><?php echo $items['model'] ?></td>
-                                        <td><?php echo $items['received_date'] ?></td>
+                                        <td><?= $i ?></td>
+                                        <td><?= $d['sales_order_id'] ?></td>
+                                        <td><?= $d['inventory_id'] ?></td>
+                                        <td><?= $d['brand'] ?></td>
+                                        <td><?= $d['processor'] ?></td>
+                                        <td><?= $d['core'] ?></td>
+                                        <td><?= $d['generation'] ?></td>
+                                        <td><?= $d['model'] ?></td>
+                                        <td><?= $d['received_date'] ?></td>
+
                                     </tr>
-                                    <?php } } ?>
+                                    <?php }?>
                                 </tbody>
                             </table>
                         </fieldset>
@@ -155,6 +137,4 @@ searchbar.focus();
 search.value = '';
 </script>
 
-<?php include_once('../includes/footer.php'); }else{
-        die(access_denied());
-} ?>
+<?php include_once('../includes/footer.php'); ?>
