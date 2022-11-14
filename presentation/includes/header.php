@@ -200,7 +200,7 @@ body {
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="../e-commerce/e-commerce_dashboard.php" class="nav-link">
+                                    <a href="../e-commerce/e_commerce_dashboard.php" class="nav-link">
                                         <i class="fa-solid fa-earth-americas fa-user nav-icon"
                                             style="font-size: 12px;"></i>
                                         <p>E-Commerce </p>
