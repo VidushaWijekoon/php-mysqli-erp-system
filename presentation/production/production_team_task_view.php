@@ -32,7 +32,7 @@ if($role_id == 1 && $department == 11 || $role_id == 6 && $department == 1 || $r
                     <p class="text-uppercase m-0 p-0">Production Technician Daily Task</p>
                 </div>
                 <div class="card-body">
-                    <table id="example1" class="table table-striped table-bordered first">
+                    <table class="table table-striped table-bordered first">
                         <thead>
                             <tr>
                                 <th>&nbsp;</th>
@@ -225,16 +225,6 @@ if($role_id == 1 && $department == 11 || $role_id == 6 && $department == 1 || $r
         </div>
     </div>
 </div>
-
-<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
-<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-<script>
-$(document).ready(function() {
-    $('#example1').dataTable();
-});
-</script>
 
 
 <?php include_once('../includes/footer.php'); }else{

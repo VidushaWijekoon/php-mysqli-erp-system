@@ -174,7 +174,9 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-xs btn-primary">Choose Date</button>
+                                    <button type="submit" class="btn btn-xs btn-primary px-3"
+                                        style=" font-size: 10px; margin-top: 4px; border-radius: 7px; letter-spacing: 1px;">Select
+                                        Date</button>
                                 </div>
                             </div>
                             <div class="col-md-3">

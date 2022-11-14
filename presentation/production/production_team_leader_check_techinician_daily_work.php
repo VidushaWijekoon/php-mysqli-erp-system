@@ -61,8 +61,8 @@ $query_e6 = mysqli_query($connection, $query);
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-xs btn-primary px-2"
-                                        style=" font-size: 9px; margin-top: 4px; border-radius: 5px;">Select
+                                    <button type="submit" class="btn btn-xs btn-primary px-3"
+                                        style=" font-size: 10px; margin-top: 4px; border-radius: 7px; letter-spacing: 1px;">Select
                                         Date</button>
                                 </div>
                             </div>

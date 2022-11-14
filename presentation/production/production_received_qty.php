@@ -71,7 +71,6 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                                     <input type="search" id="search" name="search" required value="<?php if (isset($_POST['search'])) {
                                                                                         echo $_POST['search'];
                                                                                     } ?>" placeholder="Search QR">
-                                    <!-- <button type="submit" class="btn btn-primary">Search</button> -->
                                 </div>
                             </fieldset>
                         </form>

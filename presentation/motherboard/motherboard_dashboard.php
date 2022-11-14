@@ -176,7 +176,17 @@ if (!isset($_SESSION['user_id'])) {
                                 <td><?= $r['sales_order_created_date'] ?></td>
                                 <td><?= $r['item_delivery_date'] ?></td>
                                 <td><?= $total; ?></td>
-                                <td>6</td>
+                                <td>
+                                    <?php
+                                    
+                                        $d = "SELECT *, SUM(motherboard_assign.qty) AS Total_received FROM motherboard_assign WHERE sales_order_id ={$r['sales_order_id']}" ;
+                                        $q = mysqli_query($connection, $d);
+                                        foreach($q as $l){
+                                            $total = $l['Total_received'];
+                                            echo $total;
+                                        }
+                                    ?>
+                                </td>
                                 <td>4</td>
                                 <td>
                                     <?php                               
