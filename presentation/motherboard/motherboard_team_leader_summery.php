@@ -48,36 +48,37 @@ $sales_order_id = $_GET['sales_order_id'];
                         <tbody>
                             <?php 
 
-                                $query = "SELECT *, COUNT(motherboard_dep.motherboard_id) AS received_count
+                                $query = "SELECT *, COUNT(motherboard_dep.motherboard_id) AS count
                                     FROM motherboard_dep 
                                     LEFT JOIN warehouse_information_sheet ON warehouse_information_sheet.inventory_id = motherboard_dep.inventory_id 
-                                    LEFT JOIN motherboard_assign ON warehouse_information_sheet.sales_order_id = motherboard_assign.sales_order_id
-                                    WHERE motherboard_dep.sales_order_id = $sales_order_id
-                                    GROUP BY warehouse_information_sheet.model, 
-                                                    warehouse_information_sheet.generation, 
-                                                    warehouse_information_sheet.core, 
-                                                    warehouse_information_sheet.brand ";
+                                    WHERE warehouse_information_sheet.sales_order_id = $sales_order_id 
+                                    GROUP BY warehouse_information_sheet.model";
+                                   
                                 $result = mysqli_query($connection, $query);
 
                                 if(mysqli_num_rows($result) > 0){
                                     foreach($result as $d){ 
-                                        $recived_qty = $d['received_count'] ;
+                                        $recived_qty = $d['count'] ;
                                         $d_model = $d['model'];
+                                        $d_brand = $d['brand'];
+                                        $d_core = $d['core'];
+                                        $d_generation = $d['generation'];                                         
                                         
-                                        $assing_qty = "SELECT *,COUNT(motherboard_assign_task_id) as total FROM motherboard_assign" ;
+                                        $assing_qty = "SELECT *,COUNT(motherboard_assign_task_id) as total FROM motherboard_assign WHERE sales_order_id = $sales_order_id";
                                         $query_d = mysqli_query($connection, $assing_qty);
                                         foreach($query_d as $m){
+                                            $assing_total = $m['total'];                                           
  
                                     }
                                                            
                             ?>
                             <tr class="text-uppercase">
-                                <td><?= $d['brand'] ?></td>
-                                <td><?= $d['model'] ?></td>
-                                <td><?= $d['core'] ?></td>
-                                <td><?= $d['generation'] ?></td>
-                                <td><?= $recived_qty; ?></td>
-                                <td><?= $d['qty']; ?></td>
+                                <td><?php echo $d['brand'] ?></td>
+                                <td><?php echo $d['model'] ?></td>
+                                <td><?php echo $d['core'] ?></td>
+                                <td><?php echo $d['generation'] ?></td>
+                                <td><?php echo $recived_qty; ?></td>
+                                <td><?php echo $assing_total; ?></td>
                                 <td>
                                     <?php
 
@@ -114,7 +115,7 @@ $sales_order_id = $_GET['sales_order_id'];
                                 </td>
                                 <td>
                                     <?php 
-                                    echo "<a class='btn btn-xs bg-gradient-primary mx-2' href=\"motherboard_assign_page.php?sales_order_id={$d['sales_order_id']}&model={$d['model']}&core={$d['core']}&generation={$d['generation']}&brand={$d['brand']}&device={$d['device']}&processor={$d['processor']}\" class='text-white text-capitalize'><i class='fa-solid fa-sun mx-1'></i></a>" ?>
+                                    echo "<a class='btn btn-xs bg-gradient-primary mx-2' href=\"motherboard_assign_page.php?sales_order_id={$d['sales_order_id']}&model={$d['model']}&core={$d['core']}&generation={$d['generation']}&brand={$d['brand']}&device={$d['device']}&processor={$d['processor']}&count={$d['count']}\" class='text-white text-capitalize'><i class='fa-solid fa-sun mx-1'></i></a>" ?>
                                 </td>
                             </tr>
                             <?php } } ?>

@@ -28,8 +28,37 @@ if (!isset($_SESSION['user_id'])) {
     <div class="row">
         <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card mt-3">
-                <div class="card-header bg-secondary">
-                    <p class="text-uppercase m-0 p-0">Motherboard Leader</p>
+                <div class="card-header d-flex bg-secondary">
+                    <div class="mr-auto">
+                        <div class="text-center mx-auto mt-1 text-uppercase" style="font-size: 14px;">
+                            Daily Work
+                        </div>
+                    </div>
+                    <form action="" method="POST">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input type="date" name="from_date"
+                                        value="<?php if(isset($_POST['from_date'])){ echo $_POST['from_date']; } ?>"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input type="date" name="to_date"
+                                        value="<?php if(isset($_POST['to_date'])){ echo $_POST['to_date']; } ?>"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-xs btn-primary px-3"
+                                        style=" font-size: 10px; margin-top: 4px; border-radius: 7px; letter-spacing: 1px;">Select
+                                        Date</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
 
                 <div class="card-body">
