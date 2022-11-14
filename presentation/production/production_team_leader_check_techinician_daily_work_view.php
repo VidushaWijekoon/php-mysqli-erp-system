@@ -156,32 +156,34 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                             Daily Work
                         </div>
                     </div>
-                    <form action="" method="GET">
+                    <form action="" method="POST">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <input type="date" name="from_date"
-                                        value="<?php if(isset($_GET['from_date'])){ echo $_GET['from_date']; } ?>"
+                                        value="<?php if(isset($_POST['from_date'])){ echo $_POST['from_date']; } ?>"
                                         class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <input type="date" name="to_date"
-                                        value="<?php if(isset($_GET['to_date'])){ echo $_GET['to_date']; } ?>"
+                                        value="<?php if(isset($_POST['to_date'])){ echo $_POST['to_date']; } ?>"
                                         class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-xs btn-primary">Choose Date</button>
+                                    <button type="submit" class="btn btn-xs btn-primary px-3"
+                                        style=" font-size: 10px; margin-top: 4px; border-radius: 7px; letter-spacing: 1px;">Select
+                                        Date</button>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group d-flex">
                                     <span class="mx-2" style="margin-top: 5px;">Search</span>
                                     <input type="search" name="search"
-                                        value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>"
+                                        value="<?php if(isset($_POST['search'])){echo $_POST['search']; } ?>"
                                         class="form-control" placeholder="Search data">
                                 </div>
                             </div>
@@ -213,8 +215,8 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                                     $lcd_count = 0;
                                     $bodywork_count = 0;
                                     
-                                    if (isset($_GET['search'])) {
-                                        $filtervalues = $_GET['search'];                                     
+                                    if (isset($_POST['search'])) {
+                                        $filtervalues = $_POST['search'];                                     
                                                                 
                                         $query = "SELECT * FROM prod_info WHERE emp_id = {$emp_id} AND CONCAT(inventory_id) LIKE '%$filtervalues%' ";
                                                             

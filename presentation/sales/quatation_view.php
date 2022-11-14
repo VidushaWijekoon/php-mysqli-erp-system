@@ -58,7 +58,7 @@ if (isset($_GET['quatation_id'])) {
 
                 <div class="card-body">
                     <div class="d-flex">
-                        <div class="col col-lg-6 col-md-6">
+                        <div class="col col-lg-6 col-md-8 col-sm-8">
                             <fieldset class="mt-2">
                                 <legend>Customer Details</legend>
 
@@ -111,7 +111,7 @@ if (isset($_GET['quatation_id'])) {
                                 </div>
                             </fieldset>
                         </div>
-                        <div class="col col-lg-6 col-md-6">
+                        <div class="col col-lg-6 col-md-4 col-sm-4">
 
                         </div>
 
@@ -119,7 +119,7 @@ if (isset($_GET['quatation_id'])) {
                 </div>
                 <div class="col col-lg-12 mb-3">
 
-                    <table id="example1" class="table table-bordered table-striped mt-2">
+                    <table class="table table-bordered table-striped mt-2">
                         <thead>
                             <tr>
                                 <th>&nbsp;</th>
@@ -182,21 +182,5 @@ if (isset($_GET['quatation_id'])) {
     </div>
 
 </div>
-
-<style>
-select,
-input[type="text"] {
-    width: 100%;
-    height: 30px;
-    margin: inherit;
-    margin-top: 4px;
-    font-size: 10px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-    font-size: 12px;
-    background-color: black;
-}
-</style>
 
 <?php include_once('../includes/footer.php'); ?>

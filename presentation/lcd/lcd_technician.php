@@ -13,90 +13,16 @@ if (!isset($_SESSION['user_id'])) {
 
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor"><i class="fa fa-industry" aria-hidden="true"></i> Motherboard Dashboard </h3>
+        <h3 class="text-themecolor"><i class="fa fa-industry" aria-hidden="true"></i> Motherboard Technician </h3>
     </div>
 </div>
 
 <div class="row m-2">
     <div class="col-12 mt-3">
-        <a class="btn bg-gradient-info mx-2 text-white" type="button" href="motherboard_received_laptop.php"><i
-                class="fa fa-plus"></i><span class="mx-1">Received Items</span></a>
         <a class="btn bg-gradient-success mx-2 text-white" type="button" href="#"><i class="fa-solid fa-check"></i><span
-                class="mx-1">Completed Task</span></a>
+                class="mx-1">Daily Completed Task</span></a>
     </div>
 </div>
-
-<!-- Info boxes -->
-<div class="row m-2">
-    <div class="col-12 col-sm-6 col-md-3 mt-3">
-        <div class="info-box">
-            <span class="info-box-icon bg-info elevation-1"><i class="fa-solid fa-warehouse"></i></span>
-
-            <div class="info-box-content">
-                <span class="info-box-text">Total Motherboard Repaired</span>
-                <span class="info-box-number">0 </span>
-            </div>
-            <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-    </div>
-    <!-- /.col -->
-    <div class="col-12 col-sm-6 col-md-3 mt-3">
-        <div class="info-box mb-3">
-            <span class="info-box-icon bg-danger elevation-1"><i class="fa-solid fa-share-from-square"></i></span>
-
-            <div class="info-box-content">
-                <span class="info-box-text">Pre Day Motherboard Repaired</span>
-                <span class="info-box-number"> 0</span>
-            </div>
-            <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-    </div>
-    <!-- /.col -->
-
-    <!-- fix for small devices only -->
-    <div class="clearfix hidden-md-up"></div>
-
-    <div class="col-12 col-sm-6 col-md-3 mt-3">
-        <div class="info-box mb-3">
-            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
-
-            <div class="info-box-content">
-                <span class="info-box-text">Motherboard Members</span>
-                <span class="info-box-number"> 0 </span>
-            </div>
-            <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-    </div>
-    <!-- /.col -->
-    <div class="col-12 col-sm-6 col-md-3 mt-3">
-        <div class="info-box mb-3">
-            <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-
-            <div class="info-box-content">
-                <span class="info-box-text">Motherboard Technicians</span>
-                <span class="info-box-number">
-                    <?php
-
-                        $query = "SELECT department FROM employees WHERE department = 'production'";
-
-                        if ($result = mysqli_query($connection, $query)) {
-
-                            $rowcount = mysqli_num_rows($result);
-                            echo "$rowcount";
-                        }
-                        ?>
-                </span>
-            </div>
-            <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-    </div>
-    <!-- /.col -->
-</div>
-<!-- /.row -->
 
 <div class="col col-lg-12 justify-content-center m-auto">
     <div class="row">
@@ -130,8 +56,9 @@ if (!isset($_SESSION['user_id'])) {
                                 <td>E5530</td>
                                 <td>3</td>
                                 <td>
-                                    <button class='btn btn-xs btn-primary mx-1'><i data-toggle="modal"
-                                            data-target="#modal-assign" class='fas fa-eye'></i> </button>
+                                    <a class='btn btn-xs btn-primary mx-1'
+                                        href="./motherboard_technician_daily_task.php"><i data-toggle="modal"
+                                            data-target="#modal-assign" class='fas fa-eye'></i> </a>
                                 </td>
                             </tr>
                             <tr class="text-uppercase">
@@ -143,8 +70,9 @@ if (!isset($_SESSION['user_id'])) {
                                 <td>E5530</td>
                                 <td>6</td>
                                 <td>
-                                    <button class='btn btn-xs btn-primary mx-1'><i data-toggle="modal"
-                                            data-target="#modal-assign" class='fas fa-eye'></i> </button>
+                                    <a class='btn btn-xs btn-primary mx-1'
+                                        href="./motherboard_technician_daily_task.php"><i data-toggle="modal"
+                                            data-target="#modal-assign" class='fas fa-eye'></i> </a>
                                 </td>
                             </tr>
                         </tbody>

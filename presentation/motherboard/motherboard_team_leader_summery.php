@@ -15,10 +15,9 @@ $sales_order_id = $_GET['sales_order_id'];
  
 ?>
 
-
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <a href="./production_team_leader_dashboard.php">
+        <a href="./motherboard_dashboard.php">
             <i class="fa-regular fa-circle-left fa-2x m-2" style="color: #ced4da;"></i>
         </a>
     </div>
@@ -40,7 +39,6 @@ $sales_order_id = $_GET['sales_order_id'];
                                 <th>Model</th>
                                 <th>Core</th>
                                 <th>Generation</th>
-                                <th>Order QTY</th>
                                 <th>Received QTY</th>
                                 <th>Assign QTY</th>
                                 <th style="width: 250px;">&nbsp;</th>
@@ -48,53 +46,43 @@ $sales_order_id = $_GET['sales_order_id'];
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                                $new_model = NULL;
-                                
-                                $query = "SELECT *, COUNT(*) AS received_count 
-                                            FROM warehouse_information_sheet    
-                                            INNER JOIN sales_order_add_items 
-                                            ON  warehouse_information_sheet.sales_order_id = sales_order_add_items.sales_order_id 
-                                            WHERE  warehouse_information_sheet.sales_order_id = {$sales_order_id} 
-                                            AND warehouse_information_sheet.send_to_production = 1
-                                            GROUP BY warehouse_information_sheet.model, 
-                                                    warehouse_information_sheet.generation, 
-                                                    warehouse_information_sheet.core, 
-                                                    warehouse_information_sheet.brand 
-                                            ORDER BY received_count DESC";                                          
-                                            
-                                $query_run = mysqli_query($connection, $query);
+                            <?php 
 
-                                if ($rowcount = mysqli_fetch_array($query_run)) {
-                                    $assign_qty;
-                                    foreach ($query_run as $values) {
-                                        $new_model = $values['model']; 
-                                        $query_1="SELECT SUM(tech_assign_qty) AS assign_qty FROM prod_technician_assign_info 
-                                    WHERE sales_order_id = '$sales_order_id'
-                                    AND model = '{$values['model']}'
-                                    AND brand ='{$values['brand']}'
-                                    AND core = '{$values['core']}'
-                                    AND generation ='{$values['generation']}'
-                                    AND processor = '{$values['processor']}'
-                                    ";                             
-                                         $query_2 = mysqli_query($connection, $query_1);
-                                         foreach($query_2 as $data){
-                                           $assign_qty = $data['assign_qty'];
-                                         }
-                                ?>
+                                $query = "SELECT *, COUNT(motherboard_dep.motherboard_id) AS count
+                                    FROM motherboard_dep 
+                                    LEFT JOIN warehouse_information_sheet ON warehouse_information_sheet.inventory_id = motherboard_dep.inventory_id 
+                                    WHERE warehouse_information_sheet.sales_order_id = $sales_order_id 
+                                    GROUP BY warehouse_information_sheet.model";
+                                   
+                                $result = mysqli_query($connection, $query);
 
+                                if(mysqli_num_rows($result) > 0){
+                                    foreach($result as $d){ 
+                                        $recived_qty = $d['count'] ;
+                                        $d_model = $d['model'];
+                                        $d_brand = $d['brand'];
+                                        $d_core = $d['core'];
+                                        $d_generation = $d['generation'];                                         
+                                        
+                                        $assing_qty = "SELECT *,COUNT(motherboard_assign_task_id) as total FROM motherboard_assign WHERE sales_order_id = $sales_order_id";
+                                        $query_d = mysqli_query($connection, $assing_qty);
+                                        foreach($query_d as $m){
+                                            $assing_total = $m['total'];                                           
+ 
+                                    }
+                                                           
+                            ?>
                             <tr class="text-uppercase">
-                                <td><?php echo $values['brand'] ?></td>
-                                <td><?php echo $values['model'] ?></td>
-                                <td><?php echo $values['core'] ?></td>
-                                <td><?php echo $values['generation'] ?></td>
-                                <td><?php echo $values['item_quantity'] ?></td>
-                                <td><?php echo $values['received_count'] ?></td>
-                                <td><?php echo $assign_qty ?></td>
+                                <td><?php echo $d['brand'] ?></td>
+                                <td><?php echo $d['model'] ?></td>
+                                <td><?php echo $d['core'] ?></td>
+                                <td><?php echo $d['generation'] ?></td>
+                                <td><?php echo $recived_qty; ?></td>
+                                <td><?php echo $assing_total; ?></td>
                                 <td>
                                     <?php
 
-                                            $percentage = round(($assign_qty  / $values['item_quantity']) * 100);
+                                            $percentage = round((50  / 10) * 100);
 
                                             if($percentage == 100)
                                             {
@@ -127,11 +115,10 @@ $sales_order_id = $_GET['sales_order_id'];
                                 </td>
                                 <td>
                                     <?php 
-                                    echo "<a class='btn btn-xs bg-gradient-primary mx-2' href=\"production_team_leader_asign.php?sales_order_id={$values['sales_order_id']}&model={$values['model']}&core={$values['core']}&generation={$values['generation']}&brand={$values['brand']}&device={$values['device']}&processor={$values['processor']}\" class='text-white text-capitalize'><i class='fa-solid fa-sun mx-1'></i></a>" ?>
+                                    echo "<a class='btn btn-xs bg-gradient-primary mx-2' href=\"motherboard_assign_page.php?sales_order_id={$d['sales_order_id']}&model={$d['model']}&core={$d['core']}&generation={$d['generation']}&brand={$d['brand']}&device={$d['device']}&processor={$d['processor']}&count={$d['count']}\" class='text-white text-capitalize'><i class='fa-solid fa-sun mx-1'></i></a>" ?>
                                 </td>
                             </tr>
                             <?php } } ?>
-
                         </tbody>
                     </table>
 
@@ -162,9 +149,9 @@ $sales_order_id = $_GET['sales_order_id'];
                             <tbody class="text-uppercase">
                                 <?php
                                     
-                                    $query = "SELECT * FROM prod_technician_assign_info 
-                                    WHERE prod_technician_assign_info.sales_order_id = {$sales_order_id} 
-                                    GROUP BY prod_technician_assign_info.created_time  ";
+                                    $query = "SELECT * FROM motherboard_assign 
+                                    WHERE motherboard_assign.sales_order_id = {$sales_order_id} 
+                                    GROUP BY motherboard_assign.assign_time  ";
                                     $query_run = mysqli_query($connection, $query);
 
                                     if ($rowcount = mysqli_fetch_assoc($query_run)) {
@@ -177,9 +164,8 @@ $sales_order_id = $_GET['sales_order_id'];
                                     <td><?php echo $value['sales_order_id']; ?></td>
                                     <td><?php echo $value['emp_id']; ?></td>
                                     <td><?php echo $value['model']; ?></td>
-                                    <td><?php echo $value['created_time']; ?></td>
-                                    <td><span
-                                            class="badge bg-primary px-3"><?php echo $value['tech_assign_qty']; ?></span>
+                                    <td><?php echo $value['assign_time']; ?></td>
+                                    <td><span class="badge bg-primary px-3"><?php echo $value['qty']; ?></span>
                                     </td>
                                 </tr>
                                 <?php } } ?>
@@ -194,6 +180,7 @@ $sales_order_id = $_GET['sales_order_id'];
         </div>
     </div>
 </div>
+
 
 
 <?php include_once('../includes/footer.php'); } ?>

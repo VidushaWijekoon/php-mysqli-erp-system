@@ -217,7 +217,7 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                                 $received_unit =0;
                                 $tested_unit =0;
                                 $i=0;
-                                if ($rowcount = mysqli_fetch_assoc($query_run)) {
+                                if (mysqli_num_rows($query_run) > 0) {
                                     foreach ($query_run as $items) {
 
                                     $sql = "SELECT SUM(item_quantity) AS No_of_Records FROM sales_order_add_items WHERE sales_order_id ={$items['sales_order_id']} ";

@@ -141,7 +141,7 @@ if (isset($_GET['sales_order_id'])) {
 </div>
 
 <div class="modal fade" id="modal-sm">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"><i class="fa-solid fa-user-plus mx-2 bg-warning p-2"></i>SO
@@ -152,7 +152,7 @@ if (isset($_GET['sales_order_id'])) {
             </div>
             <div class="modal-body">
                 <div class="card-body p-0">
-                    <table id="tb1" class="table table-striped">
+                    <table id="tb1" class="table table-striped text-center">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -179,16 +179,12 @@ if (isset($_GET['sales_order_id'])) {
                                                     endwhile;
                                                     ?>
                                         </select>
-
-
                                 </td>
-
-
                             </tr>
                         </tbody>
                     </table>
-
-
+                    <span class="text-uppercase bg-info mx-auto text-center d-flex justify-content-center">Please
+                        Assign the task for the motherboard techinician</span>
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
@@ -216,22 +212,7 @@ if (isset($_GET['sales_order_id'])) {
 <!-- /.modal -->
 
 
-
 <style>
-select,
-input[type="text"] {
-    width: 100%;
-    height: 30px;
-    margin: inherit;
-    margin-top: 4px;
-    font-size: 10px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-    font-size: 12px;
-    background-color: black;
-}
-
 .btn {
     margin: auto;
     float: right;

@@ -33,12 +33,12 @@ $day = $_GET['day'];
             ?>
 <!-- Info boxes -->
 <div class="row mt-4 m-2">
-    <div class="col-12 col-sm-6 col-md-4">
+    <div class="col-12 col-sm-6 col-md-2">
 
         <div class="info-box">
             <div class="info-box-content">
                 <span class="info-box-text">
-                    <h3><?php echo  $emp_location."-".$day; ?></h3>
+                    <h3 class="text-center"><?php echo  $emp_location."-".$day; ?></h3>
                 </span>
                 <?php
                 $date=date_create($created_date);
@@ -57,32 +57,36 @@ $day = $_GET['day'];
                 $query2 = "SELECT emp_id,model,created_date, COUNT(model) AS request FROM `requested_part_from_production`WHERE (created_date = '$past_14_days') AND status =1 GROUP BY model;";              
                 $query_run2 = mysqli_query($connection, $query2);
                 ?>
+
                 <a
                     href="part_warehouse_task_view.php?model=<?php echo $b['model']  ?>&emp_id=<?php echo $b['emp_id']  ?>&date=<?php echo $created_date ?>">
-                    <span class="info-box-number text-white">
+                    <span
+                        class="info-box-number text-white text-center badge badge-lg badge-info text-white p-2 px-3 text-uppercase mb-2"
+                        style="font-weight: 300; font-size: 12px">
                         <?php
                         echo "Model : ".$b['model']." /";
                         echo " Count :".$b['request'];
                         }
-                    ?>
-                        <?php
+                    
                 foreach($query_run1 as $c){
                     ?>
                         <a
                             href="part_warehouse_task_view.php?model=<?php echo $c['model']  ?>&emp_id=<?php echo $c['emp_id']  ?>&date=<?php echo $past_7_days ?>">
-                            <span class="info-box-number text-warning">
+                            <span
+                                class="info-box-number text-warning text-center badge badge-lg badge-info text-white p-2 px-3 text-uppercase mb-2"
+                                style="font-weight: 300; font-size: 12px">
                                 <?php
                         echo "Model : ".$c['model']." /";
                         echo " Count :".$c['request'];
                         }
-                    ?>
-
-                                <?php
+                     
                 foreach($query_run2 as $d){
                     ?>
                                 <a
                                     href="part_warehouse_task_view.php?model=<?php echo $d['model']  ?>&emp_id=<?php echo $d['emp_id']  ?>&date=<?php echo $past_14_days ?>">
-                                    <span class="info-box-number text-danger">
+                                    <span
+                                        class="info-box-number text-danger text-center badge badge-lg badge-info text-white p-2 px-3 text-uppercase mb-2"
+                                        style="font-weight: 300; font-size: 12px">
                                         <?php
                         echo "Model : ".$d['model']." /";
                         echo " Count :".$d['request'];

@@ -521,8 +521,6 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <p class="text-uppercase  p-0 m-0">dell Laptop Inventroy</p>
-
-
                 <p class="text-uppercase mt-2 m-0">In stock dell Laptops:
                     <?php
 
@@ -537,7 +535,7 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
 
             </div>
             <div class="modal-body">
-                <table id="dell" class="table table-bordered table-striped">
+                <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>&nbsp;</th>
@@ -546,11 +544,11 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
                             <th>Core</th>
                             <th>Genaration</th>
                             <th>In Stock</th>
-                            <th style="width: 120px;">Location</th>
+                            <th style="width: 200px;">Location</th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
-                    <tbody class="table-dark">
+                    <tbody>
                         <?php
 
                             $query = "SELECT *, COUNT(*) AS No_of_Records FROM warehouse_information_sheet WHERE brand = 'dell' AND send_to_production = 0 GROUP BY model, processor, core, generation, location HAVING COUNT(*) >= 1 ";
@@ -626,7 +624,7 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
                             <th>Core</th>
                             <th>Genaration</th>
                             <th>In Stock</th>
-                            <th style="width: 120px;">Location</th>
+                            <th style="width: 200px;">Location</th>
                             <th>&nbsp;</th>
 
                         </tr>
@@ -706,7 +704,7 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
                             <th>Core</th>
                             <th>Genaration</th>
                             <th>In Stock</th>
-                            <th style="width: 120px;">Location</th>
+                            <th style="width: 200px;">Location</th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
@@ -785,7 +783,7 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
                             <th>Core</th>
                             <th>Genaration</th>
                             <th>In Stock</th>
-                            <th style="width: 120px;">Location</th>
+                            <th style="width: 200px;">Location</th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
@@ -864,7 +862,7 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
                             <th>Core</th>
                             <th>Genaration</th>
                             <th>In Stock</th>
-                            <th style="width: 120px;">Location</th>
+                            <th style="width: 200px;">Location</th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
@@ -943,7 +941,7 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
                             <th>Core</th>
                             <th>Genaration</th>
                             <th>In Stock</th>
-                            <th style="width: 120px;">Location</th>
+                            <th style="width: 200px;">Location</th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
@@ -1022,7 +1020,7 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
                             <th>Core</th>
                             <th>Genaration</th>
                             <th>In Stock</th>
-                            <th style="width: 120px;">Location</th>
+                            <th style="width: 200px;">Location</th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
@@ -1101,7 +1099,7 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
                             <th>Core</th>
                             <th>Genaration</th>
                             <th>In Stock</th>
-                            <th style="width: 120px;">Location</th>
+                            <th style="width: 200px;">Location</th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
@@ -1180,7 +1178,7 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
                             <th>Core</th>
                             <th>Genaration</th>
                             <th>In Stock</th>
-                            <th style="width: 120px;">Location</th>
+                            <th style="width: 200px;">Location</th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
@@ -1259,7 +1257,7 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
                             <th>Core</th>
                             <th>Genaration</th>
                             <th>In Stock</th>
-                            <th style="width: 120px;">Location</th>
+                            <th style="width: 200px;">Location</th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
@@ -1338,7 +1336,7 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
                             <th>Core</th>
                             <th>Genaration</th>
                             <th>In Stock</th>
-                            <th style="width: 120px;">Location</th>
+                            <th style="width: 200px;">Location</th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
@@ -1417,7 +1415,7 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
                             <th>Core</th>
                             <th>Genaration</th>
                             <th>In Stock</th>
-                            <th style="width: 120px;">Location</th>
+                            <th style="width: 200px;">Location</th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
@@ -1496,7 +1494,7 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
                             <th>Core</th>
                             <th>Genaration</th>
                             <th>In Stock</th>
-                            <th style="width: 120px;">Location</th>
+                            <th style="width: 200px;">Location</th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
@@ -1540,63 +1538,6 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
 </div>
 <!-- /.modal -->
 
-<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
-<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-<script>
-$(document).ready(function() {
-    $('#dell').dataTable();
-});
-
-$(document).ready(function() {
-    $('#hp').dataTable();
-});
-
-$(document).ready(function() {
-    $('#lenovo').dataTable();
-});
-
-$(document).ready(function() {
-    $('#asus').dataTable();
-});
-
-$(document).ready(function() {
-    $('#fujitsu').dataTable();
-});
-
-$(document).ready(function() {
-    $('#apple').dataTable();
-});
-
-$(document).ready(function() {
-    $('#msi').dataTable();
-});
-
-$(document).ready(function() {
-    $('#microsoft').dataTable();
-});
-
-$(document).ready(function() {
-    $('#acer').dataTable();
-});
-
-$(document).ready(function() {
-    $('#samsung').dataTable();
-});
-
-$(document).ready(function() {
-    $('#razer').dataTable();
-});
-
-$(document).ready(function() {
-    $('#lg').dataTable();
-});
-
-$(document).ready(function() {
-    $('#gigabyte').dataTable();
-});
-</script>
 
 <style>
 .modal-header {
