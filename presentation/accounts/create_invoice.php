@@ -237,7 +237,7 @@ if (isset($_POST['submit'])) {
                                     <div class="row">
                                         <label class="col-sm-3 col-form-label">Zip Code</label>
                                         <div class="col-sm-8">
-                                            <input type="number" class="form-control" placeholder="Zip Code"
+                                            <input type="number" class="form-control" min="1" placeholder="Zip Code"
                                                 name="zip_code">
                                         </div>
                                     </div>
@@ -245,8 +245,8 @@ if (isset($_POST['submit'])) {
                                     <div class="row">
                                         <label class="col-sm-3 col-form-label">Contact Number</label>
                                         <div class="col-sm-8">
-                                            <input type="number" class="form-control" placeholder="Contact Number"
-                                                name="contact_number">
+                                            <input type="number" class="form-control" min="1"
+                                                placeholder="Contact Number" name="contact_number">
                                         </div>
                                     </div>
                                 </div>

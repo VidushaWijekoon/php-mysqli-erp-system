@@ -32,25 +32,14 @@ function Login($role_id, $department){
     elseif($role_id == 6 && $department == 1){
         header('Location: presentation/production/production_technician_dashboard.php');
     }
-    // 7 Body Work 10 == Genaral Worker
-    elseif($role_id == 10 && $department == 7){
-        // header('Location: presentation/inventory/warehouse_member_sales_order.php');
+
+    // Motherboard Team Leader Redirect
+     elseif($role_id == 4 && $department == 9){
+        header('Location: presentation/motherboard/motherboard_dashboard.php');
     }
-    //8 Paint 10 == Genaral Worker
-    elseif($role_id == 10 && $department == 8){
-        // header('Location: presentation/inventory/warehouse_member_sales_order.php');
-    }
-    //13 Packing 10 == Genaral Worker
-    elseif($role_id == 10 && $department == 13){
-        // header('Location: presentation/inventory/warehouse_member_sales_order.php');
-    }
-    //8 HR 
-    elseif($role_id == 8 && $department == 4){
-        header('Location: presentation/includes/main.php');
-    }
-    // Sales 
-    elseif($role_id == 8 && $department == 4){
-        header('Location: presentation/sales/sales_dashboard.php');
+    // Motherboard Technician Redirect
+    elseif($role_id == 6 && $department == 9){
+        header('Location: presentation/motherboard/motherboard_technician.php');
     }
    
 

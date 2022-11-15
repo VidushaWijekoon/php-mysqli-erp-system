@@ -34,7 +34,7 @@ if($role_id == 1 && $department == 11 || $role_id == 6 && $department == 1) {
                     <p class="text-uppercase m-0 p-0">My Task</p>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered ">
+                    <table id="example2" class="table table-bordered ">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -54,16 +54,16 @@ if($role_id == 1 && $department == 11 || $role_id == 6 && $department == 1) {
                             $query_6 = mysqli_query($connection, $query_prod_tech);
                            
                             $i =0;
-                             $completed_qty =0;
-                             $tech_id;
+                            $completed_qty =0;
+                            $tech_id;
                             foreach($query_6 as $values){ 
                                 $i++;
-                               $tech_id = $values['tech_id'];
+                                $tech_id = $values['tech_id'];
                                 $query = "SELECT COUNT(tech_id) AS tech_id_count FROM prod_info WHERE tech_id = '$tech_id' AND status ='0' ";
-                                            $query_run = mysqli_query($connection, $query);
-                                            foreach($query_run as $a){
-                                                $completed_qty = $a['tech_id_count'];
-                                            }                    
+                                        $query_run = mysqli_query($connection, $query);
+                                        foreach($query_run as $a){
+                                            $completed_qty = $a['tech_id_count'];
+                                        }                    
                                 ?>
 
                             <tr>
@@ -131,17 +131,6 @@ if($role_id == 1 && $department == 11 || $role_id == 6 && $department == 1) {
     </div>
 </div>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
-<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-
-<script>
-$(document).ready(function() {
-    $('#example1').dataTable();
-});
-</script>
 
 <?php include_once('../includes/footer.php'); }else{
         die(access_denied());
