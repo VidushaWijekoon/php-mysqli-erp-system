@@ -26,7 +26,7 @@ if(isset($_GET['emp_id'])){
 ?>
 
 <div class="row page-titles">
-    <div class="col-md-5 align-self-center"><a href="./production_team_task.php">
+    <div class="col-md-5 align-self-center"><a href="./production_team_leader_dashboard.php">
             <i class="fa-solid fa-home fa-2x m-2" style="color: #ced4da;"></i>
         </a>
     </div>
