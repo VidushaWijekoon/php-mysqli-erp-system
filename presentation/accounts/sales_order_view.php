@@ -144,6 +144,7 @@ if (isset($_GET['sales_order_id'])) {
                                 <th>HDD</th>
                                 <th>Display</th>
                                 <th>Graphic</th>
+                                <th>OS</th>
                                 <th>Condition</th>
                                 <th>QTY</th>
                                 <th>Unit Price</th>
@@ -176,16 +177,14 @@ if (isset($_GET['sales_order_id'])) {
                                 <td class="text-uppercase"><?php echo $items['item_hdd'] ?></td>
                                 <td class="text-uppercase"><?php echo $items['item_display'] ?></td>
                                 <td class="text-uppercase"><?php echo $items['item_graphic'] ?></td>
+                                <td class="text-uppercase"><?php echo $items['item_os'] ?></td>
                                 <td class="text-uppercase"><?php echo $items['item_condition'] ?></td>
                                 <td class="text-uppercase"><?php echo $items['No_of_Records'] ?></td>
-                                <td class="text-uppercase"><?php echo $items['item_price'] ?></td>
                                 <td class="text-uppercase"><?php echo $items['item_total_price'] ?></td>
+                                <td class="text-uppercase"><?php echo $items['item_price'] ?></td>
                                 <td class="text-uppercase"><?php echo $items['item_delivery_date'] ?></td>
                             </tr>
-                            <?php
-                                            }
-                                        }
-                                        ?>
+                            <?php } } ?>
                         </tbody>
 
                     </table>

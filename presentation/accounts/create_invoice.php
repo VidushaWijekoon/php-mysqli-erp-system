@@ -67,11 +67,10 @@ if (isset($_POST['submit'])) {
         $result = mysqli_query($connection, $query);        
 
         if ($result) {
-            $last_id = $connection->insert_id;
-            
+            $last_id = $connection->insert_id;            
                 for ($a = 0; $a < count($_POST["item_type"]); $a++) {
                     $sql = strtolower("INSERT INTO sales_order_add_items(item_type, item_brand, item_model, item_processor, item_core, item_generation, 
-                                                    item_ram, item_hdd, item_display, item_screen, item_graphic, item_bulk, item_condition, item_quantity, 
+                                                    item_ram, item_hdd, item_display, item_screen, item_graphic, item_os, item_bulk, item_condition, item_quantity, 
                                                     item_total_price, item_delivery_date, item_price, sales_order_id)
                                                     VALUES(
                                                         '" . $_POST["item_type"][$a] . "',
@@ -85,6 +84,7 @@ if (isset($_POST['submit'])) {
                                                         '" . $_POST["item_display"][$a] . "',
                                                         '" . $_POST["item_screen"][$a] . "',
                                                         '" . $_POST["item_graphic"][$a] . "',
+                                                        '" . $_POST["item_os"][$a] . "',
                                                         '" . $_POST["item_bulk"][$a] . "',
                                                         '" . $_POST["item_condition"][$a] . "',
                                                         '" . $_POST["item_quantity"][$a] . "',
@@ -94,9 +94,12 @@ if (isset($_POST['submit'])) {
                                                         '" . (int)$last_id .  "'
                                                     )");
                     $data_result = mysqli_query($connection, $sql);
-                    header("location: ./sales_orders.php");
+                    if($data_result){
+                        header("location: ./sales_orders.php");
+                    }else{
+                        echo "Something Wrong with ur Javascript File";
+                    }
                 }
-
         } else {
             $errors[] = 'Failed to add the new record.';
         }
@@ -274,6 +277,7 @@ if (isset($_POST['submit'])) {
                                             <th>Display</th>
                                             <th>Screen</th>
                                             <th>Graphic</th>
+                                            <th>OS</th>
                                             <th>Bulk</th>
                                             <th>Condition</th>
                                             <th>QTY</th>
@@ -343,14 +347,17 @@ function addItem() {
         "<td><select name='item_graphic[]' class='form-select form-select-sm' aria-label='.form-select-sm example'><option selected>--Select Graphic--</option> <option value='2gb'>2GB</option><option value='4gb'>4GB</option><option value='8gb'>8GB</option><option value='16gb'>16GB</option></select></td >";
 
     html +=
+        "<td><select name='item_os[]' class='form-select form-select-sm' aria-label='.form-select-sm example'><option selected>--Select OS--</option> <option value='windows 7'>Windows 7</option><option value='windows 8'>Windows 8</option><option value='windows 10'>Windows 10</option><option value='windows 11'>Windows 11</option><option value='ubuntu'>Ubuntu</option><option value='linux'>Linux</option><option value='16gb'>16GB</option></select></td >";
+
+    html +=
         "<td><select name='item_bulk[]' class='form-select form-select-sm' aria-label='.form-select-sm example' required><option selected>--Select Bulk--</option> <option value='e-commerce'>E-Commerce</option><option value='bulk sale'>Bulk Sale</option></select></td >";
 
     html += "<td><input name='item_condition[]' class='form-control' type='text' ></td>";
 
-    html += "<td><input class='form-control' type='number' name='item_quantity[]'></td>";
-    html += "<td><input class='form-control' type='number' name='item_price[]'></td>";
-    html += "<td><input class='form-control' type='number' name='item_total_price[]'></td>";
-    html += "<td><input class='form-control' type='date' name='item_delivery_date[]'></td>";
+    html += "<td><input class='form-control' type='number' min='1' name='item_quantity[]'></td>";
+    html += "<td><input class='form-control' type='number' min='1' name='item_price[]'></td>";
+    html += "<td><input class='form-control' type='number' min='1' name='item_total_price[]'></td>";
+    html += "<td><input class='form-control' type='date' id='date' name='item_delivery_date[]'></td>";
     html += "<td><button type='button' onclick='deleteRow(this);'class='btn btn-sm btn-danger'>Delete</button></td>";
     html += "</tr>";
 
@@ -363,6 +370,24 @@ function deleteRow(button) {
     button.parentElement.parentElement.remove();
     // first parentElement will be td and second will be tr.
 }
+
+$(function() {
+    var dtToday = new Date();
+
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if (month < 10) month = "0" + month.toString();
+    if (day < 10) day = "0" + day.toString();
+
+    var maxDate = year + "-" + month + "-" + day;
+
+    // or instead:
+    // var maxDate = dtToday.toISOString().substr(0, 10);
+
+    // alert(maxDate);
+    $("#date").attr("min", maxDate);
+});
 </script>
 
 
