@@ -1,4 +1,5 @@
 <?php 
+ob_start();
 session_start();
 include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
@@ -133,10 +134,11 @@ if (isset($_POST['submit'])) {
  
         $query = strtolower("INSERT INTO employees (first_name, last_name, full_name, email, gender, birthday, current_passport, passport_expiring_date, visa_type, visa_expiring_date,contact_number, relationship, current_address, current_country, permanent_address, resident_country, emergency_contact, profile_photo, department, labour_category, join_date, note, discontinuation_date, old_passport, created_by, is_active) 
         VALUES ('$first_name', '$last_name', '$full_name', '$email' , '$gender', '$birthday', '$current_passport', '$passport_expiring_date', '$visa_type', '$visa_expiring_date', '$contact_number' ,'$relationship', '$current_address', '$current_country', '$permanent_address', '$resident_country', '$emergency_contact', '$profile_photo', '$department', '$labour_category', '$join_date', '$note', '$discontinuation_date', '$old_passport', '$created_by', 0)");
-    
        $result = mysqli_query($connection, $query);
 
         if ($result) {
+            echo "Successfully insert data";
+            header("Location: ./employees.php");
         } else {
             $errors[] = 'Failed to add the new record.';
         }
