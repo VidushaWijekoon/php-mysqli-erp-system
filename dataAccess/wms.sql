@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 14, 2022 at 11:42 AM
+-- Generation Time: Nov 16, 2022 at 01:44 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.4.0
 
@@ -133,7 +133,24 @@ CREATE TABLE IF NOT EXISTS `combine_check` (
   `lan_cover` int(11) NOT NULL,
   `combined_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=436 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=454 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `combine_check`
+--
+
+INSERT INTO `combine_check` (`id`, `inventory_id`, `emp_id`, `sales_order_id`, `keyboard`, `speakers`, `camera`, `bazel`, `created_time`, `status`, `damage_keys`, `mousepad`, `mouse_pad_button`, `camera_cable`, `back_cover`, `wifi_card`, `lcd_cable`, `battery`, `battery_cable`, `dvd_rom`, `dvd_caddy`, `hdd_caddy`, `hdd_cable_connector`, `c_panel_palm_rest`, `mb_base`, `hings_cover`, `lan_cover`, `combined_id`) VALUES
+(443, 000172, 1037, 1000, 1, 1, 0, 0, '2022-11-16 12:47:02', 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0),
+(444, 000175, 1037, 1000, 1, 1, 1, 1, '2022-11-16 12:51:38', 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0),
+(445, 000173, 1037, 1000, 0, 0, 0, 0, '2022-11-16 12:52:02', 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0),
+(446, 000157, 1037, 1000, 1, 1, 1, 1, '2022-11-16 12:52:34', 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0),
+(447, 000158, 1037, 1000, 1, 1, 1, 1, '2022-11-16 12:52:55', 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0),
+(448, 000159, 1037, 1000, 1, 1, 1, 1, '2022-11-16 12:53:16', 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0),
+(449, 000100, 1037, 1000, 1, 1, 1, 1, '2022-11-16 12:54:00', 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(450, 000101, 1037, 1000, 0, 1, 1, 1, '2022-11-16 12:54:37', 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0),
+(451, 000102, 1037, 1000, 0, 0, 1, 0, '2022-11-16 12:55:10', 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0),
+(452, 000103, 1037, 1000, 0, 0, 0, 0, '2022-11-16 12:55:34', 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0),
+(453, 000104, 1037, 1000, 0, 0, 0, 0, '2022-11-16 12:55:53', 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -499,6 +516,51 @@ INSERT INTO `device` (`device_id`, `device`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `district`
+--
+
+DROP TABLE IF EXISTS `district`;
+CREATE TABLE IF NOT EXISTS `district` (
+  `district_id` int(11) NOT NULL AUTO_INCREMENT,
+  `district_name` varchar(20) NOT NULL,
+  `province_id` int(11) NOT NULL,
+  PRIMARY KEY (`district_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `district`
+--
+
+INSERT INTO `district` (`district_id`, `district_name`, `province_id`) VALUES
+(1, 'Ampara', 2),
+(2, 'Anuradhapura', 3),
+(3, 'Badulla', 8),
+(4, 'Batticaloa', 2),
+(5, 'Colombo', 9),
+(6, 'Galle', 7),
+(7, 'Gampaha', 9),
+(8, 'Hambantota', 7),
+(9, 'Jaffna', 5),
+(10, 'Kalutara', 9),
+(11, 'Kandy', 1),
+(12, 'Kegalle', 6),
+(13, 'Kilinochchi', 5),
+(14, 'Kurunegala', 4),
+(15, 'Mannar', 5),
+(16, 'Matale', 1),
+(17, 'Matara', 7),
+(18, 'Moneragala', 8),
+(19, 'Mullaitivu', 5),
+(20, 'Nuwara Eliya', 1),
+(21, 'Polonnaruwa', 3),
+(22, 'Puttalam', 4),
+(23, 'Ratnapura', 6),
+(24, 'Trincomalee', 2),
+(25, 'Vavuniya', 5);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `employees`
 --
 
@@ -548,6 +610,61 @@ INSERT INTO `employees` (`emp_id`, `first_name`, `last_name`, `email`, `full_nam
 (1038, 'sam', 'cheng', 'matanamne@gmail.com', 'sam gg cheng', 'female', '2022-09-29', 'abcariya225', '2023-05-02', '11', '2022-12-02', '071748293', 'complicate', 'al nadha', 'bahamas', 'not mention', 'azerbaijan', '119', 'aaa.png', '1', '6', '2022-11-01', 'mu nam hari yanne ne dekak gahala pannapan bn ', '', '2022-11-07 12:18:55', '', 'admin', 0),
 (1039, 'asdad', 'sdfdsfsf', '', 'sdasdad', 'male', '2023-01-02', '2313123', '2023-01-01', '1', '2024-03-21', '1212', 'unmarried', 'sdfdf', 'afghanistan', 'sfsfsf', 'afghanistan', '1', '3840x1080-wallpaper-043.jpg', '9', '4', '2022-10-31', 'asdsdads', '1312313', '2022-11-13 14:52:48', '', 'admin', 0),
 (1040, 'sfsfsf', 'sdassfasf', '', 'sdfsfsdfs', 'male', '2020-02-04', '1231313', '2024-03-03', '3', '2024-12-31', '0123213123', 'married', '123213', 'aland islands', 'sfsfsf', 'afghanistan', '1', 'dual-monitor-wallpaper-7.jpg', '9', '6', '2022-11-03', 'adadsa', 'q31123213123', '2022-11-13 14:54:17', '', 'admin', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `e_com_listing`
+--
+
+DROP TABLE IF EXISTS `e_com_listing`;
+CREATE TABLE IF NOT EXISTS `e_com_listing` (
+  `listing_id` int(11) NOT NULL AUTO_INCREMENT,
+  `promo_type` varchar(20) NOT NULL,
+  `catelog_sku` varchar(40) NOT NULL,
+  `brand` varchar(40) NOT NULL,
+  `model` varchar(40) NOT NULL,
+  `size` int(11) NOT NULL,
+  `generation` int(11) NOT NULL,
+  `cpu` varchar(10) NOT NULL,
+  `ram` int(11) NOT NULL,
+  `hdd` int(11) NOT NULL,
+  `our_wholesale_price` int(11) NOT NULL,
+  `our_current_noon_price` int(11) NOT NULL,
+  `other_noon_price` int(11) NOT NULL,
+  `amazon_price` int(11) NOT NULL,
+  `cartlow_price` int(11) NOT NULL,
+  `cost_with_windows_ac` int(11) NOT NULL,
+  `gross_profit` int(11) NOT NULL,
+  `noon_charges` int(11) NOT NULL,
+  `noon_sale_price` int(11) NOT NULL,
+  `noon_paid` int(11) NOT NULL,
+  `noon_net_profit` int(11) NOT NULL,
+  `profit_percentage` int(11) NOT NULL,
+  `created_by` varchar(40) NOT NULL,
+  `created_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `qty` int(11) NOT NULL,
+  `exp_date` datetime NOT NULL,
+  `status` varchar(40) NOT NULL,
+  PRIMARY KEY (`listing_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=222 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `e_com_listing`
+--
+
+INSERT INTO `e_com_listing` (`listing_id`, `promo_type`, `catelog_sku`, `brand`, `model`, `size`, `generation`, `cpu`, `ram`, `hdd`, `our_wholesale_price`, `our_current_noon_price`, `other_noon_price`, `amazon_price`, `cartlow_price`, `cost_with_windows_ac`, `gross_profit`, `noon_charges`, `noon_sale_price`, `noon_paid`, `noon_net_profit`, `profit_percentage`, `created_by`, `created_date`, `qty`, `exp_date`, `status`) VALUES
+(211, 'B friday ', ' ', 'hp ', 'zbook g7 ', 0, 0, '--Select C', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'add his name from session', '2022-11-14 16:21:54', 0, '0000-00-00 00:00:00', ''),
+(212, 'B friday ', ' ', 'hp ', 'zbook g7 ', 0, 0, '--Select C', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'add his name from session', '2022-11-14 16:28:45', 0, '0000-00-00 00:00:00', ''),
+(213, 'B friday ', ' ', 'hp ', 'zbook g7 ', 0, 0, '--Select C', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'add his name from session', '2022-11-14 16:29:19', 0, '0000-00-00 00:00:00', ''),
+(214, 'B friday ', ' ', 'hp ', 'zbook g7 ', 0, 0, '--Select C', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'add his name from session', '2022-11-14 16:33:44', 0, '0000-00-00 00:00:00', ''),
+(215, '--Select Promotion T', ' ', '--Select brand-- ', ' ', 0, 0, ' ', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'add his name from session', '2022-11-14 16:33:47', 0, '0000-00-00 00:00:00', ''),
+(216, '--Select Promotion T', ' ', '--Select brand-- ', ' ', 0, 0, ' ', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'add his name from session', '2022-11-14 16:33:57', 0, '0000-00-00 00:00:00', ''),
+(217, 'weekly ', 'cdxbdfxbg ', 'hp ', '820 g3 ', 14, 6, 'i5 ', 4, 32, 1060, 0, 0, 0, 0, 1180, 1005, 242, 2199, 1943, 763, 65, 'add his name from session', '2022-11-14 16:48:03', 0, '0000-00-00 00:00:00', ''),
+(218, '11:11 ', 'asasas ', 'dell ', 'e5530 ', 14, 8, 'i7 ', 4, 32, 1060, 0, 0, 0, 0, 1180, 1005, 242, 2199, 1943, 763, 65, 'add his name from session', '2022-11-14 16:54:52', 22, '2022-11-30 00:00:00', 'listing submitted'),
+(219, '11:11 ', 'asasas ', 'dell ', 'e5530 ', 14, 8, 'i7 ', 4, 32, 1060, 0, 0, 0, 0, 1180, 1005, 242, 2199, 1943, 763, 65, 'add his name from session', '2022-11-14 16:57:10', 22, '2022-11-30 00:00:00', 'listing submitted'),
+(220, '11:11 ', 'asasas ', 'dell ', 'e5530 ', 14, 8, 'i7 ', 4, 32, 1060, 0, 0, 0, 0, 1180, 1005, 242, 2199, 1943, 763, 65, 'add his name from session', '2022-11-14 17:00:26', 22, '2022-11-30 00:00:00', 'listing submitted'),
+(221, '11:11 ', 'asasas ', 'dell ', 'e5530 ', 14, 8, 'i7 ', 4, 32, 1060, 0, 0, 0, 0, 1180, 1005, 242, 2199, 1943, 763, 65, 'add his name from session', '2022-11-14 17:01:30', 22, '2022-11-30 00:00:00', 'listing submitted');
 
 -- --------------------------------------------------------
 
@@ -622,7 +739,14 @@ CREATE TABLE IF NOT EXISTS `lcd_check` (
   `created_time` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `lcd_check`
+--
+
+INSERT INTO `lcd_check` (`id`, `inventory_id`, `emp_id`, `sales_order_id`, `whitespot`, `scratch`, `broken`, `line_lcd`, `yellow_shadow`, `created_time`, `status`) VALUES
+(33, 000174, 1037, 1000, 0, 0, 0, 0, 0, '2022-11-16 12:32:10', 0);
 
 -- --------------------------------------------------------
 
@@ -664,6 +788,19 @@ INSERT INTO `location` (`location_id`, `location`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `motherbaord_dep`
+--
+
+DROP TABLE IF EXISTS `motherbaord_dep`;
+CREATE TABLE IF NOT EXISTS `motherbaord_dep` (
+  `motherboard_id` int(11) NOT NULL AUTO_INCREMENT,
+  `inventory_id` int(6) UNSIGNED ZEROFILL NOT NULL,
+  PRIMARY KEY (`motherboard_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `motherboard_assign`
 --
 
@@ -685,14 +822,6 @@ CREATE TABLE IF NOT EXISTS `motherboard_assign` (
   PRIMARY KEY (`motherboard_assign_task_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `motherboard_assign`
---
-
-INSERT INTO `motherboard_assign` (`motherboard_assign_task_id`, `sales_order_id`, `emp_id`, `device`, `brand`, `processor`, `core`, `generation`, `model`, `qty`, `status`, `assign_time`, `task_completed_time`) VALUES
-(23, 1000, 1040, 'laptop', 'dell', 'intel', 'i7', '8', 'xps 15', 6, 0, '2022-11-14 08:50:15', '0000-00-00 00:00:00'),
-(24, 1000, 1040, 'laptop', 'dell', 'intel', 'i7', '8', 'e5530', 5, 0, '2022-11-14 09:01:40', '0000-00-00 00:00:00');
-
 -- --------------------------------------------------------
 
 --
@@ -712,31 +841,24 @@ CREATE TABLE IF NOT EXISTS `motherboard_check` (
   `status` int(11) NOT NULL,
   `completed_time` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=202 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=218 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `motherboard_check`
 --
 
 INSERT INTO `motherboard_check` (`id`, `inventory_id`, `emp_id`, `sales_order_id`, `bios_check`, `no_power`, `usb_connection`, `created_time`, `status`, `completed_time`) VALUES
-(184, 000100, 1037, 1000, 1, 1, 1, '2022-11-09 15:05:18', 0, '2022-11-09 19:05:18'),
-(185, 000101, 1037, 1000, 0, 1, 0, '2022-11-09 15:11:25', 0, '2022-11-09 19:11:25'),
-(186, 000102, 1037, 1000, 1, 0, 1, '2022-11-12 11:15:33', 1, '2022-11-12 15:15:33'),
-(187, 000103, 1037, 1000, 1, 1, 0, '2022-11-12 16:01:18', 1, '2022-11-12 20:01:18'),
-(188, 000104, 1037, 1000, 1, 0, 1, '2022-11-12 16:01:27', 1, '2022-11-12 20:01:27'),
-(189, 000175, 1037, 1000, 0, 0, 0, '2022-11-13 06:07:54', 0, '2022-11-13 10:07:54'),
-(190, 000176, 1037, 1000, 0, 0, 0, '2022-11-13 06:08:25', 0, '2022-11-13 10:08:25'),
-(191, 000945, 1037, 1004, 0, 1, 1, '2022-11-13 08:57:50', 1, '2022-11-13 12:57:50'),
-(192, 000946, 1037, 1004, 1, 1, 1, '2022-11-13 08:58:03', 1, '2022-11-13 12:58:03'),
-(193, 000947, 1037, 1004, 0, 0, 0, '2022-11-13 08:58:12', 0, '2022-11-13 12:58:12'),
-(194, 000948, 1037, 1004, 1, 1, 0, '2022-11-13 08:58:28', 1, '2022-11-13 12:58:28'),
-(195, 000950, 1037, 1004, 1, 1, 0, '2022-11-13 08:58:37', 1, '2022-11-13 12:58:37'),
-(196, 000157, 1037, 1000, 0, 1, 1, '2022-11-14 06:22:35', 1, '2022-11-14 10:22:35'),
-(197, 000158, 1037, 1000, 1, 0, 0, '2022-11-14 06:22:44', 1, '2022-11-14 10:22:44'),
-(198, 000159, 1037, 1000, 0, 1, 1, '2022-11-14 06:23:00', 1, '2022-11-14 10:23:00'),
-(199, 000160, 1037, 1000, 0, 0, 1, '2022-11-14 06:23:08', 1, '2022-11-14 10:23:08'),
-(200, 000161, 1037, 1000, 0, 1, 1, '2022-11-14 06:23:17', 1, '2022-11-14 10:23:17'),
-(201, 000162, 1037, 1000, 1, 1, 1, '2022-11-14 06:23:27', 1, '2022-11-14 10:23:27');
+(207, 000172, 1037, 1000, 0, 0, 0, '2022-11-16 12:46:49', 0, '2022-11-16 16:46:49'),
+(208, 000175, 1037, 1000, 0, 0, 0, '2022-11-16 12:51:25', 0, '2022-11-16 16:51:25'),
+(209, 000173, 1037, 1000, 0, 0, 0, '2022-11-16 12:51:48', 0, '2022-11-16 16:51:48'),
+(210, 000157, 1037, 1000, 0, 0, 0, '2022-11-16 12:52:19', 0, '2022-11-16 16:52:19'),
+(211, 000158, 1037, 1000, 0, 0, 0, '2022-11-16 12:52:42', 0, '2022-11-16 16:52:42'),
+(212, 000159, 1037, 1000, 0, 0, 0, '2022-11-16 12:53:02', 0, '2022-11-16 16:53:02'),
+(213, 000100, 1037, 1000, 0, 0, 0, '2022-11-16 12:53:44', 0, '2022-11-16 16:53:44'),
+(214, 000101, 1037, 1000, 0, 0, 0, '2022-11-16 12:54:09', 0, '2022-11-16 16:54:09'),
+(215, 000102, 1037, 1000, 0, 0, 0, '2022-11-16 12:54:44', 0, '2022-11-16 16:54:44'),
+(216, 000103, 1037, 1000, 0, 0, 0, '2022-11-16 12:55:21', 0, '2022-11-16 16:55:21'),
+(217, 000104, 1037, 1000, 0, 0, 0, '2022-11-16 12:55:41', 0, '2022-11-16 16:55:41');
 
 -- --------------------------------------------------------
 
@@ -754,28 +876,6 @@ CREATE TABLE IF NOT EXISTS `motherboard_dep` (
   `status` int(1) NOT NULL,
   PRIMARY KEY (`motherboard_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `motherboard_dep`
---
-
-INSERT INTO `motherboard_dep` (`motherboard_id`, `inventory_id`, `sales_order_id`, `created_by`, `received_date`, `status`) VALUES
-(21, 000100, 1000, 'admin', '2022-11-14 05:47:35', 0),
-(22, 000101, 1000, 'admin', '2022-11-14 05:47:38', 0),
-(23, 000102, 1000, 'admin', '2022-11-14 05:47:40', 0),
-(24, 000103, 1000, 'admin', '2022-11-14 05:47:43', 0),
-(25, 000104, 1000, 'admin', '2022-11-14 05:47:45', 0),
-(26, 000945, 1004, 'admin', '2022-11-14 05:48:16', 0),
-(27, 000946, 1004, 'admin', '2022-11-14 05:48:17', 0),
-(28, 000947, 1004, 'admin', '2022-11-14 05:48:19', 0),
-(29, 000948, 1004, 'admin', '2022-11-14 05:48:20', 0),
-(30, 000950, 1004, 'admin', '2022-11-14 05:48:24', 0),
-(31, 000157, 1000, 'admin', '2022-11-14 06:23:56', 0),
-(32, 000158, 1000, 'admin', '2022-11-14 06:23:58', 0),
-(33, 000159, 1000, 'admin', '2022-11-14 06:24:02', 0),
-(34, 000160, 1000, 'admin', '2022-11-14 06:24:04', 0),
-(35, 000161, 1000, 'admin', '2022-11-14 06:24:05', 0),
-(36, 000162, 1000, 'admin', '2022-11-14 06:24:15', 0);
 
 -- --------------------------------------------------------
 
@@ -814,7 +914,7 @@ CREATE TABLE IF NOT EXISTS `part_list` (
   `part_id` int(11) NOT NULL AUTO_INCREMENT,
   `part_name` varchar(100) NOT NULL,
   PRIMARY KEY (`part_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `part_list`
@@ -822,7 +922,27 @@ CREATE TABLE IF NOT EXISTS `part_list` (
 
 INSERT INTO `part_list` (`part_id`, `part_name`) VALUES
 (1, 'camera'),
-(2, 'keyboard');
+(2, 'keyboard'),
+(3, 'dvd caddy'),
+(4, 'battery'),
+(5, 'mouse pad'),
+(6, 'mouse'),
+(7, 'bazel'),
+(8, 'camera cable'),
+(9, 'back cover'),
+(10, 'lcd cable'),
+(11, 'wifi card'),
+(12, 'battery'),
+(13, 'battery cable'),
+(14, 'dvd rom'),
+(15, 'dvd caddy'),
+(16, 'hdd caddy'),
+(17, 'hdd connection caddy'),
+(18, 'a/top'),
+(19, 'c/panel plam rest '),
+(20, 'd/mb base'),
+(21, 'hings cover'),
+(22, 'lan cover');
 
 -- --------------------------------------------------------
 
@@ -836,105 +956,21 @@ CREATE TABLE IF NOT EXISTS `part_stock` (
   `part_name` varchar(100) NOT NULL,
   `part_model` varchar(100) NOT NULL,
   `part_brand` varchar(100) NOT NULL,
-  `part_gen` varchar(40) NOT NULL,
-  `capacity` varchar(6) NOT NULL,
+  `part_gen` varchar(40) DEFAULT NULL,
+  `capacity` varchar(6) DEFAULT NULL,
   `qty` int(11) NOT NULL,
   `location` varchar(40) NOT NULL,
   `rack_number` varchar(10) NOT NULL,
   `slot_name` varchar(10) NOT NULL,
   PRIMARY KEY (`stock_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `part_stock`
 --
 
 INSERT INTO `part_stock` (`stock_id`, `part_name`, `part_model`, `part_brand`, `part_gen`, `capacity`, `qty`, `location`, `rack_number`, `slot_name`) VALUES
-(2, 'keyboard', '820 G3', 'hp', '6', '', 1, '2nd box', 'null', 'null'),
-(3, 'keyboard', 'xps 15', 'dell', '8', '', 50, '3rd box', 'RACK-B', 'A-3'),
-(4, 'keyboard', 'zbook g7', 'hp', '10', '', 0, '4th box', 'RACK-A', 'A-2'),
-(5, 'speakers', 'zbook g7', 'hp', '10', '', -2, 'box-101', 'RACK-A', 'A-3'),
-(6, 'camera', 'zbook g7', 'hp', '10', '', 64, 'box-101', 'RACK-A', 'L-4'),
-(7, 'bazel', 'zbook g7', 'hp', '10', '', 64, 'box-101', 'RACK-A', 'A-5'),
-(8, 'mousepad', 'zbook g7', 'hp', '10', '', 64, 'box-101', 'RACK-A', 'A-6'),
-(9, 'mouse_pad_button', 'zbook g7', 'hp', '10', '', 64, 'box-101', 'RACK-A', 'A-7'),
-(10, 'camera_cable', 'zbook g7', 'hp', '10', '', 64, 'box-101', 'RACK-A', 'D-3'),
-(11, 'back_cover', 'zbook g7', 'hp', '10', '', 64, 'box-101', 'RACK-A', 'A-9'),
-(12, 'wifi_card', 'zbook g7', 'hp', '10', '', 64, 'box-101', 'RACK-A', 'A-10'),
-(13, 'lcd_cable', 'zbook g7', 'hp', '10', '', 64, 'box-101', 'RACK-A', 'A-11'),
-(14, 'battery', 'zbook g7', 'hp', '10', '', 64, 'box-101', 'RACK-A', 'A-12'),
-(15, 'battery_cable', 'zbook g7', 'hp', '10', '', 64, 'box-101', 'RACK-A', 'A-13'),
-(16, 'dvd_rom', 'zbook g7', 'hp', '10', '', 64, 'box-101', 'RACK-A', 'A-14'),
-(17, 'dvd_caddy', 'zbook g7', 'hp', '10', '', 64, 'box-101', 'RACK-A', 'A-15'),
-(18, 'hdd_caddy', 'zbook g7', 'hp', '10', '', 64, 'box-101', 'RACK-A', 'A-16'),
-(19, 'hdd_cable_connector', 'zbook g7', 'hp', '10', '', 64, 'box-101', 'RACK-A', 'A-17'),
-(20, 'c_panel_palm_rest', 'zbook g7', 'hp', '10', '', 64, 'box-101', 'RACK-A', 'A-18'),
-(21, 'mb_base', 'zbook g7', 'hp', '10', '', 64, 'box-101', 'RACK-A', 'A-19'),
-(22, 'hings_cover', 'zbook g7', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-20'),
-(23, 'lancover', 'zbook g7', 'hp', '10', '', 64, 'box-101', 'RACK-A', 'A-21'),
-(24, 'speakers', '820 g3', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-22'),
-(25, 'camera', '820 g3', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'C-2'),
-(26, 'bazel', '820 g3', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-24'),
-(27, 'mousepad', '820 g3', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(28, 'mouse_pad_button', '820 g3', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(29, 'camera_cable', '820 g3', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'K-1'),
-(30, 'back_cover', '820 g3', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(31, 'wifi_card', '820 g3', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(32, 'lcd_cable', '820 g3', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(33, 'battery', '820 g3', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(34, 'battery_cable', '820 g3', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(35, 'dvd_rom', '820 g3', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(36, 'dvd_caddy', '820 g3', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(37, 'hdd_caddy', '820 g3', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(38, 'hdd_cable_connector', '820 g3', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(39, 'c_panel_palm_rest', '820 g3', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(40, 'mb_base', '820 g3', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(41, 'hings_cover', '820 g3', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(42, 'lancover', '820 g3', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(43, 'speakers', 'xps 15', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(44, 'camera', 'xps 15', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(45, 'bazel', 'xps 15', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(46, 'mousepad', 'xps 15', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(47, 'mouse_pad_button', 'xps 15', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(48, 'camera_cable', 'xps 15', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'I-1'),
-(49, 'back_cover', 'xps 15', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(50, 'wifi_card', 'xps 15', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(51, 'lcd_cable', 'xps 15', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(52, 'battery', 'xps 15', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(53, 'battery_cable', 'xps 15', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(54, 'dvd_rom', 'xps 15', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(55, 'dvd_caddy', 'xps 15', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(56, 'hdd_caddy', 'xps 15', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(57, 'hdd_cable_connector', 'xps 15', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(58, 'c_panel_palm_rest', 'xps 15', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(59, 'mb_base', 'xps 15', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(60, 'hings_cover', 'xps 15', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(61, 'lancover', 'xps 15', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(62, 'speakers', 'e5530', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(63, 'camera', 'e5530', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'G-1'),
-(64, 'bazel', 'e5530', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(65, 'mousepad', 'e5530', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(66, 'mouse_pad_button', 'e5530', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(67, 'camera_cable', 'e5530', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(68, 'back_cover', 'e5530', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(69, 'wifi_card', 'e5530', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(70, 'lcd_cable', 'e5530', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(71, 'battery', 'e5530', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(72, 'battery_cable', 'e5530', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(73, 'dvd_rom', 'e5530', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(74, 'dvd_caddy', 'e5530', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(75, 'hdd_caddy', 'e5530', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(76, 'hdd_cable_connector', 'e5530', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(77, 'c_panel_palm_rest', 'e5530', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(78, 'mb_base', 'e5530', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(79, 'hings_cover', 'e5530', 'hp', '10', '', 100, 'box-101', 'RACK-A', 'A-1'),
-(80, 'lancover', 'e5530', 'hp', '10', '', 100, 'box-101', 'RACK-B', 'A-1'),
-(99, 'keyboard', '2365asa', 'acer', '236', '', 564, '', 'RACK-A', 'A-2'),
-(100, 'camera', '840 g3', 'apple', '10', '', 12, '', 'RACK-A', 'E-4'),
-(101, 'camera', '840 g3', 'apple', '10', '', 12, '', 'RACK-A', 'T-4'),
-(102, 'camera', '840 g3', 'apple', '10', '', 12, '', 'RACK-A', 'H-4'),
-(103, 'camera', 'probook', 'acer', '10', '', 12, '', 'RACK-A', 'A-4'),
-(104, 'camera', 'probook', 'apple', '10', '', 23, '', 'RACK-A', 'B-4');
+(105, 'keyboard', '820 g3', 'hp', '0', '0', 5, 'RACK-3', 'B-5', '0');
 
 -- --------------------------------------------------------
 
@@ -1008,62 +1044,53 @@ CREATE TABLE IF NOT EXISTS `production` (
   `received_date` datetime NOT NULL,
   `created_by` varchar(25) NOT NULL,
   PRIMARY KEY (`production_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `production`
 --
 
 INSERT INTO `production` (`production_id`, `sales_order_id`, `inventory_id`, `received_date`, `created_by`) VALUES
-(54, 1000, 000100, '2022-11-09 18:56:12', 'admin'),
-(55, 1000, 000101, '2022-11-09 18:56:14', 'admin'),
-(56, 1000, 000102, '2022-11-09 18:56:49', 'admin'),
-(57, 1000, 000103, '2022-11-09 18:56:50', 'admin'),
-(58, 1000, 000104, '2022-11-09 18:56:52', 'admin'),
-(59, 1000, 000105, '2022-11-09 18:56:53', 'admin'),
-(60, 1000, 000106, '2022-11-09 18:56:54', 'admin'),
-(61, 1000, 000107, '2022-11-09 18:56:55', 'admin'),
-(62, 1000, 000108, '2022-11-09 18:56:57', 'admin'),
-(63, 1000, 000109, '2022-11-09 18:56:58', 'admin'),
-(64, 1000, 000110, '2022-11-09 18:57:59', 'admin'),
-(65, 1000, 000111, '2022-11-09 18:58:00', 'admin'),
-(66, 1000, 000112, '2022-11-09 18:58:01', 'admin'),
-(67, 1000, 000113, '2022-11-09 18:58:02', 'admin'),
-(68, 1000, 000114, '2022-11-09 18:58:03', 'admin'),
-(69, 1000, 000115, '2022-11-09 18:58:04', 'admin'),
-(70, 1000, 000116, '2022-11-09 18:58:05', 'admin'),
-(71, 1000, 000117, '2022-11-09 18:58:06', 'admin'),
-(72, 1000, 000118, '2022-11-09 18:58:10', 'admin'),
-(73, 1000, 000119, '2022-11-09 18:58:12', 'admin'),
-(74, 1000, 000157, '2022-11-09 18:58:20', 'admin'),
-(75, 1000, 000158, '2022-11-09 18:58:22', 'admin'),
-(76, 1000, 000159, '2022-11-09 18:58:24', 'admin'),
-(77, 1000, 000160, '2022-11-09 18:58:25', 'admin'),
-(78, 1000, 000161, '2022-11-09 18:58:27', 'admin'),
-(79, 1000, 000162, '2022-11-09 18:58:30', 'admin'),
-(80, 1000, 000163, '2022-11-09 18:58:33', 'admin'),
-(81, 1000, 000164, '2022-11-09 18:58:34', 'admin'),
-(82, 1000, 000165, '2022-11-09 18:58:35', 'admin'),
-(83, 1000, 000166, '2022-11-09 18:58:53', 'admin'),
-(84, 1000, 000175, '2022-11-09 18:59:00', 'admin'),
-(85, 1000, 000176, '2022-11-09 18:59:02', 'admin'),
-(86, 1000, 000177, '2022-11-09 18:59:03', 'admin'),
-(87, 1000, 000178, '2022-11-09 18:59:04', 'admin'),
-(88, 1000, 000179, '2022-11-09 18:59:11', 'admin'),
-(89, 1000, 000180, '2022-11-09 18:59:13', 'admin'),
-(90, 1000, 000181, '2022-11-09 18:59:15', 'admin'),
-(91, 1000, 000182, '2022-11-09 18:59:16', 'admin'),
-(92, 1000, 000183, '2022-11-09 18:59:21', 'admin'),
-(93, 1000, 000184, '2022-11-09 18:59:29', 'admin'),
-(94, 1004, 000945, '2022-11-13 12:55:59', 'admin'),
-(95, 1004, 000946, '2022-11-13 12:56:04', 'admin'),
-(96, 1004, 000947, '2022-11-13 12:56:05', 'admin'),
-(97, 1004, 000949, '2022-11-13 12:56:12', 'admin'),
-(98, 1004, 000950, '2022-11-13 12:56:41', 'admin'),
-(99, 1004, 000951, '2022-11-13 12:56:43', 'admin'),
-(100, 1004, 000952, '2022-11-13 12:56:46', 'admin'),
-(101, 1004, 000953, '2022-11-13 12:56:49', 'admin'),
-(102, 1004, 000954, '2022-11-13 12:56:52', 'admin');
+(103, 1000, 000100, '2022-11-16 16:01:03', 'admin'),
+(104, 1000, 000101, '2022-11-16 16:01:04', 'admin'),
+(105, 1000, 000102, '2022-11-16 16:01:05', 'admin'),
+(106, 1000, 000103, '2022-11-16 16:01:06', 'admin'),
+(107, 1000, 000104, '2022-11-16 16:01:08', 'admin'),
+(108, 1000, 000105, '2022-11-16 16:01:09', 'admin'),
+(109, 1000, 000106, '2022-11-16 16:01:11', 'admin'),
+(110, 1000, 000107, '2022-11-16 16:01:13', 'admin'),
+(111, 1000, 000108, '2022-11-16 16:01:14', 'admin'),
+(112, 1000, 000109, '2022-11-16 16:01:16', 'admin'),
+(113, 1000, 000110, '2022-11-16 16:01:17', 'admin'),
+(114, 1000, 000111, '2022-11-16 16:01:18', 'admin'),
+(115, 1000, 000112, '2022-11-16 16:01:19', 'admin'),
+(116, 1000, 000113, '2022-11-16 16:01:20', 'admin'),
+(117, 1000, 000114, '2022-11-16 16:01:21', 'admin'),
+(118, 1000, 000115, '2022-11-16 16:01:22', 'admin'),
+(119, 1000, 000116, '2022-11-16 16:01:23', 'admin'),
+(120, 1000, 000117, '2022-11-16 16:01:27', 'admin'),
+(121, 1000, 000118, '2022-11-16 16:01:28', 'admin'),
+(122, 1000, 000119, '2022-11-16 16:01:30', 'admin'),
+(123, 1000, 000157, '2022-11-16 16:01:35', 'admin'),
+(124, 1000, 000158, '2022-11-16 16:01:37', 'admin'),
+(125, 1000, 000159, '2022-11-16 16:01:39', 'admin'),
+(126, 1000, 000160, '2022-11-16 16:01:40', 'admin'),
+(127, 1000, 000161, '2022-11-16 16:01:42', 'admin'),
+(128, 1000, 000162, '2022-11-16 16:01:43', 'admin'),
+(129, 1000, 000163, '2022-11-16 16:01:44', 'admin'),
+(130, 1000, 000165, '2022-11-16 16:01:45', 'admin'),
+(131, 1000, 000164, '2022-11-16 16:01:48', 'admin'),
+(132, 1000, 000166, '2022-11-16 16:02:00', 'admin'),
+(133, 1000, 000175, '2022-11-16 16:02:03', 'admin'),
+(134, 1000, 000172, '2022-11-16 16:02:07', 'admin'),
+(135, 1000, 000173, '2022-11-16 16:02:08', 'admin'),
+(136, 1000, 000174, '2022-11-16 16:02:10', 'admin'),
+(137, 1000, 000176, '2022-11-16 16:02:12', 'admin'),
+(138, 1000, 000177, '2022-11-16 16:02:13', 'admin'),
+(139, 1000, 000178, '2022-11-16 16:02:16', 'admin'),
+(140, 1000, 000179, '2022-11-16 16:02:17', 'admin'),
+(141, 1000, 000180, '2022-11-16 16:02:19', 'admin'),
+(142, 1000, 000181, '2022-11-16 16:02:22', 'admin');
 
 -- --------------------------------------------------------
 
@@ -1130,34 +1157,24 @@ CREATE TABLE IF NOT EXISTS `prod_info` (
   `status` int(11) NOT NULL,
   `issue_type` int(11) NOT NULL COMMENT '1=motherboard,2=combine,3=lcd,4=bodywork,5=no-issues',
   PRIMARY KEY (`p_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=280 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=302 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `prod_info`
 --
 
 INSERT INTO `prod_info` (`p_id`, `inventory_id`, `sales_order`, `start_date_time`, `end_date_time`, `emp_id`, `tech_id`, `status`, `issue_type`) VALUES
-(259, 000100, 1000, '2022-11-09 15:04:14', '2022-11-09 15:11:10', 1037, 125, 1, 2),
-(260, 000101, 1000, '2022-11-09 15:11:19', '0000-00-00 00:00:00', 1037, 125, 1, 0),
-(261, 000100, 1000, '2022-11-09 15:14:53', '0000-00-00 00:00:00', 1037, 125, 1, 0),
-(262, 000102, 1000, '2022-11-12 11:15:28', '2022-11-12 11:15:33', 1037, 125, 0, 1),
-(263, 000102, 1000, '2022-11-12 16:01:08', '0000-00-00 00:00:00', 1037, 125, 1, 0),
-(264, 000103, 1000, '2022-11-12 16:01:13', '2022-11-12 16:01:18', 1037, 125, 0, 1),
-(265, 000104, 1000, '2022-11-12 16:01:21', '2022-11-12 16:01:27', 1037, 125, 0, 1),
-(266, 000175, 1000, '2022-11-13 06:07:47', '0000-00-00 00:00:00', 1037, 128, 1, 0),
-(267, 000176, 1000, '2022-11-13 06:08:19', '0000-00-00 00:00:00', 1037, 128, 1, 0),
-(268, 000945, 1004, '2022-11-13 08:57:45', '2022-11-13 08:57:50', 1037, 129, 0, 1),
-(269, 000946, 1004, '2022-11-13 08:57:59', '2022-11-13 08:58:03', 1037, 129, 0, 1),
-(270, 000947, 1004, '2022-11-13 08:58:08', '0000-00-00 00:00:00', 1037, 129, 1, 0),
-(271, 000948, 1004, '2022-11-13 08:58:23', '2022-11-13 08:58:28', 1037, 129, 0, 1),
-(272, 000950, 1004, '2022-11-13 08:58:31', '2022-11-13 08:58:37', 1037, 129, 0, 1),
-(273, 000157, 1000, '2022-11-14 06:22:28', '2022-11-14 06:22:35', 1037, 126, 0, 1),
-(274, 000158, 1000, '2022-11-14 06:22:39', '2022-11-14 06:22:44', 1037, 126, 0, 1),
-(275, 000158, 1000, '2022-11-14 06:22:47', '0000-00-00 00:00:00', 1037, 126, 1, 0),
-(276, 000159, 1000, '2022-11-14 06:22:55', '2022-11-14 06:23:00', 1037, 126, 0, 1),
-(277, 000160, 1000, '2022-11-14 06:23:04', '2022-11-14 06:23:08', 1037, 126, 0, 1),
-(278, 000161, 1000, '2022-11-14 06:23:12', '2022-11-14 06:23:17', 1037, 126, 0, 1),
-(279, 000162, 1000, '2022-11-14 06:23:22', '2022-11-14 06:23:27', 1037, 126, 0, 1);
+(291, 000172, 1000, '2022-11-16 12:46:44', '2022-11-16 12:47:02', 1037, 133, 1, 2),
+(292, 000175, 1000, '2022-11-16 12:51:18', '2022-11-16 12:51:38', 1037, 133, 1, 2),
+(293, 000173, 1000, '2022-11-16 12:51:43', '2022-11-16 12:52:02', 1037, 133, 1, 2),
+(294, 000157, 1000, '2022-11-16 12:52:15', '2022-11-16 12:52:34', 1037, 130, 1, 2),
+(295, 000158, 1000, '2022-11-16 12:52:37', '2022-11-16 12:52:55', 1037, 130, 1, 2),
+(296, 000159, 1000, '2022-11-16 12:52:58', '2022-11-16 12:53:16', 1037, 130, 1, 2),
+(297, 000100, 1000, '2022-11-16 12:53:40', '2022-11-16 12:54:00', 1037, 132, 1, 2),
+(298, 000101, 1000, '2022-11-16 12:54:05', '2022-11-16 12:54:37', 1037, 132, 1, 2),
+(299, 000102, 1000, '2022-11-16 12:54:39', '2022-11-16 12:55:10', 1037, 132, 1, 2),
+(300, 000103, 1000, '2022-11-16 12:55:17', '2022-11-16 12:55:34', 1037, 132, 1, 2),
+(301, 000104, 1000, '2022-11-16 12:55:37', '2022-11-16 12:55:53', 1037, 132, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -1180,18 +1197,18 @@ CREATE TABLE IF NOT EXISTS `prod_technician_assign_info` (
   `brand` varchar(100) NOT NULL,
   `device_type` varchar(40) NOT NULL,
   PRIMARY KEY (`tech_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=135 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `prod_technician_assign_info`
 --
 
 INSERT INTO `prod_technician_assign_info` (`tech_id`, `emp_id`, `sales_order_id`, `model`, `tech_assign_qty`, `created_time`, `task_completed_time`, `core`, `generation`, `processor`, `brand`, `device_type`) VALUES
-(125, 1037, 1000, 'e5530', 10, '2022-11-09 14:59:48', '0000-00-00 00:00:00', 'i7', '8', 'intel', 'dell', 'laptop'),
-(126, 1037, 1000, 'xps 15', 10, '2022-11-09 14:59:55', '0000-00-00 00:00:00', 'i7', '8', 'intel', 'dell', 'laptop'),
-(127, 1037, 1000, 'zbook g7', 10, '2022-11-09 15:00:01', '0000-00-00 00:00:00', 'i7', '10', 'intel', 'hp', 'laptop'),
-(128, 1037, 1000, '820 g3', 10, '2022-11-09 15:00:07', '0000-00-00 00:00:00', 'i5', '6', 'intel', 'hp', 'laptop'),
-(129, 1037, 1004, 'l450', 9, '2022-11-13 08:57:26', '0000-00-00 00:00:00', 'i3', '5', 'intel', 'lenovo', 'laptop');
+(130, 1037, 1000, 'xps 15', 10, '2022-11-16 12:02:47', '0000-00-00 00:00:00', 'i7', '8', 'intel', 'dell', 'laptop'),
+(131, 1037, 1000, 'e5530', 1, '2022-11-16 12:02:54', '0000-00-00 00:00:00', 'i7', '8', 'intel', 'dell', 'laptop'),
+(132, 1037, 1000, 'e5530', 9, '2022-11-16 12:03:00', '0000-00-00 00:00:00', 'i7', '8', 'intel', 'dell', 'laptop'),
+(133, 1037, 1000, '820 g3', 10, '2022-11-16 12:03:08', '0000-00-00 00:00:00', 'i5', '6', 'intel', 'hp', 'laptop'),
+(134, 1037, 1000, 'zbook g7', 10, '2022-11-16 12:03:13', '0000-00-00 00:00:00', 'i7', '10', 'intel', 'hp', 'laptop');
 
 -- --------------------------------------------------------
 
@@ -1225,9 +1242,9 @@ CREATE TABLE IF NOT EXISTS `rack` (
 --
 
 INSERT INTO `rack` (`rack_id`, `rack_number`, `status`) VALUES
-(1, 'RACK-A', 0),
-(2, 'RACK-B', 0),
-(3, 'RACK-C', 0);
+(1, 'RACK-1', 0),
+(2, 'RACK-2', 0),
+(3, 'RACK-3', 0);
 
 -- --------------------------------------------------------
 
@@ -1386,7 +1403,7 @@ CREATE TABLE IF NOT EXISTS `requested_part_from_production` (
   `generation` int(11) NOT NULL,
   `sales_order_id` int(11) NOT NULL,
   `inventory_id` int(11) NOT NULL,
-  `created_date` date NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `delivery_date` datetime NOT NULL,
   `emp_id` int(11) NOT NULL,
   `location` varchar(40) NOT NULL,
@@ -1414,32 +1431,24 @@ CREATE TABLE IF NOT EXISTS `requested_part_from_production` (
   `switch` int(11) NOT NULL,
   `switch_id` int(11) NOT NULL,
   PRIMARY KEY (`rp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=140 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `requested_part_from_production`
 --
 
 INSERT INTO `requested_part_from_production` (`rp_id`, `brand`, `model`, `generation`, `sales_order_id`, `inventory_id`, `created_date`, `delivery_date`, `emp_id`, `location`, `status`, `keyboard`, `speakers`, `camera`, `bazel`, `lan_cover`, `mousepad`, `mouse_pad_button`, `camera_cable`, `back_cover`, `wifi_card`, `lcd_cable`, `battery`, `battery_cable`, `dvd_rom`, `dvd_caddy`, `hdd_caddy`, `hdd_cable_connector`, `c_panel_palm_rest`, `mb_base`, `hings_cover`, `switch`, `switch_id`) VALUES
-(110, 'hp', 'zbook g7', 10, 1000, 114, '2022-11-06', '2022-11-03 00:00:00', 1037, 'T1', 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 113),
-(111, 'hp', 'zbook g7', 10, 1000, 125, '2022-11-06', '2022-11-03 00:00:00', 1037, 'T1', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0),
-(112, 'hp', 'zbook g7', 10, 1000, 112, '2022-11-06', '2022-11-03 00:00:00', 1037, 'T1', 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(113, 'hp', 'zbook g7', 10, 1000, 113, '2022-11-06', '2022-11-03 00:00:00', 1037, 'T1', 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(114, 'hp', 'zbook g7', 10, 1000, 116, '2022-11-06', '2022-11-03 00:00:00', 1037, 'T1', 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(115, 'hp', 'zbook g7', 10, 1000, 119, '2022-11-06', '2022-11-03 00:00:00', 1037, 'T1', 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(116, 'hp', 'zbook g7', 10, 1000, 103, '2022-11-06', '2022-11-03 00:00:00', 1037, 'T1', 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(117, 'hp', 'zbook g7', 10, 1000, 100, '2022-11-06', '2022-11-03 00:00:00', 1037, 'T1', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(118, 'hp', 'zbook g7', 10, 1000, 110, '2022-11-06', '2022-11-03 00:00:00', 1037, 'T1', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(119, 'hp', 'zbook g7', 10, 1000, 102, '2022-11-06', '2022-11-03 00:00:00', 1037, 'T1', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(120, 'hp', 'zbook g7', 10, 1000, 115, '2022-11-07', '2022-11-07 13:21:55', 1037, 'T1', 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0),
-(121, 'hp', 'zbook g7', 10, 1000, 114, '2022-11-07', '2022-11-07 13:21:55', 1037, 'T1', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 113),
-(122, 'hp', 'zbook g7', 10, 1000, 116, '2022-11-07', '2022-11-07 13:21:55', 1037, 'T1', 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(123, 'hp', 'zbook g7', 10, 1000, 115, '2022-11-07', '2022-11-07 13:21:55', 1037, 'T1', 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0),
-(124, 'hp', 'zbook g7', 10, 1000, 114, '2022-11-07', '0000-00-00 00:00:00', 1037, 'T1', 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 113),
-(125, 'hp', 'zbook g7', 10, 1000, 113, '2022-11-07', '0000-00-00 00:00:00', 1037, 'T1', 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(126, 'hp', 'zbook g7', 10, 1000, 113, '2022-11-07', '0000-00-00 00:00:00', 1037, 'T1', 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(127, 'hp', 'zbook g7', 10, 1000, 115, '2022-11-08', '0000-00-00 00:00:00', 1037, 'T1', 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(128, 'hp', 'zbook g7', 10, 1000, 114, '2022-11-08', '0000-00-00 00:00:00', 1037, 'T1', 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+(129, 'hp', '820 g3', 6, 1000, 172, '2022-11-16 12:47:02', '2022-11-16 00:00:00', 1037, 'T1', 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0),
+(130, 'hp', '820 g3', 6, 1000, 175, '2022-11-16 12:51:38', '2022-11-16 00:00:00', 1037, 'T1', 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0),
+(131, 'hp', '820 g3', 6, 1000, 173, '2022-11-16 12:52:02', '2022-11-16 00:00:00', 1037, 'T1', 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0),
+(132, 'dell', 'xps 15', 8, 1000, 157, '2022-11-16 12:52:34', '2022-11-16 00:00:00', 1037, 'T1', 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0),
+(133, 'dell', 'xps 15', 8, 1000, 158, '2022-11-16 12:52:55', '2022-11-16 00:00:00', 1037, 'T1', 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0),
+(134, 'dell', 'xps 15', 8, 1000, 159, '2022-11-16 12:53:16', '2022-11-16 00:00:00', 1037, 'T1', 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0),
+(135, 'dell', 'e5530', 8, 1000, 100, '2022-11-16 12:54:00', '2022-11-16 00:00:00', 1037, 'T1', 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(136, 'dell', 'e5530', 8, 1000, 101, '2022-11-16 12:54:37', '2022-11-16 00:00:00', 1037, 'T1', 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0),
+(137, 'dell', 'e5530', 8, 1000, 102, '2022-11-16 12:55:10', '2022-11-16 00:00:00', 1037, 'T1', 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0),
+(138, 'dell', 'e5530', 8, 1000, 103, '2022-11-16 12:55:34', '2022-11-16 00:00:00', 1037, 'T1', 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0),
+(139, 'dell', 'e5530', 8, 1000, 104, '2022-11-16 12:55:53', '2022-11-16 00:00:00', 1037, 'T1', 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1729,12 +1738,12 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `epf`, `username`, `location`, `password`, `last_login`, `is_deleted`, `department`, `role`, `isActive`) VALUES
-(1, 'admin', 'admin', 1, 'admin', 'admin@admi', 'admin', '2022-11-14 11:13:08', 0, '11', '1', 0),
+(1, 'admin', 'admin', 1, 'admin', 'admin@admi', 'admin', '2022-11-16 11:47:45', 0, '11', '1', 0),
 (10, 'Kasun', 'karunatilake', 1033, 'hr-manager', 'kasunkarun', '123', '2022-10-27 12:56:01', 0, '4', '8', 0),
 (11, 'Sampath', 'karunatilake', 1034, 'PROD-TEAM-LEAD', 'MATANE@GMA', '123', '2022-10-31 16:16:58', 0, '1', '4', 0),
-(12, 'min', 'CHANG', 1035, 'WAREHOUSE-TEAM-LEAD', 'OIOI@GMAIL', '123', '2022-10-31 13:44:26', 0, '2', '4', 0),
-(13, 'JAHIDH', 'ABDHULLA', 1036, 'whm', 'NOTHINGBUT', '123', '2022-11-13 13:28:53', 0, '2', '10', 0),
-(14, 'SANDIKA', 'MAHAWATTE', 1037, 't1', 'T1', '123', '2022-11-14 11:02:06', 0, '1', '6', 0),
+(12, 'min', 'CHANG', 1035, 'wtl', 'OIOI@GMAIL', '123', '2022-11-15 13:56:59', 0, '2', '4', 0),
+(13, 'JAHIDH', 'ABDHULLA', 1036, 'whm', 'NOTHINGBUT', '123', '2022-11-16 11:58:38', 0, '2', '10', 0),
+(14, 'SANDIKA', 'MAHAWATTE', 1037, 't1', 'T1', '123', '2022-11-16 12:02:37', 0, '1', '6', 0),
 (18, 'mtl', 'mtl', 1039, 'mtl', '0', '123', '2022-11-13 14:54:48', 0, '9', '4', 0),
 (19, 'mbt', 'mbt', 1040, 'mbt', '0', '123', '2022-11-14 11:20:01', 0, '9', '6', 0);
 
@@ -1777,21 +1786,20 @@ INSERT INTO `visa_type` (`visa_id`, `visa_type`) VALUES
 DROP TABLE IF EXISTS `warehouse_assign_task`;
 CREATE TABLE IF NOT EXISTS `warehouse_assign_task` (
   `assign_task_id` int(11) NOT NULL AUTO_INCREMENT,
-  `sales_order_id` int(11) NOT NULL,
+  `sales_order` int(11) NOT NULL,
   `emp_id` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
   `task_created_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `task_completed_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`assign_task_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `warehouse_assign_task`
 --
 
-INSERT INTO `warehouse_assign_task` (`assign_task_id`, `sales_order_id`, `emp_id`, `task_created_date`, `task_completed_date`) VALUES
-(54, 1000, 1036, '2022-11-09 14:04:13', '2022-11-10 08:06:09'),
-(55, 1004, 1036, '2022-11-12 05:39:30', '2022-11-13 08:52:12'),
-(56, 1005, 1036, '2022-11-13 08:48:51', '0000-00-00 00:00:00');
+INSERT INTO `warehouse_assign_task` (`assign_task_id`, `sales_order`, `emp_id`, `status`, `task_created_date`, `task_completed_date`) VALUES
+(57, 1000, 1036, 1, '2022-11-16 11:58:27', '2022-11-16 12:00:51');
 
 -- --------------------------------------------------------
 
@@ -1817,33 +1825,33 @@ CREATE TABLE IF NOT EXISTS `warehouse_information_sheet` (
   `sales_order_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`inventory_id`),
   KEY `order_id` (`sales_order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=989 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1095 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `warehouse_information_sheet`
 --
 
 INSERT INTO `warehouse_information_sheet` (`inventory_id`, `device`, `processor`, `core`, `generation`, `model`, `qr_image`, `create_date`, `location`, `brand`, `create_by_inventory_id`, `send_to_production`, `send_time_to_production`, `sales_order_id`) VALUES
-(000100, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/634268247f938.png', '2022-10-09 06:20:20', 'wh2', 'dell', 'vidusha', 1, '2022-11-09 14:53:43', 1000),
-(000101, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/634268248e80a.png', '2022-10-09 06:20:20', 'WH2', 'dell', 'vidusha', 1, '2022-11-09 14:53:48', 1000),
-(000102, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/63426824a2d38.png', '2022-10-09 06:20:20', 'WH2', 'dell', 'vidusha', 1, '2022-11-09 14:53:49', 1000),
-(000103, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/63426824c3709.png', '2022-10-09 06:20:20', 'WH2', 'dell', 'vidusha', 1, '2022-11-09 14:53:51', 1000),
-(000104, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/63426824e86c5.png', '2022-10-09 06:20:20', 'WH2', 'dell', 'vidusha', 1, '2022-11-09 14:53:56', 1000),
-(000105, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/6342682dbcbee.png', '2022-10-09 06:20:29', 'WH2', 'dell', 'vidusha', 1, '2022-11-09 14:53:57', 1000),
-(000106, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/6342682e09e54.png', '2022-10-09 06:20:30', 'WH2', 'dell', 'vidusha', 1, '2022-11-09 14:53:59', 1000),
-(000107, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/6342682e4b4c3.png', '2022-10-09 06:20:30', 'WH2', 'dell', 'vidusha', 1, '2022-11-09 14:54:01', 1000),
-(000108, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/6342682e99fc4.png', '2022-10-09 06:20:30', 'WH2', 'dell', 'vidusha', 1, '2022-11-09 14:54:03', 1000),
-(000109, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/6342682eeddf0.png', '2022-10-09 06:20:30', 'WH2', 'dell', 'vidusha', 1, '2022-11-09 14:54:06', 1000),
-(000110, 'laptop', 'intel', 'i7', '10', 'zbook g7', 'temp/6342684d330ec.png', '2022-10-09 06:21:01', 'WH3', 'hp', 'vidusha', 1, '2022-11-09 14:54:07', 1000),
-(000111, 'laptop', 'intel', 'i7', '10', 'zbook g7', 'temp/6342684d9ce47.png', '2022-10-09 06:21:01', 'WH3', 'hp', 'vidusha', 1, '2022-11-09 14:54:09', 1000),
-(000112, 'laptop', 'intel', 'i7', '10', 'zbook g7', 'temp/6342684e170a1.png', '2022-10-09 06:21:02', 'WH3', 'hp', 'vidusha', 1, '2022-11-09 14:54:12', 1000),
-(000113, 'laptop', 'intel', 'i7', '10', 'zbook g7', 'temp/6342684e8f590.png', '2022-10-09 06:21:02', 'WH3', 'hp', 'vidusha', 1, '2022-11-09 14:54:13', 1000),
-(000114, 'laptop', 'intel', 'i7', '10', 'zbook g7', 'temp/6342684f180b0.png', '2022-10-09 06:21:03', 'WH3', 'hp', 'vidusha', 1, '2022-11-09 14:54:15', 1000),
-(000115, 'laptop', 'intel', 'i7', '10', 'zbook g7', 'temp/6342684f9df3f.png', '2022-10-09 06:21:03', 'WH3', 'hp', 'vidusha', 1, '2022-11-09 14:54:16', 1000),
-(000116, 'laptop', 'intel', 'i7', '10', 'zbook g7', 'temp/634268503c585.png', '2022-10-09 06:21:04', 'WH3', 'hp', 'vidusha', 1, '2022-11-09 14:54:17', 1000),
-(000117, 'laptop', 'intel', 'i7', '10', 'zbook g7', 'temp/63426850d7a04.png', '2022-10-09 06:21:04', 'WH3', 'hp', 'vidusha', 1, '2022-11-09 14:54:19', 1000),
-(000118, 'laptop', 'intel', 'i7', '10', 'zbook g7', 'temp/6342685193f5b.png', '2022-10-09 06:21:05', 'WH3', 'hp', 'vidusha', 1, '2022-11-09 14:54:21', 1000),
-(000119, 'laptop', 'intel', 'i7', '10', 'zbook g7', 'temp/63426852522b1.png', '2022-10-09 06:21:06', 'WH3', 'hp', 'vidusha', 1, '2022-11-09 14:54:23', 1000),
+(000100, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/634268247f938.png', '2022-10-09 06:20:20', 'wh2', 'dell', 'vidusha', 1, '2022-11-16 11:58:47', 1000),
+(000101, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/634268248e80a.png', '2022-10-09 06:20:20', 'WH2', 'dell', 'vidusha', 1, '2022-11-16 11:58:49', 1000),
+(000102, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/63426824a2d38.png', '2022-10-09 06:20:20', 'WH2', 'dell', 'vidusha', 1, '2022-11-16 11:58:50', 1000),
+(000103, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/63426824c3709.png', '2022-10-09 06:20:20', 'WH2', 'dell', 'vidusha', 1, '2022-11-16 11:58:51', 1000),
+(000104, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/63426824e86c5.png', '2022-10-09 06:20:20', 'WH2', 'dell', 'vidusha', 1, '2022-11-16 11:58:55', 1000),
+(000105, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/6342682dbcbee.png', '2022-10-09 06:20:29', 'WH2', 'dell', 'vidusha', 1, '2022-11-16 11:58:56', 1000),
+(000106, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/6342682e09e54.png', '2022-10-09 06:20:30', 'WH2', 'dell', 'vidusha', 1, '2022-11-16 11:58:58', 1000),
+(000107, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/6342682e4b4c3.png', '2022-10-09 06:20:30', 'WH2', 'dell', 'vidusha', 1, '2022-11-16 11:59:00', 1000),
+(000108, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/6342682e99fc4.png', '2022-10-09 06:20:30', 'WH2', 'dell', 'vidusha', 1, '2022-11-16 11:59:01', 1000),
+(000109, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/6342682eeddf0.png', '2022-10-09 06:20:30', 'WH2', 'dell', 'vidusha', 1, '2022-11-16 11:59:04', 1000),
+(000110, 'laptop', 'intel', 'i7', '10', 'zbook g7', 'temp/6342684d330ec.png', '2022-10-09 06:21:01', 'WH3', 'hp', 'vidusha', 1, '2022-11-16 11:59:05', 1000),
+(000111, 'laptop', 'intel', 'i7', '10', 'zbook g7', 'temp/6342684d9ce47.png', '2022-10-09 06:21:01', 'WH3', 'hp', 'vidusha', 1, '2022-11-16 11:59:06', 1000),
+(000112, 'laptop', 'intel', 'i7', '10', 'zbook g7', 'temp/6342684e170a1.png', '2022-10-09 06:21:02', 'WH3', 'hp', 'vidusha', 1, '2022-11-16 11:59:08', 1000),
+(000113, 'laptop', 'intel', 'i7', '10', 'zbook g7', 'temp/6342684e8f590.png', '2022-10-09 06:21:02', 'WH3', 'hp', 'vidusha', 1, '2022-11-16 11:59:09', 1000),
+(000114, 'laptop', 'intel', 'i7', '10', 'zbook g7', 'temp/6342684f180b0.png', '2022-10-09 06:21:03', 'WH3', 'hp', 'vidusha', 1, '2022-11-16 11:59:10', 1000),
+(000115, 'laptop', 'intel', 'i7', '10', 'zbook g7', 'temp/6342684f9df3f.png', '2022-10-09 06:21:03', 'WH3', 'hp', 'vidusha', 1, '2022-11-16 11:59:10', 1000),
+(000116, 'laptop', 'intel', 'i7', '10', 'zbook g7', 'temp/634268503c585.png', '2022-10-09 06:21:04', 'WH3', 'hp', 'vidusha', 1, '2022-11-16 11:59:16', 1000),
+(000117, 'laptop', 'intel', 'i7', '10', 'zbook g7', 'temp/63426850d7a04.png', '2022-10-09 06:21:04', 'WH3', 'hp', 'vidusha', 1, '2022-11-16 11:59:12', 1000),
+(000118, 'laptop', 'intel', 'i7', '10', 'zbook g7', 'temp/6342685193f5b.png', '2022-10-09 06:21:05', 'WH3', 'hp', 'vidusha', 1, '2022-11-16 11:59:18', 1000),
+(000119, 'laptop', 'intel', 'i7', '10', 'zbook g7', 'temp/63426852522b1.png', '2022-10-09 06:21:06', 'WH3', 'hp', 'vidusha', 1, '2022-11-16 11:59:20', 1000),
 (000120, 'laptop', 'intel', 'i7', '10', 'zbook g7', 'temp/63426853198ad.png', '2022-10-09 06:21:07', 'WH3', 'hp', 'vidusha', 0, '0000-00-00 00:00:00', 0),
 (000121, 'laptop', 'intel', 'i7', '10', 'zbook g7', 'temp/63426853deaaa.png', '2022-10-09 06:21:07', 'WH3', 'hp', 'vidusha', 0, '0000-00-00 00:00:00', 0),
 (000122, 'laptop', 'intel', 'i3', '4', '640 c7', 'temp/634268746c3d5.png', '2022-10-09 06:21:40', 'WH2', 'acer', 'vidusha', 0, '0000-00-00 00:00:00', 0),
@@ -1881,34 +1889,34 @@ INSERT INTO `warehouse_information_sheet` (`inventory_id`, `device`, `processor`
 (000154, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/634269083b2c7.png', '2022-10-09 06:24:08', 'WH1', 'dell', 'vidusha', 0, '0000-00-00 00:00:00', 0),
 (000155, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/6342690a647ac.png', '2022-10-09 06:24:10', 'WH1', 'dell', 'vidusha', 0, '0000-00-00 00:00:00', 0),
 (000156, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/6342690c8b946.png', '2022-10-09 06:24:12', 'WH1', 'dell', 'vidusha', 0, '0000-00-00 00:00:00', 0),
-(000157, 'laptop', 'intel', 'i7', '8', 'xps 15', 'temp/6342693753781.png', '2022-10-09 06:24:55', 'WH2', 'dell', 'vidusha', 1, '2022-11-09 14:54:29', 1000),
-(000158, 'laptop', 'intel', 'i7', '8', 'xps 15', 'temp/6342693974eae.png', '2022-10-09 06:24:57', 'WH2', 'dell', 'vidusha', 1, '2022-11-09 14:54:31', 1000),
-(000159, 'laptop', 'intel', 'i7', '8', 'xps 15', 'temp/6342693b91a92.png', '2022-10-09 06:24:59', 'WH2', 'dell', 'vidusha', 1, '2022-11-09 14:54:33', 1000),
-(000160, 'laptop', 'intel', 'i7', '8', 'xps 15', 'temp/6342693dc0e54.png', '2022-10-09 06:25:01', 'WH2', 'dell', 'vidusha', 1, '2022-11-09 14:54:50', 1000),
-(000161, 'laptop', 'intel', 'i7', '8', 'xps 15', 'temp/6342693feb335.png', '2022-10-09 06:25:03', 'WH2', 'dell', 'vidusha', 1, '2022-11-09 14:54:54', 1000),
-(000162, 'laptop', 'intel', 'i7', '8', 'xps 15', 'temp/634269423e8a5.png', '2022-10-09 06:25:06', 'WH2', 'dell', 'vidusha', 1, '2022-11-09 14:54:55', 1000),
-(000163, 'laptop', 'intel', 'i7', '8', 'xps 15', 'temp/634269448237f.png', '2022-10-09 06:25:08', 'WH2', 'dell', 'vidusha', 1, '2022-11-09 14:54:57', 1000),
-(000164, 'laptop', 'intel', 'i7', '8', 'xps 15', 'temp/63426962e6cfb.png', '2022-10-09 06:25:38', 'WH2', 'dell', 'vidusha', 1, '2022-11-09 14:54:58', 1000),
-(000165, 'laptop', 'intel', 'i7', '8', 'xps 15', 'temp/634269655fdb2.png', '2022-10-09 06:25:41', 'WH2', 'dell', 'vidusha', 1, '2022-11-09 14:54:59', 1000),
-(000166, 'laptop', 'intel', 'i7', '8', 'xps 15', 'temp/63426967d1ff5.png', '2022-10-09 06:25:43', 'WH2', 'dell', 'vidusha', 1, '2022-11-09 14:55:01', 1000),
+(000157, 'laptop', 'intel', 'i7', '8', 'xps 15', 'temp/6342693753781.png', '2022-10-09 06:24:55', 'WH2', 'dell', 'vidusha', 1, '2022-11-16 11:59:24', 1000),
+(000158, 'laptop', 'intel', 'i7', '8', 'xps 15', 'temp/6342693974eae.png', '2022-10-09 06:24:57', 'WH2', 'dell', 'vidusha', 1, '2022-11-16 11:59:25', 1000),
+(000159, 'laptop', 'intel', 'i7', '8', 'xps 15', 'temp/6342693b91a92.png', '2022-10-09 06:24:59', 'WH2', 'dell', 'vidusha', 1, '2022-11-16 11:59:27', 1000),
+(000160, 'laptop', 'intel', 'i7', '8', 'xps 15', 'temp/6342693dc0e54.png', '2022-10-09 06:25:01', 'WH2', 'dell', 'vidusha', 1, '2022-11-16 11:59:30', 1000),
+(000161, 'laptop', 'intel', 'i7', '8', 'xps 15', 'temp/6342693feb335.png', '2022-10-09 06:25:03', 'WH2', 'dell', 'vidusha', 1, '2022-11-16 11:59:31', 1000),
+(000162, 'laptop', 'intel', 'i7', '8', 'xps 15', 'temp/634269423e8a5.png', '2022-10-09 06:25:06', 'WH2', 'dell', 'vidusha', 1, '2022-11-16 11:59:32', 1000),
+(000163, 'laptop', 'intel', 'i7', '8', 'xps 15', 'temp/634269448237f.png', '2022-10-09 06:25:08', 'WH2', 'dell', 'vidusha', 1, '2022-11-16 11:59:33', 1000),
+(000164, 'laptop', 'intel', 'i7', '8', 'xps 15', 'temp/63426962e6cfb.png', '2022-10-09 06:25:38', 'WH2', 'dell', 'vidusha', 1, '2022-11-16 11:59:35', 1000),
+(000165, 'laptop', 'intel', 'i7', '8', 'xps 15', 'temp/634269655fdb2.png', '2022-10-09 06:25:41', 'WH2', 'dell', 'vidusha', 1, '2022-11-16 11:59:36', 1000),
+(000166, 'laptop', 'intel', 'i7', '8', 'xps 15', 'temp/63426967d1ff5.png', '2022-10-09 06:25:43', 'WH2', 'dell', 'vidusha', 1, '2022-11-16 11:59:44', 1000),
 (000167, 'laptop', 'intel', 'i7', '8', 'xps 15', 'temp/6342696a5e782.png', '2022-10-09 06:25:46', 'WH2', 'dell', 'vidusha', 0, '0000-00-00 00:00:00', 0),
 (000168, 'laptop', 'intel', 'i7', '8', 'xps 15', 'temp/6342696ccbf47.png', '2022-10-09 06:25:48', 'WH2', 'dell', 'vidusha', 0, '0000-00-00 00:00:00', 0),
 (000169, 'laptop', 'intel', 'i7', '8', 'xps 15', 'temp/6342696f6efb8.png', '2022-10-09 06:25:51', 'WH2', 'dell', 'vidusha', 0, '0000-00-00 00:00:00', 0),
 (000170, 'laptop', 'intel', 'i7', '8', 'xps 15', 'temp/634269727db6d.png', '2022-10-09 06:25:54', 'WH2', 'dell', 'vidusha', 0, '0000-00-00 00:00:00', 0),
-(000171, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/6342698760762.png', '2022-10-09 06:26:15', 'WH1', 'hp', 'vidusha', 0, '0000-00-00 00:00:00', 0),
-(000172, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/6342698a06e35.png', '2022-10-09 06:26:18', 'WH1', 'hp', 'vidusha', 0, '0000-00-00 00:00:00', 0),
-(000173, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/6342698ca28ac.png', '2022-10-09 06:26:20', 'WH1', 'hp', 'vidusha', 0, '0000-00-00 00:00:00', 0),
-(000174, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/6342698f4f352.png', '2022-10-09 06:26:23', 'WH1', 'hp', 'vidusha', 0, '0000-00-00 00:00:00', 0),
-(000175, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/634269920ea74.png', '2022-10-09 06:26:26', 'WH1', 'hp', 'vidusha', 1, '2022-11-09 14:55:03', 1000),
-(000176, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/63426994c4867.png', '2022-10-09 06:26:28', 'WH1', 'hp', 'vidusha', 1, '2022-11-09 14:55:11', 1000),
-(000177, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/6342699793187.png', '2022-10-09 06:26:31', 'WH1', 'hp', 'vidusha', 1, '2022-11-09 14:55:13', 1000),
-(000178, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/6342699a6293d.png', '2022-10-09 06:26:34', 'WH1', 'hp', 'vidusha', 1, '2022-11-09 14:55:18', 1000),
-(000179, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/6342699d46a7a.png', '2022-10-09 06:26:37', 'WH1', 'hp', 'vidusha', 1, '2022-11-09 14:55:17', 1000),
-(000180, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/634269a02bf29.png', '2022-10-09 06:26:40', 'WH1', 'hp', 'vidusha', 1, '2022-11-09 14:55:26', 1000),
-(000181, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/634269a337e40.png', '2022-10-09 06:26:43', 'WH1', 'hp', 'vidusha', 1, '2022-11-09 14:55:22', 1000),
-(000182, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/634269a6623bc.png', '2022-10-09 06:26:46', 'WH1', 'hp', 'vidusha', 1, '2022-11-09 14:55:31', 1000),
-(000183, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/634269a9a22e9.png', '2022-10-09 06:26:49', 'WH1', 'hp', 'vidusha', 1, '2022-11-09 14:55:32', 1000),
-(000184, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/634269acc8a2f.png', '2022-10-09 06:26:52', 'WH1', 'hp', 'vidusha', 1, '2022-11-09 14:55:35', 1000),
+(000171, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/6342698760762.png', '2022-10-09 06:26:15', 'WH1', 'hp', 'vidusha', 0, '2022-11-15 13:59:30', 0),
+(000172, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/6342698a06e35.png', '2022-10-09 06:26:18', 'WH1', 'hp', 'vidusha', 1, '2022-11-16 11:59:56', 1000),
+(000173, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/6342698ca28ac.png', '2022-10-09 06:26:20', 'WH1', 'hp', 'vidusha', 1, '2022-11-16 11:59:58', 1000),
+(000174, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/6342698f4f352.png', '2022-10-09 06:26:23', 'WH1', 'hp', 'vidusha', 1, '2022-11-16 12:00:00', 1000),
+(000175, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/634269920ea74.png', '2022-10-09 06:26:26', 'WH1', 'hp', 'vidusha', 1, '2022-11-16 11:59:46', 1000),
+(000176, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/63426994c4867.png', '2022-10-09 06:26:28', 'WH1', 'hp', 'vidusha', 1, '2022-11-16 11:59:49', 1000),
+(000177, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/6342699793187.png', '2022-10-09 06:26:31', 'WH1', 'hp', 'vidusha', 1, '2022-11-16 12:00:08', 1000),
+(000178, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/6342699a6293d.png', '2022-10-09 06:26:34', 'WH1', 'hp', 'vidusha', 1, '2022-11-16 12:00:21', 1000),
+(000179, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/6342699d46a7a.png', '2022-10-09 06:26:37', 'WH1', 'hp', 'vidusha', 1, '2022-11-16 12:00:11', 1000),
+(000180, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/634269a02bf29.png', '2022-10-09 06:26:40', 'WH1', 'hp', 'vidusha', 1, '2022-11-16 12:00:38', 1000),
+(000181, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/634269a337e40.png', '2022-10-09 06:26:43', 'WH1', 'hp', 'vidusha', 1, '2022-11-16 12:00:40', 1000),
+(000182, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/634269a6623bc.png', '2022-10-09 06:26:46', 'WH1', 'hp', 'vidusha', 0, '2022-11-16 06:37:10', 0),
+(000183, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/634269a9a22e9.png', '2022-10-09 06:26:49', 'WH1', 'hp', 'vidusha', 0, '2022-11-16 06:37:12', 0),
+(000184, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/634269acc8a2f.png', '2022-10-09 06:26:52', 'WH1', 'hp', 'vidusha', 0, '2022-11-16 06:37:13', 0),
 (000185, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/634269afec20a.png', '2022-10-09 06:26:55', 'WH1', 'hp', 'vidusha', 0, '0000-00-00 00:00:00', 0),
 (000186, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/634269b33056c.png', '2022-10-09 06:26:59', 'WH1', 'hp', 'vidusha', 0, '0000-00-00 00:00:00', 0),
 (000187, 'laptop', 'intel', 'i5', '6', '820 g3', 'temp/634269b660b10.png', '2022-10-09 06:27:02', 'WH1', 'hp', 'vidusha', 0, '0000-00-00 00:00:00', 0),
@@ -1958,16 +1966,16 @@ INSERT INTO `warehouse_information_sheet` (`inventory_id`, `device`, `processor`
 (000941, 'laptop', 'intel', 'i9', '3', 'probook', 'temp/6357a42871a80.png', '2022-10-25 08:54:00', 'wh2', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
 (000942, 'laptop', 'intel', 'i3', '2', '840 g3', 'temp/6357a46228f2e.png', '2022-10-25 08:54:58', 'wh4', 'acer', 'admin', 0, '0000-00-00 00:00:00', 0),
 (000943, 'laptop', 'intel', 'i3', '2', '840 g3', 'temp/6357a4622a94b.png', '2022-10-25 08:54:58', 'wh4', 'acer', 'admin', 0, '0000-00-00 00:00:00', 0),
-(000945, 'laptop', 'intel', 'i3', '5', 'l450', 'temp/635a87b08a42a.png', '2022-10-27 13:29:20', 'wh1', 'lenovo', 'warehouse-team-lead', 1, '2022-11-13 08:50:48', 1004),
-(000946, 'laptop', 'intel', 'i3', '5', 'l450', 'temp/635a87b08d946.png', '2022-10-27 13:29:20', 'wh1', 'lenovo', 'warehouse-team-lead', 1, '2022-11-13 08:50:53', 1004),
-(000947, 'laptop', 'intel', 'i3', '5', 'l450', 'temp/635a87b08e6e9.png', '2022-10-27 13:29:20', 'wh1', 'lenovo', 'warehouse-team-lead', 1, '2022-11-13 08:50:55', 1004),
-(000948, 'laptop', 'intel', 'i3', '5', 'l450', 'temp/635a87b08f3a0.png', '2022-10-27 13:29:20', 'wh1', 'lenovo', 'warehouse-team-lead', 1, '2022-11-13 08:50:58', 1004),
-(000949, 'laptop', 'intel', 'i3', '5', 'l450', 'temp/635a87b090287.png', '2022-10-27 13:29:20', 'wh1', 'lenovo', 'warehouse-team-lead', 1, '2022-11-13 08:51:00', 1004),
-(000950, 'laptop', 'intel', 'i3', '5', 'l450', 'temp/635a87b090ea8.png', '2022-10-27 13:29:20', 'wh1', 'lenovo', 'warehouse-team-lead', 1, '2022-11-13 08:51:02', 1004),
-(000951, 'laptop', 'intel', 'i3', '5', 'l450', 'temp/635a87b091af3.png', '2022-10-27 13:29:20', 'wh1', 'lenovo', 'warehouse-team-lead', 1, '2022-11-13 08:51:03', 1004),
-(000952, 'laptop', 'intel', 'i3', '5', 'l450', 'temp/635a87b09265c.png', '2022-10-27 13:29:20', 'wh1', 'lenovo', 'warehouse-team-lead', 1, '2022-11-13 08:51:05', 1004),
-(000953, 'laptop', 'intel', 'i3', '5', 'l450', 'temp/635a87b093a68.png', '2022-10-27 13:29:20', 'wh1', 'lenovo', 'warehouse-team-lead', 1, '2022-11-13 08:51:06', 1004),
-(000954, 'laptop', 'intel', 'i3', '5', 'l450', 'temp/635a87b0947c4.png', '2022-10-27 13:29:20', 'wh1', 'lenovo', 'warehouse-team-lead', 1, '2022-11-13 08:51:09', 1004),
+(000945, 'laptop', 'intel', 'i3', '5', 'l450', 'temp/635a87b08a42a.png', '2022-10-27 13:29:20', 'wh1', 'lenovo', 'warehouse-team-lead', 0, '2022-11-13 08:50:48', 0),
+(000946, 'laptop', 'intel', 'i3', '5', 'l450', 'temp/635a87b08d946.png', '2022-10-27 13:29:20', 'wh1', 'lenovo', 'warehouse-team-lead', 0, '2022-11-13 08:50:53', 0),
+(000947, 'laptop', 'intel', 'i3', '5', 'l450', 'temp/635a87b08e6e9.png', '2022-10-27 13:29:20', 'wh1', 'lenovo', 'warehouse-team-lead', 0, '2022-11-13 08:50:55', 0),
+(000948, 'laptop', 'intel', 'i3', '5', 'l450', 'temp/635a87b08f3a0.png', '2022-10-27 13:29:20', 'wh1', 'lenovo', 'warehouse-team-lead', 0, '2022-11-13 08:50:58', 0),
+(000949, 'laptop', 'intel', 'i3', '5', 'l450', 'temp/635a87b090287.png', '2022-10-27 13:29:20', 'wh1', 'lenovo', 'warehouse-team-lead', 0, '2022-11-13 08:51:00', 0),
+(000950, 'laptop', 'intel', 'i3', '5', 'l450', 'temp/635a87b090ea8.png', '2022-10-27 13:29:20', 'wh1', 'lenovo', 'warehouse-team-lead', 0, '2022-11-13 08:51:02', 0),
+(000951, 'laptop', 'intel', 'i3', '5', 'l450', 'temp/635a87b091af3.png', '2022-10-27 13:29:20', 'wh1', 'lenovo', 'warehouse-team-lead', 0, '2022-11-13 08:51:03', 0),
+(000952, 'laptop', 'intel', 'i3', '5', 'l450', 'temp/635a87b09265c.png', '2022-10-27 13:29:20', 'wh1', 'lenovo', 'warehouse-team-lead', 0, '2022-11-13 08:51:05', 0),
+(000953, 'laptop', 'intel', 'i3', '5', 'l450', 'temp/635a87b093a68.png', '2022-10-27 13:29:20', 'wh1', 'lenovo', 'warehouse-team-lead', 0, '2022-11-13 08:51:06', 0),
+(000954, 'laptop', 'intel', 'i3', '5', 'l450', 'temp/635a87b0947c4.png', '2022-10-27 13:29:20', 'wh1', 'lenovo', 'warehouse-team-lead', 0, '2022-11-13 08:51:09', 0),
 (000955, 'laptop', 'intel', 'i3', '4', 'c740', 'temp/635a89263a9a6.png', '2022-10-27 13:35:34', 'wh2', 'acer', 'warehouse-team-lead', 0, '0000-00-00 00:00:00', 0),
 (000956, 'laptop', 'intel', 'i3', '4', 'c740', 'temp/635a89263dc35.png', '2022-10-27 13:35:34', 'wh2', 'acer', 'warehouse-team-lead', 0, '0000-00-00 00:00:00', 0),
 (000957, 'laptop', 'intel', 'i3', '4', 'c740', 'temp/635a89263e74b.png', '2022-10-27 13:35:34', 'wh2', 'acer', 'warehouse-team-lead', 0, '0000-00-00 00:00:00', 0),
@@ -2001,23 +2009,117 @@ INSERT INTO `warehouse_information_sheet` (`inventory_id`, `device`, `processor`
 (000985, 'laptop', 'intel', 'i3', '5', 'l450', 'temp/636f4aba7faf5.png', '2022-11-12 07:26:50', 'wh1', 'lenovo', 'admin', 0, '0000-00-00 00:00:00', 0),
 (000986, 'laptop', 'intel', 'i3', '5', 'l450', 'temp/636f4aba80426.png', '2022-11-12 07:26:50', 'wh1', 'lenovo', 'admin', 0, '0000-00-00 00:00:00', 0),
 (000987, 'laptop', 'intel', 'i3', '5', 'l450', 'temp/636f4aba80d5f.png', '2022-11-12 07:26:50', 'wh1', 'lenovo', 'admin', 0, '0000-00-00 00:00:00', 0),
-(000988, 'laptop', 'intel', 'i3', '5', 'l450', 'temp/636f4aba81708.png', '2022-11-12 07:26:50', 'wh1', 'lenovo', 'admin', 0, '0000-00-00 00:00:00', 0);
+(000988, 'laptop', 'intel', 'i3', '5', 'l450', 'temp/636f4aba81708.png', '2022-11-12 07:26:50', 'wh1', 'lenovo', 'admin', 0, '0000-00-00 00:00:00', 0),
+(000989, 'laptop', 'intel', 'i7', '4', 'macbook air', 'temp/6373306b8db6a.png', '2022-11-15 06:23:39', 'wh2', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(000990, 'laptop', 'intel', 'i7', '4', 'macbook air', 'temp/6373306b8e556.png', '2022-11-15 06:23:39', 'wh2', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(000991, 'laptop', 'intel', 'i7', '4', 'macbook air', 'temp/6373306b8ec99.png', '2022-11-15 06:23:39', 'wh2', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(000992, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/637373968669d.png', '2022-11-15 11:10:14', 'wh1', 'dell', 'admin', 0, '0000-00-00 00:00:00', 0),
+(000993, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/6373739686fc2.png', '2022-11-15 11:10:14', 'wh1', 'dell', 'admin', 0, '0000-00-00 00:00:00', 0),
+(000994, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/6373739687889.png', '2022-11-15 11:10:14', 'wh1', 'dell', 'admin', 0, '0000-00-00 00:00:00', 0),
+(000995, 'laptop', 'intel', 'i3', '1', 'e5530', 'temp/637375582f883.png', '2022-11-15 11:17:44', 'wh1', 'acer', 'admin', 0, '0000-00-00 00:00:00', 0),
+(000996, 'laptop', 'intel', 'i3', '1', 'e5530', 'temp/637375582ffc4.png', '2022-11-15 11:17:44', 'wh1', 'acer', 'admin', 0, '0000-00-00 00:00:00', 0),
+(000997, 'laptop', 'intel', 'i3', '1', 'e5530', 'temp/63737558306b6.png', '2022-11-15 11:17:44', 'wh1', 'acer', 'admin', 0, '0000-00-00 00:00:00', 0),
+(000998, 'laptop', 'intel', 'i5', '8', 'e5530', 'temp/63739adc6f654.png', '2022-11-15 13:57:48', 'wh2', 'dell', 'wtl', 0, '2022-11-15 13:58:42', 0),
+(000999, 'laptop', 'intel', 'i5', '8', 'e5530', 'temp/63739adc6fe25.png', '2022-11-15 13:57:48', 'wh2', 'dell', 'wtl', 0, '2022-11-15 13:58:45', 0),
+(001000, 'laptop', 'intel', 'i5', '8', 'e5530', 'temp/63739adc704b6.png', '2022-11-15 13:57:48', 'wh2', 'dell', 'wtl', 0, '2022-11-15 13:59:02', 0),
+(001001, 'laptop', 'intel', 'i5', '8', 'e5530', 'temp/63739adc70b3d.png', '2022-11-15 13:57:48', 'wh2', 'dell', 'wtl', 0, '2022-11-15 13:59:04', 0),
+(001002, 'laptop', 'intel', 'i5', '8', 'e5530', 'temp/63739adc7121c.png', '2022-11-15 13:57:48', 'wh2', 'dell', 'wtl', 0, '2022-11-15 13:59:06', 0),
+(001003, 'laptop', 'intel', 'i5', '8', 'e5530', 'temp/63739adc71a76.png', '2022-11-15 13:57:48', 'wh2', 'dell', 'wtl', 0, '0000-00-00 00:00:00', 0),
+(001004, 'laptop', 'intel', 'i5', '8', 'e5530', 'temp/63739adc723b1.png', '2022-11-15 13:57:48', 'wh2', 'dell', 'wtl', 0, '0000-00-00 00:00:00', 0),
+(001005, 'laptop', 'intel', 'i5', '8', 'e5530', 'temp/63739adc72c74.png', '2022-11-15 13:57:48', 'wh2', 'dell', 'wtl', 0, '0000-00-00 00:00:00', 0),
+(001006, 'laptop', 'intel', 'i5', '8', 'e5530', 'temp/63739adc7358d.png', '2022-11-15 13:57:48', 'wh2', 'dell', 'wtl', 0, '0000-00-00 00:00:00', 0),
+(001007, 'laptop', 'intel', 'i5', '8', 'e5530', 'temp/63739adc73d12.png', '2022-11-15 13:57:48', 'wh2', 'dell', 'wtl', 0, '0000-00-00 00:00:00', 0),
+(001008, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/637480801f63c.png', '2022-11-16 06:17:36', 'wh1', 'dell', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001009, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/637480801f63c.png', '2022-11-16 06:17:36', 'wh1', 'dell', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001010, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/6374893658930.png', '2022-11-16 06:54:46', 'wh3', 'dell', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001011, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/6374893659dbc.png', '2022-11-16 06:54:46', 'wh3', 'dell', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001012, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/637489365a9e6.png', '2022-11-16 06:54:46', 'wh3', 'dell', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001013, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/637489365b458.png', '2022-11-16 06:54:46', 'wh3', 'dell', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001014, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/637489365bfa1.png', '2022-11-16 06:54:46', 'wh3', 'dell', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001015, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/637489365c9b5.png', '2022-11-16 06:54:46', 'wh3', 'dell', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001016, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/637489365d31a.png', '2022-11-16 06:54:46', 'wh3', 'dell', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001017, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/637489365de0c.png', '2022-11-16 06:54:46', 'wh3', 'dell', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001018, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/637489365e9be.png', '2022-11-16 06:54:46', 'wh3', 'dell', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001019, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/637489365f310.png', '2022-11-16 06:54:46', 'wh3', 'dell', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001020, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/63749341d34ac.png', '2022-11-16 07:37:37', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001021, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/63749341d42a0.png', '2022-11-16 07:37:37', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001022, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/63749341d4fc3.png', '2022-11-16 07:37:37', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001023, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/63749341d5cdc.png', '2022-11-16 07:37:37', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001024, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/63749341d67a4.png', '2022-11-16 07:37:37', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001025, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/63749341d74f4.png', '2022-11-16 07:37:37', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001026, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/63749341d80fa.png', '2022-11-16 07:37:37', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001027, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/63749341d89c4.png', '2022-11-16 07:37:37', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001028, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/63749341d92ad.png', '2022-11-16 07:37:37', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001029, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/63749341d9bc3.png', '2022-11-16 07:37:37', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001030, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/63749341da450.png', '2022-11-16 07:37:37', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001031, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/63749341dac8c.png', '2022-11-16 07:37:37', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001032, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/63749341db58f.png', '2022-11-16 07:37:37', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001033, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493a100bc0.png', '2022-11-16 07:39:13', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001034, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493a1025fa.png', '2022-11-16 07:39:13', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001035, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493a10325c.png', '2022-11-16 07:39:13', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001036, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493a103e45.png', '2022-11-16 07:39:13', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001037, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493a10488f.png', '2022-11-16 07:39:13', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001038, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493a10557c.png', '2022-11-16 07:39:13', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001039, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493a10607e.png', '2022-11-16 07:39:13', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001040, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493a106ce9.png', '2022-11-16 07:39:13', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001041, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493a1078d4.png', '2022-11-16 07:39:13', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001042, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493a1085ea.png', '2022-11-16 07:39:13', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001043, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493a109034.png', '2022-11-16 07:39:13', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001044, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493a109cf6.png', '2022-11-16 07:39:13', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001045, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493a10a838.png', '2022-11-16 07:39:13', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001046, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493b68b07a.png', '2022-11-16 07:39:34', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001047, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493b68cb61.png', '2022-11-16 07:39:34', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001048, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493b68d9b9.png', '2022-11-16 07:39:34', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001049, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493b68e5a0.png', '2022-11-16 07:39:34', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001050, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493b68f05f.png', '2022-11-16 07:39:34', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001051, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493b68fd0b.png', '2022-11-16 07:39:34', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001052, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493b6905d0.png', '2022-11-16 07:39:34', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001053, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493b690db6.png', '2022-11-16 07:39:34', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001054, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493b6915cc.png', '2022-11-16 07:39:34', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001055, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493b69202c.png', '2022-11-16 07:39:34', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001056, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493b6928f9.png', '2022-11-16 07:39:34', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001057, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493b693109.png', '2022-11-16 07:39:34', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001058, 'laptop', 'intel', 'i7', '6', 'macbook pro 15', 'temp/637493b693991.png', '2022-11-16 07:39:34', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001059, 'laptop', 'intel', 'i5', '5', 'macbook air', 'temp/637493cfeb8e8.png', '2022-11-16 07:39:59', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001060, 'laptop', 'intel', 'i5', '5', 'macbook air', 'temp/637493cfed953.png', '2022-11-16 07:39:59', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001061, 'laptop', 'intel', 'i5', '5', 'macbook air', 'temp/637493cfeeb31.png', '2022-11-16 07:39:59', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001062, 'laptop', 'intel', 'i5', '5', 'macbook air', 'temp/637493cfefd57.png', '2022-11-16 07:39:59', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001063, 'laptop', 'intel', 'i5', '5', 'macbook air', 'temp/637493cff0fe8.png', '2022-11-16 07:39:59', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001064, 'laptop', 'intel', 'i5', '5', 'macbook air', 'temp/637493cff203b.png', '2022-11-16 07:39:59', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001065, 'laptop', 'intel', 'i5', '5', 'macbook air', 'temp/637493cff2cea.png', '2022-11-16 07:39:59', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001066, 'laptop', 'intel', 'i5', '5', 'macbook air', 'temp/637493cff3841.png', '2022-11-16 07:39:59', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001067, 'laptop', 'intel', 'i5', '5', 'macbook air', 'temp/637493d00014e.png', '2022-11-16 07:40:00', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001068, 'laptop', 'intel', 'i5', '5', 'macbook air', 'temp/637493d000abd.png', '2022-11-16 07:40:00', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001069, 'laptop', 'intel', 'i5', '5', 'macbook air', 'temp/6374956d3ec72.png', '2022-11-16 07:46:53', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001070, 'laptop', 'intel', 'i5', '5', 'macbook air', 'temp/6374956d405fa.png', '2022-11-16 07:46:53', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001071, 'laptop', 'intel', 'i5', '5', 'macbook air', 'temp/6374956d40fd9.png', '2022-11-16 07:46:53', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001072, 'laptop', 'intel', 'i5', '5', 'macbook air', 'temp/6374956d41828.png', '2022-11-16 07:46:53', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001073, 'laptop', 'intel', 'i5', '5', 'macbook air', 'temp/6374956d41ea0.png', '2022-11-16 07:46:53', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001074, 'laptop', 'intel', 'i5', '5', 'macbook air', 'temp/6374956d4261e.png', '2022-11-16 07:46:53', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001075, 'laptop', 'intel', 'i5', '5', 'macbook air', 'temp/6374956d42cbf.png', '2022-11-16 07:46:53', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001076, 'laptop', 'intel', 'i5', '5', 'macbook air', 'temp/6374956d432db.png', '2022-11-16 07:46:53', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001077, 'laptop', 'intel', 'i5', '5', 'macbook air', 'temp/6374956d43a44.png', '2022-11-16 07:46:53', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001078, 'laptop', 'intel', 'i5', '5', 'macbook air', 'temp/6374956d44518.png', '2022-11-16 07:46:53', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001079, 'laptop', 'intel', 'i7', '8', 'macbook pro', 'temp/6374983de3d0f.png', '2022-11-16 07:58:53', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001080, 'laptop', 'intel', 'i7', '8', 'macbook pro', 'temp/6374983de5649.png', '2022-11-16 07:58:53', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001081, 'laptop', 'intel', 'i7', '8', 'macbook pro', 'temp/6374983de62cb.png', '2022-11-16 07:58:53', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001082, 'laptop', 'intel', 'i7', '8', 'macbook pro', 'temp/6374983de7051.png', '2022-11-16 07:58:53', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001083, 'laptop', 'intel', 'i7', '8', 'macbook pro', 'temp/6374983de7ce0.png', '2022-11-16 07:58:53', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001084, 'laptop', 'intel', 'i7', '8', 'macbook pro', 'temp/6374983de8a66.png', '2022-11-16 07:58:53', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001085, 'laptop', 'intel', 'i7', '8', 'macbook pro', 'temp/6374983de9791.png', '2022-11-16 07:58:53', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001086, 'laptop', 'intel', 'i7', '8', 'macbook pro', 'temp/6374983dea398.png', '2022-11-16 07:58:53', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001087, 'laptop', 'intel', 'i7', '8', 'macbook pro', 'temp/6374983deb0ab.png', '2022-11-16 07:58:53', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001088, 'laptop', 'intel', 'i7', '8', 'macbook pro', 'temp/6374983debd3b.png', '2022-11-16 07:58:53', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001089, 'laptop', 'intel', 'i7', '8', 'macbook pro', 'temp/6374983deca29.png', '2022-11-16 07:58:53', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001090, 'laptop', 'intel', 'i7', '8', 'macbook pro', 'temp/6374983ded683.png', '2022-11-16 07:58:53', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001091, 'laptop', 'intel', 'i7', '8', 'macbook pro', 'temp/6374983dee256.png', '2022-11-16 07:58:53', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001092, 'laptop', 'intel', 'i7', '8', 'macbook pro', 'temp/6374983deedc0.png', '2022-11-16 07:58:53', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001093, 'laptop', 'intel', 'i7', '8', 'macbook pro', 'temp/6374983def8f1.png', '2022-11-16 07:58:53', 'wh1', 'apple', 'admin', 0, '0000-00-00 00:00:00', 0),
+(001094, 'laptop', 'intel', 'i7', '8', 'e5530', 'temp/637499e5575f2.png', '2022-11-16 08:05:57', 'wh1', 'dell', 'admin', 0, '0000-00-00 00:00:00', 0);
 
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `sales_order_add_items`
---
-ALTER TABLE `sales_order_add_items`
-  ADD CONSTRAINT `fksales_order_id` FOREIGN KEY (`sales_order_id`) REFERENCES `sales_order_information` (`sales_order_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `sales_order_information`
---
-ALTER TABLE `sales_order_information`
-  ADD CONSTRAINT `sales_order_information_ibfk_1` FOREIGN KEY (`sales_order_id`) REFERENCES `sales_order_information` (`sales_order_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `sales_quatation_items`
