@@ -275,12 +275,13 @@ $item_brand=0;
                                 <th>D/MB Base</th>
                                 <th>Hings Cover</th>
                                 <th>LAN Cover</th>
+                                <th>&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody class="tbody_1">
 
                             <?php
-                                $query1 = "SELECT * FROM `requested_part_from_production`WHERE created_date = '$created_date' AND status =1 AND emp_id = '$emp_id' AND model='$model' ;";
+                                $query1 = "SELECT * FROM `requested_part_from_production`WHERE created_date = '2022-11-16 16:47:02' AND status =1 AND emp_id = '$emp_id' AND model='$model' ;";
                                 $query_run1 = mysqli_query($connection, $query1);
                            
                             foreach($query_run1 as $a){
@@ -395,6 +396,8 @@ $item_brand=0;
                                 <td>
                                     <?php echo $lan_cover; $summery_lan_cover = $lan_cover; ?>
                                 </td>
+                                <td> &nbsp; </td>
+
                             </tr>
                             <tr>
                                 <th>Stock</th>
@@ -404,9 +407,8 @@ $item_brand=0;
 
                                     foreach($query_run2 as $a){
                                         $part_name = $a['part_name'];
-                                        $part_qty = $a['qty'];     
-                                        
-                                        print_r($a);
+                                        $part_qty = $a['qty']; 
+                                                                                
                                 ?>
 
                                 <?php if($part_name == 'keyboard'){ ?>
