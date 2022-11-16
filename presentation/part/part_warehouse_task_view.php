@@ -399,12 +399,14 @@ $item_brand=0;
                             <tr>
                                 <th>Stock</th>
                                 <?php
-                                    $query2 = "SELECT * FROM part_stock WHERE part_model='$model' AND part_brand = '$item_brand' AND part_gen = '$item_generation' ;";
+                                    $query2 = "SELECT * FROM part_stock WHERE part_model = '$model' AND part_brand = '$item_brand' AND part_gen = '$item_generation' ;";
                                     $query_run2 = mysqli_query($connection, $query2);
-                                  
+
                                     foreach($query_run2 as $a){
                                         $part_name = $a['part_name'];
-                                        $part_qty = $a['qty'];                           
+                                        $part_qty = $a['qty'];     
+                                        
+                                        print_r($a);
                                 ?>
 
                                 <?php if($part_name == 'keyboard'){ ?>
@@ -571,27 +573,27 @@ $item_brand=0;
                                 $query_update="UPDATE requested_part_from_production SET delivery_date = '$date', status = '0'
                                             WHERE model = '$model' AND created_date = '$created_date' AND emp_id = '$emp_id' AND location = '$location1'
                                 ";
-                                 $query_run_update = mysqli_query($connection, $query_update);
-                                 $balance_stock_keyboard = $stock_keyboard - number_format($keyboard );
-                                 $balance_stock_speakers = $stock_speakers - number_format($speakers );
-                                 $balance_stock_camera =  $stock_camera - number_format($camera );
-                                 $balance_stock_bazel =  $stock_bazel-  number_format($bazel );
-                                 $balance_stock_lan_cover =  $stock_lan_cover - number_format($lan_cover );
-                                 $balance_stock_mousepad =  $stock_mousepad - number_format($mousepad );
-                                 $balance_stock_mouse_pad_button =  $stock_mouse_pad_button - number_format($mouse_pad_button );
-                                 $balance_stock_camera_cable =  $stock_camera_cable - number_format($camera_cable );
-                                 $balance_stock_back_cover =  $stock_back_cover - number_format($back_cover );
-                                 $balance_stock_wifi_card =  $stock_wifi_card - number_format($wifi_card );
-                                 $balance_stock_lcd_cable =  $stock_lcd_cable - number_format($lcd_cable );
-                                 $balance_stock_battery =  $stock_battery - number_format($battery );
-                                 $balance_stock_battery_cable = $stock_battery_cable - number_format($battery_cable );
-                                 $balance_stock_dvd_rom =  $stock_dvd_rom - number_format($dvd_rom );
-                                 $balance_stock_dvd_caddy =  $stock_dvd_caddy - number_format($dvd_caddy );
-                                 $balance_stock_hdd_caddy =  $stock_hdd_caddy - number_format($hdd_caddy );
-                                 $balance_stock_hdd_cable_connector =  $stock_hdd_cable_connector - number_format($hdd_cable_connector );
-                                 $balance_stock_c_panel_palm_rest = $stock_c_panel_palm_rest - number_format($c_panel_palm_rest );
-                                 $balance_stock_mb_base =  $stock_mb_base - number_format($mb_base );
-                                // $balance_stock_hings_cover  =  $stock_hings_cover - $hings_cover ;
+                                
+                                $query_run_update = mysqli_query($connection, $query_update);
+                                $balance_stock_keyboard = number_format((int)$stock_keyboard - (int)$keyboard);
+                                $balance_stock_speakers = number_format((int)$stock_speakers - (int)$speakers);
+                                $balance_stock_camera =  number_format((int)$stock_camera - (int)$camera);
+                                $balance_stock_bazel =  number_format((int)$stock_bazel-  (int)$bazel);
+                                $balance_stock_lan_cover =  number_format((int)$stock_lan_cover - (int)$lan_cover);
+                                $balance_stock_mousepad =  number_format((int)$stock_mousepad - (int)$mousepad);
+                                $balance_stock_mouse_pad_button =  number_format((int)$stock_mouse_pad_button - (int)$mouse_pad_button);
+                                $balance_stock_camera_cable =  number_format((int)$stock_camera_cable - (int)$camera_cable);
+                                $balance_stock_back_cover =  number_format((int)$stock_back_cover - (int)$back_cover);
+                                $balance_stock_wifi_card =  number_format((int)$stock_wifi_card - (int)$wifi_card);
+                                $balance_stock_lcd_cable =  number_format((int)$stock_lcd_cable - (int)$lcd_cable);
+                                $balance_stock_battery =  number_format((int)$stock_battery - (int)$battery);
+                                $balance_stock_battery_cable = number_format((int)$stock_battery_cable - (int)$battery_cable);
+                                $balance_stock_dvd_rom =  number_format((int)$stock_dvd_rom - (int)$dvd_rom);
+                                $balance_stock_dvd_caddy =  number_format((int)$stock_dvd_caddy - (int)$dvd_caddy);
+                                $balance_stock_hdd_caddy =  number_format((int)$stock_hdd_caddy - (int)$hdd_caddy);
+                                $balance_stock_hdd_cable_connector =  number_format((int)$stock_hdd_cable_connector - (int)$hdd_cable_connector);
+                                $balance_stock_c_panel_palm_rest = number_format((int)$stock_c_panel_palm_rest - (int)$c_panel_palm_rest);
+                                $balance_stock_mb_base =  number_format((int)$stock_mb_base - (int)$mb_base);
                                 $array = array(
                                     "keyboard" => $balance_stock_keyboard  ,
                                     "speakers" => $balance_stock_speakers  ,
