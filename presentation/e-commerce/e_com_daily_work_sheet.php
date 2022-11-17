@@ -9,6 +9,119 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 ?>
+<?php 
+ error_reporting (E_ALL ^ E_NOTICE);
+$promo_type ;
+$catelog_sku ;
+$brand ;
+$model = null;
+$size ;
+$generation ;
+$core ;
+$ram ;
+$hdd ;
+$our_wholesale_price ;
+$our_current_noon_price; 
+$other_noon_price ;
+$amazon_price;
+$cartlow_price; 
+$cost_with_windows_ac; 
+$gross_profit;
+$noon_charges;
+$noon_sale_price; 
+$noon_paid ;
+$noon_net_profit; 
+$profit_percentage; 
+if (isset($_POST['submit'])) {
+    $promo_type = mysqli_real_escape_string($connection, $_POST['promo_type']);
+    $catelog_sku = mysqli_real_escape_string($connection, $_POST['catelog_sku']);
+    $brand = mysqli_real_escape_string($connection, $_POST['brand']);
+    $model = mysqli_real_escape_string($connection, $_POST['model']);
+    $size = mysqli_real_escape_string($connection, $_POST['size']);
+    $generation = mysqli_real_escape_string($connection, $_POST['generation']);
+    $core = mysqli_real_escape_string($connection, $_POST['core']);
+    $ram = mysqli_real_escape_string($connection, $_POST['ram']);
+    $hdd = mysqli_real_escape_string($connection, $_POST['hdd']);
+    $our_wholesale_price = mysqli_real_escape_string($connection, $_POST['our_wholesale_price']);
+    $our_current_noon_price = mysqli_real_escape_string($connection, $_POST['our_current_noon_price']);
+    $other_noon_price = mysqli_real_escape_string($connection, $_POST['other_noon_price']);
+    $amazon_price = mysqli_real_escape_string($connection, $_POST['amazon_price']);
+    $cartlow_price = mysqli_real_escape_string($connection, $_POST['cartlow_price']);
+    $cost_with_windows_ac = mysqli_real_escape_string($connection, $_POST['cost_with_windows_ac']);
+    $gross_profit = mysqli_real_escape_string($connection, $_POST['gross_profit']);
+    $noon_charges = mysqli_real_escape_string($connection, $_POST['noon_charges']);
+    $noon_sale_price = mysqli_real_escape_string($connection, $_POST['noon_sale_price']);
+    $noon_paid = mysqli_real_escape_string($connection, $_POST['noon_paid']);
+    $noon_net_profit = mysqli_real_escape_string($connection, $_POST['noon_net_profit']);
+    $profit_percentage = mysqli_real_escape_string($connection, $_POST['profit_percentage']);
+    $status = mysqli_real_escape_string($connection, $_POST['status']);
+    $qty = mysqli_real_escape_string($connection, $_POST['qty']);
+    $exp_date = mysqli_real_escape_string($connection, $_POST['exp_date']);
+    $query = "SELECT * FROM `e_com_listing` WHERE `brand`='$brand' AND`model`='$model' AND`cpu`='$cpu' AND`generation`='$generation' AND`ram`='$ram' AND`hdd`='$hdd' AND`size`='$size' ";
+        $query_run = mysqli_query($connection, $query);
+        $rowcount = mysqli_num_rows($query_run);
+    if($catelog_sku != null AND $rowcount ==0){
+        
+   
+    $query = "INSERT INTO `e_com_listing`(
+        `promo_type`,
+        `catelog_sku`,
+        `brand`,
+        `model`,
+        `size`,
+        `generation`,
+        `cpu`,
+        `ram`,
+        `hdd`,
+        `our_wholesale_price`,
+        `our_current_noon_price`,
+        `other_noon_price`,
+        `amazon_price`,
+        `cartlow_price`,
+        `cost_with_windows_ac`,
+        `gross_profit`,
+        `noon_charges`,
+        `noon_sale_price`,
+        `noon_paid`,
+        `noon_net_profit`,
+        `profit_percentage`,
+        created_by,
+        exp_date,
+        status,
+        qty
+    )
+    VALUES(
+        '$promo_type ',
+        '$catelog_sku ',
+        '$brand ',
+        '$model ',
+        '$size ',
+        '$generation ',
+        '$core ',
+        '$ram ',
+        '$hdd ',
+        '$our_wholesale_price ',
+        '$our_current_noon_price', 
+        '$other_noon_price ',
+        '$amazon_price',
+        '$cartlow_price', 
+        '$cost_with_windows_ac', 
+        '$gross_profit',
+        '$noon_charges',
+        '$noon_sale_price', 
+        '$noon_paid ',
+        '$noon_net_profit', 
+        '$profit_percentage',
+        'add his name from session',
+        '$exp_date',
+        '$status',
+        '$qty'
+        
+    )";
+    $query_run = mysqli_query($connection, $query);
+    }
+}
+?>
 
 <div class="row page-titles m-2">
     <div class="col-md-5 align-self-center">
@@ -39,38 +152,64 @@ if (!isset($_SESSION['user_id'])) {
 <div class="container-fluid">
     <div class="row">
         <div class="col grid-margin stretch-card justify-content-center mx-auto mt-2">
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th>Promo Type </th>
-                        <th>Catelog SKU </th>
-                        <th>Brand </th>
-                        <th>Model </th>
-                        <th>Size </th>
-                        <th>CPU </th>
-                        <th>Generation </th>
-                        <th>RAM </th>
-                        <th>HDD </th>
-                        <th>QTY </th>
-                        <th>Our Wholesale Price </th>
-                        <th>Our Current Noon Price</th>
-                        <th>Other Noon Price </th>
-                        <th>Amazon Price</th>
-                        <th>Cartlow Price</th>
-                        <th>Cost With Windows AC</th>
-                        <th>gross Profit</th>
-                        <th>Noon Charges</th>
-                        <th>Noon Sale Price</th>
-                        <th>Noon Paid </th>
-                        <th>Noon Net Profit</th>
-                        <th>Profit Percentage</th>
-                        <th>End Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <form name="myForm" action="" method="POST">
+            <form name="myForm" action="" method="POST" onSubmit="window.location.reload()">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Promo Type </th>
+                            <th>Catelog SKU </th>
+                            <th>Brand </th>
+                            <th>Model </th>
+                            <th>Size </th>
+                            <th>CPU </th>
+                            <th>Generation </th>
+                            <th>RAM </th>
+                            <th>HDD </th>
+                            <th>QTY </th>
+                            <th>Our Wholesale Price </th>
+                            <th>Our Current Noon Price</th>
+                            <th>Other Noon Price </th>
+                            <th>Amazon Price</th>
+                            <th>Cartlow Price</th>
+                            <th>Cost With Windows AC</th>
+                            <th>gross Profit</th>
+                            <th>Noon Charges</th>
+                            <th>Noon Sale Price</th>
+                            <th>Noon Paid </th>
+                            <th>Noon Net Profit</th>
+                            <th>Profit Percentage</th>
+                            <th>End Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
                             <fieldset class="mx-3 my-2">
+                                <td><select name="status" class="info_select" style="border-radius: 5px;">
+                                        <option selected>--Select Status--</option>
+
+                                        <option value="prepared for listing">
+                                            <?php echo "Prepared for listing"; ?>
+                                        </option>
+                                        <option value="listing submitted">
+                                            <?php echo "Listing submitted"; ?>
+                                        </option>
+                                        <option value="listing approved">
+                                            <?php echo "Listing approved"; ?>
+                                        </option>
+                                        <option value="listed done on noon">
+                                            <?php echo "Listed done on noon"; ?>
+                                        </option>
+                                        <option value="promotion">
+                                            <?php echo "Promotion"; ?>
+                                        </option>
+                                        <option value="FBN Done">
+                                            <?php echo "FBN Done"; ?>
+                                        </option>
+                                        <option value="S/O Created">
+                                            <?php echo "S/O Created"; ?>
+                                        </option>
+                                    </select> </td>
                                 <td><select name="promo_type" class="info_select" style="border-radius: 5px;">
                                         <option selected>--Select Promotion Type--</option>
 
@@ -102,8 +241,7 @@ if (!isset($_SESSION['user_id'])) {
                                     </select>
                                 </td>
                                 <td>
-                                    <select id="model" name="model" class="info_select" style="border-radius: 5px;">
-
+                                    <select name="model" id="model" class="info_select" style="border-radius: 5px;">
                                     </select>
                                 </td>
                                 <td><select name="size" class="info_select" style="border-radius: 5px;">
@@ -196,28 +334,30 @@ if (!isset($_SESSION['user_id'])) {
                                     <input type="text" name="profit_percentage" id="profit_percentage"
                                         class="form-control" placeholder="Noon Selling Price" readonly>
                                 </td>
-                                <td><input type="date" name="to_date"
+                                <td><input type="date" name="exp_date"
                                         value="<?php if(isset($_GET['to_date'])){ echo $_GET['to_date']; } ?>"
                                         class="form-control"></td>
 
-                                <td>
-                                    <!-- <input type="button" value="Submit" id="btnsubmit" onclick="submitForm()"> -->
-
-                                    <button type="submit" name="submit"
-                                        class="btn mb-2 mt-4 btn-primary btn-sm d-block mx-auto text-center"
-                                        id="btnsubmit" onclick="submitForm()"><i style="margin-right: 5px;"></i>submit
-                                    </button>
-                                </td>
                             </fieldset>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="submit" name="submit"
+                    class="btn mb-2 mt-4 btn-primary btn-sm d-block mx-auto text-center"><i
+                        style="margin-right: 5px;"></i>submit
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col grid-margin stretch-card justify-content-center mx-auto mt-2">
 
-                        </form>
-
-                    </tr>
-                </tbody>
-            </table>
-            <table class="table table-bordered table-hover">
+            <table id="example1" class="table table-bordered table-hover">
                 <thead>
                     <tr>
+                        <th>Status </th>
                         <th>Promo Type </th>
                         <th>Catelog SKU </th>
                         <th>Brand </th>
@@ -227,6 +367,7 @@ if (!isset($_SESSION['user_id'])) {
                         <th>Generation </th>
                         <th>RAM </th>
                         <th>HDD </th>
+                        <th>QTY </th>
                         <th>Our Wholesale Price </th>
                         <th>Our Current Noon Price</th>
                         <th>Other Noon Price </th>
@@ -239,6 +380,8 @@ if (!isset($_SESSION['user_id'])) {
                         <th>Noon Paid </th>
                         <th>Noon Net Profit</th>
                         <th>Profit Percentage</th>
+                        <th>EXP Date </th>
+                        <th>Created Name </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -291,8 +434,13 @@ if (!isset($_SESSION['user_id'])) {
                     $noon_paid  =$data['noon_paid'];
                     $noon_net_profit =$data['noon_net_profit'];
                     $profit_percentage =$data['profit_percentage'];
+                    $status =$data['status'];
+                    $qty =$data['qty'];
+                    $exp_date =$data['exp_date'];
+                    $created_by =$data['created_by'];
                     ?>
                     <tr>
+                        <td><?php echo $status ?></td>
                         <td><?php echo $promo_type ?> </td>
                         <td><?php echo $catelog_sku ?> </td>
                         <td><?php echo $brand ?> </td>
@@ -301,6 +449,7 @@ if (!isset($_SESSION['user_id'])) {
                         <td><?php echo $core ?> </td>
                         <td><?php echo $generation ?> </td>
                         <td><?php echo $ram ?> </td>
+                        <td><?php echo $qty ?> </td>
                         <td><?php echo $hdd ?> </td>
                         <td><?php echo $our_wholesale_price ?> </td>
                         <td><?php echo $our_current_noon_price?> </td>
@@ -314,6 +463,8 @@ if (!isset($_SESSION['user_id'])) {
                         <td><?php echo $noon_paid ?> </td>
                         <td><?php echo $noon_net_profit?> </td>
                         <td><?php echo $profit_percentage?> </td>
+                        <td><?php echo $exp_date ?> </td>
+                        <td><?php echo $created_by ?> </td>
                     </tr>
                     <?php } ?>
                 </tbody>
@@ -340,9 +491,12 @@ $(document).ready(function() {
         });
     });
 });
+
 $(document).ready(function() {
     $("#model").on("change", function() {
         var model = $("#model").val();
+        console.log("i am here");
+        console.log(model);
         var getURL = "get-cpu.php?model=" + model + "&brand=" + brand;
         $.get(getURL, function(data, status) {
             $("#core").html(data);
@@ -414,106 +568,15 @@ const getGrossProfit = () => {
     $('#profit_percentage').val(profit_percentage);
 }
 </script>
-<?php 
-$promo_type ;
-$catelog_sku ;
-$brand ;
-$model ;
-$size ;
-$generation ;
-$core ;
-$ram ;
-$hdd ;
-$our_wholesale_price ;
-$our_current_noon_price; 
-$other_noon_price ;
-$amazon_price;
-$cartlow_price; 
-$cost_with_windows_ac; 
-$gross_profit;
-$noon_charges;
-$noon_sale_price; 
-$noon_paid ;
-$noon_net_profit; 
-$profit_percentage; 
-if (isset($_POST['submit'])) {
-   
-    $promo_type = mysqli_real_escape_string($connection, $_POST['promo_type']);
-    $catelog_sku = mysqli_real_escape_string($connection, $_POST['catelog_sku']);
-    $brand = mysqli_real_escape_string($connection, $_POST['brand']);
-    $model = mysqli_real_escape_string($connection, $_POST['model']);
-    $size = mysqli_real_escape_string($connection, $_POST['size']);
-    $generation = mysqli_real_escape_string($connection, $_POST['generation']);
-    $core = mysqli_real_escape_string($connection, $_POST['core']);
-    $ram = mysqli_real_escape_string($connection, $_POST['ram']);
-    $hdd = mysqli_real_escape_string($connection, $_POST['hdd']);
-    $our_wholesale_price = mysqli_real_escape_string($connection, $_POST['our_wholesale_price']);
-    $our_current_noon_price = mysqli_real_escape_string($connection, $_POST['our_current_noon_price']);
-    $other_noon_price = mysqli_real_escape_string($connection, $_POST['other_noon_price']);
-    $amazon_price = mysqli_real_escape_string($connection, $_POST['amazon_price']);
-    $cartlow_price = mysqli_real_escape_string($connection, $_POST['cartlow_price']);
-    $cost_with_windows_ac = mysqli_real_escape_string($connection, $_POST['cost_with_windows_ac']);
-    $gross_profit = mysqli_real_escape_string($connection, $_POST['gross_profit']);
-    $noon_charges = mysqli_real_escape_string($connection, $_POST['noon_charges']);
-    $noon_sale_price = mysqli_real_escape_string($connection, $_POST['noon_sale_price']);
-    $noon_paid = mysqli_real_escape_string($connection, $_POST['noon_paid']);
-    $noon_net_profit = mysqli_real_escape_string($connection, $_POST['noon_net_profit']);
-    $profit_percentage = mysqli_real_escape_string($connection, $_POST['profit_percentage']);
-    $_POST['submit'] =null;
-   
-    
 
-    $query = "INSERT INTO `e_com_listing`(
-        `promo_type`,
-        `catelog_sku`,
-        `brand`,
-        `model`,
-        `size`,
-        `generation`,
-        `cpu`,
-        `ram`,
-        `hdd`,
-        `our_wholesale_price`,
-        `our_current_noon_price`,
-        `other_noon_price`,
-        `amazon_price`,
-        `cartlow_price`,
-        `cost_with_windows_ac`,
-        `gross_profit`,
-        `noon_charges`,
-        `noon_sale_price`,
-        `noon_paid`,
-        `noon_net_profit`,
-        `profit_percentage`,
-        created_by
-    )
-    VALUES(
-        '$promo_type ',
-        '$catelog_sku ',
-        '$brand ',
-        '$model ',
-        '$size ',
-        '$generation ',
-        '$core ',
-        '$ram ',
-        '$hdd ',
-        '$our_wholesale_price ',
-        '$our_current_noon_price', 
-        '$other_noon_price ',
-        '$amazon_price',
-        '$cartlow_price', 
-        '$cost_with_windows_ac', 
-        '$gross_profit',
-        '$noon_charges',
-        '$noon_sale_price', 
-        '$noon_paid ',
-        '$noon_net_profit', 
-        '$profit_percentage',
-        'add his name from session'
-    )";
-    echo $query;
-    $query_run = mysqli_query($connection, $query);
-}
-?>
+<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
+
+<script>
+$(document).ready(function() {
+    $('#example1').dataTable();
+});
+</script>
 <?php include_once('../includes/footer.php'); ?>
