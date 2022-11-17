@@ -154,7 +154,7 @@ $item_brand=0;
                         <tbody class="tbody_1">
                             <?php
                             $query = "SELECT * FROM `requested_part_from_production`WHERE created_date = '$created_date' AND status =1 AND emp_id = '$emp_id' AND model='$model' GROUP BY sales_order_id;";
-                            echo $query;
+                            
                             $query_run = mysqli_query($connection, $query);
                            
                             foreach($query_run as $a){
@@ -229,7 +229,7 @@ $item_brand=0;
                     FROM
                         `requested_part_from_production`
                     WHERE
-                        created_date = '2022-11-16 16:47:02' AND status = 1 AND emp_id = '$emp_id' AND model = '$model';";
+                        created_date = '$created_date' AND status = 1 AND emp_id = '$emp_id' AND model = '$model';";
                         $query_run2 = mysqli_query($connection, $query);
                             foreach($query_run2 as $a){
                                 $keyboard =$a['keyboard'];
@@ -282,7 +282,7 @@ $item_brand=0;
                         <tbody class="tbody_1">
 
                             <?php
-                                $query1 = "SELECT * FROM `requested_part_from_production`WHERE created_date = '2022-11-16 16:47:02' AND status =1 AND emp_id = '$emp_id' AND model='$model' ;";
+                                $query1 = "SELECT * FROM `requested_part_from_production`WHERE created_date = '$created_date' AND status =1 AND emp_id = '$emp_id' AND model='$model' ;";
                                 $query_run1 = mysqli_query($connection, $query1);
                            
                             foreach($query_run1 as $a){
@@ -404,6 +404,7 @@ $item_brand=0;
                                 <th>Stock</th>
                                 <?php
                                     $query2 = "SELECT * FROM part_stock WHERE part_model = '$model' AND part_brand = '$item_brand' AND part_gen = '$item_generation' ;";
+                                    
                                     $query_run2 = mysqli_query($connection, $query2);
 
                                     foreach($query_run2 as $a){
