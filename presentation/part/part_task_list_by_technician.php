@@ -23,7 +23,8 @@ $day = $_GET['day'];
     </div>
 </div>
 <?php 
-    $query1 = "SELECT * FROM requested_part_from_production WHERE created_date = '2022-11-16 16:47:02'  ;";
+    $query1 = "SELECT * FROM requested_part_from_production WHERE created_date = '$created_date'  ;";
+ 
     $query_run1 = mysqli_query($connection, $query1);
     foreach($query_run1 as $a){
         $query2 = "SELECT  location FROM `users` WHERE epf = '{$a['emp_id']}';";
@@ -51,13 +52,14 @@ $day = $_GET['day'];
                     date_sub($date1,date_interval_create_from_date_string("14 days"));
                     $past_14_days= date_format($date1,"Y-m-d");
 
-                    $query = "SELECT emp_id, model, created_date, COUNT(model) AS request FROM requested_part_from_production
-                            WHERE (created_date = '2022-11-16 16:47:02') AND status = 1 GROUP BY model;";                
+                    $query = "SELECT DISTINCT  emp_id, model, created_date, COUNT(model) AS request FROM requested_part_from_production
+                            WHERE (created_date = '$created_date') AND status = 1 GROUP BY model;";  
                     $query_run = mysqli_query($connection, $query);
-                    
+
                     foreach($query_run as $b){
                         $query1 = "SELECT emp_id, model, created_date, COUNT(model) AS request FROM requested_part_from_production
-                                WHERE (created_date = '$past_7_days') AND status = 1 GROUP BY model;";              
+                                WHERE (created_date = '$past_7_days') AND status = 1 GROUP BY model;";     
+                                     
                         $query_run1 = mysqli_query($connection, $query1);
                         
                         $query2 = "SELECT emp_id, model, created_date, COUNT(model) AS request FROM requested_part_from_production

@@ -45,7 +45,7 @@ if($last_update_id != 0){
 
 	$height = $howManyCodes*100;
 
-	$pageWidth =  "200mm";
+	$pageWidth =  "250mm";
 	$pageHeight =  "$height.mm";
 
 	$itemWidth = "200mm";
@@ -56,8 +56,8 @@ if($last_update_id != 0){
 	$pageMarginRight = "0mm";
 	$pageMarginBottom =  "0mm";;
 
-	$itemMarginBottom =  "45mm";
-	$itemMarginRight = "10mm";
+	$itemMarginBottom =  "0mm";
+	$itemMarginRight = "0mm";
 
 	$barCodeHeight ="170px";
 	$codetype = "qrcode";
@@ -86,23 +86,25 @@ function write($code, $overText, $rack, $barCodeHeight, $downText,$secondPart) {
 
 <div class="card mb-3" style="max-width: 940px;">
     <div class="row g-0">
-        <h5 style="margin: 5px 0 -30px 20px; position: absolute; font-size: 32px;">
-            <?php if ($overText != "") {
+        <!-- <h5 style="margin: 5px 0 -30px 20px; position: absolute; font-size: 32px;"> -->
+        <?php if ($overText != "") {
 			$abc= strtoupper( $overText);
-    		echo  "$abc &nbsp $secondPart ";
+			echo "</br>";
+    		// echo  "$abc &nbsp $secondPart ";
+			echo  "<div  ><p class = 'text-uppercase' style='font-size: 50; color:black;text-weight:bold;text-align: left;margin:0' >$abc &nbsp $secondPart</p></div>"; 
     	} 
 		?><table>
-                <th><?php echo "<img src='barcode.php?codetype=qrcode&size={$barCodeHeight}&text={$code}'align='left'width='450' height='450'> "; ?>
-                </th>
-                <th height: 370px;><?php 
+            <th><?php echo "<img src='barcode.php?codetype=qrcode&size={$barCodeHeight}&text={$code}'left = 0;width='420' height='420'> "; ?>
+            </th>
+            <th height: 370px;><?php 
 		echo strtoupper("<div style = 'font-size: 40; color:black;text-weight:bold;text-align: left;'>$rack");
 		echo strtoupper("<div style = 'font-size: 40; color:black;text-weight:bold;text-align: left;'>$downText");
     	echo strtoupper("<div style = 'font-size: 40; color:black;text-weight:bold;text-align: left;'>ALSAKB$code</div></br> ");
 		echo "<p style='page-break-after:always'></p>";
 		?></th>
-            </table>
+        </table>
 
-            <?php
+        <?php
 }
     	
 

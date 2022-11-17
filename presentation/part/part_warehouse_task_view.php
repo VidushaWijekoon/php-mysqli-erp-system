@@ -153,7 +153,8 @@ $item_brand=0;
                         </thead>
                         <tbody class="tbody_1">
                             <?php
-                            $query = "SELECT * FROM `requested_part_from_production`WHERE created_date = '2022-11-16 16:47:02' AND status =1 AND emp_id = '$emp_id' AND model='$model' GROUP BY sales_order_id;";
+                            $query = "SELECT * FROM `requested_part_from_production`WHERE created_date = '$created_date' AND status =1 AND emp_id = '$emp_id' AND model='$model' GROUP BY sales_order_id;";
+                            echo $query;
                             $query_run = mysqli_query($connection, $query);
                            
                             foreach($query_run as $a){
