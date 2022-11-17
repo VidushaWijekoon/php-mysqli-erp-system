@@ -15,15 +15,12 @@ function Login($role_id, $department){
      elseif($role_id == 4 && $department == 2){
         header('Location: presentation/inventory/warehouse_dashboard.php');
     }
-    // Part Team Leader Redirect
-    elseif($role_id == 4 && $department == 22){
+    
+    // Part Team Redirect
+    elseif($role_id == 11 && $department == 20){
         header('Location: presentation/part/part_warehouse_leader_dashboard.php');
     }
-    // Part Member Redirect
-    elseif($role_id == 11 && $department == 22){
-        header('Location: presentation/part/part_warehouse_member_dashbaord.php');
-    }
-
+    
     // Production Team Leader Redirect
     elseif($role_id == 4 && $department == 1){
         header('Location: presentation/production/production_team_leader_dashboard.php');
