@@ -38,7 +38,18 @@ if (!isset($_SESSION['user_id'])) {
             <div class="info-box-content">
                 <span class="info-box-text">Total Quatations</span>
                 <span class="info-box-number">
-                    12
+                    <?php 
+                    
+                        $query = "SELECT *, COUNT(quatation_id) as Total_quatations FROM sales_quatation";
+                        $query_set = mysqli_query($connection, $query);
+
+                        while($count = mysqli_fetch_assoc($query_set)){
+                            $Total_quatations =  $count['Total_quatations'];
+                        }
+
+                        echo $Total_quatations;                    
+                    
+                    ?>
                 </span>
             </div>
             <!-- /.info-box-content -->
@@ -53,7 +64,7 @@ if (!isset($_SESSION['user_id'])) {
             <div class="info-box-content">
                 <span class="info-box-text">Turn Over</span>
                 <span class="info-box-number">
-                    7
+                    0
                 </span>
             </div>
             <!-- /.info-box-content -->
@@ -72,7 +83,18 @@ if (!isset($_SESSION['user_id'])) {
             <div class="info-box-content">
                 <span class="info-box-text"> Sales Orders</span>
                 <span class="info-box-number">
-                    5
+                    <?php 
+                    
+                        $query = "SELECT *, COUNT(sales_order_id) as COUNT FROM sales_order_information";
+                        $query_set = mysqli_query($connection, $query);
+
+                        while($count = mysqli_fetch_assoc($query_set)){
+                            $total =  $count['COUNT'];
+                        }
+
+                        echo $total;                    
+                    
+                    ?>
                 </span>
             </div>
             <!-- /.info-box-content -->
@@ -86,7 +108,20 @@ if (!isset($_SESSION['user_id'])) {
 
             <div class="info-box-content">
                 <span class="info-box-text">Sales Team</span>
-                <span class="info-box-number">8</span>
+                <span class="info-box-number">
+                    <?php 
+                    
+                        $query = "SELECT *, COUNT(emp_id) as accont_team FROM employees WHERE department = 20";
+                        $query_set = mysqli_query($connection, $query);
+
+                        while($count = mysqli_fetch_assoc($query_set)){
+                            $accont_team =  $count['accont_team'];
+                        }
+
+                        echo $accont_team;                    
+                    
+                    ?>
+                </span>
             </div>
             <!-- /.info-box-content -->
         </div>

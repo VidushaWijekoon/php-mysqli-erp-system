@@ -204,11 +204,8 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                                                 sales_order_information.sales_order_id,
                                                 sales_order_add_items.sales_order_created_date AS created_date,
                                                 sales_order_add_items.item_delivery_date,
-                                                COUNT(
-                                                    warehouse_information_sheet.send_to_production
-                                                ) AS prepared
-                                            FROM
-                                                sales_order_information
+                                                COUNT(warehouse_information_sheet.send_to_production) AS prepared
+                                            FROM sales_order_information
                                             LEFT JOIN sales_order_add_items ON sales_order_information.sales_order_id = sales_order_add_items.sales_order_id
                                             LEFT JOIN warehouse_information_sheet ON sales_order_add_items.sales_order_id = warehouse_information_sheet.sales_order_id AND sales_order_add_items.item_model = warehouse_information_sheet.model AND sales_order_add_items.item_type = warehouse_information_sheet.device AND sales_order_add_items.item_brand = warehouse_information_sheet.brand AND sales_order_add_items.item_processor = warehouse_information_sheet.processor AND sales_order_add_items.item_generation = warehouse_information_sheet.generation AND sales_order_add_items.item_core = warehouse_information_sheet.core
                                             GROUP BY

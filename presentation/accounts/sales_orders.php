@@ -45,7 +45,7 @@ if (!isset($_SESSION['user_id'])) {
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Filter</button>
+                                    <button type="submit" class="btn btn-xs btn-primary">Choose Date</button>
                                 </div>
                             </div>
                             <div class="col-md-3">

@@ -11,15 +11,15 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 
 clearstatcache();}
-$device ="";
-$brand="";
-$generation ="";
-$model ="";
-$quantity ="";
-$location="";
-$capacity ="";
-$rack_number ="";
-$slot_name =""; 
+$device = NULL;
+$brand= NULL;
+$generation = NULL;
+$model = NULL;
+$quantity = NULL;
+$location = NULL;
+$capacity = NULL;
+$rack_number = NULL;
+$slot_name = NULL; 
 
 if(isset($_POST['submit'])){    
 
@@ -28,40 +28,22 @@ if(isset($_POST['submit'])){
         $generation = mysqli_real_escape_string($connection, $_POST['generation']);
         $model = mysqli_real_escape_string($connection, $_POST['model']);
         $quantity = mysqli_real_escape_string($connection, $_POST['quantity']);
-        $location = mysqli_real_escape_string($connection, $_POST['location']);
         $capacity = mysqli_real_escape_string($connection, $_POST['capacity']);
         $rack_number = mysqli_real_escape_string($connection, $_POST['rack_number']);
         $slot_name = mysqli_real_escape_string($connection, $_POST['slot_name']);
         $_POST = "";
         $_SESSION['device'] = $device;
         $_SESSION['slot_name'] = $slot_name;
-        $_SESSION['modal'] = $modal;
+        $_SESSION['modal'] = $model;
         $_SESSION['rack_number'] = $rack_number;        
         
-        $query = "INSERT INTO `part_stock`(
-            `part_name`,
-            `part_model`,
-            `part_brand`,
-            `part_gen`,
-            `capacity`,
-            `qty`,
-            rack_number,
-            slot_name
-        )
-        VALUES(
-            '$device',
-            '$model',
-            '$brand',
-            '$generation',
-            '$capacity',
-            '$quantity',
-            '$rack_number',
-            '$slot_name'
-        )";
+        $query = "INSERT INTO part_stock(part_name, part_model, part_brand, part_gen, capacity, qty, location, rack_number, slot_name) 
+                VALUES ('$device', '$model', '$brand', 0, 0, '$quantity', 0,'$rack_number', '$slot_name')";
+        echo $query;
         $query_run = mysqli_query($connection, $query);
         $last_id = $connection->insert_id;
-        $_SESSION['last_id'] = $last_id;
-        header("location: ./indexnew.php?last_id={$last_id}"); 
+        $_SESSION['last_id'] = $last_id;    
+        // header("location: ./indexnew.php?last_id={$last_id}"); 
 
 }
 ?>
@@ -139,14 +121,16 @@ if(isset($_POST['submit'])){
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Quantity</label>
                                 <div class="col-sm-8">
-                                    <input type="number" class="form-control" placeholder="Quantity" name="quantity">
+                                    <input type="number" min="1" class="form-control" placeholder="Quantity"
+                                        name="quantity">
                                 </div>
                             </div>
 
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Capacity</label>
                                 <div class="col-sm-8">
-                                    <input type="number" class="form-control" placeholder="Capacity" name="capacity">
+                                    <input type="number" min="1" class="form-control" placeholder="Capacity"
+                                        name="capacity">
                                 </div>
                             </div>
                             <div class="row">

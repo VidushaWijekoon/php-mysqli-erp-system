@@ -121,7 +121,7 @@ if (isset($_GET['sales_order_id'])) {
         }
 
     }
-      $query_mc = "SELECT * FROM combine_check WHERE inventory_id =$inventory_id AND sales_order_id=$sales_order_id";
+    $query_mc = "SELECT * FROM combine_check WHERE inventory_id =$inventory_id AND sales_order_id=$sales_order_id";
     $query_run_c = mysqli_query($connection, $query_mc);
     foreach($query_run_c as $data){
         $com_id = $data['inventory_id'];
@@ -149,26 +149,26 @@ if (isset($_GET['sales_order_id'])) {
         $lan_cover= $data['lan_cover'];
 
         if($keyboard ==1){ $keyboard1 =1; } 
-    if($speakers ==1){$speakers1 =1;} 
-    if($camera ==1){$camera1 =1;} 
-    if($bazel ==1){$bazel1 =1;} 
-    if($keys ==1){$keys1 =1;} 
-    if($mousepad==1){$mousepad1 =1;}  
-    if($mouse_pad_button==1){$mouse_pad_button1 =1;}  
-    if($camera_cable==1){$camera_cable1 =1;}  
-    if($back_cover==1){$back_cover1 =1;} 
-    if($wifi_card==1){$wifi_card1 =1;}  
-    if($lcd_cable==1){$lcd_cable1 =1;} 
-    if($battery==1){$battery1 =1;}  
-    if($battery_cable==1){$battery_cable1 =1;} 
-    if($dvd_rom==1){$dvd_rom1 =1;} 
-    if($dvd_caddy==1){$dvd_caddy1 =1;}  
-    if($hdd_caddy==1){$hdd_caddy1 =1;} 
-    if($hdd_cable_connector==1){$hdd_cable_connector1 =1;} 
-    if($c_panel_palm_rest==1){$c_panel_palm_rest1 =1;} 
-    if($mb_base==1){$mb_base1 =1;} 
-    if($hings_cover==1){$hings_cover1 =1;} 
-    if($lan_cover==1){$lan_cover1 =1;} 
+        if($speakers ==1){$speakers1 =1;} 
+        if($camera ==1){$camera1 =1;} 
+        if($bazel ==1){$bazel1 =1;} 
+        if($keys ==1){$keys1 =1;} 
+        if($mousepad==1){$mousepad1 =1;}  
+        if($mouse_pad_button==1){$mouse_pad_button1 =1;}  
+        if($camera_cable==1){$camera_cable1 =1;}  
+        if($back_cover==1){$back_cover1 =1;} 
+        if($wifi_card==1){$wifi_card1 =1;}  
+        if($lcd_cable==1){$lcd_cable1 =1;} 
+        if($battery==1){$battery1 =1;}  
+        if($battery_cable==1){$battery_cable1 =1;} 
+        if($dvd_rom==1){$dvd_rom1 =1;} 
+        if($dvd_caddy==1){$dvd_caddy1 =1;}  
+        if($hdd_caddy==1){$hdd_caddy1 =1;} 
+        if($hdd_cable_connector==1){$hdd_cable_connector1 =1;} 
+        if($c_panel_palm_rest==1){$c_panel_palm_rest1 =1;} 
+        if($mb_base==1){$mb_base1 =1;} 
+        if($hings_cover==1){$hings_cover1 =1;} 
+        if($lan_cover==1){$lan_cover1 =1;} 
        
         if($comb_status == 0){
             $lunch_combine = 0;
@@ -751,10 +751,7 @@ if(isset($_POST['combine_form'])){
     $location10;
     foreach($query_run as $a){
         $location10 = $a['location'];
-    }
-    
-
-
+    }   
     $status = 0;
      if($keyboard == 1 || $Keys == 1 || $speakers == 1 || $camera ==1 || $bazel ==1 || $mousepad == 1 || $mouse_pad_button == 1 || $camera_cable == 1 || $back_cover ==1 || $wifi_card ==1 ||
      $lcd_cable == 1 || $battery == 1 || $battery_cable == 1 || $dvd_rom ==1 || $dvd_caddy ==1 ||
@@ -763,81 +760,23 @@ if(isset($_POST['combine_form'])){
         $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
         $date = $date1->format('Y-m-d');
        
-        $query_6 = "INSERT INTO requested_part_from_production(
-            
-            brand,
-            model,
-            generation,
-            sales_order_id,
-            inventory_id,
-            created_date,
-            emp_id,
-            location,
-            status,
-            keyboard,
-            speakers,
-            camera,
-            bazel,
-            lan_cover,
-            mousepad,
-            mouse_pad_button,
-            camera_cable,
-            back_cover,
-            wifi_card,
-            lcd_cable,
-            battery,
-            battery_cable,
-            dvd_rom,
-            dvd_caddy,
-            hdd_caddy,
-            hdd_cable_connector,
-            c_panel_palm_rest,
-            mb_base,
-            hings_cover
-
-        )
-        VALUES(
-            '$item_brand',
-            '$item_model',
-            '$item_generation',
-            '$sales_order_id',
-            '$inventory_id',
-            '$date',
-            '$emp_id',
-            '$location10',
-            '1',
-            '$keyboard',
-            '$speakers',
-            '$camera',
-            '$bazel',
-            '$lan_cover',
-            '$mousepad',
-            '$mouse_pad_button',
-            '$camera_cable',
-            '$back_cover',
-            '$wifi_card',
-            '$lcd_cable',
-            '$battery',
-            '$battery_cable',
-            '$dvd_rom',
-            '$dvd_caddy',
-            '$hdd_caddy',
-            '$hdd_cable_connector',
-            '$c_panel_palm_rest',
-            '$mb_base',
-            '$hings_cover'
-        )";
+        $query_6 = "INSERT INTO requested_part_from_production(brand, model, generation, sales_order_id, inventory_id, delivery_date, emp_id, location, 
+                status, keyboard, speakers, camera, bazel, lan_cover, mousepad, mouse_pad_button, camera_cable, back_cover, wifi_card, lcd_cable, 
+                battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, c_panel_palm_rest, mb_base, hings_cover, switch, switch_id)
+        VALUES('$item_brand', '$item_model', '$item_generation', '$sales_order_id', '$inventory_id', '$date', '$emp_id', '$location10', '1', '$keyboard', '$speakers',
+            '$camera', '$bazel', '$lan_cover', '$mousepad', '$mouse_pad_button', '$camera_cable', '$back_cover', '$wifi_card', '$lcd_cable', '$battery', '$battery_cable',
+            '$dvd_rom', '$dvd_caddy', '$hdd_caddy', '$hdd_cable_connector', '$c_panel_palm_rest', '$mb_base', '$hings_cover', 0, 0)";
+            echo $query_6;
          $query_new = mysqli_query($connection, $query_6);
      }
     if($lunch_combine == 1){
         
-    $query_com = "INSERT INTO combine_check (inventory_id, emp_id, sales_order_id, keyboard, speakers, camera, bazel, status, damage_keys, mousepad, 
-    mouse_pad_button, camera_cable, back_cover, wifi_card, lcd_cable, battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, 
-    c_panel_palm_rest, mb_base, hings_cover, lan_cover,combined_id) 
-                VALUES ('$inventory_id', '$emp_id', '$sales_order_id', '$keyboard', '$speakers', '$camera', '$bazel','$status','$keys','$mousepad','$mouse_pad_button',
+    $query_com = "INSERT INTO combine_check(inventory_id, emp_id, sales_order_id, keyboard, speakers, camera, bazel, status, damage_keys, mousepad, mouse_pad_button, 
+                            camera_cable, back_cover, wifi_card, lcd_cable, battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, c_panel_palm_rest, mb_base, 
+                            hings_cover, lan_cover, combined_id)
+                VALUES ('$inventory_id', '$emp_id', '$sales_order_id', '$keyboard', '$speakers', '$camera', '$bazel', '$status', '$keys','$mousepad','$mouse_pad_button',
                 '$camera_cable','$back_cover','$wifi_card','$lcd_cable','$battery','$battery_cable','$dvd_rom','$dvd_caddy','$hdd_caddy','$hdd_cable_connector',
-                '$c_panel_palm_rest','$mb_base','$hings_cover','$lan_cover','0')";
-
+                '$c_panel_palm_rest','$mb_base','$hings_cover','$lan_cover', 0)";
     $query_run = mysqli_query($connection, $query_com);
    
     if($scan_id !=0){
@@ -1115,7 +1054,7 @@ function clearText(a) {
                             </div>
                             <?php } ?>
                         </div>
-                        <!-- <div class="row">
+                        <div class="row">
                             <label class="col-sm-4 col-form-label text-capitalize">02 Keys:</label>
                             <?php if($keys == null){ ?>
                             <div class="col-sm-8 mt-2">
@@ -1152,8 +1091,7 @@ function clearText(a) {
                                 <div id="result"></div>
                             </div>
                             <?php } ?>
-
-                        </div> -->
+                        </div>
 
                         <div class="row">
                             <label class="col-sm-4 col-form-label text-capitalize">02 Speakers:</label>

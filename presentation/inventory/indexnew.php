@@ -1,6 +1,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Taviraj:ital,wght@0,300;1,400&display=swap"
     rel="stylesheet">
 <!-- Latest compiled and minified CSS -->
+
 <!--  -->
 <?php
 include_once('../../dataAccess/connection.php');
@@ -79,8 +80,9 @@ echo "</form>";
 /*
 * THE SHEET
 */
-function write($code, $overText, $rack, $barCodeHeight, $downText,$secondPart) {
-	?>
+function write($code, $overText, $rack, $barCodeHeight, $downText,$secondPart) { ?>
+
+
 
 <div class="card mb-3" style="max-width: 940px;">
     <div class="row g-0">
@@ -184,5 +186,9 @@ echo <<<STYLE
 				page-break-inside: avoid;
 			}
 		}
+
+		
 	</style>
 STYLE;
+
+ 

@@ -153,7 +153,7 @@ $item_brand=0;
                         </thead>
                         <tbody class="tbody_1">
                             <?php
-                            $query = "SELECT * FROM `requested_part_from_production`WHERE created_date = '$created_date' AND status =1 AND emp_id = '$emp_id' AND model='$model' GROUP BY sales_order_id;";
+                            $query = "SELECT * FROM `requested_part_from_production`WHERE created_date = '2022-11-16 16:47:02' AND status =1 AND emp_id = '$emp_id' AND model='$model' GROUP BY sales_order_id;";
                             $query_run = mysqli_query($connection, $query);
                            
                             foreach($query_run as $a){
@@ -173,7 +173,7 @@ $item_brand=0;
                                 $emp_id =$a['emp_id'];
                                 $location =$a['location'];
                                 $rp_id = $a['rp_id'];
-                                ?>
+                            ?>
                             <tr>
                                 <td><?php echo $sales_order_id ?></td>
                                 <td><?php echo $emp_id ?></td>
@@ -183,10 +183,7 @@ $item_brand=0;
                                 <td><?php echo $item_generation ?></td>
 
                             </tr>
-                            <?php 
-                                    }
-                                
-                            ?>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -231,7 +228,7 @@ $item_brand=0;
                     FROM
                         `requested_part_from_production`
                     WHERE
-                        created_date = '$created_date' AND status = 1 AND emp_id = '$emp_id' AND model = '$model';";
+                        created_date = '2022-11-16 16:47:02' AND status = 1 AND emp_id = '$emp_id' AND model = '$model';";
                         $query_run2 = mysqli_query($connection, $query);
                             foreach($query_run2 as $a){
                                 $keyboard =$a['keyboard'];
@@ -258,114 +255,34 @@ $item_brand=0;
                         <thead>
                             <tr>
                                 <th>Barcode</th>
-
-                                <th>
-                                    <?php
-                                    echo " Keyboard </br>";
-                                    ?>
-                                </th>
-                                <th>
-                                    <?php
-                                    echo " speakers </br>";
-                                    ?>
-                                </th>
-                                <th>
-                                    <?php
-                                    echo " camera </br>";
-                                    ?>
-                                </th>
-                                <th>
-                                    <?php
-                                    echo " Bazel </br>";
-                                    ?>
-                                </th>
-                                <th>
-                                    <?php
-                                    echo " Pouse Pad </br>";
-                                    ?>
-                                </th>
-                                <th>
-                                    <?php
-                                    echo " Mouse Pad Button </br>";
-                                    ?>
-                                </th>
-                                <th>
-                                    <?php
-                                    echo " Camera Cable  </br>";
-                                    ?>
-                                </th>
-                                <th>
-                                    <?php
-                                    echo " Back Cover </br>";
-                                    ?>
-                                </th>
-                                <th>
-                                    <?php
-                                    echo " WIFI Card </br>";
-                                    ?>
-                                </th>
-                                <th>
-                                    <?php
-                                    echo " LCD Cable </br>";
-                                    ?>
-                                </th>
-                                <th>
-                                    <?php
-                                    echo " Battery </br>";
-                                    ?>
-                                </th>
-                                <th>
-                                    <?php
-                                    echo " Battery Cable </br>";
-                                    ?>
-                                </th>
-                                <th>
-                                    <?php
-                                    echo " DVD ROM </br>";
-                                    ?>
-                                </th>
-                                <th>
-                                    <?php
-                                    echo " DVD Caddy </br>";
-                                    ?>
-                                </th>
-                                <th>
-                                    <?php
-                                    echo " HDD Caddy </br>";
-                                    ?>
-                                </th>
-                                <th>
-                                    <?php
-                                    echo " HDD Cable Connetor </br>";
-                                    ?>
-                                </th>
-                                <th>
-                                    <?php
-                                    echo " C Panel / Palm Rest </br>";
-                                    ?>
-                                </th>
-                                <th>
-                                    <?php
-                                    echo " D / MB Base </br>";
-                                    ?>
-                                </th>
-                                <th>
-                                    <?php
-                                    echo " Hings Cover </br>";
-                                    ?>
-                                </th>
-                                <th>
-                                    <?php
-                                    echo " LAN Cover </br>";
-                                    ?>
-                                </th>
+                                <th>Keyboard</th>
+                                <th>Speakers</th>
+                                <th>Camera</th>
+                                <th>Bazel</th>
+                                <th>Mouse Pad</th>
+                                <th>MousePad Button</th>
+                                <th>Camera Cable</th>
+                                <th>Back Cover</th>
+                                <th>WI-FI Card</th>
+                                <th>LCD Cable</th>
+                                <th>Battery</th>
+                                <th>Battery Cable</th>
+                                <th>DVD Rom</th>
+                                <th>DVD Caddy</th>
+                                <th>HDD Caddy</th>
+                                <th>HDD Cable Connector</th>
+                                <th>C Panel/Palm Rest</th>
+                                <th>D/MB Base</th>
+                                <th>Hings Cover</th>
+                                <th>LAN Cover</th>
+                                <th>&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody class="tbody_1">
 
                             <?php
-                            $query1 = "SELECT * FROM `requested_part_from_production`WHERE created_date = '$created_date' AND status =1 AND emp_id = '$emp_id' AND model='$model' ;";
-                            $query_run1 = mysqli_query($connection, $query1);
+                                $query1 = "SELECT * FROM `requested_part_from_production`WHERE created_date = '2022-11-16 16:47:02' AND status =1 AND emp_id = '$emp_id' AND model='$model' ;";
+                                $query_run1 = mysqli_query($connection, $query1);
                            
                             foreach($query_run1 as $a){
                                 $inventory_id1 = $a['inventory_id'];
@@ -392,476 +309,191 @@ $item_brand=0;
                                 $rp_id =$a['rp_id'];
                                 ?>
                             <tr>
-                                <td><?php echo $inventory_id1 ?></th>
-
-                                <td>
-                                    <?php
-                                    echo $keyboard1 ;
-                                    ?>
-                                </td>
-                                <td>
-                                    <?php
-                                    echo $speakers1 ;
-                                    ?>
-                                </td>
-                                <td>
-                                    <?php echo $camera1; ?>
-                                </td>
-                                <td>
-                                    <?php
-                                    echo $bazel1;
-                                    ?>
-                                </td>
-                                <td>
-                                    <?php
-                                    echo $mousepad1;
-                                    ?>
-                                </td>
-
-                                <td>
-                                    <?php
-                                    echo $mouse_pad_button1;
-                                    ?>
-                                </td>
-
-                                <td>
-                                    <?php
-                                    echo $camera_cable1;
-                                    ?>
-                                </td>
-
-                                <td>
-                                    <?php
-                                    echo $back_cover1;
-                                    ?>
-                                </td>
-
-                                <td>
-                                    <?php
-                                    echo $wifi_card1;
-                                    ?>
-                                </td>
-
-                                <td>
-                                    <?php
-                                    echo $lcd_cable1;
-                                    ?>
-                                </td>
-
-                                <td>
-                                    <?php
-                                    echo $battery1;
-                                    ?>
-                                </td>
-
-                                <td>
-                                    <?php
-                                    echo $battery_cable1;
-                                    ?>
-                                </td>
-
-                                <td>
-                                    <?php
-                                    echo $dvd_rom1;
-                                    ?>
-                                </td>
-
-                                <td>
-                                    <?php
-                                    echo $dvd_caddy1;
-                                    ?>
-                                </td>
-
-                                <td>
-                                    <?php
-                                    echo $hdd_caddy1;
-                                    ?>
-                                </td>
-
-                                <td>
-                                    <?php
-                                    echo $hdd_cable_connector1;
-                                    ?>
-                                </td>
-
-                                <td>
-                                    <?php
-                                    echo $c_panel_palm_rest1;
-                                    ?>
-                                </td>
-
-                                <td>
-                                    <?php
-                                    echo $mb_base1;
-                                    ?>
-                                </td>
-
-                                <td>
-                                    <?php
-                                    echo $hings_cover1;
-                                    ?>
-                                </td>
-
-                                <td>
-                                    <?php
-                                    echo $lan_cover1;
-                                    ?>
-                                </td>
-                                <td>
-                                    &nbsp;
-                                </td>
-
+                                <td> <?php echo $inventory_id1 ?> </th>
+                                <td> <?php echo $keyboard1 ; ?> </td>
+                                <td> <?php echo $speakers1 ; ?> </td>
+                                <td> <?php echo $camera1; ?> </td>
+                                <td> <?php echo $bazel1; ?> </td>
+                                <td> <?php echo $mousepad1; ?> </td>
+                                <td> <?php echo $mouse_pad_button1; ?> </td>
+                                <td> <?php echo $camera_cable1; ?> </td>
+                                <td> <?php echo $back_cover1; ?> </td>
+                                <td> <?php echo $wifi_card1; ?> </td>
+                                <td> <?php echo $lcd_cable1; ?> </td>
+                                <td> <?php echo $battery1; ?> </td>
+                                <td> <?php echo $battery_cable1; ?> </td>
+                                <td> <?php echo $dvd_rom1; ?> </td>
+                                <td> <?php echo $dvd_caddy1; ?> </td>
+                                <td> <?php echo $hdd_caddy1; ?> </td>
+                                <td> <?php echo $hdd_cable_connector1; ?> </td>
+                                <td> <?php echo $c_panel_palm_rest1; ?> </td>
+                                <td> <?php echo $mb_base1; ?> </td>
+                                <td> <?php echo $hings_cover1; ?> </td>
+                                <td> <?php echo $lan_cover1; ?> </td>
+                                <td> &nbsp; </td>
                             </tr>
-                            <?php
-                            }
-                            ?>
-
+                            <?php } ?>
 
                             <tr>
-                                <th>summery</th>
+                                <th>Summery</th>
                                 <td>
-                                    <?php
-                                    echo $keyboard;
-                                    $summery_keyboard = $keyboard;
-                                
-                                    ?>
+                                    <?php echo $keyboard; $summery_keyboard = $keyboard; ?>
                                 </td>
                                 <td>
-                                    <?php
-                                    echo $speakers;
-                                    $summery_speakers = $speakers;
-                                    ?>
+                                    <?php echo $speakers; $summery_speakers = $speakers; ?>
                                 </td>
                                 <td>
-                                    <?php
-                                    echo $camera;
-                                    $summery_camera = $camera;
-                                    ?>
+                                    <?php echo $camera; $summery_camera = $camera; ?>
                                 </td>
                                 <td>
-                                    <?php
-                                    echo $bazel;
-                                    $summery_bazel = $bazel;
-                                    ?>
+                                    <?php echo $bazel; $summery_bazel = $bazel; ?>
                                 </td>
                                 <td>
-                                    <?php
-                                    echo $mousepad;
-                                    $summery_mousepad = $mousepad;
-                                    ?>
+                                    <?php echo $mousepad; $summery_mousepad = $mousepad; ?>
                                 </td>
                                 <td>
-                                    <?php
-                                    echo $mouse_pad_button;
-                                    $summery_mouse_pad_button = $mouse_pad_button;
-                                    ?>
+                                    <?php echo $mouse_pad_button; $summery_mouse_pad_button = $mouse_pad_button; ?>
                                 </td>
                                 <td>
-                                    <?php
-                                    echo $camera_cable;
-                                    $summery_camera_cable = $camera_cable;
-                                    ?>
+                                    <?php echo $camera_cable; $summery_camera_cable = $camera_cable; ?>
                                 </td>
                                 <td>
-                                    <?php
-                                    echo $back_cover;
-                                    $summery_back_cover = $back_cover;
-                                    ?>
+                                    <?php echo $back_cover; $summery_back_cover = $back_cover; ?>
                                 </td>
                                 <td>
-                                    <?php
-                                    echo $wifi_card;
-                                    $summery_wifi_card = $wifi_card;
-                                    ?>
+                                    <?php echo $wifi_card; $summery_wifi_card = $wifi_card; ?>
                                 </td>
                                 <td>
-                                    <?php
-                                    echo $lcd_cable;
-                                    $summery_lcd_cable = $lcd_cable;
-                                    ?>
+                                    <?php echo $lcd_cable; $summery_lcd_cable = $lcd_cable; ?>
                                 </td>
                                 <td>
-                                    <?php
-                                    echo $battery;
-                                    $summery_battery = $battery;
-                                    ?>
+                                    <?php echo $battery; $summery_battery = $battery; ?>
                                 </td>
                                 <td>
-                                    <?php
-                                    echo $battery_cable;
-                                    $summery_battery_cable = $battery_cable;
-                                    ?>
+                                    <?php echo $battery_cable; $summery_battery_cable = $battery_cable; ?>
                                 </td>
                                 <td>
-                                    <?php
-                                    echo $dvd_rom;
-                                    $summery_dvd_rom = $dvd_rom;
-                                    ?>
+                                    <?php echo $dvd_rom; $summery_dvd_rom = $dvd_rom; ?>
                                 </td>
                                 <td>
-                                    <?php
-                                    echo $dvd_caddy;
-                                    $summery_dvd_caddy = $dvd_caddy;
-                                    ?>
+                                    <?php echo $dvd_caddy; $summery_dvd_caddy = $dvd_caddy; ?>
                                 </td>
                                 <td>
-                                    <?php
-                                    echo $hdd_caddy;
-                                    $summery_hdd_caddy = $hdd_caddy;
-                                    ?>
+                                    <?php echo $hdd_caddy; $summery_hdd_caddy = $hdd_caddy; ?>
                                 </td>
                                 <td>
-                                    <?php
-                                    echo $hdd_cable_connector;
-                                    $summery_hdd_cable_connector = $hdd_cable_connector;
-                                    ?>
+                                    <?php echo $hdd_cable_connector; $summery_hdd_cable_connector = $hdd_cable_connector; ?>
                                 </td>
                                 <td>
-                                    <?php
-                                    echo $c_panel_palm_rest;
-                                    $summery_c_panel_palm_rest = $c_panel_palm_rest;
-                                    ?>
+                                    <?php echo $c_panel_palm_rest; $summery_c_panel_palm_rest = $c_panel_palm_rest; ?>
                                 </td>
                                 <td>
-                                    <?php
-                                    echo $mb_base;
-                                    $summery_mb_base = $mb_base;
-                                    ?>
+                                    <?php echo $mb_base; $summery_mb_base = $mb_base; ?>
                                 </td>
                                 <td>
-                                    <?php
-                                    echo $hings_cover;
-                                    $summery_hings_cover = $hings_cover;
-                                    ?>
+                                    <?php echo $hings_cover; $summery_hings_cover = $hings_cover; ?>
                                 </td>
                                 <td>
-                                    <?php
-                                    echo $lan_cover;
-                                    $summery_lan_cover = $lan_cover;
-                                    ?>
+                                    <?php echo $lan_cover; $summery_lan_cover = $lan_cover; ?>
                                 </td>
+                                <td> &nbsp; </td>
+
                             </tr>
                             <tr>
                                 <th>Stock</th>
                                 <?php
-                            $query2 = "SELECT * FROM `part_stock`WHERE part_model='$model' AND part_brand = '$item_brand' AND part_gen = '$item_generation' ;";
-                            // echo $query2;
-                            $query_run2 = mysqli_query($connection, $query2);
-                           
-                            foreach($query_run2 as $a){
-                                $part_name = $a['part_name'];
-                                $part_qty = $a['qty'];
-                           
+                                    $query2 = "SELECT * FROM part_stock WHERE part_model = '$model' AND part_brand = '$item_brand' AND part_gen = '$item_generation' ;";
+                                    $query_run2 = mysqli_query($connection, $query2);
+
+                                    foreach($query_run2 as $a){
+                                        $part_name = $a['part_name'];
+                                        $part_qty = $a['qty']; 
+                                                                                
                                 ?>
 
-                                <?php 
-                                    if($part_name == 'keyboard'){
-                                        
-                                    ?>
+                                <?php if($part_name == 'keyboard'){ ?>
                                 <td>
-                                    <?php
-                                    echo $part_qty;
-                                    $stock_keyboard = $part_qty;
-                                    ?>
+                                    <?php echo $part_qty; $stock_keyboard = $part_qty; ?>
                                 </td>
-                                <?php
-                                    }
-                                    if($part_name == 'speakers'){
-                                    ?>
+                                <?php } if($part_name == 'speakers'){ ?>
                                 <td>
-                                    <?php
-                                    echo $part_qty;
-                                    $stock_speakers = $part_qty;
-                                    ?>
+                                    <?php echo $part_qty; $stock_speakers = $part_qty; ?>
                                 </td>
-                                <?php
-                                }
-                                if($part_name == 'camera'){
-                                    ?>
+                                <?php } if($part_name == 'camera'){ ?>
                                 <td>
-                                    <?php
-                                    echo $part_qty;
-                                    $stock_camera = $part_qty;
-                                    ?>
+                                    <?php echo $part_qty; $stock_camera = $part_qty; ?>
                                 </td>
-                                <?php
-                                }
-                                    if($part_name == 'bazel'){
-                                    ?>
+                                <?php } if($part_name == 'bazel'){ ?>
                                 <td>
-                                    <?php
-                                    echo $part_qty;
-                                    $stock_bazel = $part_qty;
-                                    ?>
+                                    <?php echo $part_qty; $stock_bazel = $part_qty; ?>
                                 </td>
-                                <?php
-                                }
-                                if($part_name == 'mousepad'){
-                                    ?>
+                                <?php } if($part_name == 'mousepad'){ ?>
                                 <td>
-                                    <?php
-                                    echo $part_qty;
-                                    $stock_mousepad = $part_qty;
-                                    ?>
+                                    <?php echo $part_qty; $stock_mousepad = $part_qty; ?>
                                 </td>
-                                <?php
-                                }
-                                    if($part_name == 'mouse_pad_button'){
-                                    ?>
+                                <?php } if($part_name == 'mouse_pad_button'){ ?>
                                 <td>
-                                    <?php
-                                    echo $part_qty;
-                                    $stock_mouse_pad_button = $part_qty;
-                                    ?>
+                                    <?php echo $part_qty; $stock_mouse_pad_button = $part_qty; ?>
                                 </td>
-                                <?php
-                                    }
-                                    if($part_name == 'camera_cable'){
-                                    ?>
+                                <?php } if($part_name == 'camera_cable'){ ?>
                                 <td>
-                                    <?php
-                                    echo $part_qty;
-                                    $stock_camera_cable = $part_qty;
-                                    ?>
+                                    <?php echo $part_qty; $stock_camera_cable = $part_qty; ?>
                                 </td>
-                                <?php
-                                    }
-                                    if($part_name == 'back_cover'){
-                                    ?>
+                                <?php } if($part_name == 'back_cover'){ ?>
                                 <td>
-                                    <?php
-                                    echo $part_qty;
-                                    $stock_back_cover = $part_qty;
-                                    ?>
+                                    <?php echo $part_qty; $stock_back_cover = $part_qty; ?>
                                 </td>
-                                <?php
-                                    }
-                                    if($part_name == 'wifi_card'){
-                                        ?>
+                                <?php } if($part_name == 'wifi_card'){ ?>
                                 <td>
-                                    <?php
-                                    echo $part_qty;
-                                    $stock_wifi_card = $part_qty;
-                                    ?>
+                                    <?php echo $part_qty; $stock_wifi_card = $part_qty; ?>
                                 </td>
-                                <?php
-                                    }
-                                    if($part_name == 'lcd_cable'){
-                                    ?>
+                                <?php } if($part_name == 'lcd_cable'){ ?>
                                 <td>
-                                    <?php
-                                    echo $part_qty;
-                                    $stock_lcd_cable = $part_qty;
-                                    ?>
+                                    <?php echo $part_qty; $stock_lcd_cable = $part_qty; ?>
                                 </td>
-                                <?php
-                                    }
-                                    if($part_name == 'battery'){
-                                    ?>
+                                <?php } if($part_name == 'battery'){ ?>
                                 <td>
-                                    <?php
-                                    echo $part_qty;
-                                    $stock_battery = $part_qty;
-                                    ?>
+                                    <?php echo $part_qty; $stock_battery = $part_qty; ?>
                                 </td>
-                                <?php
-                                }
-                                    if($part_name == 'battery_cable'){
-                                    ?>
+                                <?php } if($part_name == 'battery_cable'){ ?>
                                 <td>
-                                    <?php
-                                    echo $part_qty;
-                                    $stock_battery_cable = $part_qty;
-                                    ?>
+                                    <?php echo $part_qty; $stock_battery_cable = $part_qty; ?>
                                 </td>
-                                <?php
-                                    }
-                                    if($part_name == 'dvd_rom'){
-                                    ?>
+                                <?php } if($part_name == 'dvd_rom'){ ?>
                                 <td>
-                                    <?php
-                                    echo $part_qty;
-                                    $stock_dvd_rom = $part_qty;
-                                    ?>
+                                    <?php echo $part_qty; $stock_dvd_rom = $part_qty; ?>
                                 </td>
-                                <?php
-                                    }
-                                    if($part_name == 'dvd_caddy'){
-                                    ?>
+                                <?php } if($part_name == 'dvd_caddy'){ ?>
                                 <td>
-                                    <?php
-                                    echo $part_qty;
-                                    $stock_dvd_caddy = $part_qty;
-                                    ?>
+                                    <?php echo $part_qty; $stock_dvd_caddy = $part_qty; ?>
                                 </td>
-                                <?php
-                                    }
-                                    if($part_name == 'hdd_caddy'){
-                                    ?>
+                                <?php } if($part_name == 'hdd_caddy'){ ?>
                                 <td>
-                                    <?php
-                                    echo $part_qty;
-                                    $stock_hdd_caddy = $part_qty;
-                                    ?>
+                                    <?php echo $part_qty; $stock_hdd_caddy = $part_qty; ?>
                                 </td>
-                                <?php
-                                    }
-                                    if($part_name == 'hdd_cable_connector'){
-                                    ?>
+                                <?php } if($part_name == 'hdd_cable_connector'){ ?>
                                 <td>
-                                    <?php
-                                    echo $part_qty;
-                                    $stock_hdd_cable_connector = $part_qty;
-                                    ?>
+                                    <?php echo $part_qty; $stock_hdd_cable_connector = $part_qty; ?>
                                 </td>
-                                <?php
-                                    }
-                                    if($part_name == 'c_panel_palm_rest'){
-                                    ?>
+                                <?php } if($part_name == 'c_panel_palm_rest'){ ?>
                                 <td>
-                                    <?php
-                                    echo $part_qty;
-                                    $stock_c_panel_palm_rest = $part_qty;
-                                    ?>
+                                    <?php echo $part_qty; $stock_c_panel_palm_rest = $part_qty; ?>
                                 </td>
-                                <?php
-                                    }
-                                    if($part_name == 'mb_base'){
-                                    ?>
+                                <?php } if($part_name == 'mb_base'){ ?>
                                 <td>
-                                    <?php
-                                    echo $part_qty;
-                                    $stock_mb_base = $part_qty;
-                                    ?>
+                                    <?php echo $part_qty; $stock_mb_base = $part_qty; ?>
                                 </td>
-                                <?php
-                                    }
-                                    if($part_name == 'hings_cover'){
-                                    ?>
+                                <?php } if($part_name == 'hings_cover'){ ?>
                                 <td>
-                                    <?php
-                                    echo $part_qty;
-                                    $stock_hings_cover = $part_qty;
-                                    ?>
+                                    <?php echo $part_qty; $stock_hings_cover = $part_qty; ?>
                                 </td>
-                                <?php
-                                    }
-                                    
-                                    if($part_name == 'lan_cover'){
-                                    ?>
+                                <?php } if($part_name == 'lan_cover'){ ?>
                                 <td>
-                                    <?php
-                                    echo $part_qty;
-                                    $stock_lan_cover = $part_qty;
-                                    ?>
+                                    <?php echo $part_qty; $stock_lan_cover = $part_qty; ?>
                                 </td>
-                                <?php
-                                    }
-                                }?>
+                                <?php } } ?>
                             </tr>
-                            <?php 
-                                    }
-                            ?>
+                            <?php } ?>
                             <tr>
                                 <?php if (isset($_POST['submit'])) {
                                     $keyboard = mysqli_real_escape_string($connection, $_POST['keyboard']);
@@ -940,38 +572,30 @@ $item_brand=0;
                                 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                 $date = $date1->format('Y-m-d H:i:s');
 
-                                $query_update="UPDATE
-                                `requested_part_from_production`
-                            SET
-                                `delivery_date` = '$date',
-                                `status` = '0'
-                            WHERE
-                                `model` = '$model'AND
-                                `created_date` = '$created_date'AND
-                                `emp_id` = '$emp_id'AND
-                                `location` = '$location1'
+                                $query_update="UPDATE requested_part_from_production SET delivery_date = '$date', status = '0'
+                                            WHERE model = '$model' AND created_date = '$created_date' AND emp_id = '$emp_id' AND location = '$location1'
                                 ";
-                                 $query_run_update = mysqli_query($connection, $query_update);
-                                 $balance_stock_keyboard = $stock_keyboard - number_format($keyboard );
-                                 $balance_stock_speakers = $stock_speakers - number_format($speakers );
-                                 $balance_stock_camera =  $stock_camera - number_format($camera );
-                                 $balance_stock_bazel =  $stock_bazel-  number_format($bazel );
-                                 $balance_stock_lan_cover =  $stock_lan_cover - number_format($lan_cover );
-                                 $balance_stock_mousepad =  $stock_mousepad - number_format($mousepad );
-                                 $balance_stock_mouse_pad_button =  $stock_mouse_pad_button - number_format($mouse_pad_button );
-                                 $balance_stock_camera_cable =  $stock_camera_cable - number_format($camera_cable );
-                                 $balance_stock_back_cover =  $stock_back_cover - number_format($back_cover );
-                                 $balance_stock_wifi_card =  $stock_wifi_card - number_format($wifi_card );
-                                 $balance_stock_lcd_cable =  $stock_lcd_cable - number_format($lcd_cable );
-                                 $balance_stock_battery =  $stock_battery - number_format($battery );
-                                 $balance_stock_battery_cable = $stock_battery_cable - number_format($battery_cable );
-                                 $balance_stock_dvd_rom =  $stock_dvd_rom - number_format($dvd_rom );
-                                 $balance_stock_dvd_caddy =  $stock_dvd_caddy - number_format($dvd_caddy );
-                                 $balance_stock_hdd_caddy =  $stock_hdd_caddy - number_format($hdd_caddy );
-                                 $balance_stock_hdd_cable_connector =  $stock_hdd_cable_connector - number_format($hdd_cable_connector );
-                                 $balance_stock_c_panel_palm_rest = $stock_c_panel_palm_rest - number_format($c_panel_palm_rest );
-                                 $balance_stock_mb_base =  $stock_mb_base - number_format($mb_base );
-                                // $balance_stock_hings_cover  =  $stock_hings_cover - $hings_cover ;
+                                
+                                $query_run_update = mysqli_query($connection, $query_update);
+                                $balance_stock_keyboard = number_format((int)$stock_keyboard - (int)$keyboard);
+                                $balance_stock_speakers = number_format((int)$stock_speakers - (int)$speakers);
+                                $balance_stock_camera =  number_format((int)$stock_camera - (int)$camera);
+                                $balance_stock_bazel =  number_format((int)$stock_bazel-  (int)$bazel);
+                                $balance_stock_lan_cover =  number_format((int)$stock_lan_cover - (int)$lan_cover);
+                                $balance_stock_mousepad =  number_format((int)$stock_mousepad - (int)$mousepad);
+                                $balance_stock_mouse_pad_button =  number_format((int)$stock_mouse_pad_button - (int)$mouse_pad_button);
+                                $balance_stock_camera_cable =  number_format((int)$stock_camera_cable - (int)$camera_cable);
+                                $balance_stock_back_cover =  number_format((int)$stock_back_cover - (int)$back_cover);
+                                $balance_stock_wifi_card =  number_format((int)$stock_wifi_card - (int)$wifi_card);
+                                $balance_stock_lcd_cable =  number_format((int)$stock_lcd_cable - (int)$lcd_cable);
+                                $balance_stock_battery =  number_format((int)$stock_battery - (int)$battery);
+                                $balance_stock_battery_cable = number_format((int)$stock_battery_cable - (int)$battery_cable);
+                                $balance_stock_dvd_rom =  number_format((int)$stock_dvd_rom - (int)$dvd_rom);
+                                $balance_stock_dvd_caddy =  number_format((int)$stock_dvd_caddy - (int)$dvd_caddy);
+                                $balance_stock_hdd_caddy =  number_format((int)$stock_hdd_caddy - (int)$hdd_caddy);
+                                $balance_stock_hdd_cable_connector =  number_format((int)$stock_hdd_cable_connector - (int)$hdd_cable_connector);
+                                $balance_stock_c_panel_palm_rest = number_format((int)$stock_c_panel_palm_rest - (int)$c_panel_palm_rest);
+                                $balance_stock_mb_base =  number_format((int)$stock_mb_base - (int)$mb_base);
                                 $array = array(
                                     "keyboard" => $balance_stock_keyboard  ,
                                     "speakers" => $balance_stock_speakers  ,
@@ -995,48 +619,25 @@ $item_brand=0;
                                     "lan_cover" => $balance_stock_lan_cover  ,
                                 );
                                 foreach ($array as $key => $value) {
-                                    $query="UPDATE
-                                                `part_stock`
-                                            SET
-                                                `qty` = $value
-                                            WHERE
-                                                part_model = '$item_model' AND part_brand ='$item_brand' AND part_gen ='$item_generation' AND part_name = '$key' ;";
-                                                
-                                                $query_stock_update = mysqli_query($connection, $query);
+                                    $query="UPDATE part_stock SET qty = $value
+                                            WHERE part_model = '$item_model' AND part_brand = '$item_brand' AND part_gen = '$item_generation' AND part_name = '$key'";                                                
+                                    $query_stock_update = mysqli_query($connection, $query);
 
                                                 if($value == 0){
-                                                    $query ="SELECT
-                                                                `rack_number`,
-                                                                `slot_name`
-                                                            FROM
-                                                                `part_stock`
-                                                            WHERE
-                                                            part_model = '$item_model' AND part_brand ='$item_brand' AND part_gen ='$item_generation' AND part_name = '$key' ;";
+                                                    $query ="SELECT rack_number, slot_name FROM part_stock
+                                                            WHERE part_model = '$item_model' AND part_brand = '$item_brand' AND part_gen = '$item_generation' AND part_name = '$key'";
                                              $query_data_retrive = mysqli_query($connection, $query);
                                              foreach($query_data_retrive as $d){
                                                 $slot_name =$d['slot_name'];
                                                 $rack_number =$d['rack_number'];
-                                                $query="UPDATE
-                                                            `rack_slots`
-                                                        SET
-                                                            `status` = '0'
-                                                        WHERE
-                                                        slot_name = '$slot_name'
-                                                        ";             
-                                                    $query_data_update = mysqli_query($connection, $query);    
+                                                $query="UPDATE rack_slots SET status = '0' WHERE slot_name = '$slot_name' ";             
+                                                    $query_data_update = mysqli_query($connection, $query); 
                                                     
-                                                    $query="UPDATE
-                                                    `rack`
-                                                SET
-                                                    `status` = '0'
-                                                WHERE
-                                                rack_number = '$rack_number'
-                                                ";             
+                                                    $query="UPDATE rack SET status = '0' WHERE rack_number = '$rack_number' ";             
                                             $query_data_update = mysqli_query($connection, $query);    
-                                                    }    
-                                            }
+                                        }    
+                                    }
                                 }
-
                             }?>
                                 <form action="" method="POST">
                                     <td>Prepared</td>
@@ -1068,111 +669,111 @@ $item_brand=0;
                             </tr>
                             <?php 
 
-                            $need_to_buy_keyboard = $stock_keyboard - $summery_keyboard ;
-                            $need_to_buy_speakers = $stock_speakers - $summery_speakers ;
-                            $need_to_buy_camera =  $stock_camera - $summery_camera ;
-                            $need_to_buy_bazel =  $stock_bazel-$summery_bazel ;
-                            $need_to_buy_lan_cover =  $stock_lan_cover - $summery_lan_cover ;
-                            $need_to_buy_mousepad =  $stock_mousepad - $summery_mousepad ;
-                            $need_to_buy_mouse_pad_button =  $stock_mouse_pad_button - $summery_mouse_pad_button ;
-                            $need_to_buy_camera_cable =  $stock_camera_cable - $summery_camera_cable ;
-                            $need_to_buy_back_cover =  $stock_back_cover - $summery_back_cover ;
-                            $need_to_buy_wifi_card =  $stock_wifi_card - $summery_wifi_card ;
-                            $need_to_buy_lcd_cable =  $stock_lcd_cable - $summery_lcd_cable ;
-                            $need_to_buy_battery =  $stock_battery - $summery_battery ;
-                            $need_to_buy_battery_cable = $stock_battery_cable - $summery_battery_cable ;
-                            $need_to_buy_dvd_rom =  $stock_dvd_rom - $summery_dvd_rom ;
-                            $need_to_buy_dvd_caddy =  $stock_dvd_caddy - $summery_dvd_caddy ;
-                            $need_to_buy_hdd_caddy =  $stock_hdd_caddy - $summery_hdd_caddy ;
-                            $need_to_buy_hdd_cable_connector =  $stock_hdd_cable_connector - $summery_hdd_cable_connector ;
-                            $need_to_buy_c_panel_palm_rest = $stock_c_panel_palm_rest - $summery_c_panel_palm_rest ;
-                            $need_to_buy_mb_base =  $stock_mb_base - $summery_mb_base ;
-                            $need_to_buy_hings_cover  =  $stock_hings_cover - $summery_hings_cover ;
-                           
-                            $keyboard = 0 ;
-                            $speacker = 0 ;
-                            $camera = 0 ;
-                            $bazel = 0 ;
-                            $lan_cover = 0 ;
-                            $mousepad = 0 ;
-                            $mouse_pad_button = 0 ;
-                            $camera_cable = 0 ;
-                            $back_cover = 0 ;
-                            $wifi_card = 0 ;
-                            $lcd_cable = 0 ;
-                            $battery = 0 ;
-                            $battery_cable = 0 ;
-                            $dvd_rom = 0 ;
-                            $dvd_caddy = 0 ;
-                            $hdd_caddy = 0 ;
-                            $hdd_cable_connector = 0 ;
-                            $c_panel_palm_rest = 0 ;
-                            $mb_base = 0 ;
-                            $hings_cover = 0;
+                                $need_to_buy_keyboard = $stock_keyboard - $summery_keyboard ;
+                                $need_to_buy_speakers = $stock_speakers - $summery_speakers ;
+                                $need_to_buy_camera =  $stock_camera - $summery_camera ;
+                                $need_to_buy_bazel =  $stock_bazel-$summery_bazel ;
+                                $need_to_buy_lan_cover =  $stock_lan_cover - $summery_lan_cover ;
+                                $need_to_buy_mousepad =  $stock_mousepad - $summery_mousepad ;
+                                $need_to_buy_mouse_pad_button =  $stock_mouse_pad_button - $summery_mouse_pad_button ;
+                                $need_to_buy_camera_cable =  $stock_camera_cable - $summery_camera_cable ;
+                                $need_to_buy_back_cover =  $stock_back_cover - $summery_back_cover ;
+                                $need_to_buy_wifi_card =  $stock_wifi_card - $summery_wifi_card ;
+                                $need_to_buy_lcd_cable =  $stock_lcd_cable - $summery_lcd_cable ;
+                                $need_to_buy_battery =  $stock_battery - $summery_battery ;
+                                $need_to_buy_battery_cable = $stock_battery_cable - $summery_battery_cable ;
+                                $need_to_buy_dvd_rom =  $stock_dvd_rom - $summery_dvd_rom ;
+                                $need_to_buy_dvd_caddy =  $stock_dvd_caddy - $summery_dvd_caddy ;
+                                $need_to_buy_hdd_caddy =  $stock_hdd_caddy - $summery_hdd_caddy ;
+                                $need_to_buy_hdd_cable_connector =  $stock_hdd_cable_connector - $summery_hdd_cable_connector ;
+                                $need_to_buy_c_panel_palm_rest = $stock_c_panel_palm_rest - $summery_c_panel_palm_rest ;
+                                $need_to_buy_mb_base =  $stock_mb_base - $summery_mb_base ;
+                                $need_to_buy_hings_cover  =  $stock_hings_cover - $summery_hings_cover ;
                             
-                            if (isset($_POST['sorting_submit'])) {
+                                $keyboard = 0 ;
+                                $speacker = 0 ;
+                                $camera = 0 ;
+                                $bazel = 0 ;
+                                $lan_cover = 0 ;
+                                $mousepad = 0 ;
+                                $mouse_pad_button = 0 ;
+                                $camera_cable = 0 ;
+                                $back_cover = 0 ;
+                                $wifi_card = 0 ;
+                                $lcd_cable = 0 ;
+                                $battery = 0 ;
+                                $battery_cable = 0 ;
+                                $dvd_rom = 0 ;
+                                $dvd_caddy = 0 ;
+                                $hdd_caddy = 0 ;
+                                $hdd_cable_connector = 0 ;
+                                $c_panel_palm_rest = 0 ;
+                                $mb_base = 0 ;
+                                $hings_cover = 0;
+                                
+                                    if (isset($_POST['sorting_submit'])) {
 
-                                if(!empty($_POST['keyboard'])){
-                                $keyboard = mysqli_real_escape_string($connection, $_POST['keyboard']);
+                                    if(!empty($_POST['keyboard'])){
+                                    $keyboard = mysqli_real_escape_string($connection, $_POST['keyboard']);
+                                    }
+                                    if(!empty($_POST['speaker'])){
+                                        $speaker = mysqli_real_escape_string($connection, $_POST['speaker']);
+                                    }
+                                    if(!empty($_POST['camera'])){
+                                    $camera = mysqli_real_escape_string($connection, $_POST['camera']);
+                                    }
+                                    if(!empty($_POST['bazel'])){
+                                        $bazel = mysqli_real_escape_string($connection, $_POST['bazel']);
+                                    }
+                                    if(!empty($_POST['lan_cover'])){
+                                        $lan_cover = mysqli_real_escape_string($connection, $_POST['lan_cover']);
+                                    }
+                                    if(!empty($_POST['mousepad'])){
+                                        $mousepad = mysqli_real_escape_string($connection, $_POST['mousepad']);
+                                    }
+                                    if(!empty($_POST['mouse_pad_button'])){
+                                        $mouse_pad_button = mysqli_real_escape_string($connection, $_POST['mouse_pad_button']);
+                                    }
+                                    if(!empty($_POST['camera_cable'])){
+                                        $camera_cable = mysqli_real_escape_string($connection, $_POST['camera_cable']);
+                                    }
+                                    if(!empty($_POST['back_cover'])){
+                                        $back_cover = mysqli_real_escape_string($connection, $_POST['back_cover']);
+                                    }
+                                    if(!empty($_POST['wifi_card'])){
+                                        $wifi_card = mysqli_real_escape_string($connection, $_POST['wifi_card']);
+                                    }
+                                    if(!empty($_POST['lcd_cable'])){
+                                        $lcd_cable = mysqli_real_escape_string($connection, $_POST['lcd_cable']);
+                                    }
+                                    if(!empty($_POST['battery'])){
+                                        $battery = mysqli_real_escape_string($connection, $_POST['battery']);
+                                    }
+                                    if(!empty($_POST['battery_cable'])){
+                                        $battery_cable = mysqli_real_escape_string($connection, $_POST['battery_cable']);
+                                    }
+                                    if(!empty($_POST['dvd_rom'])){
+                                        $dvd_rom = mysqli_real_escape_string($connection, $_POST['dvd_rom']);
+                                    }
+                                    if(!empty($_POST['dvd_caddy'])){
+                                        $dvd_caddy = mysqli_real_escape_string($connection, $_POST['dvd_caddy']);
+                                    }
+                                    if(!empty($_POST['hdd_caddy'])){
+                                        $hdd_caddy = mysqli_real_escape_string($connection, $_POST['hdd_caddy']);
+                                    }
+                                    if(!empty($_POST['hdd_cable_connector'])){
+                                        $hdd_cable_connector = mysqli_real_escape_string($connection, $_POST['hdd_cable_connector']);
+                                    }
+                                    if(!empty($_POST['c_panel_palm_rest'])){
+                                        $c_panel_palm_rest = mysqli_real_escape_string($connection, $_POST['c_panel_palm_rest']);
+                                    }
+                                    if(!empty($_POST['mb_base'])){
+                                        $mb_base = mysqli_real_escape_string($connection, $_POST['mb_base']);
+                                    }
+                                    if(!empty($_POST['hings_cover'])){
+                                        $hings_cover = mysqli_real_escape_string($connection, $_POST['hings_cover']);    
                                 }
-                                if(!empty($_POST['speaker'])){
-                                    $speaker = mysqli_real_escape_string($connection, $_POST['speaker']);
-                                }
-                                if(!empty($_POST['camera'])){
-                                $camera = mysqli_real_escape_string($connection, $_POST['camera']);
-                                }
-                                if(!empty($_POST['bazel'])){
-                                    $bazel = mysqli_real_escape_string($connection, $_POST['bazel']);
-                                }
-                                if(!empty($_POST['lan_cover'])){
-                                    $lan_cover = mysqli_real_escape_string($connection, $_POST['lan_cover']);
-                                }
-                                if(!empty($_POST['mousepad'])){
-                                    $mousepad = mysqli_real_escape_string($connection, $_POST['mousepad']);
-                                }
-                                if(!empty($_POST['mouse_pad_button'])){
-                                    $mouse_pad_button = mysqli_real_escape_string($connection, $_POST['mouse_pad_button']);
-                                }
-                                if(!empty($_POST['camera_cable'])){
-                                    $camera_cable = mysqli_real_escape_string($connection, $_POST['camera_cable']);
-                                }
-                                if(!empty($_POST['back_cover'])){
-                                    $back_cover = mysqli_real_escape_string($connection, $_POST['back_cover']);
-                                }
-                                if(!empty($_POST['wifi_card'])){
-                                    $wifi_card = mysqli_real_escape_string($connection, $_POST['wifi_card']);
-                                }
-                                if(!empty($_POST['lcd_cable'])){
-                                    $lcd_cable = mysqli_real_escape_string($connection, $_POST['lcd_cable']);
-                                }
-                                if(!empty($_POST['battery'])){
-                                    $battery = mysqli_real_escape_string($connection, $_POST['battery']);
-                                }
-                                if(!empty($_POST['battery_cable'])){
-                                    $battery_cable = mysqli_real_escape_string($connection, $_POST['battery_cable']);
-                                }
-                                if(!empty($_POST['dvd_rom'])){
-                                    $dvd_rom = mysqli_real_escape_string($connection, $_POST['dvd_rom']);
-                                }
-                                if(!empty($_POST['dvd_caddy'])){
-                                    $dvd_caddy = mysqli_real_escape_string($connection, $_POST['dvd_caddy']);
-                                }
-                                if(!empty($_POST['hdd_caddy'])){
-                                    $hdd_caddy = mysqli_real_escape_string($connection, $_POST['hdd_caddy']);
-                                }
-                                if(!empty($_POST['hdd_cable_connector'])){
-                                    $hdd_cable_connector = mysqli_real_escape_string($connection, $_POST['hdd_cable_connector']);
-                                }
-                                if(!empty($_POST['c_panel_palm_rest'])){
-                                    $c_panel_palm_rest = mysqli_real_escape_string($connection, $_POST['c_panel_palm_rest']);
-                                }
-                                if(!empty($_POST['mb_base'])){
-                                    $mb_base = mysqli_real_escape_string($connection, $_POST['mb_base']);
-                                }
-                                if(!empty($_POST['hings_cover'])){
-                                    $hings_cover = mysqli_real_escape_string($connection, $_POST['hings_cover']);    
-                                }
-                               $query_buy ="INSERT INTO `request_parts_from_part_warehouse`(
+                                $query_buy ="INSERT INTO `request_parts_from_part_warehouse`(
                                 `location`,
                                 `model`,
                                 `status`,
@@ -1243,10 +844,7 @@ $item_brand=0;
                                         <td><?php if($need_to_buy_bazel <= 0){ echo $need_to_buy_bazel*-1 ; ?><input
                                                 type="hidden" id="bazel" name="bazel"
                                                 value="<?php echo $need_to_buy_bazel; ?>"><?php } ?></td>
-                                        <td><?php if($need_to_buy_lan_cover <= 0){ echo $need_to_buy_lan_cover*-1 ;?><input
-                                                type="hidden" id="lan_cover" name="lan_cover"
-                                                value="<?php echo $need_to_buy_lan_cover; ?>"><?php } ?>
-                                        </td>
+
                                         <td><?php if($need_to_buy_mousepad <= 0){ echo $need_to_buy_mousepad*-1 ; ?><input
                                                 type="hidden" id="mousepad" name="mousepad"
                                                 value="<?php echo $need_to_buy_mousepad; ?>"><?php } ?>
@@ -1301,6 +899,10 @@ $item_brand=0;
                                                 type="hidden" id="mb_base" name="mb_base"
                                                 value="<?php echo $need_to_buy_mb_base; ?>"><?php } ?></td>
                                         <td><?php if($need_to_buy_hings_cover <= 0){ echo $need_to_buy_hings_cover*-1 ;?><?php } ?>
+                                        </td>
+                                        <td><?php if($need_to_buy_lan_cover <= 0){ echo $need_to_buy_lan_cover*-1 ;?><input
+                                                type="hidden" id="lan_cover" name="lan_cover"
+                                                value="<?php echo $need_to_buy_lan_cover; ?>"><?php } ?>
                                         </td>
 
                                         <td><button type="submit" name="sorting_submit"

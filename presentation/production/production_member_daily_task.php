@@ -87,11 +87,9 @@ foreach($query_tech as $data){
 
                     $query_insert = "INSERT INTO prod_info(p_id, inventory_id, start_date_time, end_date_time,sales_order, emp_id, tech_id,status, issue_type) 
                                     VALUES (null,'{$inventory_id}', CURRENT_TIMESTAMP, 0,'{$sales_order_id}','{$emp_id}','{$tech_id}','1', 0)";
-                    // echo $query_insert;
                     $query_prod_info = mysqli_query($connection, $query_insert);
                     header("Location: production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id} ");
                 }
-            // }else{ echo 'can not scan more than'}
             }else{
                 echo " cannot scan over qty";
             }
@@ -115,7 +113,6 @@ foreach($query_tech as $data){
     <div class="row">
         <div class="col-lg-11 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card">
-                <?php if (!empty($errors)) { display_errors($errors); } ?>
                 <form action="" method="POST">
                     <div class="row mx-2">
                         <div class="col-md-3">
@@ -127,7 +124,6 @@ foreach($query_tech as $data){
                                     <input type="text" name="search" id="search" required value="<?php if (isset($_POST['search'])) {
                                                                                         echo $_POST['search'];
                                                                                     } ?>" placeholder="Search QR">
-                                    <!-- <button type="submit" class="btn btn-primary">Search</button> -->
                                 </div>
                             </fieldset>
                         </div>
@@ -220,14 +216,9 @@ foreach($query_tech as $data){
                                         $sales_order_id = '';
 
                                         // getting the list of users
-                                        $query = "SELECT 
-                                        *,
-                                        brand,core,model,generation,processor,device
-                                    FROM
-                                        prod_info
-                                    LEFT JOIN warehouse_information_sheet ON prod_info.inventory_id = warehouse_information_sheet.inventory_id
-                                    WHERE
-                                          prod_info.emp_id ='{$emp_id}' AND prod_info.tech_id ='{$tech_id}' ; ";
+                                        $query = "SELECT *, brand,core,model,generation,processor,device FROM prod_info
+                                                LEFT JOIN warehouse_information_sheet ON prod_info.inventory_id = warehouse_information_sheet.inventory_id
+                                                WHERE prod_info.emp_id ='{$emp_id}' AND prod_info.tech_id ='{$tech_id}' ; ";
                                         $query_run = mysqli_query($connection, $query);
 
                                             if ($rowcount = mysqli_fetch_assoc($query_run)) {
@@ -267,20 +258,21 @@ foreach($query_tech as $data){
                                                     // href=\"production_checklist.php?emp_id={$emp_id}&inventory_id={$values['inventory_id']}&sales_order_id={$values['sales_order_id']}\"><i
                                                     //     class='fas fa-eye'></i> </a>";
                                                     // }else{ 
-                                                        if ($values['issue_type'] ==1) {
+                                                        if ($values['issue_type'] == 1) {
                                                             echo '<span class="badge badge-lg badge-danger text-white px-2">Motherboard Issue</span>';
-                                                        }if ($values['issue_type'] ==2) {
+                                                        }if ($values['issue_type'] == 2) {
                                                             
-                                                            $query_1 ="SELECT  `status`FROM `requested_part_from_production` WHERE inventory_id = $inventory_id";
+                                                            $query_1 ="SELECT  `status` FROM `requested_part_from_production` WHERE inventory_id = $inventory_id";
                                                             $query_run = mysqli_query($connection, $query_1);
 
-                                                            $query_2 ="SELECT  `status`FROM `combine_check` WHERE inventory_id = $inventory_id";
+                                                            $query_2 ="SELECT  `status` FROM `combine_check` WHERE inventory_id = $inventory_id";
                                                             $query_run_2 = mysqli_query($connection, $query_2);
                                                             $combine_status;
                                                             foreach($query_run_2 as $c){
                                                                 $combine_status = $c['status'];
+                                                                echo $combine_status;
                                                             }
-                                                            $received =null;
+                                                            $received = NULL;
                                                             if(empty($query_run)){
                                                                 $received ='1';
                                                             }else{
@@ -295,7 +287,7 @@ foreach($query_tech as $data){
                                                                 <span class='badge badge-lg badge-warning text-white px-2'>Combine Issue</span>
                                                                 </a>";
                                                             }else{
-                                                                echo "after item recived start this";
+                                                                echo '<span class="badge badge-lg badge-danger text-white px-2 p-1">after item recived start this</span>';
                                                             }
                                                         }if ($values['issue_type'] ==3) {
                                                             echo '<span class="badge badge-lg badge-danger text-white px-2">LCD Issue</span>';

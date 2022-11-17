@@ -130,7 +130,7 @@ if (isset($_GET['sales_order_id'])) {
                 </div>
                 <div class="col col-lg-12 mb-3">
 
-                    <table id="example1" class="table table-bordered table-striped mt-2">
+                    <table class="table table-bordered table-striped mt-2">
                         <thead>
                             <tr>
                                 <th>&nbsp;</th>
@@ -144,6 +144,7 @@ if (isset($_GET['sales_order_id'])) {
                                 <th>HDD</th>
                                 <th>Display</th>
                                 <th>Graphic</th>
+                                <th>OS</th>
                                 <th>Condition</th>
                                 <th>QTY</th>
                                 <th>Unit Price</th>
@@ -176,16 +177,14 @@ if (isset($_GET['sales_order_id'])) {
                                 <td class="text-uppercase"><?php echo $items['item_hdd'] ?></td>
                                 <td class="text-uppercase"><?php echo $items['item_display'] ?></td>
                                 <td class="text-uppercase"><?php echo $items['item_graphic'] ?></td>
+                                <td class="text-uppercase"><?php echo $items['item_os'] ?></td>
                                 <td class="text-uppercase"><?php echo $items['item_condition'] ?></td>
                                 <td class="text-uppercase"><?php echo $items['No_of_Records'] ?></td>
-                                <td class="text-uppercase"><?php echo $items['item_price'] ?></td>
                                 <td class="text-uppercase"><?php echo $items['item_total_price'] ?></td>
+                                <td class="text-uppercase"><?php echo $items['item_price'] ?></td>
                                 <td class="text-uppercase"><?php echo $items['item_delivery_date'] ?></td>
                             </tr>
-                            <?php
-                                            }
-                                        }
-                                        ?>
+                            <?php } } ?>
                         </tbody>
 
                     </table>
@@ -196,21 +195,5 @@ if (isset($_GET['sales_order_id'])) {
     </div>
 
 </div>
-
-<style>
-select,
-input[type="text"] {
-    width: 100%;
-    height: 30px;
-    margin: inherit;
-    margin-top: 4px;
-    font-size: 10px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-    font-size: 12px;
-    background-color: black;
-}
-</style>
 
 <?php include_once('../includes/footer.php'); ?>
