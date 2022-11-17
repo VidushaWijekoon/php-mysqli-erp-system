@@ -234,7 +234,7 @@ body {
 
                         <?php } ?>
 
-                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 2)) { ?>
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 2) || ($role_id == 11 && $department == 20)) { ?>
 
                         <!-- Inventory -->
                         <li class="nav-item">
@@ -243,6 +243,8 @@ body {
                                 <p> Warehouse <i class="right fas fa-angle-left"></i> </p>
                             </a>
                             <ul class="nav nav-treeview">
+
+                                <?php if(($role_id == 1 && $department == 11) || ($role_id == 4 || $department == 2)) { ?>
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
@@ -269,7 +271,7 @@ body {
 
                                 </li>
 
-                                <?php if(($role_id == 1 && $department == 11) || ($role_id == 4 || $department == 2)) { ?>
+                                <?php } if(($role_id == 1 && $department == 11) || ($role_id == 4 || $department == 2)) { ?>
 
                                 <li class="nav-item">
                                     <a href="../inventory/warehouse_stock_report.php" class="nav-link">
@@ -280,7 +282,7 @@ body {
 
                                 <?php } ?>
 
-                                <?php if(($role_id == 1 && $department == 11) || ($role_id == 4 || $department == 22) || ($role_id == 11 && $department == 22))  { ?>
+                                <?php if(($role_id == 1 && $department == 11) || ($role_id == 11 && $department == 20))  { ?>
                                 <!-- Part -->
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
