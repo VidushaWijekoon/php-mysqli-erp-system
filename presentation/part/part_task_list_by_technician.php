@@ -23,8 +23,7 @@ $day = $_GET['day'];
     </div>
 </div>
 <?php 
-    $query1 = "SELECT * FROM requested_part_from_production WHERE created_date = '$created_date'  ;";
- 
+    $query1 = "SELECT * FROM requested_part_from_production WHERE created_date = '$created_date' GROUP BY model LIMIT 1  ;";
     $query_run1 = mysqli_query($connection, $query1);
     foreach($query_run1 as $a){
         $query2 = "SELECT  location FROM `users` WHERE epf = '{$a['emp_id']}';";
