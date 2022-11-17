@@ -458,9 +458,9 @@ $values1 = array(
                         $search_qty_B =0;
                         $slot_name_search_C = null;
                         $search_qty_C =0;
-                        $rack_number_a = 'RACK-A';
-                        $rack_number_b = 'RACK-B';
-                        $rack_number_c = 'RACK-C';
+                        $rack_number_a = 'RACK-1';
+                        $rack_number_b = 'RACK-2';
+                        $rack_number_c = 'RACK-3';
                         $common_slot = null;
                         $test = null;
                         $test_b = null;
@@ -477,6 +477,7 @@ $values1 = array(
                             echo "<span class='badge badge-lg badge-primary text-white p-2 px-5 text-uppercase'>$common_slot</span>";
                             
                             $query = "SELECT * FROM part_stock WHERE  part_model = '{$model}' AND part_name ='{$item_name}' ";
+                           
                                             $result_set = mysqli_query($connection, $query);
                                            $i =0;
                                             foreach($result_set as $data){                                                
@@ -534,7 +535,7 @@ $values1 = array(
                 <!-- // rack 01 -->
                 <div class="col-4 mt-5 text-uppercase">
                     <?php  
-                    $query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'RACK-A'";
+                    $query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'RACK-1'";
                     $result_set = mysqli_query($connection, $query);
                     foreach($result_set as $a){
                     $slot_name = $a['slot_name'];
@@ -652,7 +653,7 @@ $values1 = array(
                 <!-- // rack 02 -->
                 <div class="col-4 mt-5 text-uppercase">
                     <?php
-            $query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'RACK-B'";
+            $query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'RACK-2'";
             $result_set = mysqli_query($connection, $query);
             foreach($result_set as $a){
             $slot_name = $a['slot_name'];
@@ -774,7 +775,7 @@ $values1 = array(
                 <!-- // rack 03 -->
                 <div class="col-4 mt-5 text-uppercase">
                     <?php
-            $query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'RACK-C'";
+            $query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'RACK-3'";
             $result_set = mysqli_query($connection, $query);
             foreach($result_set as $a){
             $slot_name = $a['slot_name'];
