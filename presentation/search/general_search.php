@@ -18,7 +18,7 @@ if (!isset($_SESSION['user_id'])) {
             <div class="card mb-2">
                 <div class="d-flex">
                     <div class="col col-md-6 col-lg-6">
-                        <fieldset class="mt-4 mb-2">
+                        <fieldset class="mt-2 mb-3">
                             <legend>Scan Inventory ID</legend>
                             <form action="" method="GET">
                                 <div class="input-group">
