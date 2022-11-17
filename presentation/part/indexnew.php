@@ -6,8 +6,13 @@
 include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
 require_once("sanitizer.php");
+include_once('../../dataAccess/403.php');
 
+$role_id = $_SESSION['role_id'];
+$department = $_SESSION['department'];
 
+if($role_id == 1 && $department == 11 || $role_id == 2 && $department == 18 || $role_id == 11 && $department == 20){
+ 
 session_start();
 // $last_update_id =0;
 $rack_id = $_SESSION['rack_number'];
@@ -270,3 +275,5 @@ echo <<<STYLE
 		}
 	</style>
 STYLE;
+
+} else{ die(access_denied()); } ?>
