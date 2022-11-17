@@ -408,96 +408,110 @@ $item_brand=0;
                                 <th>Stock</th>
                                 <?php
                                     $query2 = "SELECT * FROM part_stock WHERE part_model = '$model' AND part_brand = '$item_brand' AND part_gen = '$item_generation' ;";
-                                    
+                                    echo $query2;
                                     $query_run2 = mysqli_query($connection, $query2);
 
                                     foreach($query_run2 as $a){
                                         $part_name = $a['part_name'];
                                         $part_qty = $a['qty']; 
+                                        if($part_name == 'keyboard'){ $stock_keyboard = $part_qty;}
+                                        if($part_name == 'speakers'){ $stock_speakers = $part_qty;}
+                                        if($part_name == 'camera'){ $stock_camera = $part_qty; }
+                                        if($part_name == 'bazel'){  $stock_bazel = $part_qty;} 
+                                        if($part_name == 'mousepad'){ $stock_mousepad = $part_qty;}
+                                        if($part_name == 'mouse pad button'){  $stock_mouse_pad_button = $part_qty; } 
+                                        if($part_name == 'camera cable'){ $stock_camera_cable = $part_qty;} 
+                                        if($part_name == 'back cover'){ $stock_back_cover = $part_qty;}
+                                        if($part_name == 'wifi card'){ $stock_wifi_card = $part_qty;}
+                                        if($part_name == 'lcd cable'){ $stock_lcd_cable = $part_qty; }
+                                        if($part_name == 'battery'){$stock_battery = $part_qty; }
+                                        if($part_name == 'battery cable'){ $stock_battery_cable = $part_qty;}
+                                        if($part_name == 'dvd rom'){ $stock_dvd_rom = $part_qty;}
+                                        if($part_name == 'dvd caddy'){  $stock_dvd_caddy = $part_qty;}
+                                        if($part_name == 'hdd caddy'){ $stock_hdd_caddy = $part_qty;}
+                                        if($part_name == 'hdd cable connector'){$stock_hdd_cable_connector = $part_qty;}
+                                        if($part_name == 'c panel palm rest'){ $stock_c_panel_palm_rest = $part_qty;}
+                                        if($part_name == 'mb base'){ $stock_mb_base = $part_qty;}
+                                        if($part_name == 'hings cover'){ $stock_hings_cover = $part_qty;}
+                                        if($part_name == 'lan cover'){ $stock_lan_cover = $part_qty;}
+                                    }
                                                                                 
                                 ?>
+                                <td>
 
-                                <?php if($part_name == 'keyboard'){ ?>
-                                <td>
-                                    <?php echo $part_qty; $stock_keyboard = $part_qty; ?>
+                                    <?php  echo $stock_keyboard;  ?>
                                 </td>
-                                <?php } if($part_name == 'speakers'){ ?>
+
                                 <td>
-                                    <?php echo $part_qty; $stock_speakers = $part_qty; ?>
+                                    <?php
+                                        echo $stock_speakers; 
+                                        
+                                        ?>
                                 </td>
-                                <?php } if($part_name == 'camera'){ ?>
                                 <td>
-                                    <?php echo $part_qty; $stock_camera = $part_qty; ?>
+                                    <?php echo $stock_camera; ?>
                                 </td>
-                                <?php } if($part_name == 'bazel'){ ?>
                                 <td>
-                                    <?php echo $part_qty; $stock_bazel = $part_qty; ?>
+                                    <?php
+                                 echo $stock_bazel;  ?>
                                 </td>
-                                <?php } if($part_name == 'mousepad'){ ?>
                                 <td>
-                                    <?php echo $part_qty; $stock_mousepad = $part_qty; ?>
+                                    <?php
+                                     echo $stock_mousepad;  ?>
                                 </td>
-                                <?php } if($part_name == 'mouse_pad_button'){ ?>
                                 <td>
-                                    <?php echo $part_qty; $stock_mouse_pad_button = $part_qty; ?>
+                                    <?php
+                                  echo $stock_mouse_pad_button;  ?>
                                 </td>
-                                <?php } if($part_name == 'camera_cable'){ ?>
                                 <td>
-                                    <?php echo $part_qty; $stock_camera_cable = $part_qty; ?>
+                                    <?php
+                                 echo $stock_camera_cable;  ?>
                                 </td>
-                                <?php } if($part_name == 'back_cover'){ ?>
                                 <td>
-                                    <?php echo $part_qty; $stock_back_cover = $part_qty; ?>
+                                    <?php echo $stock_back_cover;  ?>
                                 </td>
-                                <?php } if($part_name == 'wifi_card'){ ?>
                                 <td>
-                                    <?php echo $part_qty; $stock_wifi_card = $part_qty; ?>
+                                    <?php  echo $stock_wifi_card;  ?>
                                 </td>
-                                <?php } if($part_name == 'lcd_cable'){ ?>
                                 <td>
-                                    <?php echo $part_qty; $stock_lcd_cable = $part_qty; ?>
+                                    <?php
+                                echo $stock_lcd_cable;  ?>
                                 </td>
-                                <?php } if($part_name == 'battery'){ ?>
                                 <td>
-                                    <?php echo $part_qty; $stock_battery = $part_qty; ?>
+                                    <?php echo $stock_battery;  ?>
                                 </td>
-                                <?php } if($part_name == 'battery_cable'){ ?>
                                 <td>
-                                    <?php echo $part_qty; $stock_battery_cable = $part_qty; ?>
+                                    <?php 
+                                
+                                if($part_name == 'battery cable'){ ?>
+
+                                    <?php echo $part_qty; $stock_battery_cable = $part_qty;}else{ echo $stock_battery_cable; } ?>
                                 </td>
-                                <?php } if($part_name == 'dvd_rom'){ ?>
                                 <td>
-                                    <?php echo $part_qty; $stock_dvd_rom = $part_qty; ?>
+                                    <?php  echo $stock_dvd_rom;  ?>
                                 </td>
-                                <?php } if($part_name == 'dvd_caddy'){ ?>
                                 <td>
-                                    <?php echo $part_qty; $stock_dvd_caddy = $part_qty; ?>
+                                    <?php  echo $stock_dvd_caddy;  ?>
                                 </td>
-                                <?php } if($part_name == 'hdd_caddy'){ ?>
                                 <td>
-                                    <?php echo $part_qty; $stock_hdd_caddy = $part_qty; ?>
+                                    <?php  echo $stock_hdd_caddy;  ?>
                                 </td>
-                                <?php } if($part_name == 'hdd_cable_connector'){ ?>
                                 <td>
-                                    <?php echo $part_qty; $stock_hdd_cable_connector = $part_qty; ?>
+                                    <?php echo $stock_hdd_cable_connector ; ?>
                                 </td>
-                                <?php } if($part_name == 'c_panel_palm_rest'){ ?>
                                 <td>
-                                    <?php echo $part_qty; $stock_c_panel_palm_rest = $part_qty; ?>
+                                    <?php echo $stock_c_panel_palm_rest;  ?>
                                 </td>
-                                <?php } if($part_name == 'mb_base'){ ?>
                                 <td>
-                                    <?php echo $part_qty; $stock_mb_base = $part_qty; ?>
+                                    <?php  echo $stock_mb_base; ?>
                                 </td>
-                                <?php } if($part_name == 'hings_cover'){ ?>
                                 <td>
-                                    <?php echo $part_qty; $stock_hings_cover = $part_qty; ?>
+                                    <?php echo $stock_hings_cover;  ?>
                                 </td>
-                                <?php } if($part_name == 'lan_cover'){ ?>
                                 <td>
-                                    <?php echo $part_qty; $stock_lan_cover = $part_qty; ?>
+                                    <?php echo $stock_lan_cover; ?>
                                 </td>
-                                <?php } } ?>
+                                <?php  ?>
                             </tr>
                             <?php } ?>
                             <tr>

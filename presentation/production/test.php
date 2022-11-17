@@ -1,109 +1,89 @@
-<!DOCTYPE html>
-<html>
+<td>
+    <?php if($part_name == 'keyboard'){ ?>
 
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
+    <?php echo $stock_keyboard; $stock_keyboard = $part_qty; }else{ echo $stock_keyboard; } ?>
 
-    /* The Modal (background) */
-    .modal {
-        display: none;
-        /* Hidden by default */
-        position: fixed;
-        /* Stay in place */
-        z-index: 1;
-        /* Sit on top */
-        padding-top: 100px;
-        /* Location of the box */
-        left: 0;
-        top: 0;
-        width: 100%;
-        /* Full width */
-        height: 100%;
-        /* Full height */
-        overflow: auto;
-        /* Enable scroll if needed */
-        background-color: rgb(0, 0, 0);
-        /* Fallback color */
-        background-color: rgba(0, 0, 0, 0.4);
-        /* Black w/ opacity */
-    }
 
-    /* Modal Content */
-    .modal-content {
-        background-color: #fefefe;
-        margin: auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-    }
 
-    /* The Close Button */
-    .close {
-        color: #aaaaaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
+    <?php
+                                if($part_name == 'speakers'){ $stock_speakers = $part_qty;}
+                                if($part_name == 'camera'){ $stock_camera = $part_qty; }
+                                if($part_name == 'bazel'){  $stock_bazel = $part_qty;} 
+                                    if($part_name == 'mousepad'){ $stock_mousepad = $part_qty;}
+                                 if($part_name == 'mouse pad button'){  $stock_mouse_pad_button = $part_qty; } 
+                                if($part_name == 'camera cable'){ ?>
 
-    .close:hover,
-    .close:focus {
-        color: #000;
-        text-decoration: none;
-        cursor: pointer;
-    }
-    </style>
-</head>
+    <?php echo $part_qty; $stock_camera_cable = $part_qty;}else{ echo $stock_camera_cable; } ?>
 
-<body>
 
-    <h2>Modal Example</h2>
+    <?php
+                                
+                                if($part_name == 'back cover'){ ?>
 
-    <!-- Trigger/Open The Modal -->
-    <button id="myBtn">Open Modal</button>
+    <?php echo $part_qty; $stock_back_cover = $part_qty;}else{ echo $stock_back_cover; } ?>
 
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
 
-        <!-- Modal content -->
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>Some text in the Modal..</p>
-        </div>
+    <?php 
+                                if($part_name == 'wifi card'){ ?>
 
-    </div>
+    <?php echo $part_qty; $stock_wifi_card = $part_qty;}else{ echo $stock_wifi_card; } ?>
 
-    <script>
-    // Get the modal
-    var modal = document.getElementById("myModal");
 
-    // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
+    <?php
+                                
+                                if($part_name == 'lcd cable'){ ?>
 
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
+    <?php echo $part_qty; $stock_lcd_cable = $part_qty; }else{ echo $stock_lcd_cable; } ?>
 
-    // When the user clicks the button, open the modal 
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
 
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
+    <?php
+                                if($part_name == 'battery'){ ?>
 
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-    </script>
+    <?php echo $part_qty; $stock_battery = $part_qty; }else{ echo $stock_battery; } ?>
 
-</body>
 
-</html>
+    <?php 
+                                
+                                if($part_name == 'battery cable'){ ?>
+
+    <?php echo $part_qty; $stock_battery_cable = $part_qty;}else{ echo $stock_battery_cable; } ?>
+
+
+    <?php if($part_name == 'dvd rom'){ ?>
+
+    <?php echo $part_qty; $stock_dvd_rom = $part_qty;}else{ echo $stock_dvd_rom; } ?>
+
+
+    <?php if($part_name == 'dvd caddy'){ ?>
+
+    <?php echo $part_qty; $stock_dvd_caddy = $part_qty;}else{ echo $stock_dvd_caddy; } ?>
+
+
+    <?php if($part_name == 'hdd caddy'){ ?>
+
+    <?php echo $part_qty; $stock_hdd_caddy = $part_qty;}else{ echo $stock_hdd_caddy; } ?>
+
+
+    <?php if($part_name == 'hdd cable connector'){ ?>
+
+    <?php echo $part_qty; $stock_hdd_cable_connector = $part_qty;}else{ echo $stock_hdd_cable_connector ;} ?>
+
+
+    <?php if($part_name == 'c panel palm rest'){ ?>
+
+    <?php echo $part_qty; $stock_c_panel_palm_rest = $part_qty;}else{ echo $stock_c_panel_palm_rest; } ?>
+
+
+    <?php if($part_name == 'mb base'){ ?>
+
+    <?php echo $part_qty; $stock_mb_base = $part_qty;}else{ echo $stock_mb_base; } ?>
+
+
+    <?php if($part_name == 'hings cover'){ ?>
+
+    <?php echo $part_qty; $stock_hings_cover = $part_qty;}else{ echo $stock_hings_cover; } ?>
+
+
+    <?php if($part_name == 'lan cover'){ ?>
+
+    <?php echo $part_qty; $stock_lan_cover = $part_qty;}else{ echo $stock_lan_cover; }?>

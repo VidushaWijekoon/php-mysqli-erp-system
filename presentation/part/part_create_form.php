@@ -43,7 +43,7 @@ if(isset($_POST['submit'])){
         $_SESSION['rack_number'] = $rack_number;        
         
         $query = "INSERT INTO part_stock(part_name, part_model, part_brand, part_gen, capacity, qty, rack_number, slot_name) 
-                VALUES ('$device', '$model', '$brand', 0, 0, '$quantity','$rack_number', '$slot_name')";
+                VALUES ('$device', '$model', '$brand', '$generation', '$capacity', '$quantity','$rack_number', '$slot_name')";
         echo $query;
         $query_run = mysqli_query($connection, $query);
         $last_id = $connection->insert_id;
