@@ -71,7 +71,25 @@ for ($i = 0; $i <= $int_qty; $i++) {
 					('$device', '$brand', '$processor', '$core', '$generation', '$model', '$filename', '$location', 0, '$user_id', 0, 0)");
         // echo $sql; 
         $result_1 = mysqli_query($connection, $sql);
-        header("location: ./indexnew.php?last_id={$last_id}");            
+
+
+        $query = "SELECT inventory_id FROM warehouse_information_sheet ORDER BY inventory_id DESC LIMIT 1";
+                                            $query_run = mysqli_query($connection, $query);
+
+                                            $print_data = mysqli_fetch_row($query_run);
+
+        $tempDir = 'temp/'; 
+        $email = $print_data[0];
+        $filename = $email;
+        echo $filename;
+        $codeContents = $email; 
+        QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5);      
+
+
+        
+        //////////////////
+        header("location: ./indexnew.php?last_id={$last_id}");       
+             
                                     
 
 
