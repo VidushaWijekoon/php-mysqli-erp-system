@@ -1,6 +1,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Taviraj:ital,wght@0,300;1,400&display=swap"
     rel="stylesheet">
 <!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
 <!--  -->
 <?php
@@ -82,40 +84,32 @@ echo "</form>";
 */
 function write($code,$last_id, $overText, $rack, $barCodeHeight, $downText,$secondPart) { ?>
 
-
-
-<div class="card mb-3" style="max-width: 940px;">
-    <div class="row g-0">
-        <!-- <h5 style="margin: 5px 0 -30px 20px; position: absolute; font-size: 32px;"> -->
-        <?php if ($overText != "") {
-			$abc= strtoupper( $overText);
-			echo "</br>";
-    		// echo  "$abc &nbsp $secondPart ";
-			echo  "<div  ><p class = 'text-uppercase' style='font-size: 50; color:black;text-weight:bold;text-align: left;margin:0' >$abc &nbsp $secondPart</p></div>"; 
-    	} 
-		?><table>
-
-            <th>
-                <center>
-                    <!-- <div class="qrframe" style="border:2px solid black; width:310px; height:310px;"> -->
-                    <?php
-					echo '<img src="temp/'.$code.'.png" style="width:450px; height:450px;"><br>';
-					 ?>
+<div class="card">
+    <div class="card-header">
 
     </div>
+    <div class="card-body">
+        <div class="">
+            <?php if ($overText != "") {$abc= strtoupper( $overText); echo "</br>";
+			echo  "<div><p class='text-uppercase' style='font-size: 40px; color:black; text-weight:bold; margin-right: 5px;'>$abc &nbsp $secondPart</p></div>"; 
+    	} ?>
+        </div>
+        <div class="d-flex">
+            <div class="">
+                <?php echo '<img src="temp/'.$code.'.png" style="width: 300px; height: 300px;"><br>'; ?>
+            </div>
+            <div class="text-uppercase" style="margin: 169px 0 0 -20px; font-size: 30px; line-height: 1;">
+                <?php 
+				echo $rack ."<br>";
+				echo $downText ."<br>";
+				echo "ALSAKB$code " ."<br>";
+  				?>
+            </div>
+        </div>
+    </div>
+</div>
 
-    </center>
-    </th>
-    <th height: 370px;><?php 
-		echo strtoupper("<div style = 'font-size: 40; color:black;text-weight:bold;text-align: left;'>$rack");
-		echo strtoupper("<div style = 'font-size: 40; color:black;text-weight:bold;text-align: left;'>$downText");
-    	echo strtoupper("<div style = 'font-size: 40; color:black;text-weight:bold;text-align: left;'>ALSAKB$code</div></br> ");
-		echo "<p style='page-break-after:always'></p>";
-		echo "</br>";
-		?></th>
-    </table>
-
-    <?php
+<?php
 }
     	
 
