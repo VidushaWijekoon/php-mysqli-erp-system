@@ -48,6 +48,9 @@ if(isset($_POST['submit'])){
         $filename = $email;
         $codeContents = $email; 
         QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5);      
+
+
+        
         ///////////////////////////////////////////////////////////////////////////////////////////////////
         $query = "INSERT INTO part_stock(part_name, part_model, part_brand, part_gen, capacity, qty, rack_number, slot_name) 
                 VALUES ('$device', '$model', '$brand', '$generation', '$capacity', '$quantity','$rack_number', '$slot_name')";
@@ -55,7 +58,7 @@ if(isset($_POST['submit'])){
         $query_run = mysqli_query($connection, $query);
         $last_id = $connection->insert_id;
         $_SESSION['last_id'] = $last_id;    
-        header("location: ./indexnew.php?last_id={$last_id}"); 
+        // header("location: ./indexnew.php?last_id={$last_id}"); 
 
 }
 ?>
