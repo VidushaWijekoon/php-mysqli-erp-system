@@ -1,4 +1,5 @@
 <?php 
+ob_start();
 session_start();
 include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
@@ -448,6 +449,30 @@ $values1 = array(
                                 class="fa-solid fa-search" style="margin-right: 5px;"></i>Search</button>
                     </div>
                 </form>
+            </fieldset>
+        </div>
+        <!-- /////////////////////////// -->
+        <div class="col col-md-4 col-lg-4">
+            <fieldset class="mt-4 mb-2 mx-4">
+                <legend>Add Item / Remove Item</legend>
+                <form name="form" action="#" method="POST">
+                    <div class="col-sm-8">
+                        <input type="text" id="search" name="search" required value="<?php if (isset($_POST['search'])) {
+                                                                                        echo $_POST['search'];
+                                                                                    } ?>" placeholder="Search QR">
+                    </div>
+                </form>
+                <script>
+                let searchbar = document.querySelector('input[name="search"]');
+                searchbar.focus();
+                search.value = '';
+                </script>
+                <?php
+                if (isset($_POST['search'])) {
+                    $location = mysqli_real_escape_string($connection, $_POST['search']);
+                    header("Location: ./add_additional_part.php?scan_id=$location");
+                }
+                ?>
             </fieldset>
         </div>
 

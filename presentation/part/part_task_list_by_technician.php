@@ -22,7 +22,7 @@ $day = $_GET['day'];
 ?>
 
 <div class="row page-titles">
-    <div class="col-md-5 align-self-center"><a href="#">
+    <div class="col-md-5 align-self-center"><a href="part_warehouse_leader_dashboard.php">
             <i class="fa-regular fa-circle-left fa-2x m-2" style="color: #ced4da;"></i>
         </a>
     </div>

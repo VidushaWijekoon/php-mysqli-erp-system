@@ -1,13 +1,7 @@
 <?php
 
 require_once("sanitizer.php");
-include_once('../../dataAccess/403.php');
 
-$role_id = $_SESSION['role_id'];
-$department = $_SESSION['department'];
-
-if($role_id == 1 && $department == 11 || $role_id == 2 && $department == 18 || $role_id == 11 && $department == 20){
- 
 	
 // Get pararameters that are passed in through $_GET or set to the default value
 $text = ( filterInt("text") != "" ) ? filterInt("text") : "0";
@@ -71,5 +65,3 @@ function createImage($code_string) {
 	imagepng($image);
 	imagedestroy($image);
 }
-
-} else{ die(access_denied()); } ?>

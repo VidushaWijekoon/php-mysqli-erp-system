@@ -5,6 +5,7 @@ include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
 include_once('../includes/header.php');
 include_once('../../dataAccess/403.php');
+include('phpqrcode/qrlib.php'); 
 
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
@@ -39,16 +40,22 @@ if(isset($_POST['submit'])){
         $_POST = "";
         $_SESSION['device'] = $device;
         $_SESSION['slot_name'] = $slot_name;
-        $_SESSION['modal'] = $model;
-        $_SESSION['rack_number'] = $rack_number;        
-        
+        $_SESSION['model'] = $model;
+        $_SESSION['rack_number'] = $rack_number;  
+        ////////////////////////////////////////////////////////////////////////////////////////
+        $tempDir = 'temp/'; 
+        $email = $rack_number."_".$slot_name;
+        $filename = $email;
+        $codeContents = $email; 
+        QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5);      
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
         $query = "INSERT INTO part_stock(part_name, part_model, part_brand, part_gen, capacity, qty, rack_number, slot_name) 
                 VALUES ('$device', '$model', '$brand', '$generation', '$capacity', '$quantity','$rack_number', '$slot_name')";
         echo $query;
         $query_run = mysqli_query($connection, $query);
         $last_id = $connection->insert_id;
         $_SESSION['last_id'] = $last_id;    
-        // header("location: ./indexnew.php?last_id={$last_id}"); 
+        header("location: ./indexnew.php?last_id={$last_id}"); 
 
 }
 ?>
