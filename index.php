@@ -55,6 +55,12 @@ if(isset($_POST['submit'])) {
 
             verify_query($result_set);
 
+            if($query_run){
+                if(isset($_REQUEST["remember"]) && $_REQUEST["remember"]==1){
+                    setcookie("loggin time", $username . "," . time() * 3600);//expire after 1hour 
+                }
+            }
+
             // redirect to users.php
             login($_SESSION['role_id'], $_SESSION['department']);
         } else {

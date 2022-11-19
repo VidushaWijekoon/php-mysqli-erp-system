@@ -203,7 +203,7 @@ for ($i = 0; $i <= $int_qty; $i++) {
                                     <select name="core" class="info_select" style="border-radius: 5px;" required>
                                         <option selected>--Select Type--</option>
                                         <?php
-                                            $query = "SELECT * FROM core ORDER BY core_id";
+                                            $query = "SELECT * FROM core ORDER BY core";
                                             $all_devices = mysqli_query($connection, $query);
 
                                             while ($types = mysqli_fetch_array($all_devices, MYSQLI_ASSOC)) :;
