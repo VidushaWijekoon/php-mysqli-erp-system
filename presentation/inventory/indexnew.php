@@ -45,10 +45,10 @@ if($last_update_id != 0){
 
 	$height = $howManyCodes*100;
 
-	$pageWidth =  "250mm";
+	$pageWidth =  "350mm";
 	$pageHeight =  "$height.mm";
 
-	$itemWidth = "200mm";
+	$itemWidth = "250mm";
 	$itemHeight = "105mm";
 
 	$pageMarginLeft ="0mm";
@@ -80,7 +80,7 @@ echo "</form>";
 /*
 * THE SHEET
 */
-function write($code, $overText, $rack, $barCodeHeight, $downText,$secondPart) { ?>
+function write($code,$last_id, $overText, $rack, $barCodeHeight, $downText,$secondPart) { ?>
 
 
 
@@ -94,29 +94,40 @@ function write($code, $overText, $rack, $barCodeHeight, $downText,$secondPart) {
 			echo  "<div  ><p class = 'text-uppercase' style='font-size: 50; color:black;text-weight:bold;text-align: left;margin:0' >$abc &nbsp $secondPart</p></div>"; 
     	} 
 		?><table>
-            <th><?php echo "<img src='barcode.php?codetype=qrcode&size={$barCodeHeight}&text={$code}'left = 0;width='420' height='420'> "; ?>
-            </th>
-            <th height: 370px;><?php 
+
+            <th>
+                <center>
+                    <!-- <div class="qrframe" style="border:2px solid black; width:310px; height:310px;"> -->
+                    <?php
+					echo '<img src="temp/'.$code.'.png" style="width:450px; height:450px;"><br>';
+					 ?>
+
+    </div>
+
+    </center>
+    </th>
+    <th height: 370px;><?php 
 		echo strtoupper("<div style = 'font-size: 40; color:black;text-weight:bold;text-align: left;'>$rack");
 		echo strtoupper("<div style = 'font-size: 40; color:black;text-weight:bold;text-align: left;'>$downText");
     	echo strtoupper("<div style = 'font-size: 40; color:black;text-weight:bold;text-align: left;'>ALSAKB$code</div></br> ");
 		echo "<p style='page-break-after:always'></p>";
+		echo "</br>";
 		?></th>
-        </table>
+    </table>
 
-        <?php
+    <?php
 }
     	
 
 echo "<div class='sheet'>";
 	if ($codeArray != "") { // Specified array of codes
 		foreach (json_decode($codeArray) as $secondPart) {
-			write($code, $overText, $rack, $barCodeHeight, $downText,$secondPart);
+			write($code,$last_id, $overText, $rack, $barCodeHeight, $downText,$secondPart);
 		}
 	} else { // Unspecified codes, let's go incremental
 		for ($i = $start; $i < $howManyCodes + $start; $i++) {
 			$code = str_pad($i, $digits, "0", STR_PAD_LEFT);
-			write($code, $overText, $rack, $barCodeHeight, $downText,$secondPart);
+			write($code,$last_id, $overText, $rack, $barCodeHeight, $downText,$secondPart);
 		}
 	}
 echo "</div>";
