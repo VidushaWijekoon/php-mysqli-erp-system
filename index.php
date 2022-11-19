@@ -6,7 +6,7 @@ require_once('dataAccess/functions.php');
 require_once('dataAccess/login_functions.php'); 
 
 // check for form submission
-if (isset($_POST['submit'])) {
+if(isset($_POST['submit'])) {
 
     $errors = array();
 
@@ -42,12 +42,16 @@ if (isset($_POST['submit'])) {
             $_SESSION['department'] = $user['department'];
             $_SESSION['epf'] = $user['epf'];
             $_SESSION['first_name'] = $user['first_name'];
+
             // $_SESSION['role'] = $user['role'];
             // updating last login
-            $query = "UPDATE users SET last_login = NOW() ";
-            $query .= "WHERE user_id = {$_SESSION['user_id']} LIMIT 1";
-
+            $query = "UPDATE users SET last_login = NOW() WHERE user_id = {$_SESSION['user_id']} LIMIT 1";
             $result_set = mysqli_query($connection, $query);
+
+            // insert last logged in time
+            $query1 = "INSERT INTO users_logged_in_time(emp_id, username, logged_time) 
+                        VALUES ('{$_SESSION['user_id']}', '$username', CURRENT_TIMESTAMP)";
+            $query_run = mysqli_query($connection, $query1);
 
             verify_query($result_set);
 
