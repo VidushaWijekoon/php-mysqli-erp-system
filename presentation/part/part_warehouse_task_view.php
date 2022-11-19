@@ -407,7 +407,7 @@ $item_brand=0;
                             <tr>
                                 <th>Stock</th>
                                 <?php
-                                    $query2 = "SELECT * FROM part_stock WHERE part_model = '$model' AND part_brand = '$item_brand' AND part_gen = '$item_generation' ;";
+                                    $query2 = "SELECT part_name, qty FROM part_stock WHERE part_model = '$model' AND part_brand = '$item_brand' ;";
                                     echo $query2;
                                     $query_run2 = mysqli_query($connection, $query2);
 
@@ -481,11 +481,7 @@ $item_brand=0;
                                     <?php echo $stock_battery;  ?>
                                 </td>
                                 <td>
-                                    <?php 
-                                
-                                if($part_name == 'battery cable'){ ?>
-
-                                    <?php echo $part_qty; $stock_battery_cable = $part_qty;}else{ echo $stock_battery_cable; } ?>
+                                    <?php echo $stock_battery_cable;  ?>
                                 </td>
                                 <td>
                                     <?php  echo $stock_dvd_rom;  ?>
@@ -559,6 +555,7 @@ $item_brand=0;
                                     `dvd_caddy`,
                                     `hdd_caddy`,
                                     `hdd_cable_connector`,
+                                    c_panel_palm_rest,
                                     `mb_base`,
                                     `hings_cover`
                                 )
@@ -587,7 +584,8 @@ $item_brand=0;
                                     '$c_panel_palm_rest',
                                     '$mb_base',
                                     '$hings_cover'
-                                )";
+                                )"; 
+                                echo $query;                 
                                 $query_run = mysqli_query($connection, $query);
                                 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                 $date = $date1->format('Y-m-d H:i:s');
@@ -638,26 +636,27 @@ $item_brand=0;
                                     // "hings_cover" => $balance_stock_hings_cover  ,
                                     "lan_cover" => $balance_stock_lan_cover  ,
                                 );
-                                foreach ($array as $key => $value) {
-                                    $query="UPDATE part_stock SET qty = $value
-                                            WHERE part_model = '$item_model' AND part_brand = '$item_brand' AND part_gen = '$item_generation' AND part_name = '$key'";                                                
-                                    $query_stock_update = mysqli_query($connection, $query);
+                                // foreach ($array as $key => $value) {
+                                //     $query="UPDATE part_stock SET qty = $value
+                                //             WHERE part_model = '$item_model' AND part_brand = '$item_brand' AND part_name = '$key'";                                                
+                                //     $query_stock_update = mysqli_query($connection, $query);
 
-                                                if($value == 0){
-                                                    $query ="SELECT rack_number, slot_name FROM part_stock
-                                                            WHERE part_model = '$item_model' AND part_brand = '$item_brand' AND part_gen = '$item_generation' AND part_name = '$key'";
-                                             $query_data_retrive = mysqli_query($connection, $query);
-                                             foreach($query_data_retrive as $d){
-                                                $slot_name =$d['slot_name'];
-                                                $rack_number =$d['rack_number'];
-                                                $query="UPDATE rack_slots SET status = '0' WHERE slot_name = '$slot_name' ";             
-                                                    $query_data_update = mysqli_query($connection, $query); 
+                                //                 if($value == 0){
+                                //                     $query ="SELECT rack_number, slot_name FROM part_stock
+                                //                             WHERE part_model = '$item_model' AND part_brand = '$item_brand' AND part_name = '$key'";
+                                //              $query_data_retrive = mysqli_query($connection, $query);
+                                //              foreach($query_data_retrive as $d){
+                                //                 $slot_name =$d['slot_name'];
+                                //                 $rack_number =$d['rack_number'];
+                                //                 $query="UPDATE rack_slots SET status = '0' WHERE slot_name = '$slot_name' ";             
+                                //                     $query_data_update = mysqli_query($connection, $query); 
                                                     
-                                                    $query="UPDATE rack SET status = '0' WHERE rack_number = '$rack_number' ";             
-                                            $query_data_update = mysqli_query($connection, $query);    
-                                        }    
-                                    }
-                                }
+                                //                     $query="UPDATE rack SET status = '0' WHERE rack_number = '$rack_number' ";             
+                                //             $query_data_update = mysqli_query($connection, $query);    
+                                //         }    
+                                //     }
+                                // }
+                                header('Location: part_warehouse_leader_dashboard.php');
                             }?>
                                 <form action="" method="POST">
                                     <td>Prepared</td>
@@ -845,6 +844,8 @@ $item_brand=0;
                             )";
                             $query_run = mysqli_query($connection, $query_buy);
                             }
+                            
+                            // part_warehouse_leader_dashboard
                             ?>
                             <tr>
                                 <form action="#" method="POST">

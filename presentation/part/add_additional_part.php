@@ -37,53 +37,99 @@ include_once('../../dataAccess/connection.php');
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
- 
-?>
+ $scan_id = $_GET['scan_id'];
+$location = explode("_",$scan_id);
+$rack_number = $location[0];
+$slot_number = $location[1];
+$part_name;
+$part_model;
+$part_brand;
+$qty;
+$stock_id;
+
+$query = "SELECT * FROM part_stock WHERE `rack_number`='$rack_number' AND `slot_name`='$slot_number' ";
+
+$result = mysqli_query($connection, $query);
+foreach($result as $a){
+    $part_name = $a['part_name'];
+    $part_model = $a['part_model'];
+    $part_brand = $a['part_brand'];
+    $qty =$a['qty'];
+    $stock_id = $a['stock_id'];
+}
+ ?>
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-5 grid-margin stretch-card justify-content-center mx-auto mt-5">
-            <div class="card mt-5" style="background: #3f4156;">
-                <div class="card-header bg-secondary d-flex">
-                    <h4 class="card-title text-uppercase">Add Additional Item From</h4>
+            <form action="" method="post">
+                <div class="card mt-5" style="background: #3f4156;">
+                    <div class="card-header bg-secondary d-flex">
+                        <h4 class="card-title text-uppercase">Add Additional Item From</h4>
 
-                </div>
-                <div class="card-body">
-                    <table class="table table-striped">
-                        <thead class="bg-secondary text-uppercase">
-                            <tr>
-                                <th>Type</th>
-                                <th>Device</th>
-                                <th>Model</th>
-                                <th>Quantity</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <form action="" method="post">
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead class="bg-secondary text-uppercase">
                                 <tr>
-                                    <td>Keyboard</td>
-                                    <td>Dell</td>
-                                    <td>E5530</td>
+                                    <th>Part Name</th>
+                                    <th>Model</th>
+                                    <th>Brand</th>
+                                    <th>Available Quantity</th>
+                                    <th>Add Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr>
+                                    <td><?php echo $part_name ?></td>
+                                    <td><?php echo $part_model ?></td>
+                                    <td><?php echo $part_brand ?></td>
+                                    <td><?php echo $qty ?></td>
                                     <td>
                                         <input type="number" class="form-control" placeholder="Please Enter QTY"
                                             name="qty">
                                     </td>
                                 </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <!-- /.card-body -->
-                <div class="justify-content-between mx-auto mb-3 text-center">
-                    <a href="#" class="btn btn-secondary btn-sm">Close</a>
-                    <input class="btn btn-success btn-sm" type="submit" name="submit" value="Save Changes">
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="justify-content-between mx-auto mb-3 text-center">
+                        <a href="part_stock_dashboard.php" class="btn btn-secondary btn-sm">Close</a>
+                        <!-- <input class="btn btn-success btn-sm" type="submit" name="submit" value="Save Changes"> -->
+                        <button type="submit" name="add" class="btn btn-success btn-xs mx-2">Add</button>
+                        <button type="submit" name="remove" class="btn btn-danger btn-xs mx-2">Remove</button>
 
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
-        </form>
+
     </div>
 </div>
-
+<?php if (isset($_POST['add'])) {
+     $add_qty = mysqli_real_escape_string($connection, $_POST['qty']);
+    // 
+    $new_qty = $qty;
+    $new_qty += $add_qty;
+    $query ="UPDATE `part_stock` SET`qty`='$new_qty' WHERE `stock_id` = '$stock_id'";
+    $result = mysqli_query($connection, $query);
+    header("Location: ./part_stock_dashboard.php");
+ } ?>
+<?php if (isset($_POST['remove'])) {
+     $add_qty = mysqli_real_escape_string($connection, $_POST['qty']);
+    // 
+    $new_qty = $qty;
+    $new_qty -= $add_qty;
+    if($new_qty >=0){
+    $query ="UPDATE `part_stock` SET`qty`='$new_qty' WHERE `stock_id` = '$stock_id'";
+    $result = mysqli_query($connection, $query);
+    header("Location: ./part_stock_dashboard.php");
+    }else{
+        echo "You Can't Remove Over Item in Stock";
+    }
+ } ?>
 
 <style>
 body,

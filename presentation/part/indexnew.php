@@ -3,31 +3,26 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 <link rel="stylesheet" href="../../static/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
 <?php
+session_start();
 include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
 require_once("sanitizer.php");
-include_once('../../dataAccess/403.php');
 
-$role_id = $_SESSION['role_id'];
-$department = $_SESSION['department'];
 
-if($role_id == 1 && $department == 11 || $role_id == 2 && $department == 18 || $role_id == 11 && $department == 20){
  
-session_start();
+
 // $last_update_id =0;
 $rack_id = $_SESSION['rack_number'];
 $slot_id = $_SESSION['slot_name'];
 $model = $_SESSION['model'];
 $device = $_SESSION['device'];
-// $core = $_SESSION['core'];
-// $location = $_SESSION['location'];
+$filename = $rack_id."_".$slot_id;
+$name = $filename.".png";
+$path = "temp/".$name;
 $last_id = $_SESSION['last_id'] ;
 
 $last_update_id =0;
 $quantity = 1;
-// $rack_id="RACK-A";
-// $slot_id = " A-1";
-// $model = "840 g3";
 $core = $device;
 $item_id = 1 ;
 echo "<form action=''  method='get'>";
@@ -79,7 +74,7 @@ echo "</form>";
 * THE SHEET
 */
 
-function write($code, $overText,$device,  $barCodeHeight, $downText,$secondPart) {
+function write($code,$path, $overText,$device,  $barCodeHeight, $downText,$secondPart) {
 	?>
 <style>
 p.ex1 {
@@ -129,7 +124,7 @@ p.ex1 {
             echo "<div style='font-size: 60; color:black;text-weight:bold;text-align: center;'><i
                     class='fa-solid fa-keyboard fa-4x'> </i></div>";
             }
-            if($device == 'battery_cable'){
+            if($device == 'battery'){
             echo "<div style='font-size: 60; color:black;text-weight:bold;text-align: center;'><i
                     class='fa-solid fa-camera fa-4x'> </i></div>";
             }
@@ -172,7 +167,17 @@ p.ex1 {
         </th>
     </tr>
     <tr>
-        <td><?php echo "<img src='barcode.php?codetype=qrcode&size='100'&text={$code}'align='left' width='900' height='900'> </br></br></br></br></br></br> "; ?>
+        <!-- <td><?php echo "<img src='barcode.php?codetype=qrcode&size='100'&text={$code}'align='left' width='600' height='600'> </br></br></br></br></br></br> "; ?>
+        </td> -->
+        <td>
+            <center>
+                <!-- <div class="qrframe" style="border:2px solid black; width:310px; height:310px;"> -->
+                <?php
+					echo '<img src="'.$path.'" style="width:300px; height:600px;"><br>'; ?>
+
+                </div>
+
+            </center>
         </td>
         <td>
             <?php 
@@ -182,7 +187,7 @@ p.ex1 {
 		} 
 		?>
             <?php
-    	echo strtoupper("<div style = 'font-size: 80; color:black;text-weight:bold;text-align: left;'>ALSAKB$code</div></br></br></br> ");
+    	// echo strtoupper("<div style = 'font-size: 80; color:black;text-weight:bold;text-align: left;'>ALSAKB$code</div></br></br></br> ");
 		?>
         </td>
     </tr>
@@ -198,12 +203,13 @@ p.ex1 {
 echo "<div class='sheet'>";
 	if ($codeArray != "") { // Specified array of codes
 		foreach (json_decode($codeArray) as $secondPart) {
-			write($code, $overText,$device, $barCodeHeight, $downText,$secondPart);
+			echo "im here";
+			write($code,$path, $overText,$device, $barCodeHeight, $downText,$secondPart);
 		}
 	} else { // Unspecified codes, let's go incremental
 		for ($i = $start; $i < $howManyCodes + $start; $i++) {
 			$code = str_pad($i, $digits, "0", STR_PAD_LEFT);
-			write($code, $overText,$device, $barCodeHeight, $downText,$secondPart);
+			write($code,$path, $overText,$device, $barCodeHeight, $downText,$secondPart);
 		}
 	}
 echo "</div>";
@@ -276,4 +282,4 @@ echo <<<STYLE
 	</style>
 STYLE;
 
-} else{ die(access_denied()); } ?>
+ ?>
