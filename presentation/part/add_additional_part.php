@@ -57,12 +57,13 @@ foreach($result as $a){
     $qty =$a['qty'];
     $stock_id = $a['stock_id'];
 }
+
  ?>
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-5 grid-margin stretch-card justify-content-center mx-auto mt-5">
-            <form action="" method="post">
+            <form action="" method="post" id="myCoolForm">
                 <div class="card mt-5" style="background: #3f4156;">
                     <div class="card-header bg-secondary d-flex">
                         <h4 class="card-title text-uppercase">Add Additional Item From</h4>
@@ -96,9 +97,10 @@ foreach($result as $a){
                     </div>
                     <!-- /.card-body -->
                     <div class="justify-content-between mx-auto mb-3 text-center">
+                        <button type="submit" name="add" class="btn btn-success btn-xs mx-2">Add</button>
                         <a href="part_stock_dashboard.php" class="btn btn-secondary btn-sm">Close</a>
                         <!-- <input class="btn btn-success btn-sm" type="submit" name="submit" value="Save Changes"> -->
-                        <button type="submit" name="add" class="btn btn-success btn-xs mx-2">Add</button>
+
                         <button type="submit" name="remove" class="btn btn-danger btn-xs mx-2">Remove</button>
 
                     </div>
@@ -232,6 +234,12 @@ html {
     text-transform: uppercase;
 }
 </style>
+<script>
+var el = document.getElementById('myCoolForm');
 
+el.addEventListener('submit', function() {
+    return confirm('Are you sure you want to submit this form?');
+}, false);
+</script>
 
 <?php include_once('../includes/footer.php');  ?>
