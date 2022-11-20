@@ -97,7 +97,7 @@ foreach($result as $a){
                     </div>
                     <!-- /.card-body -->
                     <div class="justify-content-between mx-auto mb-3 text-center">
-                        <button type="submit" name="add" class="btn btn-success btn-xs mx-2">Add</button>
+                        <button type="submit" name="add" id="add" class="btn btn-success btn-xs mx-2">Add</button>
                         <a href="part_stock_dashboard.php" class="btn btn-secondary btn-sm">Close</a>
                         <!-- <input class="btn btn-success btn-sm" type="submit" name="submit" value="Save Changes"> -->
 
@@ -236,6 +236,8 @@ html {
 </style>
 <script>
 var el = document.getElementById('myCoolForm');
+var msg = document.getElementById('add');
+console.log(msg);
 
 el.addEventListener('submit', function() {
     return confirm('Are you sure you want to submit this form?');

@@ -63,7 +63,7 @@ if (isset($_POST['submit'])) {
                      $_SESSION['generation']=$generation ;
                      $_SESSION['core']=$core ;
                      $_SESSION['location']=$location ;
-                         header("location: ./indexnew.php");  
+                        //  header("location: ./indexnew.php");  
                          
 
 }
@@ -96,7 +96,6 @@ if (isset($_POST['submit'])) {
                                 <input type="text" id="search" name="search" required value="<?php if (isset($_POST['search'])) {
                                                                                         echo $_POST['search'];
                                                                                     } ?>" placeholder="Search QR">
-                                <!-- <button type="submit" class="btn btn-primary">Search</button> -->
                             </div>
 
                         </form>
