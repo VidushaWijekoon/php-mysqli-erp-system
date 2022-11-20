@@ -77,13 +77,13 @@ for ($i = 0; $i <= $int_qty; $i++) {
                                             $query_run = mysqli_query($connection, $query);
 
                                             $print_data = mysqli_fetch_row($query_run);
-
+        
         $tempDir = 'temp/'; 
         $email = $print_data[0];
         $filename = $email;
         echo $filename;
         $codeContents = $email; 
-        QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5);      
+        QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5,1);      
 
 
         
@@ -147,7 +147,7 @@ for ($i = 0; $i <= $int_qty; $i++) {
         <div class="col-lg-8 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card mt-3 w-100">
                 <div class="card-body">
-                    <?php if (!empty($errors)) { display_errors($errors); } ?>
+                    <?php if (!empty($errors)) { display_errors($errors); }?>
                     <form method="POST">
                         <fieldset>
                             <legend>Create Warehouse Information Sheet</legend>

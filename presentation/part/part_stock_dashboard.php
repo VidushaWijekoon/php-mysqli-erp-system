@@ -426,33 +426,9 @@ $values1 = array(
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col col-md-4 col-lg-4">
-            <fieldset class="mt-4 mb-2 mx-4">
-                <legend>Find Me !!</legend>
-                <form name="form" action="#" method="POST">
-                    <div class="col-sm-8">
-                        <select name="part_name" class="info_select w-25 mx-1" style="border-radius: 5px;">
-                            <option selected>--Select Item--</option>
-                            <?php
-                                $query = "SELECT * FROM part_list";
-                                $result = mysqli_query($connection, $query);
 
-                                while ($selection = mysqli_fetch_array($result, MYSQLI_ASSOC)) :; ?>
-
-                            <option value="<?php echo $selection["part_name"]; ?>">
-                                <?php echo strtoupper($selection["part_name"]); ?>
-                            </option>
-                            <?php endwhile; ?>
-                        </select>
-                        <input type="text" class="w-25" name="model">
-                        <button type="submit" name="submit" class="btn btn-primary btn-xs mx-2"><i
-                                class="fa-solid fa-search" style="margin-right: 5px;"></i>Search</button>
-                    </div>
-                </form>
-            </fieldset>
-        </div>
         <!-- /////////////////////////// -->
-        <div class="col col-md-4 col-lg-4">
+        <!-- <div class="col col-md-4 col-lg-4">
             <fieldset class="mt-4 mb-2 mx-4">
                 <legend>Add Item / Remove Item</legend>
                 <form name="form" action="#" method="POST">
@@ -468,15 +444,15 @@ $values1 = array(
                 search.value = '';
                 </script>
                 <?php
-                if (isset($_POST['search'])) {
-                    $location = mysqli_real_escape_string($connection, $_POST['search']);
-                    header("Location: ./add_additional_part.php?scan_id=$location");
-                }
+                // if (isset($_POST['search'])) {
+                //     $location = mysqli_real_escape_string($connection, $_POST['search']);
+                //     header("Location: ./add_additional_part.php?scan_id=$location");
+                // }
                 ?>
             </fieldset>
-        </div>
+        </div> -->
 
-        <div class="mt-5 text-center">
+        <div class="mt-5 ">
 
             <?php 
                         $part_model =0;
@@ -502,8 +478,8 @@ $values1 = array(
                             $item_name = mysqli_real_escape_string($connection, $_POST['part_name']);
                             $model = mysqli_real_escape_string($connection, $_POST['model']);
                             $common_slot =  $item_name;
-
-                            echo "<span class='badge badge-lg badge-primary text-white p-2 px-5 text-uppercase'>$common_slot</span>";
+                            
+                            
                             
                             $query = "SELECT * FROM part_stock WHERE  part_model = '{$model}' AND part_name ='{$item_name}' ";
                            
@@ -532,29 +508,71 @@ $values1 = array(
                                                         $i++;
                                                     }
                                             }
-                                            if(empty($test)){}else{
-                                                echo "</br>";
-                                                echo "Rack-01";
-                                            foreach($test as $test1){
-                                                echo " "."-->"." ".$test1[0];
-                                            }
-                                            }  
-                                            if(empty($test_b)){}else{
-                                                echo "</br>";
-                                                echo "Rack-02";
-                                                foreach($test_b as $test1){
-                                                    echo " "."-->"." ".$test1[0];
-                                                }
-                                            }  
-                                            if(empty($test_c)){}else{
-                                                echo "</br>";
-                                                    echo "Rack-03";
-                                                foreach($test_c as $test1){
-                                                    echo " "."-->"." ".$test1[0];
-                                                }
-                                            }       
+                                             
                         }
                     ?>
+
+
+        </div>
+        <div class="col col-md-4 col-lg-4">
+            <fieldset class="mt-4 mb-2 mx-4">
+                <legend>Find Me !!</legend>
+                <form name="form" action="#" method="POST">
+                    <div class="col-sm-8">
+                        <select name="part_name" class="info_select w-25 mx-1" style="border-radius: 5px;">
+                            <option selected>--Select Item--</option>
+                            <?php
+                                $query = "SELECT * FROM part_list";
+                                $result = mysqli_query($connection, $query);
+
+                                while ($selection = mysqli_fetch_array($result, MYSQLI_ASSOC)) :; ?>
+
+                            <option value="<?php echo $selection["part_name"]; ?>">
+                                <?php echo strtoupper($selection["part_name"]); ?>
+                            </option>
+                            <?php endwhile; ?>
+                        </select>
+                        <input type="text" class="w-25" name="model">
+                        <button type="submit" name="submit" class="btn btn-primary btn-xs mx-2"><i
+                                class="fa-solid fa-search" style="margin-right: 5px;"></i>Search</button>
+                    </div>
+                </form>
+            </fieldset>
+            <?php  echo "<span class='badge badge-lg badge-danger text-white p-2 px-5 text-uppercase'>$common_slot</span>";
+            if(empty($test)){}else{
+                echo "</br>";
+                echo "Rack-01 -->";
+            foreach($test as $test1){ ?>
+            <a class="btn  bg-success mt-2" href="
+                add_additional_part.php?scan_id=<?php echo "rack-1_".$test1[0] ?>">
+                <?php  echo $test1[0]; ?>
+            </a>
+            <?php
+            }
+            }  
+            if(empty($test_b)){}else{
+                echo "</br>";
+                echo "Rack-02 -->";
+                foreach($test_b as $test1){ ?>
+            <a class="btn  bg-success mt-2" href="
+                add_additional_part.php?scan_id=<?php echo "rack-2_".$test1[0] ?>">
+                <?php  echo $test1[0]; ?>
+            </a> <?php
+                }
+            }  
+            if(empty($test_c)){}else{
+                echo "</br>";
+                    echo "Rack-03 -->";
+                foreach($test_c as $test1){ ?>
+            <a class="btn  bg-success mt-2" href="
+                    add_additional_part.php?scan_id=<?php echo "rack-3_".$test1[0] ?>">
+                <?php  echo $test1[0]; ?>
+            </a>
+            <?php
+                }
+            }      
+            ?>
+
         </div>
 
         <div class="container-fluid">
@@ -610,6 +628,7 @@ $values1 = array(
                         $i =0;
                     
                ?>
+
                     <div class="card card-primary">
                         <div class="card-header" ;>
                             <h4 class=" card-title">Rack 01</h4>
@@ -638,8 +657,9 @@ $values1 = array(
 
                             <!-- slot with value -->
                             <?php if(empty($test)){?>
-
-                            <a class="btn grid_btn bg-success mt-2 ">
+                            <a class="btn grid_btn bg-success mt-2" href="
+                                add_additional_part.php?scan_id=<?php echo "rack-1_".$substring[0] ?>">
+                                <!-- <a class="btn grid_btn bg-success mt-2 "> -->
                                 <i class="fas fa-inbox"></i>
                                 <?php
                         echo $substring[0]."</br>";
@@ -651,7 +671,8 @@ $values1 = array(
                             <?php }else{   
                      foreach($test as $a){
                         if($substring[0] == $a[0] ){ ?>
-                            <a class="btn grid_btn bg-red mt-2 ">
+                            <a class="btn grid_btn bg-danger mt-2" href="
+                                add_additional_part.php?scan_id=<?php echo "rack-1_".$substring[0] ?>">
                                 <i class="fas fa-inbox"></i>
                                 <?php
                                 echo $substring[0]."</br>";
@@ -760,7 +781,8 @@ $values1 = array(
                             <!-- slot with value -->
                             <?php if(empty($test_b)){?>
 
-                            <a class="btn grid_btn  bg-success mt-2 ">
+                            <a class="btn grid_btn bg-success mt-2" href="
+                                add_additional_part.php?scan_id=<?php echo "rack-2_".$substring[0] ?>">
                                 <i class="fas fa-inbox"></i>
                                 <?php
                echo $substring[0]."</br>";
@@ -772,7 +794,8 @@ $values1 = array(
                             <?php }else{  
             foreach($test_b as $a){
                if($substring[0] == $a[0] ){ ?>
-                            <a class="btn grid_btn  bg-red mt-2 ">
+                            <a class="btn grid_btn bg-danger mt-2" href="
+                                add_additional_part.php?scan_id=<?php echo "rack-1_".$substring[0] ?>">
                                 <i class="fas fa-inbox"></i>
                                 <?php
                        echo $substring[0]."</br>";
@@ -881,7 +904,8 @@ $values1 = array(
                             <!-- slot with value -->
                             <?php if(empty($test_c)){?>
 
-                            <a class="btn grid_btn bg-success mt-2 ">
+                            <a class="btn grid_btn bg-success mt-2" href="
+                                add_additional_part.php?scan_id=<?php echo "rack-3_".$substring[0] ?>">
                                 <i class="fas fa-inbox"></i>
                                 <?php
                echo $substring[0]."</br>";
@@ -893,7 +917,8 @@ $values1 = array(
                             <?php }else{ 
             foreach($test_c as $a){
                if($substring[0] == $a[0] ){ ?>
-                            <a class="btn grid_btn  bg-red mt-2 ">
+                            <a class="btn grid_btn bg-danger mt-2" href="
+                                add_additional_part.php?scan_id=<?php echo "rack-1_".$substring[0] ?>">
                                 <i class="fas fa-inbox"></i>
                                 <?php
                        echo $substring[0]."</br>";

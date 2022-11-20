@@ -1,8 +1,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Taviraj:ital,wght@0,300;1,400&display=swap"
     rel="stylesheet">
 <!-- Latest compiled and minified CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
 <!--  -->
 <?php
@@ -47,21 +45,19 @@ if($last_update_id != 0){
 
 	$height = $howManyCodes*100;
 
-	$pageWidth =  "350mm";
+	$pageWidth =  "400mm";
 	$pageHeight =  "$height.mm";
 
-	$itemWidth = "250mm";
+	$itemWidth = "220mm";
 	$itemHeight = "105mm";
 
 	$pageMarginLeft ="0mm";
-	$pageMarginTop ="0mm";
+	$pageMarginTop ="0px";
 	$pageMarginRight = "0mm";
 	$pageMarginBottom =  "0mm";;
 
 	$itemMarginBottom =  "0mm";
 	$itemMarginRight = "0mm";
-
-	$barCodeHeight ="170px";
 	$codetype = "qrcode";
 	// echo "<br>Barcode type: <input type='text' name='codetype' value='{$codetype}'> (Valid codetypes: code128, code39, code25, codabar, qrcode)";
 	if($last_update_id != 0){
@@ -70,11 +66,8 @@ if($last_update_id != 0){
 }else{
 	echo "<br><a href='./warehouse_information_sheet.php'> Back</a>";
 }
-	
-
 	echo '<input type="submit" name="production_form" value="Print" onClick="window.print()">';
 
-	echo "<h2>Preview:</h2>";
 echo "</form>";
 
 
@@ -82,32 +75,39 @@ echo "</form>";
 /*
 * THE SHEET
 */
-function write($code,$last_id, $overText, $rack, $barCodeHeight, $downText,$secondPart) { ?>
 
-<div class="card">
-    <div class="card-header">
+function write($code,$last_id, $overText, $rack, $downText,$secondPart) {
+	?>
+<table>
+    <tr>
+        <th><?php if ($overText != "") {
+			$abc= strtoupper( $overText);
+    		echo  "<div  ><p class = 'text-uppercase' style='font-size: 90;
+			font-family: Arial, Helvetica, sans-serif;margin: 80px 0 0 0;
+			color:black;text-weight:bold;text-align: left;margin:0'>$abc &nbsp $secondPart</p></div>";
+    	} 
+		?>
+        <th>
+    </tr>
+    <tr>
+        <th>
+            <?php echo '<img src="temp/'.$code.'.png" style="width:500px; height:500px;margin: 180px 0 0 -425px;">';?>
+        </th>
+        <th> <?php 
+		echo strtoupper("<div style = 'font-family: Arial, Helvetica, sans-serif; margin: 390px 0 0 -425px; font-size: 80; color:black;text-weight:bold;text-align: left;'>$rack </br>$downText </br>ALSAKB$code</div></br> ");
+		
+		?></th>
+    </tr>
+    <tr>
+        <?php echo "</br> </br>";
+		echo "</br> ";
+		echo "</br> ";
+		echo "</br> ";
+		 ?>
+    </tr>
 
-    </div>
-    <div class="card-body">
-        <div class="">
-            <?php if ($overText != "") {$abc= strtoupper( $overText); echo "</br>";
-			echo  "<div><p class='text-uppercase' style='font-size: 40px; color:black; text-weight:bold; margin-right: 5px;'>$abc &nbsp $secondPart</p></div>"; 
-    	} ?>
-        </div>
-        <div class="d-flex">
-            <div class="">
-                <?php echo '<img src="temp/'.$code.'.png" style="width: 300px; height: 300px;"><br>'; ?>
-            </div>
-            <div class="text-uppercase" style="margin: 169px 0 0 -20px; font-size: 30px; line-height: 1;">
-                <?php 
-				echo $rack ."<br>";
-				echo $downText ."<br>";
-				echo "ALSAKB$code " ."<br>";
-  				?>
-            </div>
-        </div>
-    </div>
-</div>
+
+</table>
 
 <?php
 }
@@ -116,12 +116,12 @@ function write($code,$last_id, $overText, $rack, $barCodeHeight, $downText,$seco
 echo "<div class='sheet'>";
 	if ($codeArray != "") { // Specified array of codes
 		foreach (json_decode($codeArray) as $secondPart) {
-			write($code,$last_id, $overText, $rack, $barCodeHeight, $downText,$secondPart);
+			write($code,$last_id, $overText, $rack,  $downText,$secondPart);
 		}
 	} else { // Unspecified codes, let's go incremental
 		for ($i = $start; $i < $howManyCodes + $start; $i++) {
 			$code = str_pad($i, $digits, "0", STR_PAD_LEFT);
-			write($code,$last_id, $overText, $rack, $barCodeHeight, $downText,$secondPart);
+			write($code,$last_id, $overText, $rack,  $downText,$secondPart);
 		}
 	}
 echo "</div>";
@@ -154,7 +154,6 @@ echo <<<STYLE
 		.item {
 			float: left;
 			
-			vertical-align: middle;
 			border: 0;
 			overflow: visible;
 
@@ -180,8 +179,8 @@ echo <<<STYLE
 			html, body {
 				margin: 0;
 				padding: 0;
-				height: $pageHeight;
-				width: $pageWidth;
+				height: 250px;
+				width: 150px;
 			}
 		    form {
 		        display: none;
@@ -195,5 +194,4 @@ echo <<<STYLE
 		
 	</style>
 STYLE;
-
- 
+?>
