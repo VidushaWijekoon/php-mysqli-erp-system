@@ -69,7 +69,7 @@ if($role_id == 1 || $role_id == 3 || $role_id == 8 || $role_id == 2){
                 <span class="info-box-number">
                     <?php
 
-                        $query = "SELECT * FROM employees WHERE isActive = 0";
+                        $query = "SELECT * FROM employees WHERE is_active = 0";
 
                         if ($result = mysqli_query($connection, $query)) {
 

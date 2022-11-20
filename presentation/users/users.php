@@ -87,6 +87,7 @@ if($role_id = 1 && $department == 11) {
                                 </td>
                                 <td>
                                     <?php echo "<a class='btn btn-xs btn-primary mx-1' href=\"users_edit.php?user_id={$users['user_id']}\"><i class='fa-solid fa-eye'></i> </a>" ?>
+                                    <?php echo "<a class='btn btn-xs btn-success mx-1' href=\"user_loggin.php?user_id={$users['user_id']}&username={$users['username']}\"><i class='fa-solid fa-circle-info'></i> </a>" ?>
                                     <?php 
                                         if($users['isActive'] == 0 || $users['is_deleted'] == 0){ 
                                             echo "<a class='btn btn-xs btn-danger mx-1' href=\"inActive_user.php?user_id={$users['user_id']}\" onclick=\"return confirm('Are you sure $username want inactive this user?');\"><i class='fa-solid fa-xmark px-1'></i></a>" ; }
@@ -120,6 +121,7 @@ if($role_id = 1 && $department == 11) {
                                 </td>
                                 <td>
                                     <?php echo "<a class='btn btn-xs btn-primary mx-1' href=\"users_edit.php?user_id={$users['user_id']}\"><i class='fa-solid fa-eye'></i> </a>" ?>
+                                    <?php echo "<a class='btn btn-xs btn-success mx-1' href=\"user_loggin.php?user_id={$users['user_id']}&username={$users['username']}\"><i class='fa-solid fa-circle-info'></i> </a>" ?>
                                     <?php if($users['isActive'] == 0 || $users['is_deleted'] == 0){ 
                                         echo "<a class='btn btn-xs btn-danger mx-1' href=\"inActive_user.php?user_id={$users['user_id']}\" onclick=\"return confirm('Are you sure $username want inactive this user?');\"><i class='fa-solid fa-xmark px-1'></i></a>" ; }
                                     elseif($users['isActive'] == 1 || $users['is_deleted'] == 1){
