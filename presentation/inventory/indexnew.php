@@ -45,7 +45,7 @@ if($last_update_id != 0){
 
 	$height = $howManyCodes*100;
 
-	$pageWidth =  "300mm";
+	$pageWidth =  "400mm";
 	$pageHeight =  "$height.mm";
 
 	$itemWidth = "220mm";
@@ -82,19 +82,19 @@ function write($code,$last_id, $overText, $rack, $downText,$secondPart) {
     <tr>
         <th><?php if ($overText != "") {
 			$abc= strtoupper( $overText);
-    		echo  "<div  ><p class = 'text-uppercase' style='font-size: 70;
-			font-family: Arial, Helvetica, sans-serif;margin: 19px
-			color:black;text-weight:bold;text-align: left;margin:0'>$abc &nbsp$secondPart</p></div>";
+    		echo  "<div  ><p class = 'text-uppercase' style='font-size: 90;
+			font-family: Arial, Helvetica, sans-serif;margin: 80px 0 0 0;
+			color:black;text-weight:bold;text-align: left;margin:0'>$abc &nbsp $secondPart</p></div>";
     	} 
 		?>
         <th>
     </tr>
     <tr>
         <th>
-            <?php echo '<img src="temp/'.$code.'.png" style="width:700px; height:700px;margin: 0 0 0 -300px;">';?>
+            <?php echo '<img src="temp/'.$code.'.png" style="width:500px; height:500px;margin: 180px 0 0 -425px;">';?>
         </th>
         <th> <?php 
-		echo strtoupper("<div style = 'font-family: Arial, Helvetica, sans-serif;margin: 0 0 0 -250px; font-size: 60; color:black;text-weight:bold;text-align: left;'>$rack </br>$downText </br>ALSAKB$code</div></br> ");
+		echo strtoupper("<div style = 'font-family: Arial, Helvetica, sans-serif; margin: 390px 0 0 -425px; font-size: 80; color:black;text-weight:bold;text-align: left;'>$rack </br>$downText </br>ALSAKB$code</div></br> ");
 		
 		?></th>
     </tr>
