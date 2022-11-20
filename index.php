@@ -49,8 +49,8 @@ if(isset($_POST['submit'])) {
             $result_set = mysqli_query($connection, $query);
 
             // insert last logged in time
-            $query1 = "INSERT INTO users_logged_in_time(emp_id, username, logged_time) 
-                        VALUES ('{$_SESSION['user_id']}', '$username', CURRENT_TIMESTAMP)";
+            $query1 = "INSERT INTO users_logged_in_time(emp_id, username, logged_time, logged_out) 
+                        VALUES ('{$_SESSION['user_id']}', '$username', CURRENT_TIMESTAMP, 0)";
             $query_run = mysqli_query($connection, $query1);
 
             verify_query($result_set);
