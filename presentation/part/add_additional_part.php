@@ -127,10 +127,21 @@ foreach($result as $a){
     if($new_qty >=0){
     $query ="UPDATE `part_stock` SET`qty`='$new_qty' WHERE `stock_id` = '$stock_id'";
     $result = mysqli_query($connection, $query);
+    if( $new_qty ==0){ 
+        $new_slot_name = $slot_number."_removed";
+        $query ="UPDATE `part_stock` SET`slot_name`='$new_slot_name' WHERE `stock_id` = '$stock_id'";
+        $result = mysqli_query($connection, $query);
+        $query="UPDATE rack_slots SET status = '0' WHERE slot_name = '$slot_number' ";             
+                            $query_data_update = mysqli_query($connection, $query); 
+                            $query="UPDATE rack SET status = '0' WHERE rack_number = '$rack_number' ";             
+                    $query_data_update = mysqli_query($connection, $query);    
+
+    }
     header("Location: ./part_stock_dashboard.php");
     }else{
         echo "You Can't Remove Over Item in Stock";
     }
+   
  } ?>
 
 <style>
