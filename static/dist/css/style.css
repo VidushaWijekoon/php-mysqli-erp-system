@@ -1,7 +1,16 @@
+@font-face {
+  font-family: "Poppins", sans-serif;
+  src: url("../fonts/Poppins-Bold.ttf");
+}
+
 fieldset,
 legend {
   all: revert;
   font-size: 12px;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
 }
 
 .page-titles {

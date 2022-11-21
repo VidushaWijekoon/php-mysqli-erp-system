@@ -30,7 +30,9 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
 
         <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./production_team_task_view.php"><i
                 class="fa-solid fa-users"></i><span class="mx-1">Team Achievement</span></a>
-        <a class="btn bg-gradient-info mx-2 text-white" type="button"
+        <a class="btn bg-gradient-secondary mx-2 text-white" type="button" href="./production_sales_order.php"><i
+                class="fa-solid fa-users"></i><span class="mx-1">Sales Orders</span></a>
+        <a class="btn bg-gradient-primary mx-2 text-white" type="button"
             href="./production_team_leader_check_techinician_daily_work.php"><i class="fa-solid fa-cogs"></i><span
                 class="mx-1">Team Part List</span></a>
 
@@ -41,42 +43,40 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
 <!-- Info boxes -->
 <?php $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
         $date = $date1->format('Y-m-d H:i:s');
-                                                $dt = new DateTime;
-                                                $dt->setTime(0, 0);
-                                                $dt->format('Y-m-d H:i:s');
-                                                $dt->add(new DateInterval('PT4H'));
-                                                $start_time= $dt->format('H:i:s');
-                                                $current_time= $date;
-                                                $query ="SELECT issue_type FROM prod_info WHERE end_date_time BETWEEN '$start_time' AND '$current_time'";
-                                                $query_e6 = mysqli_query($connection, $query);
-                                                $motherboard =0;
-                                                $combind =0;
-                                                $lcd =0;
-                                                $bodywork =0;
-                                                $qc =0;
-                                                foreach($query_e6 as $data){
-                                                    if(empty($data)){}else{
-                                                    if($data['issue_type'] ==1){
-                                                        $motherboard++;
-                                                    }
-                                                    if($data['issue_type'] ==2){
-                                                        $combind++;
-                                                    }
-                                                    if($data['issue_type'] ==3){
-                                                        $lcd++;
-                                                    }
-                                                    if($data['issue_type'] ==4){
-                                                        $bodywork++;
-                                                    }
-                                                    if($data['issue_type'] ==5){
-                                                        $qc++;
-                                                    }
-                                                }
-                                                }
-                                                
+        $dt = new DateTime;
+        $dt->setTime(0, 0);
+        $dt->format('Y-m-d H:i:s');
+        $dt->add(new DateInterval('PT4H'));
+        $start_time= $dt->format('H:i:s');
+        $current_time= $date;
+        $query ="SELECT issue_type FROM prod_info WHERE end_date_time BETWEEN '$start_time' AND '$current_time'";
+        $query_e6 = mysqli_query($connection, $query);
+        $motherboard =0;
+        $combind =0;
+        $lcd =0;
+        $bodywork =0;
+        $qc =0;
+        foreach($query_e6 as $data){
+            if(empty($data)){}else{
+                if($data['issue_type'] ==1){
+                    $motherboard++;
+                }
+                if($data['issue_type'] ==2){
+                    $combind++;
+                }
+                if($data['issue_type'] ==3){
+                    $lcd++;
+                }
+                if($data['issue_type'] ==4){
+                    $bodywork++;
+                }
+                if($data['issue_type'] ==5){
+                    $qc++;
+                }
+            }
+        }                                              
+?>
 
-
-                                                ?>
 <div class="row m-2">
     <div class="col-12 col-sm-6 col-md-2 mt-3">
         <div class="info-box">
@@ -181,6 +181,10 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
             </div>
 
             <div class="card-body">
+                <div class="mb-2 mt-2" style="text-align: end;">
+                    Assign Page --> <a class='btn btn-xs bg-teal mx-2'><i class='fas fa-eye'></i></a>
+                    Scan Page --> <a class='btn btn-xs bg-primary'><i class='fa-solid fa-qrcode'></i> </a>
+                </div>
                 <table id="example2" class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -244,7 +248,9 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                             <?php } else {?>
                         <tr>
                             <?php }?>
-                            <td><?php echo $items['sales_order_id'] ?></td>
+                            <td>
+                                <?php echo "<a href=\"production_sales_order_view.php?sales_order_id={$items['sales_order_id']}\"> {$items['sales_order_id']}</a>" ?>
+                            </td>
                             <td><?php echo $items['created_date'] ?></td>
                             <td><?php echo $items['item_delivery_date'] ?></td>
                             <td><?php echo  $sum  ?></td>
