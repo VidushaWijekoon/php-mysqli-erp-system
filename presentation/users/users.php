@@ -65,8 +65,8 @@ if($role_id = 1 && $department == 11) {
                                     $filtervalues = $_GET['search'];
 
                                     $search_query = "SELECT * FROM users
-                                                    INNER JOIN departments ON departments.department_id = users.department
-                                                    INNER JOIN tbl_roles ON tbl_roles.role_id = users.role
+                                                    LEFT JOIN departments ON departments.department_id = users.department
+                                                    LEFT JOIN tbl_roles ON tbl_roles.role_id = users.role
                                                     WHERE CONCAT(first_name, last_name, epf, users.department, users.role, users.username) LIKE '%$filtervalues%' ";
                                     $query_result = mysqli_query($connection, $search_query);                               
         
@@ -99,8 +99,8 @@ if($role_id = 1 && $department == 11) {
                             <?php }                            
                         
                             }else{
-                                $query = "SELECT * FROM users INNER JOIN departments ON departments.department_id = users.department                            
-                                INNER JOIN tbl_roles ON tbl_roles.role_id = users.role";                                
+                                $query = "SELECT * FROM users LEFT JOIN departments ON departments.department_id = users.department                            
+                                LEFT JOIN tbl_roles ON tbl_roles.role_id = users.role";                                
                                 $query_run = mysqli_query($connection, $query);
 
                                 foreach ($query_run as $users) {

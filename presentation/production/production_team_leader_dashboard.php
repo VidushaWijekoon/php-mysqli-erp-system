@@ -35,6 +35,11 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
         <a class="btn bg-gradient-primary mx-2 text-white" type="button"
             href="./production_team_leader_check_techinician_daily_work.php"><i class="fa-solid fa-cogs"></i><span
                 class="mx-1">Team Part List</span></a>
+        <a class="btn bg-gradient-fuchsia mx-2 text-white" type="button"
+            href="../part/part_warehouse_leader_dashboard.php"><i class="fa-solid fa-users"></i><span class="mx-1">Part
+                Request Form</span></a>
+        <a class="btn bg-gradient-navy mx-2 text-white" type="button" href="../part/part_stock_dashboard.php"><i
+                class="fa-solid fa-users"></i><span class="mx-1">Stock Report</span></a>
 
     </div>
 </div>
@@ -192,11 +197,11 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                             <th>SO Created Date</th>
                             <th>Delivery Date</th>
                             <th>Order QTY</th>
-                            <th>Received QTY</th>
                             <th>Prepared QTY from Warehouse</th>
+                            <th>Received QTY</th>
                             <th>Tested QTY form production</th>
-                            <th style="width: 250px;">&nbsp;</th>
-                            <th>&nbsp;</th>
+                            <th style="width: 250px;">S/O Completed</th>
+                            <th>Task</th>
                         </tr>
                     </thead>
                     <tbody class="tbody_1">
@@ -253,10 +258,10 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                             </td>
                             <td><?php echo $items['created_date'] ?></td>
                             <td><?php echo $items['item_delivery_date'] ?></td>
-                            <td><?php echo  $sum  ?></td>
-                            <td><?php echo $received_unit ?></td>
+                            <td><?php echo $sum ?></td>
                             <td><?php echo $items['prepared'] ?></td>
-                            <td><?php echo  $tested_unit ?></td>
+                            <td><?php echo $received_unit ?></td>
+                            <td><?php echo $tested_unit ?></td>
                             <td>
                                 <?php
                                 if( $tested_unit==0){

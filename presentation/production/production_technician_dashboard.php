@@ -28,7 +28,7 @@ if($role_id == 1 && $department == 11 || $role_id == 6 && $department == 1) {
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-5">
+        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto">
             <div class="card mt-5">
                 <div class="card-header bg-secondary">
                     <p class="text-uppercase m-0 p-0">My Task</p>

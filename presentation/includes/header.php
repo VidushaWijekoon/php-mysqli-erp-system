@@ -30,7 +30,7 @@ if(isset($_POST['logged_out'])){
     <!-- Google Font: Source Sans Pro -->
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../static/dist/fonts/Poppins-Regular.ttf">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../../static//dist/fontawesome/all.css">
     <link rel="stylesheet" href="../../static/plugins/fontawesome-free/css/all.min.css">
@@ -311,12 +311,12 @@ body {
                                                 <p>Leader Dashboard</p>
                                             </a>
                                         </li>
-                                        <li class="nav-item">
+                                        <!-- <li class="nav-item">
                                             <a href="../part/part_create_form.php" class="nav-link">
                                                 <i class="fa-solid fa-plus nav-icon" style="font-size: 12px;"></i>
                                                 <p>Add Part</p>
                                             </a>
-                                        </li>
+                                        </li> -->
                                         <li class="nav-item">
                                             <a href="../part/part_stock_dashboard.php" class="nav-link">
                                                 <i class="fa-solid fa-cubes nav-icon" style="font-size: 12px;"></i>

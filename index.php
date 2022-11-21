@@ -86,14 +86,8 @@ if(isset($_POST['submit'])) {
 <head>
     <title>AL SAKB</title>
     <link rel="icon" type="image/x-icon" href="static/images/">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
-        integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-    <link rel="stylesheet" href="static/css/main.css">
-
+    <link rel="stylesheet" href="./static/dist/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/dist/fontawesome/css/all.min.css">
 </head>
 
 <body>
@@ -109,13 +103,13 @@ if(isset($_POST['submit'])) {
                     <form method="POST" action="">
                         <div class="input-group mb-3">
                             <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                <span class="input-group-text"><i class="fas fa-user m-2"></i></span>
                             </div>
                             <input type="text" name="username" placeholder="Username..." class="form-control">
                         </div>
                         <div class="input-group mb-2">
                             <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                <span class="input-group-text"><i class="fas fa-key m-2"></i></span>
                             </div>
                             <input type="password" name="password" placeholder="Password..." class="form-control">
                         </div>
@@ -123,12 +117,8 @@ if(isset($_POST['submit'])) {
                         <div class="d-flex justify-content-center mt-4 mb-4 login_container">
                             <input class="btn login_btn " type="submit" name="submit" value="Login">
                         </div>
-                        <?php
-                            if (isset($errors) && !empty($errors)) {
-                                echo '<p class="error text-center">Invalid Username OR Password</p>';
-                            }
-                            
-                        ?>
+                        <?php if (isset($errors) && !empty($errors)) { echo '<p class="error text-center">Invalid Username OR Password</p>'; } ?>
+
                     </form>
                 </div>
 
@@ -213,6 +203,66 @@ html {
     border-radius: 5px;
     padding: 8px;
     margin: 0;
+}
+
+@media screen and (max-width: 1366px) and (max-height: 800px) {
+    .user_card {
+        width: 350px;
+        margin-top: auto;
+        margin-bottom: auto;
+        background: #3f4156;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        padding: 10px;
+        font-size: 12px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 5px;
+    }
+
+    .form_container {
+        margin-top: 10px;
+    }
+
+    .input-group-text {
+        background: #575a7a !important;
+        color: white !important;
+        border: 0 !important;
+        border-radius: 0.25rem 0 0 0.25rem !important;
+        font-size: 10px;
+    }
+
+    .login_btn {
+        width: 50%;
+        background: #5a818e !important;
+        color: white !important;
+        font-size: 12px;
+        padding: 3px 0 !important;
+    }
+
+    #form-title {
+        font-size: 30px;
+        letter-spacing: 2px;
+    }
+
+    [type="text"],
+    [type="password"] {
+        height: 30px;
+        font-size: 15px;
+    }
+
+    .form-control {
+        border-radius: 5px;
+    }
+
+    .fas {
+        margin: 4px !important;
+    }
+
+
 }
 </style>
 

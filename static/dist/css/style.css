@@ -395,3 +395,58 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px #43484d inset !important;
 }
+
+@media screen and (max-width: 1366px) and (max-height: 800px) {
+  th {
+    font-size: 10px;
+    font-weight: 300;
+  }
+  td {
+    font-size: 10px;
+  }
+
+  .badge {
+    font-size: 7px;
+    font-weight: none;
+  }
+
+  .nav-sidebar {
+    font-size: 10px;
+  }
+
+  .modal-xl {
+    width: 850px;
+  }
+
+  body {
+    font-size: 12px;
+  }
+
+  .horizontal-timeline .items .items-list {
+    display: inline-block;
+    width: 8%;
+    padding-top: 45px;
+  }
+
+  .event-date {
+    font-size: 9px !important;
+    font-weight: 200;
+  }
+
+  .col-form-label {
+    font-size: 9px;
+  }
+
+  .custom-control-label {
+    font-size: 9px;
+  }
+
+  .col-values {
+    font-size: 9px;
+  }
+
+  .rounded-circle {
+    font-size: 8px;
+    margin: 0 0 0 -10px;
+  }
+}

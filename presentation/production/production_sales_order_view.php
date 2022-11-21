@@ -53,7 +53,7 @@ if (isset($_GET['sales_order_id'])) {
 ?>
 
 <div class="row page-titles">
-    <div class="col-md-5 align-self-center"><a href="./sales_orders.php">
+    <div class="col-md-5 align-self-center"><a href="./production_team_leader_dashboard.php">
             <i class="fa-regular fa-circle-left fa-2x m-2" style="color: #ced4da;"></i>
         </a>
     </div>
