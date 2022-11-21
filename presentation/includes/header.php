@@ -311,12 +311,12 @@ body {
                                                 <p>Leader Dashboard</p>
                                             </a>
                                         </li>
-                                        <li class="nav-item">
+                                        <!-- <li class="nav-item">
                                             <a href="../part/part_create_form.php" class="nav-link">
                                                 <i class="fa-solid fa-plus nav-icon" style="font-size: 12px;"></i>
                                                 <p>Add Part</p>
                                             </a>
-                                        </li>
+                                        </li> -->
                                         <li class="nav-item">
                                             <a href="../part/part_stock_dashboard.php" class="nav-link">
                                                 <i class="fa-solid fa-cubes nav-icon" style="font-size: 12px;"></i>

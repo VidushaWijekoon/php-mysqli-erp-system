@@ -117,12 +117,8 @@ if(isset($_POST['submit'])) {
                         <div class="d-flex justify-content-center mt-4 mb-4 login_container">
                             <input class="btn login_btn " type="submit" name="submit" value="Login">
                         </div>
-                        <?php
-                            if (isset($errors) && !empty($errors)) {
-                                echo '<p class="error text-center">Invalid Username OR Password</p>';
-                            }
-                            
-                        ?>
+                        <?php if (isset($errors) && !empty($errors)) { echo '<p class="error text-center">Invalid Username OR Password</p>'; } ?>
+
                     </form>
                 </div>
 
@@ -207,6 +203,66 @@ html {
     border-radius: 5px;
     padding: 8px;
     margin: 0;
+}
+
+@media screen and (max-width: 1366px) and (max-height: 800px) {
+    .user_card {
+        width: 350px;
+        margin-top: auto;
+        margin-bottom: auto;
+        background: #3f4156;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        padding: 10px;
+        font-size: 12px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 5px;
+    }
+
+    .form_container {
+        margin-top: 10px;
+    }
+
+    .input-group-text {
+        background: #575a7a !important;
+        color: white !important;
+        border: 0 !important;
+        border-radius: 0.25rem 0 0 0.25rem !important;
+        font-size: 10px;
+    }
+
+    .login_btn {
+        width: 50%;
+        background: #5a818e !important;
+        color: white !important;
+        font-size: 12px;
+        padding: 3px 0 !important;
+    }
+
+    #form-title {
+        font-size: 30px;
+        letter-spacing: 2px;
+    }
+
+    [type="text"],
+    [type="password"] {
+        height: 30px;
+        font-size: 15px;
+    }
+
+    .form-control {
+        border-radius: 5px;
+    }
+
+    .fas {
+        margin: 4px !important;
+    }
+
+
 }
 </style>
 
