@@ -144,7 +144,7 @@ for ($i = 0; $i <= $int_qty; $i++) {
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-8 grid-margin stretch-card justify-content-center mx-auto mt-2">
+        <div class="col-lg-6 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card mt-3 w-100">
                 <div class="card-body">
                     <?php if (!empty($errors)) { display_errors($errors); }?>
@@ -325,6 +325,13 @@ for ($i = 0; $i <= $int_qty; $i++) {
 
                 </div>
                 <!--/col-->
+            </div>
+        </div>
+        <div class="col-lg-6 grid-margin stretch-card justify-content-center mx-auto mt-2">
+            <div class="card mt-3 w-100">
+                <div class="card-body">
+
+                </div>
             </div>
         </div>
     </div>

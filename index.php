@@ -53,6 +53,15 @@ if(isset($_POST['submit'])) {
                         VALUES ('{$_SESSION['user_id']}', '$username', CURRENT_TIMESTAMP, 0)";
             $query_run = mysqli_query($connection, $query1);
 
+            $query = "SELECT * FROM users_logged_in_time ORDER BY logged_in_id DESC LIMIT 1";
+            $run = mysqli_query($connection, $query);
+            foreach($run as $r){
+                $logged_in_id = $r['logged_in_id'];
+
+                $_SESSION['logged_in_id'] = $r['logged_in_id'];
+            }
+            
+
             verify_query($result_set);
 
             if($query_run){
