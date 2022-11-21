@@ -6,6 +6,7 @@ include_once('../../dataAccess/functions.php');
 include_once('../../dataAccess/403.php');
 include_once('../includes/header.php');
 require_once("phpqrcode/qrlib.php");
+require_once("sanitizer.php");
 // require_once "warehouese_qr_print.php";
 // checking if a user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -27,6 +28,7 @@ $quantity = "";
 $sales_order_id = "";
 $user_id = $_SESSION['username'];
 $int_qty = 0;
+$start_print = 0;
 
 $query_last_id = "SELECT inventory_id FROM warehouse_information_sheet ORDER BY inventory_id DESC LIMIT 1; ";
  $result_last_id = mysqli_query($connection, $query_last_id);
@@ -60,76 +62,50 @@ for ($i = 0; $i <= $int_qty; $i++) {
             $location = mysqli_real_escape_string($connection, $_POST['location']);
             $quantity = mysqli_real_escape_string($connection, $_POST['quantity']);
         }
-       
-        $PNG_TEMP_DIR = 'temp/';
-        if (!file_exists($PNG_TEMP_DIR))
-            mkdir($PNG_TEMP_DIR);
-        $filename = $PNG_TEMP_DIR  . uniqid() . '.png';
-        $last_id = $connection->insert_id;
-
-        $sql = strtolower("INSERT INTO warehouse_information_sheet  (device, brand, processor, core, generation, model, qr_image, location, send_to_production, create_by_inventory_id, send_time_to_production, sales_order_id) VALUES 
-					('$device', '$brand', '$processor', '$core', '$generation', '$model', '$filename', '$location', 0, '$user_id', 0, 0)");
-        // echo $sql; 
-        $result_1 = mysqli_query($connection, $sql);
+$_SESSION['quantity'] = $quantity ;
+$_SESSION['brand'] = $brand ;
+$_SESSION['model'] = $model ;
+$_SESSION['generation'] = $generation ;
+$_SESSION['core'] = $core ;
+$_SESSION['location'] = $location ;
+// echo "test here".$quantity 
 
 
-        $query = "SELECT inventory_id FROM warehouse_information_sheet ORDER BY inventory_id DESC LIMIT 1";
-                                            $query_run = mysqli_query($connection, $query);
+$PNG_TEMP_DIR = 'temp/';
+if (!file_exists($PNG_TEMP_DIR))
+mkdir($PNG_TEMP_DIR);
+$filename = $PNG_TEMP_DIR . uniqid() . '.png';
+$last_id = $connection->insert_id;
 
-                                            $print_data = mysqli_fetch_row($query_run);
-        
-        $tempDir = 'temp/'; 
-        $email = $print_data[0];
-        $filename = $email;
-        echo $filename;
-        $codeContents = $email; 
-        QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5,1);      
-
-
-        
-        //////////////////
-        header("location: ./indexnew.php?last_id={$print_data[0]}");       
-             
-                                    
+$sql = strtolower("INSERT INTO warehouse_information_sheet (device, brand, processor, core, generation, model, qr_image,
+location, send_to_production, create_by_inventory_id, send_time_to_production, sales_order_id) VALUES
+('$device', '$brand', '$processor', '$core', '$generation', '$model', '$filename', '$location', 0, '$user_id', 0, 0)");
+// echo $sql;
+$result_1 = mysqli_query($connection, $sql);
 
 
-        // if (mysqli_multi_query($connection, $sql)) {
-        //     // $query = "SELECT inventory_id from warehouse_information_sheet";
-        //     // $result = mysqli_query($connection, $query);
+$query = "SELECT inventory_id FROM warehouse_information_sheet ORDER BY inventory_id DESC LIMIT 1";
+$query_run = mysqli_query($connection, $query);
 
-        //     // $query = "SELECT inventory_id,brand,model,core,location,generation FROM warehouse_information_sheet ORDER BY inventory_id DESC LIMIT 1";
-        //     // $query_run = mysqli_query($connection, $query);
+$print_data = mysqli_fetch_row($query_run);
 
-        //     // $print_data = mysqli_fetch_row($query_run);
-        //     // $brand;
-        //     // $model;
-        //     // $core;
-        //     // $location;
-        //     // $generation;
-        //     // $i =0;
+$tempDir = 'temp/';
+$email = $print_data[0];
+$filename = $email;
+$codeContents = $email;
+QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5,1);
+$start_print = 1;
 
-        //     foreach ($result as $result) {
-        //         // $i++;
-        //         // $codeString = $print_data[0];
-        //         // $brand = $print_data[1];
-        //         // $model = $print_data[2];
-        //         // $core = $print_data[3];
-        //         // $location = $print_data[4];
-        //         // $filename = $PNG_TEMP_DIR  .$codeString . '.png';
-        //         //  QRcode::png($codeString, $filename, QR_ECLEVEL_Q, 12, 1);
-                
-        //         // file_get_contents("warehouese_qr_print.php");
-        //     }
-        //     if($codeString != 0){
-        //     
-     
-        // getting current Date Time OOP way
-        $currentDateTime = new \DateTime();
+// header("location: ./indexnew.php?last_id={$print_data[0]}");
 
-        //set timeZone
-        $currentDateTime->setTimezone(new \DateTimeZone('Asia/Dubai'));
-        $dateTime = $currentDateTime->format('j-m-Y H:i:s');
-    }
+
+// getting current Date Time OOP way
+$currentDateTime = new \DateTime();
+
+//set timeZone
+$currentDateTime->setTimezone(new \DateTimeZone('Asia/Dubai'));
+$dateTime = $currentDateTime->format('j-m-Y H:i:s');
+}
 }
 
 
@@ -331,22 +307,118 @@ for ($i = 0; $i <= $int_qty; $i++) {
             <div class="card mt-3 w-100">
                 <div class="card-body">
 
+                    <input type="button" onclick="printDiv('printableArea')" value="print a QR!" />
+                    <div id="printableArea">
+                        <?php
+                       
+                          
+                    $last_update_id =0;
+                    $quantity = $_SESSION['quantity'];
+                    $_SESSION['quantity'] = 0;
+                    $brand = $_SESSION['brand'];
+                    $model = $_SESSION['model'];
+                    $generation = $_SESSION['generation'];
+                    $core = $_SESSION['core'];
+                    $location = $_SESSION['location'];
+                    $last_id = $_SESSION['last_id'] ;
+                    if(empty($_SESSION['last_update_id'])){ $last_update_id =0;}else{
+                    
+                        $last_update_id = $_SESSION['last_update_id'];
+                    
+                    }
+                    if($last_update_id != 0){
+                        $last_id = $last_update_id  ;
+                        
+                    }else{
+                        $last_id = $last_id + 1;
+                    }
+                        $howManyCodes =$quantity;
+                        $digits = 6;
+                        $start = $last_id; 
+                        $overText = $brand."  ".$model ;
+                        $secondPart = $core." GEN".$generation;
+                        $downText = $generation."-".$model;
+                        $rack = $location; 
+                        $hideText = null;
+
+                        if($start_print == 1){
+                    $codeArray = (filterRaw('codeArray') != "") ? filterRaw('codeArray') : "";
+                    function write($code,$last_id, $overText, $rack, $downText,$secondPart) {
+                        ?>
+                        <table>
+                            <tr>
+                                <th style="width :600mm"><?php if ($overText != "") {
+                                $abc= strtoupper( $overText);
+                                echo  "<div  ><p class = 'text-uppercase' style='font-size: 50;
+                                font-family: Arial, Helvetica, sans-serif;margin: 30px 0 0 0;
+                                color:black;text-weight:bold;text-align: left;margin:0'>$abc &nbsp $secondPart</p></div>";
+                            } 
+                            ?>
+                                <th>
+                            </tr>
+                            <tr>
+                                <th>
+
+                                    <?php echo '<img src="temp/'.$code.'.png" style="width:200px; height:200px;margin: 0px 0 0 0px;">';?>
+                                </th>
+                                <th> <?php 
+                            echo strtoupper("<div style = 'font-family: Arial, Helvetica, sans-serif; margin: 0px 100px 0 0px; font-size: 40; color:black;text-weight:bold;text-align: left;'>$rack </br>$downText </br>ALSAKB$code</div></br> ");
+                            
+                            ?></th>
+                            </tr>
+                            <tr>
+                                <?php echo "</br> </br>";
+                            echo "</br> ";
+                            echo "</br> ";
+                            echo "</br> ";
+                             ?>
+                            </tr>
+
+
+                        </table>
+
+                        <?php
+                                            }
+                                        echo "<div class='sheet'>";
+                            if ($codeArray != "") { // Specified array of codes
+                                foreach (json_decode($codeArray) as $secondPart) {
+                                    write($code,$last_id, $overText, $rack,  $downText,$secondPart);
+                                }
+                            } else { // Unspecified codes, let's go incremental
+                                for ($i = $start; $i < $howManyCodes + $start; $i++) {
+                                    $code = str_pad($i, $digits, "0", STR_PAD_LEFT);
+                                    write($code,$last_id, $overText, $rack,  $downText,$secondPart);
+                                }
+                            }
+                        echo "</div>";
+                        
+                          } 
+                          ?>
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
 </div>
-<?php
-$_SESSION['quantity'] = $quantity ;
-$_SESSION['brand'] = $brand ;
-$_SESSION['model'] = $model ;
-$_SESSION['generation'] = $generation ;
-$_SESSION['core'] = $core ;
-$_SESSION['location'] = $location ;
-// echo "test here".$quantity 
-?>
+<style>
+@media print {
+    */
+}
+</style>
+<script>
+function printDiv(divName) {
+    var printContents = document.getElementById(divName).innerHTML;
+    var originalContents = document.body.innerHTML;
 
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+}
+</script>
 <?php include_once('../includes/footer.php'); }else{
         die(access_denied());
 } ?>

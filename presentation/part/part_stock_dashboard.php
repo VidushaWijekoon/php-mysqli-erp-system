@@ -421,7 +421,211 @@ $values1 = array(
     $T4 => [4, 1],
     $T5 => [5, 1],
     );
-
+    $values3 = array(
+        $A1 => [1, 20],
+        $A2 => [2, 20],
+        $A3 => [3, 20],
+        $A4 => [4, 20],
+        $A5 => [5, 20],
+        $B1 => [1, 19],
+        $B2 => [2, 19],
+        $B3 => [3, 19],
+        $B4 => [4, 19],
+        $B5 => [5, 19],
+        $C1 => [1, 18],
+        $C2 => [2, 18],
+        $C3 => [3, 18],
+        $C4 => [4, 18],
+        $C5 => [5, 18],
+        $D1 => [1, 17],
+        $D2 => [2, 17],
+        $D3 => [3, 17],
+        $D4 => [4, 17],
+        $D5 => [5, 17],
+        $E1 => [1, 16],
+        $E2 => [2, 16],
+        $E3 => [3, 16],
+        $E4 => [4, 16],
+        $E5 => [5, 16],
+        $F1 => [1, 15],
+        $F2 => [2, 15],
+        $F3 => [3, 15],
+        $F4 => [4, 15],
+        $F5 => [5, 15],
+        $G1 => [1, 14],
+        $G2 => [2, 14],
+        $G3 => [3, 14],
+        $G4 => [4, 14],
+        $G5 => [5, 14],
+        $H1 => [1, 13],
+        $H2 => [2, 13],
+        $H3 => [3, 13],
+        $H4 => [4, 13],
+        $H5 => [5, 13],
+        $I1 => [1, 12],
+        $I2 => [2, 12],
+        $I3 => [3, 12],
+        $I4 => [4, 12],
+        $I5 => [5, 12],
+        $J1 => [1, 11],
+        $J2 => [2, 11],
+        $J3 => [3, 11],
+        $J4 => [4, 11],
+        $J5 => [5, 11],
+        $K1 => [1, 10],
+        $K2 => [2, 10],
+        $K3 => [3, 10],
+        $K4 => [4, 10],
+        $K5 => [5, 10],
+        $L1 => [1, 9],
+        $L2 => [2, 9],
+        $L3 => [3, 9],
+        $L4 => [4, 9],
+        $L5 => [5, 9],
+        $M1 => [1, 8],
+        $M2 => [2, 8],
+        $M3 => [3, 8],
+        $M4 => [4, 8],
+        $M5 => [5, 8],
+        $N1 => [1, 7],
+        $N2 => [2, 7],
+        $N3 => [3, 7],
+        $N4 => [4, 7],
+        $N5 => [5, 7],
+        $O1 => [1, 6],
+        $O2 => [2, 6],
+        $O3 => [3, 6],
+        $O4 => [4, 6],
+        $O5 => [5, 6],
+        $P1 => [1, 5],
+        $P2 => [2, 5],
+        $P3 => [3, 5],
+        $P4 => [4, 5],
+        $P5 => [5, 5],
+        $Q1 => [1, 4],
+        $Q2 => [2, 4],
+        $Q3 => [3, 4],
+        $Q4 => [4, 4],
+        $Q5 => [5, 4],
+        $R1 => [1, 3],
+        $R2 => [2, 3],
+        $R3 => [3, 3],
+        $R4 => [4, 3],
+        $R5 => [5, 3],
+        $S1 => [1, 2],
+        $S2 => [2, 2],
+        $S3 => [3, 2],
+        $S4 => [4, 2],
+        $S5 => [5, 2],
+        $T1 => [1, 1],
+        $T2 => [2, 1],
+        $T3 => [3, 1],
+        $T4 => [4, 1],
+        $T5 => [5, 1],
+        );
+        $values4 = array(
+            $A1 => [1, 20],
+            $A2 => [2, 20],
+            $A3 => [3, 20],
+            $A4 => [4, 20],
+            $A5 => [5, 20],
+            $B1 => [1, 19],
+            $B2 => [2, 19],
+            $B3 => [3, 19],
+            $B4 => [4, 19],
+            $B5 => [5, 19],
+            $C1 => [1, 18],
+            $C2 => [2, 18],
+            $C3 => [3, 18],
+            $C4 => [4, 18],
+            $C5 => [5, 18],
+            $D1 => [1, 17],
+            $D2 => [2, 17],
+            $D3 => [3, 17],
+            $D4 => [4, 17],
+            $D5 => [5, 17],
+            $E1 => [1, 16],
+            $E2 => [2, 16],
+            $E3 => [3, 16],
+            $E4 => [4, 16],
+            $E5 => [5, 16],
+            $F1 => [1, 15],
+            $F2 => [2, 15],
+            $F3 => [3, 15],
+            $F4 => [4, 15],
+            $F5 => [5, 15],
+            $G1 => [1, 14],
+            $G2 => [2, 14],
+            $G3 => [3, 14],
+            $G4 => [4, 14],
+            $G5 => [5, 14],
+            $H1 => [1, 13],
+            $H2 => [2, 13],
+            $H3 => [3, 13],
+            $H4 => [4, 13],
+            $H5 => [5, 13],
+            $I1 => [1, 12],
+            $I2 => [2, 12],
+            $I3 => [3, 12],
+            $I4 => [4, 12],
+            $I5 => [5, 12],
+            $J1 => [1, 11],
+            $J2 => [2, 11],
+            $J3 => [3, 11],
+            $J4 => [4, 11],
+            $J5 => [5, 11],
+            $K1 => [1, 10],
+            $K2 => [2, 10],
+            $K3 => [3, 10],
+            $K4 => [4, 10],
+            $K5 => [5, 10],
+            $L1 => [1, 9],
+            $L2 => [2, 9],
+            $L3 => [3, 9],
+            $L4 => [4, 9],
+            $L5 => [5, 9],
+            $M1 => [1, 8],
+            $M2 => [2, 8],
+            $M3 => [3, 8],
+            $M4 => [4, 8],
+            $M5 => [5, 8],
+            $N1 => [1, 7],
+            $N2 => [2, 7],
+            $N3 => [3, 7],
+            $N4 => [4, 7],
+            $N5 => [5, 7],
+            $O1 => [1, 6],
+            $O2 => [2, 6],
+            $O3 => [3, 6],
+            $O4 => [4, 6],
+            $O5 => [5, 6],
+            $P1 => [1, 5],
+            $P2 => [2, 5],
+            $P3 => [3, 5],
+            $P4 => [4, 5],
+            $P5 => [5, 5],
+            $Q1 => [1, 4],
+            $Q2 => [2, 4],
+            $Q3 => [3, 4],
+            $Q4 => [4, 4],
+            $Q5 => [5, 4],
+            $R1 => [1, 3],
+            $R2 => [2, 3],
+            $R3 => [3, 3],
+            $R4 => [4, 3],
+            $R5 => [5, 3],
+            $S1 => [1, 2],
+            $S2 => [2, 2],
+            $S3 => [3, 2],
+            $S4 => [4, 2],
+            $S5 => [5, 2],
+            $T1 => [1, 1],
+            $T2 => [2, 1],
+            $T3 => [3, 1],
+            $T4 => [4, 1],
+            $T5 => [5, 1],
+            );
+            
 ?>
 
 <div class="container-fluid">
@@ -463,13 +667,21 @@ $values1 = array(
                         $search_qty_B =0;
                         $slot_name_search_C = null;
                         $search_qty_C =0;
+                        $slot_name_search_d = null;
+                        $search_qty_d =0;
+                        $slot_name_search_e = null;
+                        $search_qty_e =0;
                         $rack_number_a = 'RACK-1';
                         $rack_number_b = 'RACK-2';
                         $rack_number_c = 'RACK-3';
+                        $rack_number_d = 'RACK-4';
+                        $rack_number_e = 'RACK-5';
                         $common_slot = null;
                         $test = null;
                         $test_b = null;
                         $test_c = null;
+                        $test_d = null;
+                        $test_e = null;
                         $run =null;
                         $i =0;
                         $item_name;
@@ -506,6 +718,16 @@ $values1 = array(
                                                         $search_qty_C =$data['qty'];
                                                         $test_c[$i] =array($data['slot_name']);
                                                         $i++;
+                                                    } elseif($data['rack_number'] == $rack_number_d){
+                                                        $slot_name_search_d = $data['slot_name'];
+                                                        $search_qty_d =$data['qty'];
+                                                        $test_d[$i] =array($data['slot_name']);
+                                                        $i++;
+                                                    } elseif($data['rack_number'] == $rack_number_e){
+                                                        $slot_name_search_e = $data['slot_name'];
+                                                        $search_qty_e =$data['qty'];
+                                                        $test_e[$i] =array($data['slot_name']);
+                                                        $i++;
                                                     }
                                             }
                                              
@@ -532,7 +754,7 @@ $values1 = array(
                             </option>
                             <?php endwhile; ?>
                         </select>
-                        <input type="text" class="w-25" name="model">
+                        <input type="search" class="w-25" name="model" id="model">
                         <button type="submit" name="submit" class="btn btn-primary btn-xs mx-2"><i
                                 class="fa-solid fa-search" style="margin-right: 5px;"></i>Search</button>
                     </div>
@@ -798,7 +1020,7 @@ $values1 = array(
             foreach($test_b as $a){
                if($substring[0] == $a[0] ){ ?>
                             <a class="btn grid_btn bg-danger mt-2" href="
-                                add_additional_part.php?scan_id=<?php echo "rack-1_".$substring[0] ?>">
+                                add_additional_part.php?scan_id=<?php echo "rack-2_".$substring[0] ?>">
                                 <i class="fas fa-inbox"></i>
                                 <?php
                        echo $substring[0]."</br>";
@@ -878,6 +1100,7 @@ $values1 = array(
             $i =0;
             
        ?>
+
                     <div class="card card-primary">
                         <div class="card-header" ;>
                             <h4 class=" card-title">Rack 03</h4>
@@ -923,7 +1146,7 @@ $values1 = array(
             foreach($test_c as $a){
                if($substring[0] == $a[0] ){ ?>
                             <a class="btn grid_btn bg-danger mt-2" href="
-                                add_additional_part.php?scan_id=<?php echo "rack-1_".$substring[0] ?>">
+                                add_additional_part.php?scan_id=<?php echo "rack-3_".$substring[0] ?>">
                                 <i class="fas fa-inbox"></i>
                                 <?php
                        echo $substring[0]."</br>";
@@ -956,6 +1179,261 @@ $values1 = array(
                 </div>
             </div>
         </div>
+        <!-- rack 04 -->
+        <div class="col-4 mt-5 text-uppercase">
+            <?php
+            $query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'RACK-4'";
+            $result_set = mysqli_query($connection, $query);
+            foreach($result_set as $a){
+            $slot_name = $a['slot_name'];
+            $slot_name_change = $a['slot_name']."_0_0_0";
+            $part_name= $a['part_name'];
+            $part_model= $a['part_model'];
+            $qty= $a['qty'];
+            foreach($values2 as $k => $v){
+                
+                if($k == $slot_name_change){
+                    $name= $slot_name."_".$part_name."_".$part_model."_".$qty;
+                    $values3[$name] = $values3[$k];
+                    unset($values3[$k]);
+                }
+            }
+            }
+            $grid3 = createGrid3(5, 20);
+            $grid3 = plotGridValues3($grid3, $values3);
+            echo renderGrid3($grid3,$slot_name_search_C,$search_qty_C,$common_slot,$test_c);
+            function createGrid3($columns, $rows)
+            {
+            $grid3 = [];
+            $cell = 1;
+            for ($r = 0; $r < $rows; $r++) {
+                $row = [];
+                for ($c = 0; $c < $columns; $c++) {
+                    $row[] = $cell++;
+                }
+                $grid3[] = $row;
+            }
+            return $grid3;
+            }
+            function plotGridValues3($grid3, $values3)
+            {
+            foreach ($values3 as $value => $coordinates) {
+                list($x, $y) = $coordinates;
+                $grid3[$y - 1][$x - 1] = $value;
+            }
+            return $grid3;
+            }
+            function renderGrid3($grid3 ,$slot_name_search_c,$search_qty_c,$common_slot,$test_c)
+            {
+            $grid3 = array_reverse($grid3); 
+            $i =0;
+            
+       ?>
+            <div class="card card-primary">
+                <div class="card-header" ;>
+                    <h4 class=" card-title">Rack 04</h4>
+
+
+                </div>
+                <div class="card-body mx-auto justify-content-center mx-auto text-center">
+                    <?php  foreach ($grid3 as $row) { 
+                
+                foreach ($row as $k=>$v) { 
+                    $substring = explode("_", $v);
+                    //   empty qty 
+                    if($substring[3] == 0){ ?>
+                    <!-- // slot name with empty qty -->
+
+                    <a class="btn grid_btn bg-secondary mt-2" href="
+                            part_create_form.php?scan_id=<?php echo "rack-4_".$substring[0] ?>">
+                        <i class="fas fa-inbox"></i>
+                        <?php 
+               echo $substring[0]."</br>";
+               echo "</br>";
+               echo "</br>";
+               echo "</br>";
+                ?>
+                    </a>
+                    <?php }else{
+                 
+               ?>
+                    <!-- slot with value -->
+                    <?php if(empty($test_d)){?>
+
+                    <a class="btn grid_btn bg-success mt-2" href="
+                                add_additional_part.php?scan_id=<?php echo "rack-4_".$substring[0] ?>">
+                        <i class="fas fa-inbox"></i>
+                        <?php
+               echo $substring[0]."</br>";
+               echo $substring[1]."</br>";
+               echo $substring[2]."</br>";
+               echo $substring[3]."</br>";
+                ?>
+                    </a>
+                    <?php }else{ 
+            foreach($test_d as $a){
+               if($substring[0] == $a[0] ){ ?>
+                    <a class="btn grid_btn bg-danger mt-2" href="
+                                add_additional_part.php?scan_id=<?php echo "rack-4_".$substring[0] ?>">
+                        <i class="fas fa-inbox"></i>
+                        <?php
+                       echo $substring[0]."</br>";
+                       echo $substring[1]."</br>";
+                       echo $substring[2]."</br>";
+                       echo $substring[3]."</br>";
+                       $substring[0] =5;
+                        ?>
+                    </a><?php
+               // echo $a[0]."----".$slot_name_search;
+               // echo "</br>";
+           } } if($substring[0] != 5){ ?>
+                    <a class="btn grid_btn bg-secondary mt-2" href="
+                            part_create_form.php?scan_id=<?php echo "rack-4_".$substring[0] ?>">
+                        <i class="fas fa-inbox"></i>
+                        <?php 
+               echo $substring[0]."</br>";
+               echo "</br>";
+               echo "</br>";
+               echo "</br>";
+                ?>
+                    </a>
+
+                    <?php } } } } } ?>
+
+
+                </div>
+            </div>
+            <?php } ?>
+        </div>
+        <!-- rack 04 -->
+
+
+        <div class="col-4 mt-5 text-uppercase">
+            <?php
+            $query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'RACK-5'";
+            $result_set = mysqli_query($connection, $query);
+            foreach($result_set as $a){
+            $slot_name = $a['slot_name'];
+            $slot_name_change = $a['slot_name']."_0_0_0";
+            $part_name= $a['part_name'];
+            $part_model= $a['part_model'];
+            $qty= $a['qty'];
+            foreach($values4 as $k => $v){
+                
+                if($k == $slot_name_change){
+                    $name= $slot_name."_".$part_name."_".$part_model."_".$qty;
+                    $values4[$name] = $values4[$k];
+                    unset($values4[$k]);
+                }
+            }
+            }
+            $grid4 = createGrid4(5, 20);
+            $grid4 = plotGridValues4($grid4, $values4);
+            echo renderGrid4($grid4,$slot_name_search_e,$search_qty_e,$common_slot,$test_e);
+            function createGrid4($columns, $rows)
+            {
+            $grid4 = [];
+            $cell = 1;
+            for ($r = 0; $r < $rows; $r++) {
+                $row = [];
+                for ($c = 0; $c < $columns; $c++) {
+                    $row[] = $cell++;
+                }
+                $grid4[] = $row;
+            }
+            return $grid4;
+            }
+            function plotGridValues4($grid4, $values4)
+            {
+            foreach ($values4 as $value => $coordinates) {
+                list($x, $y) = $coordinates;
+                $grid4[$y - 1][$x - 1] = $value;
+            }
+            return $grid4;
+            }
+            function renderGrid4($grid4 ,$slot_name_search_e,$search_qty_e,$common_slot,$test_e)
+            {
+            $grid4 = array_reverse($grid4); 
+            $i =0;
+            
+       ?>
+            <div class="card card-primary">
+                <div class="card-header" ;>
+                    <h4 class=" card-title">Rack 05</h4>
+
+
+                </div>
+                <div class="card-body mx-auto justify-content-center mx-auto text-center">
+                    <?php  foreach ($grid4 as $row) { 
+                
+                foreach ($row as $k=>$v) { 
+                    $substring = explode("_", $v);
+                    //   empty qty 
+                    if($substring[3] == 0){ ?>
+                    <!-- // slot name with empty qty -->
+
+                    <a class="btn grid_btn bg-secondary mt-2" href="
+                            part_create_form.php?scan_id=<?php echo "rack-5_".$substring[0] ?>">
+                        <i class="fas fa-inbox"></i>
+                        <?php 
+               echo $substring[0]."</br>";
+               echo "</br>";
+               echo "</br>";
+               echo "</br>";
+                ?>
+                    </a>
+                    <?php }else{
+                 
+               ?>
+                    <!-- slot with value -->
+                    <?php if(empty($test_d)){?>
+
+                    <a class="btn grid_btn bg-success mt-2" href="
+                                add_additional_part.php?scan_id=<?php echo "rack-5_".$substring[0] ?>">
+                        <i class="fas fa-inbox"></i>
+                        <?php
+               echo $substring[0]."</br>";
+               echo $substring[1]."</br>";
+               echo $substring[2]."</br>";
+               echo $substring[3]."</br>";
+                ?>
+                    </a>
+                    <?php }else{ 
+            foreach($test_d as $a){
+               if($substring[0] == $a[0] ){ ?>
+                    <a class="btn grid_btn bg-danger mt-2" href="
+                                add_additional_part.php?scan_id=<?php echo "rack-5_".$substring[0] ?>">
+                        <i class="fas fa-inbox"></i>
+                        <?php
+                       echo $substring[0]."</br>";
+                       echo $substring[1]."</br>";
+                       echo $substring[2]."</br>";
+                       echo $substring[3]."</br>";
+                       $substring[0] =5;
+                        ?>
+                    </a><?php
+               // echo $a[0]."----".$slot_name_search;
+               // echo "</br>";
+           } } if($substring[0] != 5){ ?>
+                    <a class="btn grid_btn bg-secondary mt-2" href="
+                            part_create_form.php?scan_id=<?php echo "rack-5_".$substring[0] ?>">
+                        <i class="fas fa-inbox"></i>
+                        <?php 
+               echo $substring[0]."</br>";
+               echo "</br>";
+               echo "</br>";
+               echo "</br>";
+                ?>
+                    </a>
+
+                    <?php } } } } } ?>
+
+
+                </div>
+            </div>
+            <?php } ?>
+        </div>
+
     </div>
 </div>
 
@@ -965,5 +1443,9 @@ $values1 = array(
     font-size: 10px;
 }
 </style>
-
+<script>
+let searchbar = document.querySelector('input[name="model"]');
+searchbar.focus();
+search.value = '';
+</script>
 <?php include_once('../includes/footer.php');  ?>

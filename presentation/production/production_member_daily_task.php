@@ -270,7 +270,6 @@ foreach($query_tech as $data){
                                                             $combine_status;
                                                             foreach($query_run_2 as $c){
                                                                 $combine_status = $c['status'];
-                                                                echo $combine_status;
                                                             }
                                                             $received = NULL;
                                                             if(empty($query_run)){
@@ -279,7 +278,7 @@ foreach($query_tech as $data){
                                                                 foreach($query_run as $a){
                                                                     $received = $a['status'];
                                                                 }
-                                                            }if($combine_status == 0 && $received == 0){
+                                                            }if($combine_status == 0){
                                                                 echo "combine ok";
                                                             }elseif($received == 0){
                                                                 echo "<a class='btn btn-sm '

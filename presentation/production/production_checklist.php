@@ -500,7 +500,7 @@ if(isset($_POST['submit'])){
 
                                     </div>
                                     <div class="col-6">
-                                        <?php if($body_work == 0){ ?>
+                                        <?php if($lcd == 0){ ?>
 
                                         <div class="row mt-2">
                                             <label class="col-sm-4 col-form-label text-capitalize">Step 04
@@ -625,7 +625,7 @@ if(isset($_POST['motherboard_submit'])){
                         </div>
                     </div>
                     <div class="row">
-                        <label class="col-sm-4 col-form-label text-capitalize">No Power</label>
+                        <label class="col-sm-4 col-form-label text-capitalize">Power</label>
                         <?php  if($no_power == null){  ?>
                         <div class="col-sm-8 mt-2">
                             <div class="icheck-success d-inline">
@@ -662,7 +662,7 @@ if(isset($_POST['motherboard_submit'])){
                         <?php } ?>
                     </div>
                     <div class="row">
-                        <label class="col-sm-4 col-form-label text-capitalize">USB Connection</label>
+                        <label class="col-sm-4 col-form-label text-capitalize">Port</label>
                         <?php if($usb_connection == null){ ?>
                         <div class="col-sm-8 mt-2">
                             <div class="icheck-success d-inline">
@@ -760,10 +760,9 @@ if(isset($_POST['combine_form'])){
         $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
         $date = $date1->format('Y-m-d');
        
-        $query_6 = "INSERT INTO requested_part_from_production(brand, model, generation, sales_order_id, inventory_id, delivery_date, emp_id, location, 
-                status, keyboard, speakers, camera, bazel, lan_cover, mousepad, mouse_pad_button, camera_cable, back_cover, wifi_card, lcd_cable, 
+        $query_6 = "INSERT INTO requested_part_from_production(brand, model, generation, sales_order_id, inventory_id, created_date, emp_id, location,status, keyboard, speakers, camera, bazel, lan_cover, mousepad, mouse_pad_button, camera_cable, back_cover, wifi_card, lcd_cable, 
                 battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, c_panel_palm_rest, mb_base, hings_cover, switch, switch_id)
-        VALUES('$item_brand', '$item_model', '$item_generation', '$sales_order_id', '$inventory_id', '$date', '$emp_id', '$location10', '1', '$keyboard', '$speakers',
+        VALUES('$item_brand', '$item_model', '$item_generation', '$sales_order_id', '$inventory_id', '$date', '$emp_id', '$location10', '$status', '$keyboard', '$speakers',
             '$camera', '$bazel', '$lan_cover', '$mousepad', '$mouse_pad_button', '$camera_cable', '$back_cover', '$wifi_card', '$lcd_cable', '$battery', '$battery_cable',
             '$dvd_rom', '$dvd_caddy', '$hdd_caddy', '$hdd_cable_connector', '$c_panel_palm_rest', '$mb_base', '$hings_cover', 0, 0)";
             echo $query_6;
@@ -1006,11 +1005,16 @@ function clearText(a) {
                         <fieldset class="mt-2">
                             <div class="input-group mb-2 mt-2">
                                 <lable>Switch Parts</lable>
-                                <input type="text" name="scan_id" id="scan_id" class="scan_id"
+                                <input type="search" name="scan_id" id="scan_id" class="scan_id"
                                     onfocus="clearInput(this)" value="">
                             </div>
                         </fieldset>
                     </div>
+                    <script>
+                    let searchbar = document.querySelector('input[name="scan_id"]');
+                    searchbar.focus();
+                    search.value = '';
+                    </script>
                 </div>
                 <?php } ?>
                 <div class="modal-body d-flex mx-5">
@@ -1036,7 +1040,7 @@ function clearText(a) {
                                     <label class="label_values" for="r7" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="r8" name="keyboard" value="1">
+                                    <input type="radio" id="r8" name="keyboard" value="1" disabled>
                                     <label class="label_values" for="r8">No </label>
                                 </div>
                             </div>
@@ -1074,7 +1078,7 @@ function clearText(a) {
                                     <label class="label_values" for="c31" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="c32" name="keys" value="1">
+                                    <input type="radio" id="c32" name="keys" value="1" disabled>
                                     <label class="label_values" for="c32">No </label>
                                 </div>
                             </div>
@@ -1113,7 +1117,7 @@ function clearText(a) {
                                     <label class="label_values" for="r9" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="r10" name="speakers" value="1">
+                                    <input type="radio" id="r10" name="speakers" value="1" disabled>
                                     <label class="label_values" for="r10">No </label>
                                 </div>
                             </div>
@@ -1153,7 +1157,7 @@ function clearText(a) {
                                     <label class="label_values" for="r11" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="r12" name="camera" value="1">
+                                    <input type="radio" id="r12" name="camera" value="1" disabled>
                                     <label class="label_values" for="r12">No </label>
                                 </div>
                             </div>
@@ -1192,7 +1196,7 @@ function clearText(a) {
                                     <label class="label_values" for="13" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="r14" name="bazel" value="1">
+                                    <input type="radio" id="r14" name="bazel" value="1" disabled>
                                     <label class="label_values" for="r14">No </label>
                                 </div>
                             </div><?php }elseif($bazel ==1){ ?>
@@ -1229,7 +1233,7 @@ function clearText(a) {
                                     <label class="label_values" for="c1" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="c2" name="mousepad" value="1">
+                                    <input type="radio" id="c2" name="mousepad" value="1" disabled>
                                     <label class="label_values" for="c2">No </label>
                                 </div>
                             </div>
@@ -1268,7 +1272,7 @@ function clearText(a) {
                                     <label class="label_values" for="c3" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="c4" name="mouse_pad_button" value="1">
+                                    <input type="radio" id="c4" name="mouse_pad_button" value="1" disabled>
                                     <label class="label_values" for="c4">No </label>
                                 </div>
                             </div>
@@ -1308,7 +1312,7 @@ function clearText(a) {
                                     <label class="label_values" for="c5" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="c6" name="camera_cable" value="1">
+                                    <input type="radio" id="c6" name="camera_cable" value="1" disabled>
                                     <label class="label_values" for="c6">No </label>
                                 </div>
                             </div>
@@ -1348,7 +1352,7 @@ function clearText(a) {
                                     <label class="label_values" for="c7" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="c8" name="back_cover" value="1">
+                                    <input type="radio" id="c8" name="back_cover" value="1" disabled>
                                     <label class="label_values" for="c8">No </label>
                                 </div>
                             </div>
@@ -1387,7 +1391,7 @@ function clearText(a) {
                                     <label class="label_values" for="c9" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="c10" name="wifi_card" value="1">
+                                    <input type="radio" id="c10" name="wifi_card" value="1" disabled>
                                     <label class="label_values" for="c10">No </label>
                                 </div>
                             </div>
@@ -1426,7 +1430,7 @@ function clearText(a) {
                                     <label class="label_values" for="c11" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="c12" name="lcd_cable" value="1">
+                                    <input type="radio" id="c12" name="lcd_cable" value="1" disabled>
                                     <label class="label_values" for="c12">No </label>
                                 </div>
                             </div>
@@ -1467,7 +1471,7 @@ function clearText(a) {
                                     <label class="label_values" for="c13" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="c14" name="battery" value="1">
+                                    <input type="radio" id="c14" name="battery" value="1" disabled>
                                     <label class="label_values" for="c14">No </label>
                                 </div>
                             </div>
@@ -1506,7 +1510,7 @@ function clearText(a) {
                                     <label class="label_values" for="c15" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="c16" name="battery_cable" value="1">
+                                    <input type="radio" id="c16" name="battery_cable" value="1" disabled>
                                     <label class="label_values" for="c16">No </label>
                                 </div>
                             </div>
@@ -1547,7 +1551,7 @@ function clearText(a) {
                                     <label class="label_values" for="c17" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="c18" name="dvd_rom" value="1">
+                                    <input type="radio" id="c18" name="dvd_rom" value="1" disabled>
                                     <label class="label_values" for="c18">No </label>
                                 </div>
                             </div>
@@ -1587,7 +1591,7 @@ function clearText(a) {
                                     <label class="label_values" for="c19" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="c20" name="dvd_caddy" value="1">
+                                    <input type="radio" id="c20" name="dvd_caddy" value="1" disabled>
                                     <label class="label_values" for="c20">No </label>
                                 </div>
                             </div>
@@ -1627,7 +1631,7 @@ function clearText(a) {
                                     <label class="label_values" for="c21" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="c22" name="hdd_caddy" value="1">
+                                    <input type="radio" id="c22" name="hdd_caddy" value="1" disabled>
                                     <label class="label_values" for="c22">No </label>
                                 </div>
                             </div>
@@ -1666,7 +1670,7 @@ function clearText(a) {
                                     <label class="label_values" for="c23" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="c24" name="hdd_cable_connector" value="1">
+                                    <input type="radio" id="c24" name="hdd_cable_connector" value="1" disabled>
                                     <label class="label_values" for="c24">No </label>
                                 </div>
                             </div>
@@ -1706,7 +1710,7 @@ function clearText(a) {
                                     <label class="label_values" for="c25" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="c26" name="c_panel_palm_rest" value="1">
+                                    <input type="radio" id="c26" name="c_panel_palm_rest" value="1" disabled>
                                     <label class="label_values" for="c26">No </label>
                                 </div>
                             </div>
@@ -1746,7 +1750,7 @@ function clearText(a) {
                                     <label class="label_values" for="c33" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="c34" name="mb_base" value="1">
+                                    <input type="radio" id="c34" name="mb_base" value="1" disabled>
                                     <label class="label_values" for="c34">No </label>
                                 </div>
                             </div>
@@ -1785,7 +1789,7 @@ function clearText(a) {
                                     <label class="label_values" for="c27" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="c28" name="hings_cover" value="1">
+                                    <input type="radio" id="c28" name="hings_cover" value="1" disabled>
                                     <label class="label_values" for="c28">No </label>
                                 </div>
                             </div>
@@ -1825,7 +1829,7 @@ function clearText(a) {
                                     <label class="label_values" for="c29" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="c30" name="lan_cover" value="1">
+                                    <input type="radio" id="c30" name="lan_cover" value="1" disabled>
                                     <label class="label_values" for="c30">No </label>
                                 </div>
                             </div>
@@ -2203,12 +2207,12 @@ if(isset($_POST['lcd_form'])){
                             <?php if($b_logo_retrive == 2){ ?>
                             <div class="icheck-danger d-inline">
                                 <input type="checkbox" id="b_bazel_logo" name="work[]" value="b_logo">
-                                <label class="label_values" for="b_bazel_logo">Logo </label>
+                                <label class="label_values" for="b_bazel_logo">Logo Missing </label>
                             </div>
                             <?php } elseif($b_logo_retrive == 1){ ?>
                             <div class="icheck-danger d-inline">
                                 <input type="checkbox" id="b_bazel_logo" name="work[]" value="b_logo">
-                                <label class="label_values" for="b_bazel_logo">Logo </label>
+                                <label class="label_values" for="b_bazel_logo">Logo Missing</label>
                             </div>
                             <?php } ?>
 

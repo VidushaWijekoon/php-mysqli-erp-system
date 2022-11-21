@@ -88,8 +88,8 @@ foreach($result as $a){
                                     <td><?php echo $part_brand ?></td>
                                     <td><?php echo $qty ?></td>
                                     <td>
-                                        <input type="number" class="form-control" placeholder="Please Enter QTY"
-                                            name="qty">
+                                        <input type="number" id="qty" class="form-control"
+                                            placeholder="Please Enter QTY" name="qty">
                                     </td>
                                 </tr>
                             </tbody>
@@ -254,5 +254,9 @@ el.addEventListener('submit', function() {
     return confirm('Are you sure you want to submit this form?');
 }, false);
 </script>
-
+<script>
+let searchbar = document.querySelector('input[name="qty"]');
+searchbar.focus();
+search.value = '';
+</script>
 <?php include_once('../includes/footer.php');  ?>
