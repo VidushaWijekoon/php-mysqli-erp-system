@@ -86,14 +86,8 @@ if(isset($_POST['submit'])) {
 <head>
     <title>AL SAKB</title>
     <link rel="icon" type="image/x-icon" href="static/images/">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
-        integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-    <link rel="stylesheet" href="static/css/main.css">
-
+    <link rel="stylesheet" href="./static/dist/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/dist/fontawesome/css/all.min.css">
 </head>
 
 <body>
@@ -109,13 +103,13 @@ if(isset($_POST['submit'])) {
                     <form method="POST" action="">
                         <div class="input-group mb-3">
                             <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                <span class="input-group-text"><i class="fas fa-user m-2"></i></span>
                             </div>
                             <input type="text" name="username" placeholder="Username..." class="form-control">
                         </div>
                         <div class="input-group mb-2">
                             <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                <span class="input-group-text"><i class="fas fa-key m-2"></i></span>
                             </div>
                             <input type="password" name="password" placeholder="Password..." class="form-control">
                         </div>

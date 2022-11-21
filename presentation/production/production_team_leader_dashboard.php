@@ -192,11 +192,11 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                             <th>SO Created Date</th>
                             <th>Delivery Date</th>
                             <th>Order QTY</th>
-                            <th>Received QTY</th>
                             <th>Prepared QTY from Warehouse</th>
+                            <th>Received QTY</th>
                             <th>Tested QTY form production</th>
-                            <th style="width: 250px;">&nbsp;</th>
-                            <th>&nbsp;</th>
+                            <th style="width: 250px;">S/O Completed</th>
+                            <th>Task</th>
                         </tr>
                     </thead>
                     <tbody class="tbody_1">
@@ -253,10 +253,10 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                             </td>
                             <td><?php echo $items['created_date'] ?></td>
                             <td><?php echo $items['item_delivery_date'] ?></td>
-                            <td><?php echo  $sum  ?></td>
-                            <td><?php echo $received_unit ?></td>
+                            <td><?php echo $sum ?></td>
                             <td><?php echo $items['prepared'] ?></td>
-                            <td><?php echo  $tested_unit ?></td>
+                            <td><?php echo $received_unit ?></td>
+                            <td><?php echo $tested_unit ?></td>
                             <td>
                                 <?php
                                 if( $tested_unit==0){

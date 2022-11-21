@@ -31,7 +31,7 @@ if(isset($_POST['logged_out'])){
     <!-- Google Font: Source Sans Pro -->
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../static/dist/fonts/Poppins-Regular.ttf">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../../static//dist/fontawesome/all.css">
     <link rel="stylesheet" href="../../static/plugins/fontawesome-free/css/all.min.css">
