@@ -20,8 +20,12 @@ $department = $_SESSION['department'];
     <link rel="icon" type="image/x-icon" href="../../static/dist/img/alsakb logo.png">
 
     <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../static/dist/fonts/Poppins-Regular.ttf">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="../../static//dist/fontawesome/all.min.css">
+    <link rel="stylesheet" href="../../static//dist/fontawesome/all.css">
     <link rel="stylesheet" href="../../static/plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
