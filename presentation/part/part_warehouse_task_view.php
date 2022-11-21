@@ -8,8 +8,12 @@ include_once('../../dataAccess/403.php');
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 
-if($role_id == 1 && $department == 11 || $role_id == 2 && $department == 18 || $role_id == 11 && $department == 20){
-    
+
+if($role_id == 1 && $department == 11 || $role_id == 2 && $department == 18 || $role_id == 11 && $department == 20 ||  $role_id == 10 && $department == 1 ){
+    $prod_t_l = 0;
+    if( $role_id == 10 && $department == 1 ){
+        $prod_t_l =1;
+    }
 // checking if a user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
@@ -680,8 +684,10 @@ $item_brand=0;
                                     <td><input type="text" id="c_panel_palm_rest" name="c_panel_palm_rest"></td>
                                     <td><input type="text" id="mb_base" name="mb_base"></td>
                                     <td><input type="text" id="hings_cover" name="hings_cover"></td>
+                                    <?php if($prod_t_l == 0){ ?>
                                     <td><input type="submit" class="btn btn-xs bg-gradient-info" name="submit"
-                                            value="Send"></td>
+                                            value="update"></td>
+                                    <?php } ?>
 
                                 </form>
 
@@ -925,10 +931,10 @@ $item_brand=0;
                                                 type="hidden" id="lan_cover" name="lan_cover"
                                                 value="<?php echo $need_to_buy_lan_cover; ?>"><?php } ?>
                                         </td>
-
+                                        <?php if($prod_t_l == 0){ ?>
                                         <td><button type="submit" name="sorting_submit"
                                                 class="btn btn-xs bg-gradient-blue">Submit</button></td>
-
+                                        <?php } ?>
                                     </form>
 
                             </tr>
