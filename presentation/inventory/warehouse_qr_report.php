@@ -5,6 +5,7 @@ include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
 include_once('../../dataAccess/403.php');
 include_once('../includes/header.php');
+require_once("phpqrcode/qrlib.php");
 
 // checking if a user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -63,6 +64,14 @@ if (isset($_POST['submit'])) {
                      $_SESSION['generation']=$generation ;
                      $_SESSION['core']=$core ;
                      $_SESSION['location']=$location ;
+                     $tempDir = 'temp/'; 
+                     $email = $_POST["inventory_id"];
+                     $filename = $email;
+                     echo $filename;
+                     $codeContents = $email; 
+                     QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5,1);      
+             
+             
                          header("location: ./indexnew.php");  
                          
 
@@ -96,7 +105,6 @@ if (isset($_POST['submit'])) {
                                 <input type="text" id="search" name="search" required value="<?php if (isset($_POST['search'])) {
                                                                                         echo $_POST['search'];
                                                                                     } ?>" placeholder="Search QR">
-                                <!-- <button type="submit" class="btn btn-primary">Search</button> -->
                             </div>
 
                         </form>

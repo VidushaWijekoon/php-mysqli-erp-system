@@ -644,7 +644,8 @@ $values1 = array(
                                     if($substring[3] == 0){ ?>
                             <!-- // slot name with empty qty -->
 
-                            <a class="btn grid_btn bg-secondary mt-2">
+                            <a class="btn grid_btn bg-secondary mt-2" href="
+                            part_create_form.php?scan_id=<?php echo "rack-1_".$substring[0] ?>">
                                 <i class="fas fa-inbox"></i>
                                 <?php 
                                             echo $substring[0]."</br>";
@@ -685,7 +686,8 @@ $values1 = array(
                         // echo $a[0]."----".$slot_name_search;
                         // echo "</br>";
                     } } if($substring[0] != 5){ ?>
-                            <a class="btn grid_btn bg-secondary mt-2">
+                            <a class="btn grid_btn bg-secondary mt-2" href="
+                            part_create_form.php?scan_id=<?php echo "rack-1_".$substring[0] ?>">
                                 <i class="fas fa-inbox"></i>
                                 <?php 
                         echo $substring[0]."</br>";
@@ -766,7 +768,8 @@ $values1 = array(
                         ?>
                             <!-- // slot name with empty qty -->
 
-                            <a class="btn grid_btn bg-secondary mt-2">
+                            <a class="btn grid_btn bg-secondary mt-2" href="
+                            part_create_form.php?scan_id=<?php echo "rack-2_".$substring[0] ?>">
                                 <i class="fas fa-inbox"></i>
                                 <?php 
                echo $substring[0]."</br>";
@@ -808,7 +811,8 @@ $values1 = array(
                // echo $a[0]."----".$slot_name_search;
                // echo "</br>";
            } } if($substring[0] != 5){ ?>
-                            <a class="btn grid_btn  bg-secondary mt-2">
+                            <a class="btn grid_btn bg-secondary mt-2" href="
+                            part_create_form.php?scan_id=<?php echo "rack-2_".$substring[0] ?>">
                                 <i class="fas fa-inbox"></i>
                                 <?php 
                echo $substring[0]."</br>";
@@ -889,7 +893,8 @@ $values1 = array(
                     if($substring[3] == 0){ ?>
                             <!-- // slot name with empty qty -->
 
-                            <a class="btn grid_btn bg-secondary mt-2">
+                            <a class="btn grid_btn bg-secondary mt-2" href="
+                            part_create_form.php?scan_id=<?php echo "rack-3_".$substring[0] ?>">
                                 <i class="fas fa-inbox"></i>
                                 <?php 
                echo $substring[0]."</br>";
@@ -931,7 +936,8 @@ $values1 = array(
                // echo $a[0]."----".$slot_name_search;
                // echo "</br>";
            } } if($substring[0] != 5){ ?>
-                            <a class="btn  bg-secondary mt-2">
+                            <a class="btn grid_btn bg-secondary mt-2" href="
+                            part_create_form.php?scan_id=<?php echo "rack-3_".$substring[0] ?>">
                                 <i class="fas fa-inbox"></i>
                                 <?php 
                echo $substring[0]."</br>";

@@ -20,6 +20,7 @@ $last_id = $_SESSION['last_id'] ;
 if(empty($_SESSION['last_update_id'])){ $last_update_id =0;}else{
 
 	$last_update_id = $_SESSION['last_update_id'];
+
 }
 
 // $query = "SELECT inventory_id FROM warehouse_information_sheet ORDER BY inventory_id DESC LIMIT 1";
@@ -45,7 +46,7 @@ if($last_update_id != 0){
 
 	$height = $howManyCodes*100;
 
-	$pageWidth =  "400mm";
+	$pageWidth =  "500mm";
 	$pageHeight =  "$height.mm";
 
 	$itemWidth = "220mm";
@@ -70,17 +71,11 @@ if($last_update_id != 0){
 
 echo "</form>";
 
-
-
-/*
-* THE SHEET
-*/
-
 function write($code,$last_id, $overText, $rack, $downText,$secondPart) {
 	?>
 <table>
     <tr>
-        <th><?php if ($overText != "") {
+        <th style="width :400mm"><?php if ($overText != "") {
 			$abc= strtoupper( $overText);
     		echo  "<div  ><p class = 'text-uppercase' style='font-size: 90;
 			font-family: Arial, Helvetica, sans-serif;margin: 80px 0 0 0;
@@ -91,10 +86,11 @@ function write($code,$last_id, $overText, $rack, $downText,$secondPart) {
     </tr>
     <tr>
         <th>
-            <?php echo '<img src="temp/'.$code.'.png" style="width:500px; height:500px;margin: 180px 0 0 -425px;">';?>
+
+            <?php echo '<img src="temp/'.$code.'.png" style="width:500px; height:500px;margin: 180px 0 0 -940px;">';?>
         </th>
         <th> <?php 
-		echo strtoupper("<div style = 'font-family: Arial, Helvetica, sans-serif; margin: 390px 0 0 -425px; font-size: 80; color:black;text-weight:bold;text-align: left;'>$rack </br>$downText </br>ALSAKB$code</div></br> ");
+		echo strtoupper("<div style = 'font-family: Arial, Helvetica, sans-serif; margin: 390px 0 0 -940px; font-size: 80; color:black;text-weight:bold;text-align: left;'>$rack </br>$downText </br>ALSAKB$code</div></br> ");
 		
 		?></th>
     </tr>
