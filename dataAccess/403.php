@@ -1,4 +1,4 @@
-<?php function access_denied() { ?>
+<?php ob_start(); function access_denied() { ?>
 
 <div class="container">
     <div class="component PC"></div>
