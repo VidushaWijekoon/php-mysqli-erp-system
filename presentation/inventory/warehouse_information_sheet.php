@@ -88,7 +88,7 @@ for ($i = 0; $i <= $int_qty; $i++) {
 
         
         //////////////////
-        header("location: ./indexnew.php?last_id={$last_id}");       
+        header("location: ./indexnew.php?last_id={$print_data[0]}");       
              
                                     
 
@@ -156,7 +156,7 @@ for ($i = 0; $i <= $int_qty; $i++) {
                                 <label class="col-sm-3 col-form-label">Device</label>
                                 <div class="col-sm-8">
                                     <select name="device" class="info_select" style="border-radius: 5px;" required>
-                                        <option selected>--Select Device Type--</option>
+                                        <!-- <option selected>--Select Device Type--</option> -->
                                         <?php
                                             $query = "SELECT * FROM device ORDER BY device ASC";
                                             $all_devices = mysqli_query($connection, $query);
@@ -177,7 +177,7 @@ for ($i = 0; $i <= $int_qty; $i++) {
                                 <label class="col-sm-3 col-form-label">Brand</label>
                                 <div class="col-sm-8">
                                     <select name="brand" class="info_select" style="border-radius: 5px;" required>
-                                        <option selected>--Select Brand--</option>
+                                        <option selected value="hp">HP</option>
                                         <?php
                                             $query = "SELECT * FROM brand ORDER BY brand ASC";
                                             $all_devices = mysqli_query($connection, $query);
@@ -198,7 +198,7 @@ for ($i = 0; $i <= $int_qty; $i++) {
                                 <label class="col-sm-3 col-form-label">Processor</label>
                                 <div class="col-sm-8">
                                     <select name="processor" class="info_select" style="border-radius: 5px;" required>
-                                        <option selected>--Select Processor--</option>
+                                        <option selected value="intel">INTEL</option>
                                         <?php
                                             $query = "SELECT * FROM processor ";
                                             $result = mysqli_query($connection, $query);
@@ -219,7 +219,7 @@ for ($i = 0; $i <= $int_qty; $i++) {
                                 <label class="col-sm-3 col-form-label">Core</label>
                                 <div class="col-sm-8">
                                     <select name="core" class="info_select" style="border-radius: 5px;" required>
-                                        <option selected>--Select Type--</option>
+                                        <option selected value="i6">i6</option>
                                         <?php
                                             $query = "SELECT * FROM core ORDER BY core";
                                             $all_devices = mysqli_query($connection, $query);
@@ -240,7 +240,7 @@ for ($i = 0; $i <= $int_qty; $i++) {
                                 <label class="col-sm-3 col-form-label">Generation</label>
                                 <div class="col-sm-8">
                                     <select name="generation" class="info_select" style="border-radius: 5px;" required>
-                                        <option selected>--Select Generation--</option>
+                                        <option selected value="5">5</option>
                                         <?php
                                             $query = "SELECT * FROM generation ORDER BY generation_id";
                                             $all_devices = mysqli_query($connection, $query);
@@ -277,7 +277,7 @@ for ($i = 0; $i <= $int_qty; $i++) {
                                 <label class="col-sm-3 col-form-label">Location</label>
                                 <div class="col-sm-8">
                                     <select name="location" class="info_select" style="border-radius: 5px;" required>
-                                        <option selected>--Select Location--</option>
+                                        <option selected value="wh4">WH4</option>
                                         <?php
                                             $query = "SELECT * FROM location ORDER BY location_id";
                                             $result = mysqli_query($connection, $query);

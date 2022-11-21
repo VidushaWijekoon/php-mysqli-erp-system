@@ -10,8 +10,9 @@ include('phpqrcode/qrlib.php');
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 
+
 if($role_id == 1 && $department == 11 || $role_id == 2 && $department == 18 || $role_id == 11 && $department == 20){
- 
+  
 // checking if a user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
@@ -26,6 +27,10 @@ $location = NULL;
 $capacity = NULL;
 $rack_number = NULL;
 $slot_name = NULL; 
+$scan_id = $_GET['scan_id'];
+$location = explode("_",$scan_id);
+$rack_number = $location[0];
+$slot_number = $location[1];
 
 if(isset($_POST['submit'])){    
 
@@ -59,6 +64,7 @@ if(isset($_POST['submit'])){
         $last_id = $connection->insert_id;
         $_SESSION['last_id'] = $last_id;    
         // header("location: ./indexnew.php?last_id={$last_id}"); 
+        header("Location: ./part_stock_dashboard.php");
 
 }
 ?>
@@ -152,6 +158,10 @@ if(isset($_POST['submit'])){
                                 <label class="col-sm-3 col-form-label">Rack</label>
                                 <div class="col-sm-8">
                                     <select class="w-100" name="rack_number" style="border-radius: 5px;" required>
+                                        <?php if($rack_number != null){ ?>
+                                        <option selected value="<?php echo $rack_number ?>"><?php echo $rack_number ?>
+                                        </option>
+                                        <?php  }else{ ?>
                                         <option selected>--Select Rack--</option>
                                         <?php
                                             $query = "SELECT  rack_number FROM rack WHERE status = 0 ";
@@ -161,7 +171,7 @@ if(isset($_POST['submit'])){
                                         <option value="<?php echo $rack_id["rack_number"]; ?>">
                                             <?php echo strtoupper($rack_id["rack_number"]); ?>
                                         </option>
-                                        <?php endwhile; ?>
+                                        <?php endwhile; }?>
                                     </select>
                                 </div>
                             </div>
@@ -170,8 +180,13 @@ if(isset($_POST['submit'])){
                                 <label class="col-sm-3 col-form-label">Slot</label>
                                 <div class="col-sm-8">
                                     <select class="w-100" name="slot_name" style="border-radius: 5px;" required>
-                                        <option selected>--Select slot--</option>
-                                        <?php
+
+                                        <?php if($slot_number != null){ ?>
+                                        <option selected value="<?php echo $slot_number ?>"><?php echo $slot_number ?>
+                                        </option>
+                                        <?php  }else{ ?>
+                                        <option selected>--Select Rack--</option>
+                                        <?php 
                                             $querys = "SELECT  slot_name FROM rack_slots WHERE status = 0 ";
                                             $query_slot = mysqli_query($connection, $querys);
                                                 while ($slot_id = mysqli_fetch_array($query_slot, MYSQLI_ASSOC)) :;
@@ -179,7 +194,7 @@ if(isset($_POST['submit'])){
                                         <option value="<?php echo $slot_id["slot_name"]; ?>">
                                             <?php echo strtoupper($slot_id["slot_name"]); ?>
                                         </option>
-                                        <?php endwhile; ?>
+                                        <?php endwhile; }?>
                                     </select>
                                 </div>
                             </div>
