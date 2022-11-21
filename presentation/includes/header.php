@@ -7,6 +7,15 @@ if (!isset($_SESSION['user_id'])) {
 
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
+$logged_in_id = $_SESSION['logged_in_id'];
+if(isset($_POST['logged_out'])){
+    echo 
+    $query_2 = "UPDATE users_logged_in_time SET logged_out = CURRENT_TIMESTAMP WHERE logged_in_id = '{$logged_in_id}' LIMIT 1";
+    $result_set = mysqli_query($connection, $query_2);
+    if($result_set){
+        header('Location: ../../logout.php');
+    }
+}
 
 ?>
 
@@ -22,9 +31,8 @@ $department = $_SESSION['department'];
     <!-- Google Font: Source Sans Pro -->
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../static/dist/fonts/Poppins-Regular.ttf">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
-    <!-- fontawesome -->
-    <link rel="stylesheet" href="../../static//dist/fontawesome/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="../../static//dist/fontawesome/all.css">
     <link rel="stylesheet" href="../../static/plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
@@ -98,7 +106,10 @@ body {
                         </div>
                         <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
                         <a class="dropdown-item" href=""><i class="fas fa-cog mr-2"></i>Setting</a>
-                        <a class="dropdown-item" href="../../logout.php"><i class="fas fa-power-off mr-2"></i>Logout</a>
+                        <form action="" method="POST">
+                            <button class="dropdown-item" name="logged_out" type="submit"><i
+                                    class="fas fa-power-off mr-2"></i>Logout</a>
+                        </form>
                     </div>
                 </li>
             </ul>
