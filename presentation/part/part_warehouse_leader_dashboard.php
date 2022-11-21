@@ -29,6 +29,7 @@ if($role_id == 1 && $department == 11 || $role_id == 2 && $department == 18 || $
                 FROM requested_part_from_production
                 WHERE status =1
                 GROUP BY DATE(created_date) ORDER BY DATE(created_date);";
+                echo $query;
     $query_run = mysqli_query($connection, $query);
     $day;
 ?>

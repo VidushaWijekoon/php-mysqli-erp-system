@@ -4,7 +4,6 @@ include_once('../../dataAccess/connection.php');
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
-
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 $logged_in_id = $_SESSION['logged_in_id'];
