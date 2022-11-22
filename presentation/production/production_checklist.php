@@ -11,7 +11,9 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $role_id = $_SESSION['role_id'];
-if($role_id == 1 || $role_id == 2 || $role_id == 6){
+$department = $_SESSION['department'];
+
+if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 6 && $department == 1)){
 
 $sales_item_id = '';
 $inventory_id = '';
@@ -775,7 +777,7 @@ if(isset($_POST['combine_form'])){
             echo $query_6;
             
          $query_new = mysqli_query($connection, $query_6);
-         exit();
+        
          
      }
     if($lunch_combine == 1){
@@ -2776,11 +2778,6 @@ if(isset($_POST['production_form'])){
 </div>
 <!-- /.modal -->
 
-<?php include_once('../includes/footer.php'); } ?>
-<style>
-fieldset,
-legend {
-    all: revert;
-    font-size: 12px;
-}
-</style>
+<?php include_once('../includes/footer.php'); }else{
+        die(access_denied());
+} ?>

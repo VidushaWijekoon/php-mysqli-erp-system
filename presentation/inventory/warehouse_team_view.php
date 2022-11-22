@@ -13,8 +13,8 @@ if (!isset($_SESSION['user_id'])) {
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 
-if($role_id == 1 || $role_id == 2 || $role_id == 3 || $role_id == 4 || $role_id == 8 || $department == `warehouse`){
-    
+if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $role_id == 2 && $department == 18){
+ 
 ?>
 
 <div class="row page-titles">

@@ -41,7 +41,7 @@ if (!isset($_SESSION['user_id'])) {
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 
-if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 6 && $department == 1)){
+if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 1)){
 
 $sales_order_id = '';
 $model = '';
@@ -97,7 +97,6 @@ foreach($query_run as $data){
                             <tr>
                                 <th>Technician</th>
                                 <th>Model</th>
-                                <th>Order Quantity</th>
                                 <th>Quantity</th>
                             </tr>
                         </thead>
@@ -123,8 +122,6 @@ foreach($query_run as $data){
                                                     ?>
                                         </select>
                                     </td>
-
-                                    <td class="text-uppercase"><?php echo $order_qty; ?></td>
                                     <td class="text-uppercase"><?php echo $model; ?></td>
                                     <td>
                                         <!-- <input type="number" class="form-control" placeholder="Quantity" name="quantity"> -->
@@ -146,10 +143,11 @@ foreach($query_run as $data){
                             if($order_qty > $exixting_qty){
                                 if($order_qty >= $_POST['qty']){
 
-                            $query = "INSERT INTO prod_technician_assign_info(tech_id, emp_id, sales_order_id, model, tech_assign_qty,core,generation,processor,brand,device_type) VALUES (null,'{$_POST['emp_id']}','{$sales_order_id}','{$model}','{$_POST['qty']}','{$core}','{$generation}','{$processor}','{$brand}','{$device}')";
+                            $query = "UPDATE prod_technician_assign_info(tech_id, emp_id, sales_order_id, model, tech_assign_qty,core,generation,processor,brand,device_type) 
+                                    VALUES (null,'{$_POST['emp_id']}','{$sales_order_id}','{$model}','{$_POST['qty']}','{$core}','{$generation}','{$processor}','{$brand}','{$device}')";
                             
                             $result  = mysqli_query($connection, $query);
-                            header("location: ./production_team_leader_summery.php?sales_order_id=".$sales_order_id);?>
+                            // header("location: ./production_team_leader_summery.php?sales_order_id=".$sales_order_id);?>
                 </div>
                 <?php 
                                 }else{
@@ -276,6 +274,7 @@ html {
 }
 </style>
 
+
 <?php include_once('../includes/footer.php'); }else{
-        die(access_denied());
+        die("<h3 class='text-danger'><<<<<< Access Denied >>>>></h3>");
 } ?>

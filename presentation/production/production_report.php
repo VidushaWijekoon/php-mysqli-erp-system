@@ -11,7 +11,9 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $role_id = $_SESSION['role_id'];
-if($role_id == 1 || $role_id == 2){
+$department = $_SESSION['department'];
+
+if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 1)){
                      
 $emp_id = '';
 
@@ -130,6 +132,7 @@ if(isset($_GET['emp_id'])){
         </div>
     </div>
 </div>
+
 <?php include_once('../includes/footer.php'); }else{
         die(access_denied());
 } ?>

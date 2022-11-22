@@ -11,7 +11,8 @@ if (!isset($_SESSION['user_id'])) {
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 
-if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
+if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 6 && $department == 1)){
+
 
     $emp_id = $_GET['emp_id'];
     $emp_name = $_GET['emp_name'];
@@ -277,7 +278,6 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
     </div>
 </div>
 
-
 <?php include_once('../includes/footer.php'); }else{
-        die("<h3 class='text-danger'><<<<<< Access Denied >>>>></h3>");
-}  ?>
+        die(access_denied());
+} ?>

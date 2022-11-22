@@ -9,7 +9,9 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $role_id = $_SESSION['role_id'];
-if($role_id == 1 || $role_id == 4){
+$department = $_SESSION['department'];
+
+if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 1)){
 
 $sales_order_id = $_GET['sales_order_id'];
  
@@ -43,7 +45,7 @@ $sales_order_id = $_GET['sales_order_id'];
                                 <th>Order QTY</th>
                                 <th>Received QTY</th>
                                 <th>Assign QTY</th>
-                                <th style="width: 250px;">&nbsp;</th>
+                                <th style="width: 250px;">Assgin Progress</th>
                                 <th>&nbsp;</th>
                             </tr>
                         </thead>
@@ -69,18 +71,18 @@ $sales_order_id = $_GET['sales_order_id'];
                                     $assign_qty;
                                     foreach ($query_run as $values) {
                                         $new_model = $values['model']; 
-                                        $query_1="SELECT SUM(tech_assign_qty) AS assign_qty FROM prod_technician_assign_info 
-                                    WHERE sales_order_id = '$sales_order_id'
-                                    AND model = '{$values['model']}'
-                                    AND brand ='{$values['brand']}'
-                                    AND core = '{$values['core']}'
-                                    AND generation ='{$values['generation']}'
-                                    AND processor = '{$values['processor']}'
-                                    ";                             
-                                         $query_2 = mysqli_query($connection, $query_1);
-                                         foreach($query_2 as $data){
+                                        $order_qty = $values['item_quantity'];
+
+                                        $query_1="SELECT SUM(tech_assign_qty) AS assign_qty FROM prod_technician_assign_info WHERE sales_order_id = '$sales_order_id'
+                                                AND model = '{$values['model']}'
+                                                AND brand ='{$values['brand']}'
+                                                AND core = '{$values['core']}'
+                                                AND generation ='{$values['generation']}'
+                                                AND processor = '{$values['processor']}' ";                             
+                                        $query_2 = mysqli_query($connection, $query_1);
+                                        foreach($query_2 as $data){
                                            $assign_qty = $data['assign_qty'];
-                                         }
+                                        }
                                 ?>
 
                             <tr class="text-uppercase">
@@ -88,7 +90,7 @@ $sales_order_id = $_GET['sales_order_id'];
                                 <td><?php echo $values['model'] ?></td>
                                 <td><?php echo $values['core'] ?></td>
                                 <td><?php echo $values['generation'] ?></td>
-                                <td><?php echo $values['item_quantity'] ?></td>
+                                <td><?php echo $order_qty ?></td>
                                 <td><?php echo $values['received_count'] ?></td>
                                 <td><?php echo $assign_qty ?></td>
                                 <td>
@@ -126,8 +128,14 @@ $sales_order_id = $_GET['sales_order_id'];
                                             ?>
                                 </td>
                                 <td>
-                                    <?php 
-                                    echo "<a class='btn btn-xs bg-gradient-primary mx-2' href=\"production_team_leader_asign.php?sales_order_id={$values['sales_order_id']}&model={$values['model']}&core={$values['core']}&generation={$values['generation']}&brand={$values['brand']}&device={$values['device']}&processor={$values['processor']}\" class='text-white text-capitalize'><i class='fa-solid fa-sun mx-1'></i></a>" ?>
+                                    <?php if($order_qty == $assign_qty){?>
+                                    <span class="badge badge-lg badge-danger text-white p-1 px-3">Assigned</span>
+                                    <?php }else{
+                                    echo "<a class='btn btn-xs bg-gradient-primary mx-2' href=\"production_team_leader_asign.php?order_qty={$values['item_quantity']}&sales_order_id={$values['sales_order_id']}&model={$values['model']}&core={$values['core']}&generation={$values['generation']}&brand={$values['brand']}&device={$values['device']}&processor={$values['processor']}\" class='text-white text-capitalize'><i class='fa-solid fa-sun mx-1'></i></a>" 
+                                    ?>
+
+
+                                    <?php } ?>
                                 </td>
                             </tr>
                             <?php } } ?>
@@ -151,12 +159,12 @@ $sales_order_id = $_GET['sales_order_id'];
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>#</th>
                                     <th>Sales Order</th>
                                     <th>EMP ID</th>
                                     <th>Model</th>
                                     <th>Assign Time</th>
                                     <th>QTY</th>
+                                    <th>Update</th>
                                 </tr>
                             </thead>
                             <tbody class="text-uppercase">
@@ -168,18 +176,20 @@ $sales_order_id = $_GET['sales_order_id'];
                                     $query_run = mysqli_query($connection, $query);
 
                                     if ($rowcount = mysqli_fetch_assoc($query_run)) {
-                                        $i = 0;
                                         foreach($query_run as $value) {
-                                            $i++;
                                 ?>
                                 <tr>
-                                    <td><?php echo $i; ?> </td>
                                     <td><?php echo $value['sales_order_id']; ?></td>
                                     <td><?php echo $value['emp_id']; ?></td>
                                     <td><?php echo $value['model']; ?></td>
                                     <td><?php echo $value['created_time']; ?></td>
-                                    <td><span
+                                    <td>
+                                        <span
                                             class="badge bg-primary px-3"><?php echo $value['tech_assign_qty']; ?></span>
+                                    </td>
+                                    <td>
+                                        <?php 
+                                    echo "<a class='btn btn-xs bg-gradient-primary mx-2' href=\"production_assign_update.php?assign_id={$value['tech_id']}&sales_order_id={$values['sales_order_id']}&model={$values['model']}&core={$values['core']}&generation={$values['generation']}&brand={$values['brand']}&device={$values['device']}&processor={$values['processor']}\" class='text-white text-capitalize'><i class='fa-solid fa-sun mx-1'></i></a>" ?>
                                     </td>
                                 </tr>
                                 <?php } } ?>
@@ -196,4 +206,6 @@ $sales_order_id = $_GET['sales_order_id'];
 </div>
 
 
-<?php include_once('../includes/footer.php'); } ?>
+<?php include_once('../includes/footer.php'); }else{
+        die(access_denied());
+} ?>

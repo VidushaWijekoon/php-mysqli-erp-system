@@ -4,6 +4,12 @@ function Login($role_id, $department){
     if($role_id == 1 && $department == 11){
         header('Location: presentation/includes/main.php');
     }
+
+    // Admin Redirect
+    elseif($role_id == 2 && $department == 18){
+        header('Location: presentation/includes/main.php');
+    }
+    
     // Inventory Team Member Redirect
     elseif($role_id == 4 && $department == 2){
         header('Location: presentation/inventory/warehouse_dashboard.php');
