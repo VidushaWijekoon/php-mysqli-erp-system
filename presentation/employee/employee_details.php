@@ -10,8 +10,6 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
 
-$role_id = $_SESSION['role_id'];
-if($role_id == 1 || $role_id == 3 || $role_id == 8 || $role_id == 2){
 
 $emp_id = "";
 $first_name = "";
@@ -333,6 +331,4 @@ input[type="text"],
 }
 </style>
 
-<?php include_once('../includes/footer.php'); }else{
-        die(access_denied());
-} ?>
+<?php include_once('../includes/footer.php');  ?>

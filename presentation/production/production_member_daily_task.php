@@ -3,6 +3,7 @@ ob_start();
 session_start();
 include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
+include_once('../../dataAccess/403.php');
 include_once('../includes/header.php');
 
 // checking if a user is logged in
@@ -11,7 +12,9 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $role_id = $_SESSION['role_id'];
-if($role_id == 1 || $role_id == 2 || $role_id == 3 || $role_id == 4 || $role_id == 8 || $role_id == 6){
+$department = $_SESSION['department'];
+
+if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 6 && $department == 1)){
 
 $emp_id = $_SESSION['epf'];
 $inventory_id = '';
@@ -318,5 +321,5 @@ search.value = '';
 </script>
 
 <?php include_once('../includes/footer.php'); }else{
-        die("<h3 class='text-danger'><<<<<< Access Denied >>>>></h3>");
+        die(access_denied());
 } ?>

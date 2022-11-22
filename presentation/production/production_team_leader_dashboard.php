@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 
-if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
+if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1 || $role_id == 2 && $department == 18){
 
 ?>
 
@@ -38,9 +38,6 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
         <a class="btn bg-gradient-fuchsia mx-2 text-white" type="button"
             href="../part/part_warehouse_leader_dashboard.php"><i class="fa-solid fa-users"></i><span class="mx-1">Part
                 Request Form</span></a>
-        <a class="btn bg-gradient-navy mx-2 text-white" type="button" href="../part/part_stock_dashboard.php"><i
-                class="fa-solid fa-users"></i><span class="mx-1">Stock Report</span></a>
-
     </div>
 </div>
 

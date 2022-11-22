@@ -164,7 +164,7 @@ body {
 
                         <?php } ?>
 
-                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 8 && $department == 4 )) { ?>
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) ) { ?>
 
                         <!-- HR -->
                         <li class="nav-item">
@@ -196,7 +196,7 @@ body {
 
                         <?php } ?>
 
-                        <?php if(($role_id == 1 && $department == 11) || ($department == 5 )) { ?>
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18)) { ?>
 
                         <!-- Sales -->
                         <li class="nav-item">
@@ -226,7 +226,7 @@ body {
 
                         <?php } ?>
 
-                        <?php if(($role_id == 1 && $department == 11) || ($department == 5 )) { ?>
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18)) { ?>
 
                         <!-- Accounts -->
                         <li class="nav-item">
@@ -248,7 +248,7 @@ body {
 
                         <?php } ?>
 
-                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 2) || ($role_id == 11 && $department == 20)) { ?>
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 2 && $department == 4)) { ?>
 
                         <!-- Inventory -->
                         <li class="nav-item">
@@ -257,8 +257,6 @@ body {
                                 <p> Warehouse <i class="right fas fa-angle-left"></i> </p>
                             </a>
                             <ul class="nav nav-treeview">
-
-                                <?php if(($role_id == 1 && $department == 11) || ($role_id == 4 || $department == 2)) { ?>
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
@@ -282,59 +280,43 @@ body {
                                             </a>
                                         </li>
                                     </ul>
-
                                 </li>
-
-                                <?php } if(($role_id == 1 && $department == 11) || ($role_id == 4 || $department == 2)) { ?>
-
-                                <li class="nav-item">
-                                    <a href="../inventory/warehouse_stock_report.php" class="nav-link">
-                                        <i class="fa-solid fa-cubes-stacked nav-icon" style="font-size: 12px;"></i>
-                                        <p> Stock Report </p>
-                                    </a>
-                                </li>
-
-                                <?php } ?>
-
-                                <?php if(($role_id == 1 && $department == 11) || ($role_id == 11 && $department == 20))  { ?>
-                                <!-- Part -->
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa-solid fa-screwdriver-wrench nav-icon" style="font-size: 12px;"></i>
-                                        <p> Part <i class="right fas fa-angle-left"></i> </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="../part/part_warehouse_leader_dashboard.php" class="nav-link">
-                                                <i class="fa-solid fa-people-line nav-icon"
-                                                    style="font-size: 12px;"></i>
-                                                <p>Leader Dashboard</p>
-                                            </a>
-                                        </li>
-                                        <!-- <li class="nav-item">
-                                            <a href="../part/part_create_form.php" class="nav-link">
-                                                <i class="fa-solid fa-plus nav-icon" style="font-size: 12px;"></i>
-                                                <p>Add Part</p>
-                                            </a>
-                                        </li> -->
-                                        <li class="nav-item">
-                                            <a href="../part/part_stock_dashboard.php" class="nav-link">
-                                                <i class="fa-solid fa-cubes nav-icon" style="font-size: 12px;"></i>
-                                                <p>Part Stock Report</p>
-                                            </a>
-                                        </li>
-
-                                    </ul>
-                                </li>
-
-                                <?php } ?>
-
                             </ul>
                         </li>
+
                         <?php } ?>
 
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 20) || ($role_id == 4 && $department == 1)) { ?>
 
-                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 1) ) { ?>
+                        <!-- Production -->
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa-solid fa-gears"></i>
+                                <p> Part Warehouse <i class="right fas fa-angle-left"></i> </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+
+                                <li class="nav-item">
+                                    <a href="../part/part_warehouse_leader_dashboard.php" class="nav-link">
+                                        <i class="fa-solid fa-people-line nav-icon" style="font-size: 12px;"></i>
+                                        <p>Leader Dashboard</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../part/part_stock_dashboard.php" class="nav-link">
+                                        <i class="fa-solid fa-cubes nav-icon" style="font-size: 12px;"></i>
+                                        <p>Part Stock Report</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                        </li>
+
+                        <?php } ?>
+
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 1) || ($role_id == 2 && $department == 18)) { ?>
 
                         <!-- Production -->
                         <li class="nav-item">
@@ -364,7 +346,7 @@ body {
 
                         <?php } ?>
 
-                        <?php if($role_id == 1 && $department == 11) { ?>
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18)) { ?>
 
                         <!-- Motherboard -->
                         <li class="nav-item">
@@ -401,7 +383,7 @@ body {
 
                         <?php } ?>
 
-                        <?php if($role_id == 1 && $department == 11) { ?>
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18)) { ?>
 
                         <!-- LCD -->
                         <li class="nav-item">
@@ -422,7 +404,7 @@ body {
 
                         <?php } ?>
 
-                        <?php if($role_id == 1 && $department == 11) { ?>
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18)) { ?>
 
                         <!-- Battery -->
                         <li class="nav-item">
@@ -445,7 +427,7 @@ body {
 
                         <?php } ?>
 
-                        <?php if($role_id == 1 && $department == 11) { ?>
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18)) { ?>
 
                         <!-- Bodywork -->
                         <li class="nav-item">
@@ -466,7 +448,7 @@ body {
 
                         <?php } ?>
 
-                        <?php if($role_id == 1 && $department == 11) { ?>
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18)) { ?>
 
                         <!-- Sanding -->
                         <li class="nav-item">
@@ -487,7 +469,7 @@ body {
 
                         <?php } ?>
 
-                        <?php if($role_id == 1 && $department == 11) { ?>
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18)) { ?>
 
                         <!-- Painting -->
                         <li class="nav-item">
@@ -509,7 +491,7 @@ body {
 
                         <?php } ?>
 
-                        <?php if($role_id == 1 && $department == 11) { ?>
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18)) { ?>
 
                         <!-- QC -->
                         <li class="nav-item">
@@ -531,7 +513,7 @@ body {
 
                         <?php } ?>
 
-                        <?php if($role_id == 1 && $department == 11) { ?>
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18)) { ?>
 
 
                         <!-- Packing -->
@@ -557,55 +539,34 @@ body {
 
                         <li class="nav-header text-uppercase">Other</li>
 
-                        <?php if($role_id == 1 && $department == 11) { ?>
-
-                        <!-- Email -->
-                        <!-- <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-envelope"></i>
-                                <p> Mailbox <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="pages/mailbox/mailbox.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
-                                        <p>Inbox</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/mailbox/compose.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
-                                        <p>Compose</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/mailbox/read-mail.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon" style="font-size: 12px;"></i>
-                                        <p>Read</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li> -->
-
-                        <?php } ?>
-
-
-                        <!-- Search -->
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-search"></i>
-                                <p> Search <i class="fas fa-angle-left right"></i> </p>
+                            <a href="../search/general_search.php" class="nav-link">
+                                <i class="fa-solid fa-search nav-icon" style="font-size: 12px;"></i>
+                                <p> Search Device</p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../search/general_search.php" class="nav-link">
-                                        <i class="fa-solid fa-search nav-icon" style="font-size: 12px;"></i>
-                                        <p> Search </p>
-                                    </a>
-                                </li>
+                        </li>
 
-                            </ul>
+
+                        <li class="nav-item">
+                            <a href="../search/general_search.php" class="nav-link">
+                                <i class="fa-regular fa-folder-open nav-icon" style="font-size: 12px;"></i>
+                                <p> Search Sales Order </p>
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="../inventory/warehouse_stock_report.php" class="nav-link">
+                                <i class="fa-solid fa-cubes-stacked nav-icon" style="font-size: 12px;"></i>
+                                <p> Stock Report </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="../part/part_stock_dashboard.php" class="nav-link">
+                                <i class="fa-solid fa-cubes nav-icon" style="font-size: 12px;"></i>
+                                <p>Part Stock Report</p>
+                            </a>
                         </li>
 
 

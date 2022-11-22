@@ -8,6 +8,12 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
 
+$role_id = $_SESSION['role_id'];
+$department = $_SESSION['department'];
+
+if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 6 && $department == 1)){
+
+
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 $date = $date1->format('Y-m-d H:i:s');
 $dt = new DateTime;
@@ -485,6 +491,6 @@ $query_e6 = mysqli_query($connection, $query);
     </div>
 </div>
 
-
-
-<?php include_once('../includes/footer.php'); ?>
+<?php include_once('../includes/footer.php'); }else{
+        die(access_denied());
+} ?>

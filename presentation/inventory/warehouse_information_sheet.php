@@ -13,8 +13,11 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
 
-if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $role_id == 2 && $department == 18){
+$role_id = $_SESSION['role_id'];
+$department = $_SESSION['department'];
 
+if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $role_id == 2 && $department == 18){
+ 
 $errors = array();
 
 $device = "";
@@ -402,11 +405,7 @@ $dateTime = $currentDateTime->format('j-m-Y H:i:s');
     </div>
 
 </div>
-<style>
-@media print {
-    */
-}
-</style>
+
 <script>
 function printDiv(divName) {
     var printContents = document.getElementById(divName).innerHTML;

@@ -11,11 +11,10 @@ if (!isset($_SESSION['user_id'])) {
 
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
-
 $username = $_SESSION['username'];
 $sales_order_id = $_GET['sales_order_id'];
-
-if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
+ 
+if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 1)){
         
     if (isset($_POST['search'])) {
         $inventory_id = $_POST['search'];
