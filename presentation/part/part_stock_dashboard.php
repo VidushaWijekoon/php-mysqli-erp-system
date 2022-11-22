@@ -6,6 +6,14 @@ include_once('../../dataAccess/functions.php');
 include_once('../includes/header.php');
 include_once('../../dataAccess/403.php');
 
+$role_id = $_SESSION['role_id']; //4
+$department = $_SESSION['department']; //20
+echo $role_id ;
+echo "</br>";
+echo $department ;
+
+
+ 
 // checking if a user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
@@ -769,26 +777,59 @@ $values1 = array(
 <div class="row">
     <div class="col col-md-8 col-sm-8 col-lg-6 mx-5">
         <?php  echo "<span class='badge badge-lg badge-primary text-white p-2 mb-2 mt-1 px-5 text-uppercase'>$common_slot</span>";
-                if(empty($test)){}else{ ?>
+                
+        if(empty($test)){}else{ ?>
         <div class=''>Rack-01 --></div>
         <?php  foreach($test as $test1){ ?>
-        <a class="btn  bg-success mt-2" href="add_additional_part.php?scan_id=<?php echo "rack-1_".$test1[0] ?>">
-            <?php  echo $test1[0]; ?>
-        </a>
-        <?php } } if(empty($test_b)){}else{ ?>
-        <div>Rack-02 --></div>
-        <?php    foreach($test_b as $test1){ ?>
-        <a class="btn  bg-success mt-2" href="
+        <?php if($role_id == 4 && $department ==20){ ?>
+        <a class="btn  bg-danger mt-2" href="add_additional_part.php?scan_id=<?php echo "rack-1_".$test1[0] ?>">
+            <?php } else{ ?> <a class="btn  bg-danger mt-2"> <?php } ?>
+                <?php  echo $test1[0]; ?>
+            </a>
+            <?php } } 
+        
+        if(empty($test_b)){}else{ ?>
+            <div>Rack-02 --></div>
+            <?php    foreach($test_b as $test1){ ?>
+            <?php if($role_id == 4 && $department ==20){ ?>
+            <a class="btn  bg-danger mt-2" href="
             add_additional_part.php?scan_id=<?php echo "rack-2_".$test1[0] ?>">
-            <?php  echo $test1[0]; ?>
-        </a> <?php } } if(empty($test_c)){}else{ ?>
-        <div>Rack-03 --></div>
-        <?php  foreach($test_c as $test1){ ?>
-        <a class="btn  bg-success mt-2" href="
+                <?php } else{ ?> <a class="btn  bg-danger mt-2"> <?php } ?>
+                    <?php  echo $test1[0]; ?>
+                </a> <?php } } 
+        
+        if(empty($test_c)){}else{ ?>
+                <div>Rack-03 --></div>
+                <?php  foreach($test_c as $test1){ ?>
+                <?php if($role_id == 4 && $department ==20){ ?>
+                <a class="btn  bg-danger mt-2" href="
             add_additional_part.php?scan_id=<?php echo "rack-3_".$test1[0] ?>">
-            <?php  echo $test1[0]; ?>
-        </a>
-        <?php } } ?>
+                    <?php } else{ ?> <a class="btn  bg-danger mt-2"> <?php } ?>
+                        <?php  echo $test1[0]; ?>
+                    </a>
+                    <?php } }  
+        
+        if(empty($test)){}else{ ?>
+                    <div class=''>Rack-04 --></div>
+                    <?php  foreach($test as $test1){ ?>
+                    <?php if($role_id == 4 && $department ==20){ ?>
+                    <a class="btn  bg-danger mt-2"
+                        href="add_additional_part.php?scan_id=<?php echo "rack-1_".$test1[0] ?>">
+                        <?php } else{ ?> <a class="btn  bg-danger mt-2"> <?php } ?>
+                            <?php  echo $test1[0]; ?>
+                        </a>
+                        <?php } } ?>
+
+                        <?php if(empty($test)){}else{ ?>
+                        <div class=''>Rack-05 --></div>
+                        <?php  foreach($test as $test1){ ?>
+                        <?php if($role_id == 4 && $department ==20){ ?>
+                        <a class="btn  bg-danger mt-2"
+                            href="add_additional_part.php?scan_id=<?php echo "rack-1_".$test1[0] ?>">
+                            <?php } else{ ?> <a class="btn  bg-danger mt-2"> <?php } ?>
+                                <?php  echo $test1[0]; ?>
+                            </a>
+                            <?php } } ?>
     </div>
 </div>
 <div class="container-fluid">
@@ -814,7 +855,7 @@ $values1 = array(
                     }
                         $grid = createGrid(5, 20);
                         $grid = plotGridValues($grid, $values);
-                        echo renderGrid($grid ,$slot_name_search,$search_qty,$common_slot,$test);
+                        echo renderGrid($grid ,$slot_name_search,$search_qty,$common_slot,$test,$role_id,$department);
                     function createGrid($columns, $rows){
                         $grid = [];
                         $cell = 1;
@@ -834,7 +875,7 @@ $values1 = array(
                         }
                         return $grid;
                     }
-                        function renderGrid($grid ,$slot_name_search,$search_qty,$common_slot,$test){
+                        function renderGrid($grid ,$slot_name_search,$search_qty,$common_slot,$test,$role_id,$department){
                         $grid = array_reverse($grid); 
                         $i =0;                    
                ?>
@@ -851,58 +892,74 @@ $values1 = array(
                                 if($substring[3] == 0){ ?>
 
                     <!-- // slot name with empty qty -->
+                    <?php if($role_id == 4 && $department ==20){ ?>
                     <a class="btn grid_btn bg-secondary mt-2"
                         href="part_create_form.php?scan_id=<?php echo "rack-1_".$substring[0] ?>">
-                        <i class="fas fa-inbox"></i>
-                        <?php 
+                        <?php }else{ ?>
+                        <a class="btn grid_btn bg-secondary mt-2">
+                            <?php } ?>
+                            <i class="fas fa-inbox"></i>
+                            <?php 
                             echo $substring[0]."</br>";
                             echo "</br>";
                             echo "</br>";
                             echo "</br>";
                         ?>
-                    </a>
-                    <?php }else{  
+                        </a>
+                        <?php }else{  
                     // <!-- slot with value -->
                     if(empty($test)) { ?>
-                    <a class="btn grid_btn bg-success mt-2" href="
+                        <?php if($role_id == 4 && $department ==20){ ?>
+                        <a class="btn grid_btn bg-success mt-2" href="
                                 add_additional_part.php?scan_id=<?php echo "rack-1_".$substring[0] ?>">
-                        <i class="fas fa-inbox"></i>
-                        <?php
+                            <?php }else{ ?>
+                            <a class="btn grid_btn bg-success mt-2">
+                                <i class="fas fa-inbox"></i>
+                                <?php
+                                }
                             echo $substring[0]."</br>";
                             echo $substring[1]."</br>";
                             echo $substring[2]."</br>";
                             echo $substring[3]."</br>";
                          ?>
-                    </a>
-                    <?php } else {   
+                            </a>
+                            <?php } else {   
                         foreach($test as $a){
                             if($substring[0] == $a[0]) { ?>
-                    <a class="btn grid_btn bg-danger mt-2" href="
+                            <?php if($role_id == 4 && $department ==20){ ?>
+                            <a class="btn grid_btn bg-success mt-2" href="
                                 add_additional_part.php?scan_id=<?php echo "rack-1_".$substring[0] ?>">
-                        <i class="fas fa-inbox"></i>
-                        <?php
+                                <?php } else { ?>
+                                <a class="btn grid_btn bg-danger mt-2">
+                                    <?php } ?>
+                                    <i class="fas fa-inbox"></i>
+                                    <?php
                             echo $substring[0]."</br>";
                             echo $substring[1]."</br>";
                             echo $substring[2]."</br>";
                             echo $substring[3]."</br>";
                             $substring[0] =5;
                         ?>
-                    </a>
-                    <?php
+                                </a>
+                                <?php
                         // echo $a[0]."----".$slot_name_search;
                         // echo "</br>";
                     } } if($substring[0] != 5){ ?>
-                    <a class="btn grid_btn bg-secondary mt-2" href="
+                                <?php if($role_id == 4 && $department ==20){ ?>
+                                <a class="btn grid_btn bg-secondary mt-2" href="
                             part_create_form.php?scan_id=<?php echo "rack-1_".$substring[0] ?>">
-                        <i class="fas fa-inbox"></i>
-                        <?php 
+                                    <?php } else{ ?>
+                                    <a class="btn grid_btn bg-secondary mt-2">
+                                        <?php } ?>
+                                        <i class="fas fa-inbox"></i>
+                                        <?php 
                             echo $substring[0]."</br>";
                             echo "</br>";
                             echo "</br>";
                             echo "</br>";
                         ?>
-                    </a>
-                    <?php } } } } }  ?>
+                                    </a>
+                                    <?php } } } } }  ?>
                 </div>
             </div>
             <?php } ?>
@@ -929,7 +986,7 @@ $values1 = array(
             }
             $grid1 = createGrid1(5, 20);
             $grid1 = plotGridValues1($grid1, $values1);
-            echo renderGrid1($grid1,$slot_name_search_B,$search_qty_B,$common_slot,$test_b);
+            echo renderGrid1($grid1,$slot_name_search_B,$search_qty_B,$common_slot,$test_b,$role_id,$department);
             function createGrid1($columns, $rows)
             {
             $grid1 = [];
@@ -951,7 +1008,7 @@ $values1 = array(
             }
             return $grid1;
             }
-            function renderGrid1($grid1 ,$slot_name_search_b,$search_qty_b,$common_slot,$test_b)
+            function renderGrid1($grid1 ,$slot_name_search_b,$search_qty_b,$common_slot,$test_b,$role_id,$department)
             {
             $grid1 = array_reverse($grid1); 
             $i =0;
@@ -972,62 +1029,78 @@ $values1 = array(
                     if($substring[3] == 0){ 
                         ?>
                     <!-- // slot name with empty qty -->
-
+                    <?php if($role_id == 4 && $department ==20){ ?>
                     <a class="btn grid_btn bg-secondary mt-2" href="
                             part_create_form.php?scan_id=<?php echo "rack-2_".$substring[0] ?>">
-                        <i class="fas fa-inbox"></i>
-                        <?php 
+                        <?php } else { ?>
+                        <a class="btn grid_btn bg-secondary mt-2">
+                            <?php } ?>
+                            <i class="fas fa-inbox"></i>
+                            <?php 
                echo $substring[0]."</br>";
                echo "</br>";
                echo "</br>";
                echo "</br>";
                 ?>
-                    </a>
-                    <?php }else{ ?>
+                        </a>
+                        <?php }else{ ?>
 
 
-                    <!-- slot with value -->
-                    <?php if(empty($test_b)){?>
-
-                    <a class="btn grid_btn bg-success mt-2" href="
+                        <!-- slot with value -->
+                        <?php if(empty($test_b)){?>
+                        <?php if($role_id == 4 && $department ==20){ ?>
+                        <a class="btn grid_btn bg-success mt-2" href="
                                 add_additional_part.php?scan_id=<?php echo "rack-2_".$substring[0] ?>">
-                        <i class="fas fa-inbox"></i>
-                        <?php
+                            <?php } else { ?>
+                            <a class="btn grid_btn bg-success mt-2">
+                                <?php } ?>
+                                <i class="fas fa-inbox"></i>
+                                <?php
                echo $substring[0]."</br>";
                echo $substring[1]."</br>";
                echo $substring[2]."</br>";
                echo $substring[3]."</br>";
                 ?>
-                    </a>
-                    <?php }else{  
+                            </a>
+                            <?php }else{  
             foreach($test_b as $a){
                if($substring[0] == $a[0] ){ ?>
-                    <a class="btn grid_btn bg-danger mt-2" href="
+                            <?php if($role_id == 4 && $department ==20){ ?>
+                            <a class="btn grid_btn bg-danger mt-2" href="
                                 add_additional_part.php?scan_id=<?php echo "rack-2_".$substring[0] ?>">
-                        <i class="fas fa-inbox"></i>
-                        <?php
+                                <?php } else { ?>
+                                <a class="btn grid_btn bg-danger mt-2">
+                                    <?php } ?>
+
+                                    <i class="fas fa-inbox"></i>
+                                    <?php
                        echo $substring[0]."</br>";
                        echo $substring[1]."</br>";
                        echo $substring[2]."</br>";
                        echo $substring[3]."</br>";
                        $substring[0] =5;
                         ?>
-                    </a><?php
+                                </a><?php
                // echo $a[0]."----".$slot_name_search;
                // echo "</br>";
            } } if($substring[0] != 5){ ?>
-                    <a class="btn grid_btn bg-secondary mt-2" href="
+                                <?php if($role_id == 4 && $department ==20){ ?>
+                                <a class="btn grid_btn bg-secondary mt-2" href="
                             part_create_form.php?scan_id=<?php echo "rack-2_".$substring[0] ?>">
-                        <i class="fas fa-inbox"></i>
-                        <?php 
+                                    <?php } else { ?>
+                                    <a class="btn grid_btn bg-secondary mt-2">
+                                        <?php } ?>
+
+                                        <i class="fas fa-inbox"></i>
+                                        <?php 
                echo $substring[0]."</br>";
                echo "</br>";
                echo "</br>";
                echo "</br>";
                 ?>
-                    </a>
+                                    </a>
 
-                    <?php } } } } } ?>
+                                    <?php } } } } } ?>
 
                 </div>
             </div>
@@ -1055,7 +1128,7 @@ $values1 = array(
             }
             $grid2 = createGrid2(5, 20);
             $grid2 = plotGridValues2($grid2, $values2);
-            echo renderGrid2($grid2,$slot_name_search_C,$search_qty_C,$common_slot,$test_c);
+            echo renderGrid2($grid2,$slot_name_search_C,$search_qty_C,$common_slot,$test_c,$role_id,$department);
             function createGrid2($columns, $rows)
             {
             $grid2 = [];
@@ -1077,7 +1150,7 @@ $values1 = array(
             }
             return $grid2;
             }
-            function renderGrid2($grid2 ,$slot_name_search_c,$search_qty_c,$common_slot,$test_c)
+            function renderGrid2($grid2 ,$slot_name_search_c,$search_qty_c,$common_slot,$test_c,$role_id,$department)
             {
             $grid2 = array_reverse($grid2); 
             $i =0;
@@ -1098,62 +1171,79 @@ $values1 = array(
                     //   empty qty 
                     if($substring[3] == 0){ ?>
                     <!-- // slot name with empty qty -->
-
+                    <?php if($role_id == 4 && $department ==20){ ?>
                     <a class="btn grid_btn bg-secondary mt-2" href="
                             part_create_form.php?scan_id=<?php echo "rack-3_".$substring[0] ?>">
-                        <i class="fas fa-inbox"></i>
-                        <?php 
+                        <?php } else { ?>
+                        <a class="btn grid_btn bg-secondary mt-2">
+                            <?php } ?>
+                            <i class="fas fa-inbox"></i>
+                            <?php 
                echo $substring[0]."</br>";
                echo "</br>";
                echo "</br>";
                echo "</br>";
                 ?>
-                    </a>
-                    <?php }else{
+                        </a>
+                        <?php }else{
                  
                ?>
-                    <!-- slot with value -->
-                    <?php if(empty($test_c)){?>
-
-                    <a class="btn grid_btn bg-success mt-2" href="
+                        <!-- slot with value -->
+                        <?php if(empty($test_c)){?>
+                        <?php if($role_id == 4 && $department ==20){ ?>
+                        <a class="btn grid_btn bg-success mt-2" href="
                                 add_additional_part.php?scan_id=<?php echo "rack-3_".$substring[0] ?>">
-                        <i class="fas fa-inbox"></i>
-                        <?php
+                            <?php } else { ?>
+                            <a class="btn grid_btn bg-success mt-2">
+                                <?php } ?>
+
+                                <i class="fas fa-inbox"></i>
+                                <?php
                echo $substring[0]."</br>";
                echo $substring[1]."</br>";
                echo $substring[2]."</br>";
                echo $substring[3]."</br>";
                 ?>
-                    </a>
-                    <?php }else{ 
+                            </a>
+                            <?php }else{ 
             foreach($test_c as $a){
                if($substring[0] == $a[0] ){ ?>
-                    <a class="btn grid_btn bg-danger mt-2" href="
+                            <?php if($role_id == 4 && $department ==20){ ?>
+                            <a class="btn grid_btn bg-danger mt-2" href="
                                 add_additional_part.php?scan_id=<?php echo "rack-3_".$substring[0] ?>">
-                        <i class="fas fa-inbox"></i>
-                        <?php
+                                <?php } else { ?>
+                                <a class="btn grid_btn bg-danger mt-2">
+                                    <?php } ?>
+
+                                    <i class="fas fa-inbox"></i>
+                                    <?php
                        echo $substring[0]."</br>";
                        echo $substring[1]."</br>";
                        echo $substring[2]."</br>";
                        echo $substring[3]."</br>";
                        $substring[0] =5;
                         ?>
-                    </a><?php
+                                </a><?php
                // echo $a[0]."----".$slot_name_search;
                // echo "</br>";
            } } if($substring[0] != 5){ ?>
-                    <a class="btn grid_btn bg-secondary mt-2" href="
+                                <?php if($role_id == 4 && $department ==20){ ?>
+                                <a class="btn grid_btn bg-secondary mt-2" href="
                             part_create_form.php?scan_id=<?php echo "rack-3_".$substring[0] ?>">
-                        <i class="fas fa-inbox"></i>
-                        <?php 
+                                    <?php } else { ?>
+                                    <a class="btn grid_btn bg-secondary mt-2">
+                                        <?php } ?>
+
+                                        <i class="fas fa-inbox"></i>
+                                        <?php 
                echo $substring[0]."</br>";
                echo "</br>";
                echo "</br>";
                echo "</br>";
                 ?>
-                    </a>
+                                    </a>
 
-                    <?php } } } } } ?>
+                                    <?php } } } } } ?>
 
 
                 </div>
@@ -1186,7 +1276,7 @@ $values1 = array(
             }
             $grid3 = createGrid3(5, 20);
             $grid3 = plotGridValues3($grid3, $values3);
-            echo renderGrid3($grid3,$slot_name_search_C,$search_qty_C,$common_slot,$test_c);
+            echo renderGrid3($grid3,$slot_name_search_d,$search_qty_d,$common_slot,$test_d,$role_id,$department);
             function createGrid3($columns, $rows)
             {
             $grid3 = [];
@@ -1208,7 +1298,7 @@ $values1 = array(
             }
             return $grid3;
             }
-            function renderGrid3($grid3 ,$slot_name_search_c,$search_qty_c,$common_slot,$test_c)
+            function renderGrid3($grid3 ,$slot_name_search_d,$search_qty_d,$common_slot,$test_d,$role_id,$department)
             {
             $grid3 = array_reverse($grid3); 
             $i =0;
@@ -1228,62 +1318,81 @@ $values1 = array(
                     //   empty qty 
                     if($substring[3] == 0){ ?>
                     <!-- // slot name with empty qty -->
-
+                    <?php if($role_id == 4 && $department ==20){ ?>
                     <a class="btn grid_btn bg-secondary mt-2" href="
                             part_create_form.php?scan_id=<?php echo "rack-4_".$substring[0] ?>">
-                        <i class="fas fa-inbox"></i>
-                        <?php 
+                        <?php } else { ?>
+                        <a class="btn grid_btn bg-secondary mt-2">
+                            <?php } ?>
+
+
+                            <i class="fas fa-inbox"></i>
+                            <?php 
                echo $substring[0]."</br>";
                echo "</br>";
                echo "</br>";
                echo "</br>";
                 ?>
-                    </a>
-                    <?php }else{
+                        </a>
+                        <?php }else{
                  
                ?>
-                    <!-- slot with value -->
-                    <?php if(empty($test_d)){?>
-
-                    <a class="btn grid_btn bg-success mt-2" href="
+                        <!-- slot with value -->
+                        <?php if(empty($test_d)){?>
+                        <?php if($role_id == 4 && $department ==20){ ?>
+                        <a class="btn grid_btn bg-success mt-2" href="
                                 add_additional_part.php?scan_id=<?php echo "rack-4_".$substring[0] ?>">
-                        <i class="fas fa-inbox"></i>
-                        <?php
+                            <?php } else { ?>
+                            <a class="btn grid_btn bg-success mt-2">
+                                <?php } ?>
+
+                                <i class="fas fa-inbox"></i>
+                                <?php
                echo $substring[0]."</br>";
                echo $substring[1]."</br>";
                echo $substring[2]."</br>";
                echo $substring[3]."</br>";
                 ?>
-                    </a>
-                    <?php }else{ 
+                            </a>
+                            <?php }else{ 
             foreach($test_d as $a){
                if($substring[0] == $a[0] ){ ?>
-                    <a class="btn grid_btn bg-danger mt-2" href="
+                            <?php if($role_id == 4 && $department ==20){ ?>
+                            <a class="btn grid_btn bg-danger mt-2" href="
                                 add_additional_part.php?scan_id=<?php echo "rack-4_".$substring[0] ?>">
-                        <i class="fas fa-inbox"></i>
-                        <?php
+                                <?php } else { ?>
+                                <a class="btn grid_btn bg-danger mt-2">
+                                    <?php } ?>
+
+                                    <i class="fas fa-inbox"></i>
+                                    <?php
                        echo $substring[0]."</br>";
                        echo $substring[1]."</br>";
                        echo $substring[2]."</br>";
                        echo $substring[3]."</br>";
                        $substring[0] =5;
                         ?>
-                    </a><?php
+                                </a><?php
                // echo $a[0]."----".$slot_name_search;
                // echo "</br>";
            } } if($substring[0] != 5){ ?>
-                    <a class="btn grid_btn bg-secondary mt-2" href="
+                                <?php if($role_id == 4 && $department ==20){ ?>
+                                <a class="btn grid_btn bg-secondary mt-2" href="
                             part_create_form.php?scan_id=<?php echo "rack-4_".$substring[0] ?>">
-                        <i class="fas fa-inbox"></i>
-                        <?php 
+                                    <?php } else { ?>
+                                    <a class="btn grid_btn bg-secondary mt-2">
+                                        <?php } ?>
+
+                                        <i class="fas fa-inbox"></i>
+                                        <?php 
                echo $substring[0]."</br>";
                echo "</br>";
                echo "</br>";
                echo "</br>";
                 ?>
-                    </a>
+                                    </a>
 
-                    <?php } } } } } ?>
+                                    <?php } } } } } ?>
 
 
                 </div>
@@ -1314,7 +1423,7 @@ $values1 = array(
             }
             $grid4 = createGrid4(5, 20);
             $grid4 = plotGridValues4($grid4, $values4);
-            echo renderGrid4($grid4,$slot_name_search_e,$search_qty_e,$common_slot,$test_e);
+            echo renderGrid4($grid4,$slot_name_search_e,$search_qty_e,$common_slot,$test_e,$role_id,$department);
             function createGrid4($columns, $rows)
             {
             $grid4 = [];
@@ -1336,7 +1445,7 @@ $values1 = array(
             }
             return $grid4;
             }
-            function renderGrid4($grid4 ,$slot_name_search_e,$search_qty_e,$common_slot,$test_e)
+            function renderGrid4($grid4 ,$slot_name_search_e,$search_qty_e,$common_slot,$test_e,$role_id,$department)
             {
             $grid4 = array_reverse($grid4); 
             $i =0;
@@ -1356,62 +1465,80 @@ $values1 = array(
                     //   empty qty 
                     if($substring[3] == 0){ ?>
                     <!-- // slot name with empty qty -->
-
+                    <?php if($role_id == 4 && $department ==20){ ?>
                     <a class="btn grid_btn bg-secondary mt-2" href="
                             part_create_form.php?scan_id=<?php echo "rack-5_".$substring[0] ?>">
-                        <i class="fas fa-inbox"></i>
-                        <?php 
+                        <?php } else { ?>
+                        <a class="btn grid_btn bg-secondary mt-2">
+                            <?php } ?>
+
+                            <i class="fas fa-inbox"></i>
+                            <?php 
                echo $substring[0]."</br>";
                echo "</br>";
                echo "</br>";
                echo "</br>";
                 ?>
-                    </a>
-                    <?php }else{
+                        </a>
+                        <?php }else{
                  
                ?>
-                    <!-- slot with value -->
-                    <?php if(empty($test_d)){?>
-
-                    <a class="btn grid_btn bg-success mt-2" href="
+                        <!-- slot with value -->
+                        <?php if(empty($test_d)){?>
+                        <?php if($role_id == 4 && $department ==20){ ?>
+                        <a class="btn grid_btn bg-success mt-2" href="
                                 add_additional_part.php?scan_id=<?php echo "rack-5_".$substring[0] ?>">
-                        <i class="fas fa-inbox"></i>
-                        <?php
+                            <?php } else { ?>
+                            <a class="btn grid_btn bg-success mt-2">
+                                <?php } ?>
+
+                                <i class="fas fa-inbox"></i>
+                                <?php
                echo $substring[0]."</br>";
                echo $substring[1]."</br>";
                echo $substring[2]."</br>";
                echo $substring[3]."</br>";
                 ?>
-                    </a>
-                    <?php }else{ 
+                            </a>
+                            <?php }else{ 
             foreach($test_d as $a){
                if($substring[0] == $a[0] ){ ?>
-                    <a class="btn grid_btn bg-danger mt-2" href="
+                            <?php if($role_id == 4 && $department ==20){ ?>
+                            <a class="btn grid_btn bg-danger mt-2" href="
                                 add_additional_part.php?scan_id=<?php echo "rack-5_".$substring[0] ?>">
-                        <i class="fas fa-inbox"></i>
-                        <?php
+                                <?php } else { ?>
+                                <a class="btn grid_btn bg-danger mt-2">
+                                    <?php } ?>
+
+                                    <i class="fas fa-inbox"></i>
+                                    <?php
                        echo $substring[0]."</br>";
                        echo $substring[1]."</br>";
                        echo $substring[2]."</br>";
                        echo $substring[3]."</br>";
                        $substring[0] =5;
                         ?>
-                    </a><?php
+                                </a><?php
                // echo $a[0]."----".$slot_name_search;
                // echo "</br>";
            } } if($substring[0] != 5){ ?>
-                    <a class="btn grid_btn bg-secondary mt-2" href="
+                                <?php if($role_id == 4 && $department ==20){ ?>
+                                <a class="btn grid_btn bg-secondary mt-2" href="
                             part_create_form.php?scan_id=<?php echo "rack-5_".$substring[0] ?>">
-                        <i class="fas fa-inbox"></i>
-                        <?php 
+                                    <?php } else { ?>
+                                    <a class="btn grid_btn bg-secondary mt-2">
+                                        <?php } ?>
+
+                                        <i class="fas fa-inbox"></i>
+                                        <?php 
                echo $substring[0]."</br>";
                echo "</br>";
                echo "</br>";
                echo "</br>";
                 ?>
-                    </a>
+                                    </a>
 
-                    <?php } } } } } ?>
+                                    <?php } } } } } ?>
 
 
                 </div>

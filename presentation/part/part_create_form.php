@@ -11,7 +11,7 @@ $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 
 
-if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 20)){
+if($role_id == 1 && $department == 11 || $role_id == 2 && $department == 18 || $role_id == 11 && $department == 20){
   
 // checking if a user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -48,11 +48,11 @@ if(isset($_POST['submit'])){
         $_SESSION['model'] = $model;
         $_SESSION['rack_number'] = $rack_number;  
         ////////////////////////////////////////////////////////////////////////////////////////
-        $tempDir = 'temp/'; 
-        $email = $rack_number."_".$slot_name;
-        $filename = $email;
-        $codeContents = $email; 
-        QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5);      
+        // $tempDir = 'temp/'; 
+        // $email = $rack_number."_".$slot_name;
+        // $filename = $email;
+        // $codeContents = $email; 
+        // QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5);      
 
 
         

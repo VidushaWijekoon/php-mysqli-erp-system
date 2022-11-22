@@ -1,4 +1,5 @@
 <?php 
+ob_start();
 session_start();
 include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
@@ -116,7 +117,11 @@ if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) 
                                             $received_qty =0;
                                             foreach($query_result2 as $a){
                                                 $received_qty = $a['production_id'];
-                                                echo '<span class="badge badge-lg badge-info text-white px-2 received_qty">Receiving Total: '.$received_qty.'</span>';
+                                                echo '<a class="badge badge-lg badge-info text-white p-2 mx-2 received_qty">Receiving Total: '.$received_qty.'</a>';
+                                                if($received_qty == $order_qty){
+                                                    echo '<a class="badge badge-lg badge-success text-white p-2 received_qty" href="./production_team_leader_dashboard.php" >Task Completed</a>';
+                                                    // header("location: ./production_team_leader_dashboard.php");
+                                                }
                                             }
                                             ////////////////////////////////////////////////////
                                             
@@ -124,7 +129,7 @@ if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) 
                                             if (mysqli_fetch_assoc($result)) {
                                                 foreach ($result as $items) {
                                                     $i++;
-                                                    
+                                                     
                                         ?>
 
                                     <tr class="text-uppercase">

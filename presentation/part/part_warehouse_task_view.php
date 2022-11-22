@@ -10,8 +10,9 @@ $department = $_SESSION['department'];
 
 
 if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 1) || ($role_id == 4 && $department == 20)){
+if($role_id == 1 && $department == 11 || $role_id == 2 && $department == 18 || $role_id == 4 && $department == 20 || $role_id == 4 && $department == 1){
     $prod_t_l = 0;
-    if( $role_id == 10 && $department == 1 ){
+    if( $role_id == 4 && $department == 1 ){
         $prod_t_l =1;
     }
 // checking if a user is logged in
@@ -662,6 +663,7 @@ $item_brand=0;
                                 // }
                                 header('Location: part_warehouse_leader_dashboard.php');
                             }?>
+                                <?php if($prod_t_l == 0){ ?>
                                 <form action="" method="POST">
                                     <td>Prepared</td>
                                     <td><input type="text" id="keyboard" name="keyboard"></td>
@@ -684,13 +686,13 @@ $item_brand=0;
                                     <td><input type="text" id="c_panel_palm_rest" name="c_panel_palm_rest"></td>
                                     <td><input type="text" id="mb_base" name="mb_base"></td>
                                     <td><input type="text" id="hings_cover" name="hings_cover"></td>
-                                    <?php if($prod_t_l == 0){ ?>
+
                                     <td><input type="submit" class="btn btn-xs bg-gradient-info" name="submit"
                                             value="update"></td>
-                                    <?php } ?>
+
 
                                 </form>
-
+                                <?php } ?>
                             </tr>
                             <?php 
 
