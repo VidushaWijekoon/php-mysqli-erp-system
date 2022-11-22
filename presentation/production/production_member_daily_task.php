@@ -150,6 +150,9 @@ foreach($query_tech as $data){
                                                         <th>Core</th>
                                                         <th>Generation</th>
                                                         <th>Processor</th>
+                                                        <th>RAM</th>
+                                                        <th>HDD</th>
+                                                        <th>Order QTY</th>
                                                         <th style="width: 40px">Assign QTY</th>
                                                     </tr>
                                                 </thead>
@@ -157,7 +160,9 @@ foreach($query_tech as $data){
                                                     <tr>
                                                         <?php
                                     
-                                                            $query = "SELECT * FROM prod_technician_assign_info WHERE tech_id = '{$tech_id}'; ";
+                                                            $query = "SELECT *,item_ram,item_hdd,item_quantity FROM prod_technician_assign_info 
+                                                            LEFT JOIN sales_order_add_items ON sales_order_add_items.sales_order_id = prod_technician_assign_info.sales_order_id
+                                                             WHERE tech_id = '{$tech_id}'; ";
 
                                                             $query_run = mysqli_query($connection, $query);
 
@@ -174,6 +179,9 @@ foreach($query_tech as $data){
                                                         <td><?php echo $value['core']; ?></td>
                                                         <td><?php echo $value['generation']; ?></td>
                                                         <td><?php echo $value['processor']; ?></td>
+                                                        <td><?php echo $value['item_ram']."GB"; ?></td>
+                                                        <td><?php echo $value['item_hdd']; ?></td>
+                                                        <td><?php echo $value['item_quantity']; ?></td>
 
                                                         <td><span class="badge bg-primary px-3"><?php echo $value['tech_assign_qty']; 
                                                                 ?></span>
