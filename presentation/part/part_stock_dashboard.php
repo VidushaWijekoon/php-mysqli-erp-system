@@ -672,9 +672,9 @@ $values1 = array(
                 $search_qty_e =0;
                 $rack_number_a = 'RACK-1';
                 $rack_number_b = 'RACK-2';
-                $rack_number_c = 'RACK-3';
-                $rack_number_d = 'RACK-4';
-                $rack_number_e = 'RACK-5';
+                $rack_number_c = 'rack-3';
+                $rack_number_d = 'rack-4';
+                $rack_number_e = 'rack-5';
                 $common_slot = null;
                 $test = null;
                 $test_b = null;
@@ -687,12 +687,14 @@ $values1 = array(
                 $model;
                 
                 if (isset($_POST['submit'])) {
+                    
                     $item_name = mysqli_real_escape_string($connection, $_POST['part_name']);
                     $model = mysqli_real_escape_string($connection, $_POST['model']);
-                    $common_slot =  $item_name;                          
+                    $common_slot =  $item_name;                       
                             
                     $query = "SELECT * FROM part_stock WHERE  part_model = '{$model}' AND part_name ='{$item_name}' ";                           
                     $result_set = mysqli_query($connection, $query);
+
 
                     $i =0;
                     foreach($result_set as $data){                                                
@@ -710,12 +712,14 @@ $values1 = array(
                                 $search_qty_B =$data['qty'];
                                 $test_b[$i] =array($data['slot_name']);
                                 $i++;
+                               
                             }
                             elseif($data['rack_number'] == $rack_number_c){
                                 $slot_name_search_C = $data['slot_name'];
                                 $search_qty_C =$data['qty'];
                                 $test_c[$i] =array($data['slot_name']);
                                 $i++;
+                                echo "im here";
                             } elseif($data['rack_number'] == $rack_number_d){
                                  $slot_name_search_d = $data['slot_name'];
                                  $search_qty_d =$data['qty'];
@@ -761,24 +765,23 @@ $values1 = array(
     </div>
 </div>
 <div class="row">
-    <div class="col col-md-8 col-sm-8 col-lg-6">
+    <div class="col col-md-8 col-sm-8 col-lg-6 mx-5">
         <?php  echo "<span class='badge badge-lg badge-primary text-white p-2 mb-2 mt-1 px-5 text-uppercase'>$common_slot</span>";
-                if(empty($test)){}else{
-                    echo "<div class=''>Rack-01 --></div>";
-                    foreach($test as $test1){ ?>
-        <a class="btn  bg-success mt-2" href="
-            add_additional_part.php?scan_id=<?php echo "rack-1_".$test1[0] ?>">
+                if(empty($test)){}else{ ?>
+        <div class=''>Rack-01 --></div>
+        <?php  foreach($test as $test1){ ?>
+        <a class="btn  bg-success mt-2" href="add_additional_part.php?scan_id=<?php echo "rack-1_".$test1[0] ?>">
             <?php  echo $test1[0]; ?>
         </a>
-        <?php } } if(empty($test_b)){}else{
-            echo "<div>Rack-02 --></div>";
-                    foreach($test_b as $test1){ ?>
+        <?php } } if(empty($test_b)){}else{ ?>
+        <div>Rack-02 --></div>
+        <?php    foreach($test_b as $test1){ ?>
         <a class="btn  bg-success mt-2" href="
             add_additional_part.php?scan_id=<?php echo "rack-2_".$test1[0] ?>">
             <?php  echo $test1[0]; ?>
-        </a> <?php } } if(empty($test_c)){}else{
-            echo "<div>Rack-03 --></div>";
-            foreach($test_c as $test1){ ?>
+        </a> <?php } } if(empty($test_c)){}else{ ?>
+        <div>Rack-03 --></div>
+        <?php  foreach($test_c as $test1){ ?>
         <a class="btn  bg-success mt-2" href="
             add_additional_part.php?scan_id=<?php echo "rack-3_".$test1[0] ?>">
             <?php  echo $test1[0]; ?>
@@ -837,7 +840,7 @@ $values1 = array(
                 <div class="card-header" ;>
                     <h4 class=" card-title">Rack 01</h4>
                 </div>
-                <div class="card-body">
+                <div class="card-body text-center">
                     <?php  
                     foreach ($grid as $row) {                         
                         foreach ($row as $k=>$v) { 
