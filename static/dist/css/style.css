@@ -450,3 +450,9 @@ input:-webkit-autofill:active {
     margin: 0 0 0 -10px;
   }
 }
+
+.grid_btn {
+  min-height: 130px;
+  width: 90px;
+  font-size: 10px;
+}
