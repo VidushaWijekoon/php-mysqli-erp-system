@@ -17,7 +17,7 @@ function Login($role_id, $department){
     }
     
     // Part Team Redirect
-    elseif($role_id == 11 && $department == 20){
+    elseif($role_id == 4 && $department == 20){
         header('Location: presentation/part/part_warehouse_leader_dashboard.php');
     }
     

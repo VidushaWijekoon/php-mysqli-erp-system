@@ -305,7 +305,7 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1){
                                         href=\"production_team_leader_summery.php?sales_order_id={$items['sales_order_id']}\"><i
                                        class='fas fa-eye'></i> </a>";
                                        echo "<a class='btn btn-xs bg-primary'
-                                        href=\"production_received_qty.php?sales_order_id={$items['sales_order_id']}\"><i
+                                        href=\"production_received_qty.php?sales_order_id={$items['sales_order_id']}&qty={$row['No_of_Records']}\"><i
                                        class='fa-solid fa-qrcode'></i> </a>";
                                 ?>
                             </td>
