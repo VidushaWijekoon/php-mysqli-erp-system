@@ -646,7 +646,7 @@ if(isset($_POST['motherboard_submit'])){
                             <div class="icheck-danger d-inline">
                                 <input type="radio" id="r4" name="no_power" value="1">
                                 <label class="label_values" for="r4">No </label>
-                            </div>
+                            </div>$camera_cable1
                         </div>
                         <?php } elseif($no_power == 1){ ?>
                         <div class="col-sm-8 mt-2">
@@ -719,6 +719,12 @@ if(isset($_POST['motherboard_submit'])){
 
 if(isset($_POST['combine_form'])){
     $scan_id =0;
+
+    if( empty($_POST['scan_id'])){
+        $scan_id =0;
+    }else{
+        $scan_id= mysqli_real_escape_string($connection,  $_POST['scan_id']);
+    }
     $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
     $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
     $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
@@ -743,7 +749,7 @@ if(isset($_POST['combine_form'])){
     $mb_base= mysqli_real_escape_string($connection,  $_POST['mb_base']);
     $hings_cover= mysqli_real_escape_string($connection,  $_POST['hings_cover']);
     $lan_cover= mysqli_real_escape_string($connection,  $_POST['lan_cover']);
-    $scan_id= mysqli_real_escape_string($connection,  $_POST['scan_id']);
+    
 
 
     $query = "SELECT location FROM users WHERE epf = '$emp_id'";
@@ -753,7 +759,7 @@ if(isset($_POST['combine_form'])){
         $location10 = $a['location'];
     }   
     $status = 0;
-     if($keyboard == 1 || $Keys == 1 || $speakers == 1 || $camera ==1 || $bazel ==1 || $mousepad == 1 || $mouse_pad_button == 1 || $camera_cable == 1 || $back_cover ==1 || $wifi_card ==1 ||
+     if($keyboard == 1 || $keys == 1 || $speakers == 1 || $camera ==1 || $bazel ==1 || $mousepad == 1 || $mouse_pad_button == 1 || $camera_cable == 1 || $back_cover ==1 || $wifi_card ==1 ||
      $lcd_cable == 1 || $battery == 1 || $battery_cable == 1 || $dvd_rom ==1 || $dvd_caddy ==1 ||
       $hdd_caddy == 1 || $hdd_cable_connector == 1 || $c_panel_palm_rest == 1 || $mb_base ==1 || $hings_cover ==1 || $lan_cover ==1){
         $status = 1;
@@ -781,6 +787,7 @@ if(isset($_POST['combine_form'])){
                 '$camera_cable','$back_cover','$wifi_card','$lcd_cable','$battery','$battery_cable','$dvd_rom','$dvd_caddy','$hdd_caddy','$hdd_cable_connector',
                 '$c_panel_palm_rest','$mb_base','$hings_cover','$lan_cover', 0)";
     $query_run = mysqli_query($connection, $query_com);
+    
    
     if($scan_id !=0){
        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -889,7 +896,9 @@ if(isset($_POST['combine_form'])){
         inventory_id = '$inventory_id'";
         $query_run = mysqli_query($connection, $query_update);
     }
+   
     $query_update_part = "UPDATE `requested_part_from_production` SET `status`='0' ,switch = '1',switch_id ='$scan_id' WHERE `inventory_id`='$inventory_id';";
+
     $query_run = mysqli_query($connection, $query_update_part);
     $query_1 ="SELECT  `status`FROM `requested_part_from_production` WHERE inventory_id = $inventory_id";
                                                             $query_run = mysqli_query($connection, $query_1);
@@ -959,10 +968,7 @@ $(document).ready(function() {
 });
 
 //////////////////////////////////////////////////////////////////
-// setInterval(
-//     function() {
-//         document.getElementById("scan_id").value = "";
-//     }, 30000);
+
 
 function ClearInputField() {
     document.getElementsByName('scan_id').val("");

@@ -238,7 +238,7 @@ foreach($query_tech as $data){
                                                 <?php if( $values['end_date_time'] == '0000-00-00 00:00:00') {?>
                                                 <span class="badge badge-lg badge-danger text-white">Not Finished</span>
                                                 <?php } else { ?>
-                                                <span><?php echo $values['start_date_time'] ?></span>
+                                                <span><?php echo $values['end_date_time'] ?></span>
                                                 <?php } ?>
                                             </td>
                                             <td>
