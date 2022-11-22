@@ -769,7 +769,7 @@ if(isset($_POST['combine_form'])){
             echo $query_6;
             
          $query_new = mysqli_query($connection, $query_6);
-         exit();
+        
          
      }
     if($lunch_combine == 1){
