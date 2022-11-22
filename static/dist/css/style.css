@@ -449,6 +449,12 @@ input:-webkit-autofill:active {
     font-size: 8px;
     margin: 0 0 0 -10px;
   }
+
+  .grid_btn {
+    min-height: 90px !important;
+    width: 55px !important;
+    font-size: 6px !important;
+  }
 }
 
 .grid_btn {

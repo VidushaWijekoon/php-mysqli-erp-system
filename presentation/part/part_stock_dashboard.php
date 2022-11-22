@@ -6,14 +6,16 @@ include_once('../../dataAccess/functions.php');
 include_once('../includes/header.php');
 include_once('../../dataAccess/403.php');
 
-$role_id = $_SESSION['role_id'];
-$department = $_SESSION['department'];
-
- 
 // checking if a user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
+
+$role_id = $_SESSION['role_id'];
+$department = $_SESSION['department'];
+
+if($role_id == 1 && $department == 11 || $role_id == 6 && $department == 1 || $role_id == 4 && $department == 20 || $role_id == 4 && $department == 1 || $role_id == 2 && $department == 18) {
+
 $A1="A-1_0_0_0";
 $A2="A-2_0_0_0";
 $A3="A-3_0_0_0";
@@ -1422,4 +1424,7 @@ let searchbar = document.querySelector('input[name="model"]');
 searchbar.focus();
 search.value = '';
 </script>
-<?php include_once('../includes/footer.php');  ?>
+
+<?php include_once('../includes/footer.php'); } else{
+        die(access_denied());
+} ?>
