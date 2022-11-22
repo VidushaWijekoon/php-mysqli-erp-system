@@ -248,7 +248,7 @@ body {
 
                         <?php } ?>
 
-                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 2) || ($role_id == 11 && $department == 20)) { ?>
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 2) || ($role_id == 4 && $department == 20)) { ?>
 
                         <!-- Inventory -->
                         <li class="nav-item">
@@ -296,7 +296,7 @@ body {
 
                                 <?php } ?>
 
-                                <?php if(($role_id == 1 && $department == 11) || ($role_id == 11 && $department == 20))  { ?>
+                                <?php if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 20))  { ?>
                                 <!-- Part -->
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
