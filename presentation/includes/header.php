@@ -28,11 +28,9 @@ if(isset($_POST['logged_out'])){
     <link rel="icon" type="image/x-icon" href="../../static/dist/img/alsakb logo.png">
 
     <!-- Google Font: Source Sans Pro -->
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../static/dist/fonts/Poppins-Regular.ttf">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="../../static//dist/fontawesome/all.css">
+    <link rel="stylesheet" href="../../static/dist/fonts/Poppins-Regular.ttf">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="../../static/plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -54,27 +52,21 @@ if(isset($_POST['logged_out'])){
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <!-- Customer CSS -->
     <link rel="stylesheet" href="../../static/dist/css/style.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="./static/plugins/bootstrap/css/bootstrap.min.css">
 
 </head>
-
-<style>
-.dropdown-menu {
-    padding: 0;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    font-size: 13px;
-}
-</style>
 
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__wobble" src="../../static/dist/img/alsakb logo.png" width="25%">
+            <div id="loader"></div>
         </div>
+
+
+
 
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-dark">
@@ -135,16 +127,44 @@ body {
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
 
+                        <!-- Warehouse Team Leader -->
+                        <?php if($role_id == 4 && $department == 2) { ?>
                         <li class="nav-item menu-open">
-                            <a href="#" class="nav-link active">
+                            <a href="../inventory/warehouse_dashboard.php" class="nav-link active">
                                 <i class="nav-icon fas fa-home"></i>
                                 <p> Home Page </p>
                             </a>
+                        </li>
 
+                        <!-- Warehouse Member -->
+                        <?php } if($role_id == 10 && $department == 2) { ?>
+                        <li class="nav-item menu-open">
+                            <a href="../inventory/warehouse_member_sales_order.php" class="nav-link active">
+                                <i class="nav-icon fas fa-home"></i>
+                                <p> Home Page </p>
+                            </a>
+                        </li>
+
+                        <!-- Production Team Leader -->
+                        <?php } if($role_id == 4 && $department == 1) { ?>
+                        <li class="nav-item menu-open">
+                            <a href="../production/production_team_leader_dashboard.php" class="nav-link active">
+                                <i class="nav-icon fas fa-home"></i>
+                                <p> Home Page </p>
+                            </a>
+                        </li>
+
+                        <!-- Production Technician -->
+                        <?php } if($role_id == 6 && $department == 1) { ?>
+                        <li class="nav-item menu-open">
+                            <a href="../production/production_technician_dashboard.php" class="nav-link active">
+                                <i class="nav-icon fas fa-home"></i>
+                                <p> Home Page </p>
+                            </a>
                         </li>
 
                         <!-- Admin  -->
-                        <?php if($role_id == 1 && $department == 11) { ?>
+                        <?php } if($role_id == 1 && $department == 11) { ?>
 
                         <li class="nav-item">
                             <a href="#" class="nav-link">
@@ -288,7 +308,7 @@ body {
 
                         <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 20) || ($role_id == 4 && $department == 1)) { ?>
 
-                        <!-- Production -->
+                        <!-- Part -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa-solid fa-gears"></i>
@@ -303,9 +323,6 @@ body {
                                     </a>
                                 </li>
 
-                                <?php } ?>
-
-                                <?php if(($role_id == 1 && $department == 11) || ($role_id == 11 && $department == 20))  { ?>
                                 <!-- Part -->
                                 <li class="nav-item">
                                     <a href="../part/part_stock_dashboard.php" class="nav-link">
@@ -544,20 +561,22 @@ body {
                         <li class="nav-header text-uppercase">Other</li>
 
                         <li class="nav-item">
-                            <a href="../search/general_search.php" class="nav-link">
+                            <a href="../search/search_inventory_id.php" class="nav-link">
                                 <i class="fa-solid fa-search nav-icon" style="font-size: 12px;"></i>
                                 <p> Search Device</p>
                             </a>
                         </li>
 
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) ) { ?>
 
                         <li class="nav-item">
-                            <a href="../search/general_search.php" class="nav-link">
+                            <a href="../search/search_sales_order.php" class="nav-link">
                                 <i class="fa-regular fa-folder-open nav-icon" style="font-size: 12px;"></i>
                                 <p> Search Sales Order </p>
                             </a>
                         </li>
 
+                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 2) || ($role_id == 10 && $department == 2)) { ?>
 
                         <li class="nav-item">
                             <a href="../inventory/warehouse_stock_report.php" class="nav-link">
@@ -566,6 +585,8 @@ body {
                             </a>
                         </li>
 
+                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 1) || ($role_id == 6 && $department == 1)) { ?>
+
                         <li class="nav-item">
                             <a href="../part/part_stock_dashboard.php" class="nav-link">
                                 <i class="fa-solid fa-cubes nav-icon" style="font-size: 12px;"></i>
@@ -573,6 +594,7 @@ body {
                             </a>
                         </li>
 
+                        <?php } ?>
 
                     </ul>
                 </nav>

@@ -21,8 +21,6 @@ if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) 
     <div class="col-12 mt-3 d-flex">
         <a class="btn bg-gradient-info mx-2 text-white" type="button" href="producton_technician_daily_work.php"><i
                 class="fa-solid fa-users"></i><span class="mx-1">Completed Work</span></a>
-        <a class="btn bg-gradient-orange mx-2 text-white" type="button" href="../part/part_stock_dashboard.php"><i
-                class="fa-solid fa-users"></i><span class="mx-1">Part Stock</span></a>
     </div>
 </div>
 

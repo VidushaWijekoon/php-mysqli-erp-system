@@ -35,7 +35,7 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1 || $
         <a class="btn bg-gradient-primary mx-2 text-white" type="button"
             href="./production_team_leader_check_techinician_daily_work.php"><i class="fa-solid fa-cogs"></i><span
                 class="mx-1">Team Part List</span></a>
-        <a class="btn bg-gradient-fuchsia mx-2 text-white" type="button"
+        <a class="btn bg-gradient-cyan mx-2 text-white" type="button"
             href="../part/part_warehouse_leader_dashboard.php"><i class="fa-solid fa-users"></i><span class="mx-1">Part
                 Request Form</span></a>
     </div>
