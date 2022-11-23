@@ -86,8 +86,10 @@ if(isset($_POST['submit'])) {
 <head>
     <title>AL SAKB</title>
     <link rel="icon" type="image/x-icon" href="static/images/">
-    <link rel="stylesheet" href="./static/dist/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./static/dist/fontawesome/css/all.min.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="./static/plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="./static/plugins/fontawesome-free/css/all.css">
 </head>
 
 <body>

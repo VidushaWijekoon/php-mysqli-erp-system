@@ -28,11 +28,9 @@ if(isset($_POST['logged_out'])){
     <link rel="icon" type="image/x-icon" href="../../static/dist/img/alsakb logo.png">
 
     <!-- Google Font: Source Sans Pro -->
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../static/dist/fonts/Poppins-Regular.ttf">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="../../static//dist/fontawesome/all.css">
+    <link rel="stylesheet" href="../../static/dist/fonts/Poppins-Regular.ttf">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="../../static/plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -54,6 +52,8 @@ if(isset($_POST['logged_out'])){
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <!-- Customer CSS -->
     <link rel="stylesheet" href="../../static/dist/css/style.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="./static/plugins/bootstrap/css/bootstrap.min.css">
 
 </head>
 
