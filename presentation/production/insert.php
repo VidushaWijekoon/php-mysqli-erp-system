@@ -217,31 +217,69 @@ $status = 0;
         )"; 
         $query_run = mysqli_query($connection, $query_new_record);
         // insert record with merge machine 
-        $query_new_record = "INSERT INTO combine_check(
-            inventory_id,
-            emp_id,
-            sales_order_id,
-            $name,
-            created_time,
-            status
-        )
-        VALUES(
-            $scan_id,
-            $emp_id,
-            $sales_order_id,
-            1,
-            '$date',
-            1
+        $check = "SELECT * FROM combine_check WHERE  inventory_id = '$scan_id'";
+        $query_run_get = mysqli_query($connection, $check);
+        $exist = null;
+        foreach($query_run_get as $data){
+            $exist = $data['inventory_id'];
+            echo $exist;
+        }
+        if($exist == null){
+            $query_new_record = "INSERT INTO combine_check(
+                inventory_id,
+                emp_id,
+                sales_order_id,
+                $name,
+                created_time,
+                status
+            )
+            VALUES(
+                $scan_id,
+                $emp_id,
+                $sales_order_id,
+                1,
+                '$date',
+                1
+                
+            )"; 
+               if(mysqli_query($connection, $query_new_record))  
+               {  
+                    echo "Inserted Successfully!";  
+               }  
+               else  
+               {  
+                    echo 'Not Inserted';  
+               } 
             
-        )"; 
-           if(mysqli_query($connection, $query_new_record))  
-           {  
-                echo "Inserted Successfully!";  
-           }  
-           else  
-           {  
-                echo 'Not Inserted';  
-           } 
+        }else{
+            $query ="UPDATE combine_check SET $name='1', status ='1' WHERE inventory_id = '$scan_id' ";
+            $query_run = mysqli_query($connection, $query);
+        }
+        // $query_new_record = "INSERT INTO combine_check(
+        //     inventory_id,
+        //     emp_id,
+        //     sales_order_id,
+        //     $name,
+        //     created_time,
+        //     status
+        // )
+        // VALUES(
+        //     $scan_id,
+        //     $emp_id,
+        //     $sales_order_id,
+        //     1,
+        //     '$date',
+        //     1
+            
+        // )"; 
+        //    if(mysqli_query($connection, $query_new_record))  
+        //    {  
+        //         echo "Inserted Successfully!";  
+        //    }  
+        //    else  
+        //    {  
+        //         echo 'Not Inserted';  
+        //    } 
         }else{
             echo "Please Scan the Switch Machine ";
         }

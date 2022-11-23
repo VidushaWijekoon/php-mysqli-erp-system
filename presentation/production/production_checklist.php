@@ -1017,7 +1017,7 @@ function clearText(a) {
 
                         <fieldset class="mt-2">
                             <div class="input-group mb-2 mt-2">
-                                <lable>Switch Parts</lable>
+                                <lable>Switch Parts Form</lable>
                                 <input type="search" name="scan_id" id="scan_id" class="scan_id"
                                     onfocus="clearInput(this)" value="">
                             </div>
@@ -1026,7 +1026,7 @@ function clearText(a) {
                     <script>
                     let searchbar = document.querySelector('input[name="scan_id"]');
                     searchbar.focus();
-                    search.value = '';
+                    // search.value = '';
                     </script>
                 </div>
                 <?php } ?>
