@@ -288,7 +288,7 @@ body {
 
                         <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 20) || ($role_id == 4 && $department == 1)) { ?>
 
-                        <!-- Production -->
+                        <!-- Part -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa-solid fa-gears"></i>
@@ -303,9 +303,6 @@ body {
                                     </a>
                                 </li>
 
-                                <?php } ?>
-
-                                <?php if(($role_id == 1 && $department == 11) || ($role_id == 11 && $department == 20))  { ?>
                                 <!-- Part -->
                                 <li class="nav-item">
                                     <a href="../part/part_stock_dashboard.php" class="nav-link">
