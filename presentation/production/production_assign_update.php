@@ -32,6 +32,7 @@
 ob_start();
 session_start();
 include_once('../../dataAccess/connection.php');
+include_once('../../dataAccess/403.php');
  
 // checking if a user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -54,6 +55,9 @@ if (isset($_GET['sales_order_id'])) {
     $core = mysqli_real_escape_string($connection, $_GET['core']);
     $processor = mysqli_real_escape_string($connection, $_GET['processor']);
     $generation = mysqli_real_escape_string($connection, $_GET['generation']);
+    $status = mysqli_real_escape_string($connection, $_GET['status']);
+    $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
+    $assigned_qty = mysqli_real_escape_string($connection, $_GET['qty']);
 
 
 }
@@ -97,6 +101,7 @@ foreach($query_run as $data){
                             <tr>
                                 <th>Technician</th>
                                 <th>Model</th>
+                                <th>Order Quantity</th>
                                 <th>Quantity</th>
                             </tr>
                         </thead>
@@ -122,7 +127,9 @@ foreach($query_run as $data){
                                                     ?>
                                         </select>
                                     </td>
+
                                     <td class="text-uppercase"><?php echo $model; ?></td>
+                                    <td class="text-uppercase"><?php echo $order_qty; ?></td>
                                     <td>
                                         <!-- <input type="number" class="form-control" placeholder="Quantity" name="quantity"> -->
                                         <input type="number" class="form-control" placeholder="Please Enter QTY"
@@ -140,22 +147,27 @@ foreach($query_run as $data){
                     <?php
                         if(isset($_POST['submit'])){
                            
-                            if($order_qty > $exixting_qty){
-                                if($order_qty >= $_POST['qty']){
+                                if($assigned_qty >= $_POST['qty']){
+                                    $new_qty = $assigned_qty ;
+                                    $new_qty -= $_POST['qty'] ;
+                                 
 
-                            $query = "UPDATE prod_technician_assign_info(tech_id, emp_id, sales_order_id, model, tech_assign_qty,core,generation,processor,brand,device_type) 
-                                    VALUES (null,'{$_POST['emp_id']}','{$sales_order_id}','{$model}','{$_POST['qty']}','{$core}','{$generation}','{$processor}','{$brand}','{$device}')";
-                            
+                            $query = "INSERT INTO prod_technician_assign_info(tech_id, emp_id, sales_order_id, model, tech_assign_qty,core,generation,processor,brand,device_type) 
+                            VALUES (null,'{$_POST['emp_id']}','{$sales_order_id}','{$model}','{$_POST['qty']}','{$core}','{$generation}','{$processor}','{$brand}','{$device}')";
                             $result  = mysqli_query($connection, $query);
-                            // header("location: ./production_team_leader_summery.php?sales_order_id=".$sales_order_id);?>
+                            $query = "UPDATE prod_technician_assign_info SET tech_assign_qty='$new_qty' WHERE emp_id ='$emp_id'";
+                                    echo $query;
+                          
+                            $result  = mysqli_query($connection, $query);
+
+
+                            header("location: ./production_team_leader_summery.php?sales_order_id=".$sales_order_id);?>
                 </div>
                 <?php 
                                 }else{
                                     echo "<div class='equal mb-3 mt-3 mx-auto text-uppercase text-dark bg-danger'>can not assign more than order quantity</div>";
                                 }
-                            }else{
-                                echo "<div class='equal mb-3 mt-3 mx-auto text-uppercase text-dark bg-danger'>already assigned</div>";
-                            }
+                            
                         }
                     ?>
             </div>
@@ -274,7 +286,6 @@ html {
 }
 </style>
 
-
 <?php include_once('../includes/footer.php'); }else{
-        die("<h3 class='text-danger'><<<<<< Access Denied >>>>></h3>");
+        die(access_denied());
 } ?>

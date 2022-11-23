@@ -1,6 +1,7 @@
 <?php 
 session_start();
 include_once('../../dataAccess/connection.php');
+include_once('../../dataAccess/403.php');
 include_once('../includes/header.php');
 
 // checking if a user is logged in
@@ -54,16 +55,22 @@ $sales_order_id = $_GET['sales_order_id'];
                                 $new_model = NULL;
                                 
                                 $query = "SELECT *, COUNT(*) AS received_count 
-                                            FROM warehouse_information_sheet    
-                                            INNER JOIN sales_order_add_items 
-                                            ON  warehouse_information_sheet.sales_order_id = sales_order_add_items.sales_order_id 
-                                            WHERE  warehouse_information_sheet.sales_order_id = {$sales_order_id} 
-                                            AND warehouse_information_sheet.send_to_production = 1
-                                            GROUP BY warehouse_information_sheet.model, 
-                                                    warehouse_information_sheet.generation, 
-                                                    warehouse_information_sheet.core, 
-                                                    warehouse_information_sheet.brand 
-                                            ORDER BY received_count DESC";                                          
+                                FROM warehouse_information_sheet    
+                                INNER JOIN sales_order_add_items 
+                                ON  warehouse_information_sheet.model = sales_order_add_items.item_model 
+                                AND warehouse_information_sheet.sales_order_id = sales_order_add_items.sales_order_id                     
+                                AND warehouse_information_sheet.brand = sales_order_add_items.item_brand                     
+                                AND warehouse_information_sheet.core = sales_order_add_items.item_core                     
+                                AND warehouse_information_sheet.device = sales_order_add_items.item_type                     
+                                AND warehouse_information_sheet.processor = sales_order_add_items.item_processor
+                                WHERE  warehouse_information_sheet.sales_order_id = {$sales_order_id} 
+                                AND warehouse_information_sheet.send_to_production = 1
+                                GROUP BY warehouse_information_sheet.model, 
+                                        warehouse_information_sheet.generation, 
+                                        warehouse_information_sheet.core, 
+                                        warehouse_information_sheet.brand 
+                                ORDER BY received_count DESC";   
+                                                                             
                                             
                                 $query_run = mysqli_query($connection, $query);
 
@@ -189,7 +196,7 @@ $sales_order_id = $_GET['sales_order_id'];
                                     </td>
                                     <td>
                                         <?php 
-                                    echo "<a class='btn btn-xs bg-gradient-primary mx-2' href=\"production_assign_update.php?assign_id={$value['tech_id']}&sales_order_id={$values['sales_order_id']}&model={$values['model']}&core={$values['core']}&generation={$values['generation']}&brand={$values['brand']}&device={$values['device']}&processor={$values['processor']}\" class='text-white text-capitalize'><i class='fa-solid fa-sun mx-1'></i></a>" ?>
+                                    echo "<a class='btn btn-xs bg-gradient-primary mx-2' href=\"production_assign_update.php?assign_id={$value['tech_id']}&sales_order_id={$value['sales_order_id']}&model={$value['model']}&core={$value['core']}&generation={$value['generation']}&brand={$value['brand']}&device={$value['device_type']}&processor={$value['processor']}&emp_id={$value['emp_id']}&qty={$value['tech_assign_qty']}&status=update\" class='text-white text-capitalize'><i class='fa-solid fa-sun mx-1'></i></a>" ?>
                                     </td>
                                 </tr>
                                 <?php } } ?>
