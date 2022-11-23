@@ -1384,7 +1384,7 @@ $values_single = array(
             </div>
             <?php } }?>
         </div>
-        <!-- rack 04 -->
+        <!-- rack 05 -->
 
 
         <div class="col-1 mt-5 text-uppercase text-center">
@@ -1434,8 +1434,9 @@ $values_single = array(
             {
             $grid4 = array_reverse($grid4); 
             $i =0;
+            echo "test here";
             if((empty($test) && empty($test_b) && empty($test_c) && empty($test_d) && empty($test_e)) || !empty($test_e)) {
-            
+                echo "test here 2";
        ?>
             <div class="card card-primary">
                 <div class="card-header" ;>
@@ -1460,18 +1461,18 @@ $values_single = array(
 
                             <i class="fas fa-inbox"></i>
                             <?php 
-               echo $substring[0]."</br>";
-               echo "</br>";
-               echo "</br>";
-               echo "</br>";
-                ?>
+                                echo $substring[0]."</br>";
+                                echo "</br>";
+                                echo "</br>";
+                                echo "</br>";
+                                    ?>
                         </a>
 
                         <?php echo "</br>"; }else{
                  
                ?>
                         <!-- slot with value -->
-                        <?php if(empty($test_d)){?>
+                        <?php if(empty($test_e)){?>
                         <?php if($role_id == 4 && $department ==20){ ?>
                         <a class="btn grid_btn bg-success mt-2" href="
                                 add_additional_part.php?scan_id=<?php echo "rack-5_".$substring[0] ?>">
@@ -1481,14 +1482,14 @@ $values_single = array(
 
                                 <i class="fas fa-inbox"></i>
                                 <?php
-               echo $substring[0]."</br>";
-               echo $substring[1]."</br>";
-               echo $substring[2]."</br>";
-               echo $substring[3]."</br>";
+                                echo $substring[0]."</br>";
+                                echo $substring[1]."</br>";
+                                echo $substring[2]."</br>";
+                                echo $substring[3]."</br>";
                 ?>
                             </a>
                             <?php }else{ 
-            foreach($test_d as $a){
+            foreach($test_e as $a){
                if($substring[0] == $a[0] ){ ?>
                             <?php if($role_id == 4 && $department ==20){ ?>
                             <a class="btn grid_btn bg-danger mt-2" href="
@@ -1499,11 +1500,11 @@ $values_single = array(
 
                                     <i class="fas fa-inbox"></i>
                                     <?php
-                       echo $substring[0]."</br>";
-                       echo $substring[1]."</br>";
-                       echo $substring[2]."</br>";
-                       echo $substring[3]."</br>";
-                       $substring[0] =5;
+                                echo $substring[0]."</br>";
+                                echo $substring[1]."</br>";
+                                echo $substring[2]."</br>";
+                                echo $substring[3]."</br>";
+                                $substring[0] =5;
                         ?>
                                 </a><?php
                // echo $a[0]."----".$slot_name_search;
