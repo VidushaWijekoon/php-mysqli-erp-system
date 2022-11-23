@@ -303,6 +303,10 @@ body {
                                     </a>
                                 </li>
 
+                                <?php } ?>
+
+                                <?php if(($role_id == 1 && $department == 11) || ($role_id == 11 && $department == 20))  { ?>
+                                <!-- Part -->
                                 <li class="nav-item">
                                     <a href="../part/part_stock_dashboard.php" class="nav-link">
                                         <i class="fa-solid fa-cubes nav-icon" style="font-size: 12px;"></i>
