@@ -14,6 +14,7 @@ $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 $username = $_SESSION['username'];
 $sales_order_id = $_GET['sales_order_id'];
+$order_qty=$_GET['qty'];
  
 if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 1)){
         
@@ -117,9 +118,11 @@ if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) 
                                             $received_qty =0;
                                             foreach($query_result2 as $a){
                                                 $received_qty = $a['production_id'];
+                                                if($received_qty != $order_qty){
                                                 echo '<a class="badge badge-lg badge-info text-white p-2 mx-2 received_qty">Receiving Total: '.$received_qty.'</a>';
+                                                }
                                                 if($received_qty == $order_qty){
-                                                    echo '<a class="badge badge-lg badge-success text-white p-2 received_qty" href="./production_team_leader_dashboard.php" >Task Completed</a>';
+                                                    echo '<a class="badge badge-lg badge-success text-white p-2 received_qty" href="./production_team_leader_dashboard.php" >Receiving Total: '.$received_qty.' Task Completed</a>';
                                                     // header("location: ./production_team_leader_dashboard.php");
                                                 }
                                             }

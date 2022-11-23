@@ -8,9 +8,6 @@ include_once('../../dataAccess/403.php');
 
 $role_id = $_SESSION['role_id']; //4
 $department = $_SESSION['department']; //20
-echo $role_id ;
-echo "</br>";
-echo $department ;
 
 
  

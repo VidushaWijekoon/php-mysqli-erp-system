@@ -32,6 +32,7 @@
 ob_start();
 session_start();
 include_once('../../dataAccess/connection.php');
+include_once('../../dataAccess/403.php');
  
 // checking if a user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -41,7 +42,7 @@ if (!isset($_SESSION['user_id'])) {
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 
-if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 6 && $department == 1)){
+if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 1)){
 
 $sales_order_id = '';
 $model = '';
@@ -124,8 +125,8 @@ foreach($query_run as $data){
                                         </select>
                                     </td>
 
-                                    <td class="text-uppercase"><?php echo $order_qty; ?></td>
                                     <td class="text-uppercase"><?php echo $model; ?></td>
+                                    <td class="text-uppercase"><?php echo $order_qty; ?></td>
                                     <td>
                                         <!-- <input type="number" class="form-control" placeholder="Quantity" name="quantity"> -->
                                         <input type="number" class="form-control" placeholder="Please Enter QTY"
