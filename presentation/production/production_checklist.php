@@ -243,6 +243,7 @@ if (isset($_GET['sales_order_id'])) {
             $item_graphic = $result['item_graphic'];
             $item_condition = $result['item_condition'];
             $item_graphic = $result['item_graphic'];
+            $item_os = $result['item_os'];
 
         } else {
             // user not found
@@ -368,7 +369,7 @@ if(isset($_POST['submit'])){
                             <label class="col-sm-3 col-form-label">Operating System</label>
                             <div class="col-sm-8">
                                 <input type="text" readonly class="form-control text-uppercase" name="customer_name"
-                                    placeholder="Dell"
+                                    <?php echo 'value="' . $item_os . '"'; ?>
                                     style="margin: 0; font-size: 12px; border: 1px solid black; height: 25px;">
                             </div>
                         </div>
@@ -2428,19 +2429,18 @@ if(isset($_POST['production_form'])){
     $processor = mysqli_real_escape_string($connection, $_POST['processor']);
     $generation = mysqli_real_escape_string($connection, $_POST['generation']);
     $ram = mysqli_real_escape_string($connection, $_POST['ram']);
-    $ssd = mysqli_real_escape_string($connection, $_POST['ssd']);
-    $hdd = mysqli_real_escape_string($connection, $_POST['hdd']);
+    $hdd_capacity = mysqli_real_escape_string($connection, $_POST['hdd_capacity']);
+    $hdd_type = mysqli_real_escape_string($connection, $_POST['hdd_type']);
     $display = mysqli_real_escape_string($connection, $_POST['display']);
     $resolutions = mysqli_real_escape_string($connection, $_POST['resolutions']);
     $graphic = mysqli_real_escape_string($connection, $_POST['graphic']);
     $graphic_type = mysqli_real_escape_string($connection, $_POST['graphic_type']);
     $operating_system = mysqli_real_escape_string($connection, $_POST['operating_system']);
    
-    $query = "INSERT INTO production_check (sales_order_id, emp_id, inventory_id, processor, generation, ram, ssd, hdd, display, resolutions, graphic, graphic_type, operating_system) 
-                VALUES ('$sales_order_id', '$emp_id', '$inventory_id', '$processor', '$generation', '$ram', '$ssd', '$hdd', '$display', '$resolutions', '$graphic', '$graphic_type', '$operating_system')";
+    $query = "INSERT INTO production_check (sales_order_id, emp_id, inventory_id, processor, generation, ram, hdd_capacity, hdd_type, display, resolutions, graphic, graphic_type, operating_system, status) 
+                VALUES ('$sales_order_id', '$emp_id', '$inventory_id', '$processor', '$generation', '$ram', '$hdd_capacity', '$hdd_type', '$display', '$resolutions', '$graphic', '$graphic_type', '$operating_system', 0)";
     $query_run = mysqli_query($connection, $query);
-    
-        $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+         $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                                     $date = $date1->format('Y-m-d H:i:s');
         $query_prod_info ="UPDATE prod_info SET end_date_time=' $date',status='0',issue_type='5' WHERE p_id ='$p_id' ";
         $query_prod_run = mysqli_query($connection, $query_prod_info);
@@ -2590,30 +2590,31 @@ if(isset($_POST['production_form'])){
 
                     <div class="row">
                         <label
-                            class="col-sm-3 col-form-label text-capitalize mx-auto text-center justify-content-center">SSD</label>
+                            class="col-sm-3 col-form-label text-capitalize mx-auto text-center justify-content-center">HDD
+                            Capacity</label>
                         <div class="col-sm-9 mt-2">
                             <div class="icheck-success d-inline">
-                                <input type="radio" id="128gbssd" name="ssd" value="128gb">
+                                <input type="radio" id="128gbssd" name="hdd_capacity" value="128gb">
                                 <label class="label_values" for="128gbssd" style="margin-right: 15px;">128GB </label>
                             </div>
                             <div class="icheck-success d-inline">
-                                <input type="radio" id="256gbssd" name="ssd" value="256gb">
+                                <input type="radio" id="256gbssd" name="hdd_capacity" value="256gb">
                                 <label class="label_values" for="256gbssd" style="margin-right: 15px;">256GB </label>
                             </div>
                             <div class="icheck-success d-inline">
-                                <input type="radio" id="512gbssd" name="ssd" value="512gb">
+                                <input type="radio" id="512gbssd" name="hdd_capacity" value="512gb">
                                 <label class="label_values" for="512gbssd" style="margin-right: 15px;">512GB </label>
                             </div>
                             <div class="icheck-success d-inline">
-                                <input type="radio" id="1tbssd" name="ssd" value="1tb">
+                                <input type="radio" id="1tbssd" name="hdd_capacity" value="1tb">
                                 <label class="label_values" for="1tbssd" style="margin-right: 15px;">1TB </label>
                             </div>
                             <div class="icheck-success d-inline">
-                                <input type="radio" id="2tbssd" name="ssd" value="2tb">
+                                <input type="radio" id="2tbssd" name="hdd_capacity" value="2tb">
                                 <label class="label_values" for="2tbssd" style="margin-right: 15px;">2TB </label>
                             </div>
                             <div class="icheck-success d-inline">
-                                <input type="radio" id="nossd" name="hdd" value="n/a">
+                                <input type="radio" id="nossd" name="hdd_capacity" value="n/a">
                                 <label class="label_values" for="nossd" style="margin-right: 15px;">N/A </label>
                             </div>
 
@@ -2622,31 +2623,22 @@ if(isset($_POST['production_form'])){
 
                     <div class="row">
                         <label
-                            class="col-sm-3 col-form-label text-capitalize mx-auto text-center justify-content-center">HDD</label>
+                            class="col-sm-3 col-form-label text-capitalize mx-auto text-center justify-content-center">HDD
+                            Type</label>
                         <div class="col-sm-9 mt-2">
                             <div class="icheck-success d-inline">
-                                <input type="radio" id="128gbhdd" name="hdd" value="128gb">
-                                <label class="label_values" for="128gbhdd" style="margin-right: 15px;">128GB </label>
+                                <input type="radio" id="hdd" name="hdd_type" value="hdd">
+                                <label class="label_values" for="hdd" style="margin-right: 15px;"> HDD</label>
                             </div>
                             <div class="icheck-success d-inline">
-                                <input type="radio" id="256gbhdd" name="hdd" value="256gb">
-                                <label class="label_values" for="256gbhdd" style="margin-right: 15px;">256GB </label>
+                                <input type="radio" id="ssd" name="hdd_type" value="ssd">
+                                <label class="label_values" for="ssd" style="margin-right: 15px;"> SSD
+                                </label>
                             </div>
                             <div class="icheck-success d-inline">
-                                <input type="radio" id="512gbhdd" name="hdd" value="512gb">
-                                <label class="label_values" for="512gbhdd" style="margin-right: 15px;">512GB </label>
-                            </div>
-                            <div class="icheck-success d-inline">
-                                <input type="radio" id="1tbhdd" name="hdd" value="1tb">
-                                <label class="label_values" for="1tbhdd" style="margin-right: 15px;">1TB </label>
-                            </div>
-                            <div class="icheck-success d-inline">
-                                <input type="radio" id="2tbhdd" name="hdd" value="2tb">
-                                <label class="label_values" for="2tbhdd" style="margin-right: 15px;">2TB </label>
-                            </div>
-                            <div class="icheck-success d-inline">
-                                <input type="radio" id="nohdd" name="hdd" value="n/a">
-                                <label class="label_values" for="nohdd" style="margin-right: 15px;">N/A </label>
+                                <input type="radio" id="nvme" name="hdd_type" value="nvme">
+                                <label class="label_values" for="nvme" style="margin-right: 15px;"> NVMe
+                                </label>
                             </div>
 
                         </div>
