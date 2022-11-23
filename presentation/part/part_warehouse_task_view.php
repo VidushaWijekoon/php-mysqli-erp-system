@@ -10,7 +10,6 @@ $department = $_SESSION['department'];
 
 
 if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 1) || ($role_id == 4 && $department == 20)){
-if($role_id == 1 && $department == 11 || $role_id == 2 && $department == 18 || $role_id == 4 && $department == 20 || $role_id == 4 && $department == 1){
     $prod_t_l = 0;
     if( $role_id == 4 && $department == 1 ){
         $prod_t_l =1;
@@ -413,7 +412,6 @@ $item_brand=0;
                                 <th>Stock</th>
                                 <?php
                                     $query2 = "SELECT part_name, qty FROM part_stock WHERE part_model = '$model' AND part_brand = '$item_brand' ;";
-                                    echo $query2;
                                     $query_run2 = mysqli_query($connection, $query2);
 
                                     foreach($query_run2 as $a){
