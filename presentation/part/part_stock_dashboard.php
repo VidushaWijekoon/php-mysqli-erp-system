@@ -120,6 +120,11 @@ $T2="T-2_0_0_0";
 $T3="T-3_0_0_0";
 $T4="T-4_0_0_0";
 $T5="T-5_0_0_0";
+$U1="U-1_0_0_0";
+$V1="V-1_0_0_0";
+$W1="W-1_0_0_0";
+$X1="X-1_0_0_0";
+$Y1="Y-1_0_0_0";
 
 $values = array(
    $A1 => [1, 20],
@@ -632,6 +637,33 @@ $values1 = array(
             $T5 => [5, 1],
             );
             
+$values_single = array(
+    $A1 => [1, 25],
+    $B1 => [1, 24],
+    $C1 => [1, 23],
+    $D1 => [1, 22],
+    $E1 => [1, 21],
+    $F1 => [1, 20],
+    $G1 => [1, 19],
+    $H1 => [1, 18],
+    $I1 => [1, 17],
+    $J1 => [1, 16],
+    $K1 => [1, 15],
+    $L1 => [1, 14],
+    $M1 => [1, 13],
+    $N1 => [1, 12],
+    $O1 => [1, 11],
+    $P1 => [1, 10],
+    $Q1 => [1, 9],
+    $R1 => [1, 8],
+    $S1 => [1, 7],
+    $T1 => [1, 6],
+    $U1 => [1, 5],
+    $V1 => [1, 4],
+    $W1 => [1, 3],
+    $X1 => [1, 2],
+    $Y1 => [1, 1]
+ );
 ?>
 
 <div class="container-fluid">
@@ -1221,9 +1253,8 @@ $values1 = array(
 <!-- rack 04 -->
 <div class="container-fluid">
     <div class="row mx-3">
-        <div class="col-lg-4 col-md-6 col-sm-10 mt-5 text-uppercase">
-            <?php
-            $query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'RACK-4'";
+        <?php
+            $query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'rack-4'";
             $result_set = mysqli_query($connection, $query);
             foreach($result_set as $a){
             $slot_name = $a['slot_name'];
@@ -1231,7 +1262,7 @@ $values1 = array(
             $part_name= $a['part_name'];
             $part_model= $a['part_model'];
             $qty= $a['qty'];
-            foreach($values2 as $k => $v){
+            foreach($values3 as $k => $v){
                 
                 if($k == $slot_name_change){
                     $name= $slot_name."_".$part_name."_".$part_model."_".$qty;
@@ -1241,8 +1272,8 @@ $values1 = array(
             }
             }
             $grid3 = createGrid3(5, 20);
-            $grid3 = plotGridValues3($grid3, $values3);
-            echo renderGrid3($grid3,$slot_name_search_d,$search_qty_d,$common_slot,$test_d,$role_id,$department,$test, $test_b,$test_c,$test_e);
+            $grid3 = plotGridvalues3($grid3, $values3);
+            echo renderGrid3($grid3,$slot_name_search_C,$search_qty_C,$common_slot,$test_c,$role_id,$department,$test, $test_b,$test_d,$test_e);
             function createGrid3($columns, $rows)
             {
             $grid3 = [];
@@ -1256,7 +1287,7 @@ $values1 = array(
             }
             return $grid3;
             }
-            function plotGridValues3($grid3, $values3)
+            function plotGridvalues3($grid3, $values3)
             {
             foreach ($values3 as $value => $coordinates) {
                 list($x, $y) = $coordinates;
@@ -1264,16 +1295,17 @@ $values1 = array(
             }
             return $grid3;
             }
-            function renderGrid3($grid3 ,$slot_name_search_d,$search_qty_d,$common_slot,$test_d,$role_id,$department,$test, $test_b,$test_c,$test_e)
+            function renderGrid3($grid3 ,$slot_name_search_c,$search_qty_c,$common_slot,$test_c,$role_id,$department,$test, $test_b,$test_d,$test_e)
             {
             $grid3 = array_reverse($grid3); 
             $i =0;
-            if((empty($test) && empty($test_b) && empty($test_c) && empty($test_d) && empty($test_e)) || !empty($test_d)) {
+            if((empty($test) && empty($test_b) && empty($test_c) && empty($test_d) && empty($test_e)) || !empty($test_d)) {  
             
        ?>
+        <div class="col-4 mt-5 text-uppercase">
             <div class="card card-primary">
                 <div class="card-header" ;>
-                    <h4 class=" card-title">Rack 04</h4>
+                    <h4 class=" card-title">Rack 03</h4>
 
 
                 </div>
@@ -1285,14 +1317,14 @@ $values1 = array(
                     //   empty qty 
                     if($substring[3] == 0){ ?>
                     <!-- // slot name with empty qty -->
-                    <?php if($role_id == 4 && $department ==20){ ?>
+                    <?php 
+                    if(empty($test_d)){
+                    if($role_id == 4 && $department ==20){ ?>
                     <a class="btn grid_btn bg-secondary mt-2" href="
-                            part_create_form.php?scan_id=<?php echo "rack-4_".$substring[0] ?>">
+                            part_create_form.php?scan_id=<?php echo "rack-3_".$substring[0] ?>">
                         <?php } else { ?>
                         <a class="btn grid_btn bg-secondary mt-2">
                             <?php } ?>
-
-
                             <i class="fas fa-inbox"></i>
                             <?php 
                echo $substring[0]."</br>";
@@ -1301,14 +1333,14 @@ $values1 = array(
                echo "</br>";
                 ?>
                         </a>
-                        <?php }else{
+                        <?php } }else{
                  
                ?>
                         <!-- slot with value -->
                         <?php if(empty($test_d)){?>
                         <?php if($role_id == 4 && $department ==20){ ?>
                         <a class="btn grid_btn bg-success mt-2" href="
-                                add_additional_part.php?scan_id=<?php echo "rack-4_".$substring[0] ?>">
+                                add_additional_part.php?scan_id=<?php echo "rack-3_".$substring[0] ?>">
                             <?php } else { ?>
                             <a class="btn grid_btn bg-success mt-2">
                                 <?php } ?>
@@ -1326,7 +1358,7 @@ $values1 = array(
                if($substring[0] == $a[0] ){ ?>
                             <?php if($role_id == 4 && $department ==20){ ?>
                             <a class="btn grid_btn bg-danger mt-2" href="
-                                add_additional_part.php?scan_id=<?php echo "rack-4_".$substring[0] ?>">
+                                add_additional_part.php?scan_id=<?php echo "rack-3_".$substring[0] ?>">
                                 <?php } else { ?>
                                 <a class="btn grid_btn bg-danger mt-2">
                                     <?php } ?>
@@ -1342,21 +1374,22 @@ $values1 = array(
                                 </a><?php
                // echo $a[0]."----".$slot_name_search;
                // echo "</br>";
-           } } ?>
+           } }?>
+
 
                                 <?php  } } } } ?>
 
 
                 </div>
             </div>
-            <?php }} ?>
+            <?php } }?>
         </div>
         <!-- rack 04 -->
 
 
-        <div class="col-4 mt-5 text-uppercase">
+        <div class="col-1 mt-5 text-uppercase text-center">
             <?php
-            $query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'RACK-5'";
+            $query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'rack-5'";
             $result_set = mysqli_query($connection, $query);
             foreach($result_set as $a){
             $slot_name = $a['slot_name'];
@@ -1364,17 +1397,17 @@ $values1 = array(
             $part_name= $a['part_name'];
             $part_model= $a['part_model'];
             $qty= $a['qty'];
-            foreach($values4 as $k => $v){
+            foreach($values_single as $k => $v){
                 
                 if($k == $slot_name_change){
                     $name= $slot_name."_".$part_name."_".$part_model."_".$qty;
-                    $values4[$name] = $values4[$k];
-                    unset($values4[$k]);
+                    $values_single[$name] = $values_single[$k];
+                    unset($values_single[$k]);
                 }
             }
             }
-            $grid4 = createGrid4(5, 20);
-            $grid4 = plotGridValues4($grid4, $values4);
+            $grid4 = createGrid4(1, 25);
+            $grid4 = plotGridValues4($grid4, $values_single);
             echo renderGrid4($grid4,$slot_name_search_e,$search_qty_e,$common_slot,$test_e,$role_id,$department,$test, $test_b,$test_c,$test_d);
             function createGrid4($columns, $rows)
             {
@@ -1389,9 +1422,9 @@ $values1 = array(
             }
             return $grid4;
             }
-            function plotGridValues4($grid4, $values4)
+            function plotGridValues4($grid4, $values_single)
             {
-            foreach ($values4 as $value => $coordinates) {
+            foreach ($values_single as $value => $coordinates) {
                 list($x, $y) = $coordinates;
                 $grid4[$y - 1][$x - 1] = $value;
             }
@@ -1433,7 +1466,8 @@ $values1 = array(
                echo "</br>";
                 ?>
                         </a>
-                        <?php }else{
+
+                        <?php echo "</br>"; }else{
                  
                ?>
                         <!-- slot with value -->
