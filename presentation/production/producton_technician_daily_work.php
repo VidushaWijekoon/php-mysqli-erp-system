@@ -14,7 +14,7 @@ $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 $epf_id = $_SESSION['epf'];
  
-if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 1)){
+if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 6 && $department == 1)){
 
     $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
     $date = $date1->format('Y-m-d H:i:s');
