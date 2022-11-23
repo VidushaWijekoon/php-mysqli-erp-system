@@ -163,6 +163,15 @@ if(isset($_POST['logged_out'])){
                             </a>
                         </li>
 
+                        <!-- Part  -->
+                        <?php } if($role_id == 4 && $department == 20) { ?>
+                        <li class="nav-item menu-open">
+                            <a href="../part/part_warehouse_leader_dashboard.php" class="nav-link active">
+                                <i class="nav-icon fas fa-home"></i>
+                                <p> Home Page </p>
+                            </a>
+                        </li>
+
                         <!-- Admin  -->
                         <?php } if($role_id == 1 && $department == 11) { ?>
 
@@ -560,6 +569,8 @@ if(isset($_POST['logged_out'])){
 
                         <li class="nav-header text-uppercase">Other</li>
 
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) ) { ?>
+
                         <li class="nav-item">
                             <a href="../search/search_inventory_id.php" class="nav-link">
                                 <i class="fa-solid fa-search nav-icon" style="font-size: 12px;"></i>
@@ -567,7 +578,7 @@ if(isset($_POST['logged_out'])){
                             </a>
                         </li>
 
-                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) ) { ?>
+                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) ) { ?>
 
                         <li class="nav-item">
                             <a href="../search/search_sales_order.php" class="nav-link">
@@ -585,7 +596,7 @@ if(isset($_POST['logged_out'])){
                             </a>
                         </li>
 
-                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 1) || ($role_id == 6 && $department == 1)) { ?>
+                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 20) || ($role_id == 6 && $department == 1)) { ?>
 
                         <li class="nav-item">
                             <a href="../part/part_stock_dashboard.php" class="nav-link">
