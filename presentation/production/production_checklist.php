@@ -973,9 +973,9 @@ $(document).ready(function() {
 //////////////////////////////////////////////////////////////////
 
 
-function ClearInputField() {
-    document.getElementsByName('scan_id').val("");
-}
+// function ClearInputField() {
+//     document.getElementsByName('scan_id').val("");
+// }
 
 /////////////////////////////////////////////////////////////////
 </script>
@@ -1002,8 +1002,7 @@ function clearText(a) {
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST">
-                <?php $query = "SELECT  COUNT(`inventory_id`) AS exist_count FROM combine_check WHERE inventory_id ='$inventory_id'";
+            <?php $query = "SELECT  COUNT(`inventory_id`) AS exist_count FROM combine_check WHERE inventory_id ='$inventory_id'";
                 
                 $query_run = mysqli_query($connection, $query);
                 $exist_count;
@@ -1012,24 +1011,27 @@ function clearText(a) {
                 }
                 if($exist_count ==0){ }else{
                 ?>
-                <div class="row mx-2">
-                    <div class="col-md-3">
+            <div class="row mx-2">
+                <div class="col-md-3">
 
-                        <fieldset class="mt-2">
-                            <div class="input-group mb-2 mt-2">
-                                <lable>Switch Parts Form</lable>
-                                <input type="search" name="scan_id" id="scan_id" class="scan_id"
-                                    onfocus="clearInput(this)" value="">
-                            </div>
-                        </fieldset>
-                    </div>
-                    <script>
-                    let searchbar = document.querySelector('input[name="scan_id"]');
-                    searchbar.focus();
-                    // search.value = '';
-                    </script>
+                    <fieldset class="mt-2">
+                        <div class="input-group mb-2 mt-2">
+                            <lable>Switch Parts Form</lable>
+                            <input type="text" name="scan_id" id="scan_id" class="scan_id" onfocus="clearInput(this)"
+                                value="">
+                        </div>
+                    </fieldset>
                 </div>
-                <?php } ?>
+                <script>
+                // let searchbar = document.querySelector('input[name="scan_id"]');
+                // searchbar.focus();
+                // search.value = '';
+                </script>
+            </div>
+            <?php } ?>
+
+            <form method="POST">
+
                 <div class="modal-body d-flex mx-5">
                     <div class="col col-md-6 col-lg-6">
                         <div class="row">
