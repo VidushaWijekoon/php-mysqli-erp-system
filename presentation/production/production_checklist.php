@@ -2753,9 +2753,6 @@ if(isset($_POST['production_form'])){
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn bg-gradient-danger" data-dismiss="modal">Close</button>
