@@ -319,7 +319,7 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
                         $query = "SELECT *, SUM(item_quantity) AS No_of_Records FROM sales_order_information
                                 LEFT JOIN sales_order_add_items ON sales_order_information.sales_order_id = sales_order_add_items.sales_order_id
                                 WHERE sales_order_add_items.sales_order_id AND sales_order_information.sales_order_id                        
-                                GROUP BY customer_name ORDER BY sales_order_created_date";
+                                GROUP BY sales_order_add_items.sales_order_id ORDER BY sales_order_created_date";
                         $query_run = mysqli_query($connection, $query);
 
                         if ($rowcount = mysqli_fetch_assoc($query_run)) {

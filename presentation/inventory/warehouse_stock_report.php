@@ -13,17 +13,17 @@ if (!isset($_SESSION['user_id'])) {
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 
-if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $role_id == 2 && $department == 18){
+if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 2) || ($role_id == 2 && $department == 18) || ($role_id == 10 && $department == 2)){
  
 
 ?>
 
-<div class="row page-titles">
+<!-- <div class="row page-titles">
     <div class="col-md-5 align-self-center"><a href="./warehouse_dashboard.php">
             <i class="fa-solid fa-home fa-2x m-2" style="color: #ced4da;"></i>
         </a>
     </div>
-</div>
+</div> -->
 
 <div class="container-fluid">
     <div class="row">
