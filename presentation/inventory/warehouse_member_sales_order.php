@@ -12,14 +12,29 @@ if (!isset($_SESSION['user_id'])) {
 
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
+$username = $_SESSION['username'];
 
 if($role_id == 1 && $department == 11 || $role_id == 10 && $department == 2 ||  $role_id == 4 && $department == 2 || $role_id == 2 && $department == 18){
 
 ?>
 
+<div class="row page-titles m-2">
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor"><i class="fa fa-warehouse" aria-hidden="true"></i> Warehouse Member
+            <?php echo $username; ?> </h3>
+    </div>
+</div>
+
+<div class="row m-2">
+    <div class="col-12 mt-3">
+        <a class="btn bg-gradient-success mx-2 text-white" type="button" href="warehouse_completed_task.php"><i
+                class="fa-solid fa-check"></i><span class="mx-1">Completed Task</span></a>
+    </div>
+</div>
+
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-5">
+        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto">
             <div class="card mt-3">
                 <div class="card-header bg-secondary">
                     <p class="text-uppercase m-0 p-0">Warehouse Sales Orders</p>

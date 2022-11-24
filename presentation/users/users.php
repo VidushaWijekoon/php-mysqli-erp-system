@@ -96,9 +96,7 @@ if($role_id = 1 && $department == 11) {
                                         ?>
                                 </td>
                             </tr>
-                            <?php }                            
-                        
-                            }else{
+                            <?php } } else {                     
                                 $query = "SELECT * FROM users LEFT JOIN departments ON departments.department_id = users.department                            
                                 LEFT JOIN tbl_roles ON tbl_roles.role_id = users.role";                                
                                 $query_run = mysqli_query($connection, $query);
@@ -106,7 +104,6 @@ if($role_id = 1 && $department == 11) {
                                 foreach ($query_run as $users) {
                                     $username = $users['username'];                                 
                                 ?>
-
                             <tr>
                                 <td><?php echo $users['epf'] ?></td>
                                 <td><?php echo $users['username'] ?></td>

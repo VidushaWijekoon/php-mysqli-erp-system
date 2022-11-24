@@ -13,15 +13,25 @@ if (!isset($_SESSION['user_id'])) {
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 
-if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $role_id == 2 && $department == 18){
+if(($role_id == 1 && $department == 11) || ($role_id == 10 && $department == 2) ||  ($role_id == 4 && $department == 2) || ($role_id == 2 && $department == 18)){
  
 ?>
+
+<?php if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 2) || ($role_id == 2 && $department == 18)) { ?>
 <div class="row page-titles">
     <div class="col-md-5 align-self-center"><a href="./warehouse_dashboard.php">
             <i class="fa-solid fa-home fa-2x m-2" style="color: #ced4da;"></i>
         </a>
     </div>
 </div>
+<?php } if ($role_id == 10 && $department == 2) { ?>
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center"><a href="./warehouse_member_sales_order.php">
+            <i class="fa-solid fa-home fa-2x m-2" style="color: #ced4da;"></i>
+        </a>
+    </div>
+</div>
+<?php } ?>
 
 <div class="row">
     <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 mx-auto justify-content-center mt-5">
@@ -40,6 +50,7 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
                             <th>Target</th>
                             <th>Assign Date</th>
                             <th>Completed date</th>
+                            <th>&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody class="table-dark">
@@ -50,16 +61,14 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
                                 $archive;
                                 $target;
                                 $prepared;
-                                $query = "SELECT
+                                $query = "SELECT * ,
                                                 employees.emp_id AS emp_id,first_name,
                                                 warehouse_assign_task.sales_order AS so_id,
                                                 warehouse_assign_task.task_created_date AS task_assign_date, 
                                                 warehouse_assign_task.task_completed_date  AS task_completed_date 
-
-                                            FROM
-                                                employees
+                                            FROM employees
                                             LEFT JOIN warehouse_assign_task ON employees.emp_id = warehouse_assign_task.emp_id
-                                            WHERE department =2 AND status = 1 
+                                            WHERE department = 2 AND status = 1 
                                             ORDER BY `so_id`  DESC;";
                                 $query_run = mysqli_query($connection, $query);
 
@@ -95,6 +104,9 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
                                                     ?></td>
                             <td><?php echo $production_team['task_assign_date']?></td>
                             <td><?php echo $production_team['task_completed_date']?></td>
+                            <td>
+                                <?php echo "<a class='btn btn-xs btn-primary mx-1' href=\"warehouse_completed_inventory_id.php?sales_order_id={$production_team['sales_order']}\"><i class='fa-solid fa-eye'></i> </a>" ?>
+                            </td>
                         </tr>
                         <?php }} ?>
                     </tbody>
