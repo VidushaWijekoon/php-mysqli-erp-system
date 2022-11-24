@@ -879,6 +879,12 @@ $values_single = array(
                 $test_i = null;
                 $test_j = null;
                 $test_k = null;
+                $single_rack_1 = 0;
+                $single_rack_2 = 0;
+                $single_rack_3 = 0;
+                $single_rack_4 = 0;
+                $single_rack_5 = 0;
+                $single_rack_6 = 0;
                 $run =null;
                 $i =0;
                 $item_name;
@@ -922,12 +928,7 @@ $values_single = array(
                                  $search_qty_d =$data['qty'];
                                  $test_d[$i] =array($data['slot_name']);
                                  $i++;
-                            } elseif($data['rack_number'] == $rack_number_e){
-                                $slot_name_search_e = $data['slot_name'];
-                                $search_qty_e =$data['qty'];
-                                $test_e[$i] =array($data['slot_name']);
-                                $i++;
-                            }elseif($data['rack_number'] == $rack_number_f){
+                            } elseif($data['rack_number'] == $rack_number_f){
                                 $slot_name_search_f = $data['slot_name'];
                                 $search_qty_f =$data['qty'];
                                 $test_f[$i] =array($data['slot_name']);
@@ -996,9 +997,10 @@ $values_single = array(
 <div class="row">
     <div class="col col-md-8 col-sm-8 col-lg-6 mx-5">
         <?php  echo "<span class='badge badge-lg badge-primary text-white p-2 mb-2 mt-1 px-5 text-uppercase'>$common_slot</span>";
+          echo "<span class='badge badge-lg badge-primary text-white p-2 mb-2 mt-1 px-5 text-uppercase'>$model</span>";
                 
         if(empty($test)){}else{ ?>
-        <div class=''>Rack-01 --></div>
+        <div class='mt-2'>Rack-01 --></div>
         <?php  foreach($test as $test1){ ?>
         <?php if(($role_id == 4 && $department ==20) || ($role_id == 2 && $department ==18)){ ?>
         <a class="btn  bg-danger mt-2" href="add_additional_part.php?scan_id=<?php echo "rack-1_".$test1[0] ?>">
@@ -1008,7 +1010,7 @@ $values_single = array(
             <?php } } 
         
         if(empty($test_b)){}else{ ?>
-            <div>Rack-02 --></div>
+            <div class='mt-2'>Rack-02 --></div>
             <?php    foreach($test_b as $test1){ ?>
             <?php if(($role_id == 4 && $department ==20) || ($role_id == 2 && $department ==18)){ ?>
             <a class="btn  bg-danger mt-2" href="
@@ -1018,7 +1020,7 @@ $values_single = array(
                 </a> <?php } } 
         
         if(empty($test_c)){}else{ ?>
-                <div>Rack-03 --></div>
+                <div class='mt-2'>Rack-03 --></div>
                 <?php  foreach($test_c as $test1){ ?>
                 <?php if(($role_id == 4 && $department ==20) || ($role_id == 2 && $department ==18)){ ?>
                 <a class="btn  bg-danger mt-2" href="
@@ -1029,7 +1031,7 @@ $values_single = array(
                     <?php } }  
         
         if(empty($test_d)){}else{ ?>
-                    <div class=''>Rack-04 --></div>
+                    <div class='mt-2'>Rack-04 --></div>
                     <?php  foreach($test_d as $test1){ ?>
                     <?php if(($role_id == 4 && $department ==20) || ($role_id == 2 && $department ==18)){ ?>
                     <a class="btn  bg-danger mt-2"
@@ -1039,9 +1041,9 @@ $values_single = array(
                         </a>
                         <?php } } ?>
 
-                        <?php if(empty($test_e)){}else{ ?>
-                        <div class=''>Rack-05 --></div>
-                        <?php  foreach($test_e as $test1){ ?>
+                        <?php if(empty($test_f)){}else{ $single_rack_1 =1;?>
+                        <div class='mt-2'>Rack-05 --></div>
+                        <?php  foreach($test_f as $test1){ ?>
                         <?php if(($role_id == 4 && $department ==20) || ($role_id == 2 && $department ==18)){ ?>
                         <a class="btn  bg-danger mt-2"
                             href="add_additional_part.php?scan_id=<?php echo "rack-5_".$test1[0] ?>">
@@ -1049,9 +1051,9 @@ $values_single = array(
                                 <?php  echo $test1[0]; ?>
                             </a>
                             <?php } } ?>
-                            <?php if(empty($test_f)){}else{ ?>
-                            <div class=''>Rack-06 --></div>
-                            <?php  foreach($test_f as $test1){ ?>
+                            <?php if(empty($test_g)){}else{ $single_rack_2 =1; ?>
+                            <div class='mt-2'>Rack-06 --></div>
+                            <?php  foreach($test_g as $test1){ ?>
                             <?php if(($role_id == 4 && $department ==20) || ($role_id == 2 && $department ==18)){ ?>
                             <a class="btn  bg-danger mt-2"
                                 href="add_additional_part.php?scan_id=<?php echo "rack-6_".$test1[0] ?>">
@@ -1059,9 +1061,10 @@ $values_single = array(
                                     <?php  echo $test1[0]; ?>
                                 </a>
                                 <?php } } ?>
-                                <?php if(empty($test_g)){}else{ ?>
-                                <div class=''>Rack-07 --></div>
-                                <?php  foreach($test_g as $test1){ ?>
+
+                                <?php if(empty($test_h)){}else{ $single_rack_3 =1; ?>
+                                <div class='mt-2'>Rack-07 --></div>
+                                <?php  foreach($test_h as $test1){ ?>
                                 <?php if(($role_id == 4 && $department ==20) || ($role_id == 2 && $department ==18)){ ?>
                                 <a class="btn  bg-danger mt-2"
                                     href="add_additional_part.php?scan_id=<?php echo "rack-7_".$test1[0] ?>">
@@ -1069,10 +1072,9 @@ $values_single = array(
                                         <?php  echo $test1[0]; ?>
                                     </a>
                                     <?php } } ?>
-
-                                    <?php if(empty($test_h)){}else{ ?>
-                                    <div class=''>Rack-08 --></div>
-                                    <?php  foreach($test_h as $test1){ ?>
+                                    <?php if(empty($test_j)){}else{ $single_rack_4 =1; ?>
+                                    <div class='mt-2'>Rack-08 --></div>
+                                    <?php  foreach($test_j as $test1){ ?>
                                     <?php if(($role_id == 4 && $department ==20) || ($role_id == 2 && $department ==18)){ ?>
                                     <a class="btn  bg-danger mt-2"
                                         href="add_additional_part.php?scan_id=<?php echo "rack-8_".$test1[0] ?>">
@@ -1080,9 +1082,10 @@ $values_single = array(
                                             <?php  echo $test1[0]; ?>
                                         </a>
                                         <?php } } ?>
-                                        <?php if(empty($test_j)){}else{ ?>
-                                        <div class=''>Rack-09 --></div>
-                                        <?php  foreach($test_j as $test1){ ?>
+
+                                        <?php if(empty($test_k)){}else{  $single_rack_5 =1;?>
+                                        <div class='mt-2'>Rack-09 --></div>
+                                        <?php  foreach($test_k as $test1){ ?>
                                         <?php if(($role_id == 4 && $department ==20) || ($role_id == 2 && $department ==18)){ ?>
                                         <a class="btn  bg-danger mt-2"
                                             href="add_additional_part.php?scan_id=<?php echo "rack-9_".$test1[0] ?>">
@@ -1091,25 +1094,16 @@ $values_single = array(
                                             </a>
                                             <?php } } ?>
 
-                                            <?php if(empty($test_k)){}else{ ?>
-                                            <div class=''>Rack-10 --></div>
-                                            <?php  foreach($test_k as $test1){ ?>
-                                            <?php if(($role_id == 4 && $department ==20) || ($role_id == 2 && $department ==18)){ ?>
-                                            <a class="btn  bg-danger mt-2"
-                                                href="add_additional_part.php?scan_id=<?php echo "rack-8_".$test1[0] ?>">
-                                                <?php } else{ ?> <a class="btn  bg-danger mt-2"> <?php } ?>
-                                                    <?php  echo $test1[0]; ?>
-                                                </a>
-                                                <?php } } ?>
-
 
     </div>
 </div>
+
 <div class="container-fluid">
     <div class="row mx-3">
         <!-- // rack 01 -->
         <div class="col-lg-4 col-md-6 col-sm-10 mt-5 text-uppercase">
             <?php  
+             
                 $query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'RACK-1'";
                 $result_set = mysqli_query($connection, $query);
                 foreach($result_set as $a){
@@ -1363,6 +1357,7 @@ $values_single = array(
         <!-- // rack 03 -->
 
         <?php
+        
             $query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'RACK-3'";
             $result_set = mysqli_query($connection, $query);
             foreach($result_set as $a){
@@ -1404,6 +1399,7 @@ $values_single = array(
             }
             return $grid2;
             }
+            
             function renderGrid2($grid2 ,$slot_name_search_c,$search_qty_c,$common_slot,$test_c,$role_id,$department,$test, $test_b,$test_d,$test_e,$test_f,$test_g,$test_h,$test_i,$test_j,$test_k)
             {
             $grid2 = array_reverse($grid2); 
@@ -1491,10 +1487,12 @@ $values_single = array(
 
                 </div>
             </div>
-            <?php } }?>
+            <?php } }
+        ?>
         </div>
     </div>
 </div>
+
 <!-- rack 04 -->
 <div class="container-fluid">
     <div class="row mx-3">
@@ -1518,7 +1516,7 @@ $values_single = array(
             }
             $grid3 = createGrid3(5, 20);
             $grid3 = plotGridvalues3($grid3, $values3);
-            echo renderGrid3($grid3,$slot_name_search_C,$search_qty_C,$common_slot,$test_c,$role_id,$department,$test, $test_b,$test_d,$test_e,$test_f,$test_g,$test_h,$test_i,$test_j,$test_k);
+            echo renderGrid3($grid3,$slot_name_search_d,$search_qty_d,$common_slot,$test_c,$role_id,$department,$test, $test_b,$test_d,$test_e,$test_f,$test_g,$test_h,$test_i,$test_j,$test_k);
             function createGrid3($columns, $rows)
             {
             $grid3 = [];
@@ -1540,14 +1538,14 @@ $values_single = array(
             }
             return $grid3;
             }
-            function renderGrid3($grid3 ,$slot_name_search_c,$search_qty_c,$common_slot,$test_c,$role_id,$department,$test, $test_b,$test_d,$test_e,$test_f,$test_g,$test_h,$test_i,$test_j,$test_k)
+            function renderGrid3($grid3 ,$slot_name_search_d,$search_qty_d,$common_slot,$test_c,$role_id,$department,$test, $test_b,$test_d,$test_e,$test_f,$test_g,$test_h,$test_i,$test_j,$test_k)
             {
             $grid3 = array_reverse($grid3); 
             $i =0;
             if((empty($test) && empty($test_b) && empty($test_c) && empty($test_d) && empty($test_e) && empty($test_f) && empty($test_g)&& empty($test_h) && empty($test_i) && empty($test_j) && empty($test_k)) || !empty($test_d)) {  
             
        ?>
-        <div class="col-4 mt-5 text-uppercase">
+        <div class="col-lg-4 col-md-6 col-sm-10 mt-5  text-uppercase mx-5">
             <div class="card card-primary">
                 <div class="card-header" ;>
                     <h4 class=" card-title">Rack 04</h4>
@@ -1679,9 +1677,9 @@ $values_single = array(
             {
             $grid4 = array_reverse($grid4); 
             $i =0;
-            if((empty($test) && empty($test_b) && empty($test_c) && empty($test_d) && empty($test_e) && empty($test_f) && empty($test_g)&& empty($test_h) && empty($test_i) && empty($test_j) && empty($test_k)) || !empty($test_e)) {
-             
-       ?>
+            if((empty($test) && empty($test_b) && empty($test_c) && empty($test_d) && empty($test_e) && empty($test_f) && empty($test_g)&& empty($test_h) && empty($test_i) && empty($test_j) && empty($test_k)) || !empty($test_f)) {
+            
+            ?>
             <div class="card card-primary">
                 <div class="card-header" ;>
                     <h4 class=" card-title">Rack 05</h4>
@@ -1694,8 +1692,10 @@ $values_single = array(
                 foreach ($row as $k=>$v) { 
                     $substring = explode("_", $v);
                     //   empty qty 
-                    if($substring[3] == 0){ ?>
+                    if($substring[3] == 0){ 
+                        if(empty($test_f)){   ?>
                     <!-- // slot name with empty qty -->
+
                     <?php if(($role_id == 4 && $department ==20) || ($role_id == 2 && $department ==18)){ ?>
                     <a class="btn grid_btn bg-secondary mt-2" href="
                             part_create_form.php?scan_id=<?php echo "rack-5_".$substring[0] ?>">
@@ -1712,11 +1712,11 @@ $values_single = array(
                                     ?>
                         </a>
 
-                        <?php echo "</br>"; }else{
+                        <?php echo "</br>"; }}else{
                  
                ?>
                         <!-- slot with value -->
-                        <?php if(empty($test_e)){?>
+                        <?php if(empty($test_f)){?>
                         <?php if(($role_id == 4 && $department ==20) || ($role_id == 2 && $department ==18)){ ?>
                         <a class="btn grid_btn bg-success mt-2" href="
                                 add_additional_part.php?scan_id=<?php echo "rack-5_".$substring[0] ?>">
@@ -1733,7 +1733,7 @@ $values_single = array(
                 ?>
                             </a>
                             <?php }else{ 
-            foreach($test_e as $a){
+            foreach($test_f as $a){
                if($substring[0] == $a[0] ){ ?>
                             <?php if(($role_id == 4 && $department ==20) || ($role_id == 2 && $department ==18)){ ?>
                             <a class="btn grid_btn bg-danger mt-2" href="
@@ -1769,6 +1769,7 @@ $values_single = array(
         <?php
             $query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'rack-6'";
             $result_set = mysqli_query($connection, $query);
+           
             foreach($result_set as $a){
             $slot_name = $a['slot_name'];
             $slot_name_change = $a['slot_name']."_0_0_0";
@@ -1812,9 +1813,9 @@ $values_single = array(
             {
             $grid5 = array_reverse($grid5); 
             $i =0;
-           
-            if((empty($test) && empty($test_b) && empty($test_c) && empty($test_d) && empty($test_e) && empty($test_f) && empty($test_g)&& empty($test_h) && empty($test_i) && empty($test_j) && empty($test_k)) || !empty($test_f)) {
-              
+            
+            if((empty($test) && empty($test_b) && empty($test_c) && empty($test_d) && empty($test_e) && empty($test_f) && empty($test_g)&& empty($test_h) && empty($test_i) && empty($test_j) && empty($test_k)) || !empty($test_g)) {
+             
        ?>
         <div class="col-1 mt-5 text-uppercase text-center">
             <div class="card card-primary">
@@ -1829,7 +1830,8 @@ $values_single = array(
                 foreach ($row as $k=>$v) { 
                     $substring = explode("_", $v);
                     //   empty qty 
-                    if($substring[3] == 0){ ?>
+                    if($substring[3] == 0){ 
+                        if(empty($test_g)){  ?>
                     <!-- // slot name with empty qty -->
                     <?php if(($role_id == 4 && $department ==20) || ($role_id == 2 && $department ==18)){ ?>
                     <a class="btn grid_btn bg-secondary mt-2" href="
@@ -1847,11 +1849,11 @@ $values_single = array(
                                     ?>
                         </a>
 
-                        <?php echo "</br>"; }else{
+                        <?php echo "</br>"; }}else{
                  
                ?>
                         <!-- slot with value -->
-                        <?php if(empty($test_f)){?>
+                        <?php if(empty($test_g)){?>
                         <?php if(($role_id == 4 && $department ==20) || ($role_id == 2 && $department ==18)){ ?>
                         <a class="btn grid_btn bg-success mt-2" href="
                                 add_additional_part.php?scan_id=<?php echo "rack-6_".$substring[0] ?>">
@@ -1868,7 +1870,7 @@ $values_single = array(
                 ?>
                             </a>
                             <?php }else{ 
-            foreach($test_f as $a){
+            foreach($test_g as $a){
                if($substring[0] == $a[0] ){ ?>
                             <?php if(($role_id == 4 && $department ==20) || ($role_id == 2 && $department ==18)){ ?>
                             <a class="btn grid_btn bg-danger mt-2" href="
@@ -1963,7 +1965,8 @@ $values_single = array(
                 foreach ($row as $k=>$v) { 
                     $substring = explode("_", $v);
                     //   empty qty 
-                    if($substring[3] == 0){ ?>
+                    if($substring[3] == 0){
+                        if(empty($test_h)){   ?>
                     <!-- // slot name with empty qty -->
                     <?php if(($role_id == 4 && $department ==20) || ($role_id == 2 && $department ==18)){ ?>
                     <a class="btn grid_btn bg-secondary mt-2" href="
@@ -1981,7 +1984,7 @@ $values_single = array(
                                     ?>
                         </a>
 
-                        <?php echo "</br>"; }else{
+                        <?php echo "</br>"; } }else{
                  
                ?>
                         <!-- slot with value -->
@@ -2096,7 +2099,8 @@ $values_single = array(
                 foreach ($row as $k=>$v) { 
                     $substring = explode("_", $v);
                     //   empty qty 
-                    if($substring[3] == 0){ ?>
+                    if($substring[3] == 0){
+                        if(empty($test_i)){   ?>
                     <!-- // slot name with empty qty -->
                     <?php if(($role_id == 4 && $department ==20) || ($role_id == 2 && $department ==18)){ ?>
                     <a class="btn grid_btn bg-secondary mt-2" href="
@@ -2114,7 +2118,7 @@ $values_single = array(
                                     ?>
                         </a>
 
-                        <?php echo "</br>"; }else{
+                        <?php echo "</br>"; } }else{
                  
                ?>
                         <!-- slot with value -->
@@ -2229,7 +2233,8 @@ $values_single = array(
                 foreach ($row as $k=>$v) { 
                     $substring = explode("_", $v);
                     //   empty qty 
-                    if($substring[3] == 0){ ?>
+                    if($substring[3] == 0){ 
+                        if(empty($test_j)){   ?>
                     <!-- // slot name with empty qty -->
                     <?php if(($role_id == 4 && $department ==20) || ($role_id == 2 && $department ==18)){ ?>
                     <a class="btn grid_btn bg-secondary mt-2" href="
@@ -2247,7 +2252,7 @@ $values_single = array(
                                     ?>
                         </a>
 
-                        <?php echo "</br>"; }else{
+                        <?php echo "</br>"; } }else{
                  
                ?>
                         <!-- slot with value -->

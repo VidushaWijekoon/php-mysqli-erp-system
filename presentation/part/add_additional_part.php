@@ -88,9 +88,9 @@ foreach($result as $a){
                                     <td><?php echo $part_name ?></td>
                                     <td><?php echo $part_model ?></td>
                                     <td><?php echo $part_brand ?></td>
+                                    <td><?php echo $qty ?></td>
                                     <td><?php echo $rack_number ?></td>
                                     <td><?php echo $slot_number ?></td>
-                                    <td><?php echo $qty ?></td>
                                     <td>
                                         <input type="number" id="qty" class="form-control"
                                             placeholder="Please Enter QTY" name="qty">
