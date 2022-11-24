@@ -65,7 +65,9 @@ if (isset($_GET['sales_order_id'])) {
                             warehouse_information_sheet.generation, 
                             warehouse_information_sheet.core, 
                             warehouse_information_sheet.brand 
-                    ORDER BY received_count DESC";                                          
+                    ORDER BY received_count DESC";  
+                   
+                                                           
                         
                     $query_run4 = mysqli_query($connection, $query4);
                        
@@ -109,6 +111,7 @@ if (isset($_GET['sales_order_id'])) {
                                 if($sales_orderID == 0){
                                     $query_check ="SELECT COUNT(send_to_production) as prepared FROM `warehouse_information_sheet` WHERE `sales_order_id` = {$sales_order_id} AND send_to_production = 1 
                                     AND model= '{$model}' AND processor='{$processor}' AND device ='{$type}' AND core='{$core}' AND generation='{$generation}' AND brand='{$brand}' ";
+                                    
                                     $query_item_check ="SELECT item_quantity FROM `sales_order_add_items` WHERE `sales_order_id` = {$sales_order_id}
                                     AND item_model= '{$model}' AND item_processor='{$processor}' AND item_type ='{$type}' AND item_core='{$core}' AND item_generation='{$generation}' AND item_brand='{$brand}' ";
  
@@ -137,6 +140,10 @@ if (isset($_GET['sales_order_id'])) {
                                 break;
                             }
                         }
+                    }
+                    if($sales_orderID != 0){
+                        echo "<span class='exists badge badge-lg badge-info text-white p-2 mx-2'>existing </span>";
+                        break;
                     }
 
                     // // // Already Scanned

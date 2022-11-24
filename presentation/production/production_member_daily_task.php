@@ -297,7 +297,7 @@ foreach($query_tech as $data){
                                                                 <span class='badge badge-lg badge-warning text-white px-2'>Combine Issue</span>
                                                                 </a>";
                                                             }else{
-                                                                echo '<span class="badge badge-lg badge-danger text-white px-2 p-1">after item recived start this</span>';
+                                                                echo '<span class="badge badge-lg badge-danger text-white px-2 p-1">Waiting for parts</span>';
                                                             }
                                                         }if ($values['issue_type'] ==3) {
                                                             echo '<span class="badge badge-lg badge-danger text-white px-2">LCD Issue</span>';
