@@ -332,5 +332,5 @@ $status = 0;
         )"; 
         $query_run = mysqli_query($connection, $query_inventory_record);
     }
-    
+  
  ?>
