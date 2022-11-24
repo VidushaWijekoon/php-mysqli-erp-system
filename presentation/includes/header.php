@@ -206,7 +206,7 @@ if(isset($_POST['logged_out'])){
 
                                 <li class="nav-item">
                                     <a href="../employee/employee_dashboard.php" class="nav-link">
-                                        <i class="fa-solid fa-person nav-icon" style="font-size: 12px;"></i>
+                                        <i class="fa fa-user nav-icon" style="font-size: 12px;"></i>
                                         <p> HR </i>
                                         </p>
                                     </a>
@@ -214,7 +214,7 @@ if(isset($_POST['logged_out'])){
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="fa-solid fa-comment-dollar nav-icon" style="font-size: 12px;"></i>
+                                        <i class="fas fa-comment-dollar nav-icon" style="font-size: 12px;"></i>
                                         <p> Payroll</i>
                                         </p>
                                     </a>
@@ -230,22 +230,21 @@ if(isset($_POST['logged_out'])){
                         <!-- Sales -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fa-solid fa-receipt"></i>
+                                <i class="nav-icon fa fa-receipt"></i>
                                 <p> Sales <i class="right fas fa-angle-left"></i> </p>
                             </a>
                             <ul class="nav nav-treeview">
 
                                 <li class="nav-item">
                                     <a href="../sales/sales_dashboard.php" class="nav-link">
-                                        <i class="fa-solid fa-landmark nav-icon" style="font-size: 12px;"></i>
+                                        <i class="fa fa-landmark nav-icon" style="font-size: 12px;"></i>
                                         <p> Sales </p>
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a href="../e-commerce/e_commerce_dashboard.php" class="nav-link">
-                                        <i class="fa-solid fa-earth-americas fa-user nav-icon"
-                                            style="font-size: 12px;"></i>
+                                        <i class="fa fa-earth-americas fa-user nav-icon" style="font-size: 12px;"></i>
                                         <p>E-Commerce </p>
                                     </a>
                                 </li>
@@ -267,7 +266,7 @@ if(isset($_POST['logged_out'])){
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="../accounts/accounts_dashboard.php" class="nav-link">
-                                        <i class="fa-solid fa-coins nav-icon" style="font-size: 12px;"></i>
+                                        <i class="fa fa-coins nav-icon" style="font-size: 12px;"></i>
                                         <p> Accounts </p>
                                     </a>
                                 </li>
@@ -289,22 +288,20 @@ if(isset($_POST['logged_out'])){
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="fa-solid fa-warehouse nav-icon" style="font-size: 12px;"></i>
+                                        <i class="fa fa-warehouse nav-icon" style="font-size: 12px;"></i>
                                         <p> Inventory <i class="right fas fa-angle-left"></i> </p>
                                     </a>
 
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
                                             <a href="../inventory/warehouse_dashboard.php" class="nav-link">
-                                                <i class="fa-solid fa-people-line nav-icon"
-                                                    style="font-size: 12px;"></i>
+                                                <i class="fa fa-people-line nav-icon" style="font-size: 12px;"></i>
                                                 <p>Team Leader</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="../inventory/warehouse_member_sales_order.php" class="nav-link">
-                                                <i class="fa-sharp fa-solid fa-chalkboard-user nav-icon"
-                                                    style="font-size: 12px;"></i>
+                                                <i class="fa fa-chalkboard-user nav-icon" style="font-size: 12px;"></i>
                                                 <p>Team Member </p>
                                             </a>
                                         </li>
@@ -320,7 +317,7 @@ if(isset($_POST['logged_out'])){
                         <!-- Part -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fa-solid fa-gears"></i>
+                                <i class="nav-icon fab fa-gears"></i>
                                 <p> Part Warehouse <i class="right fas fa-angle-left"></i> </p>
                             </a>
                             <ul class="nav nav-treeview">
@@ -335,7 +332,7 @@ if(isset($_POST['logged_out'])){
                                 <!-- Part -->
                                 <li class="nav-item">
                                     <a href="../part/part_stock_dashboard.php" class="nav-link">
-                                        <i class="fa-solid fa-cubes nav-icon" style="font-size: 12px;"></i>
+                                        <i class="fa fa-cubes nav-icon" style="font-size: 12px;"></i>
                                         <p>Part Stock Report</p>
                                     </a>
                                 </li>
@@ -358,15 +355,14 @@ if(isset($_POST['logged_out'])){
 
                                 <li class="nav-item">
                                     <a href="../production/production_team_leader_dashboard.php" class="nav-link">
-                                        <i class="fa-solid fa-people-line nav-icon" style="font-size: 12px;"></i>
+                                        <i class="fa fa-people-line nav-icon" style="font-size: 12px;"></i>
                                         <p> Team Leader </p>
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a href="../production/production_technician_dashboard.php" class="nav-link">
-                                        <i class="fa-sharp fa-solid fa-chalkboard-user nav-icon"
-                                            style="font-size: 12px;"></i>
+                                        <i class="fa fa-chalkboard-user nav-icon" style="font-size: 12px;"></i>
                                         <p> Technician </p>
                                     </a>
                                 </li>
@@ -388,22 +384,21 @@ if(isset($_POST['logged_out'])){
 
                                 <li class="nav-item">
                                     <a href="../motherboard/motherboard_dashboard.php" class="nav-link">
-                                        <i class="fa-solid fa-people-line nav-icon" style="font-size: 12px;"></i>
+                                        <i class="fa fa-people-line nav-icon" style="font-size: 12px;"></i>
                                         <p> Team Leader</p>
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a href="../motherboard/motherboard_technician.php" class="nav-link">
-                                        <i class="fa-sharp fa-solid fa-chalkboard-user nav-icon"
-                                            style="font-size: 12px;"></i>
+                                        <i class="fa fa-chalkboard-user nav-icon" style="font-size: 12px;"></i>
                                         <p> Motherboard Technician </p>
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a href="../motherboard/motherboard_technician.php" class="nav-link">
-                                        <i class="fa-sharp fa-solid fa-laptop nav-icon" style="font-size: 12px;"></i>
+                                        <i class="fa fa-laptop nav-icon" style="font-size: 12px;"></i>
                                         <p> Laptop Technician </p>
                                     </a>
                                 </li>
@@ -424,7 +419,7 @@ if(isset($_POST['logged_out'])){
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="fa-solid fa-display nav-icon" style="font-size: 12px;"></i>
+                                        <i class="fa fa-display nav-icon" style="font-size: 12px;"></i>
                                         <p> LCD </p>
                                     </a>
                                 </li>
@@ -439,14 +434,14 @@ if(isset($_POST['logged_out'])){
                         <!-- Battery -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fa-solid fa-battery"></i>
+                                <i class="nav-icon fa fa-battery"></i>
                                 <p> Battery <i class="right fas fa-angle-left"></i> </p>
                             </a>
                             <ul class="nav nav-treeview">
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="fa-solid fa-battery nav-icon" style="font-size: 12px;"></i>
+                                        <i class="fa fa-battery nav-icon" style="font-size: 12px;"></i>
                                         <p> Battery </p>
                                     </a>
 
@@ -462,14 +457,14 @@ if(isset($_POST['logged_out'])){
                         <!-- Bodywork -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fa-solid fa-laptop"></i>
+                                <i class="nav-icon fa fa-laptop"></i>
                                 <p> Bodywork <i class="right fas fa-angle-left"></i> </p>
                             </a>
                             <ul class="nav nav-treeview">
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="fa-solid fa-laptop nav-icon" style="font-size: 12px;"></i>
+                                        <i class="fa fa-laptop nav-icon" style="font-size: 12px;"></i>
                                         <p> Bodywork </p>
                                     </a>
                                 </li>
@@ -483,14 +478,14 @@ if(isset($_POST['logged_out'])){
                         <!-- Sanding -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fa-solid fa-soap"></i>
+                                <i class="nav-icon fa fa-soap"></i>
                                 <p> Sanding <i class="right fas fa-angle-left"></i> </p>
                             </a>
                             <ul class="nav nav-treeview">
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="fa-solid fa-soap nav-icon" style="font-size: 12px;"></i>
+                                        <i class="fa fa-soap nav-icon" style="font-size: 12px;"></i>
                                         <p> Sanding </p>
                                     </a>
                                 </li>
@@ -504,14 +499,14 @@ if(isset($_POST['logged_out'])){
                         <!-- Painting -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-spray-can"></i>
+                                <i class="nav-icon fa fa-spray-can"></i>
                                 <p> Painting <i class="right fas fa-angle-left"></i> </p>
                             </a>
                             <ul class="nav nav-treeview">
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="fa-solid fa-spray-can nav-icon" style="font-size: 12px;"></i>
+                                        <i class="fa fa-spray-can nav-icon" style="font-size: 12px;"></i>
                                         <p> Painting </p>
                                     </a>
                                 </li>
@@ -533,7 +528,7 @@ if(isset($_POST['logged_out'])){
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="fa-solid fa-stethoscope nav-icon" style="font-size: 12px;"></i>
+                                        <i class="fa fa-stethoscope nav-icon" style="font-size: 12px;"></i>
                                         <p> QC </p>
                                     </a>
                                 </li>
@@ -556,7 +551,7 @@ if(isset($_POST['logged_out'])){
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="fa-solid fa-boxes nav-icon" style="font-size: 12px;"></i>
+                                        <i class="fa fa-boxes nav-icon" style="font-size: 12px;"></i>
                                         <p> Packing </p>
                                     </a>
                                 </li>
@@ -573,7 +568,7 @@ if(isset($_POST['logged_out'])){
 
                         <li class="nav-item">
                             <a href="../search/search_inventory_id.php" class="nav-link">
-                                <i class="fa-solid fa-search nav-icon" style="font-size: 12px;"></i>
+                                <i class="fa fa-search nav-icon" style="font-size: 12px;"></i>
                                 <p> Search Device</p>
                             </a>
                         </li>
@@ -582,7 +577,7 @@ if(isset($_POST['logged_out'])){
 
                         <li class="nav-item">
                             <a href="../search/search_sales_order.php" class="nav-link">
-                                <i class="fa-regular fa-folder-open nav-icon" style="font-size: 12px;"></i>
+                                <i class="fa fa-folder-open nav-icon" style="font-size: 12px;"></i>
                                 <p> Search Sales Order </p>
                             </a>
                         </li>
@@ -591,7 +586,7 @@ if(isset($_POST['logged_out'])){
 
                         <li class="nav-item">
                             <a href="../inventory/warehouse_stock_report.php" class="nav-link">
-                                <i class="fa-solid fa-cubes-stacked nav-icon" style="font-size: 12px;"></i>
+                                <i class="fa fa-cubes-stacked nav-icon" style="font-size: 12px;"></i>
                                 <p> Stock Report </p>
                             </a>
                         </li>
@@ -600,7 +595,7 @@ if(isset($_POST['logged_out'])){
 
                         <li class="nav-item">
                             <a href="../part/part_stock_dashboard.php" class="nav-link">
-                                <i class="fa-solid fa-cubes nav-icon" style="font-size: 12px;"></i>
+                                <i class="fa fa-cubes nav-icon" style="font-size: 12px;"></i>
                                 <p>Part Stock Report</p>
                             </a>
                         </li>

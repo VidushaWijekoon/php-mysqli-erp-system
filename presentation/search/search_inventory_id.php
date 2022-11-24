@@ -20,11 +20,11 @@ if (!isset($_SESSION['user_id'])) {
                     <div class="col col-md-6 col-lg-6">
                         <fieldset class="mt-2 mb-3">
                             <legend>Scan Inventory ID</legend>
-                            <form action="" method="GET">
+                            <form action="" method="POST">
                                 <div class="input-group">
                                     <span class="mt-1 mx-3" style="font-size: 14px;">Search :</span>
                                     <input type="number" min="000001" name="search"
-                                        value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>"
+                                        value="<?php if(isset($_POST['search'])){echo $_POST['search']; } ?>"
                                         class="form-control" placeholder="Search data" width="50%">
                                 </div>
                             </form>
@@ -42,14 +42,14 @@ if (!isset($_SESSION['user_id'])) {
                     $wh_model = NULL;
                     $wh_location = NULL;
 
-                                if (isset($_GET['search'])) {
-                                    $filtervalues = $_GET['search'];
+                                if (isset($_POST['search'])) {
+                                    $filtervalues = $_POST['search'];
 
                                 $query = "SELECT *, (warehouse_information_sheet.processor) AS w_processor,
                                                     (warehouse_information_sheet.generation) AS w_gen,
                                                     (production_check.processor) AS pro_pro,
                                                     (production_check.generation) AS pro_gen,
-                                                    (motherbaord_dep.inventory_id) AS motherboard_dep_inventory_id,
+                                                    (motherboard_dep.inventory_id) AS motherboard_dep_inventory_id,
                                                     (lcd_dep.inventory_id) AS lcd_dep_inventory_id,
                                                     (bodywork_dep.inventory_id) AS bodywork_dep_inventory_id,
                                                     (sanding_dep.inventory_id) AS sanding_dep_inventory_id,
@@ -63,7 +63,7 @@ if (!isset($_SESSION['user_id'])) {
                                         LEFT JOIN combine_check ON warehouse_information_sheet.inventory_id = combine_check.inventory_id
                                         LEFT JOIN production_check ON warehouse_information_sheet.inventory_id = production_check.inventory_id
                                         LEFT JOIN prod_info ON warehouse_information_sheet.inventory_id = prod_info.inventory_id
-                                        LEFT JOIN motherbaord_dep ON warehouse_information_sheet.inventory_id = motherbaord_dep.inventory_id
+                                        LEFT JOIN motherboard_dep ON warehouse_information_sheet.inventory_id = motherboard_dep.inventory_id
                                         LEFT JOIN lcd_dep ON warehouse_information_sheet.inventory_id = lcd_dep.inventory_id
                                         LEFT JOIN bodywork_dep ON warehouse_information_sheet.inventory_id = bodywork_dep.inventory_id
                                         LEFT JOIN sanding_dep ON warehouse_information_sheet.inventory_id = sanding_dep.inventory_id
@@ -127,8 +127,8 @@ if (!isset($_SESSION['user_id'])) {
                                     $prod_processor = $rows['pro_pro'];
                                     $prod_generation = $rows['pro_gen'];
                                     $prod_ram = $rows['ram'];
-                                    $prod_ssd = $rows['ssd'];
-                                    $prod_hdd = $rows['hdd'];
+                                    $prod_hdd_capacity = $rows['hdd_capacity'];
+                                    $prod_hdd_type = $rows['hdd_type'];
                                     $prod_display = $rows['display'];
                                     $prod_resolutions = $rows['resolutions'];
                                     $prod_graphic = $rows['graphic'];
@@ -2017,14 +2017,14 @@ if (!isset($_SESSION['user_id'])) {
                                                         <div class="row">
                                                             <label class="col-sm-4 col-form-label">SSD</label>
                                                             <div class="col-sm-8 mt-2 col-values">
-                                                                <?php echo $prod_ssd ?>
+                                                                <?php echo $prod_hdd_capacity ?>
                                                             </div>
                                                         </div>
 
                                                         <div class="row">
                                                             <label class="col-sm-4 col-form-label">HDD</label>
                                                             <div class="col-sm-8 mt-2 col-values">
-                                                                <?php echo $prod_hdd ?>
+                                                                <?php echo $prod_hdd_type ?>
                                                             </div>
                                                         </div>
 
