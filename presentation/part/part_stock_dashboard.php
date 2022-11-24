@@ -691,6 +691,114 @@ $values_single = array(
     $X1 => [1, 2],
     $Y1 => [1, 1]
  );
+ $values_single3 = array(
+    $A1 => [1, 25],
+    $B1 => [1, 24],
+    $C1 => [1, 23],
+    $D1 => [1, 22],
+    $E1 => [1, 21],
+    $F1 => [1, 20],
+    $G1 => [1, 19],
+    $H1 => [1, 18],
+    $I1 => [1, 17],
+    $J1 => [1, 16],
+    $K1 => [1, 15],
+    $L1 => [1, 14],
+    $M1 => [1, 13],
+    $N1 => [1, 12],
+    $O1 => [1, 11],
+    $P1 => [1, 10],
+    $Q1 => [1, 9],
+    $R1 => [1, 8],
+    $S1 => [1, 7],
+    $T1 => [1, 6],
+    $U1 => [1, 5],
+    $V1 => [1, 4],
+    $W1 => [1, 3],
+    $X1 => [1, 2],
+    $Y1 => [1, 1]
+ );
+ $values_single4 = array(
+    $A1 => [1, 25],
+    $B1 => [1, 24],
+    $C1 => [1, 23],
+    $D1 => [1, 22],
+    $E1 => [1, 21],
+    $F1 => [1, 20],
+    $G1 => [1, 19],
+    $H1 => [1, 18],
+    $I1 => [1, 17],
+    $J1 => [1, 16],
+    $K1 => [1, 15],
+    $L1 => [1, 14],
+    $M1 => [1, 13],
+    $N1 => [1, 12],
+    $O1 => [1, 11],
+    $P1 => [1, 10],
+    $Q1 => [1, 9],
+    $R1 => [1, 8],
+    $S1 => [1, 7],
+    $T1 => [1, 6],
+    $U1 => [1, 5],
+    $V1 => [1, 4],
+    $W1 => [1, 3],
+    $X1 => [1, 2],
+    $Y1 => [1, 1]
+ );
+ $values_single5 = array(
+    $A1 => [1, 25],
+    $B1 => [1, 24],
+    $C1 => [1, 23],
+    $D1 => [1, 22],
+    $E1 => [1, 21],
+    $F1 => [1, 20],
+    $G1 => [1, 19],
+    $H1 => [1, 18],
+    $I1 => [1, 17],
+    $J1 => [1, 16],
+    $K1 => [1, 15],
+    $L1 => [1, 14],
+    $M1 => [1, 13],
+    $N1 => [1, 12],
+    $O1 => [1, 11],
+    $P1 => [1, 10],
+    $Q1 => [1, 9],
+    $R1 => [1, 8],
+    $S1 => [1, 7],
+    $T1 => [1, 6],
+    $U1 => [1, 5],
+    $V1 => [1, 4],
+    $W1 => [1, 3],
+    $X1 => [1, 2],
+    $Y1 => [1, 1]
+ );
+ $values_single6 = array(
+    $A1 => [1, 25],
+    $B1 => [1, 24],
+    $C1 => [1, 23],
+    $D1 => [1, 22],
+    $E1 => [1, 21],
+    $F1 => [1, 20],
+    $G1 => [1, 19],
+    $H1 => [1, 18],
+    $I1 => [1, 17],
+    $J1 => [1, 16],
+    $K1 => [1, 15],
+    $L1 => [1, 14],
+    $M1 => [1, 13],
+    $N1 => [1, 12],
+    $O1 => [1, 11],
+    $P1 => [1, 10],
+    $Q1 => [1, 9],
+    $R1 => [1, 8],
+    $S1 => [1, 7],
+    $T1 => [1, 6],
+    $U1 => [1, 5],
+    $V1 => [1, 4],
+    $W1 => [1, 3],
+    $X1 => [1, 2],
+    $Y1 => [1, 1]
+ );
 ?>
 
 <div class="container-fluid">
@@ -739,13 +847,26 @@ $values_single = array(
                 $search_qty_f =0;
                 $slot_name_search_g = null;
                 $search_qty_g =0;
+                $slot_name_search_h = null;
+                $search_qty_h =0;
+                $slot_name_search_i = null;
+                $search_qty_i =0;
+                $slot_name_search_j = null;
+                $search_qty_j =0;
+                $slot_name_search_k = null;
+                $search_qty_k =0;
                 $rack_number_a = 'RACK-1';
                 $rack_number_b = 'RACK-2';
                 $rack_number_c = 'rack-3';
                 $rack_number_d = 'rack-4';
-                $rack_number_e = 'rack-5';
-                $rack_number_f = 'rack-6';
-                $rack_number_g = 'rack-7';
+                $rack_number_e = 'rack-extra';
+                $rack_number_f = 'rack-5';
+                $rack_number_g = 'rack-6';
+                $rack_number_h = 'rack-7';
+                $rack_number_i = 'rack-8';
+                $rack_number_j = 'rack-9';
+                $rack_number_k = 'rack-10';
+                $rack_number_l = 'rack-11';
                 $common_slot = null;
                 $test = null;
                 $test_b = null;
@@ -754,6 +875,10 @@ $values_single = array(
                 $test_e = null;
                 $test_f = null;
                 $test_g = null;
+                $test_h = null;
+                $test_i = null;
+                $test_j = null;
+                $test_k = null;
                 $run =null;
                 $i =0;
                 $item_name;
@@ -792,7 +917,6 @@ $values_single = array(
                                 $search_qty_C =$data['qty'];
                                 $test_c[$i] =array($data['slot_name']);
                                 $i++;
-                                echo "im here";
                             } elseif($data['rack_number'] == $rack_number_d){
                                  $slot_name_search_d = $data['slot_name'];
                                  $search_qty_d =$data['qty'];
@@ -814,7 +938,29 @@ $values_single = array(
                                $test_g[$i] =array($data['slot_name']);
                                $i++;
                            }
+                           elseif($data['rack_number'] == $rack_number_h){
+                            $slot_name_search_h = $data['slot_name'];
+                            $search_qty_h =$data['qty'];
+                            $test_h[$i] =array($data['slot_name']);
+                            $i++;
+                        }elseif($data['rack_number'] == $rack_number_i){
+                            $slot_name_search_i = $data['slot_name'];
+                            $search_qty_i =$data['qty'];
+                            $test_i[$i] =array($data['slot_name']);
+                            $i++;
                         }
+                        elseif($data['rack_number'] == $rack_number_j){
+                            $slot_name_search_j = $data['slot_name'];
+                            $search_qty_j =$data['qty'];
+                            $test_j[$i] =array($data['slot_name']);
+                            $i++;
+                        }elseif($data['rack_number'] == $rack_number_k){
+                            $slot_name_search_k = $data['slot_name'];
+                            $search_qty_k =$data['qty'];
+                            $test_k[$i] =array($data['slot_name']);
+                            $i++;
+                        }
+                     }
                                              
                     }
                 ?>
@@ -923,6 +1069,40 @@ $values_single = array(
                                         <?php  echo $test1[0]; ?>
                                     </a>
                                     <?php } } ?>
+
+                                    <?php if(empty($test_h)){}else{ ?>
+                                    <div class=''>Rack-08 --></div>
+                                    <?php  foreach($test_h as $test1){ ?>
+                                    <?php if($role_id == 4 && $department ==20){ ?>
+                                    <a class="btn  bg-danger mt-2"
+                                        href="add_additional_part.php?scan_id=<?php echo "rack-8_".$test1[0] ?>">
+                                        <?php } else{ ?> <a class="btn  bg-danger mt-2"> <?php } ?>
+                                            <?php  echo $test1[0]; ?>
+                                        </a>
+                                        <?php } } ?>
+                                        <?php if(empty($test_j)){}else{ ?>
+                                        <div class=''>Rack-09 --></div>
+                                        <?php  foreach($test_j as $test1){ ?>
+                                        <?php if($role_id == 4 && $department ==20){ ?>
+                                        <a class="btn  bg-danger mt-2"
+                                            href="add_additional_part.php?scan_id=<?php echo "rack-9_".$test1[0] ?>">
+                                            <?php } else{ ?> <a class="btn  bg-danger mt-2"> <?php } ?>
+                                                <?php  echo $test1[0]; ?>
+                                            </a>
+                                            <?php } } ?>
+
+                                            <?php if(empty($test_k)){}else{ ?>
+                                            <div class=''>Rack-10 --></div>
+                                            <?php  foreach($test_k as $test1){ ?>
+                                            <?php if($role_id == 4 && $department ==20){ ?>
+                                            <a class="btn  bg-danger mt-2"
+                                                href="add_additional_part.php?scan_id=<?php echo "rack-8_".$test1[0] ?>">
+                                                <?php } else{ ?> <a class="btn  bg-danger mt-2"> <?php } ?>
+                                                    <?php  echo $test1[0]; ?>
+                                                </a>
+                                                <?php } } ?>
+
+
     </div>
 </div>
 <div class="container-fluid">
@@ -948,7 +1128,7 @@ $values_single = array(
                     }
                         $grid = createGrid(5, 20);
                         $grid = plotGridValues($grid, $values);
-                        echo renderGrid($grid ,$slot_name_search,$search_qty,$common_slot,$test,$role_id,$department,$test_b,$test_c,$test_d,$test_e,$test_g,$test_f);
+                        echo renderGrid($grid ,$slot_name_search,$search_qty,$common_slot,$test,$role_id,$department,$test_b,$test_c,$test_d,$test_e,$test_g,$test_f,$test_g,$test_h,$test_i,$test_j,$test_k);
                     function createGrid($columns, $rows){
                         $grid = [];
                         $cell = 1;
@@ -968,10 +1148,10 @@ $values_single = array(
                         }
                         return $grid;
                     }
-                        function renderGrid($grid ,$slot_name_search,$search_qty,$common_slot,$test,$role_id,$department,$test_b,$test_c,$test_d,$test_e,$test_g,$test_f){
+                        function renderGrid($grid ,$slot_name_search,$search_qty,$common_slot,$test,$role_id,$department,$test_b,$test_c,$test_d,$test_e,$test_f,$test_g,$test_h,$test_i,$test_j,$test_k){
                         $grid = array_reverse($grid); 
                         $i =0;    
-                        if((empty($test) && empty($test_b) && empty($test_c) && empty($test_d) && empty($test_e) && empty($test_f) && empty($test_g)) || !empty($test)) {                
+                        if((empty($test) && empty($test_b) && empty($test_c) && empty($test_d) && empty($test_e) && empty($test_f) && empty($test_g)&& empty($test_h) && empty($test_i) && empty($test_j) && empty($test_k)) || !empty($test)) {                
                ?>
             <div class="card card-primary">
                 <div class="card-header" ;>
@@ -1068,7 +1248,7 @@ $values_single = array(
             }
             $grid1 = createGrid1(5, 20);
             $grid1 = plotGridValues1($grid1, $values1);
-            echo renderGrid1($grid1,$slot_name_search_B,$search_qty_B,$common_slot,$test_b,$role_id,$department,$test,$test_c,$test_d,$test_e,$test_g,$test_f);
+            echo renderGrid1($grid1,$slot_name_search_B,$search_qty_B,$common_slot,$test_b,$role_id,$department,$test,$test_c,$test_d,$test_e,$test_g,$test_f,$test_g,$test_h,$test_i,$test_j,$test_k);
             function createGrid1($columns, $rows)
             {
             $grid1 = [];
@@ -1090,13 +1270,13 @@ $values_single = array(
             }
             return $grid1;
             }
-            function renderGrid1($grid1 ,$slot_name_search_b,$search_qty_b,$common_slot,$test_b,$role_id,$department,$test,$test_c,$test_d,$test_e,$test_g,$test_f)
+            function renderGrid1($grid1 ,$slot_name_search_b,$search_qty_b,$common_slot,$test_b,$role_id,$department,$test,$test_c,$test_d,$test_e,$test_f,$test_g,$test_h,$test_i,$test_j,$test_k)
             {
             $grid1 = array_reverse($grid1); 
             $i =0;
             
        ?>
-        <?php if((empty($test) && empty($test_b) && empty($test_c) && empty($test_d) && empty($test_e) && empty($test_f) && empty($test_g)) || !empty($test_b)) {?>
+        <?php if((empty($test) && empty($test_b) && empty($test_c) && empty($test_d) && empty($test_e) && empty($test_f) && empty($test_g) && empty($test_h) && empty($test_i) && empty($test_j) && empty($test_k)) || !empty($test_b)) {?>
         <div class="col-4 mt-5 text-uppercase">
             <div class="card card-primary">
                 <div class="card-header" ;>
@@ -1202,7 +1382,7 @@ $values_single = array(
             }
             $grid2 = createGrid2(5, 20);
             $grid2 = plotGridValues2($grid2, $values2);
-            echo renderGrid2($grid2,$slot_name_search_C,$search_qty_C,$common_slot,$test_c,$role_id,$department,$test, $test_b,$test_d,$test_e,$test_g,$test_f);
+            echo renderGrid2($grid2,$slot_name_search_C,$search_qty_C,$common_slot,$test_c,$role_id,$department,$test, $test_b,$test_d,$test_e,$test_g,$test_f,$test_g,$test_h,$test_i,$test_j,$test_k);
             function createGrid2($columns, $rows)
             {
             $grid2 = [];
@@ -1224,11 +1404,11 @@ $values_single = array(
             }
             return $grid2;
             }
-            function renderGrid2($grid2 ,$slot_name_search_c,$search_qty_c,$common_slot,$test_c,$role_id,$department,$test, $test_b,$test_d,$test_e,$test_g,$test_f)
+            function renderGrid2($grid2 ,$slot_name_search_c,$search_qty_c,$common_slot,$test_c,$role_id,$department,$test, $test_b,$test_d,$test_e,$test_f,$test_g,$test_h,$test_i,$test_j,$test_k)
             {
             $grid2 = array_reverse($grid2); 
             $i =0;
-            if((empty($test) && empty($test_b) && empty($test_c) && empty($test_d) && empty($test_e) && empty($test_f) && empty($test_g)) || !empty($test_c)) {  
+            if((empty($test) && empty($test_b) && empty($test_c) && empty($test_d) && empty($test_e) && empty($test_f) && empty($test_g)&& empty($test_h) && empty($test_i) && empty($test_j) && empty($test_k)) || !empty($test_c)) {  
             
        ?>
         <div class="col-4 mt-5 text-uppercase">
@@ -1338,7 +1518,7 @@ $values_single = array(
             }
             $grid3 = createGrid3(5, 20);
             $grid3 = plotGridvalues3($grid3, $values3);
-            echo renderGrid3($grid3,$slot_name_search_C,$search_qty_C,$common_slot,$test_c,$role_id,$department,$test, $test_b,$test_d,$test_e,$test_g,$test_f);
+            echo renderGrid3($grid3,$slot_name_search_C,$search_qty_C,$common_slot,$test_c,$role_id,$department,$test, $test_b,$test_d,$test_e,$test_f,$test_g,$test_h,$test_i,$test_j,$test_k);
             function createGrid3($columns, $rows)
             {
             $grid3 = [];
@@ -1360,11 +1540,11 @@ $values_single = array(
             }
             return $grid3;
             }
-            function renderGrid3($grid3 ,$slot_name_search_c,$search_qty_c,$common_slot,$test_c,$role_id,$department,$test, $test_b,$test_d,$test_e,$test_g,$test_f)
+            function renderGrid3($grid3 ,$slot_name_search_c,$search_qty_c,$common_slot,$test_c,$role_id,$department,$test, $test_b,$test_d,$test_e,$test_f,$test_g,$test_h,$test_i,$test_j,$test_k)
             {
             $grid3 = array_reverse($grid3); 
             $i =0;
-            if((empty($test) && empty($test_b) && empty($test_c) && empty($test_d) && empty($test_e) && empty($test_f) && empty($test_g)) || !empty($test_d)) {  
+            if((empty($test) && empty($test_b) && empty($test_c) && empty($test_d) && empty($test_e) && empty($test_f) && empty($test_g)&& empty($test_h) && empty($test_i) && empty($test_j) && empty($test_k)) || !empty($test_d)) {  
             
        ?>
         <div class="col-4 mt-5 text-uppercase">
@@ -1386,7 +1566,7 @@ $values_single = array(
                     if(empty($test_d)){
                     if($role_id == 4 && $department ==20){ ?>
                     <a class="btn grid_btn bg-secondary mt-2" href="
-                            part_create_form.php?scan_id=<?php echo "rack-3_".$substring[0] ?>">
+                            part_create_form.php?scan_id=<?php echo "rack-4_".$substring[0] ?>">
                         <?php } else { ?>
                         <a class="btn grid_btn bg-secondary mt-2">
                             <?php } ?>
@@ -1405,7 +1585,7 @@ $values_single = array(
                         <?php if(empty($test_d)){?>
                         <?php if($role_id == 4 && $department ==20){ ?>
                         <a class="btn grid_btn bg-success mt-2" href="
-                                add_additional_part.php?scan_id=<?php echo "rack-3_".$substring[0] ?>">
+                                add_additional_part.php?scan_id=<?php echo "rack-4_".$substring[0] ?>">
                             <?php } else { ?>
                             <a class="btn grid_btn bg-success mt-2">
                                 <?php } ?>
@@ -1423,7 +1603,7 @@ $values_single = array(
                if($substring[0] == $a[0] ){ ?>
                             <?php if($role_id == 4 && $department ==20){ ?>
                             <a class="btn grid_btn bg-danger mt-2" href="
-                                add_additional_part.php?scan_id=<?php echo "rack-3_".$substring[0] ?>">
+                                add_additional_part.php?scan_id=<?php echo "rack-4_".$substring[0] ?>">
                                 <?php } else { ?>
                                 <a class="btn grid_btn bg-danger mt-2">
                                     <?php } ?>
@@ -1473,7 +1653,7 @@ $values_single = array(
             }
             $grid4 = createGrid4(1, 25);
             $grid4 = plotGridValues4($grid4, $values_single);
-            echo renderGrid4($grid4,$slot_name_search_e,$search_qty_e,$common_slot,$test_e,$role_id,$department,$test, $test_b,$test_c,$test_d,$test_g,$test_f);
+            echo renderGrid4($grid4,$slot_name_search_e,$search_qty_e,$common_slot,$test_e,$role_id,$department,$test, $test_b,$test_c,$test_d,$test_f,$test_g,$test_h,$test_i,$test_j,$test_k);
             function createGrid4($columns, $rows)
             {
             $grid4 = [];
@@ -1495,11 +1675,11 @@ $values_single = array(
             }
             return $grid4;
             }
-            function renderGrid4($grid4 ,$slot_name_search_e,$search_qty_e,$common_slot,$test_e,$role_id,$department,$test, $test_b,$test_c,$test_d,$test_g,$test_f)
+            function renderGrid4($grid4 ,$slot_name_search_e,$search_qty_e,$common_slot,$test_e,$role_id,$department,$test, $test_b,$test_c,$test_d,$test_f,$test_g,$test_h,$test_i,$test_j,$test_k)
             {
             $grid4 = array_reverse($grid4); 
             $i =0;
-            if((empty($test) && empty($test_b) && empty($test_c) && empty($test_d) && empty($test_e) && empty($test_f) && empty($test_g)) || !empty($test_e)) {
+            if((empty($test) && empty($test_b) && empty($test_c) && empty($test_d) && empty($test_e) && empty($test_f) && empty($test_g)&& empty($test_h) && empty($test_i) && empty($test_j) && empty($test_k)) || !empty($test_e)) {
              
        ?>
             <div class="card card-primary">
@@ -1589,7 +1769,6 @@ $values_single = array(
         <?php
             $query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'rack-6'";
             $result_set = mysqli_query($connection, $query);
-            echo "hi im there";
             foreach($result_set as $a){
             $slot_name = $a['slot_name'];
             $slot_name_change = $a['slot_name']."_0_0_0";
@@ -1607,7 +1786,7 @@ $values_single = array(
             }
             $grid5 = createGrid5(1, 25);
             $grid5 = plotGridValues5($grid5, $values_single2);
-            echo renderGrid5($grid5,$slot_name_search_e,$search_qty_e,$common_slot,$test_e,$role_id,$department,$test, $test_b,$test_c,$test_d,$test_g,$test_f);
+            echo renderGrid5($grid5,$slot_name_search_e,$search_qty_e,$common_slot,$test_e,$role_id,$department,$test, $test_b,$test_c,$test_d,$test_f,$test_g,$test_h,$test_i,$test_j,$test_k);
             function createGrid5($columns, $rows)
             {
             $grid5 = [];
@@ -1629,12 +1808,12 @@ $values_single = array(
             }
             return $grid5;
             }
-            function renderGrid5($grid5 ,$slot_name_search_e,$search_qty_e,$common_slot,$test_e,$role_id,$department,$test, $test_b,$test_c,$test_d,$test_f,$test_g)
+            function renderGrid5($grid5 ,$slot_name_search_e,$search_qty_e,$common_slot,$test_e,$role_id,$department,$test, $test_b,$test_c,$test_d,$test_f,$test_g,$test_h,$test_i,$test_j,$test_k)
             {
             $grid5 = array_reverse($grid5); 
             $i =0;
            
-            if((empty($test) && empty($test_b) && empty($test_c) && empty($test_d) && empty($test_e) && empty($test_f) && empty($test_g)) || !empty($test_f)) {
+            if((empty($test) && empty($test_b) && empty($test_c) && empty($test_d) && empty($test_e) && empty($test_f) && empty($test_g)&& empty($test_h) && empty($test_i) && empty($test_j) && empty($test_k)) || !empty($test_f)) {
               
        ?>
         <div class="col-1 mt-5 text-uppercase text-center">
@@ -1719,6 +1898,407 @@ $values_single = array(
             </div>
             <?php } } ?>
         </div>
+
+        <!-- rack-07 -->
+
+        <div class="col-1 mt-5 text-uppercase text-center">
+            <?php
+            $query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'rack-7'";
+            $result_set = mysqli_query($connection, $query);
+            foreach($result_set as $a){
+            $slot_name = $a['slot_name'];
+            $slot_name_change = $a['slot_name']."_0_0_0";
+            $part_name= $a['part_name'];
+            $part_model= $a['part_model'];
+            $qty= $a['qty'];
+            foreach($values_single3 as $k => $v){
+                
+                if($k == $slot_name_change){
+                    $name= $slot_name."_".$part_name."_".$part_model."_".$qty;
+                    $values_single3[$name] = $values_single3[$k];
+                    unset($values_single3[$k]);
+                }
+            }
+            }
+            $grid6 = createGrid6(1, 25);
+            $grid6 = plotGridValues6($grid6, $values_single3);
+            echo renderGrid6($grid6,$slot_name_search_e,$search_qty_e,$common_slot,$test_e,$role_id,$department,$test, $test_b,$test_c,$test_d,$test_f,$test_g,$test_h,$test_i,$test_j,$test_k);
+            function createGrid6($columns, $rows)
+            {
+            $grid6 = [];
+            $cell = 1;
+            for ($r = 0; $r < $rows; $r++) {
+                $row = [];
+                for ($c = 0; $c < $columns; $c++) {
+                    $row[] = $cell++;
+                }
+                $grid6[] = $row;
+            }
+            return $grid6;
+            }
+            function plotGridValues6($grid6, $values_single3)
+            {
+            foreach ($values_single3 as $value => $coordinates) {
+                list($x, $y) = $coordinates;
+                $grid6[$y - 1][$x - 1] = $value;
+            }
+            return $grid6;
+            }
+            function renderGrid6($grid6 ,$slot_name_search_e,$search_qty_e,$common_slot,$test_e,$role_id,$department,$test, $test_b,$test_c,$test_d,$test_f,$test_g,$test_h,$test_i,$test_j,$test_k)
+            {
+            $grid6 = array_reverse($grid6); 
+            $i =0;
+            if((empty($test) && empty($test_b) && empty($test_c) && empty($test_d) && empty($test_e) && empty($test_f) && empty($test_g)&& empty($test_h) && empty($test_i) && empty($test_j) && empty($test_k)) || !empty($test_h)) {
+             
+       ?>
+            <div class="card card-primary">
+                <div class="card-header" ;>
+                    <h4 class=" card-title">Rack 07</h4>
+
+
+                </div>
+                <div class="card-body mx-auto justify-content-center mx-auto text-center">
+                    <?php  foreach ($grid6 as $row) { 
+                
+                foreach ($row as $k=>$v) { 
+                    $substring = explode("_", $v);
+                    //   empty qty 
+                    if($substring[3] == 0){ ?>
+                    <!-- // slot name with empty qty -->
+                    <?php if($role_id == 4 && $department ==20){ ?>
+                    <a class="btn grid_btn bg-secondary mt-2" href="
+                            part_create_form.php?scan_id=<?php echo "rack-7_".$substring[0] ?>">
+                        <?php } else { ?>
+                        <a class="btn grid_btn bg-secondary mt-2">
+                            <?php } ?>
+
+                            <i class="fas fa-inbox"></i>
+                            <?php 
+                                echo $substring[0]."</br>";
+                                echo "</br>";
+                                echo "</br>";
+                                echo "</br>";
+                                    ?>
+                        </a>
+
+                        <?php echo "</br>"; }else{
+                 
+               ?>
+                        <!-- slot with value -->
+                        <?php if(empty($test_h)){?>
+                        <?php if($role_id == 4 && $department ==20){ ?>
+                        <a class="btn grid_btn bg-success mt-2" href="
+                                add_additional_part.php?scan_id=<?php echo "rack-7_".$substring[0] ?>">
+                            <?php } else { ?>
+                            <a class="btn grid_btn bg-success mt-2">
+                                <?php } ?>
+
+                                <i class="fas fa-inbox"></i>
+                                <?php
+                                echo $substring[0]."</br>";
+                                echo $substring[1]."</br>";
+                                echo $substring[2]."</br>";
+                                echo $substring[3]."</br>";
+                ?>
+                            </a>
+                            <?php }else{ 
+            foreach($test_h as $a){
+               if($substring[0] == $a[0] ){ ?>
+                            <?php if($role_id == 4 && $department ==20){ ?>
+                            <a class="btn grid_btn bg-danger mt-2" href="
+                                add_additional_part.php?scan_id=<?php echo "rack-7_".$substring[0] ?>">
+                                <?php } else { ?>
+                                <a class="btn grid_btn bg-danger mt-2">
+                                    <?php } ?>
+
+                                    <i class="fas fa-inbox"></i>
+                                    <?php
+                                echo $substring[0]."</br>";
+                                echo $substring[1]."</br>";
+                                echo $substring[2]."</br>";
+                                echo $substring[3]."</br>";
+                                $substring[0] =5;
+                        ?>
+                                </a><?php
+               // echo $a[0]."----".$slot_name_search;
+               // echo "</br>";
+           } }  ?>
+
+
+                                <?php  } } } } ?>
+
+
+                </div>
+            </div>
+            <?php } } ?>
+        </div>
+        <!-- rack -8 -->
+
+        <div class="col-1 mt-5 text-uppercase text-center">
+            <?php
+            $query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'rack-8'";
+            $result_set = mysqli_query($connection, $query);
+            foreach($result_set as $a){
+            $slot_name = $a['slot_name'];
+            $slot_name_change = $a['slot_name']."_0_0_0";
+            $part_name= $a['part_name'];
+            $part_model= $a['part_model'];
+            $qty= $a['qty'];
+            foreach($values_single4 as $k => $v){
+                
+                if($k == $slot_name_change){
+                    $name= $slot_name."_".$part_name."_".$part_model."_".$qty;
+                    $values_single4[$name] = $values_single4[$k];
+                    unset($values_single4[$k]);
+                }
+            }
+            }
+            $grid7 = createGrid7(1, 25);
+            $grid7 = plotGridValues7($grid7, $values_single4);
+            echo renderGrid7($grid7,$slot_name_search_e,$search_qty_e,$common_slot,$test_e,$role_id,$department,$test, $test_b,$test_c,$test_d,$test_g,$test_f,$test_h,$test_i,$test_j,$test_k);
+            function createGrid7($columns, $rows)
+            {
+            $grid7 = [];
+            $cell = 1;
+            for ($r = 0; $r < $rows; $r++) {
+                $row = [];
+                for ($c = 0; $c < $columns; $c++) {
+                    $row[] = $cell++;
+                }
+                $grid7[] = $row;
+            }
+            return $grid7;
+            }
+            function plotGridValues7($grid7, $values_single4)
+            {
+            foreach ($values_single4 as $value => $coordinates) {
+                list($x, $y) = $coordinates;
+                $grid7[$y - 1][$x - 1] = $value;
+            }
+            return $grid7;
+            }
+            function renderGrid7($grid7 ,$slot_name_search_e,$search_qty_e,$common_slot,$test_e,$role_id,$department,$test, $test_b,$test_c,$test_d,$test_g,$test_f,$test_h,$test_i,$test_j,$test_k)
+            {
+            $grid7 = array_reverse($grid7); 
+            $i =0;
+            if((empty($test) && empty($test_b) && empty($test_c) && empty($test_d) && empty($test_e) && empty($test_f) && empty($test_g)&& empty($test_h) && empty($test_i) && empty($test_j) && empty($test_k)) || !empty($test_i)) {
+             
+       ?>
+            <div class="card card-primary">
+                <div class="card-header" ;>
+                    <h4 class=" card-title">Rack 08</h4>
+
+
+                </div>
+                <div class="card-body mx-auto justify-content-center mx-auto text-center">
+                    <?php  foreach ($grid7 as $row) { 
+                
+                foreach ($row as $k=>$v) { 
+                    $substring = explode("_", $v);
+                    //   empty qty 
+                    if($substring[3] == 0){ ?>
+                    <!-- // slot name with empty qty -->
+                    <?php if($role_id == 4 && $department ==20){ ?>
+                    <a class="btn grid_btn bg-secondary mt-2" href="
+                            part_create_form.php?scan_id=<?php echo "rack-8_".$substring[0] ?>">
+                        <?php } else { ?>
+                        <a class="btn grid_btn bg-secondary mt-2">
+                            <?php } ?>
+
+                            <i class="fas fa-inbox"></i>
+                            <?php 
+                                echo $substring[0]."</br>";
+                                echo "</br>";
+                                echo "</br>";
+                                echo "</br>";
+                                    ?>
+                        </a>
+
+                        <?php echo "</br>"; }else{
+                 
+               ?>
+                        <!-- slot with value -->
+                        <?php if(empty($test_i)){?>
+                        <?php if($role_id == 4 && $department ==20){ ?>
+                        <a class="btn grid_btn bg-success mt-2" href="
+                                add_additional_part.php?scan_id=<?php echo "rack-8_".$substring[0] ?>">
+                            <?php } else { ?>
+                            <a class="btn grid_btn bg-success mt-2">
+                                <?php } ?>
+
+                                <i class="fas fa-inbox"></i>
+                                <?php
+                                echo $substring[0]."</br>";
+                                echo $substring[1]."</br>";
+                                echo $substring[2]."</br>";
+                                echo $substring[3]."</br>";
+                ?>
+                            </a>
+                            <?php }else{ 
+            foreach($test_i as $a){
+               if($substring[0] == $a[0] ){ ?>
+                            <?php if($role_id == 4 && $department ==20){ ?>
+                            <a class="btn grid_btn bg-danger mt-2" href="
+                                add_additional_part.php?scan_id=<?php echo "rack-8_".$substring[0] ?>">
+                                <?php } else { ?>
+                                <a class="btn grid_btn bg-danger mt-2">
+                                    <?php } ?>
+
+                                    <i class="fas fa-inbox"></i>
+                                    <?php
+                                echo $substring[0]."</br>";
+                                echo $substring[1]."</br>";
+                                echo $substring[2]."</br>";
+                                echo $substring[3]."</br>";
+                                $substring[0] =5;
+                        ?>
+                                </a><?php
+               // echo $a[0]."----".$slot_name_search;
+               // echo "</br>";
+           } }  ?>
+
+
+                                <?php  } } } } ?>
+
+
+                </div>
+            </div>
+            <?php } } ?>
+        </div>
+        <!-- rack-09 -->
+
+        <div class="col-1 mt-5 text-uppercase text-center">
+            <?php
+            $query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'rack-9'";
+            $result_set = mysqli_query($connection, $query);
+            foreach($result_set as $a){
+            $slot_name = $a['slot_name'];
+            $slot_name_change = $a['slot_name']."_0_0_0";
+            $part_name= $a['part_name'];
+            $part_model= $a['part_model'];
+            $qty= $a['qty'];
+            foreach($values_single5 as $k => $v){
+                
+                if($k == $slot_name_change){
+                    $name= $slot_name."_".$part_name."_".$part_model."_".$qty;
+                    $values_single5[$name] = $values_single5[$k];
+                    unset($values_single5[$k]);
+                }
+            }
+            }
+            $grid8 = createGrid8(1, 25);
+            $grid8 = plotGridValues8($grid8, $values_single5);
+            echo renderGrid8($grid8,$slot_name_search_e,$search_qty_e,$common_slot,$test_e,$role_id,$department,$test, $test_b,$test_c,$test_d,$test_g,$test_f,$test_h,$test_i,$test_j,$test_k);
+            function createGrid8($columns, $rows)
+            {
+            $grid8 = [];
+            $cell = 1;
+            for ($r = 0; $r < $rows; $r++) {
+                $row = [];
+                for ($c = 0; $c < $columns; $c++) {
+                    $row[] = $cell++;
+                }
+                $grid8[] = $row;
+            }
+            return $grid8;
+            }
+            function plotGridValues8($grid8, $values_single5)
+            {
+            foreach ($values_single5 as $value => $coordinates) {
+                list($x, $y) = $coordinates;
+                $grid8[$y - 1][$x - 1] = $value;
+            }
+            return $grid8;
+            }
+            function renderGrid8($grid8 ,$slot_name_search_e,$search_qty_e,$common_slot,$test_e,$role_id,$department,$test, $test_b,$test_c,$test_d,$test_g,$test_f,$test_h,$test_i,$test_j,$test_k)
+            {
+            $grid8 = array_reverse($grid8); 
+            $i =0;
+            if((empty($test) && empty($test_b) && empty($test_c) && empty($test_d) && empty($test_e) && empty($test_f) && empty($test_g)&& empty($test_h) && empty($test_i) && empty($test_j) && empty($test_k)) || !empty($test_j)) {
+             
+       ?>
+            <div class="card card-primary">
+                <div class="card-header" ;>
+                    <h4 class=" card-title">Rack 09</h4>
+
+
+                </div>
+                <div class="card-body mx-auto justify-content-center mx-auto text-center">
+                    <?php  foreach ($grid8 as $row) { 
+                
+                foreach ($row as $k=>$v) { 
+                    $substring = explode("_", $v);
+                    //   empty qty 
+                    if($substring[3] == 0){ ?>
+                    <!-- // slot name with empty qty -->
+                    <?php if($role_id == 4 && $department ==20){ ?>
+                    <a class="btn grid_btn bg-secondary mt-2" href="
+                            part_create_form.php?scan_id=<?php echo "rack-9_".$substring[0] ?>">
+                        <?php } else { ?>
+                        <a class="btn grid_btn bg-secondary mt-2">
+                            <?php } ?>
+
+                            <i class="fas fa-inbox"></i>
+                            <?php 
+                                echo $substring[0]."</br>";
+                                echo "</br>";
+                                echo "</br>";
+                                echo "</br>";
+                                    ?>
+                        </a>
+
+                        <?php echo "</br>"; }else{
+                 
+               ?>
+                        <!-- slot with value -->
+                        <?php if(empty($test_j)){?>
+                        <?php if($role_id == 4 && $department ==20){ ?>
+                        <a class="btn grid_btn bg-success mt-2" href="
+                                add_additional_part.php?scan_id=<?php echo "rack-9_".$substring[0] ?>">
+                            <?php } else { ?>
+                            <a class="btn grid_btn bg-success mt-2">
+                                <?php } ?>
+
+                                <i class="fas fa-inbox"></i>
+                                <?php
+                                echo $substring[0]."</br>";
+                                echo $substring[1]."</br>";
+                                echo $substring[2]."</br>";
+                                echo $substring[3]."</br>";
+                ?>
+                            </a>
+                            <?php }else{ 
+            foreach($test_j as $a){
+               if($substring[0] == $a[0] ){ ?>
+                            <?php if($role_id == 4 && $department ==20){ ?>
+                            <a class="btn grid_btn bg-danger mt-2" href="
+                                add_additional_part.php?scan_id=<?php echo "rack-9_".$substring[0] ?>">
+                                <?php } else { ?>
+                                <a class="btn grid_btn bg-danger mt-2">
+                                    <?php } ?>
+
+                                    <i class="fas fa-inbox"></i>
+                                    <?php
+                                echo $substring[0]."</br>";
+                                echo $substring[1]."</br>";
+                                echo $substring[2]."</br>";
+                                echo $substring[3]."</br>";
+                                $substring[0] =5;
+                        ?>
+                                </a><?php
+               // echo $a[0]."----".$slot_name_search;
+               // echo "</br>";
+           } }  ?>
+
+
+                                <?php  } } } } ?>
+
+
+                </div>
+            </div>
+            <?php } } ?>
+        </div>
+        <!-- rack -10 -->
 
     </div>
 </div>
