@@ -564,7 +564,7 @@ if(isset($_POST['logged_out'])){
 
                         <li class="nav-header text-uppercase">Other</li>
 
-                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) ) { ?>
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 6 && $department == 1) || ($role_id == 4 && $department == 1) ) { ?>
 
                         <li class="nav-item">
                             <a href="../search/search_inventory_id.php" class="nav-link">
