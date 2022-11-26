@@ -14,7 +14,7 @@ if (!isset($_SESSION['user_id'])) {
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 
-if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $role_id == 2 && $department == 18){
+if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $role_id == 4 && $department == 13){
 
 $errors = array();
 $device = NULL;
@@ -26,6 +26,9 @@ $hdd_capacity = NULL;
 $ram_capacity = NULL;
 $hdd_type = null;
 $mfg= null;
+$mfg_count= 0;
+$cartoon_number=0;
+$cartoon_count = 0;
 $username = $_SESSION['username'];
 $start_print = 0;
 
@@ -33,8 +36,25 @@ $start_print = 0;
 
     
     $mfg = mysqli_real_escape_string($connection, $_POST['mfg']); 
-   
-    $query = " SELECT * FROM packing_mfg WHERE mfg = '$mfg'";
+    $cartoon_number = mysqli_real_escape_string($connection, $_POST['cartoon_number']); 
+
+    $query = "SELECT * FROM packing_mfg WHERE cartoon_number = '$cartoon_number'";
+    $query_run = mysqli_query($connection, $query);
+    foreach($query_run as $data){
+        $cartoon_count++;
+    }
+    $query = "SELECT * FROM packing_mfg WHERE mfg = '$mfg' AND cartoon_number='0'";
+    $query_run = mysqli_query($connection, $query);
+    foreach($query_run as $data){
+        $mfg_count++;
+    }
+    
+
+    if($cartoon_count <4 && $mfg_count==1){
+        $query = "UPDATE packing_mfg SET  cartoon_number='$cartoon_number' WHERE mfg = '$mfg' ";
+        $query_run = mysqli_query($connection, $query);
+        
+    $query = " SELECT * FROM packing_mfg WHERE mfg = '$mfg' ";
     $query_run = mysqli_query($connection, $query);
    foreach($query_run as $data){
     $device = $data['device'];
@@ -45,9 +65,15 @@ $start_print = 0;
     $hdd_capacity = $data['hdd_capacity'];
     $ram_capacity = $data['ram_capacity'];
     $hdd_type = $data['hdd_type'];
+    $touch_type = $data['touch'];
+    $screen_size = $data['screen_size'];
+    $cartoon_number = $data['cartoon_number'];
     $start_print = 1;
 
    }
+}else{
+    echo '<script>alert("Cartoon number already completed please check cartoon number")</script>';
+}
    
     }
 ?>
@@ -68,7 +94,13 @@ $start_print = 0;
                     <form method="POST">
                         <fieldset>
                             <legend>Create MFG</legend>
-
+                            <div class="row">
+                                <label class="col-sm-3 col-form-label">Cartoon Number</label>
+                                <div class="col-sm-8">
+                                    <input type="text" min="1" class="form-control" placeholder="Cartoon Number"
+                                        name="cartoon_number">
+                                </div>
+                            </div>
 
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">MFG Number</label>
@@ -77,9 +109,10 @@ $start_print = 0;
                                 </div>
                             </div>
 
+
                             <button type="submit" name="submit_mfg" id="submit"
                                 class="btn mb-2 mt-4 btn-primary btn-sm d-block mx-auto text-center"><i
-                                    class="fa-solid fa-qrcode" style="margin-right: 5px;"></i>Genarate BarCode</button>
+                                    class="fa-solid fa-qrcode" style="margin-right: 5px;"></i>Genarate Label</button>
 
 
                         </fieldset>
@@ -93,14 +126,14 @@ $start_print = 0;
             <div class="card mt-3 w-100">
                 <div class="card-body">
 
-                    <input type="button" onclick="printDiv('printableArea')" value="print a QR!" />
+                    <input type="button" onclick="printDiv('printableArea')" value="print a Label !" />
                     <div id="printableArea">
                         <?php
                         $howManyCodes =1;
                         $digits = 6;
                         $start = 0; 
                         $brand = $brand ;
-                        $secondPart = $core." GEN".$generation."  ".$ram_capacity."/".$hdd_capacity." ".$hdd_type;
+                        $secondPart = $core." GEN".$generation."  ".$ram_capacity."GB/".$hdd_capacity." ".$hdd_type;
                         $downText = $generation."-".$model;
                         $model = $model; 
                         $hideText = null;
@@ -108,7 +141,7 @@ $start_print = 0;
                         $barcodeText = trim($mfg);
                         $barcodeType="Code128";
                         $barcodeDisplay="Horizontal";
-                        $barcodeSize=80;
+                        $barcodeSize=40;
                         
 
 
@@ -117,53 +150,133 @@ $start_print = 0;
                                 return filter_input (INPUT_GET, $name, FILTER_UNSAFE_RAW);
                             }
                     $codeArray = (filterRaw('codeArray') != "") ? filterRaw('codeArray') : "";
-                    function write($code,$last_id, $brand, $model,$mfg, $downText,$secondPart,$barcodeText,$barcodeType,$barcodeDisplay,$barcodeSize) {
+                    function write($code,$last_id, $brand, $model,$mfg, $downText,$secondPart,$barcodeText,$barcodeType,$barcodeDisplay,$barcodeSize, $touch_type,$screen_size,$cartoon_number) {
                         ?>
-                        <table>
-                            <tr>
-                                <th style="width :500mm"><?php if ($brand != "") {
+                        <table style="border: black; border-style: solid;">
+                            <tr style="border: black; border-style: solid;">
+                                <th style="border: black; border-style: solid;"><?php if ($brand != "") {
                                 $abc= strtoupper( $brand);
-                                echo  "<div  ><p class = 'text-uppercase' style='font-size: 50;
+                                echo  "<div  ><p class = 'text-uppercase' style='font-size: 40;
                                 font-family: Arial, Helvetica, sans-serif;margin: 30px 0 0 0;
-                                color:black;text-weight:bold;text-align: left;margin:0'>Brand : $abc </br>Model : $model</br>Spec : $secondPart</p></div>";
+                                color:black;text-weight:bold;text-align: left;margin-left:5px'>Brand </p></div>";
                             } 
                             ?>
                                 </th>
+                                <td style=" border: black; border-style: solid;"><?php if ($brand != "") {
+                                $abc= strtoupper( $brand);
+                                echo  "<div  ><p class = 'text-uppercase' style='font-size: 40;
+                                font-family: Arial, Helvetica, sans-serif;margin: 30px 0 0 0;
+                                color:black;text-weight:bold;text-align: left;margin-left:5px'> $abc </p></div>";
+                            } 
+                            ?>
+                                </td>
                             </tr>
-                            <tr>
-                                <th class="text-center mx-auto">
-                                    <?php echo "MFG S/N". "</br>"; echo '<img class="barcode" alt="'.$barcodeText.'" src="php-barcode/barcode.php?text='.$barcodeText.'&codetype='.$barcodeType.'&orientation='.$barcodeDisplay.
-'&size='.$barcodeSize.'&print='.$mfg.'"/>'."</br>".$mfg;?>
+                            <tr style="border: black; border-style: solid;">
+                                <th style=" border: black; border-style: solid;"><?php 
+                                echo  "<div  ><p class = 'text-uppercase' style='font-size: 40;
+                                font-family: Arial, Helvetica, sans-serif;margin: 30px 0 0 0;
+                                color:black;text-weight:bold;text-align: left;margin-left:5px'>Model</p></div>";
+                            ?>
                                 </th>
-
+                                <td style=" border: black; border-style: solid;"><?php 
+                                echo  "<div  ><p class = 'text-uppercase' style='font-size: 40;
+                                font-family: Arial, Helvetica, sans-serif;margin: 30px 0 0 0;
+                                color:black;text-weight:bold;text-align: left;margin-left:5px'> $model </p></div>";
+                            ?>
+                                </td>
                             </tr>
-                            <tr>
-                                <?php echo "</br> </br>";
-                            echo "</br> ";
-                            echo "</br> ";
-                            echo "</br> ";
-                             ?>
+                            <tr style="border: black; border-style: solid;">
+                                <th style=" border: black; border-style: solid;"><?php 
+                                echo  "<div  ><p class = 'text-uppercase' style='font-size: 40;
+                                font-family: Arial, Helvetica, sans-serif;margin: 30px 0 0 0;
+                                color:black;text-weight:bold;text-align: left;margin-left:5px'>Spec </p></div>";
+                            ?>
+                                </th>
+                                <td style=" border: black; border-style: solid;"><?php 
+                                echo  "<div  ><p class = 'text-uppercase' style='font-size: 40;
+                                font-family: Arial, Helvetica, sans-serif;margin: 30px 0 0 0;
+                                color:black;text-weight:bold;text-align: left;margin-left:5px'>$secondPart</p></div>";
+                            ?>
+                                </td>
                             </tr>
-
-
+                            <tr style="border: black; border-style: solid;">
+                                <th style=" border: black; border-style: solid;"><?php 
+                                echo  "<div  ><p class = 'text-uppercase' style='font-size: 40;
+                                font-family: Arial, Helvetica, sans-serif;margin: 30px 0 0 0;
+                                color:black;text-weight:bold;text-align: left;margin-left:5px'>Screen &nbsp; &nbsp; </p></div>";
+                            ?>
+                                </th>
+                                <td style=" border: black; border-style: solid;"><?php 
+                                echo  "<div  ><p class = 'text-uppercase' style='font-size: 40;
+                                font-family: Arial, Helvetica, sans-serif;margin: 30px 0 0 0;
+                                color:black;text-weight:bold;text-align: left;margin-left:5px'> $touch_type</p></div>";
+                            ?>
+                                </td>
+                            </tr>
+                            <tr style="border: black; border-style: solid;">
+                                <th style=" border: black; border-style: solid;"><?php 
+                                echo  "<div  ><p class = 'text-uppercase' style='font-size: 40;
+                                font-family: Arial, Helvetica, sans-serif;margin: 30px 0 0 0;
+                                color:black;text-weight:bold;text-align: left;margin-left:5px'>Screen size </p></div>";
+                            ?>
+                                </th>
+                                <td style=" border: black; border-style: solid;"><?php 
+                                echo  "<div  ><p class = 'text-uppercase' style='font-size: 40;
+                                font-family: Arial, Helvetica, sans-serif;margin: 30px 0 0 0;
+                                color:black;text-weight:bold;text-align: left;margin-left:5px'> $screen_size'</p></div>";
+                            ?>
+                                </td>
+                            </tr>
                         </table>
+                        <?php echo "</br>" ?>
+
+                        <div class="row">
+                            <div class="col-sm">
+                                <p class="text-left text-uppercase" style="font-size: 40px;color:black !important">
+                                    <?php echo "CARTOON NUMBER ".  $cartoon_number; ?></p>
+                                <p class="text-center text-uppercase text-weight:bold"
+                                    style="font-size: 40px; color:black !important">
+                                    MFG S/N
+                                </p>
+                                <div class="text-left" style="margin-left:0px">
+                                    <?php echo '<img class="barcode " style="width:850px"alt="'.$barcodeText.'" src="php-barcode/barcode.php?text='.$barcodeText.'&codetype='.$barcodeType.'&orientation='.$barcodeDisplay.
+'&size='.$barcodeSize.'&print='.$mfg.'"/>';?>
+                                </div>
+                                <p class="text-center text-uppercase" style="font-size: 40px;color:black !important">
+                                    <?php echo  $mfg; ?></p>
+                            </div>
+                        </div>
+
+
+
+
+
 
                         <?php
                                             }
                                         echo "<div class='sheet'>";
                             if ($codeArray != "") { // Specified array of codes
                                 foreach (json_decode($codeArray) as $secondPart) {
-                                    write($code,$last_id, $brand, $model, $mfg, $downText,$secondPart,$barcodeText,$barcodeType,$barcodeDisplay,$barcodeSize);
+                                    write($code,$last_id, $brand, $model, $mfg, $downText,$secondPart,$barcodeText,$barcodeType,$barcodeDisplay,$barcodeSize, $touch_type,$screen_size,$cartoon_number);
                                 }
                             } else { // Unspecified codes, let's go incremental
                                 for ($i = $start; $i < $howManyCodes + $start; $i++) {
                                     $code = str_pad($i, $digits, "0", STR_PAD_LEFT);
-                                    write($code,$last_id, $brand, $model, $mfg, $downText,$secondPart,$barcodeText,$barcodeType,$barcodeDisplay,$barcodeSize);
+                                    write($code,$last_id, $brand, $model, $mfg, $downText,$secondPart,$barcodeText,$barcodeType,$barcodeDisplay,$barcodeSize, $touch_type,$screen_size,$cartoon_number);
                                 }
                             }
                         echo "</div>";
                         
                           } 
+                            $device = NULL;
+                            $brand = NULL;
+                            $core = NULL;
+                            $generation = NULL;
+                            $model = NULL;
+                            $hdd_capacity = NULL;
+                            $ram_capacity = NULL;
+                            $hdd_type = null;
+                            $mfg= null;
                           ?>
 
                     </div>

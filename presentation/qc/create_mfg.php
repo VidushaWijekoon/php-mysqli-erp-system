@@ -14,7 +14,7 @@ if (!isset($_SESSION['user_id'])) {
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 
-if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $role_id == 2 && $department == 18){
+if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $role_id == 4 && $department == 19){
 
 $errors = array();
 $device = NULL;
@@ -25,6 +25,8 @@ $model = NULL;
 $hdd_capacity = NULL;
 $ram_capacity = NULL;
 $hdd_type = null;
+$touch_type=null;
+$screen_size = null;
 $mfg= null;
 $username = $_SESSION['username'];
 $start_print = 0;
@@ -39,12 +41,14 @@ $start_print = 0;
     $hdd_capacity = mysqli_real_escape_string($connection, $_POST['hdd_capacity']);
     $ram_capacity = mysqli_real_escape_string($connection, $_POST['ram_capacity']);
     $hdd_type = mysqli_real_escape_string($connection, $_POST['hdd_type']); 
+    $touch_type = mysqli_real_escape_string($connection, $_POST['touch']); 
+    $screen_size = mysqli_real_escape_string($connection, $_POST['screen_size']); 
     $mfg = mysqli_real_escape_string($connection, $_POST['mfg']); 
     
-    $query = "INSERT INTO packing_mfg(device, brand, core, generation, model, hdd_capacity, hdd_type, created_time, created_by,mfg,ram_capacity) 
-            VALUES('$device', '$brand' , '$core', '$generation', '$model', '$hdd_capacity', '$hdd_type', CURRENT_TIMESTAMP, '$username','$mfg','$ram_capacity')";
+    $query = "INSERT INTO packing_mfg(device, brand, core, generation, model, hdd_capacity, hdd_type, created_time, created_by,mfg,ram_capacity,touch,screen_size) 
+            VALUES('$device', '$brand' , '$core', '$generation', '$model', '$hdd_capacity', '$hdd_type', CURRENT_TIMESTAMP, '$username','$mfg','$ram_capacity','$touch_type','$screen_size')";
+    
     $query_run = mysqli_query($connection, $query);
-    echo $query;
     // $tempDir = 'temp/';
     //     $email = $mfg;
     //     $filename = $email;
@@ -169,11 +173,11 @@ $start_print = 0;
                                 <div class="col-sm-8">
                                     <select name="hdd_capacity" class="info_select" style="border-radius: 5px;"
                                         required>
-                                        <option selected value="128">128GB</option>
-                                        <option value="256">256GB</option>
-                                        <option value="512">512GB</option>
-                                        <option value="1">1TB</option>
-                                        <option value="2">2TB</option>
+                                        <option selected value="128GB">128GB</option>
+                                        <option value="256GB">256GB</option>
+                                        <option value="512GB">512GB</option>
+                                        <option value="1TB">1TB</option>
+                                        <option value="2TB">2TB</option>
                                     </select>
                                 </div>
                             </div>
@@ -202,6 +206,28 @@ $start_print = 0;
                                     </select>
                                 </div>
                             </div>
+                            <div class="row">
+                                <label class="col-sm-3 col-form-label">Screen</label>
+                                <div class="col-sm-8">
+                                    <select name="touch" class="info_select" style="border-radius: 5px;" required>
+                                        <option selected value="touch">Touch</option>
+                                        <option value="none_touch">None Touch</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-3 col-form-label">Screen Size</label>
+                                <div class="col-sm-8">
+                                    <select name="screen_size" class="info_select" style="border-radius: 5px;" required>
+                                        <option selected value="11">11"</option>
+                                        <option value="12">12"</option>
+                                        <option value="13">13"</option>
+                                        <option value="14">14"</option>
+                                        <option value="15">15"</option>
+                                        <option value="17">17"</option>
+                                    </select>
+                                </div>
+                            </div>
 
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">MFG Number</label>
@@ -226,11 +252,11 @@ $start_print = 0;
             <div class="card mt-3 w-100">
                 <div class="card-body">
 
-                    <input type="button" onclick="printDiv('printableArea')" value="print a QR!" />
-                    <div id="printableArea">
-                        <?php
+                    <input type="button" onclick="printDiv('printableArea')" value="print a Barcode!" />
+
+                    <?php
                         $howManyCodes =1;
-                        $digits = 6;
+                        $digits = 50;
                         $start = 0; 
                         $brand = $brand ;
                         $secondPart = $core." GEN".$generation."  ".$ram_capacity."/".$hdd_capacity." ".$hdd_type;
@@ -241,7 +267,7 @@ $start_print = 0;
                         $barcodeText = trim($mfg);
                         $barcodeType="Code128";
                         $barcodeDisplay="Horizontal";
-                        $barcodeSize=80;
+                        $barcodeSize=50;
 
 
                         if($start_print == 1){
@@ -251,35 +277,24 @@ $start_print = 0;
                     $codeArray = (filterRaw('codeArray') != "") ? filterRaw('codeArray') : "";
                     function write($code,$last_id, $brand, $model,$mfg, $downText,$secondPart,$barcodeText,$barcodeType,$barcodeDisplay,$barcodeSize) {
                         ?>
-                        <table>
-                            <tr>
-                                <th style="width :600mm"><?php if ($brand != "") {
-                                $abc= strtoupper( $brand);
-                                echo  "<div  ><p class = 'text-uppercase' style='font-size: 50;
-                                font-family: Arial, Helvetica, sans-serif;margin: 30px 0 0 0;
-                                color:black;text-weight:bold;text-align: left;margin:0'>Brand : $abc </br>Model : $model</br>Spec : $secondPart</p></div>";
-                            } 
-                            ?>
-                                </th>
-                            </tr>
-                            <tr>
-                                <th>
-
-                                    <?php echo $mfg. "</br>"; echo '<img class="barcode" alt="'.$barcodeText.'" src="php-barcode/barcode.php?text='.$barcodeText.'&codetype='.$barcodeType.'&orientation='.$barcodeDisplay.
+                    <div id="printableArea">
+                        <div class="row">
+                            <div class="col-sm">
+                                <p class="text-center text-uppercase text-weight:bold"
+                                    style="font-size: 120px; color:black !important">
+                                    MFG S/N
+                                </p>
+                                <div class="text-left" style="margin-left:0px">
+                                    <?php echo '<img class="barcode w-100 " style="width:1350px"alt="'.$barcodeText.'" src="php-barcode/barcode.php?text='.$barcodeText.'&codetype='.$barcodeType.'&orientation='.$barcodeDisplay.
 '&size='.$barcodeSize.'&print='.$mfg.'"/>';?>
-                                </th>
-
-                            </tr>
-                            <tr>
-                                <?php echo "</br> </br>";
-                            echo "</br> ";
-                            echo "</br> ";
-                            echo "</br> ";
-                             ?>
-                            </tr>
-
-
-                        </table>
+                                </div>
+                                <p class="text-center text-uppercase" style="font-size: 120px;color:black !important">
+                                    <?php echo  $mfg;
+                                    echo "</br>";
+                                    echo "</br>";
+                                    ?></p>
+                            </div>
+                        </div>
 
                         <?php
                                             }
