@@ -5,7 +5,7 @@ include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
 include_once('../../dataAccess/403.php');
 include_once('../includes/header.php');
-require_once("phpqrcode/qrlib.php");
+// require_once("phpqrcode/qrlib.php");
   
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
@@ -45,11 +45,11 @@ $start_print = 0;
             VALUES('$device', '$brand' , '$core', '$generation', '$model', '$hdd_capacity', '$hdd_type', CURRENT_TIMESTAMP, '$username','$mfg','$ram_capacity')";
     $query_run = mysqli_query($connection, $query);
     echo $query;
-    $tempDir = 'temp/';
-        $email = $mfg;
-        $filename = $email;
-        $codeContents = $email;
-        QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5,1);
+    // $tempDir = 'temp/';
+    //     $email = $mfg;
+    //     $filename = $email;
+    //     $codeContents = $email;
+    //     QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5,1);
         $start_print = 1;
    
     }
@@ -70,7 +70,7 @@ $start_print = 0;
                     <?php if (!empty($errors)) { display_errors($errors); }?>
                     <form method="POST">
                         <fieldset>
-                            <legend>Create Warehouse Information Sheet</legend>
+                            <legend>Create Machine Information Sheet</legend>
 
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Device</label>
@@ -229,28 +229,6 @@ $start_print = 0;
                     <input type="button" onclick="printDiv('printableArea')" value="print a QR!" />
                     <div id="printableArea">
                         <?php
-                       
-                          
-                    // $last_update_id =0;
-                    // $quantity = $_SESSION['quantity'];
-                    // $_SESSION['quantity'] = 0;
-                    // $brand = $_SESSION['brand'];
-                    // $model = $_SESSION['model'];
-                    // $generation = $_SESSION['generation'];
-                    // $core = $_SESSION['core'];
-                    // $location = $_SESSION['location'];
-                    // $last_id = $_SESSION['last_id'] ;
-                    // if(empty($_SESSION['last_update_id'])){ $last_update_id =0;}else{
-                    
-                    //     $last_update_id = $_SESSION['last_update_id'];
-                    
-                    // }
-                    // if($last_update_id != 0){
-                    //     $last_id = $last_update_id  ;
-                        
-                    // }else{
-                    //     $last_id = $last_id + 1;
-                    // }
                         $howManyCodes =1;
                         $digits = 6;
                         $start = 0; 
