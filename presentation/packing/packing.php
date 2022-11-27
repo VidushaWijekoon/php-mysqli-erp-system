@@ -29,6 +29,7 @@ $mfg= null;
 $mfg_count= 0;
 $cartoon_number=0;
 $cartoon_count = 0;
+$sales_order_id = 0;
 $username = $_SESSION['username'];
 $start_print = 0;
 
@@ -37,6 +38,7 @@ $start_print = 0;
     
     $mfg = mysqli_real_escape_string($connection, $_POST['mfg']); 
     $cartoon_number = mysqli_real_escape_string($connection, $_POST['cartoon_number']); 
+    $sales_order_id = mysqli_real_escape_string($connection, $_POST['sales_order_id']); 
 
     $query = "SELECT * FROM packing_mfg WHERE cartoon_number = '$cartoon_number'";
     $query_run = mysqli_query($connection, $query);
@@ -51,7 +53,8 @@ $start_print = 0;
     
 
     if($cartoon_count <4 && $mfg_count==1){
-        $query = "UPDATE packing_mfg SET  cartoon_number='$cartoon_number' WHERE mfg = '$mfg' ";
+        $query = "UPDATE packing_mfg SET  cartoon_number='$cartoon_number',sales_order_id ='$sales_order_id' WHERE mfg = '$mfg' ";
+        echo $query;
         $query_run = mysqli_query($connection, $query);
         
     $query = " SELECT * FROM packing_mfg WHERE mfg = '$mfg' ";
@@ -68,6 +71,7 @@ $start_print = 0;
     $touch_type = $data['touch'];
     $screen_size = $data['screen_size'];
     $cartoon_number = $data['cartoon_number'];
+    $sales_order_id = $data['sales_order_id'];
     $start_print = 1;
 
    }
@@ -93,6 +97,14 @@ $start_print = 0;
                     <?php if (!empty($errors)) { display_errors($errors); }?>
                     <form method="POST">
                         <fieldset>
+                            <div class="row">
+                                <label class="col-sm-3 col-form-label">S/O Number</label>
+                                <div class="col-sm-8">
+                                    <input type="text" min="1" class="form-control" placeholder="S/O Number"
+                                        name="sales_order_id">
+                                </div>
+                            </div>
+
                             <legend>Create MFG</legend>
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Cartoon Number</label>
@@ -150,9 +162,26 @@ $start_print = 0;
                                 return filter_input (INPUT_GET, $name, FILTER_UNSAFE_RAW);
                             }
                     $codeArray = (filterRaw('codeArray') != "") ? filterRaw('codeArray') : "";
-                    function write($code,$last_id, $brand, $model,$mfg, $downText,$secondPart,$barcodeText,$barcodeType,$barcodeDisplay,$barcodeSize, $touch_type,$screen_size,$cartoon_number) {
+                    function write($code,$last_id, $brand, $model,$mfg, $downText,$secondPart,$barcodeText,$barcodeType,$barcodeDisplay,$barcodeSize, $touch_type,$screen_size,$cartoon_number,$sales_order_id) {
                         ?>
                         <table style="border: black; border-style: solid;">
+                            <tr style="border: black; border-style: solid;">
+                                <th style="border: black; border-style: solid;"><?php if ($brand != "") {
+                                $abc= strtoupper( $brand);
+                                echo  "<div  ><p class = 'text-uppercase' style='font-size: 40;
+                                font-family: Arial, Helvetica, sans-serif;margin: 30px 0 0 0;
+                                color:black;text-weight:bold;text-align: left;margin-left:5px'>S/O </p></div>";
+                            } 
+                            ?>
+                                </th>
+                                <td style=" border: black; border-style: solid;"><?php 
+                                echo  "<div  ><p class = 'text-uppercase' style='font-size: 40;
+                                font-family: Arial, Helvetica, sans-serif;margin: 30px 0 0 0;
+                                color:black;text-weight:bold;text-align: left;margin-left:5px'> $sales_order_id </p></div>";
+                            
+                            ?>
+                                </td>
+                            </tr>
                             <tr style="border: black; border-style: solid;">
                                 <th style="border: black; border-style: solid;"><?php if ($brand != "") {
                                 $abc= strtoupper( $brand);
@@ -233,7 +262,7 @@ $start_print = 0;
                         <div class="row">
                             <div class="col-sm">
                                 <p class="text-left text-uppercase" style="font-size: 40px;color:black !important">
-                                    <?php echo "CARTOON NUMBER ".  $cartoon_number; ?></p>
+                                    <?php echo "CTN ".  $cartoon_number; ?></p>
                                 <p class="text-center text-uppercase text-weight:bold"
                                     style="font-size: 40px; color:black !important">
                                     MFG S/N
@@ -257,12 +286,12 @@ $start_print = 0;
                                         echo "<div class='sheet'>";
                             if ($codeArray != "") { // Specified array of codes
                                 foreach (json_decode($codeArray) as $secondPart) {
-                                    write($code,$last_id, $brand, $model, $mfg, $downText,$secondPart,$barcodeText,$barcodeType,$barcodeDisplay,$barcodeSize, $touch_type,$screen_size,$cartoon_number);
+                                    write($code,$last_id, $brand, $model, $mfg, $downText,$secondPart,$barcodeText,$barcodeType,$barcodeDisplay,$barcodeSize, $touch_type,$screen_size,$cartoon_number,$sales_order_id);
                                 }
                             } else { // Unspecified codes, let's go incremental
                                 for ($i = $start; $i < $howManyCodes + $start; $i++) {
                                     $code = str_pad($i, $digits, "0", STR_PAD_LEFT);
-                                    write($code,$last_id, $brand, $model, $mfg, $downText,$secondPart,$barcodeText,$barcodeType,$barcodeDisplay,$barcodeSize, $touch_type,$screen_size,$cartoon_number);
+                                    write($code,$last_id, $brand, $model, $mfg, $downText,$secondPart,$barcodeText,$barcodeType,$barcodeDisplay,$barcodeSize, $touch_type,$screen_size,$cartoon_number,$sales_order_id);
                                 }
                             }
                         echo "</div>";
