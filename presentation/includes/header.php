@@ -513,7 +513,7 @@ if(isset($_POST['logged_out'])){
 
                         <?php } ?>
 
-                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18)) { ?>
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 19)) { ?>
 
                         <!-- QC -->
                         <li class="nav-item">
@@ -524,7 +524,7 @@ if(isset($_POST['logged_out'])){
                             <ul class="nav nav-treeview">
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="../qc/create_mfg.php" class="nav-link">
                                         <i class="fa fa-stethoscope nav-icon" style="font-size: 12px;"></i>
                                         <p> QC </p>
                                     </a>
@@ -535,7 +535,7 @@ if(isset($_POST['logged_out'])){
 
                         <?php } ?>
 
-                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18)) { ?>
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 13)) { ?>
 
 
                         <!-- Packing -->
@@ -547,7 +547,7 @@ if(isset($_POST['logged_out'])){
                             <ul class="nav nav-treeview">
 
                                 <li class="nav-item">
-                                    <a href="../packing/packing_dashboard.php" class="nav-link">
+                                    <a href="../packing/packing.php" class="nav-link">
                                         <i class="fa fa-boxes nav-icon" style="font-size: 12px;"></i>
                                         <p> Packing </p>
                                     </a>

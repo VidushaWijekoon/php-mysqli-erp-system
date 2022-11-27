@@ -44,6 +44,14 @@ function Login($role_id, $department){
     elseif($role_id == 6 && $department == 9){
         header('Location: presentation/motherboard/motherboard_technician.php');
     }
+     // QC Team Leader Redirect
+     elseif($role_id == 4 && $department == 19){
+        header('Location: presentation/qc/create_mfg.php');
+    }
+    // Packing Technician Redirect
+    elseif($role_id == 4 && $department == 13){
+        header('Location: presentation/packing/packing.php');
+    }
    
 
 }
