@@ -6,7 +6,11 @@ include_once('../../dataAccess/functions.php');
 include_once('../../dataAccess/403.php');
 include_once('../includes/header.php');
 // require_once("phpqrcode/qrlib.php");
-  
+//   ?>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<?php
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
@@ -46,15 +50,27 @@ $start_print = 0;
     $mfg = mysqli_real_escape_string($connection, $_POST['mfg']); 
     $query ="SELECT * FROM packing_mfg WHERE mfg ='$mfg' ";
     $query_run = mysqli_query($connection, $query);
+    
+    
     foreach($query_run as $data){
         $exist++;
     }
-
+    
     if($exist == 0){
     $query = "INSERT INTO packing_mfg(device, brand, core, generation, model, hdd_capacity, hdd_type, created_time, created_by,mfg,ram_capacity,touch,screen_size) 
             VALUES('$device', '$brand' , '$core', '$generation', '$model', '$hdd_capacity', '$hdd_type', CURRENT_TIMESTAMP, '$username','$mfg','$ram_capacity','$touch_type','$screen_size')";
     
     $query_run = mysqli_query($connection, $query);
+    echo "<script>
+            var newHTML = document.createElement ('div');
+            newHTML.innerHTML =
+            newHTML = document.createElement ('div');
+            newHTML.innerHTML = ' <div id=\"myModal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+            document.body.appendChild (newHTML);
+            $(window).load(function(){
+                 $('#modal-motherboard').modal('show');
+            });
+        </script>";
         $start_print = 1;
     }else{
         echo '<script>alert("MFG Number '.$mfg.' is Already Exist")</script>';
@@ -65,7 +81,7 @@ $start_print = 0;
 ?>
 
 <div class="row page-titles">
-    <div class="col-md-5 align-self-center"><a href="#">
+    <div class="col-md-5 align-self-center"><a href="./warehouse_dashboard.php">
             <i class="fa-solid fa-home fa-2x m-2" style="color: #ced4da; "></i>
         </a>
     </div>
@@ -75,7 +91,19 @@ $start_print = 0;
         Create MFG Form
     </div>
 </div>
-
+<div class="modal fade" id="thankyouModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Thank you for pre-registering!</h4>
+            </div>
+            <div class="modal-body">
+                <p>Thanks for getting in touch!</p>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="container-fluid">
     <div class="row">
@@ -175,7 +203,7 @@ $start_print = 0;
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Model</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" placeholder="Model" name="model">
+                                    <input type="text" class="form-control" placeholder="Model" name="model" required>
                                 </div>
                             </div>
 
@@ -243,19 +271,15 @@ $start_print = 0;
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">MFG Number</label>
                                 <div class="col-sm-8">
-                                    <input type="text" min="1" class="form-control" placeholder="MFG Number" name="mfg">
+                                    <input type="text" min="1" class="form-control" placeholder="MFG Number" name="mfg"
+                                        required>
                                 </div>
                             </div>
 
                             <button type="submit" name="submit_mfg" id="submit"
                                 class="btn mb-2 mt-4 btn-primary btn-sm d-block mx-auto text-center"><i
                                     class="fa-solid fa-qrcode" style="margin-right: 5px;"></i>Genarate BarCode</button>
-                            <?php if($mfg != null){ ?>
-                            <button type="button" class="btn mb-2 mt-4 btn-danger btn-sm d-block mx-auto"
-                                data-toggle="modal" data-target="#modal-motherboard">
-                                Launch Preview Form
-                            </button>
-                            <?php } ?>
+
                         </fieldset>
                     </form>
 
@@ -267,7 +291,8 @@ $start_print = 0;
             <div class="card mt-3 w-100">
                 <div class="card-body">
 
-                    <input type="button" onclick="printDiv('printableArea')" value="print a Barcode!" />
+                    <input class="btn btn-warning" type="button" onclick="printDiv('printableArea')"
+                        value="print a Barcode!" />
 
                     <?php
                         $howManyCodes =1;
@@ -337,6 +362,7 @@ $start_print = 0;
         </div>
     </div>
 </div>
+
 
 <div class="modal fade" id="modal-motherboard">
     <div class="modal-dialog">
@@ -433,7 +459,7 @@ $start_print = 0;
                     </div>
 
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn bg-gradient-danger" data-dismiss="modal">Close</button>
+                        <!-- <button type="button" class="btn bg-gradient-danger" data-dismiss="modal">Close</button> -->
                         <a class="btn btn bg-gradient-navy"
                             href="./update_mfg.php?mfg_id=<?php echo $mfg_id; ?>">Update</a>
 
