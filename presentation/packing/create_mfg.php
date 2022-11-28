@@ -45,11 +45,11 @@ $start_print = 0;
             VALUES('$device', '$brand' , '$core', '$generation', '$model', '$hdd_capacity', '$hdd_type', CURRENT_TIMESTAMP, '$username','$mfg','$ram_capacity')";
     $query_run = mysqli_query($connection, $query);
     echo $query;
-    $tempDir = 'temp/';
-        $email = $mfg;
-        $filename = $email;
-        $codeContents = $email;
-        QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5,1);
+    // $tempDir = 'temp/';
+    //     $email = $mfg;
+    //     $filename = $email;
+    //     $codeContents = $email;
+    //     QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5,1);
         $start_print = 1;
    
     }

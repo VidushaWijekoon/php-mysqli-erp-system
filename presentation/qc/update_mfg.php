@@ -6,7 +6,11 @@ include_once('../../dataAccess/functions.php');
 include_once('../../dataAccess/403.php');
 include_once('../includes/header.php');
 // require_once("phpqrcode/qrlib.php");
-  
+?>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<?php
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
@@ -63,7 +67,18 @@ WHERE
     mfg_id='$mfg_id'";
     
     $query_run = mysqli_query($connection, $query);
+   
         $start_print = 1;
+        echo "<script>
+        var newHTML = document.createElement ('div');
+        newHTML.innerHTML =
+        newHTML = document.createElement ('div');
+        newHTML.innerHTML = ' <div id=\"myModal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+        document.body.appendChild (newHTML);
+        $(window).load(function(){
+             $('#modalmotherboard').modal('show');
+        });
+    </script>";
    
     }
     $query="SELECT * FROM packing_mfg WHERE mfg_id ='$mfg_id'";
@@ -275,12 +290,7 @@ WHERE
                             <button type="submit" name="submit_mfg" id="submit"
                                 class="btn mb-2 mt-4 btn-primary btn-sm d-block mx-auto text-center"><i
                                     class="fa-solid fa-qrcode" style="margin-right: 5px;"></i>Update BarCode</button>
-                            <?php if($start_print != 0){ ?>
-                            <button type="button" class="btn mb-2 mt-4 btn-danger btn-sm d-block mx-auto"
-                                data-toggle="modal" data-target="#modal-motherboard">
-                                Launch Preview Form
-                            </button>
-                            <?php } ?>
+
                         </fieldset>
                     </form>
 
@@ -292,8 +302,8 @@ WHERE
             <div class="card mt-3 w-100">
                 <div class="card-body">
 
-                    <input type="button" onclick="printDiv('printableArea')" value="print a Barcode!" />
-
+                    <input class="btn btn-warning" type="button" onclick="printDiv('printableArea')"
+                        value="print a Barcode!" />
                     <?php
                         $howManyCodes =1;
                         $digits = 50;
@@ -363,7 +373,7 @@ WHERE
     </div>
 </div>
 
-<div class="modal fade" id="modal-motherboard">
+<div class="modal fade" id="modalmotherboard">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -457,11 +467,11 @@ WHERE
                         </div>
                     </div>
 
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn bg-gradient-danger" data-dismiss="modal">Close</button>
+                    <!-- <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn bg-gradient-danger" data-dismiss="modal">Close</button> -->
 
 
-                    </div>
+                </div>
             </form>
         </div>
         <!-- /.modal-content -->
