@@ -83,7 +83,7 @@ $start_print = 0;
 ?>
 
 <div class="row page-titles">
-    <div class="col-md-5 align-self-center"><a href="./warehouse_dashboard.php">
+    <div class="col-md-5 align-self-center"><a href="#">
             <i class="fa-solid fa-home fa-2x m-2" style="color: #ced4da; "></i>
         </a>
     </div>
