@@ -169,6 +169,24 @@ if(isset($_POST['logged_out'])){
                             </a>
                         </li>
 
+                        <!-- QC  -->
+                        <?php } if($role_id == 4 && $department == 19) { ?>
+                        <li class="nav-item menu-open">
+                            <a href="../qc/create_mfg.php" class="nav-link active">
+                                <i class="nav-icon fas fa-home"></i>
+                                <p> Home Page </p>
+                            </a>
+                        </li>
+
+                        <!-- Packing  -->
+                        <?php } if($role_id == 4 && $department == 13) { ?>
+                        <li class="nav-item menu-open">
+                            <a href="../packing/packing.php" class="nav-link active">
+                                <i class="nav-icon fas fa-home"></i>
+                                <p> Home Page </p>
+                            </a>
+                        </li>
+
                         <!-- Admin  -->
                         <?php } if($role_id == 1 && $department == 11) { ?>
 
