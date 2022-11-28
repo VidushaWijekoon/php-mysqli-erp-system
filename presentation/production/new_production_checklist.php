@@ -217,7 +217,7 @@ $query_run_c = mysqli_query($connection, $query_mc);
         $keyboard = $data['keyboard'];
         $speakers = $data['speakers'];
         $camera = $data['camera'];
-        $bazel = $data['bazel_broken'];
+        $bazel = $data['bazel'];
         $keys= $data['keyboard_keys'];
         $mousepad= $data['mousepad'];
         $mouse_pad_button= $data['mouse_pad_button'];
@@ -274,7 +274,7 @@ $query_run_c = mysqli_query($connection, $query_mc);
 
 
 <div class="row page-titles">
-    <div class="col-md-5 align-self-center"><a href="./production_team_leader_dashboard.php">
+    <div class="col-md-5 align-self-center"><a href="./production_technician_dashboard.php">
             <i class="fa-solid fa-home fa-2x m-2" style="color: #ced4da;"></i>
         </a>
     </div>
@@ -391,18 +391,23 @@ $query_run_c = mysqli_query($connection, $query_mc);
 
                             <div class="row mt-2">
 
-
                                 <label class="col-sm-4 col-form-label text-capitalize">
                                     <p>01 Motherboard Check:</p>
                                 </label>
                                 <div class="col-sm-8">
+                                    <?php echo $mother_board; if($mother_board == 0) {?>
+                                    <button type="button" class="btn bg-gradient-warning d-none w-75"
+                                        data-toggle="modal" disabled data-target="#myModal1">
+                                        Launch Motherboard Form
+                                    </button>
+                                    <?php }if($mother_board == null){ ?>
                                     <button type="button" class="btn bg-gradient-warning w-75" data-toggle="modal"
                                         data-target="#myModal1">
                                         Launch Motherboard Form
                                     </button>
+                                    <?php } ?>
                                 </div>
                             </div>
-
 
                             <div class="row mt-2">
 
@@ -478,7 +483,7 @@ $query_run_c = mysqli_query($connection, $query_mc);
     data-keyboard="false" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form method="POST">
+            <form method="POST" id="form">
                 <?php
                 
                     if(isset($_POST['submit_motherboard_check'])){
@@ -624,8 +629,10 @@ $query_run_c = mysqli_query($connection, $query_mc);
                     </fieldset>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" name="submit_motherboard_check"
+
+                    <button type="submit" value="submit" name="submit_motherboard_check"
                         class="btn btn-default btn-next bg-gradient-success">Next</button>
+
                 </div>
             </form>
         </div>
@@ -710,9 +717,9 @@ $query_run_c = mysqli_query($connection, $query_mc);
         $query_com = "INSERT INTO combine_check(inventory_id, emp_id, sales_order_id, keyboard, keyboard_keys, speakers, camera, bazel, mousepad, mouse_pad_button, camera_cable, back_cover, 
                                                 wifi_card, lcd_cable, battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, c_panel_palm_rest, mb_base, hings_cover,
                                                 lan_cover, fan, heat_sink, cpu, created_time, status, combined_id) 
-                    VALUES ('$inventory_id', '$emp_id', '$sales_order_id', '$keyboard', '$keys', '$speakers', '$camera', '$bazel', '$status', '$mousepad','$mouse_pad_button',
+                    VALUES ('$inventory_id', '$emp_id', '$sales_order_id', '$keyboard', '$keys', '$speakers', '$camera', '$bazel', '$mousepad','$mouse_pad_button',
                     '$camera_cable', '$back_cover', '$wifi_card', '$lcd_cable', '$battery', '$battery_cable', '$dvd_rom', '$dvd_caddy', '$hdd_caddy', '$hdd_cable_connector',
-                    '$c_panel_palm_rest', '$mb_base', '$hings_cover', '$lan_cover', '$fan', '$heat_sink', '$cpu', CURRENT_TIMESTAMP, '$status')";
+                    '$c_panel_palm_rest', '$mb_base', '$hings_cover', '$lan_cover', '$fan', '$heat_sink', '$cpu', CURRENT_TIMESTAMP, '$status', 0)";
                     echo $query_com;
         $query_run = mysqli_query($connection, $query_com);
         
@@ -1820,7 +1827,7 @@ $query_run_c = mysqli_query($connection, $query_mc);
                     </fieldset>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" name="combine_check_form"
+                    <button type="submit" value="submit" name="combine_check_form"
                         class="btn btn-default bg-gradient-success btn-next">Next</button>
                 </div>
             </form>
@@ -2065,7 +2072,7 @@ $query_run_c = mysqli_query($connection, $query_mc);
                     </fieldset>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" name="submit_lcd_check"
+                    <button type="submit" value="submit" name="submit_lcd_check"
                         class="btn btn-default bg-gradient-success btn-next">Next</button>
                 </div>
             </form>
@@ -2080,14 +2087,83 @@ $query_run_c = mysqli_query($connection, $query_mc);
 
 <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
     data-keyboard="false" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">04 Bodywork Form</h4>
+    <?php 
+        if(isset($_POST['bodywork'])){
+        $checkBox = implode(',', $_POST['work']); 
+        $result=explode(",",$checkBox);
 
-            </div>
-            <div class="modal-body">
-                <form role="form" action="" method="post" class="registration-form">
+        for($i =0; $i< sizeof($result);$i++){
+            if($result[$i] == "a_scratch"){
+                $a_scratch ="1";
+            }
+            if($result[$i] == "a_broken"){
+                $a_broken ="1";
+            }
+            if($result[$i] == "a_dent"){
+                $a_dent ="1";
+            }
+            if($result[$i] == "b_scratch"){
+                $b_scratch ="1";
+            }
+            if($result[$i] == "b_broken"){
+                $b_broken ="1";
+            }
+            if($result[$i] == "b_logo"){
+                $b_logo ="1";
+            }
+            if($result[$i] == "b_color"){
+                $b_color ="1";
+            }
+            if($result[$i] == "c_scratch"){
+                $c_scratch ="1";
+            }
+            if($result[$i] == "c_broken"){
+                $c_broken ="1";
+            }
+            if($result[$i] == "c_dent"){
+                $c_dent ="1";
+            }
+            if($result[$i] == "d_scratch"){
+                $d_scratch ="1";
+            }
+            if($result[$i] == "d_broken"){
+                $d_broken ="1";
+            }
+            if($result[$i] == "d_dent"){
+                $d_dent ="1";
+            }
+        }
+            $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
+            $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
+            $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
+            $status = 0;
+            if($a_scratch == 1 || $a_broken == 1 || $a_dent == 1 || $b_scratch ==1 || $b_broken ==1 || $b_logo == 1 || $b_color == 1 || $c_scratch == 1 || $c_broken == 1 || 
+                $c_dent ==1 || $d_scratch == 1 || $d_broken == 1 || $d_dent==1){
+                $status = 1;
+            } 
+
+            $checkBox = implode(',', $_POST['work']);
+            $query = "INSERT INTO bodywork(inventory_id, emp_id, sales_order_id, a_scratch, a_broken, a_dent, b_scratch, b_broken, b_logo, b_color, c_scratch, c_broken, c_dent, d_scratch, d_broken, d_dent, status) 
+                                VALUES ('$inventory_id','$emp_id','$sales_order_id','$a_scratch','$a_broken','$a_dent','$b_scratch','$b_broken','$b_logo','$b_color','$c_scratch','$c_broken','$c_dent','$d_scratch','$d_broken','$d_dent','$status')";
+            echo $query;
+            $query_run = mysqli_query($connection, $query);
+            if($status == 1){
+                $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+                $date = $date1->format('Y-m-d H:i:s');
+                $query_prod_info ="UPDATE prod_info SET end_date_time = '$date', status = '0', issue_type = '4' WHERE p_id = '$p_id' ";
+                $query_prod_run = mysqli_query($connection, $query_prod_info);
+            } 
+        }
+    ?>
+
+    <div class="modal-dialog modal-xl">
+        <form role="form" action="" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">04 Bodywork Form</h4>
+
+                </div>
+                <div class="modal-body">
                     <fieldset style="display: block;">
                         <div class="modal-body">
                             <div class="row">
@@ -2185,12 +2261,13 @@ $query_run_c = mysqli_query($connection, $query_mc);
                         </div>
                     </fieldset>
 
-                </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" value="submit" class=" btn btn-default bg-gradient-success
+                    btn-next">Next</button>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-default bg-gradient-success btn-next">Next</button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 
@@ -2204,7 +2281,7 @@ $query_run_c = mysqli_query($connection, $query_mc);
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">01 Motherboard Form</h4>
+                <h4 class="modal-title" id="myModalLabel">05 Production Specification Form</h4>
             </div>
             <form method="POST">
                 <?php                 

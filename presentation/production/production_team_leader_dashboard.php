@@ -1,6 +1,7 @@
 <?php 
 session_start();
 include_once('../../dataAccess/connection.php');
+include_once('../../dataAccess/403.php');
 include_once('../includes/header.php');
 
 // checking if a user is logged in
@@ -323,5 +324,5 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1 || $
 </div>
 
 <?php include_once('../includes/footer.php'); }else{
-        die("<h3 class='text-danger'><<<<<< Access Denied >>>>></h3>");
-}  ?>
+        die(access_denied());
+} ?>
