@@ -51,10 +51,10 @@ if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) 
                                 <thead>
                                     <tr>
                                         <th>S/O ID</th>
-                                        <th>Brand</th>
                                         <th>Core</th>
                                         <th>Genaration</th>
                                         <th>Model</th>
+                                        <th>Assigned QTY</th>
                                         <th>Completed QTY</th>
                                         <th style="width: 250px;">&nbsp;</th>
                                     </tr>
@@ -77,17 +77,17 @@ if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) 
                                                 if ($rowcount = mysqli_fetch_assoc($query_run)) {
                                                     foreach($query_run as $x) {
 
-                                                     $count =   "SELECT *, COUNT(prod_info.inventory_id) as Completed FROM prod_info GROUP BY inventory_id";
+                                                     $count =   "SELECT *, COUNT(prod_info.inventory_id) as Completed FROM prod_info WHERE status ='0'";
                                                      $sd = mysqli_query($connection, $count);
                                                      foreach($sd as $d){
                                             ?>
 
                                     <tr>
                                         <td><?= $x['sales_order_id']; ?></td>
-                                        <td><?= $x['brand']; ?></td>
                                         <td><?= $x['core']; ?></td>
                                         <td><?= $x['generation']; ?></td>
                                         <td><?= $x['model']; ?></td>
+                                        <td><?= $x['tech_assign_qty']; ?></td>
                                         <td><?= $d['Completed']; ?></td>
                                         <td>
                                             <?php
