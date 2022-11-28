@@ -226,8 +226,6 @@ if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) 
     </div>
 </div>
 
-
-
 <?php include_once('../includes/footer.php'); }else{
         die(access_denied());
 } ?>
