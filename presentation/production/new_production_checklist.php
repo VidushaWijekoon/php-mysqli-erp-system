@@ -44,6 +44,7 @@ $tech_id;
 
 $mother_board = null;
 $bios = null;
+$bios_check = null;
 $power = null;
 $ports = null;
 
@@ -187,34 +188,8 @@ if (isset($_GET['sales_order_id'])) {
 
  
 // ------------------------------------------------------- //
-// -------------------Motherboard check-------------------- //
+// -------------------Motherboard check------------------- //
 // ------------------------------------------------------- //
-
-if(isset($_POST['submit_motherboard_check'])){
-    $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
-    $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
-    $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
-    $bios = mysqli_real_escape_string($connection, $_POST['bios_check']);
-    $power = mysqli_real_escape_string($connection, $_POST['power']);
-    $ports = mysqli_real_escape_string($connection, $_POST['ports']);
-    $status = 0;
-    if($bios == 1 || $power == 1 || $ports == 1){
-        $status = 1;
-    }
-    $query = "INSERT INTO motherboard_check (sales_order_id, emp_id, inventory_id, bios_check, power, ports, status) 
-                    VALUES ('$sales_order_id', '$emp_id', '$inventory_id', '$bios', '$power', '$ports', '$status')";
-    $query_run = mysqli_query($connection, $query);
-        
-    if($status == 1){
-        $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-        $date = $date1->format('Y-m-d H:i:s');
-        $query_prod_info ="UPDATE prod_info SET end_date_time=' $date', status = '1', issue_type = '1' WHERE p_id = '$p_id' ";
-        $query_prod_run = mysqli_query($connection, $query_prod_info);
-        header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
-    }else{
-        echo "Already Completed";
-    }
-}
 
 $query_m = "SELECT * FROM motherboard_check WHERE inventory_id = $inventory_id AND sales_order_id = $sales_order_id";
 $query_run_m = mysqli_query($connection, $query_m);
@@ -233,143 +208,6 @@ $query_run_m = mysqli_query($connection, $query_m);
 // ----------------------Combine check-------------------- //
 // ------------------------------------------------------- //
 
-if(isset($_POST['combine_check_form'])){
-    
-    $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
-    $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
-    $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
-    $keyboard = mysqli_real_escape_string($connection, $_POST['keyboard']);
-    $keys = mysqli_real_escape_string($connection,  $_POST['keyboard_keys']);
-    $speakers = mysqli_real_escape_string($connection, $_POST['speakers']);
-    $camera = mysqli_real_escape_string($connection, $_POST['camera']);
-    $bazel = mysqli_real_escape_string($connection, $_POST['bazel']);
-    $mousepad= mysqli_real_escape_string($connection,  $_POST['mousepad']);
-    $mouse_pad_button= mysqli_real_escape_string($connection,  $_POST['mouse_pad_button']);
-    $camera_cable= mysqli_real_escape_string($connection,  $_POST['camera_cable']);
-    $back_cover= mysqli_real_escape_string($connection,  $_POST['back_cover']);
-    $wifi_card= mysqli_real_escape_string($connection,  $_POST['wifi_card']);
-    $lcd_cable= mysqli_real_escape_string($connection,  $_POST['lcd_cable']);
-    $battery= mysqli_real_escape_string($connection,  $_POST['battery']);
-    $battery_cable= mysqli_real_escape_string($connection,  $_POST['battery_cable']);
-    $dvd_rom= mysqli_real_escape_string($connection,  $_POST['dvd_rom']);
-    $dvd_caddy= mysqli_real_escape_string($connection,  $_POST['dvd_caddy']);
-    $hdd_caddy= mysqli_real_escape_string($connection,  $_POST['hdd_caddy']);
-    $hdd_cable_connector= mysqli_real_escape_string($connection,  $_POST['hdd_cable_connector']);
-    $c_panel_palm_rest= mysqli_real_escape_string($connection,  $_POST['c_panel_palm_rest']);
-    $mb_base= mysqli_real_escape_string($connection,  $_POST['mb_base']);
-    $hings_cover= mysqli_real_escape_string($connection,  $_POST['hings_cover']);
-    $lan_cover= mysqli_real_escape_string($connection,  $_POST['lan_cover']);
-    $fan= mysqli_real_escape_string($connection,  $_POST['fan']);
-    $heat_sink= mysqli_real_escape_string($connection,  $_POST['heat_sink']);
-    $cpu= mysqli_real_escape_string($connection, $_POST['cpu']);
-    
-    $scan_id =0;
-
-    if( empty($_POST['scan_id'])){
-        $scan_id =0;
-    }else{
-        $scan_id= mysqli_real_escape_string($connection,  $_POST['scan_id']);
-    }
-    
-    $query = "SELECT location FROM users WHERE epf = '$emp_id'";
-    $query_run = mysqli_query($connection, $query);
-    $location10;
-    foreach($query_run as $a){
-        $location10 = $a['location'];
-    }   
-    $status = 0;
-    if($keyboard == 1 || $keys == 1 || $speakers == 1 || $camera == 1 || $bazel == 1 || $mousepad == 1 || $mouse_pad_button == 1 || $camera_cable == 1 || $back_cover == 1 || $wifi_card == 1 ||
-        $lcd_cable == 1 || $battery == 1 || $battery_cable == 1 || $dvd_rom == 1 || $dvd_caddy == 1 || $hdd_caddy == 1 || $hdd_cable_connector == 1 || $c_panel_palm_rest == 1 || $mb_base == 1 || 
-        $hings_cover == 1 || $lan_cover == 1 || $fan == 1 || $heat_sink == 1 || $cpu == 1){
-        $status = 1;
-        
-        $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-        $date = $date1->format('Y-m-d');
-       
-        $query_6 = "INSERT INTO requested_part_from_production(brand, model, generation, sales_order_id, inventory_id, created_date, delivery_date, emp_id, location, status, 
-                                                                keyboard, speakers, camera, bazel_broken, lan_cover, mousepad, mouse_pad_button, camera_cable, back_cover, wifi_card, lcd_cable, 
-                                                                battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, c_panel_palm_rest, mb_base, hings_cover, fan, heat_sink, cpu,
-                                                                switch, switch_id)
-                    VALUES('$item_brand', '$item_model', '$item_generation', '$sales_order_id', '$inventory_id', '$date','0000-00-00' ,'$emp_id', '$location10', '$status', '$keyboard', '$speakers',
-                        '$camera', '$bazel', '$lan_cover', '$mousepad', '$mouse_pad_button', '$camera_cable', '$back_cover', '$wifi_card', '$lcd_cable', '$battery', '$battery_cable',
-                        '$dvd_rom', '$dvd_caddy', '$hdd_caddy', '$hdd_cable_connector', '$c_panel_palm_rest', '$mb_base', '$hings_cover', '$fan', '$heat_sink', '$cpu', 0, 0)";
-                    echo $query_6;
-         $query_new = mysqli_query($connection, $query_6);
-    }
-    
-    if($lunch_combine == null){
-        
-    $query_com = "INSERT INTO combine_check(inventory_id, emp_id, sales_order_id, keyboard, keyboard_keys, speakers, camera, bazel_broken, mousepad, mouse_pad_button, camera_cable, back_cover, 
-                                            wifi_card, lcd_cable, battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, c_panel_palm_rest, mb_base, hings_cover,
-                                            lan_cover, fan, heat_sink, cpu, created_time, status, combined_id) 
-                VALUES ('$inventory_id', '$emp_id', '$sales_order_id', '$keyboard', '$keys', '$speakers', '$camera', '$bazel', '$status', '$mousepad','$mouse_pad_button',
-                '$camera_cable', '$back_cover', '$wifi_card', '$lcd_cable', '$battery', '$battery_cable', '$dvd_rom', '$dvd_caddy', '$hdd_caddy', '$hdd_cable_connector',
-                '$c_panel_palm_rest', '$mb_base', '$hings_cover', '$lan_cover', '$fan', '$heat_sink', '$cpu', CURRENT_TIMESTAMP, '$status', 0)";
-                echo $query_com;
-    $query_run = mysqli_query($connection, $query_com);
-    
-   
-    if($scan_id !=0){
-
-    $com_inventory_id = $scan_id;
-    $query_check="SELECT `id`, `inventory_id` FROM `combine_check` WHERE inventory_id ='$com_inventory_id'";
-   
-    $query_run = mysqli_query($connection, $query_check);
-        $test=0;
-    foreach($query_run as $k){
-        $test = $k['inventory_id'];
-    }
-        if( $test == 0){ 
-            $query_in ="INSERT INTO combine_check(inventory_id, emp_id, sales_order_id, keyboard, keyboard_keys, speakers, camera, bazel_broken, mousepad, mouse_pad_button, camera_cable, back_cover, 
-                                            wifi_card, lcd_cable, battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, c_panel_palm_rest, mb_base, hings_cover,
-                                            lan_cover, fan, heat_sink, cpu, created_time, status, combined_id)
-                        VALUES('$scan_id', '$emp_id', '$sales_order_id', '$keyboard1', '$speakers1', '$camera1', '$bazel1', '$status1', '$keys1', '$mousepad1', '$mouse_pad_button1', '$camera_cable1', '$back_cover1',
-                '$wifi_card1', '$lcd_cable1', '$battery1', '$battery_cable1', '$dvd_rom1', '$dvd_caddy1', '$hdd_caddy1', '$hdd_cable_connector1', '$c_panel_palm_rest1', '$mb_base1', '$hings_cover1', '$lan_cover1',
-                '$inventory_id1' )";
-            $query_run = mysqli_query($connection, $query_in);
-        }else{
-            $query_update ="UPDATE combine_check
-        SET
-            `keyboard` = '$keyboard1', `speakers` = '$speakers1', `camera` = '$camera1', `bazel` = '$bazel1', `status` = '$status1', `damage_keys` = '$damage_keys1', `mousepad` = '$mousepad1', `mouse_pad_button` = '$mouse_pad_button1',
-            `camera_cable` = '$camera_cable1', `back_cover` = '$back_cover1', `wifi_card` = '$wifi_card1', `lcd_cable` = '$lcd_cable1', `battery` = '$battery1', `battery_cable` = '$battery_cable1', `dvd_rom` = '$dvd_rom1',
-            `dvd_caddy` = '$dvd_caddy1', `hdd_caddy` = '$hdd_caddy1', `hdd_cable_connector` = '$hdd_cable_connector1', `c_panel_palm_rest` = '$c_panel_palm_rest1', `mb_base` = '$mb_base1', `hings_cover` = '$hings_cover1',
-            `lan_cover` = '$lan_cover1', `combined_id` = '$combined_id1'   
-        WHERE inventory_id = '$inventory_id'";
-            $query_run = mysqli_query($connection, $query_update);
-        }
-   
-    $query_update_part = "UPDATE requested_part_from_production SET `status`='0',  switch = '1', switch_id = '$scan_id' WHERE inventory_id = '$inventory_id';";
-
-    $query_run = mysqli_query($connection, $query_update_part);
-    $query_1 ="SELECT  `status`FROM `requested_part_from_production` WHERE inventory_id = $inventory_id";
-    $query_run = mysqli_query($connection, $query_1);
-
-    $query_2 ="SELECT  `status`FROM `combine_check` WHERE inventory_id = $inventory_id";
-    $query_run_2 = mysqli_query($connection, $query_2);
-    $combine_status;
-    foreach($query_run_2 as $c){
-        $combine_status = $c['status'];
-    }
-    $received =null;
-    if(empty($query_run)){
-        $received ='1';
-    }else{
-        foreach($query_run as $a){
-            $received = $a['status'];
-        }
-    }if($combine_status == 0 && $received == 0){
-        header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
-    }
-}
-
-    if($status == 1){
-        $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-        $date = $date1->format('Y-m-d H:i:s');
-        $query_prod_info ="UPDATE prod_info SET end_date_time = '$date', status = '1', issue_type = '2' WHERE p_id = '$p_id' ";
-        $query_prod_run = mysqli_query($connection, $query_prod_info);
-        }
-    }    
-}
 
 $query_mc = "SELECT * FROM combine_check WHERE inventory_id =$inventory_id AND sales_order_id=$sales_order_id";
 $query_run_c = mysqli_query($connection, $query_mc);
@@ -430,65 +268,6 @@ $query_run_c = mysqli_query($connection, $query_mc);
             $lunch_combine = 0;
         }
     }
-
- 
-// ------------------------------------------------------- //
-// -------------------LCD check-------------------- //
-// ------------------------------------------------------- //
-
-if(isset($_POST['submit_lcd_check'])){
-            $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
-            $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
-            $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
-            $whitespot = mysqli_real_escape_string($connection, $_POST['whitespot']);
-            $scratch = mysqli_real_escape_string($connection, $_POST['scratch']);
-            $broken = mysqli_real_escape_string($connection, $_POST['broken']);
-            $line_lcd = mysqli_real_escape_string($connection, $_POST['line_lcd']);
-            $yellow_shadow = mysqli_real_escape_string($connection, $_POST['yellow_shadow']);
-            $status = NULL;
-
-            if($whitespot == 1 || $scratch == 1 || $broken == 1 || $line_lcd == 1 || $yellow_shadow == 1){
-                $status = 1;
-            }else{
-                $status = 0;
-            }
-
-            $lcd_check_query = "INSERT INTO `lcd_check`(inventory_id, emp_id, sales_order_id, whitespot, scratch, broken, line_lcd, yellow_shadow, created_time, status) 
-                                        VALUES ('$inventory_id', '$emp_id', '$sales_order_id', '$whitespot', '$scratch', '$broken', '$line_lcd', '$yellow_shadow', CURRENT_TIMESTAMP, $status)";
-            $lcd_query = mysqli_query($connection, $lcd_check_query);
-        }
-
- 
-// ------------------------------------------------------- //
-// -------------------Production check-------------------- //
-// ------------------------------------------------------- //
-
-if(isset($_POST['prduction_specification_form'])){
-    
-    $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
-    $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
-    $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
-    $processor = mysqli_real_escape_string($connection, $_POST['processor']);
-    $generation = mysqli_real_escape_string($connection, $_POST['generation']);
-    $ram = mysqli_real_escape_string($connection, $_POST['ram']);
-    $hdd_capacity = mysqli_real_escape_string($connection, $_POST['hdd_capacity']);
-    $hdd_type = mysqli_real_escape_string($connection, $_POST['hdd_type']);
-    $display = mysqli_real_escape_string($connection, $_POST['display']);
-    $resolutions = mysqli_real_escape_string($connection, $_POST['resolutions']);
-    $graphic = mysqli_real_escape_string($connection, $_POST['graphic']);
-    $graphic_type = mysqli_real_escape_string($connection, $_POST['graphic_type']);
-    $operating_system = mysqli_real_escape_string($connection, $_POST['operating_system']);
-   
-    $query = "INSERT INTO production_check(inventory_id, emp_id, sales_order_id, processor, generation, ram, hdd_capacity, hdd_type, display, resolutions, graphic, graphic_type, operating_system, status, created_time) 
-                VALUES ('$sales_order_id', '$emp_id', '$inventory_id', '$processor', '$generation', '$ram', '$hdd_capacity', '$hdd_type', '$display', '$resolutions', '$graphic', '$graphic_type', '$operating_system', 0, CURRENT_TIMESTAMP)";
-    $query_run = mysqli_query($connection, $query);
-    $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-    $date = $date1->format('Y-m-d H:i:s');
-    $query_prod_info ="UPDATE prod_info SET end_date_time = '$date', status = '0', issue_type = '5' WHERE p_id = '$p_id' ";
-    $query_prod_run = mysqli_query($connection, $query_prod_info);
-    header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
-        
-}
 
 ?>
 
@@ -611,10 +390,11 @@ if(isset($_POST['prduction_specification_form'])){
                         <div class="card-body">
 
                             <div class="row mt-2">
+
+
                                 <label class="col-sm-4 col-form-label text-capitalize">
                                     <p>01 Motherboard Check:</p>
                                 </label>
-
                                 <div class="col-sm-8">
                                     <button type="button" class="btn bg-gradient-warning w-75" data-toggle="modal"
                                         data-target="#myModal1">
@@ -625,6 +405,7 @@ if(isset($_POST['prduction_specification_form'])){
 
 
                             <div class="row mt-2">
+
                                 <label class="col-sm-4 col-form-label text-capitalize">
                                     <p>02 Combine Check:</p>
                                 </label>
@@ -698,6 +479,34 @@ if(isset($_POST['prduction_specification_form'])){
     <div class="modal-dialog">
         <div class="modal-content">
             <form method="POST">
+                <?php
+                
+                    if(isset($_POST['submit_motherboard_check'])){
+                        
+                        $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
+                        $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
+                        $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
+                        $bios = mysqli_real_escape_string($connection, $_POST['bios_check']);
+                        $power = mysqli_real_escape_string($connection, $_POST['power']);
+                        $ports = mysqli_real_escape_string($connection, $_POST['ports']);
+                        $status = 0;
+                        if($bios == 1 || $power == 1 || $ports == 1){
+                            $status = 1;
+                        }
+                        $query = "INSERT INTO motherboard_check (sales_order_id, emp_id, inventory_id, bios_check, power, ports, status) 
+                                        VALUES ('$sales_order_id', '$emp_id', '$inventory_id', '$bios', '$power', '$ports', '$status')";
+                        $query_run = mysqli_query($connection, $query);
+                            
+                        if($status == 1){
+                            $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+                            $date = $date1->format('Y-m-d H:i:s');
+                            $query_prod_info ="UPDATE prod_info SET end_date_time=' $date', status = '1', issue_type = '1' WHERE p_id = '$p_id' ";
+                            $query_prod_run = mysqli_query($connection, $query_prod_info);
+                            header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+                        } 
+                    }
+
+                ?>
                 <div class="modal-header">
                     <h4 class="modal-title" id="myModalLabel">01 Motherboard Form</h4>
                 </div>
@@ -830,6 +639,148 @@ if(isset($_POST['prduction_specification_form'])){
 
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
     data-keyboard="false" aria-hidden="true">
+    <?php 
+    
+        if(isset($_POST['combine_check_form'])){
+        
+        $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
+        $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
+        $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
+        $keyboard = mysqli_real_escape_string($connection, $_POST['keyboard']);
+        $keys = mysqli_real_escape_string($connection,  $_POST['keyboard_keys']);
+        $speakers = mysqli_real_escape_string($connection, $_POST['speakers']);
+        $camera = mysqli_real_escape_string($connection, $_POST['camera']);
+        $bazel = mysqli_real_escape_string($connection, $_POST['bazel']);
+        $mousepad= mysqli_real_escape_string($connection,  $_POST['mousepad']);
+        $mouse_pad_button= mysqli_real_escape_string($connection,  $_POST['mouse_pad_button']);
+        $camera_cable= mysqli_real_escape_string($connection,  $_POST['camera_cable']);
+        $back_cover= mysqli_real_escape_string($connection,  $_POST['back_cover']);
+        $wifi_card= mysqli_real_escape_string($connection,  $_POST['wifi_card']);
+        $lcd_cable= mysqli_real_escape_string($connection,  $_POST['lcd_cable']);
+        $battery= mysqli_real_escape_string($connection,  $_POST['battery']);
+        $battery_cable= mysqli_real_escape_string($connection,  $_POST['battery_cable']);
+        $dvd_rom= mysqli_real_escape_string($connection,  $_POST['dvd_rom']);
+        $dvd_caddy= mysqli_real_escape_string($connection,  $_POST['dvd_caddy']);
+        $hdd_caddy= mysqli_real_escape_string($connection,  $_POST['hdd_caddy']);
+        $hdd_cable_connector= mysqli_real_escape_string($connection,  $_POST['hdd_cable_connector']);
+        $c_panel_palm_rest= mysqli_real_escape_string($connection,  $_POST['c_panel_palm_rest']);
+        $mb_base= mysqli_real_escape_string($connection,  $_POST['mb_base']);
+        $hings_cover= mysqli_real_escape_string($connection,  $_POST['hings_cover']);
+        $lan_cover= mysqli_real_escape_string($connection,  $_POST['lan_cover']);
+        $fan= mysqli_real_escape_string($connection,  $_POST['fan']);
+        $heat_sink= mysqli_real_escape_string($connection,  $_POST['heat_sink']);
+        $cpu= mysqli_real_escape_string($connection, $_POST['cpu']);
+        
+        $scan_id =0;
+
+        if( empty($_POST['scan_id'])){
+            $scan_id =0;
+        }else{
+            $scan_id= mysqli_real_escape_string($connection,  $_POST['scan_id']);
+        }
+        
+        $query = "SELECT location FROM users WHERE epf = '$emp_id'";
+        $query_run = mysqli_query($connection, $query);
+        $location10;
+        foreach($query_run as $a){
+            $location10 = $a['location'];
+        }   
+        $status = 0;
+        if($keyboard == 1 || $keys == 1 || $speakers == 1 || $camera == 1 || $bazel == 1 || $mousepad == 1 || $mouse_pad_button == 1 || $camera_cable == 1 || $back_cover == 1 || $wifi_card == 1 ||
+            $lcd_cable == 1 || $battery == 1 || $battery_cable == 1 || $dvd_rom == 1 || $dvd_caddy == 1 || $hdd_caddy == 1 || $hdd_cable_connector == 1 || $c_panel_palm_rest == 1 || $mb_base == 1 || 
+            $hings_cover == 1 || $lan_cover == 1 || $fan == 1 || $heat_sink == 1 || $cpu == 1){
+            $status = 1;
+            
+            $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+            $date = $date1->format('Y-m-d');
+        
+            $query_6 = "INSERT INTO requested_part_from_production(brand, model, generation, sales_order_id, inventory_id, created_date, delivery_date, emp_id, location, status, 
+                                                                    keyboard, speakers, camera, bazel, lan_cover, mousepad, mouse_pad_button, camera_cable, back_cover, wifi_card, lcd_cable, 
+                                                                    battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, c_panel_palm_rest, mb_base, hings_cover, fan, heat_sink, cpu,
+                                                                    switch, switch_id)
+                        VALUES('$item_brand', '$item_model', '$item_generation', '$sales_order_id', '$inventory_id', '$date','0000-00-00' ,'$emp_id', '$location10', '$status', '$keyboard', '$speakers',
+                            '$camera', '$bazel', '$lan_cover', '$mousepad', '$mouse_pad_button', '$camera_cable', '$back_cover', '$wifi_card', '$lcd_cable', '$battery', '$battery_cable',
+                            '$dvd_rom', '$dvd_caddy', '$hdd_caddy', '$hdd_cable_connector', '$c_panel_palm_rest', '$mb_base', '$hings_cover', '$fan', '$heat_sink', '$cpu', 0, 0)";
+                        echo $query_6;
+            $query_new = mysqli_query($connection, $query_6);
+        }
+        
+        if($lunch_combine == null){
+            
+        $query_com = "INSERT INTO combine_check(inventory_id, emp_id, sales_order_id, keyboard, keyboard_keys, speakers, camera, bazel, mousepad, mouse_pad_button, camera_cable, back_cover, 
+                                                wifi_card, lcd_cable, battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, c_panel_palm_rest, mb_base, hings_cover,
+                                                lan_cover, fan, heat_sink, cpu, created_time, status, combined_id) 
+                    VALUES ('$inventory_id', '$emp_id', '$sales_order_id', '$keyboard', '$keys', '$speakers', '$camera', '$bazel', '$status', '$mousepad','$mouse_pad_button',
+                    '$camera_cable', '$back_cover', '$wifi_card', '$lcd_cable', '$battery', '$battery_cable', '$dvd_rom', '$dvd_caddy', '$hdd_caddy', '$hdd_cable_connector',
+                    '$c_panel_palm_rest', '$mb_base', '$hings_cover', '$lan_cover', '$fan', '$heat_sink', '$cpu', CURRENT_TIMESTAMP, '$status')";
+                    echo $query_com;
+        $query_run = mysqli_query($connection, $query_com);
+        
+    
+        if($scan_id !=0){
+
+        $com_inventory_id = $scan_id;
+        $query_check="SELECT `id`, `inventory_id` FROM `combine_check` WHERE inventory_id ='$com_inventory_id'";
+    
+        $query_run = mysqli_query($connection, $query_check);
+            $test=0;
+        foreach($query_run as $k){
+            $test = $k['inventory_id'];
+        }
+            if( $test == 0){ 
+                $query_in ="INSERT INTO combine_check(inventory_id, emp_id, sales_order_id, keyboard, keyboard_keys, speakers, camera, bazel_broken, mousepad, mouse_pad_button, camera_cable, back_cover, 
+                                                wifi_card, lcd_cable, battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, c_panel_palm_rest, mb_base, hings_cover,
+                                                lan_cover, fan, heat_sink, cpu, created_time, status, combined_id)
+                            VALUES('$scan_id', '$emp_id', '$sales_order_id', '$keyboard1', '$speakers1', '$camera1', '$bazel1', '$status1', '$keys1', '$mousepad1', '$mouse_pad_button1', '$camera_cable1', '$back_cover1',
+                    '$wifi_card1', '$lcd_cable1', '$battery1', '$battery_cable1', '$dvd_rom1', '$dvd_caddy1', '$hdd_caddy1', '$hdd_cable_connector1', '$c_panel_palm_rest1', '$mb_base1', '$hings_cover1', '$lan_cover1',
+                    '$inventory_id1' )";
+                $query_run = mysqli_query($connection, $query_in);
+            }else{
+                $query_update ="UPDATE combine_check
+            SET
+                `keyboard` = '$keyboard1', `speakers` = '$speakers1', `camera` = '$camera1', `bazel` = '$bazel1', `status` = '$status1', `damage_keys` = '$damage_keys1', `mousepad` = '$mousepad1', `mouse_pad_button` = '$mouse_pad_button1',
+                `camera_cable` = '$camera_cable1', `back_cover` = '$back_cover1', `wifi_card` = '$wifi_card1', `lcd_cable` = '$lcd_cable1', `battery` = '$battery1', `battery_cable` = '$battery_cable1', `dvd_rom` = '$dvd_rom1',
+                `dvd_caddy` = '$dvd_caddy1', `hdd_caddy` = '$hdd_caddy1', `hdd_cable_connector` = '$hdd_cable_connector1', `c_panel_palm_rest` = '$c_panel_palm_rest1', `mb_base` = '$mb_base1', `hings_cover` = '$hings_cover1',
+                `lan_cover` = '$lan_cover1', `combined_id` = '$combined_id1'   
+            WHERE inventory_id = '$inventory_id'";
+                $query_run = mysqli_query($connection, $query_update);
+            }
+    
+        $query_update_part = "UPDATE requested_part_from_production SET `status`='0',  switch = '1', switch_id = '$scan_id' WHERE inventory_id = '$inventory_id';";
+
+        $query_run = mysqli_query($connection, $query_update_part);
+        $query_1 ="SELECT  `status`FROM `requested_part_from_production` WHERE inventory_id = $inventory_id";
+        $query_run = mysqli_query($connection, $query_1);
+
+        $query_2 ="SELECT  `status`FROM `combine_check` WHERE inventory_id = $inventory_id";
+        $query_run_2 = mysqli_query($connection, $query_2);
+        $combine_status;
+        foreach($query_run_2 as $c){
+            $combine_status = $c['status'];
+        }
+        $received =null;
+        if(empty($query_run)){
+            $received ='1';
+        }else{
+            foreach($query_run as $a){
+                $received = $a['status'];
+            }
+        }if($combine_status == 0 && $received == 0){
+            header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
+        }
+    }
+
+        if($status == 1){
+            $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+            $date = $date1->format('Y-m-d H:i:s');
+            $query_prod_info ="UPDATE prod_info SET end_date_time = '$date', status = '1', issue_type = '2' WHERE p_id = '$p_id' ";
+            $query_prod_run = mysqli_query($connection, $query_prod_info);
+            }
+        }    
+    }
+
+    
+    ?>
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -846,7 +797,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="r7" name="keyboard" value="0">
-                                        <label class="label_values" for="r7" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="r7" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="r8" name="keyboard" value="1">
@@ -857,7 +809,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="r7" name="keyboard" value="0" checked="checked">
-                                        <label class="label_values" for="r7" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="r7" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="r8" name="keyboard" value="1" disabled>
@@ -868,7 +821,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="r7" class="keyboard" name="keyboard" value="keyboard">
-                                        <label class="label_values" for="r7" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="r7" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="r8" name="keyboard" value="1" checked="checked">
@@ -884,7 +838,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c31" name="keyboard_keys" value="0">
-                                        <label class="label_values" for="c31" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c31" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c32" name="keyboard_keys" value="1">
@@ -895,7 +850,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c31" name="keyboard_keys" value="0" checked="checked">
-                                        <label class="label_values" for="c31" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c31" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c32" name="keyboard_keys" value="1" disabled>
@@ -906,7 +862,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c31" name="keyboard_keys" class="keys" value="keys">
-                                        <label class="label_values" for="c31" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c31" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c32" name="keyboard_keys" value="1" checked="checked">
@@ -923,7 +880,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="r9" name="speakers" value="0">
-                                        <label class="label_values" for="r9" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="r9" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="r10" name="speakers" value="1">
@@ -934,7 +892,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="r9" name="speakers" value="0" checked="checked">
-                                        <label class="label_values" for="r9" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="r9" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="r10" name="speakers" value="1" disabled>
@@ -945,7 +904,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="r9" class="speakers" name="speakers" value="speakers">
-                                        <label class="label_values" for="r9" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="r9" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="r10" name="speakers" value="1" checked="checked">
@@ -963,7 +923,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="r11" name="camera" value="0">
-                                        <label class="label_values" for="r11" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="r11" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="r12" name="camera" value="1">
@@ -974,7 +935,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="r11" name="camera" value="0" checked="checked">
-                                        <label class="label_values" for="r11" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="r11" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="r12" name="camera" value="1" disabled>
@@ -985,7 +947,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="r11" name="camera" class="camera" value="camera">
-                                        <label class="label_values" for="r11" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="r11" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="r12" name="camera" value="1" checked="checked">
@@ -1003,7 +966,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="13" name="bazel" value="0">
-                                        <label class="label_values" for="13" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="13" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="r14" name="bazel" value="1">
@@ -1013,7 +977,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="13" name="bazel" value="0" checked="checked">
-                                        <label class="label_values" for="13" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="13" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="r14" name="bazel" value="1" disabled>
@@ -1023,7 +988,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="13" name="bazel" class="bazel" value="bazel">
-                                        <label class="label_values" for="13" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="13" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="r14" name="bazel" value="1" checked="checked">
@@ -1039,7 +1005,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c1" name="mousepad" value="0">
-                                        <label class="label_values" for="c1" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c1" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c2" name="mousepad" value="1">
@@ -1050,7 +1017,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c1" name="mousepad" value="0" checked="checked">
-                                        <label class="label_values" for="c1" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c1" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c2" name="mousepad" value="1" disabled>
@@ -1061,7 +1029,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c1" name="mousepad" class="mousepad" value="mousepad">
-                                        <label class="label_values" for="c1" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c1" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c2" name="mousepad" value="1" checked="checked">
@@ -1078,7 +1047,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c3" name="mouse_pad_button" value="0">
-                                        <label class="label_values" for="c3" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c3" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c4" name="mouse_pad_button" value="1">
@@ -1089,7 +1059,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c3" name="mouse_pad_button" value="0" checked="checked">
-                                        <label class="label_values" for="c3" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c3" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c4" name="mouse_pad_button" value="1" disabled>
@@ -1101,7 +1072,8 @@ if(isset($_POST['prduction_specification_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c3" name="mouse_pad_button" class="mouse_pad_button"
                                             value="mouse_pad_button">
-                                        <label class="label_values" for="c3" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c3" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c4" name="mouse_pad_button" value="1" checked="checked">
@@ -1118,7 +1090,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c5" name="camera_cable" value="0">
-                                        <label class="label_values" for="c5" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c5" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c6" name="camera_cable" value="1">
@@ -1129,7 +1102,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c5" name="camera_cable" value="0" checked="checked">
-                                        <label class="label_values" for="c5" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c5" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c6" name="camera_cable" value="1" disabled>
@@ -1141,7 +1115,8 @@ if(isset($_POST['prduction_specification_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c5" name="camera_cable" class="camera_cable"
                                             value="camera_cable">
-                                        <label class="label_values" for="c5" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c5" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c6" name="camera_cable" value="1" checked="checked">
@@ -1158,7 +1133,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c7" name="back_cover" value="0">
-                                        <label class="label_values" for="c7" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c7" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c8" name="back_cover" value="1">
@@ -1169,7 +1145,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c7" name="back_cover" value="0" checked="checked">
-                                        <label class="label_values" for="c7" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c7" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c8" name="back_cover" value="1" disabled>
@@ -1181,7 +1158,8 @@ if(isset($_POST['prduction_specification_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c7" name="back_cover" class="back_cover"
                                             value="back_cover">
-                                        <label class="label_values" for="c7" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c7" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c8" name="back_cover" value="1" checked="checked">
@@ -1198,7 +1176,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c9" name="wifi_card" value="0">
-                                        <label class="label_values" for="c9" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c9" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c10" name="wifi_card" value="1">
@@ -1209,7 +1188,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c9" name="wifi_card" value="0" checked="checked">
-                                        <label class="label_values" for="c9" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c9" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c10" name="wifi_card" value="1" disabled>
@@ -1221,7 +1201,8 @@ if(isset($_POST['prduction_specification_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c9" name="wifi_card" class="wifi_card"
                                             value="wifi_card">
-                                        <label class="label_values" for="c9" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c9" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c10" name="wifi_card" value="1" checked="checked">
@@ -1238,7 +1219,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c11" name="lcd_cable" value="0">
-                                        <label class="label_values" for="c11" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c11" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c12" name="lcd_cable" value="1">
@@ -1249,7 +1231,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c11" name="lcd_cable" value="0" checked="checked">
-                                        <label class="label_values" for="c11" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c11" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c12" name="lcd_cable" value="1" disabled>
@@ -1261,7 +1244,8 @@ if(isset($_POST['prduction_specification_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c11" name="lcd_cable" class="lcd_cable"
                                             value="lcd_cable">
-                                        <label class="label_values" for="c11" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c11" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c12" name="lcd_cable" value="1" checked="checked">
@@ -1277,7 +1261,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c13" name="battery" value="0">
-                                        <label class="label_values" for="c13" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c13" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c14" name="battery" value="1">
@@ -1288,7 +1273,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c13" name="battery" value="0" checked="checked">
-                                        <label class="label_values" for="c13" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c13" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c14" name="battery" value="1" disabled>
@@ -1299,7 +1285,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c13" name="battery" class="battery" value="battery">
-                                        <label class="label_values" for="c13" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c13" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c14" name="battery" value="1" checked="checked">
@@ -1316,7 +1303,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c15" name="battery_cable" value="0">
-                                        <label class="label_values" for="c15" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c15" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c16" name="battery_cable" value="1">
@@ -1327,7 +1315,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c15" name="battery_cable" value="0" checked="checked">
-                                        <label class="label_values" for="c15" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c15" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c16" name="battery_cable" value="1" disabled>
@@ -1339,7 +1328,8 @@ if(isset($_POST['prduction_specification_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c15" name="battery_cable" class="battery_cable"
                                             value="battery_cable">
-                                        <label class="label_values" for="c15" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c15" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c16" name="battery_cable" value="1" checked="checked">
@@ -1372,7 +1362,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c17" name="dvd_rom" value="0" checked="checked">
-                                        <label class="label_values" for="c17" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c17" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c18" name="dvd_rom" value="1" disabled>
@@ -1383,7 +1374,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c17" name="dvd_rom" class="dvd_rom" value="dvd_rom">
-                                        <label class="label_values" for="c17" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c17" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c18" name="dvd_rom" value="1" checked="checked">
@@ -1401,7 +1393,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c19" name="dvd_caddy" value="0">
-                                        <label class="label_values" for="c19" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c19" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c20" name="dvd_caddy" value="1">
@@ -1412,7 +1405,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c19" name="dvd_caddy" value="0" checked="checked">
-                                        <label class="label_values" for="c19" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c19" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c20" name="dvd_caddy" value="1" disabled>
@@ -1424,7 +1418,8 @@ if(isset($_POST['prduction_specification_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c19" name="dvd_caddy" class="dvd_caddy"
                                             value="dvd_caddy">
-                                        <label class="label_values" for="c19" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c19" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c20" name="dvd_caddy" value="1" checked="checked">
@@ -1442,7 +1437,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c21" name="hdd_caddy" value="0">
-                                        <label class="label_values" for="c21" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c21" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c22" name="hdd_caddy" value="1">
@@ -1453,7 +1449,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c21" name="hdd_caddy" value="0" checked="checked">
-                                        <label class="label_values" for="c21" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c21" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c22" name="hdd_caddy" value="1" disabled>
@@ -1465,7 +1462,8 @@ if(isset($_POST['prduction_specification_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c21" name="hdd_caddy" class="hdd_caddy"
                                             value="hdd_caddy">
-                                        <label class="label_values" for="c21" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c21" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c22" name="hdd_caddy" value="1" checked="checked">
@@ -1477,12 +1475,14 @@ if(isset($_POST['prduction_specification_form'])){
 
                             </div>
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">17 HDD Cable Connector:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">17 HDD Cable
+                                    Connector:</label>
                                 <?php if($hdd_cable_connector == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c23" name="hdd_cable_connector" value="0">
-                                        <label class="label_values" for="c23" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c23" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c24" name="hdd_cable_connector" value="1">
@@ -1494,7 +1494,8 @@ if(isset($_POST['prduction_specification_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c23" name="hdd_cable_connector" value="0"
                                             checked="checked">
-                                        <label class="label_values" for="c23" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c23" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c24" name="hdd_cable_connector" value="1" disabled>
@@ -1506,7 +1507,8 @@ if(isset($_POST['prduction_specification_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c23" name="hdd_cable_connector"
                                             class="hdd_cable_connector" value="hdd_cable_connector">
-                                        <label class="label_values" for="c23" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c23" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c24" name="hdd_cable_connector" value="1"
@@ -1519,12 +1521,14 @@ if(isset($_POST['prduction_specification_form'])){
 
                             </div>
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">18 C Panel / Palm Rest:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">18 C Panel / Palm
+                                    Rest:</label>
                                 <?php if($c_panel_palm_rest == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c25" name="c_panel_palm_rest" value="0">
-                                        <label class="label_values" for="c25" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c25" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c26" name="c_panel_palm_rest" value="1">
@@ -1536,7 +1540,8 @@ if(isset($_POST['prduction_specification_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c25" name="c_panel_palm_rest" value="0"
                                             checked="checked">
-                                        <label class="label_values" for="c25" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c25" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c26" name="c_panel_palm_rest" value="1" disabled>
@@ -1548,7 +1553,8 @@ if(isset($_POST['prduction_specification_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c25" name="c_panel_palm_rest" class="c_panel_palm_rest"
                                             value="c_panel_palm_rest">
-                                        <label class="label_values" for="c25" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c25" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c26" name="c_panel_palm_rest" value="1"
@@ -1566,7 +1572,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c33" name="mb_base" value="0">
-                                        <label class="label_values" for="c33" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c33" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c34" name="mb_base" value="1">
@@ -1577,7 +1584,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c33" name="mb_base" value="0" checked="checked">
-                                        <label class="label_values" for="c33" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c33" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c34" name="mb_base" value="1" disabled>
@@ -1588,7 +1596,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c33" name="mb_base" class="mb_base" value="mb_base">
-                                        <label class="label_values" for="c33" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c33" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c34" name="mb_base" value="1" checked="checked">
@@ -1605,7 +1614,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c27" name="hings_cover" value="0">
-                                        <label class="label_values" for="c27" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c27" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c28" name="hings_cover" value="1">
@@ -1616,7 +1626,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c27" name="hings_cover" value="0" checked="checked">
-                                        <label class="label_values" for="c27" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c27" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c28" name="hings_cover" value="1" disabled>
@@ -1628,7 +1639,8 @@ if(isset($_POST['prduction_specification_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c27" name="hings_cover" class="hings_cover"
                                             value="hings_cover">
-                                        <label class="label_values" for="c27" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c27" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c28" name="hings_cover" value="1" checked="checked">
@@ -1645,7 +1657,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c29" name="lan_cover" value="0">
-                                        <label class="label_values" for="c29" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c29" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c30" name="lan_cover" value="1">
@@ -1656,7 +1669,8 @@ if(isset($_POST['prduction_specification_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c29" name="lan_cover" value="0" checked="checked">
-                                        <label class="label_values" for="c29" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c29" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c30" name="lan_cover" value="1" disabled>
@@ -1668,7 +1682,8 @@ if(isset($_POST['prduction_specification_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c29" name="lan_cover" class="lan_cover"
                                             value="lan_cover">
-                                        <label class="label_values" for="c29" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c29" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c30" name="lan_cover" value="1" checked="checked">
@@ -1820,14 +1835,37 @@ if(isset($_POST['prduction_specification_form'])){
 
 <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
     data-keyboard="false" aria-hidden="true">
-
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel">03 LCD Check </h4>
-
             </div>
             <form method="POST">
+                <?php 
+                
+                    if(isset($_POST['submit_lcd_check'])){
+                        $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
+                        $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
+                        $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
+                        $whitespot = mysqli_real_escape_string($connection, $_POST['whitespot']);
+                        $scratch = mysqli_real_escape_string($connection, $_POST['scratch']);
+                        $broken = mysqli_real_escape_string($connection, $_POST['broken']);
+                        $line_lcd = mysqli_real_escape_string($connection, $_POST['line_lcd']);
+                        $yellow_shadow = mysqli_real_escape_string($connection, $_POST['yellow_shadow']);
+                        $status = NULL;
+
+                        if($whitespot == 1 || $scratch == 1 || $broken == 1 || $line_lcd == 1 || $yellow_shadow == 1){
+                            $status = 1;
+                        }else{
+                            $status = 0;
+                        }
+
+                        $lcd_check_query = "INSERT INTO `lcd_check`(inventory_id, emp_id, sales_order_id, whitespot, scratch, broken, line_lcd, yellow_shadow, created_time, status) 
+                                                    VALUES ('$inventory_id', '$emp_id', '$sales_order_id', '$whitespot', '$scratch', '$broken', '$line_lcd', '$yellow_shadow', CURRENT_TIMESTAMP, $status)";
+                        $lcd_query = mysqli_query($connection, $lcd_check_query);
+                    }
+                               
+                ?>
                 <div class="modal-body">
                     <fieldset>
                         <div class="row">
@@ -2169,6 +2207,36 @@ if(isset($_POST['prduction_specification_form'])){
                 <h4 class="modal-title" id="myModalLabel">01 Motherboard Form</h4>
             </div>
             <form method="POST">
+                <?php                 
+                
+                    if(isset($_POST['prduction_specification_form'])){
+                        
+                        $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
+                        $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
+                        $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
+                        $processor = mysqli_real_escape_string($connection, $_POST['processor']);
+                        $generation = mysqli_real_escape_string($connection, $_POST['generation']);
+                        $ram = mysqli_real_escape_string($connection, $_POST['ram']);
+                        $hdd_capacity = mysqli_real_escape_string($connection, $_POST['hdd_capacity']);
+                        $hdd_type = mysqli_real_escape_string($connection, $_POST['hdd_type']);
+                        $display = mysqli_real_escape_string($connection, $_POST['display']);
+                        $resolutions = mysqli_real_escape_string($connection, $_POST['resolutions']);
+                        $graphic = mysqli_real_escape_string($connection, $_POST['graphic']);
+                        $graphic_type = mysqli_real_escape_string($connection, $_POST['graphic_type']);
+                        $operating_system = mysqli_real_escape_string($connection, $_POST['operating_system']);
+                    
+                        $query = "INSERT INTO production_check(inventory_id, emp_id, sales_order_id, processor, generation, ram, hdd_capacity, hdd_type, display, resolutions, graphic, graphic_type, operating_system, status, created_time) 
+                                    VALUES ('$sales_order_id', '$emp_id', '$inventory_id', '$processor', '$generation', '$ram', '$hdd_capacity', '$hdd_type', '$display', '$resolutions', '$graphic', '$graphic_type', '$operating_system', 0, CURRENT_TIMESTAMP)";
+                        $query_run = mysqli_query($connection, $query);
+                        $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+                        $date = $date1->format('Y-m-d H:i:s');
+                        $query_prod_info ="UPDATE prod_info SET end_date_time = '$date', status = '0', issue_type = '5' WHERE p_id = '$p_id' ";
+                        $query_prod_run = mysqli_query($connection, $query_prod_info);
+                        header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+                            
+                    }
+
+                ?>
                 <div class="modal-body">
                     <fieldset style="display: block;">
                         <div class="modal-body">
@@ -2188,19 +2256,23 @@ if(isset($_POST['prduction_specification_form'])){
                                         </div>
                                         <div class="icheck-success d-inline">
                                             <input type="radio" id="i3" name="processor" value="i3">
-                                            <label class="label_values" for="i3" style="margin-bottom: 5px;">i3 </label>
+                                            <label class="label_values" for="i3" style="margin-bottom: 5px;">i3
+                                            </label>
                                         </div>
                                         <div class="icheck-success d-inline">
                                             <input type="radio" id="i5" name="processor" value="i5">
-                                            <label class="label_values" for="i5" style="margin-bottom: 5px;">i5 </label>
+                                            <label class="label_values" for="i5" style="margin-bottom: 5px;">i5
+                                            </label>
                                         </div>
                                         <div class="icheck-success d-inline">
                                             <input type="radio" id="i7" name="processor" value="i7">
-                                            <label class="label_values" for="i7" style="margin-bottom: 5px;">i7 </label>
+                                            <label class="label_values" for="i7" style="margin-bottom: 5px;">i7
+                                            </label>
                                         </div>
                                         <div class="icheck-success d-inline">
                                             <input type="radio" id="i9" name="processor" value="i9">
-                                            <label class="label_values" for="i9" style="margin-bottom: 5px;">i9 </label>
+                                            <label class="label_values" for="i9" style="margin-bottom: 5px;">i9
+                                            </label>
                                         </div>
                                         <div class="icheck-success d-inline">
                                             <input type="radio" id="xeon" name="processor" value="xeon">
@@ -2457,7 +2529,8 @@ if(isset($_POST['prduction_specification_form'])){
                                     <div class="col-sm-9 mt-2">
                                         <div class="icheck-success d-inline">
                                             <input type="radio" id="hd" name="resolutions" value="hd">
-                                            <label class="label_values" for="hd" style="margin-right: 15px;">HD </label>
+                                            <label class="label_values" for="hd" style="margin-right: 15px;">HD
+                                            </label>
                                         </div>
                                         <div class="icheck-success d-inline">
                                             <input type="radio" id="fhd" name="resolutions" value="fhd">
@@ -2471,7 +2544,8 @@ if(isset($_POST['prduction_specification_form'])){
                                         </div>
                                         <div class="icheck-success d-inline">
                                             <input type="radio" id="4k" name="resolutions" value="4k">
-                                            <label class="label_values" for="4k" style="margin-right: 15px;">4K </label>
+                                            <label class="label_values" for="4k" style="margin-right: 15px;">4K
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
