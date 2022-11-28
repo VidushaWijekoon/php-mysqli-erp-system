@@ -7,9 +7,10 @@ include_once('../../dataAccess/403.php');
 include_once('../includes/header.php');
 // require_once("phpqrcode/qrlib.php");
 //   ?>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="../../static/plugins/bootstrap-3.3.5-dist/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="../../static/plugins/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 <?php
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
