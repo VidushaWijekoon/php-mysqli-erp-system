@@ -265,10 +265,6 @@ foreach($query_tech as $data){
                                             </td>
                                             <td>
                                                 <?php if($values['status'] == 1){ 
-                                                    // echo "<a class='btn btn-sm bg-teal'
-                                                    // href=\"production_checklist.php?emp_id={$emp_id}&inventory_id={$values['inventory_id']}&sales_order_id={$values['sales_order_id']}\"><i
-                                                    //     class='fas fa-eye'></i> </a>";
-                                                    // }else{ 
                                                         if ($values['issue_type'] == 1) {
                                                             echo '<span class="badge badge-lg badge-danger text-white px-2">Motherboard Issue</span>';
                                                         }if ($values['issue_type'] == 2) {
