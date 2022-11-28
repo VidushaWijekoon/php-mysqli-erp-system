@@ -2,7 +2,7 @@
 ob_start();
 session_start();
 include_once('../../dataAccess/connection.php');
-include_once('../../dataAccess/403.php');
+include_once('../../dataAccess/functions.php');
 include_once('../includes/header.php');
 
 // checking if a user is logged in
@@ -15,98 +15,153 @@ $department = $_SESSION['department'];
 
 if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 6 && $department == 1)){
 
-$sales_item_id = NULL;
-$inventory_id = NULL;
-$emp_id = NULL;
+$sales_item_id = '';
+$inventory_id = '';
+$emp_id = '';
+$p_id ;
+$item_type = '';
+$item_brand = '';
+$item_model = '';
+$item_processor = '';
+$item_core = '';
+$item_generation = "";
+$item_delivery_date = '';
+$item_ram = '';
+$item_display = '';
+$item_screen = '';
+$item_graphic = '';
+$item_condition = '';
 
-$item_type = NULL;
-$item_brand = NULL;
-$item_model = NULL;
-$item_processor = NULL;
-$item_core = NULL;
-$item_generation = NULL;
-$item_delivery_date = NULL;
-$item_ram = NULL;
-$item_display = NULL;
-$item_screen = NULL;
-$item_graphic = NULL;
-$item_condition = NULL;
-$item_hdd  = NULL;
-$item_os   = NULL;
+//////////////////////////////////////////////////
+// created by anuradha gunasinghe 23-oct-2022 
+// radio button data retrieve variables
+/////////////////////////////////////////////////
 
-$bios_check = NULL;
-$power = NULL;
-$ports = NULL;
-$mother_board_status = NULL;
-$mb_bios_check = NULL;
-$mb_power = NULL;
-$mb_ports = NULL;
+$lcd = 1;
+$body_work=1;
+$launch_prod=1;
+$tech_id;
 
-$keyboard = NULL;
-$keyboard_keys = NULL;
-$speakers = NULL;
-$camera = NULL;
-$bazel_broken = NULL;
-$mousepad = NULL;
-$mouse_pad_button = NULL;
-$camera_cable = NULL;
-$back_cover = NULL;
-$wifi_card = NULL;
-$lcd_cable = NULL;
-$battery = NULL;
-$battery_cable = NULL;
-$dvd_rom = NULL;
-$dvd_caddy = NULL;
-$hdd_caddy = NULL;
-$hdd_cable_connector = NULL;
-$c_panel_palm_rest = NULL;
-$mb_base = NULL;
-$hings_cover = NULL;
-$lan_cover = NULL;
-$fan = NULL;
-$heat_sink = NULL;
-$cpu = NULL;
+$mother_board = null;
+$bios = null;
+$power = null;
+$ports = null;
 
-$whitespot = NULL;
-$scratch = NULL;
-$broken = NULL;
-$line_lcd = NULL;
-$yellow_shadow = NULL;
+$lunch_combine = null;
+$keyboard = null;
+$keys =null;
+$speakers = null;
+$camera = null;
+$bazel = null;
+$mousepad =null;
+$mouse_pad_button =null;
+$camera_cable=null;
+$back_cover =null;
+$lcd_cable =null;
+$wifi_card = null ;
+$battery =null;
+$battery_cable =null;
+$dvd_rom =null;
+$dvd_caddy =null;
+$hdd_caddy =null;
+$hdd_cable_connector =null;
+$c_panel_palm_rest =null;
+$hings_cover =null;
+$lan_cover =null;
+$mb_base = null;
+$fan = null;
+$heat_sink = null;
+$cpu = null;
 
-$processor = NULL;
-$generation = NULL;
-$ram = NULL;
-$hdd_capacity = NULL;
-$hdd_type = NULL;
-$display = NULL;
-$resolutions = NULL;
-$graphic = NULL;
-$graphic_type = NULL;
-$operating_system = NULL;
+$whitespot = null;
+$scratch = null;
+$broken = null;
+$line_lcd = null;
+$yellow_shadow = null;
+$a_scratch = null;
+$a_broken= null;
+$a_dent = null;
+$b_scratch = null;
+$b_broken = null;
+$b_logo = null;
+$b_color = null;
+$c_scratch = null;
+$c_broken = null;
+$c_dent = null;
+$d_scratch = null;
+$d_broken = null;
+$d_dent = null;
 
+$a_scratch_retrive = 2;
+$a_broken_retrive= 2;
+$a_dent_retrive = 2;
+$b_scratch_retrive = 2;
+$b_broken_retrive = 2;
+$b_logo_retrive = 2;
+$b_color_retrive = 2;
+$c_scratch_retrive = 2;
+$c_broken_retrive = 2;
+$c_dent_retrive = 2;
+$d_scratch_retrive = 2;
+$d_broken_retrive = 2;
+$d_dent_retrive = 2;
 
-if(isset($_GET['sales_order_id'])){
-
-    $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
+if (isset($_GET['sales_order_id'])) {
+    
     $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
     $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
-
-    $select_motherboard_query = "SELECT * FROM motherboard_check WHERE inventory_id = '$inventory_id' AND sales_order_id = '$sales_order_id' AND emp_id = '$emp_id'";
-    $motherboard_query_run = mysqli_query($connection, $select_motherboard_query);
-
-    foreach($motherboard_query_run as $mbcf){
-        $mb_bios_check = $mbcf['bios_check'];
-        $mb_power = $mbcf['power'];
-        $mb_ports = $mbcf['ports'];
-        $status = $mbcf['status'];
-        if($status == 0){
-            $mother_board_status = 0;
-        }
+    $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
+    $query_tech = "SELECT tech_id,p_id FROM prod_info WHERE inventory_id=$inventory_id AND sales_order = $sales_order_id AND emp_id = $emp_id ";
+    $query_run_tech = mysqli_query($connection, $query_tech);
+    foreach($query_run_tech AS $data){
+        $tech_id = $data['tech_id'];
+        $p_id =$data['p_id'];
     }
     
+    
+    $query_lcd = "SELECT * FROM lcd_check WHERE inventory_id =$inventory_id AND sales_order_id=$sales_order_id";
+    $query_run_lcd = mysqli_query($connection, $query_lcd);
+    foreach($query_run_lcd as $data){
+        $whitespot = $data['whitespot'];
+        $scratch = $data['scratch'];
+        $broken = $data['broken'];
+        $line_lcd = $data['line_lcd'];
+        $yellow_shadow = $data['yellow_shadow'];
+        $status = $data['status'];
+        if($status == 0){
+            $lcd = 0;
+        }
+
+    }
+    $query_body = "SELECT * FROM bodywork WHERE inventory_id =$inventory_id AND sales_order_id=$sales_order_id ORDER BY id DESC LIMIT 1";
+    $query_run_body = mysqli_query($connection, $query_body);
+    if(empty($query_run_body)){}else{
+    foreach($query_run_body as $data){
+        $a_scratch_retrive = $data['a_scratch'];
+        $a_broken_retrive=$data['a_broken'];
+        $a_dent_retrive = $data['a_dent'];
+        $b_scratch_retrive = $data['b_scratch'];
+        $b_broken_retrive = $data['b_broken'];
+        $b_logo_retrive = $data['b_logo'];
+        $b_color_retrive = $data['b_color'];
+        $c_scratch_retrive = $data['c_scratch'];
+        $c_broken_retrive = $data['c_broken'];
+        $c_dent_retrive = $data['c_dent'];
+        $d_scratch_retrive = $data['d_scratch'];
+        $d_broken_retrive = $data['d_broken'];
+        $d_dent_retrive = $data['d_dent'];
+        $status = $data['status'];
+        if($status == 0){
+            $body_work = 0;
+        }
+
+    }
+}
+    
     $query = "SELECT * FROM warehouse_information_sheet INNER JOIN sales_order_add_items
-            ON warehouse_information_sheet.sales_order_id = sales_order_add_items.sales_order_id 
-            WHERE  warehouse_information_sheet.inventory_id = {$inventory_id} AND warehouse_information_sheet.sales_order_id ={$_GET['sales_order_id']}";
+                        ON warehouse_information_sheet.sales_order_id = sales_order_add_items.sales_order_id 
+                        WHERE  warehouse_information_sheet.inventory_id = {$inventory_id} 
+                        AND warehouse_information_sheet.sales_order_id ={$_GET['sales_order_id']}";
 
     $result_set = mysqli_query($connection, $query);
     if ($result_set) {
@@ -126,13 +181,318 @@ if(isset($_GET['sales_order_id'])){
             $item_condition = $result['item_condition'];
             $item_graphic = $result['item_graphic'];
             $item_os = $result['item_os'];
-
-        } else {
-            header('Location: sales_orders.php?err=user_not_found');
-        }
+        }  
     }  
-}                            
+}
+
+ 
+// ------------------------------------------------------- //
+// -------------------Motherboard check-------------------- //
+// ------------------------------------------------------- //
+
+if(isset($_POST['submit_motherboard_check'])){
+    $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
+    $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
+    $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
+    $bios = mysqli_real_escape_string($connection, $_POST['bios_check']);
+    $power = mysqli_real_escape_string($connection, $_POST['power']);
+    $ports = mysqli_real_escape_string($connection, $_POST['ports']);
+    $status = 0;
+    if($bios == 1 || $power == 1 || $ports == 1){
+        $status = 1;
+    }
+    $query = "INSERT INTO motherboard_check (sales_order_id, emp_id, inventory_id, bios_check, power, ports, status) 
+                    VALUES ('$sales_order_id', '$emp_id', '$inventory_id', '$bios', '$power', '$ports', '$status')";
+    $query_run = mysqli_query($connection, $query);
+        
+    if($status == 1){
+        $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+        $date = $date1->format('Y-m-d H:i:s');
+        $query_prod_info ="UPDATE prod_info SET end_date_time=' $date', status = '1', issue_type = '1' WHERE p_id = '$p_id' ";
+        $query_prod_run = mysqli_query($connection, $query_prod_info);
+        header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+    }else{
+        echo "Already Completed";
+    }
+}
+
+$query_m = "SELECT * FROM motherboard_check WHERE inventory_id = $inventory_id AND sales_order_id = $sales_order_id";
+$query_run_m = mysqli_query($connection, $query_m);
+    foreach($query_run_m as $data){
+        $bios = $data['bios_check'];
+        $power = $data['power'];
+        $ports = $data['ports'];
+        $status = $data['status'];
+        if($status == 0){
+            $mother_board = 0;
+    }
+}
+
+ 
+// ------------------------------------------------------- //
+// ----------------------Combine check-------------------- //
+// ------------------------------------------------------- //
+
+if(isset($_POST['combine_check_form'])){
+    
+    $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
+    $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
+    $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
+    $keyboard = mysqli_real_escape_string($connection, $_POST['keyboard']);
+    $keys = mysqli_real_escape_string($connection,  $_POST['keyboard_keys']);
+    $speakers = mysqli_real_escape_string($connection, $_POST['speakers']);
+    $camera = mysqli_real_escape_string($connection, $_POST['camera']);
+    $bazel = mysqli_real_escape_string($connection, $_POST['bazel']);
+    $mousepad= mysqli_real_escape_string($connection,  $_POST['mousepad']);
+    $mouse_pad_button= mysqli_real_escape_string($connection,  $_POST['mouse_pad_button']);
+    $camera_cable= mysqli_real_escape_string($connection,  $_POST['camera_cable']);
+    $back_cover= mysqli_real_escape_string($connection,  $_POST['back_cover']);
+    $wifi_card= mysqli_real_escape_string($connection,  $_POST['wifi_card']);
+    $lcd_cable= mysqli_real_escape_string($connection,  $_POST['lcd_cable']);
+    $battery= mysqli_real_escape_string($connection,  $_POST['battery']);
+    $battery_cable= mysqli_real_escape_string($connection,  $_POST['battery_cable']);
+    $dvd_rom= mysqli_real_escape_string($connection,  $_POST['dvd_rom']);
+    $dvd_caddy= mysqli_real_escape_string($connection,  $_POST['dvd_caddy']);
+    $hdd_caddy= mysqli_real_escape_string($connection,  $_POST['hdd_caddy']);
+    $hdd_cable_connector= mysqli_real_escape_string($connection,  $_POST['hdd_cable_connector']);
+    $c_panel_palm_rest= mysqli_real_escape_string($connection,  $_POST['c_panel_palm_rest']);
+    $mb_base= mysqli_real_escape_string($connection,  $_POST['mb_base']);
+    $hings_cover= mysqli_real_escape_string($connection,  $_POST['hings_cover']);
+    $lan_cover= mysqli_real_escape_string($connection,  $_POST['lan_cover']);
+    $fan= mysqli_real_escape_string($connection,  $_POST['fan']);
+    $heat_sink= mysqli_real_escape_string($connection,  $_POST['heat_sink']);
+    $cpu= mysqli_real_escape_string($connection, $_POST['cpu']);
+    
+    $scan_id =0;
+
+    if( empty($_POST['scan_id'])){
+        $scan_id =0;
+    }else{
+        $scan_id= mysqli_real_escape_string($connection,  $_POST['scan_id']);
+    }
+    
+    $query = "SELECT location FROM users WHERE epf = '$emp_id'";
+    $query_run = mysqli_query($connection, $query);
+    $location10;
+    foreach($query_run as $a){
+        $location10 = $a['location'];
+    }   
+    $status = 0;
+    if($keyboard == 1 || $keys == 1 || $speakers == 1 || $camera == 1 || $bazel == 1 || $mousepad == 1 || $mouse_pad_button == 1 || $camera_cable == 1 || $back_cover == 1 || $wifi_card == 1 ||
+        $lcd_cable == 1 || $battery == 1 || $battery_cable == 1 || $dvd_rom == 1 || $dvd_caddy == 1 || $hdd_caddy == 1 || $hdd_cable_connector == 1 || $c_panel_palm_rest == 1 || $mb_base == 1 || 
+        $hings_cover == 1 || $lan_cover == 1 || $fan == 1 || $heat_sink == 1 || $cpu == 1){
+        $status = 1;
+        
+        $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+        $date = $date1->format('Y-m-d');
+       
+        $query_6 = "INSERT INTO requested_part_from_production(brand, model, generation, sales_order_id, inventory_id, created_date, delivery_date, emp_id, location, status, 
+                                                                keyboard, speakers, camera, bazel_broken, lan_cover, mousepad, mouse_pad_button, camera_cable, back_cover, wifi_card, lcd_cable, 
+                                                                battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, c_panel_palm_rest, mb_base, hings_cover, fan, heat_sink, cpu,
+                                                                switch, switch_id)
+                    VALUES('$item_brand', '$item_model', '$item_generation', '$sales_order_id', '$inventory_id', '$date','0000-00-00' ,'$emp_id', '$location10', '$status', '$keyboard', '$speakers',
+                        '$camera', '$bazel', '$lan_cover', '$mousepad', '$mouse_pad_button', '$camera_cable', '$back_cover', '$wifi_card', '$lcd_cable', '$battery', '$battery_cable',
+                        '$dvd_rom', '$dvd_caddy', '$hdd_caddy', '$hdd_cable_connector', '$c_panel_palm_rest', '$mb_base', '$hings_cover', '$fan', '$heat_sink', '$cpu', 0, 0)";
+                    echo $query_6;
+         $query_new = mysqli_query($connection, $query_6);
+    }
+    
+    if($lunch_combine == null){
+        
+    $query_com = "INSERT INTO combine_check(inventory_id, emp_id, sales_order_id, keyboard, keyboard_keys, speakers, camera, bazel_broken, mousepad, mouse_pad_button, camera_cable, back_cover, 
+                                            wifi_card, lcd_cable, battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, c_panel_palm_rest, mb_base, hings_cover,
+                                            lan_cover, fan, heat_sink, cpu, created_time, status, combined_id) 
+                VALUES ('$inventory_id', '$emp_id', '$sales_order_id', '$keyboard', '$keys', '$speakers', '$camera', '$bazel', '$status', '$mousepad','$mouse_pad_button',
+                '$camera_cable', '$back_cover', '$wifi_card', '$lcd_cable', '$battery', '$battery_cable', '$dvd_rom', '$dvd_caddy', '$hdd_caddy', '$hdd_cable_connector',
+                '$c_panel_palm_rest', '$mb_base', '$hings_cover', '$lan_cover', '$fan', '$heat_sink', '$cpu', CURRENT_TIMESTAMP, '$status', 0)";
+                echo $query_com;
+    $query_run = mysqli_query($connection, $query_com);
+    
+   
+    if($scan_id !=0){
+
+    $com_inventory_id = $scan_id;
+    $query_check="SELECT `id`, `inventory_id` FROM `combine_check` WHERE inventory_id ='$com_inventory_id'";
+   
+    $query_run = mysqli_query($connection, $query_check);
+        $test=0;
+    foreach($query_run as $k){
+        $test = $k['inventory_id'];
+    }
+        if( $test == 0){ 
+            $query_in ="INSERT INTO combine_check(inventory_id, emp_id, sales_order_id, keyboard, keyboard_keys, speakers, camera, bazel_broken, mousepad, mouse_pad_button, camera_cable, back_cover, 
+                                            wifi_card, lcd_cable, battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, c_panel_palm_rest, mb_base, hings_cover,
+                                            lan_cover, fan, heat_sink, cpu, created_time, status, combined_id)
+                        VALUES('$scan_id', '$emp_id', '$sales_order_id', '$keyboard1', '$speakers1', '$camera1', '$bazel1', '$status1', '$keys1', '$mousepad1', '$mouse_pad_button1', '$camera_cable1', '$back_cover1',
+                '$wifi_card1', '$lcd_cable1', '$battery1', '$battery_cable1', '$dvd_rom1', '$dvd_caddy1', '$hdd_caddy1', '$hdd_cable_connector1', '$c_panel_palm_rest1', '$mb_base1', '$hings_cover1', '$lan_cover1',
+                '$inventory_id1' )";
+            $query_run = mysqli_query($connection, $query_in);
+        }else{
+            $query_update ="UPDATE combine_check
+        SET
+            `keyboard` = '$keyboard1', `speakers` = '$speakers1', `camera` = '$camera1', `bazel` = '$bazel1', `status` = '$status1', `damage_keys` = '$damage_keys1', `mousepad` = '$mousepad1', `mouse_pad_button` = '$mouse_pad_button1',
+            `camera_cable` = '$camera_cable1', `back_cover` = '$back_cover1', `wifi_card` = '$wifi_card1', `lcd_cable` = '$lcd_cable1', `battery` = '$battery1', `battery_cable` = '$battery_cable1', `dvd_rom` = '$dvd_rom1',
+            `dvd_caddy` = '$dvd_caddy1', `hdd_caddy` = '$hdd_caddy1', `hdd_cable_connector` = '$hdd_cable_connector1', `c_panel_palm_rest` = '$c_panel_palm_rest1', `mb_base` = '$mb_base1', `hings_cover` = '$hings_cover1',
+            `lan_cover` = '$lan_cover1', `combined_id` = '$combined_id1'   
+        WHERE inventory_id = '$inventory_id'";
+            $query_run = mysqli_query($connection, $query_update);
+        }
+   
+    $query_update_part = "UPDATE requested_part_from_production SET `status`='0',  switch = '1', switch_id = '$scan_id' WHERE inventory_id = '$inventory_id';";
+
+    $query_run = mysqli_query($connection, $query_update_part);
+    $query_1 ="SELECT  `status`FROM `requested_part_from_production` WHERE inventory_id = $inventory_id";
+    $query_run = mysqli_query($connection, $query_1);
+
+    $query_2 ="SELECT  `status`FROM `combine_check` WHERE inventory_id = $inventory_id";
+    $query_run_2 = mysqli_query($connection, $query_2);
+    $combine_status;
+    foreach($query_run_2 as $c){
+        $combine_status = $c['status'];
+    }
+    $received =null;
+    if(empty($query_run)){
+        $received ='1';
+    }else{
+        foreach($query_run as $a){
+            $received = $a['status'];
+        }
+    }if($combine_status == 0 && $received == 0){
+        header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
+    }
+}
+
+    if($status == 1){
+        $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+        $date = $date1->format('Y-m-d H:i:s');
+        $query_prod_info ="UPDATE prod_info SET end_date_time = '$date', status = '1', issue_type = '2' WHERE p_id = '$p_id' ";
+        $query_prod_run = mysqli_query($connection, $query_prod_info);
+        }
+    }    
+}
+
+$query_mc = "SELECT * FROM combine_check WHERE inventory_id =$inventory_id AND sales_order_id=$sales_order_id";
+$query_run_c = mysqli_query($connection, $query_mc);
+    foreach($query_run_c as $data){
+        $com_id = $data['inventory_id'];
+        $comb_status = $data['status'];
+        $keyboard = $data['keyboard'];
+        $speakers = $data['speakers'];
+        $camera = $data['camera'];
+        $bazel = $data['bazel_broken'];
+        $keys= $data['keyboard_keys'];
+        $mousepad= $data['mousepad'];
+        $mouse_pad_button= $data['mouse_pad_button'];
+        $camera_cable= $data['camera_cable'];
+        $back_cover= $data['back_cover'];
+        $wifi_card= $data['wifi_card'];
+        $lcd_cable= $data['lcd_cable'];
+        $battery= $data['battery'];
+        $battery_cable= $data['battery_cable'];
+        $dvd_rom= $data['dvd_rom'];
+        $dvd_caddy= $data['dvd_caddy'];
+        $hdd_caddy= $data['hdd_caddy'];
+        $hdd_cable_connector= $data['hdd_cable_connector'];
+        $c_panel_palm_rest= $data['c_panel_palm_rest'];
+        $mb_base= $data['mb_base'];
+        $hings_cover= $data['hings_cover'];
+        $lan_cover= $data['lan_cover'];
+        $fan= $data['fan'];
+        $heat_sink= $data['heat_sink'];
+        $cpu= $data['cpu'];
+
+        if($keyboard == 1){ $keyboard1 = 1; } 
+        if($speakers == 1){$speakers1 = 1;} 
+        if($camera == 1){$camera1 = 1;} 
+        if($bazel == 1){$bazel1 = 1;} 
+        if($keys == 1){$keys1 = 1;} 
+        if($mousepad == 1){$mousepad1 = 1;}  
+        if($mouse_pad_button == 1){$mouse_pad_button1 = 1;}  
+        if($camera_cable == 1){$camera_cable1 = 1;}  
+        if($back_cover == 1){$back_cover1 =1;} 
+        if($wifi_card == 1){$wifi_card1 = 1;}  
+        if($lcd_cable == 1){$lcd_cable1 = 1;} 
+        if($battery == 1){$battery1 = 1;}  
+        if($battery_cable == 1){$battery_cable1 = 1;} 
+        if($dvd_rom == 1){$dvd_rom1 = 1;} 
+        if($dvd_caddy == 1){$dvd_caddy1 = 1;}  
+        if($hdd_caddy == 1){$hdd_caddy1 = 1;} 
+        if($hdd_cable_connector == 1){$hdd_cable_connector1 = 1;} 
+        if($c_panel_palm_rest == 1){$c_panel_palm_rest1 = 1;} 
+        if($mb_base == 1){$mb_base1 = 1;} 
+        if($hings_cover == 1){$hings_cover1 = 1;} 
+        if($lan_cover == 1){$lan_cover1 = 1;} 
+        if($fan == 1){$fan1 = 1;} 
+        if($heat_sink == 1){$heat_sink1 = 1;} 
+        if($cpu == 1){$cpu1 = 1;} 
+       
+        if($comb_status == 0){
+            $lunch_combine = 0;
+        }
+    }
+
+ 
+// ------------------------------------------------------- //
+// -------------------LCD check-------------------- //
+// ------------------------------------------------------- //
+
+if(isset($_POST['submit_lcd_check'])){
+            $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
+            $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
+            $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
+            $whitespot = mysqli_real_escape_string($connection, $_POST['whitespot']);
+            $scratch = mysqli_real_escape_string($connection, $_POST['scratch']);
+            $broken = mysqli_real_escape_string($connection, $_POST['broken']);
+            $line_lcd = mysqli_real_escape_string($connection, $_POST['line_lcd']);
+            $yellow_shadow = mysqli_real_escape_string($connection, $_POST['yellow_shadow']);
+            $status = NULL;
+
+            if($whitespot == 1 || $scratch == 1 || $broken == 1 || $line_lcd == 1 || $yellow_shadow == 1){
+                $status = 1;
+            }else{
+                $status = 0;
+            }
+
+            $lcd_check_query = "INSERT INTO `lcd_check`(inventory_id, emp_id, sales_order_id, whitespot, scratch, broken, line_lcd, yellow_shadow, created_time, status) 
+                                        VALUES ('$inventory_id', '$emp_id', '$sales_order_id', '$whitespot', '$scratch', '$broken', '$line_lcd', '$yellow_shadow', CURRENT_TIMESTAMP, $status)";
+            $lcd_query = mysqli_query($connection, $lcd_check_query);
+        }
+
+ 
+// ------------------------------------------------------- //
+// -------------------Production check-------------------- //
+// ------------------------------------------------------- //
+
+if(isset($_POST['prduction_specification_form'])){
+    
+    $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
+    $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
+    $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
+    $processor = mysqli_real_escape_string($connection, $_POST['processor']);
+    $generation = mysqli_real_escape_string($connection, $_POST['generation']);
+    $ram = mysqli_real_escape_string($connection, $_POST['ram']);
+    $hdd_capacity = mysqli_real_escape_string($connection, $_POST['hdd_capacity']);
+    $hdd_type = mysqli_real_escape_string($connection, $_POST['hdd_type']);
+    $display = mysqli_real_escape_string($connection, $_POST['display']);
+    $resolutions = mysqli_real_escape_string($connection, $_POST['resolutions']);
+    $graphic = mysqli_real_escape_string($connection, $_POST['graphic']);
+    $graphic_type = mysqli_real_escape_string($connection, $_POST['graphic_type']);
+    $operating_system = mysqli_real_escape_string($connection, $_POST['operating_system']);
+   
+    $query = "INSERT INTO production_check(inventory_id, emp_id, sales_order_id, processor, generation, ram, hdd_capacity, hdd_type, display, resolutions, graphic, graphic_type, operating_system, status, created_time) 
+                VALUES ('$sales_order_id', '$emp_id', '$inventory_id', '$processor', '$generation', '$ram', '$hdd_capacity', '$hdd_type', '$display', '$resolutions', '$graphic', '$graphic_type', '$operating_system', 0, CURRENT_TIMESTAMP)";
+    $query_run = mysqli_query($connection, $query);
+    $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+    $date = $date1->format('Y-m-d H:i:s');
+    $query_prod_info ="UPDATE prod_info SET end_date_time = '$date', status = '0', issue_type = '5' WHERE p_id = '$p_id' ";
+    $query_prod_run = mysqli_query($connection, $query_prod_info);
+    header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+        
+}
+
 ?>
+
+
 
 <div class="row page-titles">
     <div class="col-md-5 align-self-center"><a href="./production_team_leader_dashboard.php">
@@ -245,12 +605,11 @@ if(isset($_GET['sales_order_id'])){
             <div class="card">
                 <div class="card-header">
                     Featured
-                    <?php echo $mother_board_status; ?>
                 </div>
                 <div class="card-group  mb-3">
                     <div class="card">
                         <div class="card-body">
-                            <?php  if($mother_board_status == NULL) { ?>
+
                             <div class="row mt-2">
                                 <label class="col-sm-4 col-form-label text-capitalize">
                                     <p>01 Motherboard Check:</p>
@@ -263,33 +622,7 @@ if(isset($_GET['sales_order_id'])){
                                     </button>
                                 </div>
                             </div>
-                            <?php } if($mother_board_status == 0) { ?>
-                            <div class="row mt-2">
-                                <label class="col-sm-4 col-form-label text-capitalize">
-                                    <p>01 Motherboard Check:</p>
-                                </label>
 
-                                <div class="col-sm-8">
-                                    <button type="button" class="btn bg-gradient-success disabled w-75"
-                                        data-toggle="modal" data-target="#myModal1">
-                                        Launch Motherboard Form
-                                    </button>
-                                </div>
-                            </div>
-                            <?php  } if($mother_board_status == 1) { ?>
-                            <div class="row mt-2">
-                                <label class="col-sm-4 col-form-label text-capitalize">
-                                    <p>01 Motherboard Check:</p>
-                                </label>
-
-                                <div class="col-sm-8">
-                                    <button type="button" class="btn bg-gradient-danger disabled w-75"
-                                        data-toggle="modal" data-target="#myModal1">
-                                        Launch Motherboard Form
-                                    </button>
-                                </div>
-                            </div>
-                            <?php } ?>
 
                             <div class="row mt-2">
                                 <label class="col-sm-4 col-form-label text-capitalize">
@@ -358,31 +691,7 @@ if(isset($_GET['sales_order_id'])){
 <!-- ============================================================== -->
 <!-- Motherbaord Check  -->
 <!-- ============================================================== -->
-<?php 
 
-if(isset($_POST['submit_motherboard_check'])){
-    $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
-    $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
-    $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
-    $bios_check = mysqli_real_escape_string($connection, $_POST['bios_check']);
-    $power = mysqli_real_escape_string($connection, $_POST['power']);
-    $ports = mysqli_real_escape_string($connection, $_POST['ports']);
-    $status = NULL;
-
-    if($bios_check == 1 || $power == 1 || $ports == 1){
-        $status = 1;
-    }else{
-        $status = 0;
-    }
-
-    $mothercoard_check_query = "INSERT INTO motherboard_check(inventory_id, emp_id, sales_order_id, bios_check, power, ports, created_time, status, completed_time)
-                                    VALUES('$inventory_id', '$emp_id', '$sales_order_id', '$bios_check', '$power', '$ports', CURRENT_TIMESTAMP, $status, CURRENT_TIMESTAMP)";
-    $mothercoard_query = mysqli_query($connection, $mothercoard_check_query);
-
-
-}
-
-?>
 
 <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
     data-keyboard="false" aria-hidden="true">
@@ -398,42 +707,109 @@ if(isset($_POST['submit_motherboard_check'])){
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">Bios Check</label>
                                 <div class="col-sm-8 mt-2">
+                                    <?php  if($bios == null){  ?>
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="r1" name="bios_check" value="0" required>
+                                        <input type="radio" id="r1" name="bios_check" value="0">
                                         <label class="label_values" for="r1" style="margin-right: 15px;">Okay </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="r2" name="bios_check" value="1" required>
+                                        <input type="radio" id="r2" name="bios_check" value="1">
                                         <label class="label_values" for="r2">No </label>
                                     </div>
+                                    <?php }elseif($bios == 0){?>
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="r1" name="bios_check" value="0" checked="checked">
+                                        <label class="label_values" for="r1" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="r2" name="bios_check" value="1">
+                                        <label class="label_values" for="r2">No </label>
+                                    </div>
+                                    <?php }elseif($bios == 1){ }elseif($bios == 0){?>
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="r1" name="bios_check" value="0">
+                                        <label class="label_values" for="r1" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="r2" name="bios_check" value="1" checked="checked">
+                                        <label class="label_values" for="r2">No </label>
+                                    </div>
+                                    <?php } ?>
                                 </div>
                             </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">Power</label>
+                                <?php  if($power == null){  ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="r3" name="power" value="0" required>
+                                        <input type="radio" id="r3" name="power" value="0">
                                         <label class="label_values" for="r3" style="margin-right: 15px;">Okay </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="r4" name="power" value="1" required>
+                                        <input type="radio" id="r4" name="power" value="1">
                                         <label class="label_values" for="r4">No </label>
                                     </div>
                                 </div>
-
-                            </div>
-                            <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">Port</label>
+                                <?php }elseif($power == 0){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="r5" name="ports" value="0" required>
+                                        <input type="radio" id="r3" name="power" value="0" checked="checked">
+                                        <label class="label_values" for="r3" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="r4" name="power" value="1">
+                                        <label class="label_values" for="r4">No </label>
+                                    </div>
+                                </div>
+                                <?php } elseif($power == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="r3" name="power" value="0">
+                                        <label class="label_values" for="r3" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="r4" name="power" value="1" checked="checked">
+                                        <label class="label_values" for="r4">No </label>
+                                    </div>
+                                </div>
+                                <?php } ?>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-4 col-form-label text-capitalize">Ports</label>
+                                <?php if($ports == null){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="r5" name="ports" value="0">
                                         <label class="label_values" for="r5" style="margin-right: 15px;">Okay </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="r6" name="ports" value="1" required>
+                                        <input type="radio" id="r6" name="ports" value="1">
                                         <label class="label_values" for="r6">No </label>
                                     </div>
                                 </div>
+                                <?php } elseif($ports == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="r5" name="ports" value="0" checked="checked">
+                                        <label class="label_values" for="r5" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="r6" name="ports" value="1">
+                                        <label class="label_values" for="r6">No </label>
+                                    </div>
+                                </div>
+                                <?php } elseif($ports == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="r5" name="ports" value="0">
+                                        <label class="label_values" for="r5" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="r6" name="ports" value="1" checked="checked">
+                                        <label class="label_values" for="r6">No </label>
+                                    </div>
+                                </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </fieldset>
@@ -451,57 +827,6 @@ if(isset($_POST['submit_motherboard_check'])){
 <!-- Combine Check  -->
 <!-- ============================================================== -->
 
-<?php 
-
-if(isset($_POST['combine_check_form'])){
-    $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
-    $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
-    $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
-    $keyboard = mysqli_real_escape_string($connection, $_POST['keyboard']);
-    $keyboard_keys = mysqli_real_escape_string($connection, $_POST['keyboard_keys']);
-    $speakers = mysqli_real_escape_string($connection, $_POST['speakers']);
-    $camera = mysqli_real_escape_string($connection, $_POST['camera']);
-    $bazel_broken = mysqli_real_escape_string($connection, $_POST['bazel_broken']);
-    $mousepad = mysqli_real_escape_string($connection, $_POST['mousepad']);
-    $mouse_pad_button = mysqli_real_escape_string($connection, $_POST['mouse_pad_button']);
-    $camera_cable = mysqli_real_escape_string($connection, $_POST['camera_cable']);
-    $back_cover = mysqli_real_escape_string($connection, $_POST['back_cover']);
-    $wifi_card = mysqli_real_escape_string($connection, $_POST['wifi_card']);
-    $lcd_cable = mysqli_real_escape_string($connection, $_POST['lcd_cable']);
-    $battery = mysqli_real_escape_string($connection, $_POST['battery']);
-    $battery_cable = mysqli_real_escape_string($connection, $_POST['battery_cable']);
-    $dvd_rom = mysqli_real_escape_string($connection, $_POST['dvd_rom']);
-    $dvd_caddy = mysqli_real_escape_string($connection, $_POST['dvd_caddy']);
-    $hdd_caddy = mysqli_real_escape_string($connection, $_POST['hdd_caddy']);
-    $hdd_cable_connector = mysqli_real_escape_string($connection, $_POST['hdd_cable_connector']);
-    $c_panel_palm_rest = mysqli_real_escape_string($connection, $_POST['c_panel_palm_rest']);
-    $mb_base = mysqli_real_escape_string($connection, $_POST['mb_base']);
-    $hings_cover = mysqli_real_escape_string($connection, $_POST['hings_cover']);
-    $lan_cover = mysqli_real_escape_string($connection, $_POST['lan_cover']);
-    $fan = mysqli_real_escape_string($connection, $_POST['fan']);
-    $heat_sink = mysqli_real_escape_string($connection, $_POST['heat_sink']);
-    $cpu = mysqli_real_escape_string($connection, $_POST['cpu']);
-    $status = NULL;
-
-    if($keyboard == 1 || $keyboard_keys == 1 || $speakers == 1 || $camera == 1 || $bazel_broken  == 1 || $mousepad == 1 || $mouse_pad_button == 1 || $camera_cable == 1 || $back_cover == 1 ||
-        $wifi_card == 1 || $lcd_cable == 1 || $battery == 1 || $battery_cable == 1 || $dvd_rom == 1 || $dvd_caddy == 1 || $hdd_caddy == 1 || $hdd_cable_connector == 1 || $c_panel_palm_rest == 1 ||
-        $mb_base == 1 || $hings_cover == 1 || $lan_cover == 1 || $fan == 1 || $heat_sink == 1 || $cpu == 1){
-        $status = 1;
-    }else{
-        $status = 0;
-    }
-
-    $combine_check_query = "INSERT INTO combine_check(inventory_id, emp_id, sales_order_id, keyboard, keyboard_keys, speakers, camera, bazel_broken, mousepad, mouse_pad_button, camera_cable, back_cover, wifi_card,
-                                                    lcd_cable, battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, c_panel_palm_rest, mb_base, hings_cover, lan_cover, fan, heat_sink, 
-                                                    cpu, created_time, status, combined_id) 
-                            VALUES('$inventory_id', '$emp_id', '$sales_order_id', '$keyboard', '$keyboard_keys', '$speakers', '$camera', '$bazel_broken', '$mousepad', '$mouse_pad_button', '$camera_cable', 
-                                    '$back_cover', '$wifi_card', '$lcd_cable', '$battery', '$battery_cable', '$dvd_rom', '$dvd_caddy', '$hdd_caddy', '$hdd_cable_connector', '$c_panel_palm_rest', '$mb_base', '$hings_cover',
-                                    '$lan_cover', '$fan', '$heat_sink', '$cpu', CURRENT_TIMESTAMP, $status, 0)";
-    $combine_query = mysqli_query($connection, $combine_check_query);
-}
-
-
-?>
 
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
     data-keyboard="false" aria-hidden="true">
@@ -514,331 +839,849 @@ if(isset($_POST['combine_check_form'])){
                 <div class="modal-body">
                     <fieldset class="d-flex">
                         <div class="col col-md-6 col-lg-6">
-
                             <div class="row">
+
                                 <label class="col-sm-4 col-form-label text-capitalize">01 Keyboard:</label>
+                                <?php if($keyboard == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine01" name="keyboard" value="0" required>
-                                        <label class="label_values" for="combine01" style="margin-right: 15px;">Okay
-                                        </label>
+                                        <input type="radio" id="r7" name="keyboard" value="0">
+                                        <label class="label_values" for="r7" style="margin-right: 15px;">Okay </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine02" name="keyboard" value="1" required>
-                                        <label class="label_values" for="combine02">No </label>
+                                        <input type="radio" id="r8" name="keyboard" value="1">
+                                        <label class="label_values" for="r8">No </label>
                                     </div>
                                 </div>
+                                <?php }elseif($keyboard == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="r7" name="keyboard" value="0" checked="checked">
+                                        <label class="label_values" for="r7" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="r8" name="keyboard" value="1" disabled>
+                                        <label class="label_values" for="r8">No </label>
+                                    </div>
+                                </div>
+                                <?php } elseif($keyboard == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="r7" class="keyboard" name="keyboard" value="keyboard">
+                                        <label class="label_values" for="r7" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="r8" name="keyboard" value="1" checked="checked">
+                                        <label class="label_values" for="r8">No </label>
+                                    </div>
+                                    <div id="result"></div>
+                                </div>
+                                <?php } ?>
                             </div>
-
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">02 Keys:</label>
+                                <?php if($keys == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine03" name="keyboard_keys" value="0" required>
-                                        <label class="label_values" for="combine03" style="margin-right: 15px;">Okay
-                                        </label>
+                                        <input type="radio" id="c31" name="keyboard_keys" value="0">
+                                        <label class="label_values" for="c31" style="margin-right: 15px;">Okay </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine04" name="keyboard_keys" value="1" required>
-                                        <label class="label_values" for="combine04">No </label>
+                                        <input type="radio" id="c32" name="keyboard_keys" value="1">
+                                        <label class="label_values" for="c32">No </label>
                                     </div>
                                 </div>
+                                <?php }elseif($keys == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c31" name="keyboard_keys" value="0" checked="checked">
+                                        <label class="label_values" for="c31" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c32" name="keyboard_keys" value="1" disabled>
+                                        <label class="label_values" for="c32">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($keys == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c31" name="keyboard_keys" class="keys" value="keys">
+                                        <label class="label_values" for="c31" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c32" name="keyboard_keys" value="1" checked="checked">
+                                        <label class="label_values" for="c32">No </label>
+                                    </div>
+                                    <div id="result"></div>
+                                </div>
+                                <?php } ?>
                             </div>
 
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">03 Speakers:</label>
+                                <?php if($speakers == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine05" name="speakers" value="0" required>
-                                        <label class="label_values" for="combine05" style="margin-right: 15px;">Okay
-                                        </label>
+                                        <input type="radio" id="r9" name="speakers" value="0">
+                                        <label class="label_values" for="r9" style="margin-right: 15px;">Okay </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine06" name="speakers" value="1" required>
-                                        <label class="label_values" for="combine06">No </label>
+                                        <input type="radio" id="r10" name="speakers" value="1">
+                                        <label class="label_values" for="r10">No </label>
                                     </div>
                                 </div>
+                                <?php } elseif($speakers == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="r9" name="speakers" value="0" checked="checked">
+                                        <label class="label_values" for="r9" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="r10" name="speakers" value="1" disabled>
+                                        <label class="label_values" for="r10">No </label>
+                                    </div>
+                                </div>
+                                <?php } elseif($speakers == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="r9" class="speakers" name="speakers" value="speakers">
+                                        <label class="label_values" for="r9" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="r10" name="speakers" value="1" checked="checked">
+                                        <label class="label_values" for="r10">No </label>
+                                    </div>
+                                    <div id="result"></div>
+                                </div>
+                                <?php }?>
+
                             </div>
 
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">04 Camera:</label>
+                                <?php if($camera == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine07" name="camera" value="0">
-                                        <label class="label_values" for="combine07" style="margin-right: 15px;">Okay
-                                        </label>
+                                        <input type="radio" id="r11" name="camera" value="0">
+                                        <label class="label_values" for="r11" style="margin-right: 15px;">Okay </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine08" name="camera" value="1">
-                                        <label class="label_values" for="combine08">No </label>
+                                        <input type="radio" id="r12" name="camera" value="1">
+                                        <label class="label_values" for="r12">No </label>
                                     </div>
                                 </div>
+                                <?php }elseif($camera == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="r11" name="camera" value="0" checked="checked">
+                                        <label class="label_values" for="r11" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="r12" name="camera" value="1" disabled>
+                                        <label class="label_values" for="r12">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($camera == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="r11" name="camera" class="camera" value="camera">
+                                        <label class="label_values" for="r11" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="r12" name="camera" value="1" checked="checked">
+                                        <label class="label_values" for="r12">No </label>
+                                    </div>
+                                    <div id="result"></div>
+                                </div>
+                                <?php } ?>
+
                             </div>
 
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">05 Bazel Broken:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">05 Bazel:</label>
+                                <?php if($bazel == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine09" name="bazel_broken" value="0">
-                                        <label class="label_values" for="combine09" style="margin-right: 15px;">Okay
-                                        </label>
+                                        <input type="radio" id="13" name="bazel" value="0">
+                                        <label class="label_values" for="13" style="margin-right: 15px;">Okay </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine10" name="bazel_broken" value="1">
-                                        <label class="label_values" for="combine10">No </label>
+                                        <input type="radio" id="r14" name="bazel" value="1">
+                                        <label class="label_values" for="r14">No </label>
                                     </div>
+                                </div><?php }elseif($bazel==0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="13" name="bazel" value="0" checked="checked">
+                                        <label class="label_values" for="13" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="r14" name="bazel" value="1" disabled>
+                                        <label class="label_values" for="r14">No </label>
+                                    </div>
+                                </div><?php }elseif($bazel ==1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="13" name="bazel" class="bazel" value="bazel">
+                                        <label class="label_values" for="13" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="r14" name="bazel" value="1" checked="checked">
+                                        <label class="label_values" for="r14">No </label>
+                                    </div>
+                                    <div id="result"></div>
                                 </div>
+                                <?php } ?>
                             </div>
-
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">06 Mouse Pad:</label>
+                                <?php if($mousepad == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine11" name="mousepad" value="0">
-                                        <label class="label_values" for="combine11" style="margin-right: 15px;">Okay
-                                        </label>
+                                        <input type="radio" id="c1" name="mousepad" value="0">
+                                        <label class="label_values" for="c1" style="margin-right: 15px;">Okay </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine12" name="mousepad" value="1">
-                                        <label class="label_values" for="combine12">No </label>
+                                        <input type="radio" id="c2" name="mousepad" value="1">
+                                        <label class="label_values" for="c2">No </label>
                                     </div>
                                 </div>
-                            </div>
+                                <?php }elseif($mousepad == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c1" name="mousepad" value="0" checked="checked">
+                                        <label class="label_values" for="c1" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c2" name="mousepad" value="1" disabled>
+                                        <label class="label_values" for="c2">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($mousepad == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c1" name="mousepad" class="mousepad" value="mousepad">
+                                        <label class="label_values" for="c1" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c2" name="mousepad" value="1" checked="checked">
+                                        <label class="label_values" for="c2">No </label>
+                                    </div>
+                                    <div id="result"></div>
+                                </div>
+                                <?php } ?>
 
+                            </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">07 Mouse Pad Button:</label>
+                                <?php if($mouse_pad_button == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine13" name="mouse_pad_button" value="0">
-                                        <label class="label_values" for="combine13" style="margin-right: 15px;">Okay
-                                        </label>
+                                        <input type="radio" id="c3" name="mouse_pad_button" value="0">
+                                        <label class="label_values" for="c3" style="margin-right: 15px;">Okay </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine14" name="mouse_pad_button" value="1">
-                                        <label class="label_values" for="combine14">No </label>
+                                        <input type="radio" id="c4" name="mouse_pad_button" value="1">
+                                        <label class="label_values" for="c4">No </label>
                                     </div>
                                 </div>
-                            </div>
+                                <?php }elseif($mouse_pad_button == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c3" name="mouse_pad_button" value="0" checked="checked">
+                                        <label class="label_values" for="c3" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c4" name="mouse_pad_button" value="1" disabled>
+                                        <label class="label_values" for="c4">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($mouse_pad_button == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c3" name="mouse_pad_button" class="mouse_pad_button"
+                                            value="mouse_pad_button">
+                                        <label class="label_values" for="c3" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c4" name="mouse_pad_button" value="1" checked="checked">
+                                        <label class="label_values" for="c4">No </label>
+                                    </div>
+                                    <div id="result"></div>
+                                </div>
+                                <?php } ?>
 
+                            </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">08 Camera Cable:</label>
+                                <?php if($camera_cable == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine15" name="camera_cable" value="0">
-                                        <label class="label_values" for="combine15" style="margin-right: 15px;">Okay
-                                        </label>
+                                        <input type="radio" id="c5" name="camera_cable" value="0">
+                                        <label class="label_values" for="c5" style="margin-right: 15px;">Okay </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine16" name="camera_cable" value="1">
-                                        <label class="label_values" for="combine16">No </label>
+                                        <input type="radio" id="c6" name="camera_cable" value="1">
+                                        <label class="label_values" for="c6">No </label>
                                     </div>
                                 </div>
-                            </div>
+                                <?php }elseif($camera_cable == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c5" name="camera_cable" value="0" checked="checked">
+                                        <label class="label_values" for="c5" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c6" name="camera_cable" value="1" disabled>
+                                        <label class="label_values" for="c6">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($camera_cable == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c5" name="camera_cable" class="camera_cable"
+                                            value="camera_cable">
+                                        <label class="label_values" for="c5" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c6" name="camera_cable" value="1" checked="checked">
+                                        <label class="label_values" for="c6">No </label>
+                                    </div>
+                                    <div id="result"></div>
+                                </div>
+                                <?php } ?>
 
+                            </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">09 Back Cover:</label>
+                                <?php if($back_cover == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine17" name="back_cover" value="0">
-                                        <label class="label_values" for="combine17" style="margin-right: 15px;">Okay
-                                        </label>
+                                        <input type="radio" id="c7" name="back_cover" value="0">
+                                        <label class="label_values" for="c7" style="margin-right: 15px;">Okay </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine18" name="back_cover" value="1">
-                                        <label class="label_values" for="combine18">No </label>
+                                        <input type="radio" id="c8" name="back_cover" value="1">
+                                        <label class="label_values" for="c8">No </label>
                                     </div>
                                 </div>
-                            </div>
+                                <?php }elseif($back_cover == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c7" name="back_cover" value="0" checked="checked">
+                                        <label class="label_values" for="c7" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c8" name="back_cover" value="1" disabled>
+                                        <label class="label_values" for="c8">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($back_cover == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c7" name="back_cover" class="back_cover"
+                                            value="back_cover">
+                                        <label class="label_values" for="c7" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c8" name="back_cover" value="1" checked="checked">
+                                        <label class="label_values" for="c8">No </label>
+                                    </div>
+                                    <div id="result"></div>
+                                </div>
+                                <?php } ?>
 
+                            </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">10 WIFI Card: </label>
+                                <?php if($wifi_card == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine19" name="wifi_card" value="0">
-                                        <label class="label_values" for="combine19" style="margin-right: 15px;">Okay
-                                        </label>
+                                        <input type="radio" id="c9" name="wifi_card" value="0">
+                                        <label class="label_values" for="c9" style="margin-right: 15px;">Okay </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine20" name="wifi_card" value="1">
-                                        <label class="label_values" for="combine20">No </label>
+                                        <input type="radio" id="c10" name="wifi_card" value="1">
+                                        <label class="label_values" for="c10">No </label>
                                     </div>
                                 </div>
-                            </div>
+                                <?php }elseif($wifi_card == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c9" name="wifi_card" value="0" checked="checked">
+                                        <label class="label_values" for="c9" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c10" name="wifi_card" value="1" disabled>
+                                        <label class="label_values" for="c10">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($wifi_card == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c9" name="wifi_card" class="wifi_card"
+                                            value="wifi_card">
+                                        <label class="label_values" for="c9" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c10" name="wifi_card" value="1" checked="checked">
+                                        <label class="label_values" for="c10">No </label>
+                                    </div>
+                                    <div id="result"></div>
+                                </div>
+                                <?php } ?>
 
+                            </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">11 LCD Cable:</label>
+                                <?php if($lcd_cable == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine21" name="lcd_cable" value="0">
-                                        <label class="label_values" for="combine21" style="margin-right: 15px;">Okay
-                                        </label>
+                                        <input type="radio" id="c11" name="lcd_cable" value="0">
+                                        <label class="label_values" for="c11" style="margin-right: 15px;">Okay </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine22" name="lcd_cable" value="1">
-                                        <label class="label_values" for="combine22">No </label>
+                                        <input type="radio" id="c12" name="lcd_cable" value="1">
+                                        <label class="label_values" for="c12">No </label>
                                     </div>
                                 </div>
+                                <?php }elseif($lcd_cable == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c11" name="lcd_cable" value="0" checked="checked">
+                                        <label class="label_values" for="c11" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c12" name="lcd_cable" value="1" disabled>
+                                        <label class="label_values" for="c12">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($lcd_cable == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c11" name="lcd_cable" class="lcd_cable"
+                                            value="lcd_cable">
+                                        <label class="label_values" for="c11" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c12" name="lcd_cable" value="1" checked="checked">
+                                        <label class="label_values" for="c12">No </label>
+                                    </div>
+                                    <div id="result"></div>
+                                </div>
+                                <?php } ?>
                             </div>
-
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">12 Battery:</label>
+                                <?php if($battery == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine23" name="battery" value="0">
-                                        <label class="label_values" for="combine23" style="margin-right: 15px;">Okay
-                                        </label>
+                                        <input type="radio" id="c13" name="battery" value="0">
+                                        <label class="label_values" for="c13" style="margin-right: 15px;">Okay </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine24" name="battery" value="1">
-                                        <label class="label_values" for="combine24">No </label>
+                                        <input type="radio" id="c14" name="battery" value="1">
+                                        <label class="label_values" for="c14">No </label>
                                     </div>
                                 </div>
-                            </div>
+                                <?php }elseif($battery == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c13" name="battery" value="0" checked="checked">
+                                        <label class="label_values" for="c13" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c14" name="battery" value="1" disabled>
+                                        <label class="label_values" for="c14">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($battery == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c13" name="battery" class="battery" value="battery">
+                                        <label class="label_values" for="c13" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c14" name="battery" value="1" checked="checked">
+                                        <label class="label_values" for="c14">No </label>
+                                    </div>
+                                    <div id="result"></div>
+                                </div>
+                                <?php } ?>
 
+                            </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">13 Battery Cable:</label>
+                                <?php if($battery_cable == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine25" name="battery_cable" value="0">
-                                        <label class="label_values" for="combine25" style="margin-right: 15px;">Okay
-                                        </label>
+                                        <input type="radio" id="c15" name="battery_cable" value="0">
+                                        <label class="label_values" for="c15" style="margin-right: 15px;">Okay </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine26" name="battery_cable" value="1">
-                                        <label class="label_values" for="combine26">No </label>
+                                        <input type="radio" id="c16" name="battery_cable" value="1">
+                                        <label class="label_values" for="c16">No </label>
                                     </div>
                                 </div>
+                                <?php }elseif($battery_cable == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c15" name="battery_cable" value="0" checked="checked">
+                                        <label class="label_values" for="c15" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c16" name="battery_cable" value="1" disabled>
+                                        <label class="label_values" for="c16">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($battery_cable == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c15" name="battery_cable" class="battery_cable"
+                                            value="battery_cable">
+                                        <label class="label_values" for="c15" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c16" name="battery_cable" value="1" checked="checked">
+                                        <label class="label_values" for="c16">No </label>
+                                    </div>
+                                    <div id="result"></div>
+                                </div>
+                                <?php } ?>
+
                             </div>
                         </div>
 
                         <div class="col col-md-6 col-lg-6">
+
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">14 DVD ROM: </label>
+                                <?php if($dvd_rom == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine27" name="dvd_rom" value="0">
-                                        <label class="label_values" class="label_values" for="combine27"
+                                        <input type="radio" id="c17" name="dvd_rom" value="0">
+                                        <label class="label_values" class="label_values" for="c17"
                                             style="margin-right: 15px;">Okay </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine28" name="dvd_rom" value="1">
-                                        <label class="label_values" for="combine28">No </label>
+                                        <input type="radio" id="c18" name="dvd_rom" value="1">
+                                        <label class="label_values" for="c18">No </label>
                                     </div>
                                 </div>
+                                <?php }elseif($dvd_rom == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c17" name="dvd_rom" value="0" checked="checked">
+                                        <label class="label_values" for="c17" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c18" name="dvd_rom" value="1" disabled>
+                                        <label class="label_values" for="c18">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($dvd_rom == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c17" name="dvd_rom" class="dvd_rom" value="dvd_rom">
+                                        <label class="label_values" for="c17" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c18" name="dvd_rom" value="1" checked="checked">
+                                        <label class="label_values" for="c18">No </label>
+                                    </div>
+                                    <div id="result"></div>
+                                </div>
+                                <?php } ?>
+
                             </div>
 
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">15 DVD Caddy:</label>
+                                <?php if($dvd_caddy == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine29" name="dvd_caddy" value="0">
-                                        <label class="label_values" for="combine29" style="margin-right: 15px;">Okay
-                                        </label>
+                                        <input type="radio" id="c19" name="dvd_caddy" value="0">
+                                        <label class="label_values" for="c19" style="margin-right: 15px;">Okay </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine30" name="dvd_caddy" value="1">
-                                        <label class="label_values" for="combine30">No </label>
+                                        <input type="radio" id="c20" name="dvd_caddy" value="1">
+                                        <label class="label_values" for="c20">No </label>
                                     </div>
                                 </div>
-
+                                <?php }elseif($dvd_caddy == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c19" name="dvd_caddy" value="0" checked="checked">
+                                        <label class="label_values" for="c19" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c20" name="dvd_caddy" value="1" disabled>
+                                        <label class="label_values" for="c20">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($dvd_caddy == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c19" name="dvd_caddy" class="dvd_caddy"
+                                            value="dvd_caddy">
+                                        <label class="label_values" for="c19" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c20" name="dvd_caddy" value="1" checked="checked">
+                                        <label class="label_values" for="c20">No </label>
+                                    </div>
+                                    <div id="result"></div>
+                                </div>
+                                <?php } ?>
 
                             </div>
 
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">16 HDD Caddy:</label>
+                                <?php if($hdd_caddy == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine31" name="hdd_caddy" value="0">
-                                        <label class="label_values" for="combine31" style="margin-right: 15px;">Okay
-                                        </label>
+                                        <input type="radio" id="c21" name="hdd_caddy" value="0">
+                                        <label class="label_values" for="c21" style="margin-right: 15px;">Okay </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine32" name="hdd_caddy" value="1">
-                                        <label class="label_values" for="combine32">No </label>
+                                        <input type="radio" id="c22" name="hdd_caddy" value="1">
+                                        <label class="label_values" for="c22">No </label>
                                     </div>
                                 </div>
-
+                                <?php }elseif($hdd_caddy == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c21" name="hdd_caddy" value="0" checked="checked">
+                                        <label class="label_values" for="c21" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c22" name="hdd_caddy" value="1" disabled>
+                                        <label class="label_values" for="c22">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($hdd_caddy == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c21" name="hdd_caddy" class="hdd_caddy"
+                                            value="hdd_caddy">
+                                        <label class="label_values" for="c21" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c22" name="hdd_caddy" value="1" checked="checked">
+                                        <label class="label_values" for="c22">No </label>
+                                    </div>
+                                    <div id="result"></div>
+                                </div>
+                                <?php } ?>
 
                             </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">17 HDD Cable Connector:</label>
+                                <?php if($hdd_cable_connector == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine33" name="hdd_cable_connector" value="0">
-                                        <label class="label_values" for="combine33" style="margin-right: 15px;">Okay
-                                        </label>
+                                        <input type="radio" id="c23" name="hdd_cable_connector" value="0">
+                                        <label class="label_values" for="c23" style="margin-right: 15px;">Okay </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine48" name="hdd_cable_connector" value="1">
-                                        <label class="label_values" for="combine48">No </label>
+                                        <input type="radio" id="c24" name="hdd_cable_connector" value="1">
+                                        <label class="label_values" for="c24">No </label>
                                     </div>
                                 </div>
-
+                                <?php }elseif($hdd_cable_connector == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c23" name="hdd_cable_connector" value="0"
+                                            checked="checked">
+                                        <label class="label_values" for="c23" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c24" name="hdd_cable_connector" value="1" disabled>
+                                        <label class="label_values" for="c24">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($hdd_cable_connector == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c23" name="hdd_cable_connector"
+                                            class="hdd_cable_connector" value="hdd_cable_connector">
+                                        <label class="label_values" for="c23" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c24" name="hdd_cable_connector" value="1"
+                                            checked="checked">
+                                        <label class="label_values" for="c24">No </label>
+                                    </div>
+                                    <div id="result"></div>
+                                </div>
+                                <?php } ?>
 
                             </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">18 C Panel / Palm Rest:</label>
+                                <?php if($c_panel_palm_rest == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine34" name="c_panel_palm_rest" value="0">
-                                        <label class="label_values" for="combine34" style="margin-right: 15px;">Okay
-                                        </label>
+                                        <input type="radio" id="c25" name="c_panel_palm_rest" value="0">
+                                        <label class="label_values" for="c25" style="margin-right: 15px;">Okay </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine35" name="c_panel_palm_rest" value="1">
-                                        <label class="label_values" for="combine35">No </label>
+                                        <input type="radio" id="c26" name="c_panel_palm_rest" value="1">
+                                        <label class="label_values" for="c26">No </label>
                                     </div>
                                 </div>
-
+                                <?php }elseif($c_panel_palm_rest == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c25" name="c_panel_palm_rest" value="0"
+                                            checked="checked">
+                                        <label class="label_values" for="c25" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c26" name="c_panel_palm_rest" value="1" disabled>
+                                        <label class="label_values" for="c26">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($c_panel_palm_rest == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c25" name="c_panel_palm_rest" class="c_panel_palm_rest"
+                                            value="c_panel_palm_rest">
+                                        <label class="label_values" for="c25" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c26" name="c_panel_palm_rest" value="1"
+                                            checked="checked">
+                                        <label class="label_values" for="c26">No </label>
+                                    </div>
+                                    <div id="result"></div>
+                                </div>
+                                <?php } ?>
 
                             </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">19 D / MB Base:</label>
+                                <?php if($mb_base == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine36" name="mb_base" value="0">
-                                        <label class="label_values" for="combine36" style="margin-right: 15px;">Okay
-                                        </label>
+                                        <input type="radio" id="c33" name="mb_base" value="0">
+                                        <label class="label_values" for="c33" style="margin-right: 15px;">Okay </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine37" name="mb_base" value="1">
-                                        <label class="label_values" for="combine37">No </label>
+                                        <input type="radio" id="c34" name="mb_base" value="1">
+                                        <label class="label_values" for="c34">No </label>
                                     </div>
                                 </div>
-                            </div>
+                                <?php }elseif($mb_base == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c33" name="mb_base" value="0" checked="checked">
+                                        <label class="label_values" for="c33" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c34" name="mb_base" value="1" disabled>
+                                        <label class="label_values" for="c34">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($mb_base == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c33" name="mb_base" class="mb_base" value="mb_base">
+                                        <label class="label_values" for="c33" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c34" name="mb_base" value="1" checked="checked">
+                                        <label class="label_values" for="c34">No </label>
+                                    </div>
+                                    <div id="result"></div>
+                                </div>
+                                <?php } ?>
 
+                            </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">20 Hings Cover:</label>
+                                <?php if($hings_cover == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine38" name="hings_cover" value="0">
-                                        <label class="label_values" for="combine38" style="margin-right: 15px;">Okay
-                                        </label>
+                                        <input type="radio" id="c27" name="hings_cover" value="0">
+                                        <label class="label_values" for="c27" style="margin-right: 15px;">Okay </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine39" name="hings_cover" value="1">
-                                        <label class="label_values" for="combine39">No </label>
+                                        <input type="radio" id="c28" name="hings_cover" value="1">
+                                        <label class="label_values" for="c28">No </label>
                                     </div>
                                 </div>
-                            </div>
+                                <?php }elseif($hings_cover == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c27" name="hings_cover" value="0" checked="checked">
+                                        <label class="label_values" for="c27" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c28" name="hings_cover" value="1" disabled>
+                                        <label class="label_values" for="c28">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($hings_cover == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c27" name="hings_cover" class="hings_cover"
+                                            value="hings_cover">
+                                        <label class="label_values" for="c27" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c28" name="hings_cover" value="1" checked="checked">
+                                        <label class="label_values" for="c28">No </label>
+                                    </div>
+                                    <div id="result"></div>
+                                </div>
+                                <?php } ?>
 
+                            </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">21 LAN Cover:</label>
+                                <?php if($lan_cover == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine40" name="lan_cover" value="0">
-                                        <label class="label_values" for="combine40" style="margin-right: 15px;">Okay
-                                        </label>
+                                        <input type="radio" id="c29" name="lan_cover" value="0">
+                                        <label class="label_values" for="c29" style="margin-right: 15px;">Okay </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine41" name="lan_cover" value="1">
-                                        <label class="label_values" for="combine41">No </label>
+                                        <input type="radio" id="c30" name="lan_cover" value="1">
+                                        <label class="label_values" for="c30">No </label>
                                     </div>
                                 </div>
-                            </div>
+                                <?php }elseif($lan_cover == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c29" name="lan_cover" value="0" checked="checked">
+                                        <label class="label_values" for="c29" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c30" name="lan_cover" value="1" disabled>
+                                        <label class="label_values" for="c30">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($lan_cover == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="c29" name="lan_cover" class="lan_cover"
+                                            value="lan_cover">
+                                        <label class="label_values" for="c29" style="margin-right: 15px;">Okay </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="c30" name="lan_cover" value="1" checked="checked">
+                                        <label class="label_values" for="c30">No </label>
+                                    </div>
+                                    <div id="result"></div>
+                                </div>
+                                <?php } ?>
 
+                            </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">22 Fan:</label>
+                                <?php if($fan == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="combine42" name="fan" value="0">
@@ -850,10 +1693,36 @@ if(isset($_POST['combine_check_form'])){
                                         <label class="label_values" for="combine43">No </label>
                                     </div>
                                 </div>
+                                <?php }elseif($fan == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="combine42" name="fan" value="0" checked="checked">
+                                        <label class="label_values" for="combine42" style="margin-right: 15px;">Okay
+                                        </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="combine43" name="fan" value="1">
+                                        <label class="label_values" for="combine43">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($fan == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="combine42" name="fan" value="0">
+                                        <label class="label_values" for="combine42" style="margin-right: 15px;">Okay
+                                        </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="combine43" name="fan" value="1" checked="checked">
+                                        <label class="label_values" for="combine43">No </label>
+                                    </div>
+                                </div>
+                                <?php } ?>
                             </div>
 
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">23 Heat Sink:</label>
+                                <?php if($heat_sink == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="combine44" name="heat_sink" value="0">
@@ -865,10 +1734,36 @@ if(isset($_POST['combine_check_form'])){
                                         <label class="label_values" for="combine45">No </label>
                                     </div>
                                 </div>
+                                <?php }elseif($heat_sink == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="combine44" name="heat_sink" value="0" checked="checked">
+                                        <label class="label_values" for="combine44" style="margin-right: 15px;">Okay
+                                        </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="combine45" name="heat_sink" value="1">
+                                        <label class="label_values" for="combine45">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($heat_sink == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="combine44" name="heat_sink" value="0">
+                                        <label class="label_values" for="combine44" style="margin-right: 15px;">Okay
+                                        </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="combine45" name="heat_sink" value="1" checked="checked">
+                                        <label class="label_values" for="combine45">No </label>
+                                    </div>
+                                </div>
+                                <?php } ?>
                             </div>
 
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">24 CPU:</label>
+                                <?php if($cpu == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="combine46" name="cpu" value="0">
@@ -880,8 +1775,32 @@ if(isset($_POST['combine_check_form'])){
                                         <label class="label_values" for="combine47">No </label>
                                     </div>
                                 </div>
+                                <?php }elseif($cpu == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="combine46" name="cpu" value="0" checked="checked">
+                                        <label class="label_values" for="combine46" style="margin-right: 15px;">Okay
+                                        </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="combine47" name="cpu" value="1">
+                                        <label class="label_values" for="combine47">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($cpu == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="combine46" name="cpu" value="0">
+                                        <label class="label_values" for="combine46" style="margin-right: 15px;">Okay
+                                        </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="combine47" name="cpu" value="1" checked="checked">
+                                        <label class="label_values" for="combine47">No </label>
+                                    </div>
+                                </div>
+                                <?php } ?>
                             </div>
-
                         </div>
                     </fieldset>
                 </div>
@@ -898,35 +1817,10 @@ if(isset($_POST['combine_check_form'])){
 <!-- LCD Check  -->
 <!-- ============================================================== -->
 
-<?php 
-
-
-if(isset($_POST['submit_lcd_check'])){
-    $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
-    $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
-    $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
-    $whitespot = mysqli_real_escape_string($connection, $_POST['whitespot']);
-    $scratch = mysqli_real_escape_string($connection, $_POST['scratch']);
-    $broken = mysqli_real_escape_string($connection, $_POST['broken']);
-    $line_lcd = mysqli_real_escape_string($connection, $_POST['line_lcd']);
-    $yellow_shadow = mysqli_real_escape_string($connection, $_POST['yellow_shadow']);
-    $status = NULL;
-
-    if($whitespot == 1 || $scratch == 1 || $broken == 1 || $line_lcd == 1 || $yellow_shadow == 1){
-        $status = 1;
-    }else{
-        $status = 0;
-    }
-
-    $lcd_check_query = "INSERT INTO `lcd_check`(inventory_id, emp_id, sales_order_id, whitespot, scratch, broken, line_lcd, yellow_shadow, created_time, status) 
-                                VALUES ('$inventory_id', '$emp_id', '$sales_order_id', '$whitespot', '$scratch', '$broken', '$line_lcd', '$yellow_shadow', CURRENT_TIMESTAMP, $status)";
-    $lcd_query = mysqli_query($connection, $lcd_check_query);
-}
-
-?>
 
 <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
     data-keyboard="false" aria-hidden="true">
+
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -938,75 +1832,195 @@ if(isset($_POST['submit_lcd_check'])){
                     <fieldset>
                         <div class="row">
                             <label class="col-sm-4 col-form-label text-capitalize">Whitespot</label>
+                            <?php if($whitespot == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="lcd1" name="whitespot" value="0">
-                                    <label class="label_values" for="lcd1" style="margin-right: 15px;">Okay </label>
+                                    <input type="radio" id="r15" name="whitespot" value="0">
+                                    <label class="label_values" for="r15" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="lcd2" name="whitespot" value="1">
-                                    <label class="label_values" for="lcd2">No </label>
+                                    <input type="radio" id="r16" name="whitespot" value="1">
+                                    <label class="label_values" for="r16">No </label>
                                 </div>
                             </div>
+                            <?php } elseif($whitespot == 0) { ?>
+                            <div class="col-sm-8 mt-2">
+                                <div class="icheck-success d-inline">
+                                    <input type="radio" id="r15" name="whitespot" value="0" checked="checked">
+                                    <label class="label_values" for="r15" style="margin-right: 15px;">Okay </label>
+                                </div>
+                                <div class="icheck-danger d-inline">
+                                    <input type="radio" id="r16" name="whitespot" value="1">
+                                    <label class="label_values" for="r16">No </label>
+                                </div>
+                            </div>
+                            <?php } elseif ($whitespot == 1) { ?>
+                            <div class="col-sm-8 mt-2">
+                                <div class="icheck-success d-inline">
+                                    <input type="radio" id="r15" name="whitespot" value="0">
+                                    <label class="label_values" for="r15" style="margin-right: 15px;">Okay </label>
+                                </div>
+                                <div class="icheck-danger d-inline">
+                                    <input type="radio" id="r16" name="whitespot" value="1" checked="checked">
+                                    <label class="label_values" for="r16">No </label>
+                                </div>
+                            </div>
+                            <?php } ?>
+
                         </div>
 
                         <div class="row">
                             <label class="col-sm-4 col-form-label text-capitalize">Scratch </label>
+                            <?php if($scratch == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="lcd3" name="scratch" value="0">
-                                    <label class="label_values" for="lcd3" style="margin-right: 15px;">Okay </label>
+                                    <input type="radio" id="r17" name="scratch" value="0">
+                                    <label class="label_values" for="r17" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="lcd4" name="scratch" value="1">
-                                    <label class="label_values" for="lcd4">No </label>
+                                    <input type="radio" id="18" name="scratch" value="1">
+                                    <label class="label_values" for="18">No </label>
                                 </div>
                             </div>
+                            <?php } elseif($scratch == 0) { ?>
+                            <div class="col-sm-8 mt-2">
+                                <div class="icheck-success d-inline">
+                                    <input type="radio" id="r17" name="scratch" value="0" checked="checked">
+                                    <label class="label_values" for="r17" style="margin-right: 15px;">Okay </label>
+                                </div>
+                                <div class="icheck-danger d-inline">
+                                    <input type="radio" id="18" name="scratch" value="1">
+                                    <label class="label_values" for="18">No </label>
+                                </div>
+                            </div>
+                            <?php } elseif ($scratch == 1) { ?>
+                            <div class="col-sm-8 mt-2">
+                                <div class="icheck-success d-inline">
+                                    <input type="radio" id="r17" name="scratch" value="0">
+                                    <label class="label_values" for="r17" style="margin-right: 15px;">Okay </label>
+                                </div>
+                                <div class="icheck-danger d-inline">
+                                    <input type="radio" id="18" name="scratch" value="1" checked="checked">
+                                    <label class="label_values" for="18">No </label>
+                                </div>
+                            </div>
+                            <?php } ?>
+
                         </div>
 
                         <div class="row">
                             <label class="col-sm-4 col-form-label text-capitalize">Broken </label>
+                            <?php if($broken == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="lcd5" name="broken" value="0">
-                                    <label class="label_values" for="lcd5" style="margin-right: 15px;">Okay </label>
+                                    <input type="radio" id="r19" name="broken" value="0">
+                                    <label class="label_values" for="r19" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="lcd6" name="broken" value="0">
-                                    <label class="label_values" for="lcd6">No </label>
+                                    <input type="radio" id="r20" name="broken" value="0">
+                                    <label class="label_values" for="r20">No </label>
                                 </div>
                             </div>
-
+                            <?php } elseif($broken == 0) { ?>
+                            <div class="col-sm-8 mt-2">
+                                <div class="icheck-success d-inline">
+                                    <input type="radio" id="r19" name="broken" value="0" checked="checked">
+                                    <label class="label_values" for="r19" style="margin-right: 15px;">Okay </label>
+                                </div>
+                                <div class="icheck-danger d-inline">
+                                    <input type="radio" id="r20" name="broken" value="0">
+                                    <label class="label_values" for="r20">No </label>
+                                </div>
+                            </div>
+                            <?php } elseif ($broken == 1) { ?>
+                            <div class="col-sm-8 mt-2">
+                                <div class="icheck-success d-inline">
+                                    <input type="radio" id="r19" name="broken" value="0">
+                                    <label class="label_values" for="r19" style="margin-right: 15px;">Okay </label>
+                                </div>
+                                <div class="icheck-danger d-inline">
+                                    <input type="radio" id="r20" name="broken" value="0" checked="checked">
+                                    <label class="label_values" for="r20">No </label>
+                                </div>
+                            </div>
+                            <?php } ?>
                         </div>
 
                         <div class="row">
                             <label class="col-sm-4 col-form-label text-capitalize">line </label>
+                            <?php if($line_lcd == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="lcd7" name="line_lcd" value="0">
-                                    <label class="label_values" for="lcd7" style="margin-right: 15px;">Okay </label>
+                                    <input type="radio" id="r21" name="line_lcd" value="0">
+                                    <label class="label_values" for="r21" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="lcd8" name="line_lcd" value="1">
-                                    <label class="label_values" for="lcd8">No </label>
+                                    <input type="radio" id="r22" name="line_lcd" value="1">
+                                    <label class="label_values" for="r22">No </label>
                                 </div>
                             </div>
-
+                            <?php } elseif($line_lcd == 0) { ?>
+                            <div class="col-sm-8 mt-2">
+                                <div class="icheck-success d-inline">
+                                    <input type="radio" id="r21" name="line_lcd" value="0" checked="checked">
+                                    <label class="label_values" for="r21" style="margin-right: 15px;">Okay </label>
+                                </div>
+                                <div class="icheck-danger d-inline">
+                                    <input type="radio" id="r22" name="line_lcd" value="1">
+                                    <label class="label_values" for="r22">No </label>
+                                </div>
+                            </div>
+                            <?php } elseif ($line_lcd == 1) { ?>
+                            <div class="col-sm-8 mt-2">
+                                <div class="icheck-success d-inline">
+                                    <input type="radio" id="r21" name="line_lcd" value="0">
+                                    <label class="label_values" for="r21" style="margin-right: 15px;">Okay </label>
+                                </div>
+                                <div class="icheck-danger d-inline">
+                                    <input type="radio" id="r22" name="line_lcd" value="1" checked="checked">
+                                    <label class="label_values" for="r22">No </label>
+                                </div>
+                            </div>
+                            <?php } ?>
 
                         </div>
 
                         <div class="row">
                             <label class="col-sm-4 col-form-label text-capitalize">Yellow Shadow </label>
+                            <?php if($yellow_shadow == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" name="yellow_shadow" id="lcd9" value="0">
-                                    <label class="label_values" for="lcd9" style="margin-right: 15px;">Okay </label>
+                                    <input type="radio" name="yellow_shadow" id="r23" value="0">
+                                    <label class="label_values" for="r23" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" name="yellow_shadow" id="lcd110" value="1">
-                                    <label class="label_values" for="lcd110">No </label>
+                                    <input type="radio" name="yellow_shadow" id="r24" value="1">
+                                    <label class="label_values" for="r24">No </label>
                                 </div>
                             </div>
+                            <?php } elseif($yellow_shadow == 0) { ?>
+                            <div class="col-sm-8 mt-2">
+                                <div class="icheck-success d-inline">
+                                    <input type="radio" name="yellow_shadow" id="r23" value="0" checked="checked">
+                                    <label class="label_values" for="r23" style="margin-right: 15px;">Okay </label>
+                                </div>
+                                <div class="icheck-danger d-inline">
+                                    <input type="radio" name="yellow_shadow" id="r24" value="1">
+                                    <label class="label_values" for="r24">No </label>
+                                </div>
+                            </div>
+                            <?php } elseif ($yellow_shadow == 1) { ?>
+                            <div class="col-sm-8 mt-2">
+                                <div class="icheck-success d-inline">
+                                    <input type="radio" name="yellow_shadow" id="r23" value="0">
+                                    <label class="label_values" for="r23" style="margin-right: 15px;">Okay </label>
+                                </div>
+                                <div class="icheck-danger d-inline">
+                                    <input type="radio" name="yellow_shadow" id="r24" value="1" checked="checked">
+                                    <label class="label_values" for="r24">No </label>
+                                </div>
+                            </div>
+                            <?php } ?>
 
                         </div>
 
@@ -1146,41 +2160,13 @@ if(isset($_POST['submit_lcd_check'])){
 <!-- Laptop Specification Check  -->
 <!-- ============================================================== -->
 
-<?php 
-
-if(isset($_POST['prduction_specification_form'])){
-
-    $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
-    $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
-    $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
-    $processor = mysqli_real_escape_string($connection, $_POST['processor']);
-    $generation = mysqli_real_escape_string($connection, $_POST['generation']);
-    $ram = mysqli_real_escape_string($connection, $_POST['ram']);
-    $hdd_capacity = mysqli_real_escape_string($connection, $_POST['hdd_capacity']);
-    $hdd_type = mysqli_real_escape_string($connection, $_POST['hdd_type']);
-    $display = mysqli_real_escape_string($connection, $_POST['display']);
-    $resolutions = mysqli_real_escape_string($connection, $_POST['resolutions']);
-    $graphic = mysqli_real_escape_string($connection, $_POST['graphic']);
-    $graphic_type = mysqli_real_escape_string($connection, $_POST['graphic_type']);
-    $operating_system = mysqli_real_escape_string($connection, $_POST['operating_system']);
-
-    $production_spec_query = "INSERT INTO production_check(inventory_id, emp_id, sales_order_id, processor, generation, ram, hdd_capacity, hdd_type, display, 
-                                                            resolutions, graphic, graphic_type, operating_system, status, created_time) 
-                            VALUES('$inventory_id', '$emp_id', '$sales_order_id', '$processor', '$generation', '$ram', '$hdd_capacity', '$hdd_type', '$display', 
-                            '$resolutions', '$graphic', '$graphic_type', '$operating_system', 0, CURRENT_TIMESTAMP) ";
-    $production_query = mysqli_query($connection, $production_spec_query);
-    
-}
-
-?>
-
 <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
     data-keyboard="false" aria-hidden="true">
+
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel">01 Motherboard Form</h4>
-
             </div>
             <form method="POST">
                 <div class="modal-body">
