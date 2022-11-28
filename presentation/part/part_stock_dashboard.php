@@ -888,7 +888,7 @@ $values_single = array(
                 $run =null;
                 $i =0;
                 $item_name;
-                $model;
+                $model= null;
                 
                 if (isset($_POST['submit'])) {
                     
