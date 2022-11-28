@@ -50,7 +50,7 @@ function Login($role_id, $department){
     }
     // Packing Technician Redirect
     elseif($role_id == 4 && $department == 13){
-        header('Location: presentation/packing/packing.php');
+        header('Location: presentation/packing/packing_dashboard.php');
     }
    
 

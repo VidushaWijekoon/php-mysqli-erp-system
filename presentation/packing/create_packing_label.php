@@ -54,7 +54,7 @@ $start_print = 0;
 
     if($cartoon_count <4 && $mfg_count==1){
         $query = "UPDATE packing_mfg SET  cartoon_number='$cartoon_number',sales_order_id ='$sales_order_id' WHERE mfg = '$mfg' ";
-        echo $query;
+       
         $query_run = mysqli_query($connection, $query);
         
     $query = " SELECT * FROM packing_mfg WHERE mfg = '$mfg' ";
@@ -125,8 +125,6 @@ $start_print = 0;
                             <button type="submit" name="submit_mfg" id="submit"
                                 class="btn mb-2 mt-4 btn-primary btn-sm d-block mx-auto text-center"><i
                                     class="fa-solid fa-qrcode" style="margin-right: 5px;"></i>Genarate Label</button>
-
-
                         </fieldset>
                     </form>
 
@@ -165,19 +163,19 @@ $start_print = 0;
                     function write($code,$last_id, $brand, $model,$mfg, $downText,$secondPart,$barcodeText,$barcodeType,$barcodeDisplay,$barcodeSize, $touch_type,$screen_size,$cartoon_number,$sales_order_id) {
                         ?>
                         <table style="border: black; border-style: solid;">
-                            <tr style="border: black; border-style: solid;">
+                            <tr style="border: black; border-style: solid;  !important">
                                 <th style="border: black; border-style: solid;"><?php if ($brand != "") {
                                 $abc= strtoupper( $brand);
                                 echo  "<div  ><p class = 'text-uppercase' style='font-size: 40;
                                 font-family: Arial, Helvetica, sans-serif;margin: 30px 0 0 0;
-                                color:black;text-weight:bold;text-align: left;margin-left:5px'>S/O </p></div>";
+                                color:black;text-weight:bold;text-align: left;margin-left:5px '>S/O </p></div>";
                             } 
                             ?>
                                 </th>
-                                <td style=" border: black; border-style: solid;"><?php 
-                                echo  "<div  ><p class = 'text-uppercase' style='font-size: 40;
+                                <td style=" border: black; border-style: solid; "><?php 
+                                echo  "<div  ><p class = 'text-uppercase' style='font-size: 40; width:650px;
                                 font-family: Arial, Helvetica, sans-serif;margin: 30px 0 0 0;
-                                color:black;text-weight:bold;text-align: left;margin-left:5px'> $sales_order_id </p></div>";
+                                color:black;text-weight:bold;text-align: left;margin-left:5px '> $sales_order_id </p></div>";
                             
                             ?>
                                 </td>
@@ -267,8 +265,8 @@ $start_print = 0;
                                     style="font-size: 40px; color:black !important">
                                     MFG S/N
                                 </p>
-                                <div class="text-left" style="margin-left:0px">
-                                    <?php echo '<img class="barcode " style="width:850px"alt="'.$barcodeText.'" src="php-barcode/barcode.php?text='.$barcodeText.'&codetype='.$barcodeType.'&orientation='.$barcodeDisplay.
+                                <div class="text-center" style="margin-left:0px">
+                                    <?php echo '<img class="barcode " style="width:900px"alt="'.$barcodeText.'" src="php-barcode/barcode.php?text='.$barcodeText.'&codetype='.$barcodeType.'&orientation='.$barcodeDisplay.
 '&size='.$barcodeSize.'&print='.$mfg.'"/>';?>
                                 </div>
                                 <p class="text-center text-uppercase" style="font-size: 40px;color:black !important">
