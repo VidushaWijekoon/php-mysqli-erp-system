@@ -13,6 +13,7 @@ if (!isset($_SESSION['user_id'])) {
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 $epf_id = $_SESSION['epf'];
+$username = $_SESSION['username'];
  
 if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 6 && $department == 1)){
 
@@ -33,6 +34,112 @@ if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) 
 <div class="container-fliud">
     <div class="row">
         <div class="col-lg-11 grid-margin stretch-card justify-content-center mx-auto mt-5">
+            <div class="card">
+                <div class="card-header d-flex bg-secondary">
+                    <div class="mr-auto">
+                        <div class="text-center mx-auto mt-1 text-uppercase" style="font-size: 14px;">
+                            <?php echo $username; ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mx-2">
+                    <div class="col col-lg-12 mb-3">
+                        <fieldset>
+                            <legend>Production Team Members Daily View</legend>
+
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>S/O ID</th>
+                                        <th>Brand</th>
+                                        <th>Core</th>
+                                        <th>Genaration</th>
+                                        <th>Model</th>
+                                        <th>Completed QTY</th>
+                                        <th style="width: 250px;">&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-dark text-uppercase">
+                                    <?php 
+                                        
+                                        $query = "SELECT *, COUNT(prod_info.p_id) AS completed_qty FROM prod_info
+                                                INNER JOIN warehouse_information_sheet ON prod_info.sales_order = warehouse_information_sheet.sales_order_id
+                                                INNER JOIN prod_technician_assign_info ON prod_info.sales_order = prod_technician_assign_info.sales_order_id
+                                                WHERE prod_info.emp_id = 1041
+                                                GROUP BY
+                                                    prod_info.sales_order,
+                                                    prod_technician_assign_info.model,
+                                                    prod_technician_assign_info.generation,
+                                                    prod_technician_assign_info.brand,
+                                                    prod_technician_assign_info.core";
+                                        $query_run = mysqli_query($connection, $query);
+
+                                                if ($rowcount = mysqli_fetch_assoc($query_run)) {
+                                                    foreach($query_run as $x) {
+
+                                                     $count =   "SELECT *, COUNT(prod_info.inventory_id) as Completed FROM prod_info GROUP BY inventory_id";
+                                                     $sd = mysqli_query($connection, $count);
+                                                     foreach($sd as $d){
+                                            ?>
+
+                                    <tr>
+                                        <td><?= $x['sales_order_id']; ?></td>
+                                        <td><?= $x['brand']; ?></td>
+                                        <td><?= $x['core']; ?></td>
+                                        <td><?= $x['generation']; ?></td>
+                                        <td><?= $x['model']; ?></td>
+                                        <td><?= $d['Completed']; ?></td>
+                                        <td>
+                                            <?php
+
+                                            $percentage = round(($d['Completed']  / $x['tech_assign_qty']) * 100);
+
+                                            if($percentage == 100)
+                                            {
+                                                $progress_bar_class = 'bg-success progress-bar-striped';
+                                            }
+                                            else if($percentage >= 50 && $percentage < 99)
+                                            {
+                                                $progress_bar_class = 'bg-info progress-bar-striped';
+                                            }
+                                            else if($percentage >= 11 && $percentage < 49)
+                                            {
+                                                $progress_bar_class = 'bg-warning progress-bar-striped';
+                                            }
+                                            else if($percentage >= 0 && $percentage < 10)
+                                            {
+                                                $progress_bar_class = 'bg-danger progress-bar-striped';
+                                            }
+                                            else
+                                            {
+                                                $progress_bar_class = 'bg-danger progress-bar-striped';
+                                            }
+                                                                                
+                                            echo  
+                                            '<div class="progress text-bold">
+                                                <div class="progress-bar '.$progress_bar_class.'" role="progressbar" aria-valuenow="'.$percentage.'" aria-valuemin="0" aria-valuemax="100" style="width:'.$percentage.'%">
+                                                    '.$percentage.' % 
+                                                </div>
+                                            </div>'
+                                            ?>
+
+                                        </td>
+
+                                    </tr>
+                                    <?php } } }?>
+                                </tbody>
+                            </table>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fliud">
+    <div class="row">
+        <div class="col-lg-11 grid-margin stretch-card justify-content-center mx-auto mt-3">
             <div class="card">
                 <div class="card-header d-flex bg-secondary">
                     <div class="mr-auto">
@@ -71,9 +178,7 @@ if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) 
                                 </thead>
                                 <tbody class="table-dark text-uppercase">
                                     <?php 
-                                        $sales_order_id = '';
-
-                                        // getting the list of users
+ 
                                         $query = "SELECT *, brand, core, model, generation, processor, device FROM prod_info
                                                 LEFT JOIN warehouse_information_sheet ON prod_info.inventory_id = warehouse_information_sheet.inventory_id
                                                 WHERE prod_info.emp_id ='{$emp_id}' ";
@@ -135,6 +240,8 @@ if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) 
         </div>
     </div>
 </div>
+
+
 
 <?php include_once('../includes/footer.php'); }else{
         die(access_denied());
