@@ -9,7 +9,10 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
 
-?>
+$role_id = $_SESSION['role_id'];
+$department = $_SESSION['department'];
+
+if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $role_id == 4 && $department == 13){ ?>
 
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
@@ -19,8 +22,10 @@ if (!isset($_SESSION['user_id'])) {
 
 <div class="row m-2">
     <div class="col-12 mt-3">
-        <a class="btn bg-gradient-success mx-2 text-white" type="button" href="./create_mfg.php"><i
-                class="fa-solid fa-cogs"></i><span class="mx-1">Create MFG S/N</span></a>
+        <a class="btn bg-gradient-success mx-2 text-white" type="button" href="./create_packing_label.php"><i
+                class="fa-solid fa-cogs"></i><span class="mx-1">Create Label</span></a>
+        <a class="btn bg-gradient-success mx-2 text-white" type="button" href="./download_excelsheet.php"><span
+                class="mx-1">Get Excel Sheet</span></a>
     </div>
 </div>
 
@@ -79,5 +84,6 @@ if (!isset($_SESSION['user_id'])) {
 
 
 
-
-<?php include_once('../includes/footer.php'); ?>
+<?php include_once('../includes/footer.php'); }else{
+        die(access_denied());
+} ?>

@@ -10,7 +10,7 @@ include_once('../includes/header.php');
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
-
+$mfg_id = $_GET['mfg_id'];
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 
@@ -27,12 +27,12 @@ $ram_capacity = NULL;
 $hdd_type = null;
 $touch_type=null;
 $screen_size = null;
-$mfg= null;
 $username = $_SESSION['username'];
 $start_print = 0;
 
+
     if(isset($_POST['submit_mfg'])){
-        $exist = 0;
+
     $device = mysqli_real_escape_string($connection, $_POST['device']);
     $brand = mysqli_real_escape_string($connection, $_POST['brand']);
     $core = mysqli_real_escape_string($connection, $_POST['core']);
@@ -44,23 +44,42 @@ $start_print = 0;
     $touch_type = mysqli_real_escape_string($connection, $_POST['touch']); 
     $screen_size = mysqli_real_escape_string($connection, $_POST['screen_size']); 
     $mfg = mysqli_real_escape_string($connection, $_POST['mfg']); 
-    $query ="SELECT * FROM packing_mfg WHERE mfg ='$mfg' ";
-    $query_run = mysqli_query($connection, $query);
-    foreach($query_run as $data){
-        $exist++;
-    }
-
-    if($exist == 0){
-    $query = "INSERT INTO packing_mfg(device, brand, core, generation, model, hdd_capacity, hdd_type, created_time, created_by,mfg,ram_capacity,touch,screen_size) 
-            VALUES('$device', '$brand' , '$core', '$generation', '$model', '$hdd_capacity', '$hdd_type', CURRENT_TIMESTAMP, '$username','$mfg','$ram_capacity','$touch_type','$screen_size')";
+    
+    $query = "UPDATE
+    `packing_mfg`
+SET
+    `device` = '$device',
+    `brand` = '$brand',
+    `core` = '$core',
+    `generation` = '$generation',
+    `model` = '$model',
+    `hdd_capacity` = '$hdd_capacity',
+    `hdd_type` = '$hdd_type',
+    `mfg` = '$mfg',
+    `ram_capacity` = '$ram_capacity',
+    `touch` = '$touch_type',
+    `screen_size` = '$screen_size'
+WHERE
+    mfg_id='$mfg_id'";
     
     $query_run = mysqli_query($connection, $query);
         $start_print = 1;
-    }else{
-        echo '<script>alert("MFG Number '.$mfg.' is Already Exist")</script>';
-        $mfg = null;
-    }
    
+    }
+    $query="SELECT * FROM packing_mfg WHERE mfg_id ='$mfg_id'";
+    $query_run = mysqli_query($connection, $query);
+    foreach($query_run as $data){
+        $device = $data['device'];
+        $brand = $data['brand'];
+        $core = $data['core'];
+        $generation = $data['generation'];
+        $model = $data['model'];
+        $hdd_capacity = $data['hdd_capacity'];
+        $ram_capacity = $data['ram_capacity'];
+        $hdd_type = $data['hdd_type'];
+        $screen_type=$data['touch'];
+        $screen_size = $data['screen_size'];
+        $mfg = $data['mfg'];
     }
 ?>
 
@@ -68,11 +87,6 @@ $start_print = 0;
     <div class="col-md-5 align-self-center"><a href="./warehouse_dashboard.php">
             <i class="fa-solid fa-home fa-2x m-2" style="color: #ced4da; "></i>
         </a>
-    </div>
-</div>
-<div class="row page-titles">
-    <div class="col-md-5 align-self-center">
-        Create MFG Form
     </div>
 </div>
 
@@ -112,7 +126,7 @@ $start_print = 0;
                                 <label class="col-sm-3 col-form-label">Brand</label>
                                 <div class="col-sm-8">
                                     <select name="brand" class="info_select" style="border-radius: 5px;" required>
-                                        <option selected value="hp">HP</option>
+                                        <option selected value="<?php echo $brand; ?>"><?php echo $brand; ?></option>
                                         <?php
                                             $query = "SELECT * FROM brand ORDER BY brand ASC";
                                             $all_devices = mysqli_query($connection, $query);
@@ -133,7 +147,7 @@ $start_print = 0;
                                 <label class="col-sm-3 col-form-label">Core</label>
                                 <div class="col-sm-8">
                                     <select name="core" class="info_select" style="border-radius: 5px;" required>
-                                        <option selected value="i5">i5</option>
+                                        <option selected value="<?php echo $core; ?>"><?php echo $core; ?></option>
                                         <?php
                                             $query = "SELECT * FROM core ORDER BY core";
                                             $all_devices = mysqli_query($connection, $query);
@@ -154,7 +168,8 @@ $start_print = 0;
                                 <label class="col-sm-3 col-form-label">Generation</label>
                                 <div class="col-sm-8">
                                     <select name="generation" class="info_select" style="border-radius: 5px;" required>
-                                        <option selected value="5">5</option>
+                                        <option selected value="<?php echo $generation; ?>"><?php echo $generation; ?>
+                                        </option>
                                         <?php
                                             $query = "SELECT * FROM generation ORDER BY generation_id";
                                             $all_devices = mysqli_query($connection, $query);
@@ -175,7 +190,8 @@ $start_print = 0;
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Model</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" placeholder="Model" name="model">
+                                    <input type="text" class="form-control" placeholder="Model" name="model"
+                                        value="<?php echo $model; ?>">
                                 </div>
                             </div>
 
@@ -184,7 +200,8 @@ $start_print = 0;
                                 <div class="col-sm-8">
                                     <select name="hdd_capacity" class="info_select" style="border-radius: 5px;"
                                         required>
-                                        <option selected value="128GB">128GB</option>
+                                        <option selected value="<?php echo $hdd_capacity; ?>">
+                                            <?php echo $hdd_capacity; ?></option>
                                         <option value="256GB">256GB</option>
                                         <option value="512GB">512GB</option>
                                         <option value="1TB">1TB</option>
@@ -197,7 +214,8 @@ $start_print = 0;
                                 <div class="col-sm-8">
                                     <select name="ram_capacity" class="info_select" style="border-radius: 5px;"
                                         required>
-                                        <option selected value="2">2GB</option>
+                                        <option selected value="<?php echo $ram_capacity; ?>">
+                                            <?php echo $ram_capacity; ?></option>
                                         <option value="4">4GB</option>
                                         <option value="8">8GB</option>
                                         <option value="16">16GB</option>
@@ -211,7 +229,9 @@ $start_print = 0;
                                 <label class="col-sm-3 col-form-label">HDD Type</label>
                                 <div class="col-sm-8">
                                     <select name="hdd_type" class="info_select" style="border-radius: 5px;" required>
-                                        <option selected value="hdd">HDD</option>
+                                        <option selected value="<?php echo $hdd_type; ?>"><?php echo $hdd_type; ?>
+                                        </option>
+                                        <option value="hdd">HDD</option>
                                         <option value="ssd">SSD</option>
                                         <option value="nvme">NVME</option>
                                     </select>
@@ -221,7 +241,9 @@ $start_print = 0;
                                 <label class="col-sm-3 col-form-label">Screen</label>
                                 <div class="col-sm-8">
                                     <select name="touch" class="info_select" style="border-radius: 5px;" required>
-                                        <option selected value="touch">Touch</option>
+                                        <option selected value="<?php echo $screen_type; ?>"><?php echo $screen_type; ?>
+                                        </option>
+                                        <option value="touch">Touch</option>
                                         <option value="none_touch">None Touch</option>
                                     </select>
                                 </div>
@@ -230,7 +252,9 @@ $start_print = 0;
                                 <label class="col-sm-3 col-form-label">Screen Size</label>
                                 <div class="col-sm-8">
                                     <select name="screen_size" class="info_select" style="border-radius: 5px;" required>
-                                        <option selected value="11">11"</option>
+                                        <option selected value="<?php echo $screen_size; ?>"><?php echo $screen_size; ?>
+                                        </option>
+                                        <option value="11">11"</option>
                                         <option value="12">12"</option>
                                         <option value="13">13"</option>
                                         <option value="14">14"</option>
@@ -243,14 +267,15 @@ $start_print = 0;
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">MFG Number</label>
                                 <div class="col-sm-8">
-                                    <input type="text" min="1" class="form-control" placeholder="MFG Number" name="mfg">
+                                    <input type="text" min="1" class="form-control" placeholder="MFG Number" name="mfg"
+                                        value="<?php echo $mfg; ?>">
                                 </div>
                             </div>
 
                             <button type="submit" name="submit_mfg" id="submit"
                                 class="btn mb-2 mt-4 btn-primary btn-sm d-block mx-auto text-center"><i
-                                    class="fa-solid fa-qrcode" style="margin-right: 5px;"></i>Genarate BarCode</button>
-                            <?php if($mfg != null){ ?>
+                                    class="fa-solid fa-qrcode" style="margin-right: 5px;"></i>Update BarCode</button>
+                            <?php if($start_print != 0){ ?>
                             <button type="button" class="btn mb-2 mt-4 btn-danger btn-sm d-block mx-auto"
                                 data-toggle="modal" data-target="#modal-motherboard">
                                 Launch Preview Form
@@ -434,8 +459,7 @@ $start_print = 0;
 
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn bg-gradient-danger" data-dismiss="modal">Close</button>
-                        <a class="btn btn bg-gradient-navy"
-                            href="./update_mfg.php?mfg_id=<?php echo $mfg_id; ?>">Update</a>
+
 
                     </div>
             </form>
