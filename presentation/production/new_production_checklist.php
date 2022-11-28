@@ -4,7 +4,11 @@ session_start();
 include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
 include_once('../includes/header.php');
-
+?>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<?php
 // checking if a user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
@@ -479,12 +483,7 @@ $query_run_c = mysqli_query($connection, $query_mc);
 <!-- ============================================================== -->
 
 
-<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
-    data-keyboard="false" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form method="POST" id="form">
-                <?php
+<?php
                 
                     if(isset($_POST['submit_motherboard_check'])){
                         
@@ -500,8 +499,9 @@ $query_run_c = mysqli_query($connection, $query_mc);
                         }
                         $query = "INSERT INTO motherboard_check (sales_order_id, emp_id, inventory_id, bios_check, power, ports, status) 
                                         VALUES ('$sales_order_id', '$emp_id', '$inventory_id', '$bios', '$power', '$ports', '$status')";
+                                        echo $query;
                         $query_run = mysqli_query($connection, $query);
-                            
+                    
                         if($status == 1){
                             $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                             $date = $date1->format('Y-m-d H:i:s');
@@ -509,9 +509,24 @@ $query_run_c = mysqli_query($connection, $query_mc);
                             $query_prod_run = mysqli_query($connection, $query_prod_info);
                             header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
                         } 
+                            echo "<script>
+                        var newHTML = document.createElement ('div');
+                        newHTML.innerHTML =
+                        newHTML = document.createElement ('div');
+                        // newHTML.innerHTML = ' <div id=\"myModal2\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+                        document.body.appendChild (newHTML);
+                        $(window).load(function(){
+                             $('#myModal2').modal('show');
+                        });
+                    </script>";
                     }
 
                 ?>
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
+    data-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" id="form">
                 <div class="modal-header">
                     <h4 class="modal-title" id="myModalLabel">01 Motherboard Form</h4>
                 </div>
@@ -630,8 +645,8 @@ $query_run_c = mysqli_query($connection, $query_mc);
                 </div>
                 <div class="modal-footer">
 
-                    <button type="submit" value="submit" name="submit_motherboard_check"
-                        class="btn btn-default btn-next bg-gradient-success">Next</button>
+                    <a type="submit" value="submit" name="submit_motherboard_check"
+                        class="btn btn-default btn-next bg-gradient-success">Next</a>
 
                 </div>
             </form>
@@ -644,9 +659,8 @@ $query_run_c = mysqli_query($connection, $query_mc);
 <!-- ============================================================== -->
 
 
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
-    data-keyboard="false" aria-hidden="true">
-    <?php 
+
+<?php 
     
         if(isset($_POST['combine_check_form'])){
         
@@ -783,11 +797,23 @@ $query_run_c = mysqli_query($connection, $query_mc);
             $query_prod_info ="UPDATE prod_info SET end_date_time = '$date', status = '1', issue_type = '2' WHERE p_id = '$p_id' ";
             $query_prod_run = mysqli_query($connection, $query_prod_info);
             }
-        }    
+        }
+        echo "<script>
+        var newHTML = document.createElement ('div');
+        newHTML.innerHTML =
+        newHTML = document.createElement ('div');
+        // newHTML.innerHTML = ' <div id=\"myModal3\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+        document.body.appendChild (newHTML);
+        $(window).load(function(){
+             $('#myModal3').modal('show');
+        });
+    </script>";    
     }
 
     
     ?>
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
+    data-keyboard="false" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -1827,8 +1853,8 @@ $query_run_c = mysqli_query($connection, $query_mc);
                     </fieldset>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" value="submit" name="combine_check_form"
-                        class="btn btn-default bg-gradient-success btn-next">Next</button>
+                    <a type="submit" value="submit" name="combine_check_form"
+                        class="btn btn-default bg-gradient-success btn-next">Next</a>
                 </div>
             </form>
         </div>
@@ -1840,15 +1866,8 @@ $query_run_c = mysqli_query($connection, $query_mc);
 <!-- ============================================================== -->
 
 
-<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
-    data-keyboard="false" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">03 LCD Check </h4>
-            </div>
-            <form method="POST">
-                <?php 
+
+<?php 
                 
                     if(isset($_POST['submit_lcd_check'])){
                         $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
@@ -1870,9 +1889,27 @@ $query_run_c = mysqli_query($connection, $query_mc);
                         $lcd_check_query = "INSERT INTO `lcd_check`(inventory_id, emp_id, sales_order_id, whitespot, scratch, broken, line_lcd, yellow_shadow, created_time, status) 
                                                     VALUES ('$inventory_id', '$emp_id', '$sales_order_id', '$whitespot', '$scratch', '$broken', '$line_lcd', '$yellow_shadow', CURRENT_TIMESTAMP, $status)";
                         $lcd_query = mysqli_query($connection, $lcd_check_query);
+                        echo "<script>
+                        var newHTML = document.createElement ('div');
+                        newHTML.innerHTML =
+                        newHTML = document.createElement ('div');
+                        // newHTML.innerHTML = ' <div id=\"myModal4\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+                        document.body.appendChild (newHTML);
+                        $(window).load(function(){
+                             $('#myModal4').modal('show');
+                        });
+                    </script>";
                     }
                                
                 ?>
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
+    data-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">03 LCD Check </h4>
+            </div>
+            <form method="POST">
                 <div class="modal-body">
                     <fieldset>
                         <div class="row">
@@ -2072,8 +2109,8 @@ $query_run_c = mysqli_query($connection, $query_mc);
                     </fieldset>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" value="submit" name="submit_lcd_check"
-                        class="btn btn-default bg-gradient-success btn-next">Next</button>
+                    <a type="submit" value="submit" name="submit_lcd_check"
+                        class="btn btn-default bg-gradient-success btn-next">Next</a>
                 </div>
             </form>
         </div>
@@ -2085,9 +2122,8 @@ $query_run_c = mysqli_query($connection, $query_mc);
 <!-- ============================================================== -->
 
 
-<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
-    data-keyboard="false" aria-hidden="true">
-    <?php 
+
+<?php 
         if(isset($_POST['bodywork'])){
         $checkBox = implode(',', $_POST['work']); 
         $result=explode(",",$checkBox);
@@ -2153,9 +2189,20 @@ $query_run_c = mysqli_query($connection, $query_mc);
                 $query_prod_info ="UPDATE prod_info SET end_date_time = '$date', status = '0', issue_type = '4' WHERE p_id = '$p_id' ";
                 $query_prod_run = mysqli_query($connection, $query_prod_info);
             } 
+            echo "<script>
+                        var newHTML = document.createElement ('div');
+                        newHTML.innerHTML =
+                        newHTML = document.createElement ('div');
+                        // newHTML.innerHTML = ' <div id=\"myModal5\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+                        document.body.appendChild (newHTML);
+                        $(window).load(function(){
+                             $('#myModal5').modal('show');
+                        });
+                    </script>";
         }
     ?>
-
+<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
+    data-keyboard="false" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <form role="form" action="" method="POST">
             <div class="modal-content">
@@ -2263,8 +2310,8 @@ $query_run_c = mysqli_query($connection, $query_mc);
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" value="submit" class=" btn btn-default bg-gradient-success
-                    btn-next">Next</button>
+                    <a type="submit" value="submit" class=" btn btn-default bg-gradient-success
+                    btn-next">Next</a>
                 </div>
             </div>
         </form>
@@ -2275,16 +2322,8 @@ $query_run_c = mysqli_query($connection, $query_mc);
 <!-- Laptop Specification Check  -->
 <!-- ============================================================== -->
 
-<div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
-    data-keyboard="false" aria-hidden="true">
 
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">05 Production Specification Form</h4>
-            </div>
-            <form method="POST">
-                <?php                 
+<?php                 
                 
                     if(isset($_POST['prduction_specification_form'])){
                         
@@ -2314,6 +2353,15 @@ $query_run_c = mysqli_query($connection, $query_mc);
                     }
 
                 ?>
+<div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
+    data-keyboard="false" aria-hidden="true">
+
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">05 Production Specification Form</h4>
+            </div>
+            <form method="POST">
                 <div class="modal-body">
                     <fieldset style="display: block;">
                         <div class="modal-body">
