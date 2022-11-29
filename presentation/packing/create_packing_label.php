@@ -324,7 +324,7 @@ function printDiv(divName) {
     document.body.innerHTML = printContents;
 
     window.print();
+    window.location.href = './create_packing_label.php';
 
-    document.body.innerHTML = originalContents;
 }
 </script>

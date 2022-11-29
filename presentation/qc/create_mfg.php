@@ -9,7 +9,7 @@ include_once('../includes/header.php');
 //   ?>
 <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="../../static/plugins/bootstrap-3.3.5-dist/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="../../static/plugins/jquery/1.11.3/jquery.min.js"></script>
 <script src="../../static/plugins/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 <?php
 if (!isset($_SESSION['user_id'])) {
@@ -49,6 +49,11 @@ $start_print = 0;
     $touch_type = mysqli_real_escape_string($connection, $_POST['touch']); 
     $screen_size = mysqli_real_escape_string($connection, $_POST['screen_size']); 
     $mfg = mysqli_real_escape_string($connection, $_POST['mfg']); 
+    $screen_resolution = mysqli_real_escape_string($connection, $_POST['screen_resolution']);
+    $camera = mysqli_real_escape_string($connection, $_POST['camera']); 
+    $dvd = mysqli_real_escape_string($connection, $_POST['dvd']); 
+    $keyboard_backlight = mysqli_real_escape_string($connection, $_POST['keyboard_backlight']); 
+    $os = mysqli_real_escape_string($connection, $_POST['os']);
     $query ="SELECT * FROM packing_mfg WHERE mfg ='$mfg' ";
     $query_run = mysqli_query($connection, $query);
     
@@ -58,8 +63,8 @@ $start_print = 0;
     }
     
     if($exist == 0){
-    $query = "INSERT INTO packing_mfg(device, brand, core, generation, model, hdd_capacity, hdd_type, created_time, created_by,mfg,ram_capacity,touch,screen_size) 
-            VALUES('$device', '$brand' , '$core', '$generation', '$model', '$hdd_capacity', '$hdd_type', CURRENT_TIMESTAMP, '$username','$mfg','$ram_capacity','$touch_type','$screen_size')";
+    $query = "INSERT INTO packing_mfg(device, brand, core, generation, model, hdd_capacity, hdd_type, created_time, created_by,mfg,ram_capacity,touch,screen_size,screen_resolution,camera,dvd,keyboard_backlight,os) 
+            VALUES('$device', '$brand' , '$core', '$generation', '$model', '$hdd_capacity', '$hdd_type', CURRENT_TIMESTAMP, '$username','$mfg','$ram_capacity','$touch_type','$screen_size','$screen_resolution','$camera','$dvd','$keyboard_backlight','$os')";
     
     $query_run = mysqli_query($connection, $query);
     echo "<script>
@@ -268,6 +273,58 @@ $start_print = 0;
                                     </select>
                                 </div>
                             </div>
+                            <div class="row">
+                                <label class="col-sm-3 col-form-label">Screen Resolution</label>
+                                <div class="col-sm-8">
+                                    <select name="screen_resolution" class="info_select" style="border-radius: 5px;"
+                                        required>
+                                        <option selected value="1920x1080">1920x1080</option>
+                                        <option value="1366x768">1366x768</option>
+                                        <option value="1600x900">1600x900</option>
+                                        <option value="2k">2K</option>
+                                        <option value="14">3K</option>
+                                        <option value="15">4K</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-3 col-form-label">OPT</label>
+                                <div class="col-sm-8">
+                                    <select name="dvd" class="info_select" style="border-radius: 5px;" required>
+                                        <option selected value="no">No</option>
+                                        <option value="yes">Yes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-3 col-form-label">Camera</label>
+                                <div class="col-sm-8">
+                                    <select name="camera" class="info_select" style="border-radius: 5px;" required>
+                                        <option selected value="no">No</option>
+                                        <option value="yes">Yes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-3 col-form-label">Keyboard Backlight</label>
+                                <div class="col-sm-8">
+                                    <select name="keyboard_backlight" class="info_select" style="border-radius: 5px;"
+                                        required>
+                                        <option selected value="no">No</option>
+                                        <option value="yes">Yes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-3 col-form-label">OS</label>
+                                <div class="col-sm-8">
+                                    <select name="os" class="info_select" style="border-radius: 5px;" required>
+                                        <option selected value="w10p64">w10p64</option>
+                                        <option value="w10p32">w10p32</option>
+                                    </select>
+                                </div>
+                            </div>
+
 
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">MFG Number</label>
@@ -392,6 +449,11 @@ $start_print = 0;
                                 $device = $data['device'];
                                 $screen_type = $data['touch'];
                                 $screen_size = $data['screen_size'];
+                                $screen_resolution = $data['screen_resolution'];
+                                $dvd = $data['dvd'];
+                                $camera = $data['camera'];
+                                $keyboard_backlight=$data['keyboard_backlight'];
+                                $os = $data['os'];
                                 $mfg = $data['mfg'];
                                 $mfg_id = $data['mfg_id'];
                                 
@@ -449,6 +511,31 @@ $start_print = 0;
                                     <th style="border: black; border-style: solid;"> Screen Size :</th>
                                     <td class="px-2" style="border: black; border-style: solid;">
                                         <?php echo $screen_size; ?></td>
+                                </tr>
+                                <tr style="border: black; border-style: solid;">
+                                    <th style="border: black; border-style: solid;"> Screen Resolution :</th>
+                                    <td class="px-2" style="border: black; border-style: solid;">
+                                        <?php echo $screen_resolution; ?></td>
+                                </tr>
+                                <tr style="border: black; border-style: solid;">
+                                    <th style="border: black; border-style: solid;"> Camera :</th>
+                                    <td class="px-2" style="border: black; border-style: solid;">
+                                        <?php echo $camera; ?></td>
+                                </tr>
+                                <tr style="border: black; border-style: solid;">
+                                    <th style="border: black; border-style: solid;">OPT:</th>
+                                    <td class="px-2" style="border: black; border-style: solid;">
+                                        <?php echo $dvd; ?></td>
+                                </tr>
+                                <tr style="border: black; border-style: solid;">
+                                    <th style="border: black; border-style: solid;"> Keyboard Backlight :</th>
+                                    <td class="px-2" style="border: black; border-style: solid;">
+                                        <?php echo $keyboard_backlight; ?></td>
+                                </tr>
+                                <tr style="border: black; border-style: solid;">
+                                    <th style="border: black; border-style: solid;"> OS :</th>
+                                    <td class="px-2" style="border: black; border-style: solid;">
+                                        <?php echo $os; ?></td>
                                 </tr>
                                 <tr style="border: black; border-style: solid;">
                                     <th style="border: black; border-style: solid;"> MFG Number :</th>

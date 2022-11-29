@@ -5,11 +5,11 @@ include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
 include_once('../../dataAccess/403.php');
 include_once('../includes/header.php');
-// require_once("phpqrcode/qrlib.php");
+// require_once("phpqrcode/qrlib.php"); 
 ?>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../../static/plugins/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+<script src="../../static/plugins/jquery/1.11.3/jquery.min.js"></script>
+<script src="../../static/plugins/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 <?php
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
@@ -31,6 +31,11 @@ $ram_capacity = NULL;
 $hdd_type = null;
 $touch_type=null;
 $screen_size = null;
+$screen_resolution = NULL;
+$dvd = NULL;
+$camera = null;
+$keyboard_backlight=null;
+$os = null;
 $username = $_SESSION['username'];
 $start_print = 0;
 
@@ -47,6 +52,11 @@ $start_print = 0;
     $hdd_type = mysqli_real_escape_string($connection, $_POST['hdd_type']); 
     $touch_type = mysqli_real_escape_string($connection, $_POST['touch']); 
     $screen_size = mysqli_real_escape_string($connection, $_POST['screen_size']); 
+    $screen_resolution = mysqli_real_escape_string($connection, $_POST['screen_resolution']);
+    $dvd = mysqli_real_escape_string($connection, $_POST['dvd']);
+    $camera = mysqli_real_escape_string($connection, $_POST['camera']); 
+    $keyboard_backlight = mysqli_real_escape_string($connection, $_POST['keyboard_backlight']); 
+    $os = mysqli_real_escape_string($connection, $_POST['os']); 
     $mfg = mysqli_real_escape_string($connection, $_POST['mfg']); 
     
     $query = "UPDATE
@@ -62,7 +72,13 @@ SET
     `mfg` = '$mfg',
     `ram_capacity` = '$ram_capacity',
     `touch` = '$touch_type',
-    `screen_size` = '$screen_size'
+    `screen_size` = '$screen_size',
+    screen_resolution='$screen_resolution',
+    dvd = '$dvd',
+    camera = '$camera';
+    keyboard_backlight='$keyboard_backlight',
+    os = '$os'
+
 WHERE
     mfg_id='$mfg_id'";
     
@@ -94,6 +110,11 @@ WHERE
         $hdd_type = $data['hdd_type'];
         $screen_type=$data['touch'];
         $screen_size = $data['screen_size'];
+        $screen_resolution = $data['screen_resolution'];
+        $dvd = $data['dvd'];
+        $camera = $data['camera'];
+        $keyboard_backlight=$data['keyboard_backlight'];
+        $os = $data['os'];
         $mfg = $data['mfg'];
     }
 ?>
@@ -278,6 +299,64 @@ WHERE
                                     </select>
                                 </div>
                             </div>
+                            <div class="row">
+                                <label class="col-sm-3 col-form-label">Screen Resolution</label>
+                                <div class="col-sm-8">
+                                    <select name="screen_resolution" class="info_select" style="border-radius: 5px;"
+                                        required>
+                                        <option selected value="<?php echo $screen_resolution; ?>">
+                                            <?php echo $screen_resolution; ?>
+                                        <option value="1920x1080">1920x1080</option>
+                                        <option value="1366x768">1366x768</option>
+                                        <option value="1600x900">1600x900</option>
+                                        <option value="2k">2K</option>
+                                        <option value="14">3K</option>
+                                        <option value="15">4K</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-3 col-form-label">OPT</label>
+                                <div class="col-sm-8">
+                                    <select name="dvd" class="info_select" style="border-radius: 5px;" required>
+                                        <option selected value="<?php echo $dvd; ?>"><?php echo $dvd; ?>
+                                        <option value="no">No</option>
+                                        <option value="yes">Yes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-3 col-form-label">Camera</label>
+                                <div class="col-sm-8">
+                                    <select name="camera" class="info_select" style="border-radius: 5px;" required>
+                                        <option selected value="<?php echo $camera; ?>"><?php echo $camera; ?>
+                                        <option value="no">No</option>
+                                        <option value="yes">Yes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-3 col-form-label">Keyboard Backlight</label>
+                                <div class="col-sm-8">
+                                    <select name="keyboard_backlight" class="info_select" style="border-radius: 5px;"
+                                        required>
+                                        <option selected value="<?php echo $keyboard_backlight; ?>">
+                                            <?php echo $keyboard_backlight; ?>
+                                        <option value="no">No</option>
+                                        <option value="yes">Yes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-3 col-form-label">OS</label>
+                                <div class="col-sm-8">
+                                    <select name="os" class="info_select" style="border-radius: 5px;" required>
+                                        <option selected value="<?php echo $os; ?>"><?php echo $os; ?>
+                                        <option value="w10p64">w10p64</option>
+                                        <option value="w10p32">w10p32</option>
+                                    </select>
+                                </div>
+                            </div>
 
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">MFG Number</label>
@@ -400,6 +479,11 @@ WHERE
                                 $device = $data['device'];
                                 $screen_type = $data['touch'];
                                 $screen_size = $data['screen_size'];
+                                $screen_resolution = $data['screen_resolution'];
+                                $dvd = $data['dvd'];
+                                $camera = $data['camera'];
+                                $keyboard_backlight=$data['keyboard_backlight'];
+                                $os = $data['os'];
                                 $mfg = $data['mfg'];
                                 $mfg_id = $data['mfg_id'];
                                 
@@ -457,6 +541,31 @@ WHERE
                                     <th style="border: black; border-style: solid;"> Screen Size :</th>
                                     <td class="px-2" style="border: black; border-style: solid;">
                                         <?php echo $screen_size; ?></td>
+                                </tr>
+                                <tr style="border: black; border-style: solid;">
+                                    <th style="border: black; border-style: solid;"> Screen Resolution :</th>
+                                    <td class="px-2" style="border: black; border-style: solid;">
+                                        <?php echo $screen_resolution; ?></td>
+                                </tr>
+                                <tr style="border: black; border-style: solid;">
+                                    <th style="border: black; border-style: solid;"> Camera :</th>
+                                    <td class="px-2" style="border: black; border-style: solid;">
+                                        <?php echo $camera; ?></td>
+                                </tr>
+                                <tr style="border: black; border-style: solid;">
+                                    <th style="border: black; border-style: solid;">OPT:</th>
+                                    <td class="px-2" style="border: black; border-style: solid;">
+                                        <?php echo $dvd; ?></td>
+                                </tr>
+                                <tr style="border: black; border-style: solid;">
+                                    <th style="border: black; border-style: solid;"> Keyboard Backlight :</th>
+                                    <td class="px-2" style="border: black; border-style: solid;">
+                                        <?php echo $keyboard_backlight; ?></td>
+                                </tr>
+                                <tr style="border: black; border-style: solid;">
+                                    <th style="border: black; border-style: solid;"> OS :</th>
+                                    <td class="px-2" style="border: black; border-style: solid;">
+                                        <?php echo $os; ?></td>
                                 </tr>
                                 <tr style="border: black; border-style: solid;">
                                     <th style="border: black; border-style: solid;"> MFG Number :</th>

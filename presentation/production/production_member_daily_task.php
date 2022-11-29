@@ -91,7 +91,7 @@ foreach($query_tech as $data){
                     $query_insert = "INSERT INTO prod_info(p_id, inventory_id, start_date_time, end_date_time,sales_order, emp_id, tech_id,status, issue_type) 
                                     VALUES (null,'{$inventory_id}', CURRENT_TIMESTAMP, 0,'{$sales_order_id}','{$emp_id}','{$tech_id}','1', 0)";
                     $query_prod_info = mysqli_query($connection, $query_insert);
-                    header("Location: new_production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id} ");
+                    header("Location: production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id} ");
                 }
             }else{
                 echo " cannot scan over qty";
