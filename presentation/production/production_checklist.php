@@ -43,8 +43,8 @@ $launch_prod=1;
 $mother_board =1;
 $tech_id;
 $bios = null;
-$no_power = null;
-$usb_connection = null;
+$power = null;
+$ports = null;
 $keyboard = null;
 $keys =null;
 $speakers = null;
@@ -115,8 +115,8 @@ if (isset($_GET['sales_order_id'])) {
     $query_run_m = mysqli_query($connection, $query_m);
     foreach($query_run_m as $data){
         $bios = $data['bios_check'];
-        $no_power = $data['no_power'];
-        $usb_connection=$data['usb_connection'];
+        $power = $data['power'];
+        $ports=$data['ports'];
         $status = $data['status'];
         if($status == 0){
             $mother_board = 0;
@@ -554,15 +554,15 @@ if(isset($_POST['motherboard_submit'])){
     $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
     $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
     $bios_check = mysqli_real_escape_string($connection, $_POST['bios_check']);
-    $no_power = mysqli_real_escape_string($connection, $_POST['no_power']);
-    $usb_connection = mysqli_real_escape_string($connection, $_POST['usb_connection']);
+    $power = mysqli_real_escape_string($connection, $_POST['power']);
+    $ports = mysqli_real_escape_string($connection, $_POST['ports']);
     $status = 0;
-     if($bios_check == 1 || $no_power == 1 || $usb_connection == 1){
+     if($bios_check == 1 || $power == 1 || $ports == 1){
         $status = 1;
      }
      if($mother_board == 1){
-    $query = "INSERT INTO motherboard_check (sales_order_id, emp_id, inventory_id, bios_check, no_power, usb_connection,status) 
-                VALUES ('$sales_order_id', '$emp_id', '$inventory_id', '$bios_check', '$no_power', '$usb_connection','$status')";
+    $query = "INSERT INTO motherboard_check (sales_order_id, emp_id, inventory_id, bios_check, power, ports,status) 
+                VALUES ('$sales_order_id', '$emp_id', '$inventory_id', '$bios_check', '$power', '$ports','$status')";
                 // echo $query;
     $query_run = mysqli_query($connection, $query);
     if($status == 1){
@@ -629,36 +629,36 @@ if(isset($_POST['motherboard_submit'])){
                     </div>
                     <div class="row">
                         <label class="col-sm-4 col-form-label text-capitalize">Power</label>
-                        <?php  if($no_power == null){  ?>
+                        <?php  if($power == null){  ?>
                         <div class="col-sm-8 mt-2">
                             <div class="icheck-success d-inline">
-                                <input type="radio" id="r3" name="no_power" value="0">
+                                <input type="radio" id="r3" name="power" value="0">
                                 <label class="label_values" for="r3" style="margin-right: 15px;">Okay </label>
                             </div>
                             <div class="icheck-danger d-inline">
-                                <input type="radio" id="r4" name="no_power" value="1">
+                                <input type="radio" id="r4" name="power" value="1">
                                 <label class="label_values" for="r4">No </label>
                             </div>
                         </div>
-                        <?php }elseif($no_power == 0){ ?>
+                        <?php }elseif($power == 0){ ?>
                         <div class="col-sm-8 mt-2">
                             <div class="icheck-success d-inline">
-                                <input type="radio" id="r3" name="no_power" value="0" checked="checked">
+                                <input type="radio" id="r3" name="power" value="0" checked="checked">
                                 <label class="label_values" for="r3" style="margin-right: 15px;">Okay </label>
                             </div>
                             <div class="icheck-danger d-inline">
-                                <input type="radio" id="r4" name="no_power" value="1">
+                                <input type="radio" id="r4" name="power" value="1">
                                 <label class="label_values" for="r4">No </label>
                             </div>$camera_cable1
                         </div>
-                        <?php } elseif($no_power == 1){ ?>
+                        <?php } elseif($power == 1){ ?>
                         <div class="col-sm-8 mt-2">
                             <div class="icheck-success d-inline">
-                                <input type="radio" id="r3" name="no_power" value="0">
+                                <input type="radio" id="r3" name="power" value="0">
                                 <label class="label_values" for="r3" style="margin-right: 15px;">Okay </label>
                             </div>
                             <div class="icheck-danger d-inline">
-                                <input type="radio" id="r4" name="no_power" value="1" checked="checked">
+                                <input type="radio" id="r4" name="power" value="1" checked="checked">
                                 <label class="label_values" for="r4">No </label>
                             </div>
                         </div>
@@ -666,36 +666,36 @@ if(isset($_POST['motherboard_submit'])){
                     </div>
                     <div class="row">
                         <label class="col-sm-4 col-form-label text-capitalize">Port</label>
-                        <?php if($usb_connection == null){ ?>
+                        <?php if($ports == null){ ?>
                         <div class="col-sm-8 mt-2">
                             <div class="icheck-success d-inline">
-                                <input type="radio" id="r5" name="usb_connection" value="0">
+                                <input type="radio" id="r5" name="ports" value="0">
                                 <label class="label_values" for="r5" style="margin-right: 15px;">Okay </label>
                             </div>
                             <div class="icheck-danger d-inline">
-                                <input type="radio" id="r6" name="usb_connection" value="1">
+                                <input type="radio" id="r6" name="ports" value="1">
                                 <label class="label_values" for="r6">No </label>
                             </div>
                         </div>
-                        <?php } elseif($usb_connection == 0){ ?>
+                        <?php } elseif($ports == 0){ ?>
                         <div class="col-sm-8 mt-2">
                             <div class="icheck-success d-inline">
-                                <input type="radio" id="r5" name="usb_connection" value="0" checked="checked">
+                                <input type="radio" id="r5" name="ports" value="0" checked="checked">
                                 <label class="label_values" for="r5" style="margin-right: 15px;">Okay </label>
                             </div>
                             <div class="icheck-danger d-inline">
-                                <input type="radio" id="r6" name="usb_connection" value="1">
+                                <input type="radio" id="r6" name="ports" value="1">
                                 <label class="label_values" for="r6">No </label>
                             </div>
                         </div>
-                        <?php } elseif($usb_connection == 1){ ?>
+                        <?php } elseif($ports == 1){ ?>
                         <div class="col-sm-8 mt-2">
                             <div class="icheck-success d-inline">
-                                <input type="radio" id="r5" name="usb_connection" value="0">
+                                <input type="radio" id="r5" name="ports" value="0">
                                 <label class="label_values" for="r5" style="margin-right: 15px;">Okay </label>
                             </div>
                             <div class="icheck-danger d-inline">
-                                <input type="radio" id="r6" name="usb_connection" value="1" checked="checked">
+                                <input type="radio" id="r6" name="ports" value="1" checked="checked">
                                 <label class="label_values" for="r6">No </label>
                             </div>
                         </div>

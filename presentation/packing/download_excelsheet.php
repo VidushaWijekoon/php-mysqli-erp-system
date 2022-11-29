@@ -50,6 +50,11 @@ $sales_order_id= null;
             <th>RAM Capacity</th>
             <th>Screen Type</th>
             <th>Screen Size </th>
+            <th>Screen Resolution</th>
+            <th>Optical</th>
+            <th>Camera</th>
+            <th>Keyboard Backlight</th>
+            <th>Operation System </th>
         </tr>
     </thead>
     <tbody>
@@ -57,7 +62,7 @@ $sales_order_id= null;
         <?php 
         if(isset($_POST['submit'])){ 
             $sales_order_id = mysqli_real_escape_string($connection, $_POST['sales_order_id']); 
-            $sql = "SELECT * FROM packing_mfg WHERE sales_order_id ='$sales_order_id'";
+            $sql = "SELECT * FROM packing_mfg WHERE sales_order_id ='$sales_order_id' ORDER BY cartoon_number";
             $result = mysqli_query($connection, $sql);
 		foreach($result as $data){
             ?>
@@ -75,6 +80,11 @@ $sales_order_id= null;
             <td><?php echo $data['ram_capacity'];?></td>
             <td><?php echo $data['touch'];?></td>
             <td><?php echo $data['screen_size'];?></td>
+            <td><?php echo $data['screen_resolution'];?></td>
+            <td><?php echo $data['dvd'];?></td>
+            <td><?php echo $data['camera'];?></td>
+            <td><?php echo $data['keyboard_backlight'];?></td>
+            <td><?php echo $data['os'];?></td>
 
             <?php
            }

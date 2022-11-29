@@ -399,9 +399,9 @@ $query_run_c = mysqli_query($connection, $query_mc);
                                     <p>01 Motherboard Check:</p>
                                 </label>
                                 <div class="col-sm-8">
-                                    <?php echo $mother_board; if($mother_board == 0) {?>
+                                    <?php if($mother_board == 0) {?>
                                     <button type="button" class="btn bg-gradient-warning d-none w-75"
-                                        data-toggle="modal" disabled data-target="#myModal1">
+                                        data-toggle="modal" data-target="#myModal1" disabled>
                                         Launch Motherboard Form
                                     </button>
                                     <?php }if($mother_board == null){ ?>
