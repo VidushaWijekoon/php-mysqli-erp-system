@@ -2385,6 +2385,7 @@ if(isset($_POST['lcd_form'])){
 <!-- /.modal -->
 <?php 
 if(isset($_POST['bodywork'])){
+    if($_POST['work'] != null){
    $checkBox = implode(',', $_POST['work']); 
 $result=explode(",",$checkBox);
 
@@ -2433,6 +2434,7 @@ for($i =0; $i< sizeof($result);$i++){
         $d_dent ="1";
     }
 }
+}
     $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
     $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
     $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
@@ -2444,7 +2446,7 @@ for($i =0; $i< sizeof($result);$i++){
      } 
     $query = "INSERT INTO bodywork(id, inventory_id, emp_id, sales_order_id, a_scratch, a_broken, a_dent, b_scratch, b_broken, b_logo, b_color, c_scratch, c_broken, c_dent, d_scratch, d_broken, d_dent, status) 
     VALUES (null,'$inventory_id','$emp_id','$sales_order_id','$a_scratch','$a_broken','$a_dent','$b_scratch','$b_broken','$b_logo','$b_color','$c_scratch','$c_broken','$c_dent','$d_scratch','$d_broken','$d_dent','$status')";
-    echo $query;
+ 
     $query_run = mysqli_query($connection, $query);
     echo "<script>
             var newHTML = document.createElement ('div');
