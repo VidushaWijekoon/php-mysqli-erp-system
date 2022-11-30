@@ -2442,7 +2442,6 @@ for($i =0; $i< sizeof($result);$i++){
      $d_scratch == 1 || $d_broken == 1 || $d_dent==1){
         $status = 1;
      } 
-     $checkBox = implode(',', $_POST['work']);
     $query = "INSERT INTO bodywork(id, inventory_id, emp_id, sales_order_id, a_scratch, a_broken, a_dent, b_scratch, b_broken, b_logo, b_color, c_scratch, c_broken, c_dent, d_scratch, d_broken, d_dent, status) 
     VALUES (null,'$inventory_id','$emp_id','$sales_order_id','$a_scratch','$a_broken','$a_dent','$b_scratch','$b_broken','$b_logo','$b_color','$c_scratch','$c_broken','$c_dent','$d_scratch','$d_broken','$d_dent','$status')";
     echo $query;
