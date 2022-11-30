@@ -18,6 +18,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
+$user = $_SESSION['username'];
 
 if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $role_id == 4 && $department == 19){
 
@@ -67,6 +68,7 @@ $start_print = 0;
             VALUES('$device', '$brand' , '$core', '$generation', '$model', '$hdd_capacity', '$hdd_type', CURRENT_TIMESTAMP, '$username','$mfg','$ram_capacity','$touch_type','$screen_size','$screen_resolution','$camera','$dvd','$keyboard_backlight','$os')";
     
     $query_run = mysqli_query($connection, $query);
+
     echo "<script>
             var newHTML = document.createElement ('div');
             newHTML.innerHTML =
@@ -97,19 +99,6 @@ $start_print = 0;
         Create MFG Form
     </div>
 </div>
-<div class="modal fade" id="thankyouModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Thank you for pre-registering!</h4>
-            </div>
-            <div class="modal-body">
-                <p>Thanks for getting in touch!</p>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="container-fluid">
     <div class="row">
@@ -120,6 +109,24 @@ $start_print = 0;
                     <form method="POST">
                         <fieldset>
                             <legend>Create Machine Information Sheet</legend>
+                            <?php
+                            $query = "SELECT * FROM `packing_mfg` WHERE `created_by`='$user' ORDER By mfg_id DESC limit 1;";
+                            $all_devices = mysqli_query($connection, $query);
+                            $p_device;
+                            $p_brand;
+                            $p_core;
+                            $p_gen;
+                            $p_model;
+                            $p_hdd_capacity;
+                            $p_hdd_type;
+                            $p_screen_type;
+                            $p_screen_size;
+                            $p_screen_resolution;
+                            $p_opt;
+                            $p_camera;
+                            $p_keyboard_backlight;
+                            $p_os;
+                            ?>
 
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Device</label>

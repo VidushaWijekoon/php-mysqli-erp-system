@@ -5,9 +5,9 @@ include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
 include_once('../includes/header.php');
 ?>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../../static/plugins/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+<script src="../../static/plugins/jquery/1.11.3/jquery.min.js"></script>
+<script src="../../static/plugins/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 <?php
 // checking if a user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -499,7 +499,7 @@ $query_run_c = mysqli_query($connection, $query_mc);
                         }
                         $query = "INSERT INTO motherboard_check (sales_order_id, emp_id, inventory_id, bios_check, power, ports, status) 
                                         VALUES ('$sales_order_id', '$emp_id', '$inventory_id', '$bios', '$power', '$ports', '$status')";
-                                        echo $query;
+                                        echo $status;
                         $query_run = mysqli_query($connection, $query);
                     
                         if($status == 1){
@@ -509,16 +509,18 @@ $query_run_c = mysqli_query($connection, $query_mc);
                             $query_prod_run = mysqli_query($connection, $query_prod_info);
                             header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
                         } 
+                        if($status == 0){
                             echo "<script>
-                        var newHTML = document.createElement ('div');
-                        newHTML.innerHTML =
-                        newHTML = document.createElement ('div');
-                        // newHTML.innerHTML = ' <div id=\"myModal2\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
-                        document.body.appendChild (newHTML);
-                        $(window).load(function(){
-                             $('#myModal2').modal('show');
-                        });
-                    </script>";
+                         var newHTML = document.createElement ('div');
+                         newHTML.innerHTML =
+                         newHTML = document.createElement ('div');
+                         // newHTML.innerHTML = ' <div id=\"myModal2\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+                         document.body.appendChild (newHTML);
+                         $(window).load(function(){
+                              $('#myModal2').modal('show');
+                         });
+                     </script>";
+                        }
                     }
 
                 ?>
@@ -646,7 +648,7 @@ $query_run_c = mysqli_query($connection, $query_mc);
                 <div class="modal-footer">
 
                     <a type="submit" value="submit" name="submit_motherboard_check"
-                        class="btn btn-default btn-next bg-gradient-success">Next</a>
+                        class="btn btn-default btn-next bg-gradient-success">submit</a>
 
                 </div>
             </form>
@@ -724,6 +726,16 @@ $query_run_c = mysqli_query($connection, $query_mc);
                             '$dvd_rom', '$dvd_caddy', '$hdd_caddy', '$hdd_cable_connector', '$c_panel_palm_rest', '$mb_base', '$hings_cover', '$fan', '$heat_sink', '$cpu', 0, 0)";
                         echo $query_6;
             $query_new = mysqli_query($connection, $query_6);
+            echo "<script>
+            var newHTML = document.createElement ('div');
+            newHTML.innerHTML =
+            newHTML = document.createElement ('div');
+            // newHTML.innerHTML = ' <div id=\"myModal3\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+            document.body.appendChild (newHTML);
+            $(window).load(function(){
+                 $('#myModal3').modal('show');
+            });
+        </script>";
         }
         
         if($lunch_combine == null){
@@ -798,21 +810,12 @@ $query_run_c = mysqli_query($connection, $query_mc);
             $query_prod_run = mysqli_query($connection, $query_prod_info);
             }
         }
-        echo "<script>
-        var newHTML = document.createElement ('div');
-        newHTML.innerHTML =
-        newHTML = document.createElement ('div');
-        // newHTML.innerHTML = ' <div id=\"myModal3\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
-        document.body.appendChild (newHTML);
-        $(window).load(function(){
-             $('#myModal3').modal('show');
-        });
-    </script>";    
+           
     }
 
     
     ?>
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
+<div class="modal fade" id="myModal20" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
     data-keyboard="false" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
