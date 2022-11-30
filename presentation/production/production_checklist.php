@@ -417,7 +417,7 @@ if(isset($_POST['submit'])){
                                         Motherboard</label>
                                     <div class="col-sm-8">
 
-                                        <button type="button" class="btn bg-gradient-secondary w-75" data-toggle="modal"
+                                        <button type="button" class="btn bg-gradient-danger w-75" data-toggle="modal"
                                             data-target="#modal-motherboard" disabled>
                                             Launch Motherboard Form
                                         </button>
@@ -431,7 +431,7 @@ if(isset($_POST['submit'])){
                                     <label class="col-sm-4 col-form-label text-capitalize">Step 02 :
                                         Combine</label>
                                     <div class="col-sm-8">
-                                        <button type="button" class="btn bg-gradient-info w-75" data-toggle="modal"
+                                        <button type="button" class="btn bg-gradient-danger w-75" data-toggle="modal"
                                             data-target="#modal-combine">
                                             Launch Combine Form
                                         </button>
@@ -442,7 +442,7 @@ if(isset($_POST['submit'])){
                                     <label class="col-sm-4 col-form-label text-capitalize">Step 02
                                         :Combine</label>
                                     <div class="col-sm-8">
-                                        <button type="button" class="btn bg-gradient-info w-75" data-toggle="modal"
+                                        <button type="button" class="btn bg-gradient-danger w-75" data-toggle="modal"
                                             data-target="#modal-combine" disabled>
                                             Launch Combine Form
                                         </button>
@@ -486,7 +486,7 @@ if(isset($_POST['submit'])){
                                     <label class="col-sm-4 col-form-label text-capitalize">Step 04
                                         :Bodywork</label>
                                     <div class="col-sm-8">
-                                        <button type="button" class="btn bg-gradient-warning w-75" data-toggle="modal"
+                                        <button type="button" class="btn bg-gradient-danger w-75" data-toggle="modal"
                                             data-target="#modal-bodywork">
                                             Launch Bodywork Form
                                         </button>
@@ -497,7 +497,7 @@ if(isset($_POST['submit'])){
                                     <label class="col-sm-4 col-form-label text-capitalize">Step 04
                                         :Bodywork</label>
                                     <div class="col-sm-8">
-                                        <button type="button" class="btn bg-gradient-warning w-75" data-toggle="modal"
+                                        <button type="button" class="btn bg-gradient-danger w-75" data-toggle="modal"
                                             data-target="#modal-bodywork" disabled>
                                             Launch Bodywork Form
                                         </button>
@@ -576,17 +576,7 @@ if(isset($_POST['motherboard_submit'])){
     $query_prod_run = mysqli_query($connection, $query_prod_info);
     header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
     }else{
-        echo "<script>
-        var newHTML = document.createElement ('div');
-        newHTML.innerHTML =
-        newHTML = document.createElement ('div');
-        newHTML.innerHTML = '<div id=\"modal-combine\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"><div class=\"modal-dialog modal-xl\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
-        document.body.appendChild (newHTML);
-        $(window).load(function(){
-             $('#modal-combine').modal('show');
-        });
-    </script>";
-            // header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
+            header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
         }
      }else{
         // echo "Already Completed";
@@ -762,12 +752,10 @@ if(isset($_POST['combine_form'])){
     $mb_base= mysqli_real_escape_string($connection,  $_POST['mb_base']);
     $hings_cover= mysqli_real_escape_string($connection,  $_POST['hings_cover']);
     $lan_cover= mysqli_real_escape_string($connection,  $_POST['lan_cover']);
-   
     
 
 
     $query = "SELECT location FROM users WHERE epf = '$emp_id'";
-
     $query_run = mysqli_query($connection, $query);
     $location10;
     foreach($query_run as $a){
@@ -793,17 +781,16 @@ if(isset($_POST['combine_form'])){
         
          
      }
+     echo "im here......!!!!!!!!!!!!";
     if($lunch_combine == 1){
         
-    $query_com = "INSERT INTO combine_check(inventory_id, emp_id, sales_order_id, keyboard, speakers, camera, bazel, status, keyboard_keys, mousepad, mouse_pad_button, 
+    $query_com = "INSERT INTO combine_check(inventory_id, emp_id, sales_order_id, keyboard, speakers, camera, bazel, status, damage_keys, mousepad, mouse_pad_button, 
                             camera_cable, back_cover, wifi_card, lcd_cable, battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, c_panel_palm_rest, mb_base, 
                             hings_cover, lan_cover, combined_id)
                 VALUES ('$inventory_id', '$emp_id', '$sales_order_id', '$keyboard', '$speakers', '$camera', '$bazel', '$status', '$keys','$mousepad','$mouse_pad_button',
                 '$camera_cable','$back_cover','$wifi_card','$lcd_cable','$battery','$battery_cable','$dvd_rom','$dvd_caddy','$hdd_caddy','$hdd_cable_connector',
                 '$c_panel_palm_rest','$mb_base','$hings_cover','$lan_cover', 0)";
-                    
     $query_run = mysqli_query($connection, $query_com);
-    
     
    
     if($scan_id !=0){
@@ -947,17 +934,7 @@ if(isset($_POST['combine_form'])){
     $query_prod_run = mysqli_query($connection, $query_prod_info);
     header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
     }else{
-        echo "<script>
-                var newHTML = document.createElement ('div');
-                newHTML.innerHTML =
-                newHTML = document.createElement ('div');
-                // newHTML.innerHTML = ' <div id=\"modal-lcd\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
-                document.body.appendChild (newHTML);
-                $(window).load(function(){
-                    $('#modal-lcd').modal('show');
-                });
-            </script>";
-            // header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
+            header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
         }
     }else{
         // echo "already checked";
@@ -1851,10 +1828,11 @@ if(isset($_POST['combine_form'])){
 
 
                     </div>
-                </fieldset>
-                <div class="modal-footer justify-content-end">
-                    <button type="submit" name="combine_form" class="btn bg-gradient-success btn-sm">Next</button>
-                </div>
+                    <div class="modal-footer justify-content-between">
+                        <?php echo "<a class='btn btn-sm btn-danger mx-1' href=\"production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}\">Close</a>" ?>
+                        <button type="submit" name="combine_form" class="btn bg-gradient-success btn-sm">Save
+                            changes</button>
+                    </div>
 
             </form>
 
@@ -1893,17 +1871,7 @@ if(isset($_POST['lcd_form'])){
     $query_prod_run = mysqli_query($connection, $query_prod_info);
     header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
     }else{
-        echo "<script>
-                var newHTML = document.createElement ('div');
-                newHTML.innerHTML =
-                newHTML = document.createElement ('div');
-                // newHTML.innerHTML = ' <div id=\"modal-bodywork\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
-                document.body.appendChild (newHTML);
-                $(window).load(function(){
-                    $('#modal-bodywork').modal('show');
-                });
-            </script>";
-            // header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
+            header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
         }
 }
 
@@ -2394,23 +2362,11 @@ for($i =0; $i< sizeof($result);$i++){
      $d_scratch == 1 || $d_broken == 1 || $d_dent==1){
         $status = 1;
      } 
-     $checkBox = implode(',', $_POST['work']);
     $query = "INSERT INTO bodywork(id, inventory_id, emp_id, sales_order_id, a_scratch, a_broken, a_dent, b_scratch, b_broken, b_logo, b_color, c_scratch, c_broken, c_dent, d_scratch, d_broken, d_dent, status) 
     VALUES (null,'$inventory_id','$emp_id','$sales_order_id','$a_scratch','$a_broken','$a_dent','$b_scratch','$b_broken','$b_logo','$b_color','$c_scratch','$c_broken','$c_dent','$d_scratch','$d_broken','$d_dent','$status')";
     echo $query;
     $query_run = mysqli_query($connection, $query);
-    echo "<script>
-            var newHTML = document.createElement ('div');
-            newHTML.innerHTML =
-            newHTML = document.createElement ('div');
-            // newHTML.innerHTML = ' <div id=\"modal-production\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
-            document.body.appendChild (newHTML);
-            $(window).load(function(){
-                $('#modal-production').modal('show');
-            });
-        </script>";
-    
-// header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
+header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
     if($status == 1){
         $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
         $date = $date1->format('Y-m-d H:i:s');
@@ -2418,17 +2374,7 @@ for($i =0; $i< sizeof($result);$i++){
         $query_prod_run = mysqli_query($connection, $query_prod_info);
         // header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
         }else{
-            echo "<script>
-                    var newHTML = document.createElement ('div');
-                    newHTML.innerHTML =
-                    newHTML = document.createElement ('div');
-                    // newHTML.innerHTML = ' <div id=\"modal-production\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
-                    document.body.appendChild (newHTML);
-                    $(window).load(function(){
-                        $('#modal-production').modal('show');
-                    });
-                </script>";
-            // header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
+            header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
         }
 }
 ?>

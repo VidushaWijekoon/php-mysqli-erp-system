@@ -18,6 +18,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
+$user = $_SESSION['username'];
 
 if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $role_id == 4 && $department == 19){
 
@@ -67,6 +68,7 @@ $start_print = 0;
             VALUES('$device', '$brand' , '$core', '$generation', '$model', '$hdd_capacity', '$hdd_type', CURRENT_TIMESTAMP, '$username','$mfg','$ram_capacity','$touch_type','$screen_size','$screen_resolution','$camera','$dvd','$keyboard_backlight','$os')";
     
     $query_run = mysqli_query($connection, $query);
+
     echo "<script>
             var newHTML = document.createElement ('div');
             newHTML.innerHTML =
@@ -97,19 +99,6 @@ $start_print = 0;
         Create MFG Form
     </div>
 </div>
-<div class="modal fade" id="thankyouModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Thank you for pre-registering!</h4>
-            </div>
-            <div class="modal-body">
-                <p>Thanks for getting in touch!</p>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="container-fluid">
     <div class="row">
@@ -120,6 +109,42 @@ $start_print = 0;
                     <form method="POST">
                         <fieldset>
                             <legend>Create Machine Information Sheet</legend>
+                            <?php
+                            $query = "SELECT * FROM `packing_mfg` WHERE `created_by`='$user' ORDER By mfg_id DESC limit 1;";
+                            $all_devices = mysqli_query($connection, $query);
+                            $p_device = 0;
+                            $p_brand= 'HP';
+                            $p_core= 'i5';
+                            $p_gen= '3';
+                            $p_model= 0;
+                            $p_hdd_capacity= '512';
+                            $p_ram_capacity= '2';
+                            $p_hdd_type= 'HDD';
+                            $p_screen_type= 'Touch';
+                            $p_screen_size= '14';
+                            $p_screen_resolution= '1920';
+                            $p_opt= 'yes';
+                            $p_camera= 'yes';
+                            $p_keyboard_backlight= 'yes';
+                            $p_os= 'w10';
+                            foreach( $all_devices as $a){
+                                $p_device=$a['device'];
+                                $p_brand =$a['brand'];
+                                $p_core =$a['core'];
+                                $p_gen =$a['generation'];
+                                $p_model =$a['model'];
+                                $p_hdd_capacity =$a['hdd_capacity'];
+                                $p_hdd_type =$a['hdd_type'];
+                                $p_screen_type =$a['touch'];
+                                $p_screen_size =$a['screen_size'];
+                                $p_screen_resolution =$a['screen_resolution'];
+                                $p_opt =$a['dvd'];
+                                $p_camera =$a['camera'];
+                                $p_keyboard_backlight =$a['keyboard_backlight'];
+                                $p_os =$a['os'];
+                                $p_ram_capacity = $a['ram_capacity'];
+                            }
+                            ?>
 
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Device</label>
@@ -143,10 +168,16 @@ $start_print = 0;
                             </div>
 
                             <div class="row">
-                                <label class="col-sm-3 col-form-label">Brand</label>
+                                <label class="col-sm-3 col-form-label">Brand <?php echo $p_brand ?></label>
                                 <div class="col-sm-8">
                                     <select name="brand" class="info_select" style="border-radius: 5px;" required>
+                                        <?php if($p_brand == 'hp'){ ?>
                                         <option selected value="hp">HP</option>
+                                        <?php echo $p_brand; ?>
+                                        <?php }else{ ?>
+                                        <option selected value="<?php echo $p_brand ?>"><?php echo $p_brand ?></option>
+
+                                        <?php } ?>
                                         <?php
                                             $query = "SELECT * FROM brand ORDER BY brand ASC";
                                             $all_devices = mysqli_query($connection, $query);
@@ -167,7 +198,11 @@ $start_print = 0;
                                 <label class="col-sm-3 col-form-label">Core</label>
                                 <div class="col-sm-8">
                                     <select name="core" class="info_select" style="border-radius: 5px;" required>
+                                        <?php if($p_core == 'i5'){ ?>
                                         <option selected value="i5">i5</option>
+                                        <?php }else{ ?>
+                                        <option selected value="<?php echo $p_core ?>"><?php echo $p_core ?></option>
+                                        <?php } ?>
                                         <?php
                                             $query = "SELECT * FROM core ORDER BY core";
                                             $all_devices = mysqli_query($connection, $query);
@@ -188,7 +223,11 @@ $start_print = 0;
                                 <label class="col-sm-3 col-form-label">Generation</label>
                                 <div class="col-sm-8">
                                     <select name="generation" class="info_select" style="border-radius: 5px;" required>
-                                        <option selected value="5">5</option>
+                                        <?php if($p_gen == '3'){ ?>
+                                        <option selected value="5">5th</option>
+                                        <?php }else{ ?>
+                                        <option selected value="<?php echo $p_gen ?>"><?php echo $p_gen ?>th</option>
+                                        <?php } ?>
                                         <?php
                                             $query = "SELECT * FROM generation ORDER BY generation_id";
                                             $all_devices = mysqli_query($connection, $query);
@@ -209,7 +248,14 @@ $start_print = 0;
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Model</label>
                                 <div class="col-sm-8">
+
+                                    <?php if($p_model == 0){ ?>
                                     <input type="text" class="form-control" placeholder="Model" name="model" required>
+                                    <?php }else{ ?>
+                                    <input type="text" class="form-control" placeholder="Model" name="model"
+                                        value="<?php echo $p_model ?>" required>
+
+                                    <?php } ?>
                                 </div>
                             </div>
 
@@ -218,7 +264,13 @@ $start_print = 0;
                                 <div class="col-sm-8">
                                     <select name="hdd_capacity" class="info_select" style="border-radius: 5px;"
                                         required>
+                                        <?php if($p_hdd_capacity == '512'){ ?>
                                         <option selected value="128GB">128GB</option>
+                                        <?php }else{ ?>
+                                        <option selected value="<?php echo $p_hdd_capacity ?>">
+                                            <?php echo $p_hdd_capacity ?></option>
+                                        <?php } ?>
+                                        <option value="128GB">128GB</option>
                                         <option value="256GB">256GB</option>
                                         <option value="512GB">512GB</option>
                                         <option value="1TB">1TB</option>
@@ -231,7 +283,13 @@ $start_print = 0;
                                 <div class="col-sm-8">
                                     <select name="ram_capacity" class="info_select" style="border-radius: 5px;"
                                         required>
-                                        <option selected value="2">2GB</option>
+                                        <?php if($p_ram_capacity == 2){ ?>
+                                        <option selected value="2GB">2GB</option>
+                                        <?php }else{ ?>
+                                        <option selected value="<?php echo $p_ram_capacity ?>">
+                                            <?php echo $p_ram_capacity ?></option>
+                                        <option value="2">2GB</option>
+                                        <?php } ?>
                                         <option value="4">4GB</option>
                                         <option value="8">8GB</option>
                                         <option value="16">16GB</option>
@@ -245,7 +303,14 @@ $start_print = 0;
                                 <label class="col-sm-3 col-form-label">HDD Type</label>
                                 <div class="col-sm-8">
                                     <select name="hdd_type" class="info_select" style="border-radius: 5px;" required>
+
+                                        <?php if($p_hdd_type == 'hdd'){ ?>
                                         <option selected value="hdd">HDD</option>
+                                        <?php }else{ ?>
+                                        <option selected value="<?php echo $p_hdd_type ?>">
+                                            <?php echo $p_hdd_type ?></option>
+                                        <option value="hdd">HDD</option>
+                                        <?php } ?>
                                         <option value="ssd">SSD</option>
                                         <option value="nvme">NVME</option>
                                     </select>
@@ -255,7 +320,14 @@ $start_print = 0;
                                 <label class="col-sm-3 col-form-label">Screen</label>
                                 <div class="col-sm-8">
                                     <select name="touch" class="info_select" style="border-radius: 5px;" required>
+                                        <?php if($p_screen_type =='Touch'){ ?>
                                         <option selected value="touch">Touch</option>
+                                        <?php }else{ ?>
+                                        <option selected value="<?php echo $p_screen_type ?>">
+                                            <?php echo $p_screen_type ?></option>
+                                        <option value="touch">Touch</option>
+                                        <?php } ?>
+
                                         <option value="none_touch">None Touch</option>
                                     </select>
                                 </div>
@@ -264,7 +336,14 @@ $start_print = 0;
                                 <label class="col-sm-3 col-form-label">Screen Size</label>
                                 <div class="col-sm-8">
                                     <select name="screen_size" class="info_select" style="border-radius: 5px;" required>
+                                        <?php if($p_screen_size =='14'){ ?>
                                         <option selected value="11">11"</option>
+                                        <?php }else{ ?>
+                                        <option selected value="<?php echo $p_screen_size ?>">
+                                            <?php echo $p_screen_size ?></option>
+                                        <option value="11">11"</option>
+                                        <?php } ?>
+
                                         <option value="12">12"</option>
                                         <option value="13">13"</option>
                                         <option value="14">14"</option>
@@ -278,7 +357,14 @@ $start_print = 0;
                                 <div class="col-sm-8">
                                     <select name="screen_resolution" class="info_select" style="border-radius: 5px;"
                                         required>
+                                        <?php if($p_screen_resolution =='1920'){ ?>
                                         <option selected value="1920x1080">1920x1080</option>
+                                        <?php }else{ ?>
+                                        <option selected value="<?php echo $p_screen_resolution ?>">
+                                            <?php echo $p_screen_resolution ?></option>
+                                        <option value="1920x1080">1920x1080</option>
+                                        <?php } ?>
+
                                         <option value="1366x768">1366x768</option>
                                         <option value="1600x900">1600x900</option>
                                         <option value="2k">2K</option>
@@ -291,7 +377,13 @@ $start_print = 0;
                                 <label class="col-sm-3 col-form-label">OPT</label>
                                 <div class="col-sm-8">
                                     <select name="dvd" class="info_select" style="border-radius: 5px;" required>
+                                        <?php if($p_opt =='yes'){ ?>
                                         <option selected value="no">No</option>
+                                        <?php }else{ ?>
+                                        <option selected value="<?php echo $p_opt ?>"><?php echo $p_opt ?></option>
+                                        <option value="No">No</option>
+                                        <?php } ?>
+
                                         <option value="yes">Yes</option>
                                     </select>
                                 </div>
@@ -300,7 +392,14 @@ $start_print = 0;
                                 <label class="col-sm-3 col-form-label">Camera</label>
                                 <div class="col-sm-8">
                                     <select name="camera" class="info_select" style="border-radius: 5px;" required>
+
+                                        <?php if($p_camera =='yes'){ ?>
                                         <option selected value="no">No</option>
+                                        <?php }else{ ?>
+                                        <option selected value="<?php echo $p_camera ?>"><?php echo $p_camera ?>
+                                        </option>
+                                        <option value="no">No</option>
+                                        <?php } ?>
                                         <option value="yes">Yes</option>
                                     </select>
                                 </div>
@@ -310,7 +409,13 @@ $start_print = 0;
                                 <div class="col-sm-8">
                                     <select name="keyboard_backlight" class="info_select" style="border-radius: 5px;"
                                         required>
+                                        <?php if($p_keyboard_backlight =='yes'){ ?>
                                         <option selected value="no">No</option>
+                                        <?php }else{ ?>
+                                        <option selected value="<?php echo $p_keyboard_backlight ?>">
+                                            <?php echo $p_keyboard_backlight ?></option>
+                                        <option value="no">No</option>
+                                        <?php } ?>
                                         <option value="yes">Yes</option>
                                     </select>
                                 </div>
@@ -319,7 +424,13 @@ $start_print = 0;
                                 <label class="col-sm-3 col-form-label">OS</label>
                                 <div class="col-sm-8">
                                     <select name="os" class="info_select" style="border-radius: 5px;" required>
+                                        <?php if($p_os =='w10'){ ?>
                                         <option selected value="w10p64">w10p64</option>
+                                        <?php }else{ ?>
+                                        <option selected value="<?php echo $p_os ?>"><?php echo $p_os ?></option>
+                                        <option value="w10p64">w10p64</option>
+                                        <?php } ?>
+
                                         <option value="w10p32">w10p32</option>
                                     </select>
                                 </div>
