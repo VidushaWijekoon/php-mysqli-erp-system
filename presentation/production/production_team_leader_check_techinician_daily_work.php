@@ -102,24 +102,12 @@ $query_e6 = mysqli_query($connection, $query);
 
                             if (mysqli_num_rows($query_run)) {
                                 foreach ($query_run as $values) {  
-                                     if(empty($values)){}else{
-                                        if($values['issue_type'] == 1){
-                                            $bydate_motherboard++;
-                                        }
-                                        if($values['issue_type'] == 2){
-                                            $bydate_combine++;
-                                        }
-                                        if($values['issue_type'] == 3){
-                                            $bydate_lcd++;
-                                        }
-                                        if($values['issue_type'] == 4){
-                                            $bydate_bodywork++;
-                                        }
-                                        if($values['issue_type'] == 5){
-                                            $bydate_sanding++;
-                                        }
-                                    }
-                                                                                    
+                                    $bydate_motherboard = $data['m_board_issue'];
+                                    $bydate_combine = $data['combine_issue'];
+                                    $bydate_lcd = $data['lcd_issue'];
+                                    $bydate_bodywork = $data['bodywork_issue'];
+                                    $bydate_sanding = $data['production_spec'];
+                                                                                                                        
                 ?>
 
                 <div class="card-body">
@@ -134,11 +122,8 @@ $query_e6 = mysqli_query($connection, $query);
                                     <span class="info-box-text">Motherboard</span>
                                     <span class="info-box-number"><?php echo $bydate_motherboard ?></span>
                                 </div>
-                                <!-- /.info-box-content -->
                             </div>
-                            <!-- /.info-box -->
                         </div>
-                        <!-- /.col -->
                         <div class="col-12 col-sm-6 col-md-2 ">
                             <div class="info-box mb-3">
                                 <span class="info-box-icon bg-gradient-secondary elevation-1">
@@ -147,11 +132,8 @@ $query_e6 = mysqli_query($connection, $query);
                                     <span class="info-box-text">Combine</span>
                                     <span class="info-box-number"><?php echo $bydate_combine ?></span>
                                 </div>
-                                <!-- /.info-box-content -->
                             </div>
-                            <!-- /.info-box -->
                         </div>
-                        <!-- /.col -->
 
                         <!-- fix for small devices only -->
                         <div class="clearfix hidden-md-up"></div>
@@ -164,11 +146,8 @@ $query_e6 = mysqli_query($connection, $query);
                                     <span class="info-box-text">LCD</span>
                                     <span class="info-box-number"><?php echo $bydate_lcd ?></span>
                                 </div>
-                                <!-- /.info-box-content -->
                             </div>
-                            <!-- /.info-box -->
                         </div>
-                        <!-- /.col -->
                         <div class="col-12 col-sm-6 col-md-2 ">
                             <div class="info-box mb-3">
                                 <span class="info-box-icon bg-gradient-dark elevation-1"><i
@@ -178,11 +157,8 @@ $query_e6 = mysqli_query($connection, $query);
                                     <span class="info-box-text">Bodywork</span>
                                     <span class="info-box-number"><?php echo $bydate_bodywork ?></span>
                                 </div>
-                                <!-- /.info-box-content -->
                             </div>
-                            <!-- /.info-box -->
                         </div>
-                        <!-- /.col -->
                         <div class="col-12 col-sm-6 col-md-2 ">
                             <div class="info-box mb-3">
                                 <span class="info-box-icon bg-gradient-success elevation-1"><i
@@ -192,11 +168,8 @@ $query_e6 = mysqli_query($connection, $query);
                                     <span class="info-box-text">Sanding</span>
                                     <span class="info-box-number"><?php echo $bydate_sanding ?></span>
                                 </div>
-                                <!-- /.info-box-content -->
                             </div>
-                            <!-- /.info-box -->
                         </div>
-                        <!-- /.col -->
 
                     </div>
                     <!-- /.row -->
@@ -301,25 +274,11 @@ $query_e6 = mysqli_query($connection, $query);
 
                             if (mysqli_num_rows($query_run)) {
                                 foreach ($query_run as $values) {
-                                    if(empty($values)){}else{
-                                        if($values['issue_type'] == 1){
-                                            $motherboard++;
-                                         }
-                                        if($values['issue_type'] == 2){
-                                            $combine++;
-                                        }
-                                        if($values['issue_type'] == 3){
-                                                        $lcd++;
-                                        }
-                                        if($values['issue_type'] == 4){
-                                            $bodywork++;
-                                        }
-                                        if($values['issue_type'] == 5){
-                                            $sanding++;
-                                         }
-                                     }
-
-                                   
+                                    $bydate_motherboard = $values['m_board_issue'];
+                                    $bydate_combine = $values['combine_issue'];
+                                    $bydate_lcd = $values['lcd_issue'];
+                                    $bydate_bodywork = $values['bodywork_issue'];
+                                    $bydate_sanding = $values['production_spec'];                                  
                                                                                     
                 ?>
 
@@ -333,26 +292,20 @@ $query_e6 = mysqli_query($connection, $query);
                                         class="fa-solid fa-keyboard"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Motherboard</span>
-                                    <span class="info-box-number"><?php echo $motherboard ?></span>
+                                    <span class="info-box-number"><?php echo $bydate_motherboard ?></span>
                                 </div>
-                                <!-- /.info-box-content -->
                             </div>
-                            <!-- /.info-box -->
                         </div>
-                        <!-- /.col -->
                         <div class="col-12 col-sm-6 col-md-2 ">
                             <div class="info-box mb-3">
                                 <span class="info-box-icon bg-gradient-secondary elevation-1">
                                     <i class="fa-solid fa-object-group"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Combine</span>
-                                    <span class="info-box-number"><?php echo $combine ?></span>
+                                    <span class="info-box-number"><?php echo $bydate_combine ?></span>
                                 </div>
-                                <!-- /.info-box-content -->
                             </div>
-                            <!-- /.info-box -->
                         </div>
-                        <!-- /.col -->
 
                         <!-- fix for small devices only -->
                         <div class="clearfix hidden-md-up"></div>
@@ -363,13 +316,10 @@ $query_e6 = mysqli_query($connection, $query);
                                         class="fas fa-tv"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">LCD</span>
-                                    <span class="info-box-number"><?php echo $lcd ?></span>
+                                    <span class="info-box-number"><?php echo $bydate_lcd ?></span>
                                 </div>
-                                <!-- /.info-box-content -->
                             </div>
-                            <!-- /.info-box -->
                         </div>
-                        <!-- /.col -->
                         <div class="col-12 col-sm-6 col-md-2 ">
                             <div class="info-box mb-3">
                                 <span class="info-box-icon bg-gradient-dark elevation-1"><i
@@ -377,13 +327,10 @@ $query_e6 = mysqli_query($connection, $query);
 
                                 <div class="info-box-content">
                                     <span class="info-box-text">Bodywork</span>
-                                    <span class="info-box-number"><?php echo $bodywork ?></span>
+                                    <span class="info-box-number"><?php echo $bydate_bodywork ?></span>
                                 </div>
-                                <!-- /.info-box-content -->
                             </div>
-                            <!-- /.info-box -->
                         </div>
-                        <!-- /.col -->
                         <div class="col-12 col-sm-6 col-md-2 ">
                             <div class="info-box mb-3">
                                 <span class="info-box-icon bg-gradient-success elevation-1"><i
@@ -391,13 +338,10 @@ $query_e6 = mysqli_query($connection, $query);
 
                                 <div class="info-box-content">
                                     <span class="info-box-text">Sanding</span>
-                                    <span class="info-box-number"><?php echo $sanding ?></span>
+                                    <span class="info-box-number"><?php echo $bydate_sanding ?></span>
                                 </div>
-                                <!-- /.info-box-content -->
                             </div>
-                            <!-- /.info-box -->
                         </div>
-                        <!-- /.col -->
 
                     </div>
                     <!-- /.row -->
