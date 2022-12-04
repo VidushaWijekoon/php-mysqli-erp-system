@@ -22,6 +22,14 @@ $tech_id = $_GET['tech_id'];
 $sales_order_id = $_GET['sales_order_id'];
 $assign_qty;
 $scaned_qty;
+$model ;
+$brand ;
+$core ;
+$generation ;
+$processor ;
+$device ;
+$exists_inventory_id= 0;
+
 $query1 = "SELECT * FROM prod_technician_assign_info WHERE tech_id ='{$tech_id}' ";
 $query_tech = mysqli_query($connection, $query1);
 foreach($query_tech as $data){
@@ -42,10 +50,12 @@ foreach($query_tech as $data){
         $query_assign_count = "SELECT tech_assign_qty AS assign_qty FROM `prod_technician_assign_info` WHERE prod_technician_assign_info.tech_id = '$tech_id';";
         $query_scanned_count = "SELECT COUNT(prod_info.tech_id) AS completed_count FROM `prod_info` WHERE prod_info.tech_id = '$tech_id';";
         $query_scanned_inventory_count = "SELECT COUNT(prod_info.inventory_id) AS inventory_id_count FROM `prod_info` WHERE prod_info.inventory_id = '$inventory_id';";
+        $query_exists = "SELECT prod_info.inventory_id AS inventory_id FROM `prod_info` WHERE prod_info.inventory_id = '$inventory_id';";
 
         $query_assign_count_run = mysqli_query($connection, $query_assign_count);
         $query_scanned_count_run = mysqli_query($connection, $query_scanned_count);
         $query_scanned_inventory_count = mysqli_query($connection, $query_scanned_inventory_count);
+        $query_run = mysqli_query($connection, $query_exists);
         foreach($query_assign_count_run as $data){
             $assign_qty = $data['assign_qty'];
         }
@@ -55,6 +65,10 @@ foreach($query_tech as $data){
         }
         foreach($query_scanned_inventory_count as $data){
             $inventory_id_count = $data['inventory_id_count'];
+           
+        }
+        foreach($query_run as $data){
+            $exists_inventory_id = $data['inventory_id'];
            
         }
         
@@ -86,12 +100,14 @@ foreach($query_tech as $data){
            if(($assign_qty*2 )>= $scaned_qty){
             // if($inventory_id_count >3){
                 foreach($query_run as $data1){
-                    // $query_insert = "INSERT INTO prod_info(p_id, inventory_id, start_date_time, end_date_time,sales_order, emp_id, tech_id,status, issue_type) VALUES (0 ,0 , 0, 0, 0, 0, 0, 0, 0)";
-
-                    $query_insert = "INSERT INTO prod_info(p_id, inventory_id, start_date_time, end_date_time,sales_order, emp_id, tech_id,status, issue_type) 
-                                    VALUES (null,'{$inventory_id}', CURRENT_TIMESTAMP, 0,'{$sales_order_id}','{$emp_id}','{$tech_id}','1', 0)";
+                    if($exists_inventory_id == 0){
+                    $query_insert = "INSERT INTO prod_info(p_id, inventory_id, start_date_time, end_date_time,sales_order, emp_id, tech_id,status) 
+                                    VALUES (null,'{$inventory_id}', CURRENT_TIMESTAMP, 0,'{$sales_order_id}','{$emp_id}','{$tech_id}','1')";
                     $query_prod_info = mysqli_query($connection, $query_insert);
                     header("Location: production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id} ");
+                    }else{
+                        header("Location: production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id} ");
+                    }
                 }
             }else{
                 echo " cannot scan over qty";
@@ -264,10 +280,8 @@ foreach($query_tech as $data){
                                                 <?php } ?>
                                             </td>
                                             <td>
-                                                <?php echo $values['status']; if($values['status'] == 1){ 
-                                                        if ($values['issue_type'] == 1) {
-                                                            echo '<span class="badge badge-lg badge-danger text-white px-2">Motherboard Issue</span>';
-                                                        }if ($values['issue_type'] == 2) {
+                                                <?php  if($values['status'] == 1){ 
+                                                       if ($values['combine_issue'] == 1) {
                                                             
                                                             $query_1 ="SELECT  `status` FROM `requested_part_from_production` WHERE inventory_id = $inventory_id";
                                                             $query_run = mysqli_query($connection, $query_1);
@@ -286,22 +300,27 @@ foreach($query_tech as $data){
                                                                     $received = $a['status'];
                                                                 }
                                                             }if($combine_status == 0){
-                                                                echo "combine ok";
+                                                                echo "<span class='badge badge-lg badge-success text-white px-2'>Combine OK</span>";
                                                             }elseif($received == 0){
                                                                 echo "<a class='btn btn-sm '
                                                                 href=\"production_checklist.php?emp_id={$emp_id}&inventory_id={$values['inventory_id']}&sales_order_id={$values['sales_order_id']}\">
                                                                 <span class='badge badge-lg badge-warning text-white px-2'>Combine Issue</span>
                                                                 </a>";
                                                             }else{
-                                                                echo '<span class="badge badge-lg badge-danger text-white px-2 p-1">Waiting for parts</span>';
+                                                                echo '<span class="badge badge-lg badge-info text-white px-2 p-1">Waiting for parts</span>';
                                                             }
-                                                        }if ($values['issue_type'] ==3) {
+                                                        }if ($values['lcd_issue'] ==1) {
                                                             echo '<span class="badge badge-lg badge-danger text-white px-2">LCD Issue</span>';
-                                                        }if ($values['issue_type'] ==4) {
-                                                            echo '<span class="badge badge-lg badge-danger text-white px-2">Bodywork Issue</span>';
-                                                        }if ($values['issue_type'] ==5) {
-                                                            echo '<span class="badge badge-lg badge-success text-white px-2">Ready to QC</span>';
+                                                        }if ($values['bodywork_issue'] ==1) {
+                                                            echo '<span class="badge badge-lg badge-warning text-white px-2">Bodywork Issue</span>';
                                                         } 
+                                                        }elseif($values['status'] == 0){
+                                                            if ($values['m_board_issue'] ==1) {
+                                                                echo '<span class="badge badge-lg badge-secondary text-white px-2">Motherboard Issue</span>';}
+
+                                                                elseif ($values['production_spec'] ==0) {
+                                                                    echo '<span class="badge badge-lg badge-success text-white px-2">Production OK</span>';
+                                                                }
                                                         }?>
                                             </td>
                                         </tr>
