@@ -13,6 +13,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
+$user = $_SESSION['username'];
 
 if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $role_id == 4 && $department == 13){
 
@@ -32,6 +33,14 @@ $cartoon_count = 0;
 $sales_order_id = 0;
 $username = $_SESSION['username'];
 $start_print = 0;
+$query = "SELECT sales_order_id FROM `packing_mfg` WHERE `packing_by`='$user' ORDER By mfg_id DESC limit 1;"; 
+$query_run = mysqli_query($connection, $query);
+$p_sales_order_id = 0;
+foreach($query_run as $a){
+  
+    $p_sales_order_id = $a['sales_order_id'];
+  
+}
 
     if(isset($_POST['submit_mfg'])){
 
@@ -40,7 +49,8 @@ $start_print = 0;
     $cartoon_number = mysqli_real_escape_string($connection, $_POST['cartoon_number']); 
     $sales_order_id = mysqli_real_escape_string($connection, $_POST['sales_order_id']); 
 
-    $query = "SELECT * FROM packing_mfg WHERE cartoon_number = '$cartoon_number'";
+    $query = "SELECT * FROM packing_mfg WHERE sales_order_id = '$sales_order_id' AND cartoon_number = '$cartoon_number'";
+    echo $query;
     $query_run = mysqli_query($connection, $query);
     foreach($query_run as $data){
         $cartoon_count++;
@@ -51,9 +61,9 @@ $start_print = 0;
         $mfg_count++;
     }
     
-
+    echo $cartoon_count;
     if($cartoon_count <4 && $mfg_count==1){
-        $query = "UPDATE packing_mfg SET  cartoon_number='$cartoon_number',sales_order_id ='$sales_order_id' WHERE mfg = '$mfg' ";
+        $query = "UPDATE packing_mfg SET  cartoon_number='$cartoon_number',sales_order_id ='$sales_order_id',packing_by='$user',packing_date = CURRENT_TIMESTAMP WHERE mfg = '$mfg' ";
        
         $query_run = mysqli_query($connection, $query);
         
@@ -99,9 +109,16 @@ $start_print = 0;
                         <fieldset>
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">S/O Number</label>
+
                                 <div class="col-sm-8">
+                                    <?php if($p_sales_order_id == 0){ ?>
                                     <input type="text" min="1" class="form-control" placeholder="S/O Number"
                                         name="sales_order_id">
+                                    <?php }else{ ?>
+                                    <input type="text" min="1" class="form-control" name="sales_order_id"
+                                        value="<?php echo $p_sales_order_id  ?>">
+                                    <?php   }  ?>
+
                                 </div>
                             </div>
 
