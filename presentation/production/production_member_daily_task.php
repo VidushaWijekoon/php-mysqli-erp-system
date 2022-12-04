@@ -264,7 +264,7 @@ foreach($query_tech as $data){
                                                 <?php } ?>
                                             </td>
                                             <td>
-                                                <?php if($values['status'] == 1){ 
+                                                <?php echo $values['status']; if($values['status'] == 1){ 
                                                         if ($values['issue_type'] == 1) {
                                                             echo '<span class="badge badge-lg badge-danger text-white px-2">Motherboard Issue</span>';
                                                         }if ($values['issue_type'] == 2) {
