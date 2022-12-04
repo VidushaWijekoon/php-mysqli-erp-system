@@ -170,7 +170,8 @@ $start_print = 0;
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Brand <?php echo $p_brand ?></label>
                                 <div class="col-sm-8">
-                                    <select name="brand" class="info_select" style="border-radius: 5px;" required>
+                                    <select name="brand" class="info_select text-capitalize" style="border-radius: 5px;"
+                                        required>
                                         <?php if($p_brand == 'hp'){ ?>
                                         <option selected value="hp">HP</option>
                                         <?php echo $p_brand; ?>
@@ -246,7 +247,7 @@ $start_print = 0;
 
 
                             <div class="row">
-                                <label class="col-sm-3 col-form-label">Model</label>
+                                <label class="col-sm-3 col-form-label text-capitalize">Model</label>
                                 <div class="col-sm-8">
 
                                     <?php if($p_model == 0){ ?>
@@ -302,7 +303,8 @@ $start_print = 0;
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">HDD Type</label>
                                 <div class="col-sm-8">
-                                    <select name="hdd_type" class="info_select" style="border-radius: 5px;" required>
+                                    <select name="hdd_type" class="info_select text-capitalize"
+                                        style="border-radius: 5px;" required>
 
                                         <?php if($p_hdd_type == 'hdd'){ ?>
                                         <option selected value="hdd">HDD</option>
@@ -319,7 +321,8 @@ $start_print = 0;
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Screen</label>
                                 <div class="col-sm-8">
-                                    <select name="touch" class="info_select" style="border-radius: 5px;" required>
+                                    <select name="touch" class="info_select text-capitalize" style="border-radius: 5px;"
+                                        required>
                                         <?php if($p_screen_type =='Touch'){ ?>
                                         <option selected value="touch">Touch</option>
                                         <?php }else{ ?>
@@ -328,14 +331,15 @@ $start_print = 0;
                                         <option value="touch">Touch</option>
                                         <?php } ?>
 
-                                        <option value="none_touch">None Touch</option>
+                                        <option value="None Touch">None Touch</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Screen Size</label>
                                 <div class="col-sm-8">
-                                    <select name="screen_size" class="info_select" style="border-radius: 5px;" required>
+                                    <select name="screen_size" class="info_select " style="border-radius: 5px;"
+                                        required>
                                         <?php if($p_screen_size =='14'){ ?>
                                         <option selected value="11">11"</option>
                                         <?php }else{ ?>
@@ -376,11 +380,13 @@ $start_print = 0;
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">OPT</label>
                                 <div class="col-sm-8">
-                                    <select name="dvd" class="info_select" style="border-radius: 5px;" required>
+                                    <select name="dvd" class="info_select text-capitalize" style="border-radius: 5px;"
+                                        required>
                                         <?php if($p_opt =='yes'){ ?>
                                         <option selected value="no">No</option>
                                         <?php }else{ ?>
-                                        <option selected value="<?php echo $p_opt ?>"><?php echo $p_opt ?></option>
+                                        <option selected value="<?php echo $p_opt ?>">
+                                            <?php echo $p_opt ?></option>
                                         <option value="No">No</option>
                                         <?php } ?>
 
@@ -391,12 +397,14 @@ $start_print = 0;
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Camera</label>
                                 <div class="col-sm-8">
-                                    <select name="camera" class="info_select" style="border-radius: 5px;" required>
+                                    <select name="camera" class="info_select text-capitalize"
+                                        style="border-radius: 5px;" required>
 
                                         <?php if($p_camera =='yes'){ ?>
                                         <option selected value="no">No</option>
                                         <?php }else{ ?>
-                                        <option selected value="<?php echo $p_camera ?>"><?php echo $p_camera ?>
+                                        <option selected value="<?php echo $p_camera ?>">
+                                            <?php echo $p_camera ?>
                                         </option>
                                         <option value="no">No</option>
                                         <?php } ?>
@@ -407,8 +415,8 @@ $start_print = 0;
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Keyboard Backlight</label>
                                 <div class="col-sm-8">
-                                    <select name="keyboard_backlight" class="info_select" style="border-radius: 5px;"
-                                        required>
+                                    <select name="keyboard_backlight" class="info_select text-capitalize"
+                                        style="border-radius: 5px;" required>
                                         <?php if($p_keyboard_backlight =='yes'){ ?>
                                         <option selected value="no">No</option>
                                         <?php }else{ ?>
@@ -423,11 +431,13 @@ $start_print = 0;
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">OS</label>
                                 <div class="col-sm-8">
-                                    <select name="os" class="info_select" style="border-radius: 5px;" required>
+                                    <select name="os" class="info_select text-capitalize" style="border-radius: 5px;"
+                                        required>
                                         <?php if($p_os =='w10'){ ?>
                                         <option selected value="w10p64">w10p64</option>
                                         <?php }else{ ?>
-                                        <option selected value="<?php echo $p_os ?>"><?php echo $p_os ?></option>
+                                        <option selected value="<?php echo $p_os ?>">
+                                            <?php echo $p_os ?></option>
                                         <option value="w10p64">w10p64</option>
                                         <?php } ?>
 

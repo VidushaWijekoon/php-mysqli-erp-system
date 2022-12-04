@@ -803,7 +803,16 @@ if(isset($_POST['combine_form'])){
                 '$c_panel_palm_rest','$mb_base','$hings_cover','$lan_cover', 0)";
                     
     $query_run = mysqli_query($connection, $query_com);
-    
+    echo "<script>
+            var newHTML = document.createElement ('div');
+            newHTML.innerHTML =
+            newHTML = document.createElement ('div');
+            // newHTML.innerHTML = ' <div id=\"modal-lcd\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+            document.body.appendChild (newHTML);
+            $(window).load(function(){
+                $('#modal-lcd').modal('show');
+            });
+        </script>";
     
    
     if($scan_id !=0){
@@ -945,18 +954,19 @@ if(isset($_POST['combine_form'])){
                                                 $date = $date1->format('Y-m-d H:i:s');
     $query_prod_info ="UPDATE prod_info SET end_date_time=' $date',status='1',issue_type='2' WHERE p_id ='$p_id' ";
     $query_prod_run = mysqli_query($connection, $query_prod_info);
-    header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+    // header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+    echo "<script>
+    var newHTML = document.createElement ('div');
+    newHTML.innerHTML =
+    newHTML = document.createElement ('div');
+    // newHTML.innerHTML = ' <div id=\"modal-lcd\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+    document.body.appendChild (newHTML);
+    $(window).load(function(){
+        $('#modal-lcd').modal('show');
+    });
+</script>";
     }else{
-        echo "<script>
-                var newHTML = document.createElement ('div');
-                newHTML.innerHTML =
-                newHTML = document.createElement ('div');
-                // newHTML.innerHTML = ' <div id=\"modal-lcd\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
-                document.body.appendChild (newHTML);
-                $(window).load(function(){
-                    $('#modal-lcd').modal('show');
-                });
-            </script>";
+     
             // header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
         }
     }else{
@@ -1891,11 +1901,30 @@ if(isset($_POST['lcd_form'])){
                                                 $date = $date1->format('Y-m-d H:i:s');
     $query_prod_info ="UPDATE prod_info SET end_date_time=' $date',status='0',issue_type='3' WHERE p_id ='$p_id' ";
     $query_prod_run = mysqli_query($connection, $query_prod_info);
-    header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+    echo "<script>
+                var newHTML = document.createElement ('div');
+                newHTML.innerHTML =
+                newHTML = document.createElement ('div');
+                // newHTML.innerHTML = ' <div id=\"modal-bodywork\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+                document.body.appendChild (newHTML);
+                $(window).load(function(){
+                    $('#modal-bodywork').modal('show');
+                });
+            </script>";
+    // header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
     }else{
         echo "<script>
                 var newHTML = document.createElement ('div');
                 newHTML.innerHTML =
+
+
+
+
+
+
+
+
+                
                 newHTML = document.createElement ('div');
                 // newHTML.innerHTML = ' <div id=\"modal-bodywork\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
                 document.body.appendChild (newHTML);
@@ -2337,6 +2366,7 @@ if(isset($_POST['lcd_form'])){
 
 <?php 
 if(isset($_POST['bodywork'])){
+    if($_POST['work'] != null){
    $checkBox = implode(',', $_POST['work']); 
 $result=explode(",",$checkBox);
 
@@ -2385,6 +2415,7 @@ for($i =0; $i< sizeof($result);$i++){
         $d_dent ="1";
     }
 }
+}
     $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
     $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
     $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
@@ -2397,7 +2428,7 @@ for($i =0; $i< sizeof($result);$i++){
      $checkBox = implode(',', $_POST['work']);
     $query = "INSERT INTO bodywork(id, inventory_id, emp_id, sales_order_id, a_scratch, a_broken, a_dent, b_scratch, b_broken, b_logo, b_color, c_scratch, c_broken, c_dent, d_scratch, d_broken, d_dent, status) 
     VALUES (null,'$inventory_id','$emp_id','$sales_order_id','$a_scratch','$a_broken','$a_dent','$b_scratch','$b_broken','$b_logo','$b_color','$c_scratch','$c_broken','$c_dent','$d_scratch','$d_broken','$d_dent','$status')";
-    echo $query;
+ 
     $query_run = mysqli_query($connection, $query);
     echo "<script>
             var newHTML = document.createElement ('div');
@@ -2455,6 +2486,8 @@ for($i =0; $i< sizeof($result);$i++){
     $query_run = mysqli_query($connection, $query);
     $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
     $date = $date1->format('Y-m-d H:i:s');
+    $query = "SELECT status FROM combine_check WHERE $inventory_id";
+    $query_run = mysqli_query($connection, $query);  
      $query_prod_info ="UPDATE prod_info SET end_date_time = '$date', status = '0', issue_type = '5' WHERE p_id = '$p_id' ";
      $query_prod_run = mysqli_query($connection, $query_prod_info);
      header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
