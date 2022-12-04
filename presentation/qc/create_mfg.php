@@ -5,7 +5,7 @@ include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
 include_once('../../dataAccess/403.php');
 include_once('../includes/header.php');
-// require_once("phpqrcode/qrlib.php");
+require_once("phpqrcode/qrlib.php");
 //   ?>
 <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="../../static/plugins/bootstrap-3.3.5-dist/css/bootstrap.min.css">
@@ -68,6 +68,11 @@ $start_print = 0;
             VALUES('$device', '$brand' , '$core', '$generation', '$model', '$hdd_capacity', '$hdd_type', CURRENT_TIMESTAMP, '$username','$mfg','$ram_capacity','$touch_type','$screen_size','$screen_resolution','$camera','$dvd','$keyboard_backlight','$os')";
     
     $query_run = mysqli_query($connection, $query);
+    $tempDir = 'temp/';
+    $filename = $mfg;
+    $codeContents = $mfg;
+    QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5,1);
+    $start_print = 1;
 
     echo "<script>
             var newHTML = document.createElement ('div');
@@ -498,23 +503,47 @@ $start_print = 0;
                         ?>
                     <div id="printableArea">
                         <div class="row">
-                            <div class="col-sm">
+                            <table>
+                                <tr>
+                                    <th> <?php 
+                                    // QR code print
+                                    echo '<img src="temp/'.$mfg.'.png" style="width:400px; height:400px;margin: 0px 0 0 0px;">';?>
+                                    </th>
+                                    <th>
+                                        <p class="text-center text-uppercase text-weight:bold"
+                                            style="font-size: 100px; color:black !important">
+                                            MFG S/N
+                                        </p>
+                                        <p class="text-center text-uppercase"
+                                            style="font-size: 100px;color:black !important">
+                                            <?php 
+                                    echo  $mfg;
+                                    ?></p>
+                                    </th>
+                                </tr>
+                            </table>
+                            <!-- <div class="col-sm">
                                 <p class="text-center text-uppercase text-weight:bold"
                                     style="font-size: 120px; color:black !important">
                                     MFG S/N
                                 </p>
                                 <div class="text-left" style="margin-left:0px">
-                                    <?php echo '<img class="barcode w-100 " style="width:1350px"alt="'.$barcodeText.'" src="php-barcode/barcode.php?text='.$barcodeText.'&codetype='.$barcodeType.'&orientation='.$barcodeDisplay.
-                                        '&size='.$barcodeSize.'&print='.$mfg.'"/>';?>
+                                    <?php 
+                                        // barcode print 
+
+                                    // echo '<img class="barcode w-100 " style="width:1350px"alt="'.$barcodeText.'" src="php-barcode/barcode.php?text='.$barcodeText.'&codetype='.$barcodeType.'&orientation='.$barcodeDisplay.
+                                    //     '&size='.$barcodeSize.'&print='.$mfg.'"/>';
+                                        ?>
                                 </div>
                                 <p class="text-center text-uppercase" style="font-size: 120px;color:black !important">
-                                    <?php echo  $mfg;
-                                    echo "</br>";
+                                    <?php 
+                                    // echo  $mfg;
+                                    // echo "</br>";
                                     
-                                    echo "</br>";
-                                    echo ".";
+                                    // echo "</br>";
+                                    // echo ".";
                                     ?></p>
-                            </div>
+                            </div> -->
                         </div>
 
                         <?php

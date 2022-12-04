@@ -1,4 +1,5 @@
 <?php 
+ error_reporting (E_ALL ^ E_NOTICE);
 ob_start();
 session_start();
 include_once('../../dataAccess/connection.php');
@@ -572,7 +573,7 @@ if(isset($_POST['motherboard_submit'])){
     if($status == 1){
      $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                                 $date = $date1->format('Y-m-d H:i:s');
-    $query_prod_info ="UPDATE prod_info SET end_date_time=' $date',status='0',issue_type='1' WHERE p_id ='$p_id' ";
+    $query_prod_info ="UPDATE prod_info SET end_date_time=' $date',status='0',m_board_issue='1' WHERE p_id ='$p_id' ";
     $query_prod_run = mysqli_query($connection, $query_prod_info);
     header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
     }else{
@@ -730,7 +731,7 @@ if(isset($_POST['motherboard_submit'])){
 
 <?php 
 
-if(isset($_POST['combine_form'])){
+if(isset($_POST['combine_check_form'])){
     $scan_id =0;
 
     if( empty($_POST['scan_id'])){
@@ -745,7 +746,6 @@ if(isset($_POST['combine_form'])){
     $speakers = mysqli_real_escape_string($connection, $_POST['speakers']);
     $camera = mysqli_real_escape_string($connection, $_POST['camera']);
     $bazel = mysqli_real_escape_string($connection, $_POST['bazel']);
-    $keys= mysqli_real_escape_string($connection,  $_POST['keys']);
     $mousepad= mysqli_real_escape_string($connection,  $_POST['mousepad']);
     $mouse_pad_button= mysqli_real_escape_string($connection,  $_POST['mouse_pad_button']);
     $camera_cable= mysqli_real_escape_string($connection,  $_POST['camera_cable']);
@@ -762,6 +762,10 @@ if(isset($_POST['combine_form'])){
     $mb_base= mysqli_real_escape_string($connection,  $_POST['mb_base']);
     $hings_cover= mysqli_real_escape_string($connection,  $_POST['hings_cover']);
     $lan_cover= mysqli_real_escape_string($connection,  $_POST['lan_cover']);
+    $fan= mysqli_real_escape_string($connection,  $_POST['fan']);
+    $heat_sink= mysqli_real_escape_string($connection,  $_POST['heat_sink']);
+    $cpu= mysqli_real_escape_string($connection, $_POST['cpu']);
+    $keys = mysqli_real_escape_string($connection,  $_POST['keyboard_keys']);
    
     
 
@@ -770,13 +774,14 @@ if(isset($_POST['combine_form'])){
 
     $query_run = mysqli_query($connection, $query);
     $location10;
+    $second_attempt;
     foreach($query_run as $a){
         $location10 = $a['location'];
     }   
     $status = 0;
      if($keyboard == 1 || $keys == 1 || $speakers == 1 || $camera ==1 || $bazel ==1 || $mousepad == 1 || $mouse_pad_button == 1 || $camera_cable == 1 || $back_cover ==1 || $wifi_card ==1 ||
      $lcd_cable == 1 || $battery == 1 || $battery_cable == 1 || $dvd_rom ==1 || $dvd_caddy ==1 ||
-      $hdd_caddy == 1 || $hdd_cable_connector == 1 || $c_panel_palm_rest == 1 || $mb_base ==1 || $hings_cover ==1 || $lan_cover ==1){
+      $hdd_caddy == 1 || $hdd_cable_connector == 1 || $c_panel_palm_rest == 1 || $mb_base ==1 || $hings_cover ==1 || $lan_cover ==1 || $heat_sink ==1 || $cpu ==1 || $fan ==1){
         $status = 1;
         $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
         $date = $date1->format('Y-m-d');
@@ -797,10 +802,10 @@ if(isset($_POST['combine_form'])){
         
     $query_com = "INSERT INTO combine_check(inventory_id, emp_id, sales_order_id, keyboard, speakers, camera, bazel, status, keyboard_keys, mousepad, mouse_pad_button, 
                             camera_cable, back_cover, wifi_card, lcd_cable, battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, c_panel_palm_rest, mb_base, 
-                            hings_cover, lan_cover, combined_id)
+                            hings_cover, lan_cover, combined_id,heat_sink,fan,cpu)
                 VALUES ('$inventory_id', '$emp_id', '$sales_order_id', '$keyboard', '$speakers', '$camera', '$bazel', '$status', '$keys','$mousepad','$mouse_pad_button',
                 '$camera_cable','$back_cover','$wifi_card','$lcd_cable','$battery','$battery_cable','$dvd_rom','$dvd_caddy','$hdd_caddy','$hdd_cable_connector',
-                '$c_panel_palm_rest','$mb_base','$hings_cover','$lan_cover', 0)";
+                '$c_panel_palm_rest','$mb_base','$hings_cover','$lan_cover', 0,'$heat_sink','$fan','$cpu')";
                     
     $query_run = mysqli_query($connection, $query_com);
     echo "<script>
@@ -841,7 +846,7 @@ if(isset($_POST['combine_form'])){
             camera,
             bazel,
             status,
-            damage_keys,
+            keyboard_keys,
             mousepad,
             mouse_pad_button,
             camera_cable,
@@ -858,7 +863,10 @@ if(isset($_POST['combine_form'])){
             mb_base,
             hings_cover,
             lan_cover,
-            combined_id
+            combined_id,
+            heat_sink,
+            fan,
+            cpu
         )
         VALUES(
             '$scan_id',
@@ -886,7 +894,10 @@ if(isset($_POST['combine_form'])){
             '$mb_base1',
             '$hings_cover1',
             '$lan_cover1',
-            '$inventory_id1'
+            '$inventory_id1',
+            '$heat_sink1',
+            '$fan1',
+            '$cpu1'
         )";
         $query_run = mysqli_query($connection, $query_in);
     }else{
@@ -916,7 +927,10 @@ if(isset($_POST['combine_form'])){
         `mb_base` = '$mb_base1',
         `hings_cover` = '$hings_cover1',
         `lan_cover` = '$lan_cover1',
-        `combined_id` = '$combined_id1'
+        `combined_id` = '$combined_id1',
+        heat_sink = '$heat_sink1',
+            fan = '$fan1',
+            cpu = '$cpu1'
         
     WHERE
         inventory_id = '$inventory_id'";
@@ -943,18 +957,23 @@ if(isset($_POST['combine_form'])){
                                                                     $received = $a['status'];
                                                                 }
                                                             }if($combine_status == 0 && $received == 0){
-                                                                header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
+                                                                $second_attempt = true;
+                                                                header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+                                                                // header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
                                                             }
+
 }
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     if($status == 1){
+        echo $status;
      $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                                 $date = $date1->format('Y-m-d H:i:s');
-    $query_prod_info ="UPDATE prod_info SET end_date_time=' $date',status='1',issue_type='2' WHERE p_id ='$p_id' ";
+    $query_prod_info ="UPDATE prod_info SET end_date_time=' $date',status='1',combine_issue='1' WHERE p_id ='$p_id' ";
     $query_prod_run = mysqli_query($connection, $query_prod_info);
     // header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+    if($second_attempt != true){
     echo "<script>
     var newHTML = document.createElement ('div');
     newHTML.innerHTML =
@@ -965,8 +984,9 @@ if(isset($_POST['combine_form'])){
         $('#modal-lcd').modal('show');
     });
 </script>";
+    }
     }else{
-     
+        header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
             // header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
         }
     }else{
@@ -978,7 +998,8 @@ if(isset($_POST['combine_form'])){
 <!-- ============================================================== -->
 <!-- Combine check Form  -->
 <!-- ============================================================== -->
-<div class="modal fade" id="modal-combine">
+<div class="modal fade" id="modal-combine" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false"
+    aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header bg-secondary">
@@ -1014,8 +1035,8 @@ if(isset($_POST['combine_form'])){
             <?php } ?>
 
             <form method="POST">
-                <fieldset class="m-3">
-                    <div class="modal-body d-flex mx-5">
+                <div class="modal-body">
+                    <fieldset class="d-flex">
                         <div class="col col-md-6 col-lg-6">
                             <div class="row">
 
@@ -1024,7 +1045,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="r7" name="keyboard" value="0">
-                                        <label class="label_values" for="r7" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="r7" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="r8" name="keyboard" value="1">
@@ -1035,7 +1057,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="r7" name="keyboard" value="0" checked="checked">
-                                        <label class="label_values" for="r7" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="r7" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="r8" name="keyboard" value="1" disabled>
@@ -1046,7 +1069,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="r7" class="keyboard" name="keyboard" value="keyboard">
-                                        <label class="label_values" for="r7" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="r7" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="r8" name="keyboard" value="1" checked="checked">
@@ -1061,33 +1085,36 @@ if(isset($_POST['combine_form'])){
                                 <?php if($keys == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="c31" name="keys" value="0">
-                                        <label class="label_values" for="c31" style="margin-right: 15px;">Okay </label>
+                                        <input type="radio" id="c31" name="keyboard_keys" value="0">
+                                        <label class="label_values" for="c31" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="c32" name="keys" value="1">
+                                        <input type="radio" id="c32" name="keyboard_keys" value="1">
                                         <label class="label_values" for="c32">No </label>
                                     </div>
                                 </div>
                                 <?php }elseif($keys == 0){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="c31" name="keys" value="0" checked="checked">
-                                        <label class="label_values" for="c31" style="margin-right: 15px;">Okay </label>
+                                        <input type="radio" id="c31" name="keyboard_keys" value="0" checked="checked">
+                                        <label class="label_values" for="c31" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="c32" name="keys" value="1" disabled>
+                                        <input type="radio" id="c32" name="keyboard_keys" value="1" disabled>
                                         <label class="label_values" for="c32">No </label>
                                     </div>
                                 </div>
                                 <?php }elseif($keys == 1){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="c31" name="keys" class="keys" value="keys">
-                                        <label class="label_values" for="c31" style="margin-right: 15px;">Okay </label>
+                                        <input type="radio" id="c31" name="keyboard_keys" class="keys" value="keys">
+                                        <label class="label_values" for="c31" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="c32" name="keys" value="1" checked="checked">
+                                        <input type="radio" id="c32" name="keyboard_keys" value="1" checked="checked">
                                         <label class="label_values" for="c32">No </label>
                                     </div>
                                     <div id="result"></div>
@@ -1096,12 +1123,13 @@ if(isset($_POST['combine_form'])){
                             </div>
 
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">02 Speakers:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">03 Speakers:</label>
                                 <?php if($speakers == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="r9" name="speakers" value="0">
-                                        <label class="label_values" for="r9" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="r9" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="r10" name="speakers" value="1">
@@ -1112,7 +1140,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="r9" name="speakers" value="0" checked="checked">
-                                        <label class="label_values" for="r9" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="r9" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="r10" name="speakers" value="1" disabled>
@@ -1123,7 +1152,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="r9" class="speakers" name="speakers" value="speakers">
-                                        <label class="label_values" for="r9" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="r9" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="r10" name="speakers" value="1" checked="checked">
@@ -1136,12 +1166,13 @@ if(isset($_POST['combine_form'])){
                             </div>
 
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">03 Camera:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">04 Camera:</label>
                                 <?php if($camera == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="r11" name="camera" value="0">
-                                        <label class="label_values" for="r11" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="r11" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="r12" name="camera" value="1">
@@ -1152,7 +1183,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="r11" name="camera" value="0" checked="checked">
-                                        <label class="label_values" for="r11" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="r11" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="r12" name="camera" value="1" disabled>
@@ -1163,7 +1195,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="r11" name="camera" class="camera" value="camera">
-                                        <label class="label_values" for="r11" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="r11" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="r12" name="camera" value="1" checked="checked">
@@ -1176,12 +1209,13 @@ if(isset($_POST['combine_form'])){
                             </div>
 
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">04 Bazel:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">05 Bazel:</label>
                                 <?php if($bazel == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="13" name="bazel" value="0">
-                                        <label class="label_values" for="13" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="13" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="r14" name="bazel" value="1">
@@ -1191,7 +1225,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="13" name="bazel" value="0" checked="checked">
-                                        <label class="label_values" for="13" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="13" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="r14" name="bazel" value="1" disabled>
@@ -1201,7 +1236,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="13" name="bazel" class="bazel" value="bazel">
-                                        <label class="label_values" for="13" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="13" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="r14" name="bazel" value="1" checked="checked">
@@ -1212,12 +1248,13 @@ if(isset($_POST['combine_form'])){
                                 <?php } ?>
                             </div>
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">05 Mouse Pad:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">06 Mouse Pad:</label>
                                 <?php if($mousepad == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c1" name="mousepad" value="0">
-                                        <label class="label_values" for="c1" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c1" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c2" name="mousepad" value="1">
@@ -1228,7 +1265,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c1" name="mousepad" value="0" checked="checked">
-                                        <label class="label_values" for="c1" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c1" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c2" name="mousepad" value="1" disabled>
@@ -1239,7 +1277,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c1" name="mousepad" class="mousepad" value="mousepad">
-                                        <label class="label_values" for="c1" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c1" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c2" name="mousepad" value="1" checked="checked">
@@ -1251,12 +1290,13 @@ if(isset($_POST['combine_form'])){
 
                             </div>
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">06 Mouse Pad Button:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">07 Mouse Pad Button:</label>
                                 <?php if($mouse_pad_button == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c3" name="mouse_pad_button" value="0">
-                                        <label class="label_values" for="c3" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c3" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c4" name="mouse_pad_button" value="1">
@@ -1267,7 +1307,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c3" name="mouse_pad_button" value="0" checked="checked">
-                                        <label class="label_values" for="c3" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c3" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c4" name="mouse_pad_button" value="1" disabled>
@@ -1279,7 +1320,8 @@ if(isset($_POST['combine_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c3" name="mouse_pad_button" class="mouse_pad_button"
                                             value="mouse_pad_button">
-                                        <label class="label_values" for="c3" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c3" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c4" name="mouse_pad_button" value="1" checked="checked">
@@ -1291,12 +1333,13 @@ if(isset($_POST['combine_form'])){
 
                             </div>
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">07 Camera Cable:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">08 Camera Cable:</label>
                                 <?php if($camera_cable == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c5" name="camera_cable" value="0">
-                                        <label class="label_values" for="c5" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c5" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c6" name="camera_cable" value="1">
@@ -1307,7 +1350,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c5" name="camera_cable" value="0" checked="checked">
-                                        <label class="label_values" for="c5" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c5" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c6" name="camera_cable" value="1" disabled>
@@ -1319,7 +1363,8 @@ if(isset($_POST['combine_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c5" name="camera_cable" class="camera_cable"
                                             value="camera_cable">
-                                        <label class="label_values" for="c5" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c5" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c6" name="camera_cable" value="1" checked="checked">
@@ -1331,12 +1376,13 @@ if(isset($_POST['combine_form'])){
 
                             </div>
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">8 Back Cover:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">09 Back Cover:</label>
                                 <?php if($back_cover == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c7" name="back_cover" value="0">
-                                        <label class="label_values" for="c7" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c7" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c8" name="back_cover" value="1">
@@ -1347,7 +1393,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c7" name="back_cover" value="0" checked="checked">
-                                        <label class="label_values" for="c7" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c7" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c8" name="back_cover" value="1" disabled>
@@ -1359,7 +1406,8 @@ if(isset($_POST['combine_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c7" name="back_cover" class="back_cover"
                                             value="back_cover">
-                                        <label class="label_values" for="c7" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c7" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c8" name="back_cover" value="1" checked="checked">
@@ -1371,12 +1419,13 @@ if(isset($_POST['combine_form'])){
 
                             </div>
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">9 WIFI Card: </label>
+                                <label class="col-sm-4 col-form-label text-capitalize">10 WIFI Card: </label>
                                 <?php if($wifi_card == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c9" name="wifi_card" value="0">
-                                        <label class="label_values" for="c9" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c9" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c10" name="wifi_card" value="1">
@@ -1387,7 +1436,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c9" name="wifi_card" value="0" checked="checked">
-                                        <label class="label_values" for="c9" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c9" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c10" name="wifi_card" value="1" disabled>
@@ -1399,7 +1449,8 @@ if(isset($_POST['combine_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c9" name="wifi_card" class="wifi_card"
                                             value="wifi_card">
-                                        <label class="label_values" for="c9" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c9" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c10" name="wifi_card" value="1" checked="checked">
@@ -1411,12 +1462,13 @@ if(isset($_POST['combine_form'])){
 
                             </div>
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">10 LCD Cable:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">11 LCD Cable:</label>
                                 <?php if($lcd_cable == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c11" name="lcd_cable" value="0">
-                                        <label class="label_values" for="c11" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c11" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c12" name="lcd_cable" value="1">
@@ -1427,7 +1479,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c11" name="lcd_cable" value="0" checked="checked">
-                                        <label class="label_values" for="c11" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c11" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c12" name="lcd_cable" value="1" disabled>
@@ -1439,7 +1492,8 @@ if(isset($_POST['combine_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c11" name="lcd_cable" class="lcd_cable"
                                             value="lcd_cable">
-                                        <label class="label_values" for="c11" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c11" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c12" name="lcd_cable" value="1" checked="checked">
@@ -1448,17 +1502,15 @@ if(isset($_POST['combine_form'])){
                                     <div id="result"></div>
                                 </div>
                                 <?php } ?>
-
                             </div>
-                        </div>
-                        <div class="col col-md-6 col-lg-6">
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">11 Battery:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">12 Battery:</label>
                                 <?php if($battery == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c13" name="battery" value="0">
-                                        <label class="label_values" for="c13" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c13" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c14" name="battery" value="1">
@@ -1469,7 +1521,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c13" name="battery" value="0" checked="checked">
-                                        <label class="label_values" for="c13" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c13" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c14" name="battery" value="1" disabled>
@@ -1480,7 +1533,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c13" name="battery" class="battery" value="battery">
-                                        <label class="label_values" for="c13" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c13" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c14" name="battery" value="1" checked="checked">
@@ -1492,12 +1546,13 @@ if(isset($_POST['combine_form'])){
 
                             </div>
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">12 Battery Cable:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">13 Battery Cable:</label>
                                 <?php if($battery_cable == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c15" name="battery_cable" value="0">
-                                        <label class="label_values" for="c15" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c15" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c16" name="battery_cable" value="1">
@@ -1508,7 +1563,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c15" name="battery_cable" value="0" checked="checked">
-                                        <label class="label_values" for="c15" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c15" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c16" name="battery_cable" value="1" disabled>
@@ -1520,7 +1576,8 @@ if(isset($_POST['combine_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c15" name="battery_cable" class="battery_cable"
                                             value="battery_cable">
-                                        <label class="label_values" for="c15" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c15" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c16" name="battery_cable" value="1" checked="checked">
@@ -1531,8 +1588,12 @@ if(isset($_POST['combine_form'])){
                                 <?php } ?>
 
                             </div>
+                        </div>
+
+                        <div class="col col-md-6 col-lg-6">
+
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">13 DVD ROM: </label>
+                                <label class="col-sm-4 col-form-label text-capitalize">14 DVD ROM: </label>
                                 <?php if($dvd_rom == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
@@ -1549,7 +1610,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c17" name="dvd_rom" value="0" checked="checked">
-                                        <label class="label_values" for="c17" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c17" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c18" name="dvd_rom" value="1" disabled>
@@ -1560,7 +1622,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c17" name="dvd_rom" class="dvd_rom" value="dvd_rom">
-                                        <label class="label_values" for="c17" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c17" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c18" name="dvd_rom" value="1" checked="checked">
@@ -1573,12 +1636,13 @@ if(isset($_POST['combine_form'])){
                             </div>
 
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">14 DVD Caddy:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">15 DVD Caddy:</label>
                                 <?php if($dvd_caddy == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c19" name="dvd_caddy" value="0">
-                                        <label class="label_values" for="c19" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c19" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c20" name="dvd_caddy" value="1">
@@ -1589,7 +1653,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c19" name="dvd_caddy" value="0" checked="checked">
-                                        <label class="label_values" for="c19" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c19" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c20" name="dvd_caddy" value="1" disabled>
@@ -1601,7 +1666,8 @@ if(isset($_POST['combine_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c19" name="dvd_caddy" class="dvd_caddy"
                                             value="dvd_caddy">
-                                        <label class="label_values" for="c19" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c19" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c20" name="dvd_caddy" value="1" checked="checked">
@@ -1614,12 +1680,13 @@ if(isset($_POST['combine_form'])){
                             </div>
 
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">15 HDD Caddy:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">16 HDD Caddy:</label>
                                 <?php if($hdd_caddy == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c21" name="hdd_caddy" value="0">
-                                        <label class="label_values" for="c21" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c21" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c22" name="hdd_caddy" value="1">
@@ -1630,7 +1697,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c21" name="hdd_caddy" value="0" checked="checked">
-                                        <label class="label_values" for="c21" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c21" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c22" name="hdd_caddy" value="1" disabled>
@@ -1642,7 +1710,8 @@ if(isset($_POST['combine_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c21" name="hdd_caddy" class="hdd_caddy"
                                             value="hdd_caddy">
-                                        <label class="label_values" for="c21" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c21" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c22" name="hdd_caddy" value="1" checked="checked">
@@ -1654,12 +1723,14 @@ if(isset($_POST['combine_form'])){
 
                             </div>
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">16 HDD Cable Connector:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">17 HDD Cable
+                                    Connector:</label>
                                 <?php if($hdd_cable_connector == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c23" name="hdd_cable_connector" value="0">
-                                        <label class="label_values" for="c23" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c23" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c24" name="hdd_cable_connector" value="1">
@@ -1671,7 +1742,8 @@ if(isset($_POST['combine_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c23" name="hdd_cable_connector" value="0"
                                             checked="checked">
-                                        <label class="label_values" for="c23" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c23" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c24" name="hdd_cable_connector" value="1" disabled>
@@ -1683,7 +1755,8 @@ if(isset($_POST['combine_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c23" name="hdd_cable_connector"
                                             class="hdd_cable_connector" value="hdd_cable_connector">
-                                        <label class="label_values" for="c23" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c23" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c24" name="hdd_cable_connector" value="1"
@@ -1696,12 +1769,14 @@ if(isset($_POST['combine_form'])){
 
                             </div>
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">17 C Panel / Palm Rest:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">18 C Panel / Palm
+                                    Rest:</label>
                                 <?php if($c_panel_palm_rest == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c25" name="c_panel_palm_rest" value="0">
-                                        <label class="label_values" for="c25" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c25" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c26" name="c_panel_palm_rest" value="1">
@@ -1713,7 +1788,8 @@ if(isset($_POST['combine_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c25" name="c_panel_palm_rest" value="0"
                                             checked="checked">
-                                        <label class="label_values" for="c25" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c25" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c26" name="c_panel_palm_rest" value="1" disabled>
@@ -1725,7 +1801,8 @@ if(isset($_POST['combine_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c25" name="c_panel_palm_rest" class="c_panel_palm_rest"
                                             value="c_panel_palm_rest">
-                                        <label class="label_values" for="c25" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c25" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c26" name="c_panel_palm_rest" value="1"
@@ -1738,12 +1815,13 @@ if(isset($_POST['combine_form'])){
 
                             </div>
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">18 D / MB Base:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">19 D / MB Base:</label>
                                 <?php if($mb_base == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c33" name="mb_base" value="0">
-                                        <label class="label_values" for="c33" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c33" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c34" name="mb_base" value="1">
@@ -1754,7 +1832,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c33" name="mb_base" value="0" checked="checked">
-                                        <label class="label_values" for="c33" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c33" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c34" name="mb_base" value="1" disabled>
@@ -1765,7 +1844,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c33" name="mb_base" class="mb_base" value="mb_base">
-                                        <label class="label_values" for="c33" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c33" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c34" name="mb_base" value="1" checked="checked">
@@ -1777,12 +1857,13 @@ if(isset($_POST['combine_form'])){
 
                             </div>
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">19 Hings Cover:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">20 Hings Cover:</label>
                                 <?php if($hings_cover == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c27" name="hings_cover" value="0">
-                                        <label class="label_values" for="c27" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c27" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c28" name="hings_cover" value="1">
@@ -1793,7 +1874,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c27" name="hings_cover" value="0" checked="checked">
-                                        <label class="label_values" for="c27" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c27" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c28" name="hings_cover" value="1" disabled>
@@ -1805,7 +1887,8 @@ if(isset($_POST['combine_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c27" name="hings_cover" class="hings_cover"
                                             value="hings_cover">
-                                        <label class="label_values" for="c27" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c27" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c28" name="hings_cover" value="1" checked="checked">
@@ -1817,12 +1900,13 @@ if(isset($_POST['combine_form'])){
 
                             </div>
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">20 LAN Cover:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">21 LAN Cover:</label>
                                 <?php if($lan_cover == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c29" name="lan_cover" value="0">
-                                        <label class="label_values" for="c29" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c29" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c30" name="lan_cover" value="1">
@@ -1833,7 +1917,8 @@ if(isset($_POST['combine_form'])){
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c29" name="lan_cover" value="0" checked="checked">
-                                        <label class="label_values" for="c29" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c29" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c30" name="lan_cover" value="1" disabled>
@@ -1845,7 +1930,8 @@ if(isset($_POST['combine_form'])){
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c29" name="lan_cover" class="lan_cover"
                                             value="lan_cover">
-                                        <label class="label_values" for="c29" style="margin-right: 15px;">Okay </label>
+                                        <label class="label_values" for="c29" style="margin-right: 15px;">Okay
+                                        </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
                                         <input type="radio" id="c30" name="lan_cover" value="1" checked="checked">
@@ -1856,16 +1942,135 @@ if(isset($_POST['combine_form'])){
                                 <?php } ?>
 
                             </div>
+                            <div class="row">
+                                <label class="col-sm-4 col-form-label text-capitalize">22 Fan:</label>
+                                <?php if($fan == null){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="combine42" name="fan" value="0">
+                                        <label class="label_values" for="combine42" style="margin-right: 15px;">Okay
+                                        </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="combine43" name="fan" value="1">
+                                        <label class="label_values" for="combine43">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($fan == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="combine42" name="fan" value="0" checked="checked">
+                                        <label class="label_values" for="combine42" style="margin-right: 15px;">Okay
+                                        </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="combine43" name="fan" value="1">
+                                        <label class="label_values" for="combine43">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($fan == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="combine42" name="fan" value="0">
+                                        <label class="label_values" for="combine42" style="margin-right: 15px;">Okay
+                                        </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="combine43" name="fan" value="1" checked="checked">
+                                        <label class="label_values" for="combine43">No </label>
+                                    </div>
+                                </div>
+                                <?php } ?>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-sm-4 col-form-label text-capitalize">23 Heat Sink:</label>
+                                <?php if($heat_sink == null){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="combine44" name="heat_sink" value="0">
+                                        <label class="label_values" for="combine44" style="margin-right: 15px;">Okay
+                                        </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="combine45" name="heat_sink" value="1">
+                                        <label class="label_values" for="combine45">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($heat_sink == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="combine44" name="heat_sink" value="0" checked="checked">
+                                        <label class="label_values" for="combine44" style="margin-right: 15px;">Okay
+                                        </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="combine45" name="heat_sink" value="1">
+                                        <label class="label_values" for="combine45">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($heat_sink == 1){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="combine44" name="heat_sink" value="0">
+                                        <label class="label_values" for="combine44" style="margin-right: 15px;">Okay
+                                        </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="combine45" name="heat_sink" value="1" checked="checked">
+                                        <label class="label_values" for="combine45">No </label>
+                                    </div>
+                                </div>
+                                <?php } ?>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-sm-4 col-form-label text-capitalize">24 CPU:</label>
+                                <?php if($cpu == null){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="combine46" name="cpu" value="0">
+                                        <label class="label_values" for="combine46" style="margin-right: 15px;">Okay
+                                        </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="combine47" name="cpu" value="1">
+                                        <label class="label_values" for="combine47">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($cpu == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="combine46" name="cpu" value="0" checked="checked">
+                                        <label class="label_values" for="combine46" style="margin-right: 15px;">Okay
+                                        </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="combine47" name="cpu" value="1">
+                                        <label class="label_values" for="combine47">No </label>
+                                    </div>
+                                </div>
+                                <?php }elseif($cpu == 0){ ?>
+                                <div class="col-sm-8 mt-2">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="combine46" name="cpu" value="0">
+                                        <label class="label_values" for="combine46" style="margin-right: 15px;">Okay
+                                        </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="combine47" name="cpu" value="1" checked="checked">
+                                        <label class="label_values" for="combine47">No </label>
+                                    </div>
+                                </div>
+                                <?php } ?>
+                            </div>
                         </div>
-
-
-
-                    </div>
-                </fieldset>
-                <div class="modal-footer justify-content-end">
-                    <button type="submit" name="combine_form" class="btn bg-gradient-success btn-sm">Next</button>
+                    </fieldset>
                 </div>
-
+                <div class="modal-footer">
+                    <button type="submit" value="submit" name="combine_check_form"
+                        class="btn btn-default bg-gradient-success btn-next">Next</button>
+                </div>
             </form>
 
         </div>
@@ -1899,7 +2104,7 @@ if(isset($_POST['lcd_form'])){
     if($status == 1){
      $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                                 $date = $date1->format('Y-m-d H:i:s');
-    $query_prod_info ="UPDATE prod_info SET end_date_time=' $date',status='0',issue_type='3' WHERE p_id ='$p_id' ";
+    $query_prod_info ="UPDATE prod_info SET end_date_time=' $date',status='1',lcd_issue='1' WHERE p_id ='$p_id' ";
     $query_prod_run = mysqli_query($connection, $query_prod_info);
     echo "<script>
                 var newHTML = document.createElement ('div');
@@ -1940,7 +2145,8 @@ if(isset($_POST['lcd_form'])){
 <!-- ============================================================== -->
 <!-- LCD check Form  -->
 <!-- ============================================================== -->
-<div class="modal fade" id="modal-lcd">
+<div class="modal fade" id="modal-lcd" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-secondary">
@@ -2157,10 +2363,11 @@ if(isset($_POST['lcd_form'])){
 </div>
 
 <!-- ============================================================== -->
-<!-- Boduwork check Form  -->
+<!-- Bodywork check Form  -->
 <!-- ============================================================== -->
 
-<div class="modal fade" id="modal-bodywork">
+<div class="modal fade" id="modal-bodywork" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-secondary">
@@ -2425,7 +2632,7 @@ for($i =0; $i< sizeof($result);$i++){
      $d_scratch == 1 || $d_broken == 1 || $d_dent==1){
         $status = 1;
      } 
-     $checkBox = implode(',', $_POST['work']);
+  
     $query = "INSERT INTO bodywork(id, inventory_id, emp_id, sales_order_id, a_scratch, a_broken, a_dent, b_scratch, b_broken, b_logo, b_color, c_scratch, c_broken, c_dent, d_scratch, d_broken, d_dent, status) 
     VALUES (null,'$inventory_id','$emp_id','$sales_order_id','$a_scratch','$a_broken','$a_dent','$b_scratch','$b_broken','$b_logo','$b_color','$c_scratch','$c_broken','$c_dent','$d_scratch','$d_broken','$d_dent','$status')";
  
@@ -2445,7 +2652,7 @@ for($i =0; $i< sizeof($result);$i++){
     if($status == 1){
         $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
         $date = $date1->format('Y-m-d H:i:s');
-        $query_prod_info ="UPDATE prod_info SET end_date_time=' $date',status='0',issue_type='4' WHERE p_id ='$p_id' ";
+        $query_prod_info ="UPDATE prod_info SET end_date_time=' $date',status='1',bodywork_issue='1' WHERE p_id ='$p_id' ";
         $query_prod_run = mysqli_query($connection, $query_prod_info);
         // header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
         }else{
@@ -2486,9 +2693,22 @@ for($i =0; $i< sizeof($result);$i++){
     $query_run = mysqli_query($connection, $query);
     $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
     $date = $date1->format('Y-m-d H:i:s');
-    $query = "SELECT status FROM combine_check WHERE $inventory_id";
-    $query_run = mysqli_query($connection, $query);  
-     $query_prod_info ="UPDATE prod_info SET end_date_time = '$date', status = '0', issue_type = '5' WHERE p_id = '$p_id' ";
+    $query = "SELECT * FROM prod_info WHERE $inventory_id";
+    $query_run = mysqli_query($connection, $query); 
+    $lcd;
+    $body_work;
+    $combine;
+    $all_ok = 0;
+    foreach($query_run as $data){
+        $lcd = $data['lcd_issue'];
+        $combine = $data['combine_issue'];
+        $body_work = $data['bodywork_issue'];
+    }
+    if($lcd ==1 || $combine == 1 || $body_work ==1){
+        $all_ok =1;
+    }
+
+     $query_prod_info ="UPDATE prod_info SET end_date_time = '$date', status = '{$all_ok}', production_spec = '0' WHERE p_id = '$p_id' ";
      $query_prod_run = mysqli_query($connection, $query_prod_info);
      header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
                             
