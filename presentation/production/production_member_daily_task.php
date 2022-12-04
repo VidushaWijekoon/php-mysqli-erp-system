@@ -100,7 +100,6 @@ foreach($query_tech as $data){
            if(($assign_qty*2 )>= $scaned_qty){
             // if($inventory_id_count >3){
                 foreach($query_run as $data1){
-                    // $query_insert = "INSERT INTO prod_info(p_id, inventory_id, start_date_time, end_date_time,sales_order, emp_id, tech_id,status, issue_type) VALUES (0 ,0 , 0, 0, 0, 0, 0, 0, 0)";
                     if($exists_inventory_id == 0){
                     $query_insert = "INSERT INTO prod_info(p_id, inventory_id, start_date_time, end_date_time,sales_order, emp_id, tech_id,status) 
                                     VALUES (null,'{$inventory_id}', CURRENT_TIMESTAMP, 0,'{$sales_order_id}','{$emp_id}','{$tech_id}','1')";

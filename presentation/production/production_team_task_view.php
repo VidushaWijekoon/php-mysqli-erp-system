@@ -76,7 +76,11 @@ if($role_id == 1 && $department == 11 || $role_id == 6 && $department == 1 || $r
                                     $first_name;
                                     $assign_qty;
                                     $completed_qty ;
-                                    $issue_type;
+                                    $motherboard_issue;
+                                    $combine_issue;
+                                    $lcd_issue;
+                                    $bodywork_issue;
+                                    $production_spec;
                                     $target;
                                     $tech_id;
                                     foreach ($query_run as $production_team) {
@@ -84,7 +88,7 @@ if($role_id == 1 && $department == 11 || $role_id == 6 && $department == 1 || $r
                                         $query ="SELECT COUNT(status) AS completed_qty FROM `prod_info` WHERE tech_id ='{$production_team['tech_id']}' AND status=0;";
                                         $query_completed = mysqli_query($connection,$query);
 
-                                        $query_issue ="SELECT issue_type FROM `prod_info` WHERE tech_id ='{$production_team['tech_id']}' AND status=0;";
+                                        $query_issue ="SELECT * FROM `prod_info` WHERE tech_id ='{$production_team['tech_id']}' AND status=0;";
                                         $query_issue_type = mysqli_query($connection,$query_issue);
 
                                         $sales_order_id = $production_team['sales_order_id'];
@@ -99,44 +103,48 @@ if($role_id == 1 && $department == 11 || $role_id == 6 && $department == 1 || $r
                                         }
                                         foreach($query_issue_type as $b){
 
-                                            $issue_type = $b['issue_type'];
+                                            $motherboard_issue = $b['m_board_issue'];
+                                            $combine_issue = $b['combine__issue'];
+                                            $lcd_issue = $b['lcd_issue'];
+                                            $bodywork_issue = $b['bodywork_issue'];
+                                            $production_spec = $b['production_spec'];
                                             
                                             $brand = $production_team['brand'];
                                             $generation = $production_team['generation'];
                                             
                                             if($brand == 'hp' || $brand == 'dell'){
                                             if($generation== 1 || $generation== 2||$generation==3 ||$generation== 4 || $generation== 5){
-                                                if($issue_type == 1){
+                                                if($motherboard_issue == 1){
                                                     $m_point = 10;
                                                     $point +=$m_point;
                                                 }
-                                                if($issue_type == 2){
+                                                if($combine_issue == 1){
                                                     $c_point = 15;
                                                     $point +=$c_point;
                                                 }
-                                                if($issue_type == 3){
+                                                if($lcd_issue == 1){
                                                     $l_point = 17.17;
                                                     $point +=$l_point;
                                                 }
-                                                if($issue_type == 4){
+                                                if($bodywork_issue == 1){
                                                     $b_point = 17.14;
                                                     $point +=$b_point;
                                                 }
                                             }
                                             if($generation== 6 || $generation== 7||$generation==8 ||$generation== 9 || $generation== 10){
-                                                if($issue_type == 1){
+                                                if($motherboard_issue == 1){
                                                     $m_point = 7.5;
                                                     $point +=$m_point;
                                                 }
-                                                if($issue_type == 2){
+                                                if($combine_issue == 1){
                                                     $c_point = 10;
                                                     $point +=$c_point;
                                                 }
-                                                if($issue_type == 3){
+                                                if($lcd_issue == 1){
                                                     $l_point = 15;
                                                     $point +=$l_point;
                                                 }
-                                                if($issue_type == 4){
+                                                if($bodywork_issue == 1){
                                                     $b_point = 15;
                                                     $point +=$b_point;
                                                 }
@@ -144,37 +152,37 @@ if($role_id == 1 && $department == 11 || $role_id == 6 && $department == 1 || $r
                                         } 
                                         if($brand =='lenovo'){
                                             if($generation== 1 || $generation== 2||$generation==3 ||$generation== 4 || $generation== 5){
-                                                if($issue_type == 1){
+                                                if($motherboard_issue == 1){
                                                     $m_point = 12;
                                                     $point +=$m_point;
                                                 }
-                                                if($issue_type == 2){
+                                                if($combine_issue == 1){
                                                     $c_point = 15;
                                                     $point +=$c_point;
                                                 }
-                                                if($issue_type == 3){
+                                                if($lcd_issue == 1){
                                                     $l_point = 20;
                                                     $point +=$l_point;
                                                 }
-                                                if($issue_type == 4){
+                                                if($bodywork_issue == 1){
                                                     $b_point = 20;
                                                     $point +=$b_point;
                                                 }
                                             }
                                             if($generation== 6 || $generation== 7||$generation==8 ||$generation== 9 || $generation== 10){
-                                                if($issue_type == 1){
+                                                if($motherboard_issue == 1){
                                                     $m_point = 9.23;
                                                     $point +=$m_point;
                                                 }
-                                                if($issue_type == 2){
+                                                if($combine_issue == 1){
                                                     $c_point = 10.9;
                                                     $point +=$c_point;
                                                 }
-                                                if($issue_type == 3){
+                                                if($lcd_issue == 1){
                                                     $l_point = 15;
                                                     $point +=$l_point;
                                                 }
-                                                if($issue_type == 4){
+                                                if($bodywork_issue == 1){
                                                     $b_point = 15;
                                                     $point +=$b_point;
                                                 }

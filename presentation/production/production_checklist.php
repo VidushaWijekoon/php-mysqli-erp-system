@@ -105,6 +105,9 @@ $c_dent_retrive = 2;
 $d_scratch_retrive = 2;
 $d_broken_retrive = 2;
 $d_dent_retrive = 2;
+$fan;
+$heat_sink;
+$cpu;
 
 if (isset($_GET['sales_order_id'])) {
     
@@ -138,7 +141,7 @@ if (isset($_GET['sales_order_id'])) {
         $speakers = $data['speakers'];
         $camera = $data['camera'];
         $bazel = $data['bazel'];
-        //  $keys= $data['keys'];
+        $keys= $data['keyboard_keys'];
         $mousepad= $data['mousepad'];
         $mouse_pad_button= $data['mouse_pad_button'];
         $camera_cable= $data['camera_cable'];
@@ -155,6 +158,9 @@ if (isset($_GET['sales_order_id'])) {
         $mb_base= $data['mb_base'];
         $hings_cover= $data['hings_cover'];
         $lan_cover= $data['lan_cover'];
+        $heat_sink= $data['heat_sink'];
+        $fan= $data['fan'];
+        $cpu= $data['cpu'];
 
         if($keyboard ==1){ $keyboard1 =1; } 
         if($speakers ==1){$speakers1 =1;} 
@@ -177,6 +183,9 @@ if (isset($_GET['sales_order_id'])) {
         if($mb_base==1){$mb_base1 =1;} 
         if($hings_cover==1){$hings_cover1 =1;} 
         if($lan_cover==1){$lan_cover1 =1;} 
+        if($heat_sink==1){$heat_sink1 =1;} 
+        if($fan==1){$fan1 =1;} 
+        if($cpu==1){$cpu1 =1;} 
        
         if($comb_status == 0){
             $lunch_combine = 0;
@@ -595,7 +604,8 @@ if(isset($_POST['motherboard_submit'])){
 }
 
 ?>
-<div class="modal fade" id="modal-motherboard">
+<div class="modal fade" id="modal-motherboard" aria-labelledby="myModalLabel" data-backdrop="static"
+    data-keyboard="false" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -774,11 +784,16 @@ if(isset($_POST['combine_check_form'])){
 
     $query_run = mysqli_query($connection, $query);
     $location10;
-    $second_attempt;
+    $second_attempt = false;
     foreach($query_run as $a){
         $location10 = $a['location'];
     }   
     $status = 0;
+    if($keyboard1 == 1 || $keys1 == 1 || $speakers1 == 1 || $camera1 ==1 || $bazel1 ==1 || $mousepad1 == 1 || $mouse_pad_button1 == 1 || $camera_cable1 == 1 || $back_cover1 ==1 || $wifi_card1 ==1 ||
+    $lcd_cable1 == 1 || $battery1 == 1 || $battery_cable1 == 1 || $dvd_rom1 ==1 || $dvd_caddy1 ==1 ||
+     $hdd_caddy1 == 1 || $hdd_cable_connector1 == 1 || $c_panel_palm_rest1 == 1 || $mb_base1 ==1 || $hings_cover1 ==1 || $lan_cover1 ==1 || $heat_sink1 ==1 || $cpu1 ==1 || $fan1 ==1){
+        $second_attempt = true;
+     }
      if($keyboard == 1 || $keys == 1 || $speakers == 1 || $camera ==1 || $bazel ==1 || $mousepad == 1 || $mouse_pad_button == 1 || $camera_cable == 1 || $back_cover ==1 || $wifi_card ==1 ||
      $lcd_cable == 1 || $battery == 1 || $battery_cable == 1 || $dvd_rom ==1 || $dvd_caddy ==1 ||
       $hdd_caddy == 1 || $hdd_cable_connector == 1 || $c_panel_palm_rest == 1 || $mb_base ==1 || $hings_cover ==1 || $lan_cover ==1 || $heat_sink ==1 || $cpu ==1 || $fan ==1){
@@ -808,6 +823,7 @@ if(isset($_POST['combine_check_form'])){
                 '$c_panel_palm_rest','$mb_base','$hings_cover','$lan_cover', 0,'$heat_sink','$fan','$cpu')";
                     
     $query_run = mysqli_query($connection, $query_com);
+    if($second_attempt == false){
     echo "<script>
             var newHTML = document.createElement ('div');
             newHTML.innerHTML =
@@ -818,7 +834,9 @@ if(isset($_POST['combine_check_form'])){
                 $('#modal-lcd').modal('show');
             });
         </script>";
-    
+        }else{
+            header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+        }
    
     if($scan_id !=0){
        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -958,6 +976,8 @@ if(isset($_POST['combine_check_form'])){
                                                                 }
                                                             }if($combine_status == 0 && $received == 0){
                                                                 $second_attempt = true;
+                                                                echo $second_attempt;
+                                                                exit();
                                                                 header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
                                                                 // header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
                                                             }
@@ -973,7 +993,7 @@ if(isset($_POST['combine_check_form'])){
     $query_prod_info ="UPDATE prod_info SET end_date_time=' $date',status='1',combine_issue='1' WHERE p_id ='$p_id' ";
     $query_prod_run = mysqli_query($connection, $query_prod_info);
     // header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
-    if($second_attempt != true){
+   if($second_attempt == false){
     echo "<script>
     var newHTML = document.createElement ('div');
     newHTML.innerHTML =
@@ -984,9 +1004,25 @@ if(isset($_POST['combine_check_form'])){
         $('#modal-lcd').modal('show');
     });
 </script>";
-    }
+}else{
+    header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+}
     }else{
-        header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+        if($second_attempt == false){
+        echo "<script>
+    var newHTML = document.createElement ('div');
+    newHTML.innerHTML =
+    newHTML = document.createElement ('div');
+    // newHTML.innerHTML = ' <div id=\"modal-lcd\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+    document.body.appendChild (newHTML);
+    $(window).load(function(){
+        $('#modal-lcd').modal('show');
+    });
+</script>";
+        }else{
+            header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+        }
+        // header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
             // header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
         }
     }else{
@@ -2050,7 +2086,7 @@ if(isset($_POST['combine_check_form'])){
                                         <label class="label_values" for="combine47">No </label>
                                     </div>
                                 </div>
-                                <?php }elseif($cpu == 0){ ?>
+                                <?php }elseif($cpu == 1){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="combine46" name="cpu" value="0">
@@ -2719,7 +2755,8 @@ for($i =0; $i< sizeof($result);$i++){
 <!-- ============================================================== -->
 <!-- Production check Form  -->
 <!-- ============================================================== -->
-<div class="modal fade" id="modal-production">
+<div class="modal fade" id="modal-production" aria-labelledby="myModalLabel" data-backdrop="static"
+    data-keyboard="false" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header bg-secondary">

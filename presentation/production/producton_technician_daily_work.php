@@ -201,15 +201,15 @@ if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) 
                                         </td>
                                         <td>
                                             <?php if($values['status'] == 1){}else{ 
-                                                        if ($values['issue_type'] ==1) {
+                                                        if ($values['m_board_issue'] ==1) {
                                                             echo '<span class="badge badge-lg badge-danger text-white px-2">Motherboard Issue</span>';
-                                                        }if ($values['issue_type'] ==2) {
+                                                        }if ($values['combine_issue'] ==1) {
                                                             echo '<span class="badge badge-lg badge-danger text-white px-2">Combine Issue</span>';
-                                                        }if ($values['issue_type'] ==3) {
+                                                        }if ($values['lcd_issue'] ==1) {
                                                             echo '<span class="badge badge-lg badge-danger text-white px-2">LCD Issue</span>';
-                                                        }if ($values['issue_type'] ==4) {
+                                                        }if ($values['bodywork_issue'] ==1) {
                                                             echo '<span class="badge badge-lg badge-danger text-white px-2">Bodywork Issue</span>';
-                                                        }if ($values['issue_type'] ==5) {
+                                                        }if ($values['production_spec'] ==1) {
                                                             echo '<span class="badge badge-lg badge-danger text-white px-2">Ready to QC</span>';
                                                         } 
                                                         }?>
