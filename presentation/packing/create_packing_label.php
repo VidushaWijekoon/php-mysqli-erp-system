@@ -46,24 +46,17 @@ foreach($query_run as $a){
 
     
     $mfg = mysqli_real_escape_string($connection, $_POST['mfg']); 
-    $cartoon_number = mysqli_real_escape_string($connection, $_POST['cartoon_number']); 
+    // $cartoon_number = mysqli_real_escape_string($connection, $_POST['cartoon_number']); 
     $sales_order_id = mysqli_real_escape_string($connection, $_POST['sales_order_id']); 
 
-    $query = "SELECT * FROM packing_mfg WHERE sales_order_id = '$sales_order_id' AND cartoon_number = '$cartoon_number'";
-    echo $query;
-    $query_run = mysqli_query($connection, $query);
-    foreach($query_run as $data){
-        $cartoon_count++;
-    }
-    $query = "SELECT * FROM packing_mfg WHERE mfg = '$mfg' AND cartoon_number='0'";
+  
+    $query = "SELECT * FROM packing_mfg WHERE mfg = '$mfg' AND sales_order_id='0'";
     $query_run = mysqli_query($connection, $query);
     foreach($query_run as $data){
         $mfg_count++;
     }
-    
-    echo $cartoon_count;
-    if($cartoon_count <4 && $mfg_count==1){
-        $query = "UPDATE packing_mfg SET  cartoon_number='$cartoon_number',sales_order_id ='$sales_order_id',packing_by='$user',packing_date = CURRENT_TIMESTAMP WHERE mfg = '$mfg' ";
+    if( $mfg_count==1){
+        $query = "UPDATE packing_mfg SET sales_order_id ='$sales_order_id',packing_by='$user',packing_date = CURRENT_TIMESTAMP WHERE mfg = '$mfg' ";
        
         $query_run = mysqli_query($connection, $query);
         
@@ -85,8 +78,13 @@ foreach($query_run as $a){
     $start_print = 1;
 
    }
+    $tempDir = 'temp/';
+    $filename = $mfg;
+    $codeContents = $mfg;
+    QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5,1);
+    $start_print = 1;
 }else{
-    echo '<script>alert("Cartoon number already completed please check cartoon number")</script>';
+    echo '<script>alert("QR code already exists")</script>';
 }
    
     }
@@ -123,13 +121,13 @@ foreach($query_run as $a){
                             </div>
 
                             <legend>Create MFG</legend>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <label class="col-sm-3 col-form-label">Cartoon Number</label>
                                 <div class="col-sm-8">
                                     <input type="text" min="1" class="form-control" placeholder="Cartoon Number"
                                         name="cartoon_number">
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">MFG Number</label>
@@ -276,15 +274,20 @@ foreach($query_run as $a){
 
                         <div class="row">
                             <div class="col-sm">
-                                <p class="text-left text-uppercase" style="font-size: 40px;color:black !important">
-                                    <?php echo "CTN ".  $cartoon_number; ?></p>
                                 <p class="text-center text-uppercase text-weight:bold"
                                     style="font-size: 40px; color:black !important">
                                     MFG S/N
                                 </p>
                                 <div class="text-center" style="margin-left:0px">
-                                    <?php echo '<img class="barcode " style="width:900px"alt="'.$barcodeText.'" src="php-barcode/barcode.php?text='.$barcodeText.'&codetype='.$barcodeType.'&orientation='.$barcodeDisplay.
-'&size='.$barcodeSize.'&print='.$mfg.'"/>';?>
+                                    <?php 
+                                    // barcode print
+//                                     echo '<img class="barcode " style="width:900px"alt="'.$barcodeText.'" src="php-barcode/barcode.php?text='.$barcodeText.'&codetype='.$barcodeType.'&orientation='.$barcodeDisplay.
+// '&size='.$barcodeSize.'&print='.$mfg.'"/>';
+?>
+
+                                    <?php 
+                                    // QR code print
+                                    echo '<img src="temp/'.$mfg.'.png" style="width:400px; height:400px;margin: 0px 0 0 0px;">';?>
                                 </div>
                                 <p class="text-center text-uppercase" style="font-size: 40px;color:black !important">
                                     <?php echo  $mfg; ?></p>
