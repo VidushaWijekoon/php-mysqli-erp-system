@@ -274,7 +274,7 @@ foreach($query_tech as $data){
                                                 <?php } elseif( $values['start_date_time'] != '0000-00-00 00:00:00') {?>
                                                 <span class="badge badge-lg badge-success text-white">
                                                     <?php $working_time_in_seconds = strtotime($values['end_date_time']) - strtotime($values['start_date_time']);
-                                                       echo date('H:i:s', $working_time_in_seconds ); 
+                                                       echo date('i:s', $working_time_in_seconds ); 
                                                     ?>
                                                 </span>
                                                 <?php } ?>

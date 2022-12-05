@@ -34,6 +34,7 @@ if(isset($_POST['logged_out'])){
     <link rel="stylesheet" href="../../static/plugins/fontawesome-pro/css/all.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../static/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="../../static/dist/css/adminlte.css">
     <!-- overlayScrollbars Side Navbar -->
     <link rel="stylesheet" href="../../static/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Customer CSS -->

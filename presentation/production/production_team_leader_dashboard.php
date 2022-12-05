@@ -14,6 +14,12 @@ $department = $_SESSION['department'];
 
 if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1 || $role_id == 2 && $department == 18){
 
+    $motherboard = null;
+    $combine = null;
+    $lcd = null;
+    $bodywork = null;
+    $qc = null;
+
 ?>
 
 <div class="row page-titles m-2">
@@ -66,7 +72,15 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1 || $
             <span class="info-box-icon bg-gradient-info elevation-1"><i class="fa-solid fa-keyboard"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">Send to Motherboard</span>
-                <span class="info-box-number"><?php echo $motherboard; ?> </span>
+                <span class="info-box-number">
+                    <?php 
+                        if($motherboard == null){
+                            echo "0";
+                        }else{
+                        echo $motherboard; 
+                        } 
+                    ?>
+                </span>
             </div>
         </div>
     </div>
@@ -76,7 +90,17 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1 || $
                 <i class="fa-solid fa-object-group"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">Combine</span>
-                <span class="info-box-number"><?php echo $combine; ?> </span>
+                <span class="info-box-number">
+                    <span class="info-box-number">
+                        <?php 
+                            if($combine == null){
+                                echo "0";
+                            }else{
+                                echo $combine; 
+                            } 
+                        ?>
+                    </span>
+                </span>
             </div>
         </div>
     </div>
@@ -89,7 +113,15 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1 || $
             <span class="info-box-icon bg-gradient-danger elevation-1"><i class="fas fa-tv"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">Send to LCD</span>
-                <span class="info-box-number"> <?php echo $lcd; ?> </span>
+                <span class="info-box-number">
+                    <?php 
+                        if($lcd == null){
+                            echo "0";
+                        }else{
+                        echo $lcd; 
+                        } 
+                    ?>
+                </span>
             </div>
         </div>
     </div>
@@ -99,7 +131,15 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1 || $
 
             <div class="info-box-content">
                 <span class="info-box-text">Send to Bodywork</span>
-                <span class="info-box-number"> <?php echo $bodywork; ?> </span>
+                <span class="info-box-number">
+                    <?php 
+                        if($bodywork == null){
+                            echo "0";
+                        }else{
+                        echo $bodywork; 
+                        } 
+                    ?>
+                </span>
             </div>
         </div>
     </div>
@@ -109,7 +149,15 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1 || $
 
             <div class="info-box-content">
                 <span class="info-box-text">Final QC</span>
-                <span class="info-box-number"> <?php echo $qc; ?> </span>
+                <span class="info-box-number">
+                    <?php 
+                        if($qc == null){
+                            echo "0";
+                        }else{
+                        echo $motherboard; 
+                        } 
+                    ?>
+                </span>
             </div>
         </div>
     </div>

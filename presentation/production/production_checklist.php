@@ -105,9 +105,35 @@ $c_dent_retrive = 2;
 $d_scratch_retrive = 2;
 $d_broken_retrive = 2;
 $d_dent_retrive = 2;
-$fan;
-$heat_sink;
-$cpu;
+$fan =null;
+$heat_sink = null ;
+$cpu =null;
+
+$keyboard1 = null;
+$keys1 =null;
+$speakers1 = null;
+$camera1 = null;
+$bazel1 = null;
+$mousepad1 =null;
+$mouse_pad_button1 =null;
+$camera_cable1=null;
+$back_cover1 =null;
+$lcd_cable1 =null;
+$wifi_card1 = null ;
+$battery1 =null;
+$battery_cable1 =null;
+$dvd_rom1 =null;
+$dvd_caddy1 =null;
+$hdd_caddy1 =null;
+$hdd_cable_connector1 =null;
+$c_panel_palm_rest1 =null;
+$hings_cover1 =null;
+$lan_cover1 =null;
+$mb_base1 = null;
+$fan1 =null;
+$heat_sink1 = null ;
+$cpu1 =null;
+
 
 if (isset($_GET['sales_order_id'])) {
     
@@ -232,12 +258,7 @@ if (isset($_GET['sales_order_id'])) {
     
     $query = "SELECT * FROM warehouse_information_sheet 
                         INNER JOIN sales_order_add_items
-                        ON warehouse_information_sheet.model = sales_order_add_items.item_model 
-                        AND warehouse_information_sheet.core = sales_order_add_items.item_core 
-                        AND  warehouse_information_sheet.generation = sales_order_add_items.item_generation 
-                        AND  warehouse_information_sheet.processor = sales_order_add_items.item_processor
-                        AND  warehouse_information_sheet.brand = sales_order_add_items.item_brand
-                        AND warehouse_information_sheet.device = sales_order_add_items.item_type 
+                        ON warehouse_information_sheet.sales_order_id = sales_order_add_items.sales_order_id 
                         WHERE  warehouse_information_sheet.inventory_id = {$inventory_id} 
                         AND warehouse_information_sheet.sales_order_id ={$_GET['sales_order_id']}";
 
@@ -409,7 +430,8 @@ if(isset($_POST['submit'])){
                             <div class="card-body">
                                 <?php if($mother_board == 1){ ?>
                                 <div class="row mt-2">
-                                    <label class="col-sm-4 col-form-label text-capitalize">
+                                    <label class="col-sm-4 col-form-label text-capitalize"> Step 01
+                                        :
                                         Motherboard</label>
                                     <div class="col-sm-8">
 
@@ -423,8 +445,7 @@ if(isset($_POST['submit'])){
                                 <?php }else{?>
                                 <div class="row mt-2">
                                     <label class="col-sm-4 col-form-label text-capitalize"> Step 01
-                                        :
-                                        Motherboard</label>
+                                        : Motherboard</label>
                                     <div class="col-sm-8">
 
                                         <button type="button" class="btn bg-gradient-secondary w-75" data-toggle="modal"
@@ -438,8 +459,7 @@ if(isset($_POST['submit'])){
                                 <?php if($mother_board == 0 && $lunch_combine ==1){ ?>
 
                                 <div class="row mt-2">
-                                    <label class="col-sm-4 col-form-label text-capitalize">Step 02 :
-                                        Combine</label>
+                                    <label class="col-sm-4 col-form-label text-capitalize">Step 02 : Combine</label>
                                     <div class="col-sm-8">
                                         <button type="button" class="btn bg-gradient-info w-75" data-toggle="modal"
                                             data-target="#modal-combine">
@@ -450,7 +470,7 @@ if(isset($_POST['submit'])){
                                 <?php } if($mother_board == 0 && $lunch_combine == 0){ ?>
                                 <div class="row mt-2">
                                     <label class="col-sm-4 col-form-label text-capitalize">Step 02
-                                        :Combine</label>
+                                        : Combine</label>
                                     <div class="col-sm-8">
                                         <button type="button" class="btn bg-gradient-info w-75" data-toggle="modal"
                                             data-target="#modal-combine" disabled>
@@ -467,7 +487,7 @@ if(isset($_POST['submit'])){
 
                                 <div class="row mt-2">
                                     <label class="col-sm-4 col-form-label text-capitalize">Step 03
-                                        :LCD</label>
+                                        : LCD</label>
                                     <div class="col-sm-8">
                                         <button type="button" class="btn bg-gradient-danger w-75" data-toggle="modal"
                                             data-target="#modal-lcd">
@@ -481,7 +501,7 @@ if(isset($_POST['submit'])){
                                                     ?>
                                 <div class="row mt-2">
                                     <label class="col-sm-4 col-form-label text-capitalize">Step 03
-                                        :LCD</label>
+                                        : LCD</label>
                                     <div class="col-sm-8">
                                         <button type="button" class="btn bg-gradient-danger w-75" data-toggle="modal"
                                             data-target="#modal-lcd" disabled>
@@ -494,7 +514,7 @@ if(isset($_POST['submit'])){
 
                                 <div class="row mt-2">
                                     <label class="col-sm-4 col-form-label text-capitalize">Step 04
-                                        :Bodywork</label>
+                                        : Bodywork</label>
                                     <div class="col-sm-8">
                                         <button type="button" class="btn bg-gradient-warning w-75" data-toggle="modal"
                                             data-target="#modal-bodywork">
@@ -505,7 +525,7 @@ if(isset($_POST['submit'])){
                                 <?php } if($body_work == 0 && $lcd == 0){?>
                                 <div class="row mt-2">
                                     <label class="col-sm-4 col-form-label text-capitalize">Step 04
-                                        :Bodywork</label>
+                                        : Bodywork</label>
                                     <div class="col-sm-8">
                                         <button type="button" class="btn bg-gradient-warning w-75" data-toggle="modal"
                                             data-target="#modal-bodywork" disabled>
@@ -522,8 +542,8 @@ if(isset($_POST['submit'])){
                         <?php if($lcd == 0){ ?>
 
                         <div class="row mt-2">
-                            <label class="col-sm-4 col-form-label text-capitalize">Step 04
-                                :Production</label>
+                            <label class="col-sm-4 col-form-label text-capitalize">Step 05
+                                : Production</label>
                             <div class="col-sm-8">
                                 <button type="button" class="btn bg-gradient-primary w-75" data-toggle="modal"
                                     data-target="#modal-production">
@@ -775,9 +795,7 @@ if(isset($_POST['combine_check_form'])){
     $fan= mysqli_real_escape_string($connection,  $_POST['fan']);
     $heat_sink= mysqli_real_escape_string($connection,  $_POST['heat_sink']);
     $cpu= mysqli_real_escape_string($connection, $_POST['cpu']);
-    $keys = mysqli_real_escape_string($connection,  $_POST['keyboard_keys']);
-   
-    
+    $keys = mysqli_real_escape_string($connection,  $_POST['keyboard_keys']);   
 
 
     $query = "SELECT location FROM users WHERE epf = '$emp_id'";
@@ -806,9 +824,7 @@ if(isset($_POST['combine_check_form'])){
         VALUES('$item_brand', '$item_model', '$item_generation', '$sales_order_id', '$inventory_id', '$date','0000-00-00' ,'$emp_id', '$location10', '$status', '$keyboard', '$speakers',
             '$camera', '$bazel', '$lan_cover', '$mousepad', '$mouse_pad_button', '$camera_cable', '$back_cover', '$wifi_card', '$lcd_cable', '$battery', '$battery_cable',
             '$dvd_rom', '$dvd_caddy', '$hdd_caddy', '$hdd_cable_connector', '$c_panel_palm_rest', '$mb_base', '$hings_cover', 0, 0)";
-            echo $status;
-            echo $query_6;
-            
+                         
          $query_new = mysqli_query($connection, $query_6);
         
          
@@ -987,7 +1003,7 @@ if(isset($_POST['combine_check_form'])){
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     if($status == 1){
-        echo $status;
+        // echo $status;
      $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                                 $date = $date1->format('Y-m-d H:i:s');
     $query_prod_info ="UPDATE prod_info SET end_date_time=' $date',status='1',combine_issue='1' WHERE p_id ='$p_id' ";
@@ -2157,15 +2173,6 @@ if(isset($_POST['lcd_form'])){
         echo "<script>
                 var newHTML = document.createElement ('div');
                 newHTML.innerHTML =
-
-
-
-
-
-
-
-
-                
                 newHTML = document.createElement ('div');
                 // newHTML.innerHTML = ' <div id=\"modal-bodywork\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
                 document.body.appendChild (newHTML);
@@ -2712,20 +2719,21 @@ for($i =0; $i< sizeof($result);$i++){
                         
     $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
     $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
-     $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
+    $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
     $processor = mysqli_real_escape_string($connection, $_POST['processor']);
     $generation = mysqli_real_escape_string($connection, $_POST['generation']);
-     $ram = mysqli_real_escape_string($connection, $_POST['ram']);
+    $ram = mysqli_real_escape_string($connection, $_POST['ram']);
     $hdd_capacity = mysqli_real_escape_string($connection, $_POST['hdd_capacity']);
-    $hdd_type = mysqli_real_escape_string($connection, $_POST['hdd_type']);
+    $ssd_capacity = mysqli_real_escape_string($connection, $_POST['ssd_capacity']);
     $display = mysqli_real_escape_string($connection, $_POST['display']);
     $resolutions = mysqli_real_escape_string($connection, $_POST['resolutions']);
     $graphic = mysqli_real_escape_string($connection, $_POST['graphic']);
     $graphic_type = mysqli_real_escape_string($connection, $_POST['graphic_type']);
     $operating_system = mysqli_real_escape_string($connection, $_POST['operating_system']);
+    $battery_level = mysqli_real_escape_string($connection, $_POST['battery_level']);
                     
-    $query = "INSERT INTO production_check(inventory_id, emp_id, sales_order_id, processor, generation, ram, hdd_capacity, hdd_type, display, resolutions, graphic, graphic_type, operating_system, status, created_time) 
-                VALUES ('$sales_order_id', '$emp_id', '$inventory_id', '$processor', '$generation', '$ram', '$hdd_capacity', '$hdd_type', '$display', '$resolutions', '$graphic', '$graphic_type', '$operating_system', 0, CURRENT_TIMESTAMP)";
+    $query = "INSERT INTO production_check(inventory_id, emp_id, sales_order_id, processor, generation, ram, hdd_capacity, ssd_capacity, display, resolutions, graphic, graphic_type, operating_system, battery_level, status, created_time) 
+                VALUES ('$sales_order_id', '$emp_id', '$inventory_id', '$processor', '$generation', '$ram', '$hdd_capacity', '$ssd_capacity', '$display', '$resolutions', '$graphic', '$graphic_type', '$operating_system', '$battery_level', 0, CURRENT_TIMESTAMP)";
     $query_run = mysqli_query($connection, $query);
     $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
     $date = $date1->format('Y-m-d H:i:s');
@@ -2760,7 +2768,7 @@ for($i =0; $i< sizeof($result);$i++){
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header bg-secondary">
-                <h4 class="modal-title">Production Checking Form</h4>
+                <h4 class="modal-title">05 Production Checking Form</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -2773,6 +2781,7 @@ for($i =0; $i< sizeof($result);$i++){
                                 <div class="row">
                                     <label class="col-sm-3 col-form-label text-capitalize ">Processor</label>
                                     <div class="col-sm-9 mt-2">
+
                                         <div class="icheck-success d-inline">
                                             <input type="radio" id="celeron" name="processor" value="celeron">
                                             <label class="label_values" for="celeron"
@@ -2976,36 +2985,40 @@ for($i =0; $i< sizeof($result);$i++){
                                 </div>
 
                                 <div class="row">
-                                    <label class="col-sm-3 col-form-label text-capitalize ">HDD
-                                        Capacity</label>
+                                    <label class="col-sm-3 col-form-label text-capitalize">HDD </label>
                                     <div class="col-sm-9 mt-2">
                                         <div class="icheck-success d-inline">
-                                            <input type="radio" id="128gbssd" name="hdd_capacity" value="128gb">
-                                            <label class="label_values" for="128gbssd" style="margin-right: 15px;">128GB
+                                            <input type="radio" id="128gbhdd" name="hdd_capacity" value="128gb_hdd">
+                                            <label class="label_values" for="128gbhdd" style="margin-right: 15px;">128GB
                                             </label>
                                         </div>
                                         <div class="icheck-success d-inline">
-                                            <input type="radio" id="256gbssd" name="hdd_capacity" value="256gb">
-                                            <label class="label_values" for="256gbssd" style="margin-right: 15px;">256GB
+                                            <input type="radio" id="256gbhdd" name="hdd_capacity" value="256gb_hdd">
+                                            <label class="label_values" for="256gbhdd" style="margin-right: 15px;">256GB
                                             </label>
                                         </div>
                                         <div class="icheck-success d-inline">
-                                            <input type="radio" id="512gbssd" name="hdd_capacity" value="512gb">
-                                            <label class="label_values" for="512gbssd" style="margin-right: 15px;">512GB
+                                            <input type="radio" id="384gbhdd" name="hdd_capacity" value="384gb_hdd">
+                                            <label class="label_values" for="384gbhdd" style="margin-right: 15px;">384GB
                                             </label>
                                         </div>
                                         <div class="icheck-success d-inline">
-                                            <input type="radio" id="1tbssd" name="hdd_capacity" value="1tb">
-                                            <label class="label_values" for="1tbssd" style="margin-right: 15px;">1TB
+                                            <input type="radio" id="512gbhdd" name="hdd_capacity" value="512gb_hdd">
+                                            <label class="label_values" for="512gbhdd" style="margin-right: 15px;">512GB
                                             </label>
                                         </div>
                                         <div class="icheck-success d-inline">
-                                            <input type="radio" id="2tbssd" name="hdd_capacity" value="2tb">
-                                            <label class="label_values" for="2tbssd" style="margin-right: 15px;">2TB
+                                            <input type="radio" id="1tbhdd" name="hdd_capacity" value="1tb_hdd">
+                                            <label class="label_values" for="1tbhdd" style="margin-right: 15px;">1TB
                                             </label>
                                         </div>
                                         <div class="icheck-success d-inline">
-                                            <input type="radio" id="nossd" name="hdd_capacity" value="n/a">
+                                            <input type="radio" id="2tbhdd" name="hdd_capacity" value="2tb_hdd">
+                                            <label class="label_values" for="2tbhdd" style="margin-right: 15px;">2TB
+                                            </label>
+                                        </div>
+                                        <div class="icheck-success d-inline">
+                                            <input type="radio" id="nohdd" name="hdd_capacity" value="n/a">
                                             <label class="label_values" for="nossd" style="margin-right: 15px;">N/A
                                             </label>
                                         </div>
@@ -3014,22 +3027,36 @@ for($i =0; $i< sizeof($result);$i++){
                                 </div>
 
                                 <div class="row">
-                                    <label class="col-sm-3 col-form-label text-capitalize ">HDD
-                                        Type</label>
+                                    <label class="col-sm-3 col-form-label text-capitalize">SSD </label>
                                     <div class="col-sm-9 mt-2">
                                         <div class="icheck-success d-inline">
-                                            <input type="radio" id="hdd" name="hdd_type" value="hdd">
-                                            <label class="label_values" for="hdd" style="margin-right: 15px;">
-                                                HDD</label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="ssd" name="hdd_type" value="ssd">
-                                            <label class="label_values" for="ssd" style="margin-right: 15px;"> SSD
+                                            <input type="radio" id="128gbssd" name="ssd_capacity" value="128gb_ssd">
+                                            <label class="label_values" for="128gbssd" style="margin-right: 15px;">128GB
                                             </label>
                                         </div>
                                         <div class="icheck-success d-inline">
-                                            <input type="radio" id="nvme" name="hdd_type" value="nvme">
-                                            <label class="label_values" for="nvme" style="margin-right: 15px;"> NVMe
+                                            <input type="radio" id="256gbssd" name="ssd_capacity" value="256gb_ssd">
+                                            <label class="label_values" for="256gbssd" style="margin-right: 15px;">256GB
+                                            </label>
+                                        </div>
+                                        <div class="icheck-success d-inline">
+                                            <input type="radio" id="512gbssd" name="ssd_capacity" value="512gb_ssd">
+                                            <label class="label_values" for="512gbssd" style="margin-right: 15px;">512GB
+                                            </label>
+                                        </div>
+                                        <div class="icheck-success d-inline">
+                                            <input type="radio" id="1tbssd" name="ssd_capacity" value="1tb_ssd">
+                                            <label class="label_values" for="1tbssd" style="margin-right: 15px;">1TB
+                                            </label>
+                                        </div>
+                                        <div class="icheck-success d-inline">
+                                            <input type="radio" id="2tbssd" name="ssd_capacity" value="2tb_ssd">
+                                            <label class="label_values" for="2tbssd" style="margin-right: 15px;">2TB
+                                            </label>
+                                        </div>
+                                        <div class="icheck-success d-inline">
+                                            <input type="radio" id="nossd" name="ssd_capacity" value="n/a">
+                                            <label class="label_values" for="nossd" style="margin-right: 15px;">N/A
                                             </label>
                                         </div>
 
@@ -3058,22 +3085,30 @@ for($i =0; $i< sizeof($result);$i++){
                                     <div class="col-sm-9 mt-2">
                                         <div class="icheck-success d-inline">
                                             <input type="radio" id="hd" name="resolutions" value="hd">
-                                            <label class="label_values" for="hd" style="margin-right: 15px;">HD
+                                            <label class="label_values" for="hd"
+                                                style="margin-right: 15px;">HD(1366x768)
+                                            </label>
+                                        </div>
+                                        <div class="icheck-success d-inline">
+                                            <input type="radio" id="hd+" name="resolutions" value="hd+">
+                                            <label class="label_values" for="hd+"
+                                                style="margin-right: 15px;">HD+(1600x900)
                                             </label>
                                         </div>
                                         <div class="icheck-success d-inline">
                                             <input type="radio" id="fhd" name="resolutions" value="fhd">
-                                            <label class="label_values" for="fhd" style="margin-right: 15px;">FHD
+                                            <label class="label_values" for="fhd"
+                                                style="margin-right: 15px;">FHD(1920x1080)
                                             </label>
                                         </div>
                                         <div class="icheck-success d-inline">
                                             <input type="radio" id="qhd" name="resolutions" value="qhd">
-                                            <label class="label_values" for="qhd" style="margin-right: 15px;">QHD
+                                            <label class="label_values" for="qhd" style="margin-right: 15px;">QHD(2k)
                                             </label>
                                         </div>
                                         <div class="icheck-success d-inline">
                                             <input type="radio" id="4k" name="resolutions" value="4k">
-                                            <label class="label_values" for="4k" style="margin-right: 15px;">4K
+                                            <label class="label_values" for="4k" style="margin-right: 15px;">UHD(4K)
                                             </label>
                                         </div>
                                     </div>
@@ -3161,6 +3196,66 @@ for($i =0; $i< sizeof($result);$i++){
                                             <label class="label_values" for="ios" style="margin-right: 15px;">IOS
                                             </label>
                                         </div>
+                                        <div class="icheck-success d-inline">
+                                            <input type="radio" id="chrome os" name="operating_system"
+                                                value="chrome os">
+                                            <label class="label_values" for="chrome os"
+                                                style="margin-right: 15px;">Chrome OS
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-sm-3 col-form-label text-capitalize ">
+                                        Battery Percentage</label>
+                                    <div class="col-sm-9 mt-2 d-flex">
+                                        <div class="icheck-success d-inline">
+                                            <input type="radio" id="excellent" name="battery_level" value="excellent">
+                                            <div class="d-flex">
+                                                <label class="label_values" for="excellent"
+                                                    style="margin-right: 15px;">Excellent
+                                                    <div class="progress">
+                                                        <div class="progress-bar bg-gradient-success" role="progressbar"
+                                                            style="width: 90%" aria-valuenow="25" aria-valuemin="0"
+                                                            aria-valuemax="100">(80%-100%)
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                        <div class="icheck-success d-inline">
+                                            <input type="radio" id="excellent" name="battery_level" value="excellent">
+                                            <div class="d-flex">
+                                                <label class="label_values" for="excellent"
+                                                    style="margin-right: 15px;">Good
+                                                    <div class="progress">
+                                                        <div class="progress-bar bg-gradient-warning" role="progressbar"
+                                                            style="width: 60%" aria-valuenow="25" aria-valuemin="0"
+                                                            aria-valuemax="100">(79%-60%)
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                        <div class="icheck-success d-inline">
+                                            <input type="radio" id="excellent" name="battery_level" value="excellent">
+                                            <div class="d-flex">
+                                                <label class="label_values" for="excellent"
+                                                    style="margin-right: 15px;">Weak
+                                                    <div class="progress">
+                                                        <div class="progress-bar bg-gradient-danger" role="progressbar"
+                                                            style="width: 40%" aria-valuenow="25" aria-valuemin="0"
+                                                            aria-valuemax="100">(59%-0%)
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                            </div>
+
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
