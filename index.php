@@ -89,7 +89,7 @@ if(isset($_POST['submit'])) {
     <!-- Bootstrap -->
     <link rel="stylesheet" href="./static/plugins/bootstrap/css/bootstrap.min.css">
     <!-- Fontawesome -->
-    <link rel="stylesheet" href="./static/plugins/fontawesome-free/css/all.css">
+    <link rel="stylesheet" href="./static/plugins/fontawesome-pro/css/all.css">
 </head>
 
 <body>

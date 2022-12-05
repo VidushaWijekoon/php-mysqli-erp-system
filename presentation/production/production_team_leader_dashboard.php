@@ -14,6 +14,12 @@ $department = $_SESSION['department'];
 
 if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1 || $role_id == 2 && $department == 18){
 
+    $motherboard = null;
+    $combine = null;
+    $lcd = null;
+    $bodywork = null;
+    $qc = null;
+
 ?>
 
 <div class="row page-titles m-2">
@@ -26,9 +32,7 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1 || $
 
 
 <div class="row m-2">
-
     <div class="col-12 mt-3 d-flex">
-
         <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./production_team_task_view.php"><i
                 class="fa-solid fa-users"></i><span class="mx-1">Team Achievement</span></a>
         <a class="btn bg-gradient-secondary mx-2 text-white" type="button" href="./production_sales_order.php"><i
@@ -42,8 +46,6 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1 || $
     </div>
 </div>
 
-
-<!-- Info boxes -->
 <?php $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
         $date = $date1->format('Y-m-d H:i:s');
         $dt = new DateTime;
@@ -52,32 +54,16 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1 || $
         $dt->add(new DateInterval('PT4H'));
         $start_time= $dt->format('H:i:s');
         $current_time= $date;
-        $query ="SELECT issue_type FROM prod_info WHERE end_date_time BETWEEN '$start_time' AND '$current_time'";
+        $query ="SELECT * FROM prod_info WHERE end_date_time BETWEEN '$start_time' AND '$current_time'";
         $query_e6 = mysqli_query($connection, $query);
-        $motherboard =0;
-        $combind =0;
-        $lcd =0;
-        $bodywork =0;
-        $qc =0;
         foreach($query_e6 as $data){
-            if(empty($data)){}else{
-                if($data['issue_type'] ==1){
-                    $motherboard++;
-                }
-                if($data['issue_type'] ==2){
-                    $combind++;
-                }
-                if($data['issue_type'] ==3){
-                    $lcd++;
-                }
-                if($data['issue_type'] ==4){
-                    $bodywork++;
-                }
-                if($data['issue_type'] ==5){
-                    $qc++;
-                }
-            }
-        }                                              
+            $motherboard = $data['m_board_issue'];
+            $combine = $data['combine_issue'];
+            $lcd = $data['lcd_issue'];
+            $bodywork = $data['bodywork_issue'];
+            $qc = $data['production_spec'];
+        }
+                                            
 ?>
 
 <div class="row m-2">
@@ -86,26 +72,38 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1 || $
             <span class="info-box-icon bg-gradient-info elevation-1"><i class="fa-solid fa-keyboard"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">Send to Motherboard</span>
-                <span class="info-box-number"><?php echo $motherboard ?> </span>
+                <span class="info-box-number">
+                    <?php 
+                        if($motherboard == null){
+                            echo "0";
+                        }else{
+                        echo $motherboard; 
+                        } 
+                    ?>
+                </span>
             </div>
-            <!-- /.info-box-content -->
         </div>
-        <!-- /.info-box -->
     </div>
-    <!-- /.col -->
     <div class="col-12 col-sm-6 col-md-2 mt-3">
         <div class="info-box mb-3">
             <span class="info-box-icon bg-gradient-secondary elevation-1">
                 <i class="fa-solid fa-object-group"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">Combine</span>
-                <span class="info-box-number"><?php echo $combind ?> </span>
+                <span class="info-box-number">
+                    <span class="info-box-number">
+                        <?php 
+                            if($combine == null){
+                                echo "0";
+                            }else{
+                                echo $combine; 
+                            } 
+                        ?>
+                    </span>
+                </span>
             </div>
-            <!-- /.info-box-content -->
         </div>
-        <!-- /.info-box -->
     </div>
-    <!-- /.col -->
 
     <!-- fix for small devices only -->
     <div class="clearfix hidden-md-up"></div>
@@ -115,39 +113,54 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1 || $
             <span class="info-box-icon bg-gradient-danger elevation-1"><i class="fas fa-tv"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">Send to LCD</span>
-                <span class="info-box-number"> <?php echo $lcd ?> </span>
+                <span class="info-box-number">
+                    <?php 
+                        if($lcd == null){
+                            echo "0";
+                        }else{
+                        echo $lcd; 
+                        } 
+                    ?>
+                </span>
             </div>
-            <!-- /.info-box-content -->
         </div>
-        <!-- /.info-box -->
     </div>
-    <!-- /.col -->
     <div class="col-12 col-sm-6 col-md-2 mt-3">
         <div class="info-box mb-3">
             <span class="info-box-icon bg-gradient-dark elevation-1"><i class="fas fa-laptop"></i></span>
 
             <div class="info-box-content">
                 <span class="info-box-text">Send to Bodywork</span>
-                <span class="info-box-number"> <?php echo $bodywork ?> </span>
+                <span class="info-box-number">
+                    <?php 
+                        if($bodywork == null){
+                            echo "0";
+                        }else{
+                        echo $bodywork; 
+                        } 
+                    ?>
+                </span>
             </div>
-            <!-- /.info-box-content -->
         </div>
-        <!-- /.info-box -->
     </div>
-    <!-- /.col -->
     <div class="col-12 col-sm-6 col-md-2 mt-3">
         <div class="info-box mb-3">
             <span class="info-box-icon bg-gradient-success elevation-1"><i class="fas fa-stethoscope"></i></span>
 
             <div class="info-box-content">
                 <span class="info-box-text">Final QC</span>
-                <span class="info-box-number"> <?php echo $qc ?> </span>
+                <span class="info-box-number">
+                    <?php 
+                        if($qc == null){
+                            echo "0";
+                        }else{
+                        echo $motherboard; 
+                        } 
+                    ?>
+                </span>
             </div>
-            <!-- /.info-box-content -->
         </div>
-        <!-- /.info-box -->
     </div>
-    <!-- /.col -->
     <div class="col-12 col-sm-6 col-md-2 mt-3">
         <div class="info-box mb-3">
             <span class="info-box-icon bg-gradient-warning elevation-1"><i class="fas fa-users"></i></span>
@@ -158,22 +171,17 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1 || $
                     <?php
 
                         $query = "SELECT * FROM employees WHERE department = 1";
+                            if ($result = mysqli_query($connection, $query)) {
 
-                        if ($result = mysqli_query($connection, $query)) {
-
-                            // Return the number of rows in result set
-                            $rowcount = mysqli_num_rows($result);
-                        }
-                        ?><?php echo "$rowcount"; ?>
+                                $rowcount = mysqli_num_rows($result);
+                                echo $rowcount;
+                            }
+                        ?>
                 </span>
             </div>
-            <!-- /.info-box-content -->
         </div>
-        <!-- /.info-box -->
     </div>
-    <!-- /.col -->
 </div>
-<!-- /.row -->
 
 
 <div class="row">
@@ -206,8 +214,7 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1 || $
 
                         <?php 
  
-                                // getting the list of users
-                                $query = "SELECT
+                                 $query = "SELECT
                                                 sales_order_information.sales_order_id,
                                                 sales_order_add_items.sales_order_created_date AS created_date,
                                                 sales_order_add_items.item_delivery_date,
@@ -217,9 +224,9 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1 || $
                                             LEFT JOIN warehouse_information_sheet ON sales_order_add_items.sales_order_id = warehouse_information_sheet.sales_order_id
                                             GROUP BY sales_order_information.sales_order_id ";
                                 $query_run = mysqli_query($connection, $query);
-                                $received_unit =0;
-                                $tested_unit =0;
-                                $i=0;
+                                $received_unit = 0;
+                                $tested_unit = 0;
+                                $i = 0;
                                 if (mysqli_num_rows($query_run) > 0) {
                                     foreach ($query_run as $items) {
 
@@ -232,16 +239,14 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1 || $
                                     foreach($query_run_new as $a){
                                             $tested_unit = $a['tech_id'];
                                     }
-                                     /////////////////////////////////////////////
-                                     //retrive production team leader scanned item
+
+                                    //retrive production team leader scanned item
                                     $query_2 = "SELECT COUNT(production_id) AS production_id FROM `production` WHERE sales_order_id={$items['sales_order_id']};";
                                     $query_result2 = mysqli_query($connection,$query_2);
                                         foreach($query_result2 as $a){
                                             $received_unit = $a['production_id'];
-                                            
-                                        }
-                                            ///////////////////////////////////////////////
-                            ?>
+                                    }
+                             ?>
 
                         <?php 
                             $i++;
@@ -318,7 +323,6 @@ if($role_id == 1 && $department == 11 || $role_id ==  4 && $department == 1 || $
                 </table>
 
             </div>
-            <!-- /.card-body -->
         </div>
     </div>
 </div>
