@@ -2629,7 +2629,6 @@ if (isset($_GET['sales_order_id'])) {
         $query_prod_info ="UPDATE prod_info SET end_date_time = '$date', status = '{$all_ok}', production_spec = '0' WHERE p_id = '$p_id' ";
         $query_prod_run = mysqli_query($connection, $query_prod_info);
         
-        echo '<script>alert("Welcome to Geeks for Geeks")</script>';
 
         // header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
                                 

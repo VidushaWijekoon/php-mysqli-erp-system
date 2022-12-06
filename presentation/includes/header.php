@@ -530,7 +530,7 @@ if(isset($_POST['logged_out'])){
                             <ul class="nav nav-treeview">
 
                                 <li class="nav-item">
-                                    <a href="../qc/create_mfg.php" class="nav-link">
+                                    <a href="../qc/new_create_mfg.php" class="nav-link">
                                         <i class="fa fa-stethoscope nav-icon" style="font-size: 12px;"></i>
                                         <p> QC </p>
                                     </a>
