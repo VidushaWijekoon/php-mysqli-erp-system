@@ -134,7 +134,7 @@ foreach($query_tech as $data){
             <div class="card">
                 <form action="" method="POST">
                     <div class="row mx-2">
-                        <div class="col-md-3">
+                        <div class="col-md-3 align-items-center mx-auto">
 
                             <fieldset class="mt-2">
                                 <legend>QR Scan</legend>
@@ -161,14 +161,11 @@ foreach($query_tech as $data){
                                             <table class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th style="width: 10px">#</th>
                                                         <th>Sales Order</th>
-                                                        <th>Device</th>
                                                         <th>Brand</th>
                                                         <th>Model</th>
                                                         <th>Core</th>
                                                         <th>Generation</th>
-                                                        <th>Processor</th>
                                                         <th>RAM</th>
                                                         <th>HDD</th>
                                                         <th>Order QTY</th>
@@ -190,14 +187,11 @@ foreach($query_tech as $data){
                                                                 foreach($query_run as $value) {
                                                                     $i++;
                                                         ?>
-                                                        <td><?php echo $i; ?> </td>
                                                         <td><?php echo $value['sales_order_id']; ?></td>
-                                                        <td><?php echo $value['device_type']; ?></td>
                                                         <td><?php echo $value['brand']; ?></td>
                                                         <td><?php echo $value['model']; ?></td>
                                                         <td><?php echo $value['core']; ?></td>
                                                         <td><?php echo $value['generation']; ?></td>
-                                                        <td><?php echo $value['processor']; ?></td>
                                                         <td><?php echo $value['item_ram']."GB"; ?></td>
                                                         <td><?php echo $value['item_hdd']; ?></td>
                                                         <td><?php echo $value['item_quantity']; ?></td>
@@ -218,28 +212,41 @@ foreach($query_tech as $data){
                             </fieldset>
                         </div>
 
-                        <div class="col col-lg-12 mb-3">
-                            <fieldset>
-                                <legend>My Task</legend>
 
-                                <table class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Inventory ID</th>
-                                            <th>S/O ID</th>
-                                            <th>Brand</th>
-                                            <th>Core</th>
-                                            <th>Genaration</th>
-                                            <th>Model</th>
-                                            <th>Starting Time</th>
-                                            <th>End Time</th>
-                                            <th>Minutes to Complete</th>
-                                            <th>&nbsp;</th>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody class="table-dark text-uppercase">
-                                        <?php 
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fliud">
+    <div class="row">
+        <div class="col-lg-11 grid-margin stretch-card justify-content-center mx-auto mt-2">
+            <div class="card">
+                <div class="col col-lg-12 mb-3">
+                    <fieldset>
+                        <legend>My Task</legend>
+
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Inventory ID</th>
+                                    <th>S/O ID</th>
+                                    <th>Brand</th>
+                                    <th>Core</th>
+                                    <th>Genaration</th>
+                                    <th>Model</th>
+                                    <th>Starting Time</th>
+                                    <th>End Time</th>
+                                    <th>Minutes to Complete</th>
+                                    <th>&nbsp;</th>
+
+                                </tr>
+                            </thead>
+                            <tbody class="table-dark text-uppercase">
+                                <?php 
                                         $sales_order_id = '';
 
                                         // getting the list of users
@@ -253,34 +260,34 @@ foreach($query_tech as $data){
                                                     $inventory_id = $values['inventory_id'];
                                         ?>
 
-                                        <tr>
-                                            <td><?php echo $values['inventory_id'] ?></td>
-                                            <td><?php echo $values['sales_order'] ?></td>
-                                            <td><?php echo $values['brand'] ?></td>
-                                            <td><?php echo $values['core'] ?></td>
-                                            <td><?php echo $values['generation'] ?></td>
-                                            <td><?php echo $values['model'] ?></td>
-                                            <td><?php echo $values['start_date_time'] ?></td>
-                                            <td>
-                                                <?php if( $values['end_date_time'] == '0000-00-00 00:00:00') {?>
-                                                <span class="badge badge-lg badge-danger text-white">Not Finished</span>
-                                                <?php } else { ?>
-                                                <span><?php echo $values['end_date_time'] ?></span>
-                                                <?php } ?>
-                                            </td>
-                                            <td>
-                                                <?php if( $values['end_date_time'] == '0000-00-00 00:00:00') {?>
-                                                <span class="badge badge-lg badge-danger text-white">0 Minutes</span>
-                                                <?php } elseif( $values['start_date_time'] != '0000-00-00 00:00:00') {?>
-                                                <span class="badge badge-lg badge-success text-white">
-                                                    <?php $working_time_in_seconds = strtotime($values['end_date_time']) - strtotime($values['start_date_time']);
+                                <tr>
+                                    <td><?php echo $values['inventory_id'] ?></td>
+                                    <td><?php echo $values['sales_order'] ?></td>
+                                    <td><?php echo $values['brand'] ?></td>
+                                    <td><?php echo $values['core'] ?></td>
+                                    <td><?php echo $values['generation'] ?></td>
+                                    <td><?php echo $values['model'] ?></td>
+                                    <td><?php echo $values['start_date_time'] ?></td>
+                                    <td>
+                                        <?php if( $values['end_date_time'] == '0000-00-00 00:00:00') {?>
+                                        <span class="badge badge-lg badge-danger text-white">Not Finished</span>
+                                        <?php } else { ?>
+                                        <span><?php echo $values['end_date_time'] ?></span>
+                                        <?php } ?>
+                                    </td>
+                                    <td>
+                                        <?php if( $values['end_date_time'] == '0000-00-00 00:00:00') {?>
+                                        <span class="badge badge-lg badge-danger text-white">0 Minutes</span>
+                                        <?php } elseif( $values['start_date_time'] != '0000-00-00 00:00:00') {?>
+                                        <span class="badge badge-lg badge-success text-white">
+                                            <?php $working_time_in_seconds = strtotime($values['end_date_time']) - strtotime($values['start_date_time']);
                                                        echo date('i:s', $working_time_in_seconds ); 
                                                     ?>
-                                                </span>
-                                                <?php } ?>
-                                            </td>
-                                            <td>
-                                                <?php  if($values['status'] == 1){ 
+                                        </span>
+                                        <?php } ?>
+                                    </td>
+                                    <td>
+                                        <?php  if($values['status'] == 1){ 
                                                        if ($values['combine_issue'] == 1) {
                                                             
                                                             $query_1 ="SELECT  `status` FROM `requested_part_from_production` WHERE inventory_id = $inventory_id";
@@ -322,16 +329,13 @@ foreach($query_tech as $data){
                                                                     echo '<span class="badge badge-lg badge-success text-white px-2">Production OK</span>';
                                                                 }
                                                         }?>
-                                            </td>
-                                        </tr>
-                                        <?php }} ?>
-                                    </tbody>
-                                </table>
-                            </fieldset>
-                        </div>
-
-                    </div>
-                </form>
+                                    </td>
+                                </tr>
+                                <?php }} ?>
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </div>
             </div>
         </div>
     </div>

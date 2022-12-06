@@ -41,8 +41,8 @@ if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) 
                                 <th>Assigned Date</th>
                                 <th>Assigned QTY</th>
                                 <th>Complete QTY</th>
-                                <th style="width:150px ">&nbsp;</th>
-                                <th>&nbsp;</th>
+                                <th style="width:250px">Progress</th>
+                                <th>Task</th>
                             </tr>
                         </thead>
                         <tbody class="tbody_1">

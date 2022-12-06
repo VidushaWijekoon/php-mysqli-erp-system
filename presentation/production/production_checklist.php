@@ -1,5 +1,14 @@
 <?php 
- error_reporting (E_ALL ^ E_NOTICE);
+
+error_reporting (E_ALL ^ E_NOTICE);
+// Toggle this to change the setting
+define('DEBUG', true);
+
+// You want all errors to be triggered
+error_reporting(E_ALL);
+ 
+error_reporting(E_ERROR | E_PARSE);
+
 ob_start();
 session_start();
 include_once('../../dataAccess/connection.php');
@@ -320,15 +329,26 @@ if(isset($_POST['submit'])){
  
 ?>
 
+<!-- ============================================================== -->
+<!-- Home Page  -->
+<!-- ============================================================== -->
 
+
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center fa-2x"><a href="./production_technician_dashboard.php">
+            <i class="fa-solid fa-home fa-2x m-2" style="color: #ced4da;"></i>
+        </a>
+    </div>
+</div>
 
 <!-- ============================================================== -->
 <!-- Sales Order Laptop Requirment  -->
 <!-- ============================================================== -->
 
+
 <div class="container-fluid mt-3">
     <div class="row">
-        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-5">
+        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto">
             <div class="card-header bg-secondary">
                 <h3 class="card-title p-2">Inventory ID <?php echo $_GET['inventory_id']; ?></h3>
             </div>
@@ -414,7 +434,6 @@ if(isset($_POST['submit'])){
         </div>
     </div>
 </div>
-
 <!-- ============================================================== -->
 <!-- Check Form Buttons  -->
 <!-- ============================================================== -->
@@ -435,7 +454,7 @@ if(isset($_POST['submit'])){
                                         Motherboard</label>
                                     <div class="col-sm-8">
 
-                                        <button type="button" class="btn bg-gradient-danger w-75" data-toggle="modal"
+                                        <button type="button" class="btn bg-gradient-danger w-100" data-toggle="modal"
                                             data-target="#modal-motherboard">
                                             Launch Motherboard Form
                                         </button>
@@ -448,8 +467,8 @@ if(isset($_POST['submit'])){
                                         : Motherboard</label>
                                     <div class="col-sm-8">
 
-                                        <button type="button" class="btn bg-gradient-secondary w-75" data-toggle="modal"
-                                            data-target="#modal-motherboard" disabled>
+                                        <button type="button" class="btn bg-gradient-dark mx-2 mb-2 w-100"
+                                            data-toggle="modal" data-target="#modal-motherboard" disabled>
                                             Launch Motherboard Form
                                         </button>
 
@@ -461,7 +480,7 @@ if(isset($_POST['submit'])){
                                 <div class="row mt-2">
                                     <label class="col-sm-4 col-form-label text-capitalize">Step 02 : Combine</label>
                                     <div class="col-sm-8">
-                                        <button type="button" class="btn bg-gradient-info w-75" data-toggle="modal"
+                                        <button type="button" class="btn bg-gradient-info w-100" data-toggle="modal"
                                             data-target="#modal-combine">
                                             Launch Combine Form
                                         </button>
@@ -472,7 +491,7 @@ if(isset($_POST['submit'])){
                                     <label class="col-sm-4 col-form-label text-capitalize">Step 02
                                         : Combine</label>
                                     <div class="col-sm-8">
-                                        <button type="button" class="btn bg-gradient-info w-75" data-toggle="modal"
+                                        <button type="button" class="btn bg-gradient-info w-100" data-toggle="modal"
                                             data-target="#modal-combine" disabled>
                                             Launch Combine Form
                                         </button>
@@ -489,34 +508,30 @@ if(isset($_POST['submit'])){
                                     <label class="col-sm-4 col-form-label text-capitalize">Step 03
                                         : LCD</label>
                                     <div class="col-sm-8">
-                                        <button type="button" class="btn bg-gradient-danger w-75" data-toggle="modal"
+                                        <button type="button" class="btn bg-gradient-danger w-100" data-toggle="modal"
                                             data-target="#modal-lcd">
                                             Launch LCD Form
                                         </button>
                                     </div>
                                 </div>
-                                <?php
-                                                }
-                                                if($lcd == 0 && $lunch_combine == 0){
-                                                    ?>
+                                <?php } if($lcd == 0 && $lunch_combine == 0){ ?>
                                 <div class="row mt-2">
                                     <label class="col-sm-4 col-form-label text-capitalize">Step 03
                                         : LCD</label>
                                     <div class="col-sm-8">
-                                        <button type="button" class="btn bg-gradient-danger w-75" data-toggle="modal"
+                                        <button type="button" class="btn bg-gradient-danger w-100" data-toggle="modal"
                                             data-target="#modal-lcd" disabled>
                                             Launch LCD Form
                                         </button>
                                     </div>
                                 </div>
-                                <?php }
-                                                 if($body_work == 1 && $lcd == 0){ ?>
+                                <?php } if($body_work == 1 && $lcd == 0){ ?>
 
                                 <div class="row mt-2">
                                     <label class="col-sm-4 col-form-label text-capitalize">Step 04
                                         : Bodywork</label>
                                     <div class="col-sm-8">
-                                        <button type="button" class="btn bg-gradient-warning w-75" data-toggle="modal"
+                                        <button type="button" class="btn bg-gradient-warning w-100" data-toggle="modal"
                                             data-target="#modal-bodywork">
                                             Launch Bodywork Form
                                         </button>
@@ -527,7 +542,7 @@ if(isset($_POST['submit'])){
                                     <label class="col-sm-4 col-form-label text-capitalize">Step 04
                                         : Bodywork</label>
                                     <div class="col-sm-8">
-                                        <button type="button" class="btn bg-gradient-warning w-75" data-toggle="modal"
+                                        <button type="button" class="btn bg-gradient-warning w-100" data-toggle="modal"
                                             data-target="#modal-bodywork" disabled>
                                             Launch Bodywork Form
                                         </button>
@@ -545,7 +560,7 @@ if(isset($_POST['submit'])){
                             <label class="col-sm-4 col-form-label text-capitalize">Step 05
                                 : Production</label>
                             <div class="col-sm-8">
-                                <button type="button" class="btn bg-gradient-primary w-75" data-toggle="modal"
+                                <button type="button" class="btn bg-gradient-primary w-100" data-toggle="modal"
                                     data-target="#modal-production">
                                     Launch Production Form
                                 </button>
@@ -618,8 +633,6 @@ if(isset($_POST['motherboard_submit'])){
     </script>";
             // header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
         }
-     }else{
-        // echo "Already Completed";
      }
 }
 
@@ -639,7 +652,7 @@ if(isset($_POST['motherboard_submit'])){
                             <div class="col-sm-8 mt-2">
                                 <?php  if($bios == null){  ?>
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="r1" name="bios_check" value="0">
+                                    <input type="radio" id="r1" name="bios_check" value="0" required>
                                     <label class="label_values" for="r1" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
@@ -674,7 +687,7 @@ if(isset($_POST['motherboard_submit'])){
                             <?php  if($power == null){  ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="r3" name="power" value="0">
+                                    <input type="radio" id="r3" name="power" value="0" required>
                                     <label class="label_values" for="r3" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
@@ -691,7 +704,7 @@ if(isset($_POST['motherboard_submit'])){
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="r4" name="power" value="1">
                                     <label class="label_values" for="r4">No </label>
-                                </div>$camera_cable1
+                                </div>
                             </div>
                             <?php } elseif($power == 1){ ?>
                             <div class="col-sm-8 mt-2">
@@ -711,7 +724,7 @@ if(isset($_POST['motherboard_submit'])){
                             <?php if($ports == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="r5" name="ports" value="0">
+                                    <input type="radio" id="r5" name="ports" value="0" required>
                                     <label class="label_values" for="r5" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
@@ -1054,7 +1067,7 @@ if(isset($_POST['combine_check_form'])){
     aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <div class="modal-header bg-secondary">
+            <div class="modal-header bg-dark mx-2 mb-2">
                 <h4 class="modal-title">02 Combine Task</h4>
 
             </div>
@@ -1086,7 +1099,7 @@ if(isset($_POST['combine_check_form'])){
             </div>
             <?php } ?>
 
-            <form method="POST">
+            <form method="POST" name="form1">
                 <div class="modal-body">
                     <fieldset class="d-flex">
                         <div class="col col-md-6 col-lg-6">
@@ -1096,7 +1109,7 @@ if(isset($_POST['combine_check_form'])){
                                 <?php if($keyboard == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="r7" name="keyboard" value="0">
+                                        <input type="radio" id="r7" name="keyboard" value="0" required>
                                         <label class="label_values" for="r7" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
@@ -1137,7 +1150,7 @@ if(isset($_POST['combine_check_form'])){
                                 <?php if($keys == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="c31" name="keyboard_keys" value="0">
+                                        <input type="radio" id="c31" name="keyboard_keys" value="0" required>
                                         <label class="label_values" for="c31" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
@@ -1179,7 +1192,7 @@ if(isset($_POST['combine_check_form'])){
                                 <?php if($speakers == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="r9" name="speakers" value="0">
+                                        <input type="radio" id="r9" name="speakers" value="0" required>
                                         <label class="label_values" for="r9" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
@@ -1222,7 +1235,7 @@ if(isset($_POST['combine_check_form'])){
                                 <?php if($camera == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="r11" name="camera" value="0">
+                                        <input type="radio" id="r11" name="camera" value="0" required>
                                         <label class="label_values" for="r11" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
@@ -1261,11 +1274,11 @@ if(isset($_POST['combine_check_form'])){
                             </div>
 
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">05 Bazel:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">05 Bazel Broken:</label>
                                 <?php if($bazel == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="13" name="bazel" value="0">
+                                        <input type="radio" id="13" name="bazel" value="0" required>
                                         <label class="label_values" for="13" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
@@ -1304,7 +1317,7 @@ if(isset($_POST['combine_check_form'])){
                                 <?php if($mousepad == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="c1" name="mousepad" value="0">
+                                        <input type="radio" id="c1" name="mousepad" value="0" required>
                                         <label class="label_values" for="c1" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
@@ -1346,7 +1359,7 @@ if(isset($_POST['combine_check_form'])){
                                 <?php if($mouse_pad_button == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="c3" name="mouse_pad_button" value="0">
+                                        <input type="radio" id="c3" name="mouse_pad_button" value="0" required>
                                         <label class="label_values" for="c3" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
@@ -1389,7 +1402,7 @@ if(isset($_POST['combine_check_form'])){
                                 <?php if($camera_cable == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="c5" name="camera_cable" value="0">
+                                        <input type="radio" id="c5" name="camera_cable" value="0" required>
                                         <label class="label_values" for="c5" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
@@ -1432,7 +1445,7 @@ if(isset($_POST['combine_check_form'])){
                                 <?php if($back_cover == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="c7" name="back_cover" value="0">
+                                        <input type="radio" id="c7" name="back_cover" value="0" required>
                                         <label class="label_values" for="c7" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
@@ -1475,7 +1488,7 @@ if(isset($_POST['combine_check_form'])){
                                 <?php if($wifi_card == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="c9" name="wifi_card" value="0">
+                                        <input type="radio" id="c9" name="wifi_card" value="0" required>
                                         <label class="label_values" for="c9" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
@@ -1518,7 +1531,7 @@ if(isset($_POST['combine_check_form'])){
                                 <?php if($lcd_cable == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="c11" name="lcd_cable" value="0">
+                                        <input type="radio" id="c11" name="lcd_cable" value="0" required>
                                         <label class="label_values" for="c11" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
@@ -1560,7 +1573,7 @@ if(isset($_POST['combine_check_form'])){
                                 <?php if($battery == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="c13" name="battery" value="0">
+                                        <input type="radio" id="c13" name="battery" value="0" required>
                                         <label class="label_values" for="c13" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
@@ -1602,7 +1615,7 @@ if(isset($_POST['combine_check_form'])){
                                 <?php if($battery_cable == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="c15" name="battery_cable" value="0">
+                                        <input type="radio" id="c15" name="battery_cable" value="0" required>
                                         <label class="label_values" for="c15" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
@@ -1649,7 +1662,7 @@ if(isset($_POST['combine_check_form'])){
                                 <?php if($dvd_rom == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="c17" name="dvd_rom" value="0">
+                                        <input type="radio" id="c17" name="dvd_rom" value="0" required>
                                         <label class="label_values" class="label_values" for="c17"
                                             style="margin-right: 15px;">Okay </label>
                                     </div>
@@ -1692,7 +1705,7 @@ if(isset($_POST['combine_check_form'])){
                                 <?php if($dvd_caddy == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="c19" name="dvd_caddy" value="0">
+                                        <input type="radio" id="c19" name="dvd_caddy" value="0" required>
                                         <label class="label_values" for="c19" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
@@ -1736,7 +1749,7 @@ if(isset($_POST['combine_check_form'])){
                                 <?php if($hdd_caddy == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="c21" name="hdd_caddy" value="0">
+                                        <input type="radio" id="c21" name="hdd_caddy" value="0" required>
                                         <label class="label_values" for="c21" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
@@ -1780,7 +1793,7 @@ if(isset($_POST['combine_check_form'])){
                                 <?php if($hdd_cable_connector == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="c23" name="hdd_cable_connector" value="0">
+                                        <input type="radio" id="c23" name="hdd_cable_connector" value="0" required>
                                         <label class="label_values" for="c23" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
@@ -1826,7 +1839,7 @@ if(isset($_POST['combine_check_form'])){
                                 <?php if($c_panel_palm_rest == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="c25" name="c_panel_palm_rest" value="0">
+                                        <input type="radio" id="c25" name="c_panel_palm_rest" value="0" required>
                                         <label class="label_values" for="c25" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
@@ -1871,7 +1884,7 @@ if(isset($_POST['combine_check_form'])){
                                 <?php if($mb_base == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="c33" name="mb_base" value="0">
+                                        <input type="radio" id="c33" name="mb_base" value="0" required>
                                         <label class="label_values" for="c33" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
@@ -1913,7 +1926,7 @@ if(isset($_POST['combine_check_form'])){
                                 <?php if($hings_cover == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="c27" name="hings_cover" value="0">
+                                        <input type="radio" id="c27" name="hings_cover" value="0" required>
                                         <label class="label_values" for="c27" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
@@ -1956,7 +1969,7 @@ if(isset($_POST['combine_check_form'])){
                                 <?php if($lan_cover == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="c29" name="lan_cover" value="0">
+                                        <input type="radio" id="c29" name="lan_cover" value="0" required>
                                         <label class="label_values" for="c29" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
@@ -1999,7 +2012,7 @@ if(isset($_POST['combine_check_form'])){
                                 <?php if($fan == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine42" name="fan" value="0">
+                                        <input type="radio" id="combine42" name="fan" value="0" required>
                                         <label class="label_values" for="combine42" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
@@ -2040,7 +2053,7 @@ if(isset($_POST['combine_check_form'])){
                                 <?php if($heat_sink == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine44" name="heat_sink" value="0">
+                                        <input type="radio" id="combine44" name="heat_sink" value="0" required>
                                         <label class="label_values" for="combine44" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
@@ -2081,7 +2094,7 @@ if(isset($_POST['combine_check_form'])){
                                 <?php if($cpu == null){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine46" name="cpu" value="0">
+                                        <input type="radio" id="combine46" name="cpu" value="0" required>
                                         <label class="label_values" for="combine46" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
@@ -2116,6 +2129,17 @@ if(isset($_POST['combine_check_form'])){
                                 </div>
                                 <?php } ?>
                             </div>
+
+                            <!-- All SELECT BUTTON -->
+                            <div class="col mt-5">
+                                <div class="icheck-success d-inline">
+                                    <input class="mx-2" id="select_all" type="radio" name="group4" value="1"
+                                        onclick="selectAll(form1)">
+                                    <label class="" for="select_all" style="margin-right: 15px;">All Okay
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- All SELECT BUTTON -->
                         </div>
                     </fieldset>
                 </div>
@@ -2192,7 +2216,7 @@ if(isset($_POST['lcd_form'])){
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header bg-secondary">
+            <div class="modal-header bg-dark mx-2 mb-2">
                 <h4 class="modal-title">03 LCD Form</h4>
             </div>
             <form method="POST">
@@ -2204,7 +2228,7 @@ if(isset($_POST['lcd_form'])){
                             <?php if($whitespot == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="r15" name="whitespot" value="0">
+                                    <input type="radio" id="r15" name="whitespot" value="0" required>
                                     <label class="label_values" for="r15" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
@@ -2243,7 +2267,7 @@ if(isset($_POST['lcd_form'])){
                             <?php if($scratch == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="r17" name="scratch" value="0">
+                                    <input type="radio" id="r17" name="scratch" value="0" required>
                                     <label class="label_values" for="r17" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
@@ -2282,7 +2306,7 @@ if(isset($_POST['lcd_form'])){
                             <?php if($broken == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="r19" name="broken" value="0">
+                                    <input type="radio" id="r19" name="broken" value="0" required>
                                     <label class="label_values" for="r19" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
@@ -2320,7 +2344,7 @@ if(isset($_POST['lcd_form'])){
                             <?php if($line_lcd == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="r21" name="line_lcd" value="0">
+                                    <input type="radio" id="r21" name="line_lcd" value="0" required>
                                     <label class="label_values" for="r21" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
@@ -2359,7 +2383,7 @@ if(isset($_POST['lcd_form'])){
                             <?php if($yellow_shadow == null){ ?>
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" name="yellow_shadow" id="r23" value="0">
+                                    <input type="radio" name="yellow_shadow" id="r23" value="0" required>
                                     <label class="label_values" for="r23" style="margin-right: 15px;">Okay </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
@@ -2392,9 +2416,11 @@ if(isset($_POST['lcd_form'])){
                             <?php } ?>
 
                         </div>
+
+
+                    </fieldset>
                 </div>
 
-                </fieldset>
 
                 <div class="modal-footer justify-content-end">
                     <button type="submit" name="lcd_form" class="btn btn-default btn-next bg-gradient-success">Next
@@ -2413,7 +2439,7 @@ if(isset($_POST['lcd_form'])){
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header bg-secondary">
+            <div class="modal-header bg-dark mx-2 mb-2">
                 <h4 class="modal-title">04 Bodywork Form</h4>
 
             </div>
@@ -2476,33 +2502,8 @@ if(isset($_POST['lcd_form'])){
                                     <input type="checkbox" id="b_bazel_scratch" name="work[]" value="b_scratch">
                                     <label class="label_values" for="b_bazel_scratch">Scratch </label>
                                 </div>
-                                <?php } ?>
 
-                                <?php if($b_broken_retrive == 2){ ?>
-                                <div class="icheck-danger d-inline">
-                                    <input type="checkbox" id="b_bazel_broken" name="work[]" value="b_broken">
-                                    <label class="label_values" for="b_bazel_broken">Broken </label>
-                                </div>
-                                <?php  } elseif($b_broken_retrive == 1){ ?>
-                                <div class="icheck-danger d-inline">
-                                    <input type="checkbox" id="b_bazel_broken" name="work[]" value="b_broken">
-                                    <label class="label_values" for="b_bazel_broken">Broken </label>
-                                </div>
-                                <?php } ?>
-
-                                <?php if($b_logo_retrive == 2){ ?>
-                                <div class="icheck-danger d-inline">
-                                    <input type="checkbox" id="b_bazel_logo" name="work[]" value="b_logo">
-                                    <label class="label_values" for="b_bazel_logo">Logo Missing </label>
-                                </div>
-                                <?php } elseif($b_logo_retrive == 1){ ?>
-                                <div class="icheck-danger d-inline">
-                                    <input type="checkbox" id="b_bazel_logo" name="work[]" value="b_logo">
-                                    <label class="label_values" for="b_bazel_logo">Logo Missing</label>
-                                </div>
-                                <?php } ?>
-
-                                <?php if($b_color_retrive == 2){ ?>
+                                <?php } if($b_color_retrive == 2){ ?>
                                 <div class="icheck-danger d-inline">
                                     <input type="checkbox" id="b_bazel_colour" name="work[]" value="b_color">
                                     <label class="label_values" for="b_bazel_colour">Colour </label>
@@ -2511,6 +2512,17 @@ if(isset($_POST['lcd_form'])){
                                 <div class="icheck-danger d-inline">
                                     <input type="checkbox" id="b_bazel_colour" name="work[]" value="b_color">
                                     <label class="label_values" for="b_bazel_colour">Colour </label>
+                                </div>
+
+                                <?php } if($b_logo_retrive == 2){ ?>
+                                <div class="icheck-danger d-inline">
+                                    <input type="checkbox" id="b_bazel_logo" name="work[]" value="b_logo">
+                                    <label class="label_values" for="b_bazel_logo">Logo Missing </label>
+                                </div>
+                                <?php } elseif($b_logo_retrive == 1){ ?>
+                                <div class="icheck-danger d-inline">
+                                    <input type="checkbox" id="b_bazel_logo" name="work[]" value="b_logo">
+                                    <label class="label_values" for="b_bazel_logo">Logo Missing</label>
                                 </div>
                                 <?php } ?>
 
@@ -2615,70 +2627,63 @@ if(isset($_POST['lcd_form'])){
 </div>
 
 <?php 
-if(isset($_POST['bodywork'])){
-    if($_POST['work'] != null){
-   $checkBox = implode(',', $_POST['work']); 
-$result=explode(",",$checkBox);
+    if(isset($_POST['bodywork'])){
+        if($_POST['work'] != null){
+        $checkBox = implode(',', $_POST['work']); 
+        $result=explode(",",$checkBox);
 
 
-for($i =0; $i< sizeof($result);$i++){
-    // echo $result[$i];
-    // echo "</br>";
+    for($i =0; $i< sizeof($result);$i++){
+            if($result[$i] == "a_scratch"){
+                $a_scratch ="1";
+            }
+            if($result[$i] == "a_broken"){
+                $a_broken ="1";
+            }
+            if($result[$i] == "a_dent"){
+                $a_dent ="1";
+            }
+            if($result[$i] == "b_scratch"){
+                $b_scratch ="1";
+            }
+            if($result[$i] == "b_logo"){
+                $b_logo ="1";
+            }
+            if($result[$i] == "b_color"){
+                $b_color ="1";
+            }
+            if($result[$i] == "c_scratch"){
+                $c_scratch ="1";
+            }
+            if($result[$i] == "c_broken"){
+                $c_broken ="1";
+            }
+            if($result[$i] == "c_dent"){
+                $c_dent ="1";
+            }
+            if($result[$i] == "d_scratch"){
+                $d_scratch ="1";
+            }
+            if($result[$i] == "d_broken"){
+                $d_broken ="1";
+            }
+            if($result[$i] == "d_dent"){
+                $d_dent ="1";
+            }
+        }
+    }
 
-    if($result[$i] == "a_scratch"){
-        $a_scratch ="1";
-    }
-    if($result[$i] == "a_broken"){
-        $a_broken ="1";
-    }
-    if($result[$i] == "a_dent"){
-        $a_dent ="1";
-    }
-    if($result[$i] == "b_scratch"){
-        $b_scratch ="1";
-    }
-    if($result[$i] == "b_broken"){
-        $b_broken ="1";
-    }
-    if($result[$i] == "b_logo"){
-        $b_logo ="1";
-    }
-    if($result[$i] == "b_color"){
-        $b_color ="1";
-    }
-    if($result[$i] == "c_scratch"){
-        $c_scratch ="1";
-    }
-    if($result[$i] == "c_broken"){
-        $c_broken ="1";
-    }
-    if($result[$i] == "c_dent"){
-        $c_dent ="1";
-    }
-    if($result[$i] == "d_scratch"){
-        $d_scratch ="1";
-    }
-    if($result[$i] == "d_broken"){
-        $d_broken ="1";
-    }
-    if($result[$i] == "d_dent"){
-        $d_dent ="1";
-    }
-}
-}
     $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
     $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
     $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
     $status = 0;
-     if($a_scratch == 1 || $a_broken == 1 || $a_dent == 1 || $b_scratch ==1 || $b_broken ==1 ||
-     $b_logo == 1 || $b_color == 1 || $c_scratch == 1 || $c_broken ==1 || $c_dent ==1 ||
-     $d_scratch == 1 || $d_broken == 1 || $d_dent==1){
+    if($a_scratch == 1 || $a_broken == 1 || $a_dent == 1 || $b_scratch ==1 || $b_logo == 1 || $b_color == 1 || $c_scratch == 1 || $c_broken ==1 || $c_dent ==1 || $d_scratch == 1 || $d_broken == 1 || $d_dent==1){
         $status = 1;
-     } 
+    } 
   
-    $query = "INSERT INTO bodywork(id, inventory_id, emp_id, sales_order_id, a_scratch, a_broken, a_dent, b_scratch, b_broken, b_logo, b_color, c_scratch, c_broken, c_dent, d_scratch, d_broken, d_dent, status) 
-    VALUES (null,'$inventory_id','$emp_id','$sales_order_id','$a_scratch','$a_broken','$a_dent','$b_scratch','$b_broken','$b_logo','$b_color','$c_scratch','$c_broken','$c_dent','$d_scratch','$d_broken','$d_dent','$status')";
- 
+    $query = "INSERT INTO bodywork(inventory_id, emp_id, sales_order_id, a_scratch, a_broken, a_dent, b_scratch, b_logo, b_color, c_scratch, c_broken, c_dent, d_scratch, d_broken, d_dent, status) 
+    VALUES ('$inventory_id', '$emp_id', '$sales_order_id','$a_scratch','$a_broken','$a_dent','$b_scratch', '$b_logo','$b_color','$c_scratch','$c_broken','$c_dent','$d_scratch','$d_broken','$d_dent','$status')";
+    echo $query;
     $query_run = mysqli_query($connection, $query);
     echo "<script>
             var newHTML = document.createElement ('div');
@@ -2711,11 +2716,10 @@ for($i =0; $i< sizeof($result);$i++){
                 </script>";
             // header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
         }
-}
-?>
-<?php 
+    }
+ 
 
- if(isset($_POST['prduction_specification_form'])){
+if(isset($_POST['prduction_specification_form'])){
                         
     $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
     $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
@@ -2752,9 +2756,10 @@ for($i =0; $i< sizeof($result);$i++){
         $all_ok =1;
     }
 
-     $query_prod_info ="UPDATE prod_info SET end_date_time = '$date', status = '{$all_ok}', production_spec = '0' WHERE p_id = '$p_id' ";
-     $query_prod_run = mysqli_query($connection, $query_prod_info);
-     header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+    $query_prod_info ="UPDATE prod_info SET end_date_time = '$date', status = '{$all_ok}', production_spec = '0' WHERE p_id = '$p_id' ";
+    $query_prod_run = mysqli_query($connection, $query_prod_info);
+    echo '<script>alert("Welcome to Geeks for Geeks")</script>';
+    header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
                             
 }
 
@@ -2767,7 +2772,7 @@ for($i =0; $i< sizeof($result);$i++){
     data-keyboard="false" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <div class="modal-header bg-secondary">
+            <div class="modal-header bg-dark mx-2 mb-2">
                 <h4 class="modal-title">05 Production Checking Form</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -2778,206 +2783,189 @@ for($i =0; $i< sizeof($result);$i++){
                     <fieldset style="display: block;">
                         <div class="modal-body">
                             <div class="modal-body">
-                                <div class="row">
-                                    <label class="col-sm-3 col-form-label text-capitalize ">Processor</label>
-                                    <div class="col-sm-9 mt-2">
 
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="celeron" name="processor" value="celeron">
-                                            <label class="label_values" for="celeron"
-                                                style="margin-bottom: 5px;">Celeron </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="pentium" name="processor" value="pentium">
-                                            <label class="label_values" for="pentium"
-                                                style="margin-bottom: 5px;">Pentium </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="i3" name="processor" value="i3">
-                                            <label class="label_values" for="i3" style="margin-bottom: 5px;">i3
-                                            </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="i5" name="processor" value="i5">
-                                            <label class="label_values" for="i5" style="margin-bottom: 5px;">i5
-                                            </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="i7" name="processor" value="i7">
-                                            <label class="label_values" for="i7" style="margin-bottom: 5px;">i7
-                                            </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="i9" name="processor" value="i9">
-                                            <label class="label_values" for="i9" style="margin-bottom: 5px;">i9
-                                            </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="xeon" name="processor" value="xeon">
-                                            <label class="label_values" for="xeon" style="margin-bottom: 5px;">Xeon
-                                            </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="ryzen3" name="processor" value="ryzen3">
-                                            <label class="label_values" for="ryzen3" style="margin-bottom: 5px;">Ryzen3
-                                            </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="ryzen5" name="processor" value="ryzen5">
-                                            <label class="label_values" for="ryzen5" style="margin-bottom: 5px;">Ryzen5
-                                            </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="ryzen7" name="processor" value="ryzen7">
-                                            <label class="label_values" for="ryzen7" style="margin-bottom: 5px;">Ryzen7
-                                            </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="ryzen9" name="processor" value="ryzen9">
-                                            <label class="label_values" for="ryzen9" style="margin-bottom: 5px;">Ryzen9
-                                            </label>
-                                        </div>
-
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="a4" name="processor" value="a4">
-                                            <label class="label_values" for="a4" style="margin-bottom: 5px;">A4
-                                            </label>
-                                        </div>
-
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="a6" name="processor" value="a6">
-                                            <label class="label_values" for="a6" style="margin-bottom: 5px;">A6
-                                            </label>
-                                        </div>
-
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="a8" name="processor" value="a8">
-                                            <label class="label_values" for="a8" style="margin-bottom: 5px;">A8
-                                            </label>
-                                        </div>
-
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="a10" name="processor" value="a10">
-                                            <label class="label_values" for="a10" style="margin-bottom: 5px;">A10
-                                            </label>
-                                        </div>
-
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="a12" name="processor" value="a12">
-                                            <label class="label_values" for="a12" style="margin-bottom: 5px;">A12
-                                            </label>
-                                        </div>
-
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="athlon" name="processor" value="athlon">
-                                            <label class="label_values" for="athlon" style="margin-bottom: 5px;">Athlon
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <div class="row">
-                                    <label class="col-sm-3 col-form-label text-capitalize ">Generation</label>
-                                    <div class="col-sm-9 mt-2">
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="1st" name="generation" value="1st">
-                                            <label class="label_values" for="1st" style="margin-bottom: 5px;">1st
-                                            </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="2nd" name="generation" value="2nd">
-                                            <label class="label_values" for="2nd" style="margin-bottom: 5px;">2nd
-                                            </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="3rd" name="generation" value="3rd">
-                                            <label class="label_values" for="3rd" style="margin-bottom: 5px;">3rd
-                                            </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="4th" name="generation" value="4th">
-                                            <label class="label_values" for="4th" style="margin-bottom: 5px;">4th
-                                            </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="5th" name="generation" value="5th">
-                                            <label class="label_values" for="5th" style="margin-bottom: 5px;">5th
-                                            </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="6th" name="generation" value="6th">
-                                            <label class="label_values" for="6th" style="margin-bottom: 5px;">6th
-                                            </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="7th" name="generation" value="7th">
-                                            <label class="label_values" for="7th" style="margin-bottom: 5px;">7th
-                                            </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="8th" name="generation" value="8th">
-                                            <label class="label_values" for="8th" style="margin-bottom: 5px;">8th
-                                            </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="9th" name="generation" value="9th">
-                                            <label class="label_values" for="9th" style="margin-bottom: 5px;">9th
-                                            </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="10th" name="generation" value="10th">
-                                            <label class="label_values" for="10th" style="margin-bottom: 5px;">10th
-                                            </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="11th" name="generation" value="11th">
-                                            <label class="label_values" for="11th" style="margin-bottom: 5px;">11th
-                                            </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="12th" name="generation" value="12th">
-                                            <label class="label_values" for="12th" style="margin-bottom: 5px;">12th
-                                            </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="13th" name="generation" value="13th">
-                                            <label class="label_values" for="13th" style="margin-bottom: 5px;">13th
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <label class="col-sm-2 col-form-label text-capitalize "
+                                        style="font-size:14px">Processor</label>
+                                    <div class="col-sm-10 ">
 
-                                <div class="row">
-                                    <label class="col-sm-3 col-form-label text-capitalize ">RAM</label>
-                                    <div class="col-sm-9 mt-2">
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="2gb" name="ram" value="2gb">
-                                            <label class="label_values" for="2gb" style="margin-right: 15px;">2GB
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="celeron" name="processor" value="celeron"
+                                                        required>
+                                                    <label class="label_values my-1" for="celeron">Celeron </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="4gb" name="ram" value="4gb">
-                                            <label class="label_values" for="4gb" style="margin-right: 15px;">4Gb
+
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="pentium" name="processor" value="pentium"
+                                                        required>
+                                                    <label class="label_values my-1" for="pentium">Pentium </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="8gb" name="ram" value="8gb">
-                                            <label class="label_values" for="8gb" style="margin-right: 15px;">8GB
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="i3" name="processor" value="i3" required>
+                                                    <label class="label_values my-1" for="i3">i3
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="16gb" name="ram" value="16gb">
-                                            <label class="label_values" for="16gb" style="margin-right: 15px;">16GB
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="i5" name="processor" value="i5" required>
+                                                    <label class="label_values my-1" for="i5">i5
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="32gb" name="ram" value="32gb">
-                                            <label class="label_values" for="32gb" style="margin-right: 15px;">32GB
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="i7" name="processor" value="i7" required>
+                                                    <label class="label_values my-1" for="i7">i7
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="64gb" name="ram" value="64gb">
-                                            <label class="label_values" for="64gb" style="margin-right: 15px;">64GB
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="i9" name="processor" value="i9" required>
+                                                    <label class="label_values my-1" for="i9">i9
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="xeon" name="processor" value="xeon"
+                                                        required>
+                                                    <label class="label_values my-1" for="xeon">Xeon
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="ryzen3" name="processor" value="ryzen3"
+                                                        required>
+                                                    <label class="label_values my-1" for="ryzen3">Ryzen3
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="ryzen5" name="processor" value="ryzen5"
+                                                        required>
+                                                    <label class="label_values my-1" for="ryzen5">Ryzen5
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="ryzen7" name="processor" value="ryzen7"
+                                                        required>
+                                                    <label class="label_values my-1" for="ryzen7">Ryzen7
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="ryzen9" name="processor" value="ryzen9"
+                                                        required>
+                                                    <label class="label_values my-1" for="ryzen9">Ryzen9
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="a4" name="processor" value="a4" required>
+                                                    <label class="label_values my-1" for="a4">A4
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="a6" name="processor" value="a6" required>
+                                                    <label class="label_values my-1" for="a6">A6
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="a8" name="processor" value="a8" required>
+                                                    <label class="label_values my-1" for="a8">A8
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="a10" name="processor" value="a10" required>
+                                                    <label class="label_values my-1" for="a10">A10
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="a12" name="processor" value="a12" required>
+                                                    <label class="label_values my-1" for="a12">A12
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="athlon" name="processor" value="athlon"
+                                                        required>
+                                                    <label class="label_values my-1" for="athlon">Athlon
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
 
@@ -2985,41 +2973,140 @@ for($i =0; $i< sizeof($result);$i++){
                                 </div>
 
                                 <div class="row">
-                                    <label class="col-sm-3 col-form-label text-capitalize">HDD </label>
-                                    <div class="col-sm-9 mt-2">
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="128gbhdd" name="hdd_capacity" value="128gb_hdd">
-                                            <label class="label_values" for="128gbhdd" style="margin-right: 15px;">128GB
+                                    <label class="col-sm-2 col-form-label text-capitalize "
+                                        style="font-size:14px">Generation</label>
+                                    <div class="col-sm-10">
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="1st" name="generation" value="1st" required>
+                                                    <label class="label_values my-1" for="1st">1st
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="256gbhdd" name="hdd_capacity" value="256gb_hdd">
-                                            <label class="label_values" for="256gbhdd" style="margin-right: 15px;">256GB
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="2nd" name="generation" value="2nd" required>
+                                                    <label class="label_values my-1" for="2nd">2nd
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="384gbhdd" name="hdd_capacity" value="384gb_hdd">
-                                            <label class="label_values" for="384gbhdd" style="margin-right: 15px;">384GB
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="3rd" name="generation" value="3rd" required>
+                                                    <label class="label_values my-1" for="3rd">3rd
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="512gbhdd" name="hdd_capacity" value="512gb_hdd">
-                                            <label class="label_values" for="512gbhdd" style="margin-right: 15px;">512GB
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="4th" name="generation" value="4th" required>
+                                                    <label class="label_values my-1" for="4th">4th
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="1tbhdd" name="hdd_capacity" value="1tb_hdd">
-                                            <label class="label_values" for="1tbhdd" style="margin-right: 15px;">1TB
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="5th" name="generation" value="5th" required>
+                                                    <label class="label_values my-1" for="5th">5th
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="2tbhdd" name="hdd_capacity" value="2tb_hdd">
-                                            <label class="label_values" for="2tbhdd" style="margin-right: 15px;">2TB
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="6th" name="generation" value="6th" required>
+                                                    <label class="label_values my-1" for="6th">6th
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="nohdd" name="hdd_capacity" value="n/a">
-                                            <label class="label_values" for="nossd" style="margin-right: 15px;">N/A
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="7th" name="generation" value="7th" required>
+                                                    <label class="label_values my-1" for="7th">7th
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="8th" name="generation" value="8th" required>
+                                                    <label class="label_values my-1" for="8th">8th
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="9th" name="generation" value="9th" required>
+                                                    <label class="label_values my-1" for="9th">9th
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="10th" name="generation" value="10th"
+                                                        required>
+                                                    <label class="label_values my-1" for="10th">10th
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="11th" name="generation" value="11th"
+                                                        required>
+                                                    <label class="label_values my-1" for="11th">11th
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="12th" name="generation" value="12th"
+                                                        required>
+                                                    <label class="label_values my-1" for="12th">12th
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="13th" name="generation" value="13th"
+                                                        required>
+                                                    <label class="label_values my-1" for="13th">13th
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
 
@@ -3027,36 +3114,72 @@ for($i =0; $i< sizeof($result);$i++){
                                 </div>
 
                                 <div class="row">
-                                    <label class="col-sm-3 col-form-label text-capitalize">SSD </label>
-                                    <div class="col-sm-9 mt-2">
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="128gbssd" name="ssd_capacity" value="128gb_ssd">
-                                            <label class="label_values" for="128gbssd" style="margin-right: 15px;">128GB
+                                    <label class="col-sm-2 col-form-label text-capitalize "
+                                        style="font-size:14px">RAM</label>
+                                    <div class="col-sm-10 ">
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="2gb" name="ram" value="2gb" required>
+                                                    <label class="label_values my-1" for="2gb"
+                                                        style="margin-right: 15px;">2GB
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="256gbssd" name="ssd_capacity" value="256gb_ssd">
-                                            <label class="label_values" for="256gbssd" style="margin-right: 15px;">256GB
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="4gb" name="ram" value="4gb" required>
+                                                    <label class="label_values my-1" for="4gb"
+                                                        style="margin-right: 15px;">4Gb
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="512gbssd" name="ssd_capacity" value="512gb_ssd">
-                                            <label class="label_values" for="512gbssd" style="margin-right: 15px;">512GB
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="8gb" name="ram" value="8gb" required>
+                                                    <label class="label_values my-1" for="8gb"
+                                                        style="margin-right: 15px;">8GB
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="1tbssd" name="ssd_capacity" value="1tb_ssd">
-                                            <label class="label_values" for="1tbssd" style="margin-right: 15px;">1TB
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="16gb" name="ram" value="16gb" required>
+                                                    <label class="label_values my-1" for="16gb"
+                                                        style="margin-right: 15px;">16GB
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="2tbssd" name="ssd_capacity" value="2tb_ssd">
-                                            <label class="label_values" for="2tbssd" style="margin-right: 15px;">2TB
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="32gb" name="ram" value="32gb" required>
+                                                    <label class="label_values my-1" for="32gb"
+                                                        style="margin-right: 15px;">32GB
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="nossd" name="ssd_capacity" value="n/a">
-                                            <label class="label_values" for="nossd" style="margin-right: 15px;">N/A
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="64gb" name="ram" value="64gb" required>
+                                                    <label class="label_values my-1" for="64gb"
+                                                        style="margin-right: 15px;">64GB
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
 
@@ -3064,200 +3187,528 @@ for($i =0; $i< sizeof($result);$i++){
                                 </div>
 
                                 <div class="row">
-                                    <label class="col-sm-3 col-form-label text-capitalize ">Display</label>
-                                    <div class="col-sm-9 mt-2">
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="touch" name="display" value="touch">
-                                            <label class="label_values" for="touch" style="margin-right: 15px;">Touch
+                                    <label class="col-sm-2 col-form-label text-capitalize" style="font-size:14px">
+                                        HDD
+                                    </label>
+                                    <div class="col-sm-10 ">
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="128gbhdd" name="hdd_capacity"
+                                                        value="128gb_hdd" required>
+                                                    <label class="label_values my-1" for="128gbhdd"
+                                                        style="margin-right: 15px;">128GB
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="nontouch" name="display" value="non-touch">
-                                            <label class="label_values" for="nontouch" style="margin-right: 15px;">Non
-                                                Touch
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="256gbhdd" name="hdd_capacity"
+                                                        value="256gb_hdd" required>
+                                                    <label class="label_values my-1" for="256gbhdd"
+                                                        style="margin-right: 15px;">256GB
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="384gbhdd" name="hdd_capacity"
+                                                        value="384gb_hdd" required>
+                                                    <label class="label_values my-1" for="384gbhdd"
+                                                        style="margin-right: 15px;">384GB
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="512gbhdd" name="hdd_capacity"
+                                                        value="512gb_hdd" required>
+                                                    <label class="label_values my-1" for="512gbhdd"
+                                                        style="margin-right: 15px;">512GB
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="1tbhdd" name="hdd_capacity" value="1tb_hdd"
+                                                        required>
+                                                    <label class="label_values my-1" for="1tbhdd"
+                                                        style="margin-right: 15px;">1TB
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="2tbhdd" name="hdd_capacity" value="2tb_hdd"
+                                                        required>
+                                                    <label class="label_values my-1" for="2tbhdd"
+                                                        style="margin-right: 15px;">2TB
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="nohdd" name="hdd_capacity" value="n/a"
+                                                        required>
+                                                    <label class="label_values my-1" for="nohdd"
+                                                        style="margin-right: 15px;">N/A
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label text-capitalize" style="font-size:14px">
+                                        SSD
+                                    </label>
+                                    <div class="col-sm-10 ">
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="128gbssd" name="ssd_capacity"
+                                                        value="128gb_ssd" required>
+                                                    <label class="label_values my-1" for="128gbssd"
+                                                        style="margin-right: 15px;">128GB
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="256gbssd" name="ssd_capacity"
+                                                        value="256gb_ssd" required>
+                                                    <label class="label_values my-1" for="256gbssd"
+                                                        style="margin-right: 15px;">256GB
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="512gbssd" name="ssd_capacity"
+                                                        value="512gb_ssd" required>
+                                                    <label class="label_values my-1" for="512gbssd"
+                                                        style="margin-right: 15px;">512GB
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="1tbssd" name="ssd_capacity" value="1tb_ssd"
+                                                        required>
+                                                    <label class="label_values my-1" for="1tbssd"
+                                                        style="margin-right: 15px;">1TB
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="2tbssd" name="ssd_capacity" value="2tb_ssd"
+                                                        required>
+                                                    <label class="label_values my-1" for="2tbssd"
+                                                        style="margin-right: 15px;">2TB
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="nossd" name="ssd_capacity" value="n/a"
+                                                        required>
+                                                    <label class="label_values my-1" for="nossd"
+                                                        style="margin-right: 15px;">N/A
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label text-capitalize "
+                                        style="font-size:14px">Display</label>
+                                    <div class="col-sm-10 ">
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="touch" name="display" value="touch"
+                                                        required>
+                                                    <label class="label_values my-1" for="touch"
+                                                        style="margin-right: 15px;">Touch
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="nontouch" name="display" value="non-touch"
+                                                        required>
+                                                    <label class="label_values my-1" for="nontouch"
+                                                        style="margin-right: 15px;">Non
+                                                        Touch
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <label class="col-sm-3 col-form-label text-capitalize ">Resolutions</label>
-                                    <div class="col-sm-9 mt-2">
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="hd" name="resolutions" value="hd">
-                                            <label class="label_values" for="hd"
-                                                style="margin-right: 15px;">HD(1366x768)
+                                    <label class="col-sm-2 col-form-label text-capitalize "
+                                        style="font-size:14px">Resolutions</label>
+                                    <div class="col-sm-10">
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="hd" name="resolutions" value="hd" required>
+                                                    <label class="label_values my-1" for="hd"
+                                                        style="margin-right: 15px;">HD(1366x768)
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="hd+" name="resolutions" value="hd+">
-                                            <label class="label_values" for="hd+"
-                                                style="margin-right: 15px;">HD+(1600x900)
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="hd+" name="resolutions" value="hd+"
+                                                        required>
+                                                    <label class="label_values my-1" for="hd+"
+                                                        style="margin-right: 15px;">HD+(1600x900)
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="fhd" name="resolutions" value="fhd">
-                                            <label class="label_values" for="fhd"
-                                                style="margin-right: 15px;">FHD(1920x1080)
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="fhd" name="resolutions" value="fhd"
+                                                        required>
+                                                    <label class="label_values my-1" for="fhd"
+                                                        style="margin-right: 15px;">FHD(1920x1080)
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="qhd" name="resolutions" value="qhd">
-                                            <label class="label_values" for="qhd" style="margin-right: 15px;">QHD(2k)
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="qhd" name="resolutions" value="qhd"
+                                                        required>
+                                                    <label class="label_values my-1" for="qhd"
+                                                        style="margin-right: 15px;">QHD(2k)
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="4k" name="resolutions" value="4k">
-                                            <label class="label_values" for="4k" style="margin-right: 15px;">UHD(4K)
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="4k" name="resolutions" value="4k" required>
+                                                    <label class="label_values my-1" for="4k"
+                                                        style="margin-right: 15px;">UHD(4K)
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <label class="col-sm-3 col-form-label text-capitalize ">Graphic</label>
-                                    <div class="col-sm-9 mt-2">
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="1gb-graphic" name="graphic" value="1GB">
-                                            <label class="label_values" for="1gb-graphic"
-                                                style="margin-right: 15px;">1GB </label>
+                                    <label class="col-sm-2 col-form-label text-capitalize "
+                                        style="font-size:14px">Graphic</label>
+                                    <div class="col-sm-10 ">
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="1gb-graphic" name="graphic" value="1GB"
+                                                        required>
+                                                    <label class="label_values my-1" for="1gb-graphic"
+                                                        style="margin-right: 15px;">1GB </label>
+                                                </div>
+                                            </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="2gb-graphic" name="graphic" value="2GB">
-                                            <label class="label_values" for="2gb-graphic"
-                                                style="margin-right: 15px;">2GB </label>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="2gb-graphic" name="graphic" value="2GB"
+                                                        required>
+                                                    <label class="label_values my-1" for="2gb-graphic"
+                                                        style="margin-right: 15px;">2GB </label>
+                                                </div>
+                                            </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="4gb-graphic" name="graphic" value="4GB">
-                                            <label class="label_values" for="4gb-graphic"
-                                                style="margin-right: 15px;">4GB </label>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="4gb-graphic" name="graphic" value="4GB"
+                                                        required>
+                                                    <label class="label_values my-1" for="4gb-graphic"
+                                                        style="margin-right: 15px;">4GB </label>
+                                                </div>
+                                            </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="8gb-graphic" name="graphic" value="8GB">
-                                            <label class="label_values" for="8gb-graphic"
-                                                style="margin-right: 15px;">8GB </label>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="8gb-graphic" name="graphic" value="8GB"
+                                                        required>
+                                                    <label class="label_values my-1" for="8gb-graphic"
+                                                        style="margin-right: 15px;">8GB </label>
+                                                </div>
+                                            </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="16gb-graphic" name="graphic" value="16GB">
-                                            <label class="label_values" for="16gb-graphic"
-                                                style="margin-right: 15px;">16GB </label>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="16gb-graphic" name="graphic" value="16GB"
+                                                        required>
+                                                    <label class="label_values my-1" for="16gb-graphic"
+                                                        style="margin-right: 15px;">16GB </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="no-graphic" name="graphic" value="n/a"
+                                                        required>
+                                                    <label class="label_values my-1" for="no-graphic"
+                                                        style="margin-right: 15px;">N/A
+                                                    </label>
+                                                </div>
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <label class="col-sm-3 col-form-label text-capitalize ">Graphic
+                                    <label class="col-sm-2 col-form-label text-capitalize"
+                                        style="font-size:14px">Graphic
                                         Type</label>
-                                    <div class="col-sm-9 mt-2">
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="intel" name="graphic_type" value="intel">
-                                            <label class="label_values" for="intel" style="margin-right: 15px;">Intel
+                                    <div class="col-sm-10 ">
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="intel" name="graphic_type" value="intel"
+                                                        required>
+                                                    <label class="label_values my-1" for="intel"
+                                                        style="margin-right: 15px;">Intel
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="nvidia" name="graphic_type" value="nvidia">
-                                            <label class="label_values" for="nvidia" style="margin-right: 15px;">Nvidia
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="nvidia" name="graphic_type" value="nvidia"
+                                                        required>
+                                                    <label class="label_values my-1" for="nvidia"
+                                                        style="margin-right: 15px;">Nvidia
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="amd" name="graphic_type" value="AMD">
-                                            <label class="label_values" for="amd" style="margin-right: 15px;">AMD
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="amd" name="graphic_type" value="AMD"
+                                                        required>
+                                                    <label class="label_values my-1" for="amd"
+                                                        style="margin-right: 15px;">AMD
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="n-a" name="graphic_type" value="n/a">
-                                            <label class="label_values" for="n-a" style="margin-right: 15px;">N/A
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="n-a" name="graphic_type" value="n/a"
+                                                        required>
+                                                    <label class="label_values my-1" for="n-a"
+                                                        style="margin-right: 15px;">N/A
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <label class="col-sm-3 col-form-label text-capitalize ">
+                                    <label class="col-sm-2 col-form-label text-capitalize" style="font-size:14px">
                                         Operation System</label>
-                                    <div class="col-sm-9 mt-2">
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="Windows" name="operating_system" value="windows">
-                                            <label class="label_values" for="Windows"
-                                                style="margin-right: 15px;">Windows </label>
-                                        </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="Linux" name="operating_system" value="linux">
-                                            <label class="label_values" for="Linux" style="margin-right: 15px;">Linux
+                                    <div class="col-sm-10 ">
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="Windows" name="operating_system"
+                                                        value="windows" required>
+                                                    <label class="label_values my-1" for="Windows"
+                                                        style="margin-right: 15px;">Windows </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="Ubuntu" name="operating_system" value="ubuntu">
-                                            <label class="label_values" for="Ubuntu" style="margin-right: 15px;">Ubuntu
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="Linux" name="operating_system" value="linux"
+                                                        required>
+                                                    <label class="label_values my-1" for="Linux"
+                                                        style="margin-right: 15px;">Linux
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="ios" name="operating_system" value="ios">
-                                            <label class="label_values" for="ios" style="margin-right: 15px;">IOS
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="Ubuntu" name="operating_system"
+                                                        value="ubuntu" required>
+                                                    <label class="label_values my-1" for="Ubuntu"
+                                                        style="margin-right: 15px;">Ubuntu
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="chrome os" name="operating_system"
-                                                value="chrome os">
-                                            <label class="label_values" for="chrome os"
-                                                style="margin-right: 15px;">Chrome OS
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="ios" name="operating_system" value="ios"
+                                                        required>
+                                                    <label class="label_values my-1" for="ios"
+                                                        style="margin-right: 15px;">IOS
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="chrome os" name="operating_system"
+                                                        value="chrome os" required>
+                                                    <label class="label_values my-1" for="chrome os"
+                                                        style="margin-right: 15px;">Chrome OS
+                                                    </label>
+                                                </div>
                                             </label>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <label class="col-sm-3 col-form-label text-capitalize ">
+                                    <label class="col-sm-2 col-form-label text-capitalize" style="font-size:14px">
                                         Battery Percentage</label>
-                                    <div class="col-sm-9 mt-2 d-flex">
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="excellent" name="battery_level" value="excellent">
-                                            <div class="d-flex">
-                                                <label class="label_values" for="excellent"
-                                                    style="margin-right: 15px;">Excellent
-                                                    <div class="progress">
+                                    <div class="col-sm-10 d-flex">
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline d-flex">
+                                                    <input type="radio" id="excellent" name="battery_level"
+                                                        value="excellent" required>
+                                                    <label class="label_values" for="excellent"
+                                                        style="margin-right: 15px;">Excellent
+                                                    </label>
+                                                    <div class="progress mx-2 mb-0">
                                                         <div class="progress-bar bg-gradient-success" role="progressbar"
-                                                            style="width: 90%" aria-valuenow="25" aria-valuemin="0"
-                                                            aria-valuemax="100">(80%-100%)
+                                                            style="width: 96%" aria-valuenow="25" aria-valuemin="0"
+                                                            aria-valuemax="100">(100%-80%)
                                                         </div>
                                                     </div>
-                                                </label>
-                                            </div>
-
+                                                </div>
+                                            </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="excellent" name="battery_level" value="excellent">
-                                            <div class="d-flex">
-                                                <label class="label_values" for="excellent"
-                                                    style="margin-right: 15px;">Good
-                                                    <div class="progress">
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline d-flex">
+                                                    <input type="radio" id="good" name="battery_level" value="good"
+                                                        required>
+                                                    <label class="label_values  " for="good"
+                                                        style="margin-right: 15px;">Good
+                                                    </label>
+                                                    <div class="progress mx-2 mb-0">
                                                         <div class="progress-bar bg-gradient-warning" role="progressbar"
                                                             style="width: 60%" aria-valuenow="25" aria-valuemin="0"
                                                             aria-valuemax="100">(79%-60%)
                                                         </div>
                                                     </div>
-                                                </label>
-                                            </div>
-
+                                                </div>
+                                            </label>
                                         </div>
-                                        <div class="icheck-success d-inline">
-                                            <input type="radio" id="excellent" name="battery_level" value="excellent">
-                                            <div class="d-flex">
-                                                <label class="label_values" for="excellent"
-                                                    style="margin-right: 15px;">Weak
-                                                    <div class="progress">
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+
+                                                <div class="icheck-success d-inline d-flex">
+                                                    <input type="radio" id="weak" name="battery_level" value="weak"
+                                                        required>
+                                                    <label class="label_values  " for="weak"
+                                                        style="margin-right: 15px;">Weak
+                                                    </label>
+                                                    <div class="progress mx-2 mb-0">
                                                         <div class="progress-bar bg-gradient-danger" role="progressbar"
-                                                            style="width: 40%" aria-valuenow="25" aria-valuemin="0"
-                                                            aria-valuemax="100">(59%-0%)
+                                                            style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+                                                            aria-valuemax="100">(59%-0)
                                                         </div>
                                                     </div>
-                                                </label>
-                                            </div>
-
+                                                </div>
+                                            </label>
                                         </div>
-
                                     </div>
                                 </div>
+
                             </div>
                         </div>
 
@@ -3279,15 +3730,6 @@ for($i =0; $i< sizeof($result);$i++){
 
 <style>
 @import url("../fonts/Poppins-Regular.ttf");
-
-/* @font-face {
-  font-family: "Poppins", sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  src: url("../fonts/Poppins-Bold.ttf");
-  unicode-range: U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8,
-    U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
-} */
 
 @font-face {
     font-family: "Poppins", sans-serif;
@@ -3354,4 +3796,32 @@ $(document).ready(function() {
 
 
 });
+
+function selectAll(form1) {
+
+    var check = document.getElementsByName("group4"),
+        radios = document.form1.elements;
+
+    //If the first radio is checked
+    if (check[0].checked) {
+
+        for (i = 0; i < radios.length; i++) {
+
+            //And the elements are radios
+            if (radios[i].type == "radio") {
+
+                //And the radio elements's value are 1
+                if (radios[i].value == 0) {
+                    //Check all radio elements with value = 1
+                    radios[i].checked = true;
+                }
+
+            } //if
+
+        } //for
+
+        //If the second radio is checked
+    }
+    return null;
+}
 </script>
