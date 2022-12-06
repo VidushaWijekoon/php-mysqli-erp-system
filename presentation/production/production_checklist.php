@@ -53,9 +53,9 @@ $item_condition = '';
 /////////////////////////////////////////////////
 $lunch_combine = 1;
 $lcd = 1;
-$body_work=1;
-$launch_prod=1;
-$mother_board =1;
+$body_work = 1;
+$launch_prod = 1;
+$mother_board = 1;
 $tech_id;
 $bios = null;
 $power = null;
@@ -65,21 +65,21 @@ $keys =null;
 $speakers = null;
 $camera = null;
 $bazel = null;
-$mousepad =null;
-$mouse_pad_button =null;
-$camera_cable=null;
-$back_cover =null;
-$lcd_cable =null;
+$mousepad = null;
+$mouse_pad_button = null;
+$camera_cable = null;
+$back_cover = null;
+$lcd_cable = null;
 $wifi_card = null ;
-$battery =null;
-$battery_cable =null;
-$dvd_rom =null;
-$dvd_caddy =null;
-$hdd_caddy =null;
-$hdd_cable_connector =null;
-$c_panel_palm_rest =null;
-$hings_cover =null;
-$lan_cover =null;
+$battery = null;
+$battery_cable = null;
+$dvd_rom = null;
+$dvd_caddy = null;
+$hdd_caddy = null;
+$hdd_cable_connector = null;
+$c_panel_palm_rest = null;
+$hings_cover = null;
+$lan_cover = null;
 $mb_base = null;
 
 $whitespot = null;
@@ -114,34 +114,39 @@ $c_dent_retrive = 2;
 $d_scratch_retrive = 2;
 $d_broken_retrive = 2;
 $d_dent_retrive = 2;
-$fan =null;
+$fan = null;
 $heat_sink = null ;
-$cpu =null;
+$cpu = null;
 
 $keyboard1 = null;
-$keys1 =null;
+$keys1 = null;
 $speakers1 = null;
 $camera1 = null;
 $bazel1 = null;
-$mousepad1 =null;
-$mouse_pad_button1 =null;
-$camera_cable1=null;
-$back_cover1 =null;
-$lcd_cable1 =null;
+$mousepad1 = null;
+$mouse_pad_button1 = null;
+$camera_cable1 = null;
+$back_cover1 = null;
+$lcd_cable1 = null;
 $wifi_card1 = null ;
-$battery1 =null;
-$battery_cable1 =null;
-$dvd_rom1 =null;
-$dvd_caddy1 =null;
-$hdd_caddy1 =null;
-$hdd_cable_connector1 =null;
-$c_panel_palm_rest1 =null;
-$hings_cover1 =null;
-$lan_cover1 =null;
+$battery1 = null;
+$battery_cable1 = null;
+$dvd_rom1 = null;
+$dvd_caddy1 = null;
+$hdd_caddy1 = null;
+$hdd_cable_connector1 = null;
+$c_panel_palm_rest1 = null;
+$hings_cover1 = null;
+$lan_cover1 = null;
 $mb_base1 = null;
-$fan1 =null;
+$fan1 = null;
 $heat_sink1 = null ;
-$cpu1 =null;
+$cpu1 = null;
+
+$prod_motherboard_issue = null;
+$prod_lcd_issue = null;
+$prod_combine_issue = null;
+$prod_body_work_issue = null;
 
 
 if (isset($_GET['sales_order_id'])) {
@@ -155,6 +160,7 @@ if (isset($_GET['sales_order_id'])) {
         $tech_id = $data['tech_id'];
         $p_id =$data['p_id'];
     }
+    
     $query_m = "SELECT * FROM motherboard_check WHERE inventory_id =$inventory_id AND sales_order_id=$sales_order_id";
     $query_run_m = mysqli_query($connection, $query_m);
     foreach($query_run_m as $data){
@@ -165,8 +171,8 @@ if (isset($_GET['sales_order_id'])) {
         if($status == 0){
             $mother_board = 0;
         }
-
     }
+
     $query_mc = "SELECT * FROM combine_check WHERE inventory_id =$inventory_id AND sales_order_id=$sales_order_id";
     $query_run_c = mysqli_query($connection, $query_mc);
     foreach($query_run_c as $data){
@@ -226,7 +232,8 @@ if (isset($_GET['sales_order_id'])) {
             $lunch_combine = 0;
         }
     }
-      $query_lcd = "SELECT * FROM lcd_check WHERE inventory_id =$inventory_id AND sales_order_id=$sales_order_id";
+
+    $query_lcd = "SELECT * FROM lcd_check WHERE inventory_id =$inventory_id AND sales_order_id=$sales_order_id";
     $query_run_lcd = mysqli_query($connection, $query_lcd);
     foreach($query_run_lcd as $data){
         $whitespot = $data['whitespot'];
@@ -238,32 +245,32 @@ if (isset($_GET['sales_order_id'])) {
         if($status == 0){
             $lcd = 0;
         }
-
     }
+
     $query_body = "SELECT * FROM bodywork WHERE inventory_id =$inventory_id AND sales_order_id=$sales_order_id ORDER BY id DESC LIMIT 1";
     $query_run_body = mysqli_query($connection, $query_body);
     if(empty($query_run_body)){}else{
-    foreach($query_run_body as $data){
-        $a_scratch_retrive = $data['a_scratch'];
-        $a_broken_retrive=$data['a_broken'];
-        $a_dent_retrive = $data['a_dent'];
-        $b_scratch_retrive = $data['b_scratch'];
-        $b_broken_retrive = $data['b_broken'];
-        $b_logo_retrive = $data['b_logo'];
-        $b_color_retrive = $data['b_color'];
-        $c_scratch_retrive = $data['c_scratch'];
-        $c_broken_retrive = $data['c_broken'];
-        $c_dent_retrive = $data['c_dent'];
-        $d_scratch_retrive = $data['d_scratch'];
-        $d_broken_retrive = $data['d_broken'];
-        $d_dent_retrive = $data['d_dent'];
-        $status = $data['status'];
-        if($status == 0){
-            $body_work = 0;
-        }
+        foreach($query_run_body as $data){
+            $a_scratch_retrive = $data['a_scratch'];
+            $a_broken_retrive=$data['a_broken'];
+            $a_dent_retrive = $data['a_dent'];
+            $b_scratch_retrive = $data['b_scratch'];
+            $b_broken_retrive = $data['b_broken'];
+            $b_logo_retrive = $data['b_logo'];
+            $b_color_retrive = $data['b_color'];
+            $c_scratch_retrive = $data['c_scratch'];
+            $c_broken_retrive = $data['c_broken'];
+            $c_dent_retrive = $data['c_dent'];
+            $d_scratch_retrive = $data['d_scratch'];
+            $d_broken_retrive = $data['d_broken'];
+            $d_dent_retrive = $data['d_dent'];
+            $status = $data['status'];
+            if($status == 0){
+                $body_work = 0;
+            }
 
+        }
     }
-}
     
     $query = "SELECT * FROM warehouse_information_sheet 
                         INNER JOIN sales_order_add_items
@@ -291,64 +298,21 @@ if (isset($_GET['sales_order_id'])) {
             $item_os = $result['item_os'];
 
         } else {
-            // user not found
-            header('Location: sales_orders.php?err=user_not_found');
+             header('Location: sales_orders.php?err=user_not_found');
         }
-    } else {
-        // query unsuccessful
-        // header('Location: hr_employees.php?err=query_failed');
     }
 }
-
- 
-if(isset($_POST['submit'])){
-        $webcam = $_POST['webcam'];
-        $mousepad_buttons = $_POST['mousepad_buttons'];
-        $microphone = $_POST['microphone'];
-        $speaker_sound = $_POST['speaker_sound'];
-        $wifi_connection = $_POST['wifi_connection'];
-        $usb_port = $_POST['usb_port'];
-        $hinges_cover = $_POST['hinges_cover'];
-        $created_by = $_SESSION['first_name'];
- 
-        $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
-        $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
-        $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
-            
-        $query = "INSERT INTO production_checklist (webcam, mousepad_buttons, microphone, speaker_sound, wifi_connection, usb_port, hinges_cover, sales_order_id, inventory_id, emp_id, created_by) 
-                VALUES ('$webcam', '$mousepad_buttons', '$microphone', '$speaker_sound', '$wifi_connection', '$usb_port', '$hinges_cover', '$sales_order_id', '$inventory_id', '$emp_id', '$created_by')";
-        $result = mysqli_query($connection, $query);
-            
-        if($result){
-            echo "Query Add Successfully";
-        }else{
-            $errors[] = 'Failed to add the new record.';
-        }      
-}
-
- 
+  
 ?>
-
-<!-- ============================================================== -->
-<!-- Home Page  -->
-<!-- ============================================================== -->
-
-
-<div class="row page-titles">
-    <div class="col-md-5 align-self-center fa-2x"><a href="./production_technician_dashboard.php">
-            <i class="fa-solid fa-home fa-2x m-2" style="color: #ced4da;"></i>
-        </a>
-    </div>
-</div>
 
 <!-- ============================================================== -->
 <!-- Sales Order Laptop Requirment  -->
 <!-- ============================================================== -->
 
 
-<div class="container-fluid mt-3">
+<div class="container-fluid mt-5">
     <div class="row">
-        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto">
+        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-5">
             <div class="card-header bg-secondary">
                 <h3 class="card-title p-2">Inventory ID <?php echo $_GET['inventory_id']; ?></h3>
             </div>
@@ -597,44 +561,45 @@ if(isset($_POST['submit'])){
 <!-- ============================================================== -->
 <?php 
 
-if(isset($_POST['motherboard_submit'])){
-    
-    $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
-    $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
-    $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
-    $bios_check = mysqli_real_escape_string($connection, $_POST['bios_check']);
-    $power = mysqli_real_escape_string($connection, $_POST['power']);
-    $ports = mysqli_real_escape_string($connection, $_POST['ports']);
-    $status = 0;
-     if($bios_check == 1 || $power == 1 || $ports == 1){
-        $status = 1;
-     }
-     if($mother_board == 1){
-    $query = "INSERT INTO motherboard_check (sales_order_id, emp_id, inventory_id, bios_check, power, ports,status) 
-                VALUES ('$sales_order_id', '$emp_id', '$inventory_id', '$bios_check', '$power', '$ports','$status')";
-                // echo $query;
-    $query_run = mysqli_query($connection, $query);
-    if($status == 1){
-     $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-                                                $date = $date1->format('Y-m-d H:i:s');
-    $query_prod_info ="UPDATE prod_info SET end_date_time=' $date',status='0',m_board_issue='1' WHERE p_id ='$p_id' ";
-    $query_prod_run = mysqli_query($connection, $query_prod_info);
-    header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
-    }else{
-        echo "<script>
-        var newHTML = document.createElement ('div');
-        newHTML.innerHTML =
-        newHTML = document.createElement ('div');
-        newHTML.innerHTML = '<div id=\"modal-combine\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"><div class=\"modal-dialog modal-xl\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
-        document.body.appendChild (newHTML);
-        $(window).load(function(){
-             $('#modal-combine').modal('show');
-        });
-    </script>";
-            // header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
+    if(isset($_POST['motherboard_submit'])){
+        
+        $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
+        $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
+        $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
+        $bios_check = mysqli_real_escape_string($connection, $_POST['bios_check']);
+        $power = mysqli_real_escape_string($connection, $_POST['power']);
+        $ports = mysqli_real_escape_string($connection, $_POST['ports']);
+        $status = 0;
+        
+        if($bios_check == 1 || $power == 1 || $ports == 1){
+            $status = 1;
         }
-     }
-}
+        
+        if($mother_board == 1){
+        $query = "INSERT INTO motherboard_check (sales_order_id, emp_id, inventory_id, bios_check, power, ports,status) 
+                    VALUES ('$sales_order_id', '$emp_id', '$inventory_id', '$bios_check', '$power', '$ports','$status')";
+        $query_run = mysqli_query($connection, $query);
+        
+        if($status == 1){
+        $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+                                                    $date = $date1->format('Y-m-d H:i:s');
+        $query_prod_info ="UPDATE prod_info SET end_date_time=' $date',status='0',m_board_issue='1' WHERE p_id ='$p_id' ";
+        $query_prod_run = mysqli_query($connection, $query_prod_info);
+        header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+        }else{
+            echo "<script>
+            var newHTML = document.createElement ('div');
+            newHTML.innerHTML =
+            newHTML = document.createElement ('div');
+            newHTML.innerHTML = '<div id=\"modal-combine\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"><div class=\"modal-dialog modal-xl\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+            document.body.appendChild (newHTML);
+            $(window).load(function(){
+                $('#modal-combine').modal('show');
+            });
+        </script>";
+            }
+        }
+    }
 
 ?>
 <div class="modal fade" id="modal-motherboard" aria-labelledby="myModalLabel" data-backdrop="static"
@@ -774,290 +739,197 @@ if(isset($_POST['motherboard_submit'])){
 
 <?php 
 
-if(isset($_POST['combine_check_form'])){
-    $scan_id =0;
-
-    if( empty($_POST['scan_id'])){
+    if(isset($_POST['combine_check_form'])){
         $scan_id =0;
-    }else{
-        $scan_id= mysqli_real_escape_string($connection,  $_POST['scan_id']);
-    }
-    $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
-    $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
-    $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
-    $keyboard = mysqli_real_escape_string($connection, $_POST['keyboard']);
-    $speakers = mysqli_real_escape_string($connection, $_POST['speakers']);
-    $camera = mysqli_real_escape_string($connection, $_POST['camera']);
-    $bazel = mysqli_real_escape_string($connection, $_POST['bazel']);
-    $mousepad= mysqli_real_escape_string($connection,  $_POST['mousepad']);
-    $mouse_pad_button= mysqli_real_escape_string($connection,  $_POST['mouse_pad_button']);
-    $camera_cable= mysqli_real_escape_string($connection,  $_POST['camera_cable']);
-    $back_cover= mysqli_real_escape_string($connection,  $_POST['back_cover']);
-    $wifi_card= mysqli_real_escape_string($connection,  $_POST['wifi_card']);
-    $lcd_cable= mysqli_real_escape_string($connection,  $_POST['lcd_cable']);
-    $battery= mysqli_real_escape_string($connection,  $_POST['battery']);
-    $battery_cable= mysqli_real_escape_string($connection,  $_POST['battery_cable']);
-    $dvd_rom= mysqli_real_escape_string($connection,  $_POST['dvd_rom']);
-    $dvd_caddy= mysqli_real_escape_string($connection,  $_POST['dvd_caddy']);
-    $hdd_caddy= mysqli_real_escape_string($connection,  $_POST['hdd_caddy']);
-    $hdd_cable_connector= mysqli_real_escape_string($connection,  $_POST['hdd_cable_connector']);
-    $c_panel_palm_rest= mysqli_real_escape_string($connection,  $_POST['c_panel_palm_rest']);
-    $mb_base= mysqli_real_escape_string($connection,  $_POST['mb_base']);
-    $hings_cover= mysqli_real_escape_string($connection,  $_POST['hings_cover']);
-    $lan_cover= mysqli_real_escape_string($connection,  $_POST['lan_cover']);
-    $fan= mysqli_real_escape_string($connection,  $_POST['fan']);
-    $heat_sink= mysqli_real_escape_string($connection,  $_POST['heat_sink']);
-    $cpu= mysqli_real_escape_string($connection, $_POST['cpu']);
-    $keys = mysqli_real_escape_string($connection,  $_POST['keyboard_keys']);   
+            if( empty($_POST['scan_id'])){
+                $scan_id =0;
+            }else{
+                $scan_id= mysqli_real_escape_string($connection,  $_POST['scan_id']);
+            }
+            
+        $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
+        $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
+        $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
+        $keyboard = mysqli_real_escape_string($connection, $_POST['keyboard']);
+        $speakers = mysqli_real_escape_string($connection, $_POST['speakers']);
+        $camera = mysqli_real_escape_string($connection, $_POST['camera']);
+        $bazel = mysqli_real_escape_string($connection, $_POST['bazel']);
+        $mousepad= mysqli_real_escape_string($connection,  $_POST['mousepad']);
+        $mouse_pad_button= mysqli_real_escape_string($connection,  $_POST['mouse_pad_button']);
+        $camera_cable= mysqli_real_escape_string($connection,  $_POST['camera_cable']);
+        $back_cover= mysqli_real_escape_string($connection,  $_POST['back_cover']);
+        $wifi_card= mysqli_real_escape_string($connection,  $_POST['wifi_card']);
+        $lcd_cable= mysqli_real_escape_string($connection,  $_POST['lcd_cable']);
+        $battery= mysqli_real_escape_string($connection,  $_POST['battery']);
+        $battery_cable= mysqli_real_escape_string($connection,  $_POST['battery_cable']);
+        $dvd_rom= mysqli_real_escape_string($connection,  $_POST['dvd_rom']);
+        $dvd_caddy= mysqli_real_escape_string($connection,  $_POST['dvd_caddy']);
+        $hdd_caddy= mysqli_real_escape_string($connection,  $_POST['hdd_caddy']);
+        $hdd_cable_connector= mysqli_real_escape_string($connection,  $_POST['hdd_cable_connector']);
+        $c_panel_palm_rest= mysqli_real_escape_string($connection,  $_POST['c_panel_palm_rest']);
+        $mb_base= mysqli_real_escape_string($connection,  $_POST['mb_base']);
+        $hings_cover= mysqli_real_escape_string($connection,  $_POST['hings_cover']);
+        $lan_cover= mysqli_real_escape_string($connection,  $_POST['lan_cover']);
+        $fan= mysqli_real_escape_string($connection,  $_POST['fan']);
+        $heat_sink= mysqli_real_escape_string($connection,  $_POST['heat_sink']);
+        $cpu= mysqli_real_escape_string($connection, $_POST['cpu']);
+        $keys = mysqli_real_escape_string($connection,  $_POST['keyboard_keys']);   
 
 
-    $query = "SELECT location FROM users WHERE epf = '$emp_id'";
+        $query = "SELECT location FROM users WHERE epf = '$emp_id'";
 
-    $query_run = mysqli_query($connection, $query);
-    $location10;
-    $second_attempt = false;
-    foreach($query_run as $a){
-        $location10 = $a['location'];
-    }   
-    $status = 0;
-    if($keyboard1 == 1 || $keys1 == 1 || $speakers1 == 1 || $camera1 ==1 || $bazel1 ==1 || $mousepad1 == 1 || $mouse_pad_button1 == 1 || $camera_cable1 == 1 || $back_cover1 ==1 || $wifi_card1 ==1 ||
-    $lcd_cable1 == 1 || $battery1 == 1 || $battery_cable1 == 1 || $dvd_rom1 ==1 || $dvd_caddy1 ==1 ||
-     $hdd_caddy1 == 1 || $hdd_cable_connector1 == 1 || $c_panel_palm_rest1 == 1 || $mb_base1 ==1 || $hings_cover1 ==1 || $lan_cover1 ==1 || $heat_sink1 ==1 || $cpu1 ==1 || $fan1 ==1){
-        $second_attempt = true;
-     }
-     if($keyboard == 1 || $keys == 1 || $speakers == 1 || $camera ==1 || $bazel ==1 || $mousepad == 1 || $mouse_pad_button == 1 || $camera_cable == 1 || $back_cover ==1 || $wifi_card ==1 ||
-     $lcd_cable == 1 || $battery == 1 || $battery_cable == 1 || $dvd_rom ==1 || $dvd_caddy ==1 ||
-      $hdd_caddy == 1 || $hdd_cable_connector == 1 || $c_panel_palm_rest == 1 || $mb_base ==1 || $hings_cover ==1 || $lan_cover ==1 || $heat_sink ==1 || $cpu ==1 || $fan ==1){
-        $status = 1;
-        $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-        $date = $date1->format('Y-m-d');
-       
-        $query_6 = "INSERT INTO requested_part_from_production(brand, model, generation, sales_order_id, inventory_id, created_date, `delivery_date`,emp_id, location,status, keyboard, speakers, camera, bazel, lan_cover, mousepad, mouse_pad_button, camera_cable, back_cover, wifi_card, lcd_cable, 
-                battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, c_panel_palm_rest, mb_base, hings_cover, switch, switch_id)
-        VALUES('$item_brand', '$item_model', '$item_generation', '$sales_order_id', '$inventory_id', '$date','0000-00-00' ,'$emp_id', '$location10', '$status', '$keyboard', '$speakers',
-            '$camera', '$bazel', '$lan_cover', '$mousepad', '$mouse_pad_button', '$camera_cable', '$back_cover', '$wifi_card', '$lcd_cable', '$battery', '$battery_cable',
-            '$dvd_rom', '$dvd_caddy', '$hdd_caddy', '$hdd_cable_connector', '$c_panel_palm_rest', '$mb_base', '$hings_cover', 0, 0)";
-                         
-         $query_new = mysqli_query($connection, $query_6);
-        
-         
-     }
-    if($lunch_combine == 1){
-        
-    $query_com = "INSERT INTO combine_check(inventory_id, emp_id, sales_order_id, keyboard, speakers, camera, bazel, status, keyboard_keys, mousepad, mouse_pad_button, 
-                            camera_cable, back_cover, wifi_card, lcd_cable, battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, c_panel_palm_rest, mb_base, 
-                            hings_cover, lan_cover, combined_id,heat_sink,fan,cpu)
-                VALUES ('$inventory_id', '$emp_id', '$sales_order_id', '$keyboard', '$speakers', '$camera', '$bazel', '$status', '$keys','$mousepad','$mouse_pad_button',
-                '$camera_cable','$back_cover','$wifi_card','$lcd_cable','$battery','$battery_cable','$dvd_rom','$dvd_caddy','$hdd_caddy','$hdd_cable_connector',
-                '$c_panel_palm_rest','$mb_base','$hings_cover','$lan_cover', 0,'$heat_sink','$fan','$cpu')";
-                    
-    $query_run = mysqli_query($connection, $query_com);
-    if($second_attempt == false){
-    echo "<script>
-            var newHTML = document.createElement ('div');
-            newHTML.innerHTML =
-            newHTML = document.createElement ('div');
-            // newHTML.innerHTML = ' <div id=\"modal-lcd\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
-            document.body.appendChild (newHTML);
-            $(window).load(function(){
-                $('#modal-lcd').modal('show');
-            });
-        </script>";
-        }else{
-            header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+        $query_run = mysqli_query($connection, $query);
+        $location10;
+        $second_attempt = false;
+        foreach($query_run as $a){
+            $location10 = $a['location'];
+        }   
+        $status = 0;
+        if($keyboard1 == 1 || $keys1 == 1 || $speakers1 == 1 || $camera1 ==1 || $bazel1 ==1 || $mousepad1 == 1 || $mouse_pad_button1 == 1 || $camera_cable1 == 1 || $back_cover1 ==1 || $wifi_card1 ==1 ||
+            $lcd_cable1 == 1 || $battery1 == 1 || $battery_cable1 == 1 || $dvd_rom1 ==1 || $dvd_caddy1 ==1 ||
+            $hdd_caddy1 == 1 || $hdd_cable_connector1 == 1 || $c_panel_palm_rest1 == 1 || $mb_base1 ==1 || $hings_cover1 ==1 || $lan_cover1 ==1 || $heat_sink1 ==1 || $cpu1 ==1 || $fan1 ==1){
+                $second_attempt = true;
         }
-   
-    if($scan_id !=0){
-       ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    $com_inventory_id = $scan_id;
-//check inventory is exist
-    $query_check="SELECT `id`, `inventory_id` FROM `combine_check` WHERE inventory_id ='$com_inventory_id'";
-   
-    $query_run = mysqli_query($connection, $query_check);
-        $test=0;
-    foreach($query_run as $k){
-        $test = $k['inventory_id'];
-    }
-    
-    
-    //if not exist then insert new record with switch machine missing parts 
-        if( $test == 0){ 
-         
-        $query_in ="INSERT INTO combine_check(
-            inventory_id,
-            emp_id,
-            sales_order_id,
-            keyboard,
-            speakers,
-            camera,
-            bazel,
-            status,
-            keyboard_keys,
-            mousepad,
-            mouse_pad_button,
-            camera_cable,
-            back_cover,
-            wifi_card,
-            lcd_cable,
-            battery,
-            battery_cable,
-            dvd_rom,
-            dvd_caddy,
-            hdd_caddy,
-            hdd_cable_connector,
-            c_panel_palm_rest,
-            mb_base,
-            hings_cover,
-            lan_cover,
-            combined_id,
-            heat_sink,
-            fan,
-            cpu
-        )
-        VALUES(
-            '$scan_id',
-            '$emp_id',
-            '$sales_order_id',
-            '$keyboard1',
-            '$speakers1',
-            '$camera1',
-            '$bazel1',
-            '$status1',
-            '$keys1',
-            '$mousepad1',
-            '$mouse_pad_button1',
-            '$camera_cable1',
-            '$back_cover1',
-            '$wifi_card1',
-            '$lcd_cable1',
-            '$battery1',
-            '$battery_cable1',
-            '$dvd_rom1',
-            '$dvd_caddy1',
-            '$hdd_caddy1',
-            '$hdd_cable_connector1',
-            '$c_panel_palm_rest1',
-            '$mb_base1',
-            '$hings_cover1',
-            '$lan_cover1',
-            '$inventory_id1',
-            '$heat_sink1',
-            '$fan1',
-            '$cpu1'
-        )";
-        $query_run = mysqli_query($connection, $query_in);
-    }else{
-        //if machine is exist update missing parts
-        $query_update ="UPDATE
-        `combine_check`
-    SET
-        `keyboard` = '$keyboard1',
-        `speakers` = '$speakers1',
-        `camera` = '$camera1',
-        `bazel` = '$bazel1',
-        `status` = '$status1',
-        `damage_keys` = '$damage_keys1',
-        `mousepad` = '$mousepad1',
-        `mouse_pad_button` = '$mouse_pad_button1',
-        `camera_cable` = '$camera_cable1',
-        `back_cover` = '$back_cover1',
-        `wifi_card` = '$wifi_card1',
-        `lcd_cable` = '$lcd_cable1',
-        `battery` = '$battery1',
-        `battery_cable` = '$battery_cable1',
-        `dvd_rom` = '$dvd_rom1',
-        `dvd_caddy` = '$dvd_caddy1',
-        `hdd_caddy` = '$hdd_caddy1',
-        `hdd_cable_connector` = '$hdd_cable_connector1',
-        `c_panel_palm_rest` = '$c_panel_palm_rest1',
-        `mb_base` = '$mb_base1',
-        `hings_cover` = '$hings_cover1',
-        `lan_cover` = '$lan_cover1',
-        `combined_id` = '$combined_id1',
-        heat_sink = '$heat_sink1',
-            fan = '$fan1',
-            cpu = '$cpu1'
+        if($keyboard == 1 || $keys == 1 || $speakers == 1 || $camera ==1 || $bazel ==1 || $mousepad == 1 || $mouse_pad_button == 1 || $camera_cable == 1 || $back_cover ==1 || $wifi_card ==1 ||
+            $lcd_cable == 1 || $battery == 1 || $battery_cable == 1 || $dvd_rom ==1 || $dvd_caddy ==1 ||
+            $hdd_caddy == 1 || $hdd_cable_connector == 1 || $c_panel_palm_rest == 1 || $mb_base ==1 || $hings_cover ==1 || $lan_cover ==1 || $heat_sink ==1 || $cpu ==1 || $fan ==1){
+            $status = 1;
+            $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+            $date = $date1->format('Y-m-d');
         
-    WHERE
-        inventory_id = '$inventory_id'";
-        $query_run = mysqli_query($connection, $query_update);
-    }
-   
-    $query_update_part = "UPDATE `requested_part_from_production` SET `status`='0' ,switch = '1',switch_id ='$scan_id' WHERE `inventory_id`='$inventory_id';";
-
-    $query_run = mysqli_query($connection, $query_update_part);
-    $query_1 ="SELECT  `status`FROM `requested_part_from_production` WHERE inventory_id = $inventory_id";
-                                                            $query_run = mysqli_query($connection, $query_1);
-
-                                                            $query_2 ="SELECT  `status`FROM `combine_check` WHERE inventory_id = $inventory_id";
-                                                            $query_run_2 = mysqli_query($connection, $query_2);
-                                                            $combine_status;
-                                                            foreach($query_run_2 as $c){
-                                                                $combine_status = $c['status'];
-                                                            }
-                                                            $received =null;
-                                                            if(empty($query_run)){
-                                                                $received ='1';
-                                                            }else{
-                                                                foreach($query_run as $a){
-                                                                    $received = $a['status'];
-                                                                }
-                                                            }if($combine_status == 0 && $received == 0){
-                                                                $second_attempt = true;
-                                                                echo $second_attempt;
-                                                                exit();
-                                                                header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
-                                                                // header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
-                                                            }
-
-}
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    if($status == 1){
-        // echo $status;
-     $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-                                                $date = $date1->format('Y-m-d H:i:s');
-    $query_prod_info ="UPDATE prod_info SET end_date_time=' $date',status='1',combine_issue='1' WHERE p_id ='$p_id' ";
-    $query_prod_run = mysqli_query($connection, $query_prod_info);
-    // header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
-   if($second_attempt == false){
-    echo "<script>
-    var newHTML = document.createElement ('div');
-    newHTML.innerHTML =
-    newHTML = document.createElement ('div');
-    // newHTML.innerHTML = ' <div id=\"modal-lcd\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
-    document.body.appendChild (newHTML);
-    $(window).load(function(){
-        $('#modal-lcd').modal('show');
-    });
-</script>";
-}else{
-    header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
-}
-    }else{
+            $query_6 = "INSERT INTO requested_part_from_production(brand, model, generation, sales_order_id, inventory_id, created_date, `delivery_date`,emp_id, location,status, keyboard, speakers, camera, bazel, lan_cover, mousepad, mouse_pad_button, camera_cable, back_cover, wifi_card, lcd_cable, 
+                    battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, c_panel_palm_rest, mb_base, hings_cover, switch, switch_id)
+            VALUES('$item_brand', '$item_model', '$item_generation', '$sales_order_id', '$inventory_id', '$date','0000-00-00' ,'$emp_id', '$location10', '$status', '$keyboard', '$speakers',
+                '$camera', '$bazel', '$lan_cover', '$mousepad', '$mouse_pad_button', '$camera_cable', '$back_cover', '$wifi_card', '$lcd_cable', '$battery', '$battery_cable',
+                '$dvd_rom', '$dvd_caddy', '$hdd_caddy', '$hdd_cable_connector', '$c_panel_palm_rest', '$mb_base', '$hings_cover', 0, 0)";
+                            
+            $query_new = mysqli_query($connection, $query_6);           
+            
+        }
+        if($lunch_combine == 1){
+            
+        $query_com = "INSERT INTO combine_check(inventory_id, emp_id, sales_order_id, keyboard, speakers, camera, bazel, status, keyboard_keys, mousepad, mouse_pad_button, 
+                                camera_cable, back_cover, wifi_card, lcd_cable, battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, c_panel_palm_rest, mb_base, 
+                                hings_cover, lan_cover, combined_id,heat_sink,fan,cpu)
+                    VALUES ('$inventory_id', '$emp_id', '$sales_order_id', '$keyboard', '$speakers', '$camera', '$bazel', '$status', '$keys','$mousepad','$mouse_pad_button',
+                    '$camera_cable','$back_cover','$wifi_card','$lcd_cable','$battery','$battery_cable','$dvd_rom','$dvd_caddy','$hdd_caddy','$hdd_cable_connector',
+                    '$c_panel_palm_rest','$mb_base','$hings_cover','$lan_cover', 0,'$heat_sink','$fan','$cpu')";
+                        
+        $query_run = mysqli_query($connection, $query_com);
         if($second_attempt == false){
         echo "<script>
-    var newHTML = document.createElement ('div');
-    newHTML.innerHTML =
-    newHTML = document.createElement ('div');
-    // newHTML.innerHTML = ' <div id=\"modal-lcd\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
-    document.body.appendChild (newHTML);
-    $(window).load(function(){
-        $('#modal-lcd').modal('show');
-    });
-</script>";
+                var newHTML = document.createElement ('div');
+                newHTML.innerHTML =
+                newHTML = document.createElement ('div');
+                // newHTML.innerHTML = ' <div id=\"modal-lcd\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+                document.body.appendChild (newHTML);
+                $(window).load(function(){
+                    $('#modal-lcd').modal('show');
+                });
+            </script>";
         }else{
             header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
         }
-        // header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
-            // header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
+   
+        if($scan_id !=0){
+    
+            $com_inventory_id = $scan_id;
+            $query_check="SELECT `id`, `inventory_id` FROM `combine_check` WHERE inventory_id ='$com_inventory_id'";
+        
+            $query_run = mysqli_query($connection, $query_check);
+                $test=0;
+            foreach($query_run as $k){
+                $test = $k['inventory_id'];
+            }   
+    
+            //if not exist then insert new record with switch machine missing parts 
+            if( $test == 0){ 
+            
+            $query_in ="INSERT INTO combine_check(inventory_id, emp_id, sales_order_id, keyboard, speakers, camera, bazel, status, keyboard_keys, mousepad, mouse_pad_button, camera_cable, back_cover, wifi_card,
+                                                lcd_cable, battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, c_panel_palm_rest, mb_base, hings_cover, lan_cover, combined_id, heat_sink, fan, cpu) 
+                    VALUES('$scan_id', '$emp_id', '$sales_order_id', '$keyboard1', '$speakers1', '$camera1', '$bazel1', '$status1', '$keys1', '$mousepad1', '$mouse_pad_button1', '$camera_cable1', '$back_cover1',
+                        '$wifi_card1', '$lcd_cable1', '$battery1', '$battery_cable1', '$dvd_rom1', '$dvd_caddy1', '$hdd_caddy1', '$hdd_cable_connector1', '$c_panel_palm_rest1', '$mb_base1', '$hings_cover1', '$lan_cover1',
+                        '$inventory_id1', '$heat_sink1', '$fan1', '$cpu1' )";
+            $query_run = mysqli_query($connection, $query_in);
+            }else{
+                //if machine is exist update missing parts
+                $query_update ="UPDATE combine_check SET keyboard = '$keyboard1', speakers = '$speakers1', camera = '$camera1', bazel = '$bazel1', status = '$status1', damage_keys = '$damage_keys1', mousepad = '$mousepad1',
+                mouse_pad_button = '$mouse_pad_button1', camera_cable = '$camera_cable1', back_cover = '$back_cover1', wifi_card = '$wifi_card1', lcd_cable = '$lcd_cable1', battery = '$battery1', battery_cable = '$battery_cable1',
+                dvd_rom = '$dvd_rom1', dvd_caddy = '$dvd_caddy1', hdd_caddy = '$hdd_caddy1', hdd_cable_connector = '$hdd_cable_connector1', c_panel_palm_rest = '$c_panel_palm_rest1', mb_base = '$mb_base1',
+                hings_cover = '$hings_cover1', lan_cover = '$lan_cover1', combined_id = '$combined_id1', heat_sink = '$heat_sink1', fan = '$fan1', cpu = '$cpu1'        
+                WHERE
+                    inventory_id = '$inventory_id'";
+                    $query_run = mysqli_query($connection, $query_update);
+                }
+    
+            $query_update_part = "UPDATE `requested_part_from_production` SET `status`='0' ,switch = '1',switch_id ='$scan_id' WHERE `inventory_id`='$inventory_id';";
+
+            $query_run = mysqli_query($connection, $query_update_part);
+            $query_1 ="SELECT  `status`FROM `requested_part_from_production` WHERE inventory_id = $inventory_id";
+            $query_run = mysqli_query($connection, $query_1);
+
+            $query_2 ="SELECT  `status`FROM `combine_check` WHERE inventory_id = $inventory_id";
+            $query_run_2 = mysqli_query($connection, $query_2);
+            $combine_status;
+            foreach($query_run_2 as $c){
+                $combine_status = $c['status'];
+            }
+            $received =null;
+            if(empty($query_run)){
+                $received ='1';
+            }else{
+                foreach($query_run as $a){
+                    $received = $a['status'];
+                }
+            }if($combine_status == 0 && $received == 0){
+                $second_attempt = true;
+                echo $second_attempt;
+                exit();
+                header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+                // header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
+            }
+
         }
-    }else{
-        // echo "already checked";
+
+        if($status == 1){
+        $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+        $date = $date1->format('Y-m-d H:i:s');
+        $query_prod_info ="UPDATE prod_info SET end_date_time=' $date',status='1',combine_issue='1' WHERE p_id ='$p_id' ";
+        $query_prod_run = mysqli_query($connection, $query_prod_info);
+            if($second_attempt == false){
+                echo "<script>
+                    var newHTML = document.createElement ('div');
+                    newHTML.innerHTML =
+                    newHTML = document.createElement ('div');
+                    // newHTML.innerHTML = ' <div id=\"modal-lcd\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+                    document.body.appendChild (newHTML);
+                    $(window).load(function(){
+                        $('#modal-lcd').modal('show');
+                    });
+                </script>";
+            }else{
+                header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+            }
+            }else{
+                if($second_attempt == false){
+                echo "<script>
+                    var newHTML = document.createElement ('div');
+                    newHTML.innerHTML =
+                    newHTML = document.createElement ('div');
+                    // newHTML.innerHTML = ' <div id=\"modal-lcd\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+                    document.body.appendChild (newHTML);
+                    $(window).load(function(){
+                        $('#modal-lcd').modal('show');
+                    });
+            </script>";
+            }else{
+                header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+            }
+            // header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+                // header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
+            }
+        }
     }
-}
 ?>
 
 <!-- ============================================================== -->
@@ -1069,35 +941,35 @@ if(isset($_POST['combine_check_form'])){
         <div class="modal-content">
             <div class="modal-header bg-dark mx-2 mb-2">
                 <h4 class="modal-title">02 Combine Task</h4>
-
             </div>
-            <?php $query = "SELECT  COUNT(`inventory_id`) AS exist_count FROM combine_check WHERE inventory_id ='$inventory_id'";
-                
-                $query_run = mysqli_query($connection, $query);
-                $exist_count;
-                foreach($query_run as $count){
-                    $exist_count = $count['exist_count'];
-                }
-                if($exist_count ==0){ }else{
+            <div class="">
+                <button class="btn btn-sm mx-2 bg-gradient-blue" onclick="myFunction()"></button>
+
+                <div id="myDIV">
+                    <?php $query = "SELECT  COUNT(`inventory_id`) AS exist_count FROM combine_check WHERE inventory_id ='$inventory_id'";
+                    
+                    $query_run = mysqli_query($connection, $query);
+                    $exist_count;
+                    foreach($query_run as $count){
+                        $exist_count = $count['exist_count'];
+                        }
+                        if($exist_count ==0){ }else{
                 ?>
-            <div class="row mx-2">
-                <div class="col-md-3">
+                    <div class="row mx-2">
+                        <div class="col-md-3">
 
-                    <fieldset class="mt-2">
-                        <div class="input-group mb-2 mt-2">
-                            <lable>Switch Parts Form</lable>
-                            <input type="text" name="scan_id" id="scan_id" class="scan_id" onfocus="clearInput(this)"
-                                value="">
+                            <fieldset class="mt-2">
+                                <div class="input-group mb-2 mt-2">
+                                    <lable>Switch Parts Form</lable>
+                                    <input type="text" name="scan_id" id="scan_id" class="scan_id"
+                                        onfocus="clearInput(this)" value="">
+                                </div>
+                            </fieldset>
                         </div>
-                    </fieldset>
+                    </div>
+                    <?php } ?>
                 </div>
-                <script>
-                // let searchbar = document.querySelector('input[name="scan_id"]');
-                // searchbar.focus();
-                // search.value = '';
-                </script>
             </div>
-            <?php } ?>
 
             <form method="POST" name="form1">
                 <div class="modal-body">
@@ -1106,7 +978,7 @@ if(isset($_POST['combine_check_form'])){
                             <div class="row">
 
                                 <label class="col-sm-4 col-form-label text-capitalize">01 Keyboard:</label>
-                                <?php if($keyboard == null){ ?>
+                                <?php if($keyboard == null || $keyboard == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="r7" name="keyboard" value="0" required>
@@ -1147,7 +1019,7 @@ if(isset($_POST['combine_check_form'])){
                             </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">02 Keys:</label>
-                                <?php if($keys == null){ ?>
+                                <?php if($keys == null || $keys == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c31" name="keyboard_keys" value="0" required>
@@ -1189,7 +1061,7 @@ if(isset($_POST['combine_check_form'])){
 
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">03 Speakers:</label>
-                                <?php if($speakers == null){ ?>
+                                <?php if($speakers == null || $speakers == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="r9" name="speakers" value="0" required>
@@ -1232,7 +1104,7 @@ if(isset($_POST['combine_check_form'])){
 
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">04 Camera:</label>
-                                <?php if($camera == null){ ?>
+                                <?php if($camera == null || $camera == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="r11" name="camera" value="0" required>
@@ -1275,7 +1147,7 @@ if(isset($_POST['combine_check_form'])){
 
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">05 Bazel Broken:</label>
-                                <?php if($bazel == null){ ?>
+                                <?php if($bazel == null || $bazel == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="13" name="bazel" value="0" required>
@@ -1314,7 +1186,7 @@ if(isset($_POST['combine_check_form'])){
                             </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">06 Mouse Pad:</label>
-                                <?php if($mousepad == null){ ?>
+                                <?php if($mousepad == null || $mousepad == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c1" name="mousepad" value="0" required>
@@ -1356,7 +1228,7 @@ if(isset($_POST['combine_check_form'])){
                             </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">07 Mouse Pad Button:</label>
-                                <?php if($mouse_pad_button == null){ ?>
+                                <?php if($mouse_pad_button == null || $mouse_pad_button == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c3" name="mouse_pad_button" value="0" required>
@@ -1399,7 +1271,7 @@ if(isset($_POST['combine_check_form'])){
                             </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">08 Camera Cable:</label>
-                                <?php if($camera_cable == null){ ?>
+                                <?php if($camera_cable == null || $camera_cable == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c5" name="camera_cable" value="0" required>
@@ -1442,7 +1314,7 @@ if(isset($_POST['combine_check_form'])){
                             </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">09 Back Cover:</label>
-                                <?php if($back_cover == null){ ?>
+                                <?php if($back_cover == null || $back_cover == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c7" name="back_cover" value="0" required>
@@ -1485,7 +1357,7 @@ if(isset($_POST['combine_check_form'])){
                             </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">10 WIFI Card: </label>
-                                <?php if($wifi_card == null){ ?>
+                                <?php if($wifi_card == null || $wifi_card == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c9" name="wifi_card" value="0" required>
@@ -1528,7 +1400,7 @@ if(isset($_POST['combine_check_form'])){
                             </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">11 LCD Cable:</label>
-                                <?php if($lcd_cable == null){ ?>
+                                <?php if($lcd_cable == null || $lcd_cable == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c11" name="lcd_cable" value="0" required>
@@ -1540,7 +1412,7 @@ if(isset($_POST['combine_check_form'])){
                                         <label class="label_values" for="c12">No </label>
                                     </div>
                                 </div>
-                                <?php }elseif($lcd_cable == 0){ ?>
+                                <?php }elseif($lcd_cable == 0 ){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c11" name="lcd_cable" value="0" checked="checked">
@@ -1570,7 +1442,7 @@ if(isset($_POST['combine_check_form'])){
                             </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">12 Battery:</label>
-                                <?php if($battery == null){ ?>
+                                <?php if($battery == null || $battery == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c13" name="battery" value="0" required>
@@ -1612,7 +1484,7 @@ if(isset($_POST['combine_check_form'])){
                             </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">13 Battery Cable:</label>
-                                <?php if($battery_cable == null){ ?>
+                                <?php if($battery_cable == null || $battery_cable == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c15" name="battery_cable" value="0" required>
@@ -1659,7 +1531,7 @@ if(isset($_POST['combine_check_form'])){
 
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">14 DVD ROM: </label>
-                                <?php if($dvd_rom == null){ ?>
+                                <?php if($dvd_rom == null || $dvd_rom == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c17" name="dvd_rom" value="0" required>
@@ -1702,7 +1574,7 @@ if(isset($_POST['combine_check_form'])){
 
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">15 DVD Caddy:</label>
-                                <?php if($dvd_caddy == null){ ?>
+                                <?php if($dvd_caddy == null || $dvd_caddy == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c19" name="dvd_caddy" value="0" required>
@@ -1746,7 +1618,7 @@ if(isset($_POST['combine_check_form'])){
 
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">16 HDD Caddy:</label>
-                                <?php if($hdd_caddy == null){ ?>
+                                <?php if($hdd_caddy == null || $hdd_caddy == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c21" name="hdd_caddy" value="0" required>
@@ -1790,7 +1662,7 @@ if(isset($_POST['combine_check_form'])){
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">17 HDD Cable
                                     Connector:</label>
-                                <?php if($hdd_cable_connector == null){ ?>
+                                <?php if($hdd_cable_connector == null || $hdd_cable_connector == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c23" name="hdd_cable_connector" value="0" required>
@@ -1836,7 +1708,7 @@ if(isset($_POST['combine_check_form'])){
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">18 C Panel / Palm
                                     Rest:</label>
-                                <?php if($c_panel_palm_rest == null){ ?>
+                                <?php if($c_panel_palm_rest == null || $c_panel_palm_rest == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c25" name="c_panel_palm_rest" value="0" required>
@@ -1881,7 +1753,7 @@ if(isset($_POST['combine_check_form'])){
                             </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">19 D / MB Base:</label>
-                                <?php if($mb_base == null){ ?>
+                                <?php if($mb_base == null || $mb_base == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c33" name="mb_base" value="0" required>
@@ -1923,7 +1795,7 @@ if(isset($_POST['combine_check_form'])){
                             </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">20 Hings Cover:</label>
-                                <?php if($hings_cover == null){ ?>
+                                <?php if($hings_cover == null || $hings_cover == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c27" name="hings_cover" value="0" required>
@@ -1966,7 +1838,7 @@ if(isset($_POST['combine_check_form'])){
                             </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">21 LAN Cover:</label>
-                                <?php if($lan_cover == null){ ?>
+                                <?php if($lan_cover == null || $lan_cover == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="c29" name="lan_cover" value="0" required>
@@ -2009,7 +1881,7 @@ if(isset($_POST['combine_check_form'])){
                             </div>
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">22 Fan:</label>
-                                <?php if($fan == null){ ?>
+                                <?php if($fan == null || $fan == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="combine42" name="fan" value="0" required>
@@ -2050,7 +1922,7 @@ if(isset($_POST['combine_check_form'])){
 
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">23 Heat Sink:</label>
-                                <?php if($heat_sink == null){ ?>
+                                <?php if($heat_sink == null || $heat_sink == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="combine44" name="heat_sink" value="0" required>
@@ -2091,7 +1963,7 @@ if(isset($_POST['combine_check_form'])){
 
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">24 CPU:</label>
-                                <?php if($cpu == null){ ?>
+                                <?php if($cpu == null || $cpu == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="combine46" name="cpu" value="0" required>
@@ -2158,57 +2030,58 @@ if(isset($_POST['combine_check_form'])){
 
 <?php 
 
-if(isset($_POST['lcd_form'])){
-    
-    $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
-    $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
-    $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
-    $whitespot = mysqli_real_escape_string($connection, $_POST['whitespot']);
-    $scratch = mysqli_real_escape_string($connection, $_POST['scratch']);
-    $broken = mysqli_real_escape_string($connection, $_POST['broken']);
-    $line_lcd = mysqli_real_escape_string($connection, $_POST['line_lcd']);   
-    $yellow_shadow = mysqli_real_escape_string($connection, $_POST['yellow_shadow']);  
-    $status = 0;
-     if($whitespot == 1 || $scratch == 1 || $broken == 1 || $line_lcd ==1 || $yellow_shadow ==1){
-        $status = 1;
-     } 
-     
-    $query = "INSERT INTO lcd_check (sales_order_id, emp_id, inventory_id, whitespot, scratch, broken, line_lcd, yellow_shadow,status) 
-                VALUES ('$sales_order_id', '$emp_id', '$inventory_id', '$whitespot', '$scratch', '$broken', '$line_lcd', '$yellow_shadow','$status' )";
-    $query_run = mysqli_query($connection, $query);
+    if(isset($_POST['lcd_form'])){
+        
+        $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
+        $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
+        $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
+        $whitespot = mysqli_real_escape_string($connection, $_POST['whitespot']);
+        $scratch = mysqli_real_escape_string($connection, $_POST['scratch']);
+        $broken = mysqli_real_escape_string($connection, $_POST['broken']);
+        $line_lcd = mysqli_real_escape_string($connection, $_POST['line_lcd']);   
+        $yellow_shadow = mysqli_real_escape_string($connection, $_POST['yellow_shadow']);  
+        $status = 0;
+        if($whitespot == 1 || $scratch == 1 || $broken == 1 || $line_lcd ==1 || $yellow_shadow ==1){
+            $status = 1;
+        } 
+        
+        $query = "INSERT INTO lcd_check (sales_order_id, emp_id, inventory_id, whitespot, scratch, broken, line_lcd, yellow_shadow,status) 
+                    VALUES ('$sales_order_id', '$emp_id', '$inventory_id', '$whitespot', '$scratch', '$broken', '$line_lcd', '$yellow_shadow','$status' )";
+        $query_run = mysqli_query($connection, $query);
 
-    if($status == 1){
-     $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-                                                $date = $date1->format('Y-m-d H:i:s');
-    $query_prod_info ="UPDATE prod_info SET end_date_time=' $date',status='1',lcd_issue='1' WHERE p_id ='$p_id' ";
-    $query_prod_run = mysqli_query($connection, $query_prod_info);
-    echo "<script>
-                var newHTML = document.createElement ('div');
-                newHTML.innerHTML =
-                newHTML = document.createElement ('div');
-                // newHTML.innerHTML = ' <div id=\"modal-bodywork\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
-                document.body.appendChild (newHTML);
-                $(window).load(function(){
-                    $('#modal-bodywork').modal('show');
-                });
-            </script>";
-    // header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
-    }else{
+        if($status == 1){
+        $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+                                                    $date = $date1->format('Y-m-d H:i:s');
+        $query_prod_info ="UPDATE prod_info SET end_date_time=' $date',status='1',lcd_issue='1' WHERE p_id ='$p_id' ";
+        $query_prod_run = mysqli_query($connection, $query_prod_info);
         echo "<script>
-                var newHTML = document.createElement ('div');
-                newHTML.innerHTML =
-                newHTML = document.createElement ('div');
-                // newHTML.innerHTML = ' <div id=\"modal-bodywork\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
-                document.body.appendChild (newHTML);
-                $(window).load(function(){
-                    $('#modal-bodywork').modal('show');
-                });
-            </script>";
-            // header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
-        }
-}
+                    var newHTML = document.createElement ('div');
+                    newHTML.innerHTML =
+                    newHTML = document.createElement ('div');
+                    // newHTML.innerHTML = ' <div id=\"modal-bodywork\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+                    document.body.appendChild (newHTML);
+                    $(window).load(function(){
+                        $('#modal-bodywork').modal('show');
+                    });
+                </script>";
+        // header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+        }else{
+            echo "<script>
+                    var newHTML = document.createElement ('div');
+                    newHTML.innerHTML =
+                    newHTML = document.createElement ('div');
+                    // newHTML.innerHTML = ' <div id=\"modal-bodywork\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+                    document.body.appendChild (newHTML);
+                    $(window).load(function(){
+                        $('#modal-bodywork').modal('show');
+                    });
+                </script>";
+                // header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
+            }
+    }
 
 ?>
+
 <!-- ============================================================== -->
 <!-- LCD check Form  -->
 <!-- ============================================================== -->
@@ -2633,135 +2506,134 @@ if(isset($_POST['lcd_form'])){
         $result=explode(",",$checkBox);
 
 
-    for($i =0; $i< sizeof($result);$i++){
-            if($result[$i] == "a_scratch"){
-                $a_scratch ="1";
-            }
-            if($result[$i] == "a_broken"){
-                $a_broken ="1";
-            }
-            if($result[$i] == "a_dent"){
-                $a_dent ="1";
-            }
-            if($result[$i] == "b_scratch"){
-                $b_scratch ="1";
-            }
-            if($result[$i] == "b_logo"){
-                $b_logo ="1";
-            }
-            if($result[$i] == "b_color"){
-                $b_color ="1";
-            }
-            if($result[$i] == "c_scratch"){
-                $c_scratch ="1";
-            }
-            if($result[$i] == "c_broken"){
-                $c_broken ="1";
-            }
-            if($result[$i] == "c_dent"){
-                $c_dent ="1";
-            }
-            if($result[$i] == "d_scratch"){
-                $d_scratch ="1";
-            }
-            if($result[$i] == "d_broken"){
-                $d_broken ="1";
-            }
-            if($result[$i] == "d_dent"){
-                $d_dent ="1";
+        for($i =0; $i< sizeof($result);$i++){
+                if($result[$i] == "a_scratch"){
+                    $a_scratch ="1";
+                }
+                if($result[$i] == "a_broken"){
+                    $a_broken ="1";
+                }
+                if($result[$i] == "a_dent"){
+                    $a_dent ="1";
+                }
+                if($result[$i] == "b_scratch"){
+                    $b_scratch ="1";
+                }
+                if($result[$i] == "b_logo"){
+                    $b_logo ="1";
+                }
+                if($result[$i] == "b_color"){
+                    $b_color ="1";
+                }
+                if($result[$i] == "c_scratch"){
+                    $c_scratch ="1";
+                }
+                if($result[$i] == "c_broken"){
+                    $c_broken ="1";
+                }
+                if($result[$i] == "c_dent"){
+                    $c_dent ="1";
+                }
+                if($result[$i] == "d_scratch"){
+                    $d_scratch ="1";
+                }
+                if($result[$i] == "d_broken"){
+                    $d_broken ="1";
+                }
+                if($result[$i] == "d_dent"){
+                    $d_dent ="1";
+                }
             }
         }
-    }
 
-    $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
-    $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
-    $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
-    $status = 0;
-    if($a_scratch == 1 || $a_broken == 1 || $a_dent == 1 || $b_scratch ==1 || $b_logo == 1 || $b_color == 1 || $c_scratch == 1 || $c_broken ==1 || $c_dent ==1 || $d_scratch == 1 || $d_broken == 1 || $d_dent==1){
-        $status = 1;
-    } 
-  
-    $query = "INSERT INTO bodywork(inventory_id, emp_id, sales_order_id, a_scratch, a_broken, a_dent, b_scratch, b_logo, b_color, c_scratch, c_broken, c_dent, d_scratch, d_broken, d_dent, status) 
-    VALUES ('$inventory_id', '$emp_id', '$sales_order_id','$a_scratch','$a_broken','$a_dent','$b_scratch', '$b_logo','$b_color','$c_scratch','$c_broken','$c_dent','$d_scratch','$d_broken','$d_dent','$status')";
-    echo $query;
-    $query_run = mysqli_query($connection, $query);
-    echo "<script>
-            var newHTML = document.createElement ('div');
-            newHTML.innerHTML =
-            newHTML = document.createElement ('div');
-            // newHTML.innerHTML = ' <div id=\"modal-production\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
-            document.body.appendChild (newHTML);
-            $(window).load(function(){
-                $('#modal-production').modal('show');
-            });
-        </script>";
+        $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
+        $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
+        $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
+        $status = 0;
+        if($a_scratch == 1 || $a_broken == 1 || $a_dent == 1 || $b_scratch ==1 || $b_logo == 1 || $b_color == 1 || $c_scratch == 1 || $c_broken ==1 || $c_dent ==1 || $d_scratch == 1 || $d_broken == 1 || $d_dent==1){
+            $status = 1;
+        } 
     
-// header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
-    if($status == 1){
-        $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-        $date = $date1->format('Y-m-d H:i:s');
-        $query_prod_info ="UPDATE prod_info SET end_date_time=' $date',status='1',bodywork_issue='1' WHERE p_id ='$p_id' ";
-        $query_prod_run = mysqli_query($connection, $query_prod_info);
-        // header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
-        }else{
-            echo "<script>
-                    var newHTML = document.createElement ('div');
-                    newHTML.innerHTML =
-                    newHTML = document.createElement ('div');
-                    // newHTML.innerHTML = ' <div id=\"modal-production\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
-                    document.body.appendChild (newHTML);
-                    $(window).load(function(){
-                        $('#modal-production').modal('show');
-                    });
-                </script>";
-            // header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
+        $query = "INSERT INTO bodywork(inventory_id, emp_id, sales_order_id, a_scratch, a_broken, a_dent, b_scratch, b_logo, b_color, c_scratch, c_broken, c_dent, d_scratch, d_broken, d_dent, status) 
+        VALUES ('$inventory_id', '$emp_id', '$sales_order_id','$a_scratch','$a_broken','$a_dent','$b_scratch', '$b_logo','$b_color','$c_scratch','$c_broken','$c_dent','$d_scratch','$d_broken','$d_dent','$status')";
+        echo $query;
+        $query_run = mysqli_query($connection, $query);
+        echo "<script>
+                var newHTML = document.createElement ('div');
+                newHTML.innerHTML =
+                newHTML = document.createElement ('div');
+                // newHTML.innerHTML = ' <div id=\"modal-production\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+                document.body.appendChild (newHTML);
+                $(window).load(function(){
+                    $('#modal-production').modal('show');
+                });
+            </script>";
+    
+        if($status == 1){
+            $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+            $date = $date1->format('Y-m-d H:i:s');
+            $query_prod_info ="UPDATE prod_info SET end_date_time=' $date',status='1',bodywork_issue='1' WHERE p_id ='$p_id' ";
+            $query_prod_run = mysqli_query($connection, $query_prod_info);
+            // header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+            }else{
+                echo "<script>
+                        var newHTML = document.createElement ('div');
+                        newHTML.innerHTML =
+                        newHTML = document.createElement ('div');
+                        // newHTML.innerHTML = ' <div id=\"modal-production\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+                        document.body.appendChild (newHTML);
+                        $(window).load(function(){
+                            $('#modal-production').modal('show');
+                        });
+                    </script>";
+            }
         }
-    }
  
 
-if(isset($_POST['prduction_specification_form'])){
-                        
-    $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
-    $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
-    $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
-    $processor = mysqli_real_escape_string($connection, $_POST['processor']);
-    $generation = mysqli_real_escape_string($connection, $_POST['generation']);
-    $ram = mysqli_real_escape_string($connection, $_POST['ram']);
-    $hdd_capacity = mysqli_real_escape_string($connection, $_POST['hdd_capacity']);
-    $ssd_capacity = mysqli_real_escape_string($connection, $_POST['ssd_capacity']);
-    $display = mysqli_real_escape_string($connection, $_POST['display']);
-    $resolutions = mysqli_real_escape_string($connection, $_POST['resolutions']);
-    $graphic = mysqli_real_escape_string($connection, $_POST['graphic']);
-    $graphic_type = mysqli_real_escape_string($connection, $_POST['graphic_type']);
-    $operating_system = mysqli_real_escape_string($connection, $_POST['operating_system']);
-    $battery_level = mysqli_real_escape_string($connection, $_POST['battery_level']);
-                    
-    $query = "INSERT INTO production_check(inventory_id, emp_id, sales_order_id, processor, generation, ram, hdd_capacity, ssd_capacity, display, resolutions, graphic, graphic_type, operating_system, battery_level, status, created_time) 
-                VALUES ('$sales_order_id', '$emp_id', '$inventory_id', '$processor', '$generation', '$ram', '$hdd_capacity', '$ssd_capacity', '$display', '$resolutions', '$graphic', '$graphic_type', '$operating_system', '$battery_level', 0, CURRENT_TIMESTAMP)";
-    $query_run = mysqli_query($connection, $query);
-    $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-    $date = $date1->format('Y-m-d H:i:s');
-    $query = "SELECT * FROM prod_info WHERE $inventory_id";
-    $query_run = mysqli_query($connection, $query); 
-    $lcd;
-    $body_work;
-    $combine;
-    $all_ok = 0;
-    foreach($query_run as $data){
-        $lcd = $data['lcd_issue'];
-        $combine = $data['combine_issue'];
-        $body_work = $data['bodywork_issue'];
-    }
-    if($lcd ==1 || $combine == 1 || $body_work ==1){
-        $all_ok =1;
-    }
-
-    $query_prod_info ="UPDATE prod_info SET end_date_time = '$date', status = '{$all_ok}', production_spec = '0' WHERE p_id = '$p_id' ";
-    $query_prod_run = mysqli_query($connection, $query_prod_info);
-    echo '<script>alert("Welcome to Geeks for Geeks")</script>';
-    header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+    if(isset($_POST['prduction_specification_form'])){
                             
-}
+        $sales_order_id = mysqli_real_escape_string($connection, $_GET['sales_order_id']);
+        $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
+        $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
+        $processor = mysqli_real_escape_string($connection, $_POST['processor']);
+        $generation = mysqli_real_escape_string($connection, $_POST['generation']);
+        $ram = mysqli_real_escape_string($connection, $_POST['ram']);
+        $hdd_capacity = mysqli_real_escape_string($connection, $_POST['hdd_capacity']);
+        $ssd_capacity = mysqli_real_escape_string($connection, $_POST['ssd_capacity']);
+        $display = mysqli_real_escape_string($connection, $_POST['display']);
+        $resolutions = mysqli_real_escape_string($connection, $_POST['resolutions']);
+        $graphic = mysqli_real_escape_string($connection, $_POST['graphic']);
+        $graphic_type = mysqli_real_escape_string($connection, $_POST['graphic_type']);
+        $operating_system = mysqli_real_escape_string($connection, $_POST['operating_system']);
+        $battery_level = mysqli_real_escape_string($connection, $_POST['battery_level']);
+                        
+        $query = "INSERT INTO production_check(inventory_id, emp_id, sales_order_id, processor, generation, ram, hdd_capacity, ssd_capacity, display, resolutions, graphic, graphic_type, operating_system, battery_level, status, created_time) 
+                    VALUES ('$sales_order_id', '$emp_id', '$inventory_id', '$processor', '$generation', '$ram', '$hdd_capacity', '$ssd_capacity', '$display', '$resolutions', '$graphic', '$graphic_type', '$operating_system', '$battery_level', 0, CURRENT_TIMESTAMP)";
+        $query_run = mysqli_query($connection, $query);
+        $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+        $date = $date1->format('Y-m-d H:i:s');
+
+        $query = "SELECT * FROM prod_info WHERE inventory_id = '$inventory_id' ";
+        $query_run = mysqli_query($connection, $query); 
+        
+        foreach($query_run as $data){
+            $prod_motherboard_issue = $data['m_board_issue'];
+            $prod_lcd_issue = $data['lcd_issue'];
+            $prod_combine_issue = $data['combine_issue'];
+            $prod_body_work_issue = $data['bodywork_issue'];
+        }
+        if($lcd ==1 || $combine == 1 || $body_work ==1){
+            $all_ok =1;
+        }
+
+        $query_prod_info ="UPDATE prod_info SET end_date_time = '$date', status = '{$all_ok}', production_spec = '0' WHERE p_id = '$p_id' ";
+        $query_prod_run = mysqli_query($connection, $query_prod_info);
+        
+        echo '<script>alert("Welcome to Geeks for Geeks")</script>';
+
+        // header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+                                
+    }
 
 ?>
 
@@ -3724,10 +3596,6 @@ if(isset($_POST['prduction_specification_form'])){
     </div>
 </div>
 
-<?php include_once('../includes/footer.php'); }else{
-        die(access_denied());
-} ?>
-
 <style>
 @import url("../fonts/Poppins-Regular.ttf");
 
@@ -3824,4 +3692,23 @@ function selectAll(form1) {
     }
     return null;
 }
+
+window.history.forward();
+
+function noBack() {
+    window.history.forward();
+}
+
+function myFunction() {
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
 </script>
+
+<?php include_once('../includes/footer.php'); }else{
+        die(access_denied());
+} ?>
