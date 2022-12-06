@@ -66,8 +66,6 @@ $cpu;
     
       if(isset($_POST["key"]))
       if(!empty($scan_id)){  
-        echo $scan_id;
-        echo "test here";
        
       {
         if($scan_id != 0){ 
