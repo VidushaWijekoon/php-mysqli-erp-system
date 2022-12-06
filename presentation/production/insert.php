@@ -1,11 +1,21 @@
-<?php  
+<?php 
+
+error_reporting (E_ALL ^ E_NOTICE);
+// Toggle this to change the setting
+define('DEBUG', true);
+
+// You want all errors to be triggered
+error_reporting(E_ALL);
+ 
+error_reporting(E_ERROR | E_PARSE);
+
 ob_start();
 session_start();
 $emp_id = $_SESSION['epf'];  
 include_once('../../dataAccess/connection.php');
 
 $data = json_decode(stripslashes($_POST['key']));
-
+$inventory_id=0;
 $inventory_id = $_GET['com_id'];
 $query_run_get_location1 = "SELECT location FROM users WHERE epf = $emp_id";
 $query_run_get_location = mysqli_query($connection, $query_run_get_location1);
@@ -54,7 +64,11 @@ $cpu;
   } 
  
     
-      if(isset($_POST["key"]))  
+      if(isset($_POST["key"]))
+      if(!empty($scan_id)){  
+        echo $scan_id;
+        echo "test here";
+       
       {
         if($scan_id != 0){ 
         $query_get = "SELECT * FROM combine_check WHERE  inventory_id = '$inventory_id' ORDER BY id DESC Limit 1;"; 
@@ -215,7 +229,7 @@ $cpu;
             '$speakers',
             '$camera',
             '$bazel',
-            'CURRENT_TIMESTAMP',
+            CURRENT_TIMESTAMP,
             '$status',
             '$keyboard_keys',
             '$mousepad',
@@ -262,7 +276,7 @@ $cpu;
                 $emp_id,
                 $sales_order_id,
                 1,
-                '$date',
+                CURRENT_TIMESTAMP,
                 1
                 
             )"; 
@@ -354,7 +368,9 @@ $cpu;
             1
             
         )"; 
+        
         $query_run = mysqli_query($connection, $query_inventory_record);
+        }
     }
   
  ?>
