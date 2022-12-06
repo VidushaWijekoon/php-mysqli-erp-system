@@ -39,8 +39,9 @@ if(isset($_POST['logged_out'])){
     <link rel="stylesheet" href="../../static/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Customer CSS -->
     <link rel="stylesheet" href="../../static/dist/css/style.css">
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="./static/plugins/bootstrap/css/bootstrap.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="../../static/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+
 
 </head>
 
