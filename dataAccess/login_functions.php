@@ -46,7 +46,7 @@ function Login($role_id, $department){
     }
      // QC Team Leader Redirect
      elseif($role_id == 4 && $department == 19){
-        header('Location: presentation/qc/create_mfg.php');
+        header('Location: presentation/qc/new_create_mfg.php');
     }
     // Packing Technician Redirect
     elseif($role_id == 4 && $department == 13){
