@@ -152,6 +152,7 @@ label {
   font-size: 12px;
   padding: 10px;
   font-family: "Poppins", sans-serif;
+  color: #000;
 }
 
 [type="password"] {
@@ -407,8 +408,8 @@ input:-webkit-autofill:active {
 
 @media screen and (max-width: 1366px) and (max-height: 800px) {
   th {
-    font-size: 10px;
-    font-weight: 300;
+    font-size: 9px;
+    font-weight: 100;
   }
   td {
     font-size: 10px;

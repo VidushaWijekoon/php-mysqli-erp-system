@@ -37,26 +37,12 @@ if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) 
     $qc =0;
                                                
     foreach($query_e6 as $data){
-        if(empty($data)){
-                
-        }else{
-        if($data['issue_type'] ==1){
-            $motherboard++;
-        }
-        if($data['issue_type'] ==2){
-        $combind++;
-        }
-        if($data['issue_type'] ==3){
-            $lcd++;
-        }
-        if($data['issue_type'] ==4){
-            $bodywork++;
-        }
-        if($data['issue_type'] ==5){
-            $qc++;
-        }
-    }
-}                                      
+        $motherboard = $data['m_board_issue'];
+        $combine = $data['combine_issue'];
+        $lcd = $data['lcd_issue'];
+        $bodywork = $data['bodywork_issue'];
+        $qc = $data['production_spec'];
+    }                                      
 
 ?>
 
@@ -223,23 +209,27 @@ if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) 
                                         $query = "SELECT * FROM prod_info WHERE emp_id = {$emp_id} AND CONCAT(inventory_id) LIKE '%$filtervalues%' ";
                                                             
                                         $query_read = mysqli_query($connection, $query);
-                                        foreach($query_read as $row){                               
+                                            foreach($query_read as $row){                               
                                         
                                 ?>
                                 <tr>
                                     <td><?php echo $row['sales_order'] ?></td>
                                     <td><?php echo $row['inventory_id'] ?></td>
-                                    <td><?php if($row['issue_type' ] ==1){$motherboard_count++;echo "1"; }?></td>
-                                    <td><?php if($row['issue_type'] == 2){$combine_count++;echo "1"; }?></td>
-                                    <td><?php if($row['issue_type' ]== 3){$lcd_count++;echo "1"; }?></td>
-                                    <td><?php if($row['issue_type']== 4){$bodywork_count++;echo "1"; }?></td>
-                                    <td><?php if($row['issue_type']== 5){$sanding_count++;echo "1"; }?></td>
-
+                                    <td><?php echo $row['m_board_issue'] ?></td>
+                                    <td><?php echo $row['combine_issue'] ?></td>
+                                    <td><?php echo $row['lcd_issue'] ?></td>
+                                    <td><?php echo $row['bodywork_issue'] ?></td>
+                                    <td><?php echo $row['production_spec'] ?></td>
 
                                 </tr>
                                 <?php } } else {     
                                                                  
-                                        $query = "SELECT * FROM prod_info WHERE emp_id = {$emp_id} ";
+                                        $query = "SELECT *, SUM(m_board_issue) AS motherboard_issue,
+                                                    SUM(combine_issue) AS combine_issue,
+                                                    SUM(lcd_issue) AS lcd_issue,
+                                                    SUM(bodywork_issue) AS bodywork_issue,
+                                                    SUM(production_spec) AS production_spec
+                                                FROM prod_info WHERE emp_id = {$emp_id} ";
                                                             
                                         $query_read = mysqli_query($connection, $query);
                                         foreach($query_read as $row){  
@@ -248,11 +238,12 @@ if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) 
                                 <tr>
                                     <td><?php echo $row['sales_order'] ?></td>
                                     <td><?php echo $row['inventory_id'] ?></td>
-                                    <td><?php if($row['issue_type' ] ==1){$motherboard_count++;echo "1"; }?></td>
-                                    <td><?php if($row['issue_type'] == 2){$combine_count++;echo "1"; }?></td>
-                                    <td><?php if($row['issue_type' ]== 3){$lcd_count++;echo "1"; }?></td>
-                                    <td><?php if($row['issue_type']== 4){$bodywork_count++;echo "1"; }?></td>
-                                    <td><?php if($row['issue_type']== 5){$sanding_count++;echo "1"; }?></td>
+                                    <td><?php echo $row['m_board_issue'] ?></td>
+                                    <td><?php echo $row['combine_issue'] ?></td>
+                                    <td><?php echo $row['lcd_issue'] ?></td>
+                                    <td><?php echo $row['bodywork_issue'] ?></td>
+                                    <td><?php echo $row['production_spec'] ?></td>
+
                                 </tr>
                                 <?php } } ?>
 

@@ -1,12 +1,24 @@
-<?php  
+<?php 
+
+error_reporting (E_ALL ^ E_NOTICE);
+// Toggle this to change the setting
+define('DEBUG', true);
+
+// You want all errors to be triggered
+error_reporting(E_ALL);
+ 
+error_reporting(E_ERROR | E_PARSE);
+
 ob_start();
 session_start();
 $emp_id = $_SESSION['epf'];  
 include_once('../../dataAccess/connection.php');
+
 $data = json_decode(stripslashes($_POST['key']));
+$inventory_id=0;
 $inventory_id = $_GET['com_id'];
-$query_run_get_location = "SELECT location FROM users WHERE epf = $emp_id";
-$query_run_get_location = mysqli_query($connection, $query_run_get_location);
+$query_run_get_location1 = "SELECT location FROM users WHERE epf = $emp_id";
+$query_run_get_location = mysqli_query($connection, $query_run_get_location1);
 $emp_location ;
 foreach($query_run_get_location as $d){
     $emp_location = $d['location'];
@@ -37,6 +49,9 @@ $mb_base;
 $hings_cover;
 $lan_cover;
 $status = 0;
+$fan;
+$heat_sink;
+$cpu;
 
 
   foreach($data as $key=>$value){
@@ -49,7 +64,9 @@ $status = 0;
   } 
  
     
-      if(isset($_POST["key"]))  
+      if(isset($_POST["key"]))
+      if(!empty($scan_id)){  
+       
       {
         if($scan_id != 0){ 
         $query_get = "SELECT * FROM combine_check WHERE  inventory_id = '$inventory_id' ORDER BY id DESC Limit 1;"; 
@@ -82,6 +99,9 @@ $status = 0;
             $mb_base =$data['mb_base'];
             $hings_cover =$data['hings_cover'];
             $lan_cover =$data['lan_cover'];
+            $fan =$data['fan'];
+            $heat_sink =$data['heat_sink'];
+            $cpu =$data['cpu'];
         }
         //check switch data and change value
         if($name == 'keyboard'){
@@ -146,12 +166,22 @@ $status = 0;
         }if($name == 'lan_cover'){
             $lan_cover =0;
         }
+        if($name == 'fan'){
+            $fan =0;
+        }
+        if($name == 'heat_sink'){
+            $heat_sink =0;
+        }
+        if($name == 'cpu'){
+            $cpu =0;
+        }
         //check status
         $status = 0;
         $date;
         if($keyboard == 1 || $keyboard_keys == 1 || $speakers == 1 || $camera ==1 || $bazel ==1 || $mousepad == 1 || $mouse_pad_button == 1 || $camera_cable == 1 || $back_cover ==1 || $wifi_card ==1 ||
      $lcd_cable == 1 || $battery == 1 || $battery_cable == 1 || $dvd_rom ==1 || $dvd_caddy ==1 ||
-      $hdd_caddy == 1 || $hdd_cable_connector == 1 || $c_panel_palm_rest == 1 || $mb_base ==1 || $hings_cover ==1 || $lan_cover ==1){
+      $hdd_caddy == 1 || $hdd_cable_connector == 1 || $c_panel_palm_rest == 1 || $mb_base ==1 || $hings_cover ==1 || $lan_cover ==1 ||
+      $fan == 1 || $heat_sink == 1 || $cpu == 1){
         $status = 1;
         $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
         $date = $date1->format('Y-m-d');
@@ -184,6 +214,9 @@ $status = 0;
             mb_base,
             hings_cover,
             lan_cover,
+            fan,
+            heat_sink,
+            cpu,
             combined_id
         )
         VALUES(
@@ -194,7 +227,7 @@ $status = 0;
             '$speakers',
             '$camera',
             '$bazel',
-            '$date',
+            CURRENT_TIMESTAMP,
             '$status',
             '$keyboard_keys',
             '$mousepad',
@@ -213,6 +246,9 @@ $status = 0;
             '$mb_base',
             '$hings_cover',
             '$lan_cover',
+            '$fan',
+            '$heat_sink',
+            '$cpu',
             '$scan_id'
         )"; 
         $query_run = mysqli_query($connection, $query_new_record);
@@ -238,7 +274,7 @@ $status = 0;
                 $emp_id,
                 $sales_order_id,
                 1,
-                '$date',
+                CURRENT_TIMESTAMP,
                 1
                 
             )"; 
@@ -330,7 +366,9 @@ $status = 0;
             1
             
         )"; 
+        
         $query_run = mysqli_query($connection, $query_inventory_record);
+        }
     }
   
  ?>

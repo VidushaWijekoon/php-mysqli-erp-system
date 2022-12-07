@@ -34,12 +34,14 @@ if(isset($_POST['logged_out'])){
     <link rel="stylesheet" href="../../static/plugins/fontawesome-pro/css/all.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../static/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="../../static/dist/css/adminlte.css">
     <!-- overlayScrollbars Side Navbar -->
     <link rel="stylesheet" href="../../static/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Customer CSS -->
     <link rel="stylesheet" href="../../static/dist/css/style.css">
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="./static/plugins/bootstrap/css/bootstrap.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="../../static/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+
 
 </head>
 
@@ -528,7 +530,7 @@ if(isset($_POST['logged_out'])){
                             <ul class="nav nav-treeview">
 
                                 <li class="nav-item">
-                                    <a href="../qc/create_mfg.php" class="nav-link">
+                                    <a href="../qc/new_create_mfg.php" class="nav-link">
                                         <i class="fa fa-stethoscope nav-icon" style="font-size: 12px;"></i>
                                         <p> QC </p>
                                     </a>
