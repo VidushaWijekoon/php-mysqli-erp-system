@@ -94,7 +94,8 @@ $start_print = 0;
 ?>
 
 <div class="row page-titles">
-    <div class="col-md-5 align-self-center"><a href="./warehouse_dashboard.php">
+    <div class=" col-md-5 align-self-center mt-3">
+        <a href=" ./warehouse_dashboard.php">
             <i class="fa-solid fa-home fa-2x m-2" style="color: #ced4da; "></i>
         </a>
     </div>
@@ -724,3 +725,28 @@ function printDiv(divName) {
     window.location.href = './create_mfg.php';
 }
 </script>
+
+<style>
+fieldset,
+legend {
+    all: revert;
+    font-size: 12px;
+}
+
+select {
+    height: 25px !important;
+    font-size: 14px;
+}
+
+option {
+    font-size: 14px;
+}
+
+col-form-label {
+    font-size: 16px !important;
+}
+
+label {
+    font-size: 16px !important;
+}
+</style>

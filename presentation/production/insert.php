@@ -16,7 +16,7 @@ $name;
 $scan_id = 0;
 $value = 0;
 $keyboard;
-$damage_keys;
+$keyboard_keys;
 $speakers;
 $camera;
 $bazel;
@@ -62,7 +62,7 @@ $status = 0;
             
             $sales_order_id =$data['sales_order_id'];
             $keyboard =$data['keyboard'];
-            $damage_keys =$data['damage_keys'];
+            $keyboard_keys =$data['keyboard_keys'];
             $speakers =$data['speakers'];
             $camera =$data['camera'];
             $bazel =$data['bazel'];
@@ -87,8 +87,8 @@ $status = 0;
         if($name == 'keyboard'){
             $keyboard =0;
         }
-        if($name == 'damage_keys'){
-            $damage_keys =0;
+        if($name == 'keyboard_keys'){
+            $keyboard_keys =0;
         }
         if($name == 'speakers'){
             $speakers =0;
@@ -149,7 +149,7 @@ $status = 0;
         //check status
         $status = 0;
         $date;
-        if($keyboard == 1 || $damage_keys == 1 || $speakers == 1 || $camera ==1 || $bazel ==1 || $mousepad == 1 || $mouse_pad_button == 1 || $camera_cable == 1 || $back_cover ==1 || $wifi_card ==1 ||
+        if($keyboard == 1 || $keyboard_keys == 1 || $speakers == 1 || $camera ==1 || $bazel ==1 || $mousepad == 1 || $mouse_pad_button == 1 || $camera_cable == 1 || $back_cover ==1 || $wifi_card ==1 ||
      $lcd_cable == 1 || $battery == 1 || $battery_cable == 1 || $dvd_rom ==1 || $dvd_caddy ==1 ||
       $hdd_caddy == 1 || $hdd_cable_connector == 1 || $c_panel_palm_rest == 1 || $mb_base ==1 || $hings_cover ==1 || $lan_cover ==1){
         $status = 1;
@@ -167,7 +167,7 @@ $status = 0;
             bazel,
             created_time,
             status,
-            damage_keys,
+            keyboard_keys,
             mousepad,
             mouse_pad_button,
             camera_cable,
@@ -196,7 +196,7 @@ $status = 0;
             '$bazel',
             '$date',
             '$status',
-            '$damage_keys',
+            '$keyboard_keys',
             '$mousepad',
             '$mouse_pad_button',
             '$camera_cable',
