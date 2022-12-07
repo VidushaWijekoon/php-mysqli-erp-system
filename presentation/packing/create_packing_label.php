@@ -33,6 +33,12 @@ $cartoon_count = 0;
 $sales_order_id = 0;
 $username = $_SESSION['username'];
 $start_print = 0;
+$screen_resolution=null;
+$camera=null;
+$dvd=null;
+$keyboard_backlight=null;
+$os=null;
+
 $query = "SELECT sales_order_id FROM `packing_mfg` WHERE `packing_by`='$user' ORDER By mfg_id DESC limit 1;"; 
 $query_run = mysqli_query($connection, $query);
 $p_sales_order_id = 0;
@@ -56,9 +62,16 @@ foreach($query_run as $a){
         $mfg_count++;
     }
     if( $mfg_count==1){
+        $sales_type = null;
+        $query_sales_order = "SELECT item_bulk FROM sales_order_add_items WHERE sales_order_id ='$sales_order_id' AND item_bulk = 'e_commerce'";
+        $query_run_sales_order = mysqli_query($connection, $query_sales_order);
+        foreach($query_run_sales_order as $data){
+            $sales_type = $data['item_bulk'];
+        }
+
         $query = "UPDATE packing_mfg SET sales_order_id ='$sales_order_id',packing_by='$user',packing_date = CURRENT_TIMESTAMP WHERE mfg = '$mfg' ";
-       
         $query_run = mysqli_query($connection, $query);
+
         
     $query = " SELECT * FROM packing_mfg WHERE mfg = '$mfg' ";
     $query_run = mysqli_query($connection, $query);
@@ -75,8 +88,59 @@ foreach($query_run as $a){
     $screen_size = $data['screen_size'];
     $cartoon_number = $data['cartoon_number'];
     $sales_order_id = $data['sales_order_id'];
+    $screen_resolution = $data['screen_resolution'];
+    $camera= $data['camera'];
+    $dvd= $data['dvd'];
+    $keyboard_backlight= $data['keyboard_backlight'];
+    $os= $data['os'];
+    
     $start_print = 1;
 
+   }
+   if($sales_type == 'e_commerce'){
+    $query_ecom ="INSERT INTO `e_com_inventory`(
+        `device`,
+        `brand`,
+        `core`,
+        `generation`,
+        `model`,
+        `hdd_capacity`,
+        `hdd_type`,
+        `mfg`,
+        `ram_capacity`,
+        `touch`,
+        `screen_size`,
+        `sales_order_id`,
+        `screen_resolution`,
+        `camera`,
+        `dvd`,
+        `keyboard_backlight`,
+        `os`,
+        `packing_by`,
+        `packing_date`
+    )
+    VALUES(
+        '$device',
+        '$brand',
+        '$core',
+        '$generation',
+        '$model',
+        '$hdd_capacity',
+        '$hdd_type',
+        '$mfg',
+        '$ram_capacity',
+        '$touch_type',
+        '$screen_size',
+        '$sales_order_id',
+        '$screen_resolution',
+        '$camera',
+        '$dvd',
+        '$keyboard_backlight',
+        '$os',
+        '$user',
+        CURRENT_TIMESTAMP
+    )";
+    $query_run = mysqli_query($connection, $query_ecom);
    }
     $tempDir = 'temp/';
     $filename = $mfg;
