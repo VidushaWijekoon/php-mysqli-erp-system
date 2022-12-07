@@ -32,16 +32,33 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
 <!-- Info boxes -->
 <div class="row m-2">
     <div class="col-12 col-sm-6 col-md-3 mt-3">
-        <div class="info-box">
-            <span class="info-box-icon bg-info elevation-1"><i class="fa-solid fa-warehouse"></i></span>
+        <?php 
+        $date = date('Y-m-d 00:00:00');
+        $date2 = date('Y-m-d 23:59:59');
+        $start_time = $date;
+        $end_time =$date2; ?>
+        <a href="e_com_request.php?start_time='<?php echo $start_time ?>'&end_time='<?php echo $end_time ?>'&day=Today">
+            <div class="info-box">
+                <span class="info-box-icon bg-info elevation-1"><i class="fa-solid fa-warehouse"></i></span>
 
-            <div class="info-box-content">
-                <span class="info-box-text">Total Dispatch</span>
-                <span class="info-box-number">0 </span>
+                <div class="info-box-content">
+                    <span class="info-box-text">E-Commerce Order Request</span>
+                    <span class="info-box-number"><?php 
+                
+                $count=0;
+                $query = "SELECT COUNT(request_id) as request_count FROM e_com_packing_request  WHERE order_status='packing pending' AND created_time between '$date'AND '$date2' ";
+                $query_run = mysqli_query($connection, $query);
+                foreach($query_run as $a){
+                    $count = $a['request_count'];
+                }
+                echo $count;
+
+                ?> </span>
+                </div>
+                <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
+            <!-- /.info-box -->
+        </a>
     </div>
     <!-- /.col -->
     <div class="col-12 col-sm-6 col-md-3 mt-3">
