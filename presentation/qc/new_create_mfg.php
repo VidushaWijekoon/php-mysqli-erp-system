@@ -140,7 +140,7 @@ $start_print = 0;
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-11 grid-margin stretch-card justify-content-center mx-auto mt-2">
+        <div class="col-lg-11 grid-margin stretch-card justify-content-center mx-auto mt-5">
             <div class="card mt-3 w-100">
                 <form method="POST">
                     <div class="card-body">
