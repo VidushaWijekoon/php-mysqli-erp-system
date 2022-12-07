@@ -5,8 +5,9 @@ include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
 include_once('../../dataAccess/403.php');
 include_once('../includes/header.php');
-// require_once("phpqrcode/qrlib.php"); 
-?>
+require_once("phpqrcode/qrlib.php");
+//   ?>
+<!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="../../static/plugins/bootstrap-3.3.5-dist/css/bootstrap.min.css">
 <script src="../../static/plugins/jquery/1.11.3/jquery.min.js"></script>
 <script src="../../static/plugins/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
@@ -14,10 +15,11 @@ include_once('../includes/header.php');
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
-$mfg_id = $_GET['mfg_id'];
+
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
-
+$user = $_SESSION['username'];
+$mfg_id = $_GET['mfg_id'];
 if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $role_id == 4 && $department == 19){
 
 $errors = array();
@@ -26,7 +28,7 @@ $username = $_SESSION['username'];
 $device = NULL;
 $brand = NULL;
 $core = null;
-$generation;
+$generation = null;
 $model = NULL;
 $hdd_capacity = NULL;
 $hdd_type = null;
@@ -40,12 +42,15 @@ $camera = null;
 $dvd = null;
 $keyboard_backlight = null;
 $os = null;
-$mfg = null;
+$mfg=null;
+
+
+$device_d = '';
+
+
 $start_print = 0;
 
-
     if(isset($_POST['submit_mfg'])){
-
         $device = mysqli_real_escape_string($connection, $_POST['device_type']);
         $brand = mysqli_real_escape_string($connection, $_POST['brand']);
         $core = mysqli_real_escape_string($connection, $_POST['core']);
@@ -64,45 +69,72 @@ $start_print = 0;
         $keyboard_backlight = mysqli_real_escape_string($connection, $_POST['keyboard_backlight']); 
         $os = mysqli_real_escape_string($connection, $_POST['operating_system']);
         $mfg = mysqli_real_escape_string($connection, $_POST['mfg_number']); 
-    
-    $query = "UPDATE packing_mfg SET device = '$device', brand = '$brand', core = '$core', generation = '$generation', model = '$model', hdd_capacity = '$hdd_capacity',
-                hdd_type = '$hdd_type', mfg = '$mfg', ram_capacity = '$ram_capacity', touch = '$touch_type', screen_size = '$screen_size', screen_resolution = '$screen_resolution',
-                dvd = '$dvd', camera = '$camera', keyboard_backlight = '$keyboard_backlight', os = '$os', graphic = '$graphic', graphic_type = '$graphic_type'
-    WHERE mfg_id='$mfg_id'";
-    $query_run = mysqli_query($connection, $query);
-   
+        
+        
+            $query = "UPDATE
+            `packing_mfg`
+        SET
+            `device` = '$device',
+            `brand` = '$brand',
+            `core` = '$core',
+            `generation` = '$generation',
+            `model` = '$model',
+            `hdd_capacity` = '$hdd_capacity',
+            `hdd_type` = '$hdd_type',
+            `mfg` = '$mfg',
+            `ram_capacity` = '$ram_capacity',
+            `touch` = '$touch_type',
+            `screen_size` = '$screen_size',
+            screen_resolution='$screen_resolution',
+            dvd = '$dvd',
+            camera = '$camera',
+            keyboard_backlight='$keyboard_backlight',
+            os = '$os'
+        
+        WHERE
+            mfg_id='$mfg_id'";
+        $query_run = mysqli_query($connection, $query);
         $start_print = 1;
+
         echo "<script>
-        var newHTML = document.createElement ('div');
-        newHTML.innerHTML =
-        newHTML = document.createElement ('div');
-        newHTML.innerHTML = ' <div id=\"myModal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
-        document.body.appendChild (newHTML);
-        $(window).load(function(){
-             $('#modalmotherboard').modal('show');
-        });
-    </script>";
+                var newHTML = document.createElement ('div');
+                newHTML.innerHTML =
+                newHTML = document.createElement ('div');
+                newHTML.innerHTML = ' <div id=\"myModal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+                document.body.appendChild (newHTML);
+                $(window).load(function(){
+                    $('#modal-motherboard').modal('show');
+                });
+            </script>";
+            $start_print = 1;
+  
    
     }
-    $query="SELECT * FROM packing_mfg WHERE mfg_id ='$mfg_id'";
-    $query_run = mysqli_query($connection, $query);
-    foreach($query_run as $data){
+
+
+    $query ="SELECT * FROM packing_mfg WHERE mfg_id ='$mfg_id'";
+    $result =  mysqli_query($connection, $query); 
+
+
+    foreach($result as $data){
         $device = $data['device'];
         $brand = $data['brand'];
         $core = $data['core'];
         $generation = $data['generation'];
         $model = $data['model'];
         $hdd_capacity = $data['hdd_capacity'];
-        $ram_capacity = $data['ram_capacity'];
         $hdd_type = $data['hdd_type'];
-        $screen_type=$data['touch'];
+        $ram_capacity = $data['ram_capacity'];
+        $touch_type = $data['touch'];
         $screen_size = $data['screen_size'];
         $screen_resolution = $data['screen_resolution'];
+        $graphic = $data['graphic'];
+        $graphic_type = $data['graphic_type'];
         $dvd = $data['dvd'];
         $camera = $data['camera'];
-        $keyboard_backlight=$data['keyboard_backlight'];
+        $keyboard_backlight = $data['keyboard_backlight'];
         $os = $data['os'];
-        $mfg = $data['mfg'];
+        $mfg = $data['mfg'];                      
     }
 ?>
 
@@ -116,29 +148,6 @@ $start_print = 0;
                         <fieldset class="">
 
                             <?php 
-                        
-
-                            $xd = "SELECT * FROM packing_mfg WHERE mfg_id = $mfg_id ORDER BY mfg_id DESC LIMIT 1";
-                            $d = mysqli_query($connection, $xd);
-                            foreach($d as $x){
-                                $x_device_type = $x['device'];
-                                $x_brand = $x['brand'];
-                                $x_core = $x['core'];
-                                $x_generation = $x['generation'];
-                                $x_model = $x['model'];
-                                $x_ram_capacity = $x['ram_capacity'];
-                                $x_hdd_capacity = $x['hdd_capacity'];
-                                $x_hdd_type = $x['hdd_type'];
-                                $x_touch_type = $x['touch'];
-                                $x_screen_size = $x['screen_size'];
-                                $x_screen_resolutions = $x['screen_resolution'];
-                                $x_graphic = $x['graphic'];
-                                $x_graphic_type = $x['graphic_type'];
-                                $x_os = $x['os'];
-                                $x_optical = $x['dvd'];
-                                $x_camera = $x['camera'];
-                                $x_keyboard_backlight = $x['keyboard_backlight'];
-                            }
                         ?>
 
                             <!-- ============================================================== -->
@@ -148,7 +157,7 @@ $start_print = 0;
                                 <label class="col-sm-2 col-form-label text-capitalize " style="font-size:14px">Device
                                     Type</label>
                                 <div class="col-sm-10 ">
-                                    <?php if($x_device_type == 'laptop'){ ?>
+                                    <?php if($device == 'laptop'){ ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -180,7 +189,7 @@ $start_print = 0;
                                 </label>
                                 <div class="col-sm-10 ">
 
-                                    <?php if($x_brand == 'dell') {?>
+                                    <?php if($brand == 'dell') {?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -199,7 +208,7 @@ $start_print = 0;
                                         </label>
                                     </div>
 
-                                    <?php } if($x_brand == 'hp') {?>
+                                    <?php } if($brand == 'hp') {?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -217,7 +226,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_brand == 'lenovo') {?>
+                                    <?php } if($brand == 'lenovo') {?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -235,7 +244,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_brand == 'acer') {?>
+                                    <?php } if($brand == 'acer') {?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -253,7 +262,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_brand == 'apple') {?>
+                                    <?php } if($brand == 'apple') {?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -271,7 +280,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_brand == 'microsoft') {?>
+                                    <?php } if($brand == 'microsoft') {?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -291,7 +300,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_brand == 'microsoft') {?>
+                                    <?php } if($brand == 'microsoft') {?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -321,7 +330,7 @@ $start_print = 0;
                                     style="font-size:14px">Core</label>
                                 <div class="col-sm-10 ">
 
-                                    <?php if($x_core == 'celeron') {?>
+                                    <?php if($core == 'celeron') {?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -339,7 +348,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_core == 'pentium') {?>
+                                    <?php } if($core == 'pentium') {?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -357,7 +366,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_core == 'i3') {?>
+                                    <?php } if($core == 'i3') {?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
 
@@ -379,7 +388,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_core == 'i5') {?>
+                                    <?php } if($core == 'i5') {?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -399,7 +408,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_core == 'i7') {?>
+                                    <?php } if($core == 'i7') {?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -419,7 +428,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_core == 'i9') {?>
+                                    <?php } if($core == 'i9') {?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -439,7 +448,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_core == 'xeon') {?>
+                                    <?php } if($core == 'xeon') {?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -459,7 +468,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_core == 'ryzen3') {?>
+                                    <?php } if($core == 'ryzen3') {?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
 
@@ -481,7 +490,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_core == 'ryzen5') {?>
+                                    <?php } if($core == 'ryzen5') {?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -501,7 +510,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_core == 'ryzen7') {?>
+                                    <?php } if($core == 'ryzen7') {?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -521,7 +530,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_core == 'ryzen9') {?>
+                                    <?php } if($core == 'ryzen9') {?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -541,7 +550,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_core == 'a4') {?>
+                                    <?php } if($core == 'a4') {?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -561,7 +570,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_core == 'a6') {?>
+                                    <?php } if($core == 'a6') {?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -581,7 +590,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_core == 'a8') {?>
+                                    <?php } if($core == 'a8') {?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -601,7 +610,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_core == 'a10') {?>
+                                    <?php } if($core == 'a10') {?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -621,7 +630,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_core == 'a12') {?>
+                                    <?php } if($core == 'a12') {?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -641,7 +650,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_core == 'athlon') {?>
+                                    <?php } if($core == 'athlon') {?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -672,7 +681,7 @@ $start_print = 0;
                                 <label class="col-sm-2 col-form-label text-capitalize "
                                     style="font-size:14px">Generation</label>
                                 <div class="col-sm-10">
-                                    <?php if($x_generation == 1){ ?>
+                                    <?php if($generation == 1){ ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -692,7 +701,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_generation == 2){ ?>
+                                    <?php } if($generation == 2){ ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -712,7 +721,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_generation == 3){ ?>
+                                    <?php } if($generation == 3){ ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -732,7 +741,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_generation == 4){ ?>
+                                    <?php } if($generation == 4){ ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -752,7 +761,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_generation == 5){ ?>
+                                    <?php } if($generation == 5){ ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -772,7 +781,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_generation == 6){ ?>
+                                    <?php } if($generation == 6){ ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -792,7 +801,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_generation == 7){ ?>
+                                    <?php } if($generation == 7){ ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -812,7 +821,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_generation == 8){ ?>
+                                    <?php } if($generation == 8){ ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -832,7 +841,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_generation == 9){ ?>
+                                    <?php } if($generation == 9){ ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -852,7 +861,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_generation == 10){ ?>
+                                    <?php } if($generation == 10){ ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -872,7 +881,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_generation == 11){ ?>
+                                    <?php } if($generation == 11){ ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -892,7 +901,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_generation == 12){ ?>
+                                    <?php } if($generation == 12){ ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -912,7 +921,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_generation == 13){ ?>
+                                    <?php } if($generation == 13){ ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -943,11 +952,11 @@ $start_print = 0;
                                 <label class="col-sm-2 col-form-label text-capitalize "
                                     style="font-size:14px">Model</label>
                                 <div class="col-sm-10 ">
-                                    <?php if($x_model == null) {?>
+                                    <?php if($model == null) {?>
                                     <input class="mx-2" type="text" name="model" required>
                                     <?php } else { ?>
-                                    <input class="mx-2" type="text" <?php echo 'value="' . $x_model . '"'; ?>
-                                        name="model" required>
+                                    <input class="mx-2" type="text" <?php echo 'value="' . $model . '"'; ?> name="model"
+                                        required>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -959,7 +968,7 @@ $start_print = 0;
                                 <label class="col-sm-2 col-form-label text-capitalize "
                                     style="font-size:14px">RAM</label>
                                 <div class="col-sm-10 ">
-                                    <?php if($x_ram_capacity == 2) { ?>
+                                    <?php if($ram_capacity == 2) { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -981,7 +990,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_ram_capacity == 4) { ?>
+                                    <?php } if($ram_capacity == 4) { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1003,7 +1012,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_ram_capacity == 8) { ?>
+                                    <?php } if($ram_capacity == 8) { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1025,7 +1034,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_ram_capacity == 16) { ?>
+                                    <?php } if($ram_capacity == 16) { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1047,7 +1056,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_ram_capacity == 24) { ?>
+                                    <?php } if($ram_capacity == 24) { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1069,7 +1078,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_ram_capacity == 32) { ?>
+                                    <?php } if($ram_capacity == 32) { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1091,7 +1100,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_ram_capacity == 64) { ?>
+                                    <?php } if($ram_capacity == 64) { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1126,7 +1135,7 @@ $start_print = 0;
                                 </label>
                                 <div class="col-sm-10 ">
 
-                                    <?php if($x_hdd_capacity == 128) { ?>
+                                    <?php if($hdd_capacity == 128) { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1151,7 +1160,7 @@ $start_print = 0;
                                         </label>
                                     </div>
 
-                                    <?php } if($x_hdd_capacity == 256) { ?>
+                                    <?php } if($hdd_capacity == 256) { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1175,7 +1184,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_hdd_capacity == 320) { ?>
+                                    <?php } if($hdd_capacity == 320) { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1199,7 +1208,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_hdd_capacity == 512) { ?>
+                                    <?php } if($hdd_capacity == 512) { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1223,7 +1232,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_hdd_capacity == '1tb') { ?>
+                                    <?php } if($hdd_capacity == '1tb') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1246,7 +1255,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_hdd_capacity == '2tb') { ?>
+                                    <?php } if($hdd_capacity == '2tb') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1268,7 +1277,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_hdd_capacity == 'n/a') { ?>
+                                    <?php } if($hdd_capacity == 'n/a') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1302,7 +1311,7 @@ $start_print = 0;
                                     HDD Type
                                 </label>
                                 <div class="col-sm-10 ">
-                                    <?php if($x_hdd_type == 'hdd') { ?>
+                                    <?php if($hdd_type == 'hdd') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1324,7 +1333,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_hdd_type == 'ssd') { ?>
+                                    <?php } if($hdd_type == 'ssd') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1346,7 +1355,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_hdd_type == 'other') { ?>
+                                    <?php } if($hdd_type == 'other') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1379,7 +1388,7 @@ $start_print = 0;
                                 <label class="col-sm-2 col-form-label text-capitalize "
                                     style="font-size:14px">Display</label>
                                 <div class="col-sm-10 ">
-                                    <?php if($x_touch_type == 'touch') { ?>
+                                    <?php if($touch_type == 'touch') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1401,7 +1410,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_touch_type == 'non-touch') { ?>
+                                    <?php } if($touch_type == 'non-touch') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1439,7 +1448,7 @@ $start_print = 0;
                                     style="font-size:14px">Display</label>
                                 <div class="col-sm-10">
 
-                                    <?php if($x_screen_size == '10.1') { ?>
+                                    <?php if($screen_size == '10.1') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1461,7 +1470,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_screen_size == '11.6') { ?>
+                                    <?php } if($screen_size == '11.6') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1483,7 +1492,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_screen_size == '12.4') { ?>
+                                    <?php } if($screen_size == '12.4') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1505,7 +1514,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_screen_size == '12.5') { ?>
+                                    <?php } if($screen_size == '12.5') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1527,7 +1536,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_screen_size == '13.3') { ?>
+                                    <?php } if($screen_size == '13.3') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1549,7 +1558,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_screen_size == '13.5') { ?>
+                                    <?php } if($screen_size == '13.5') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1571,7 +1580,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_screen_size == '14') { ?>
+                                    <?php } if($screen_size == '14') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1593,7 +1602,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_screen_size == '15.6') { ?>
+                                    <?php } if($screen_size == '15.6') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1615,7 +1624,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_screen_size == '16') { ?>
+                                    <?php } if($screen_size == '16') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1637,7 +1646,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_screen_size == '17.3') { ?>
+                                    <?php } if($screen_size == '17.3') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1659,7 +1668,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_screen_size == '18.4') { ?>
+                                    <?php } if($screen_size == '18.4') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1692,7 +1701,7 @@ $start_print = 0;
                                 <label class="col-sm-2 col-form-label text-capitalize "
                                     style="font-size:14px">Resolutions</label>
                                 <div class="col-sm-10">
-                                    <?php if($x_screen_resolutions == '1366x768') { ?>
+                                    <?php if($screen_resolution == '1366x768') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1715,7 +1724,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_screen_resolutions == '1600x900') { ?>
+                                    <?php } if($screen_resolution == '1600x900') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1739,7 +1748,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_screen_resolutions == '1920x1080') { ?>
+                                    <?php } if($screen_resolution == '1920x1080') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1763,7 +1772,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_screen_resolutions == '2560x1440') { ?>
+                                    <?php } if($screen_resolution == '2560x1440') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1787,7 +1796,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_screen_resolutions == '2560x1440') { ?>
+                                    <?php } if($screen_resolution == '2560x1440') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1823,7 +1832,7 @@ $start_print = 0;
                                     style="font-size:14px">Graphic</label>
                                 <div class="col-sm-10 ">
 
-                                    <?php if($x_graphic == 1) { ?>
+                                    <?php if($graphic == 1) { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1843,7 +1852,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_graphic == 2) { ?>
+                                    <?php } if($graphic == 2) { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1863,7 +1872,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_graphic == 4) { ?>
+                                    <?php } if($graphic == 4) { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1883,7 +1892,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_graphic == 8) { ?>
+                                    <?php } if($graphic == 8) { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1903,7 +1912,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_graphic == 'n/a') { ?>
+                                    <?php } if($graphic == 'n/a') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1936,7 +1945,7 @@ $start_print = 0;
                                 <label class="col-sm-2 col-form-label text-capitalize" style="font-size:14px">Graphic
                                     Type</label>
                                 <div class="col-sm-10 ">
-                                    <?php if($x_graphic_type == 'intel'){ ?>
+                                    <?php if($graphic_type == 'intel'){ ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1960,7 +1969,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_graphic_type == 'nvidia'){ ?>
+                                    <?php } if($graphic_type == 'nvidia'){ ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -1984,7 +1993,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_graphic_type == 'AMD'){ ?>
+                                    <?php } if($graphic_type == 'AMD'){ ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -2006,7 +2015,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_graphic_type == 'n/a'){ ?>
+                                    <?php } if($graphic_type == 'n/a'){ ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -2039,7 +2048,7 @@ $start_print = 0;
                                 <label class="col-sm-2 col-form-label text-capitalize" style="font-size:14px">
                                     Operation System</label>
                                 <div class="col-sm-10 ">
-                                    <?php if($x_os == 'windows') { ?>
+                                    <?php if($os == 'windows') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -2061,7 +2070,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_os == 'linux') { ?>
+                                    <?php } if($os == 'linux') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -2085,7 +2094,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_os == 'linux') { ?>
+                                    <?php } if($os == 'linux') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -2109,7 +2118,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_os == 'ios') { ?>
+                                    <?php } if($os == 'ios') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -2133,7 +2142,7 @@ $start_print = 0;
                                             </div>
                                         </label>
                                     </div>
-                                    <?php } if($x_os == 'chrome os') { ?>
+                                    <?php } if($os == 'chrome os') { ?>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-xs btn-dark mx-2 mb-2">
                                             <div class="icheck-success d-inline">
@@ -2168,7 +2177,7 @@ $start_print = 0;
                                 <label class="col-sm-2 col-form-label text-capitalize "
                                     style="font-size:14px">Optical</label>
                                 <div class="col-sm-10 ">
-                                    <?php if($x_optical == 'no') { ?>
+                                    <?php if($dvd == 'no') { ?>
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="optical_1" name="optical" value="yes" required>
                                         <label class="label_values" for="optical_1" style="margin-right: 15px;">Yes
@@ -2179,7 +2188,7 @@ $start_print = 0;
                                         <input type="radio" id="optical_2" name="optical" value="no" checked required>
                                         <label class="label_values" for="optical_2">No </label>
                                     </div>
-                                    <?php } elseif($x_optical == 'yes') { ?>
+                                    <?php } elseif($dvd == 'yes') { ?>
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="optical_1" name="optical" value="yes" checked required>
                                         <label class="label_values" for="optical_1" style="margin-right: 15px;">Yes
@@ -2211,7 +2220,7 @@ $start_print = 0;
                                 <label class="col-sm-2 col-form-label text-capitalize "
                                     style="font-size:14px">Camera</label>
                                 <div class="col-sm-10 ">
-                                    <?php if($x_camera == 'no') { ?>
+                                    <?php if($camera == 'no') { ?>
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="camera_1" name="camera" value="yes" required>
                                         <label class="label_values" for="camera_1" style="margin-right: 15px;">Yes
@@ -2221,7 +2230,7 @@ $start_print = 0;
                                         <input type="radio" id="camera_2" name="camera" value="no" checked required>
                                         <label class="label_values" for="camera_2">No </label>
                                     </div>
-                                    <?php } elseif($x_camera == 'yes') { ?>
+                                    <?php } elseif($camera == 'yes') { ?>
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="camera_1" name="camera" value="yes" checked required>
                                         <label class="label_values" for="camera_1" style="margin-right: 15px;">Yes
@@ -2252,7 +2261,7 @@ $start_print = 0;
                                 <label class="col-sm-2 col-form-label text-capitalize " style="font-size:14px">Keyboard
                                     Light</label>
                                 <div class="col-sm-10 ">
-                                    <?php if($x_keyboard_backlight == 'yes') { ?>
+                                    <?php if($keyboard_backlight == 'yes') { ?>
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="keyboard_light_1" name="keyboard_backlight" value="yes"
                                             required checked>
@@ -2264,7 +2273,7 @@ $start_print = 0;
                                         <input type="radio" id="keyboard_light_2" name="keyboard_backlight" value="no">
                                         <label class="label_values" for="keyboard_light_2">No </label>
                                     </div>
-                                    <?php } elseif($x_keyboard_backlight == 'no') { ?>
+                                    <?php } elseif($keyboard_backlight == 'no') { ?>
                                     <div class="icheck-success d-inline">
                                         <input type="radio" id="keyboard_light_1" name="keyboard_backlight" value="yes"
                                             required>
@@ -2301,7 +2310,8 @@ $start_print = 0;
                                 <label class="col-sm-2 col-form-label text-capitalize " style="font-size:14px">MFG
                                     Number</label>
                                 <div class="col-sm-10 ">
-                                    <input class="mx-2" type="text" name="mfg_number" required>
+                                    <input class="mx-2" type="text" name="mfg_number" value="<?php echo $mfg ?>"
+                                        required>
                                 </div>
                             </div>
 
@@ -2320,7 +2330,7 @@ $start_print = 0;
 
 </div>
 
-<div class="container-fluid  ">
+<div class="container-fluid d-none">
     <div class="row">
         <div class="col-lg-6 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card mt-3 w-100">
@@ -2423,7 +2433,7 @@ $start_print = 0;
 </div>
 
 
-<div class="modal fade" id="modalmotherboard">
+<div class="modal fade" id="modal-motherboard">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -2436,30 +2446,7 @@ $start_print = 0;
                 <div class="modal-body">
                     <div class="row">
                         <div>
-                            <?php $query ="SELECT * FROM packing_mfg WHERE mfg ='$mfg'";
-                            $result =  mysqli_query($connection, $query); 
-                            foreach($result as $data){
-                                $device = $data['device'];
-                                $model = $data['model'];
-                                $brand = $data['brand'];
-                                $core = $data['core'];
-                                $generation = $data['generation'];
-                                $hdd_capacity = $data['hdd_capacity'];
-                                $hdd_type = $data['hdd_type'];
-                                $ram_capacity = $data['ram_capacity'];
-                                $device = $data['device'];
-                                $screen_type = $data['touch'];
-                                $screen_size = $data['screen_size'];
-                                $screen_resolution = $data['screen_resolution'];
-                                $dvd = $data['dvd'];
-                                $camera = $data['camera'];
-                                $keyboard_backlight=$data['keyboard_backlight'];
-                                $os = $data['os'];
-                                $mfg = $data['mfg'];
-                                $mfg_id = $data['mfg_id'];
-                                
-                            }
-                            ?>
+
                             <table style="border: black; border-style: solid;">
                                 <tr style="border: black; border-style: solid;">
                                     <th style="border: black; border-style: solid; margin-left:5px; width:150px;">
@@ -2470,17 +2457,20 @@ $start_print = 0;
                                 </tr>
                                 <tr style="border: black; border-style: solid;">
                                     <th style="border: black; border-style: solid;"> Brand :</th>
-                                    <td class="px-2" style="border: black; border-style: solid;"> <?php echo $brand; ?>
+                                    <td class="px-2" style="border: black; border-style: solid;">
+                                        <?php echo $brand; ?>
                                     </td>
                                 </tr>
                                 <tr style="border: black; border-style: solid;">
                                     <th style="border: black; border-style: solid;"> Model :</th>
-                                    <td class="px-2" style="border: black; border-style: solid;"><?php echo $model; ?>
+                                    <td class="px-2" style="border: black; border-style: solid;">
+                                        <?php echo $model; ?>
                                     </td>
                                 </tr>
                                 <tr style="border: black; border-style: solid;">
                                     <th style="border: black; border-style: solid;"> Core :</th>
-                                    <td class="px-2" style="border: black; border-style: solid;"> <?php echo $core; ?>
+                                    <td class="px-2" style="border: black; border-style: solid;">
+                                        <?php echo $core; ?>
                                     </td>
                                 </tr>
                                 <tr style="border: black; border-style: solid;">
@@ -2506,7 +2496,7 @@ $start_print = 0;
                                 <tr style="border: black; border-style: solid;">
                                     <th style="border: black; border-style: solid;"> Screen :</th>
                                     <td class="px-2" style="border: black; border-style: solid;">
-                                        <?php echo $screen_type; ?></td>
+                                        <?php echo $touch_type; ?></td>
                                 </tr>
                                 <tr style="border: black; border-style: solid;">
                                     <th style="border: black; border-style: solid;"> Screen Size :</th>
@@ -2540,7 +2530,8 @@ $start_print = 0;
                                 </tr>
                                 <tr style="border: black; border-style: solid;">
                                     <th style="border: black; border-style: solid;"> MFG Number :</th>
-                                    <td class="px-2" style="border: black; border-style: solid;"> <?php echo $mfg; ?>
+                                    <td class="px-2" style="border: black; border-style: solid;">
+                                        <?php echo $mfg; ?>
                                     </td>
                                 </tr>
                             </table>
@@ -2548,12 +2539,14 @@ $start_print = 0;
                     </div>
 
                     <div class="modal-footer justify-content-between">
+                        <!-- <button type="button" class="btn bg-gradient-danger" data-dismiss="modal">Close</button> -->
+                        <a class="btn btn bg-gradient-navy"
+                            href="./new_update_mfg.php?mfg_id=<?php echo $mfg_id; ?>">Update</a>
+                    </div>
+                    <div class="modal-footer justify-content-between">
                         <input class="btn btn-warning" type="button" onclick="printDiv('printableArea')"
                             value="print a Barcode!" />
                     </div>
-
-
-                </div>
             </form>
         </div>
         <!-- /.modal-content -->
@@ -2576,7 +2569,6 @@ function printDiv(divName) {
     window.location.href = './new_create_mfg.php';
 }
 </script>
-
 
 <style>
 fieldset,
