@@ -68,31 +68,14 @@ $start_print = 0;
         $dvd = mysqli_real_escape_string($connection, $_POST['optical']); 
         $keyboard_backlight = mysqli_real_escape_string($connection, $_POST['keyboard_backlight']); 
         $os = mysqli_real_escape_string($connection, $_POST['operating_system']);
-        $mfg = mysqli_real_escape_string($connection, $_POST['mfg_number']); 
+        $mfg = mysqli_real_escape_string($connection, $_POST['mfg_number']);         
         
-        
-            $query = "UPDATE
-            `packing_mfg`
-        SET
-            `device` = '$device',
-            `brand` = '$brand',
-            `core` = '$core',
-            `generation` = '$generation',
-            `model` = '$model',
-            `hdd_capacity` = '$hdd_capacity',
-            `hdd_type` = '$hdd_type',
-            `mfg` = '$mfg',
-            `ram_capacity` = '$ram_capacity',
-            `touch` = '$touch_type',
-            `screen_size` = '$screen_size',
-            screen_resolution='$screen_resolution',
-            dvd = '$dvd',
-            camera = '$camera',
-            keyboard_backlight='$keyboard_backlight',
-            os = '$os'
-        
-        WHERE
-            mfg_id='$mfg_id'";
+        $query = "UPDATE packing_mfg SET device = '$device', brand = '$brand', core = '$core', generation = '$generation', model = '$model',
+                            hdd_capacity = '$hdd_capacity', hdd_type = '$hdd_type', mfg = '$mfg', ram_capacity = '$ram_capacity', touch = '$touch_type',
+                            screen_size = '$screen_size', screen_resolution = '$screen_resolution', dvd = '$dvd', camera = '$camera', keyboard_backlight = '$keyboard_backlight',
+                            os = '$os', graphic = '$graphic', graphic_type = '$graphic_type'        
+                    WHERE mfg_id='$mfg_id'";
+        echo $query;
         $query_run = mysqli_query($connection, $query);
         $start_print = 1;
 
@@ -146,9 +129,6 @@ $start_print = 0;
                 <form method="POST">
                     <div class="card-body">
                         <fieldset class="">
-
-                            <?php 
-                        ?>
 
                             <!-- ============================================================== -->
                             <!-- Device  -->
@@ -2320,7 +2300,7 @@ $start_print = 0;
 
                         <button type="submit" name="submit_mfg" id="submit"
                             class="btn mb-2 mt-4 btn-primary btn-sm d-block mx-auto text-center"><i
-                                class="fa-solid fa-qrcode" style="margin-right: 5px;"></i>Genarate BarCode</button>
+                                class="fa-solid fa-qrcode" style="margin-right: 5px;"></i>Update QRCode</button>
 
                     </div>
                 </form>
@@ -2539,19 +2519,12 @@ $start_print = 0;
                     </div>
 
                     <div class="modal-footer justify-content-between">
-                        <!-- <button type="button" class="btn bg-gradient-danger" data-dismiss="modal">Close</button> -->
-                        <a class="btn btn bg-gradient-navy"
-                            href="./new_update_mfg.php?mfg_id=<?php echo $mfg_id; ?>">Update</a>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <input class="btn btn-warning" type="button" onclick="printDiv('printableArea')"
-                            value="print a Barcode!" />
+                        <input class="btn btn-info" type="button" onclick="printDiv('printableArea')"
+                            value="Print QRCode!" />
                     </div>
             </form>
         </div>
-        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
 </div>
 
 <?php include_once('../includes/footer.php'); }else{
