@@ -2565,8 +2565,8 @@ $start_print = 0;
                             href="./new_update_mfg.php?mfg_id=<?php echo $mfg_id; ?>">Update</a>
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <input class="btn btn-warning" type="button" onclick="printDiv('printableArea')"
-                            value="print a Barcode!" />
+                        <input class="btn btn-info btn-sm" type="button" onclick="printDiv('printableArea')"
+                            value="Print QRCode!" />
                     </div>
             </form>
         </div>
