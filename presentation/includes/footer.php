@@ -28,7 +28,10 @@
        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
        <script src="../../static/dist/js/pages/dashboard2.js"></script>
        <!-- jQuery Mapael -->
-       <script src="../../plugins/jquery/jquery.min.js"></script>
+       <script src="../../static/plugins/jquery/jquery.min.js"></script>
+       <!-- Select2 -->
+       <script src="../../static/plugins/select2/js/select2.full.min.js"></script>
+
        <!-- DataTables  & Plugins -->
        <script src="../../static/plugins/datatables/jquery.dataTables.min.js"></script>
        <script src="../../static/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

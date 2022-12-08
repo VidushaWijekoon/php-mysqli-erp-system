@@ -41,6 +41,8 @@ if(isset($_POST['logged_out'])){
     <link rel="stylesheet" href="../../static/dist/css/style.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="../../static/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!--  -->
+    <link rel="stylesheet" href="../../static/plugins/select2/css/select2.min.css">
 
 
 </head>
