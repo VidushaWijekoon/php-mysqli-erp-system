@@ -231,7 +231,7 @@ $platform=$_GET['platform'];
                             </div>
                         </div>
                         <div class="row" id="ifYes" style="display: none;">
-                            <label class="col-sm-3 col-form-label">Action Type</label>
+                            <label class="col-sm-3 col-form-label">Switch Warehouse</label>
                             <div class="col-sm-8">
                                 <select name="switch_type" class="info_select" style="border-radius: 5px;"
                                     onchange="yesnoCheck(this);">
@@ -254,7 +254,6 @@ $platform=$_GET['platform'];
                                 </select>
                             </div>
                         </div>
-
                         <button type="submit" name="submit"
                             class="btn mb-2 mt-4 btn-primary btn-sm d-block mx-auto text-center">Save</button>
                     </fieldset>
@@ -332,7 +331,7 @@ if (isset($_POST['submit'])) {
 <script>
 function yesnoCheck(that) {
     if (that.value == "switch") {
-        document.getElementById("ifYes").style.display = "block";
+        document.getElementById("ifYes").style.display = "flex";
     } else {
         document.getElementById("ifYes").style.display = "none";
     }

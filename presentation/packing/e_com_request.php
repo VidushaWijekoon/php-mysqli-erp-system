@@ -9,6 +9,14 @@ include_once('../includes/header.php');
         $start_time= $_GET['start_time'];
         $end_time= $_GET['end_time'];
         $day= $_GET['day'];
+        $date_start = date('Y-m-d 00:00:00');
+                $date_end = date('Y-m-d 23:59:59');
+                $count_a=0;
+                $query = "SELECT COUNT(request_id) as request_count FROM e_com_packing_request  WHERE order_status='packing pending' AND created_time between '$date_start'AND '$date_end' ";
+                $query_run = mysqli_query($connection, $query);
+                foreach($query_run as $a){
+                    $count_a = $a['request_count'];
+                }
                 $date_1_start = date('Y-m-d 00:00:00',strtotime("-1 days"));
                 $date_1_end = date('Y-m-d 23:59:59',strtotime("-1 days"));
                 $count=0;
@@ -36,6 +44,24 @@ include_once('../includes/header.php');
 ?>
 
 <div class="row m-2">
+    <div class="col-12 col-sm-6 col-md-3 mt-3 ">
+        <a href="e_com_request.php?start_time='<?php echo $date_start ?>'&end_time='<?php echo $date_end ?>'&day=Today">
+            <div class="info-box " style="background-color:skyblue !important; ">
+                <span class="info-box-icon bg-info elevation-1"><i class="fa-solid fa-warehouse"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Today E-Commerce Order Request</span>
+                    <span class="info-box-number">
+                        <?php 
+                echo $count_a;
+
+                ?> </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </a>
+    </div>
     <?php if($count != 0){ ?>
     <div class="col-12 col-sm-6 col-md-3 mt-3 ">
         <a

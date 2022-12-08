@@ -132,34 +132,16 @@ $dateTime = $currentDateTime->format('j-m-Y H:i:s');
                             <legend>Create Warehouse Information Sheet</legend>
 
                             <div class="row">
-                                <label class="col-sm-3 col-form-label">Device</label>
-                                <div class="col-sm-8">
-                                    <select name="device" class="info_select" style="border-radius: 5px;" required>
-                                        <?php
-                                            $query = "SELECT * FROM device ORDER BY device ASC";
-                                            $all_devices = mysqli_query($connection, $query);
-
-                                            while ($devices = mysqli_fetch_array($all_devices, MYSQLI_ASSOC)) :;
-                                        ?>
-                                        <option value="<?php echo $devices["device"]; ?>">
-                                            <?php echo strtoupper($devices["device"]); ?>
-                                        </option>
-                                        <?php endwhile; ?>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="row">
                                 <label class="col-sm-3 col-form-label">Brand</label>
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <?php $query ="SELECT * FROM `brand`"; 
-                                            $query_run = mysqli_query($connection, $query);
-                                            $brand="" ;
-                                            foreach($query_run as $data){
-                                                $brand .= "<option value=\"{$data['brand']}\">{$data['brand']}</option>";
-                                            }
-                                        ?>
+                                $query_run = mysqli_query($connection, $query);
+                                $brand="" ;
+                                foreach($query_run as $data){
+                                    $brand .= "<option value=\"{$data['brand']}\">{$data['brand']}</option>";
+                                }
+                                    ?>
                                         <select name="brand" id="brand" class="info_select" style="border-radius: 5px;">
                                             <option selected>--Select brand--</option>
                                             <?php echo $brand ?>
@@ -202,7 +184,7 @@ $dateTime = $currentDateTime->format('j-m-Y H:i:s');
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <!-- <div class="row">
                                 <label class="col-sm-3 col-form-label">Core</label>
                                 <div class="col-sm-8">
                                     <select id="core" name="core" class="info_select" style="border-radius: 5px;">
@@ -217,15 +199,49 @@ $dateTime = $currentDateTime->format('j-m-Y H:i:s');
                                         style="border-radius: 5px;">
                                     </select>
                                 </div>
+                            </div> -->
+                            <div class="row">
+                                <label class="col-sm-3 col-form-label">Core</label>
+                                <div class="col-sm-8">
+                                    <select name="core" class="info_select" style="border-radius: 5px;" required>
+                                        <option selected value="i6">i5</option>
+                                        <?php
+                                            $query = "SELECT * FROM core ORDER BY core";
+                                            $all_devices = mysqli_query($connection, $query);
+
+                                            while ($types = mysqli_fetch_array($all_devices, MYSQLI_ASSOC)) :;
+                                            ?>
+                                        <option value="<?php echo $types["core"]; ?>">
+                                            <?php echo strtoupper($types["core"]); ?>
+                                        </option>
+                                        <?php
+                                            endwhile;
+                                            ?>
+                                    </select>
+                                </div>
                             </div>
 
-
-                            <!-- <div class="row">
-                                <label class="col-sm-3 col-form-label">Model</label>
+                            <div class="row">
+                                <label class="col-sm-3 col-form-label">Generation</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" placeholder="Model" name="model">
+                                    <select name="generation" class="info_select" style="border-radius: 5px;" required>
+                                        <option selected value="5">6</option>
+                                        <?php
+                                            $query = "SELECT * FROM generation ORDER BY generation_id";
+                                            $all_devices = mysqli_query($connection, $query);
+
+                                            while ($generations = mysqli_fetch_array($all_devices, MYSQLI_ASSOC)) :;
+                                            ?>
+                                        <option value="<?php echo $generations["generation"]; ?>">
+                                            <?php echo strtoupper($generations["generation"]); ?>
+                                        </option>
+                                        <?php
+                                            endwhile;
+                                            ?>
+                                    </select>
                                 </div>
-                            </div> -->
+                            </div>
+
 
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Quantity</label>
