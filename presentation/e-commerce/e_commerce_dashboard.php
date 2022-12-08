@@ -17,8 +17,9 @@ if (!isset($_SESSION['user_id'])) {
     </div>
 
 </div>
+<!-- Info boxes -->
 <div class="row m-2">
-    <div class="col-12 col-sm-6 col-md-3">
+    <div class="col-12 col-sm-6 col-md-3 mt-3">
         <a href="e_com_daily_work_sheet.php">
             <div class="info-box">
                 <span class="info-box-icon bg-primary elevation-1"><i class="fa-solid fa-plane"></i></span>
@@ -31,9 +32,8 @@ if (!isset($_SESSION['user_id'])) {
         </a>
         <!-- /.info-box -->
     </div>
-</div>
-<div class="row m-2">
-    <div class="col-12 col-sm-6 col-md-3">
+    <!-- /.col -->
+    <div class="col-12 col-sm-6 col-md-3 mt-3">
         <a href="e_com_stock.php">
             <div class="info-box">
                 <span class="info-box-icon bg-primary elevation-1"><i class="fa-solid fa-plane"></i></span>
@@ -46,9 +46,12 @@ if (!isset($_SESSION['user_id'])) {
         </a>
         <!-- /.info-box -->
     </div>
-</div>
-<div class="row m-2">
-    <div class="col-12 col-sm-6 col-md-3">
+    <!-- /.col -->
+
+    <!-- fix for small devices only -->
+    <div class="clearfix hidden-md-up"></div>
+
+    <div class="col-12 col-sm-6 col-md-3 mt-3">
         <a href="packing_request.php">
             <div class="info-box">
                 <span class="info-box-icon bg-primary elevation-1"><i class="fa-solid fa-plane"></i></span>
@@ -61,20 +64,20 @@ if (!isset($_SESSION['user_id'])) {
         </a>
         <!-- /.info-box -->
     </div>
-</div>
-<div class="col-12 col-sm-6 col-md-3 mt-3">
-    <?php 
+    <!-- /.col -->
+    <div class="col-12 col-sm-6 col-md-3 mt-3">
+        <?php 
         $date = date('Y-m-d 00:00:00');
         $date2 = date('Y-m-d 23:59:59');
         $start_time = $date;
         $end_time =$date2; ?>
-    <a href="view_pending.php?start_time='<?php echo $start_time ?>'&end_time='<?php echo $end_time ?>'&day=Today">
-        <div class="info-box">
-            <span class="info-box-icon bg-info elevation-1"><i class="fa-solid fa-warehouse"></i></span>
+        <a href="view_pending.php?start_time='<?php echo $start_time ?>'&end_time='<?php echo $end_time ?>'&day=Today">
+            <div class="info-box">
+                <span class="info-box-icon bg-info elevation-1"><i class="fa-solid fa-warehouse"></i></span>
 
-            <div class="info-box-content">
-                <span class="info-box-text">Packing Pending</span>
-                <span class="info-box-number"><?php 
+                <div class="info-box-content">
+                    <span class="info-box-text">Packing Pending</span>
+                    <span class="info-box-number"><?php 
                 
                 $count=0;
                 $query = "SELECT COUNT(request_id) as request_count FROM e_com_packing_request  WHERE order_status='packing pending'";
@@ -85,15 +88,20 @@ if (!isset($_SESSION['user_id'])) {
                 echo $count;
 
                 ?> </span>
+                </div>
+                <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box-content -->
-        </div>
+            <!-- /.info-box -->
+        </a>
         <!-- /.info-box -->
-    </a>
+    </div>
+    <!-- /.col -->
 </div>
+<!-- /.row -->
+
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-2">
+        <div class="col-lg-12 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card mt-3">
                 <div class="card-header bg-secondary">
                     <p class="text-uppercase m-0 p-0">Manage Platform</p>

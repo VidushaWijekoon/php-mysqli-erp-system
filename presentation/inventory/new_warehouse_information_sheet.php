@@ -132,52 +132,42 @@ $dateTime = $currentDateTime->format('j-m-Y H:i:s');
                             <legend>Create Warehouse Information Sheet</legend>
 
                             <div class="row">
-                                <label class="col-sm-3 col-form-label">Device</label>
+                                <label class="col-sm-3 col-form-label">Brand</label>
                                 <div class="col-sm-8">
-                                    <select name="device" class="info_select" style="border-radius: 5px;" required>
-                                        <!-- <option selected>--Select Device Type--</option> -->
-                                        <?php
-                                            $query = "SELECT * FROM device ORDER BY device ASC";
-                                            $all_devices = mysqli_query($connection, $query);
-
-                                            while ($devices = mysqli_fetch_array($all_devices, MYSQLI_ASSOC)) :;
-                                            ?>
-                                        <option value="<?php echo $devices["device"]; ?>">
-                                            <?php echo strtoupper($devices["device"]); ?>
-                                        </option>
-                                        <?php
-                                            endwhile;
-                                            ?>
-                                    </select>
+                                    <div class="form-group">
+                                        <?php $query ="SELECT * FROM `brand`"; 
+                                $query_run = mysqli_query($connection, $query);
+                                $brand="" ;
+                                foreach($query_run as $data){
+                                    $brand .= "<option value=\"{$data['brand']}\">{$data['brand']}</option>";
+                                }
+                                    ?>
+                                        <select name="brand" id="brand" class="info_select" style="border-radius: 5px;">
+                                            <option selected>--Select brand--</option>
+                                            <?php echo $brand ?>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <label class="col-sm-3 col-form-label">Brand</label>
+                                <label class="col-sm-3 col-form-label">Model</label>
                                 <div class="col-sm-8">
-                                    <select name="brand" class="info_select" style="border-radius: 5px;" required>
-                                        <option selected value="hp">HP</option>
-                                        <?php
-                                            $query = "SELECT * FROM brand ORDER BY brand ASC";
-                                            $all_devices = mysqli_query($connection, $query);
+                                    <div class="form-group">
+                                        <select name="model" id="model" class="form-control select2"
+                                            style="border-radius: 5px;">
+                                        </select>
 
-                                            while ($brands = mysqli_fetch_array($all_devices, MYSQLI_ASSOC)) :;
-                                            ?>
-                                        <option value="<?php echo $brands["brand"]; ?>">
-                                            <?php echo strtoupper($brands["brand"]); ?>
-                                        </option>
-                                        <?php
-                                            endwhile;
-                                            ?>
-                                    </select>
+                                    </div>
                                 </div>
                             </div>
+
 
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Processor</label>
                                 <div class="col-sm-8">
                                     <select name="processor" class="info_select" style="border-radius: 5px;" required>
-                                        <option selected value="intel">INTEL</option>
+
                                         <?php
                                             $query = "SELECT * FROM processor ";
                                             $result = mysqli_query($connection, $query);
@@ -194,6 +184,22 @@ $dateTime = $currentDateTime->format('j-m-Y H:i:s');
                                 </div>
                             </div>
 
+                            <!-- <div class="row">
+                                <label class="col-sm-3 col-form-label">Core</label>
+                                <div class="col-sm-8">
+                                    <select id="core" name="core" class="info_select" style="border-radius: 5px;">
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-sm-3 col-form-label">Generation</label>
+                                <div class="col-sm-8">
+                                    <select id="generation" name="generation" class="info_select"
+                                        style="border-radius: 5px;">
+                                    </select>
+                                </div>
+                            </div> -->
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Core</label>
                                 <div class="col-sm-8">
@@ -236,13 +242,6 @@ $dateTime = $currentDateTime->format('j-m-Y H:i:s');
                                 </div>
                             </div>
 
-
-                            <div class="row">
-                                <label class="col-sm-3 col-form-label">Model</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" placeholder="Model" name="model">
-                                </div>
-                            </div>
 
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Quantity</label>
@@ -407,7 +406,7 @@ $dateTime = $currentDateTime->format('j-m-Y H:i:s');
 </div>
 
 <script>
-function printDiv(divName) {
+const printDiv = (divName) => {
     var printContents = document.getElementById(divName).innerHTML;
     var originalContents = document.body.innerHTML;
 
@@ -417,7 +416,77 @@ function printDiv(divName) {
 
     document.body.innerHTML = originalContents;
 }
+
+$(function() {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+})
 </script>
+
+<script>
+var sum = 0;
+var cost = 0;
+var model;
+var brand;
+var core;
+var windows_with_ac = 120;
+
+$(document).ready(function() {
+    $("#brand").on("change", function() {
+        brand = $("#brand").val();
+        var getURL = "get-model.php?brand=" + brand;
+        $.get(getURL, function(data, status) {
+            $("#model").html(data);
+        });
+    });
+});
+
+$(document).ready(function() {
+    $("#model").on("change", function() {
+        var model = $("#model").val();
+        var getURL = "get-cpu.php?model=" + model + "&brand=" + brand;
+        $.get(getURL, function(data, status) {
+            $("#core").html(data);
+        });
+    });
+});
+$(document).ready(function() {
+    $("#model").on("change", function() {
+        var model = $("#model").val();
+        var getURL = "get-generation.php?model=" + model + "&brand=" + brand;
+        $.get(getURL, function(data, status) {
+            $("#generation").html(data);
+        });
+    });
+});
+// $(document).ready(function() {
+//     $("#core").on("change", function() {
+//         model = $("#model").val();
+//         core = $("#core").val();
+//         var getURL = "get-generation.php?model=" + model + "&core=" + core + "&brand=" + brand;
+//         $.get(getURL, function(data, status) {
+//             $("#generation").html(data);
+//         });
+//     });
+// });
+// model = $("#model").val();
+// core = $("#core").val();
+// brand = $("#brand").val();
+// $(document).ready(function() {
+//     $("#generation").on("change", function() {
+
+//         var generation = $("#generation").val();
+//         var getURL = "get-qty.php?model=" + model + "&core=" + core + "&generation=" +
+//             generation + "&brand=" +
+//             brand;
+//         $.get(getURL, function(data, status) {
+//             $("#qty").html(data);
+//         });
+//     });
+// });
+</script>
+
 <?php include_once('../includes/footer.php'); }else{
         die(access_denied());
 } ?>
