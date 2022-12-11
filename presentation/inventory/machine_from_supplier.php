@@ -39,23 +39,21 @@ $user_id = $_SESSION['username'];
     $se_id =0;
     $add_to_wis = 0;
     $start_print=0;
+    $lcd_size='';
    
 
 if (isset($_POST['search'])) {
     $search_number=null;
     $search_number = $_POST['search'];
     $machine_id=0;
-    echo $search_number;
+    $optical ='';
     $query = "SELECT * FROM `machine_from_supplier`  WHERE serial_no = '$search_number' OR mfg ='$search_number'";
-    echo $query;
     $query1 = mysqli_query($connection, $query);
     $start_print=0;
     foreach ($query1 as $data) {
         $machine_id = $data['machine_id'];
     }
-    echo $machine_id;
    if($machine_id == 0){
-    echo "im here";
     header("location: ./new_machine_from_supplier.php?scan_id=$search_number");  
    }else{
     echo "im not empty";
@@ -74,6 +72,7 @@ if (isset($_POST['search'])) {
         $mfg = $data['mfg'];
         $supplier = $data['machine_id'];
         $add_to_wis = $data['add_to_wis'];
+        $optical = $data['dvd'];
 
     }
     $query = "INSERT INTO `warehouse_information_sheet`(
@@ -91,7 +90,8 @@ if (isset($_POST['search'])) {
         `battery`,
         `lcd_size`,
         `touch_or_non_touch`,
-        `bios_lock`
+        `bios_lock`,
+        dvd
     )
     VALUES(
         '$device',
@@ -108,39 +108,14 @@ if (isset($_POST['search'])) {
         '$battery',
         '$lcd_size',
         '$touch_or_non_touch',
-        '$bios_lock'
+        '$bios_lock',
+        '$optical'
     )";
         $query1 = mysqli_query($connection, $query);
 
         $query_update = "UPDATE `machine_from_supplier` SET add_to_wis = '1' WHERE machine_id='$supplier'";
         $query1 = mysqli_query($connection, $query_update);
-
-    //     $query = "SELECT inventory_id FROM warehouse_information_sheet WHERE create_by_inventory_id = '$user_id'  ORDER BY `inventory_id` DESC LIMIT 1"; 
-    // $query1 = mysqli_query($connection, $query);
-    // $img_id=0;
-    // foreach($query1 as $a ){
-    //     $img_id = $a['inventory_id'];
-    // }
-    //     $tempDir = 'temp/';
-    //     $filename = $img_id;
-    //     $codeContents = $img_id;
-    //     QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5,1);
-    //     $start_print=1;
       
-  
-
-//         if($battery == 'no mention' || $touch_or_non_touch == 'no mention'){
-//         echo "<script>
-//         var newHTML = document.createElement ('div');
-//         newHTML.innerHTML =
-//         newHTML = document.createElement ('div');
-//         newHTML.innerHTML = ' <div id=\"myModal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
-//         document.body.appendChild (newHTML);
-//         $(window).load(function(){
-//              $('#modal').modal('show');
-//         });
-//     </script>";
-// }
 }
     } 
 
@@ -156,20 +131,10 @@ if (isset($_POST['search'])) {
     
         $battery = $_POST['battery'];
         $touch = $_POST['touch'];
-        $location = $_POST['location'];
+        $location = $_POST['location'];;
         $query = "UPDATE warehouse_information_sheet SET location ='$location', battery='$battery',touch_or_non_touch='$touch' WHERE inventory_id = '$last_inventory_id' ";
         $query1 = mysqli_query($connection, $query);
-        // if($battery =='yes' && $touch =='yes'){
-        // $query = "UPDATE warehouse_information_sheet SET location ='$location', battery='$battery',touch_or_non_touch='$touch' WHERE inventory_id = '$last_inventory_id' ";
-        // echo $query;
-        // $query1 = mysqli_query($connection, $query);
-        // }elseif($battery =='yes' ){
-        //     $query = "UPDATE warehouse_information_sheet SET location ='$location',battery='$battery' WHERE inventory_id = '$last_inventory_id' ";
-        //     $query1 = mysqli_query($connection, $query);
-        // }elseif($touch =='yes'){
-        //     $query = "UPDATE warehouse_information_sheet SET location ='$location',touch_or_non_touch='$touch' WHERE inventory_id = '$last_inventory_id' ";
-        //     $query1 = mysqli_query($connection, $query);
-        // }
+        
             $tempDir = 'temp/';
             $filename = $last_inventory_id;
             $codeContents = $last_inventory_id;
@@ -183,7 +148,7 @@ if (isset($_POST['search'])) {
         <a href="./warehouse_dashboard.php">
             <i class="fa-solid fa-home fa-2x m-2" style="color: #ced4da;"></i>
         </a>
-        <h3 class="mt-2">Update QR Codes</h3>
+        <h3 class="mt-2">Add Item For Inventeroy</h3>
     </div>
 </div>
 
@@ -201,15 +166,17 @@ if (isset($_POST['search'])) {
                         <legend>Scan QR</legend>
 
                         <form action="#" method="POST">
-                            <?php  $query = "SELECT  inventory_id,location FROM warehouse_information_sheet WHERE create_by_inventory_id = '$user_id'  ORDER BY `inventory_id` DESC LIMIT 1"; 
+                            <?php  $query = "SELECT  dvd,inventory_id,location FROM warehouse_information_sheet WHERE create_by_inventory_id = '$user_id'  ORDER BY `inventory_id` DESC LIMIT 1"; 
                      
                                 $query1 = mysqli_query($connection, $query);
                                 $last_location = "";
                                 $last_id = "";
+                                $optical = "";
                                 if(!empty($query1)){
                                 foreach($query1 as $data){
                                     $last_location=$data['location'];
                                     $last_id=$data['inventory_id'];
+                                    $optical=$data['dvd'];
                                     }
                                 } ?>
                             <div class="row">
@@ -220,18 +187,14 @@ if (isset($_POST['search'])) {
 
                                 </div>
                             </div>
-
-                            <?php 
-                                echo $message;
-                            ?>
                             <button type="submit" name="insert" id="submit"
                                 class="btn mb-2 mt-4 btn-primary btn-sm  mx-auto text-center d-none"><i
                                     class="fa-solid fa-qrcode" style="margin-right: 5px;"></i>Genarate QR</button>
 
                         </form>
                         <form action="#" method="POST">
-                            <div class="row">
-                                <?php 
+
+                            <?php 
                             $query = "SELECT *  FROM warehouse_information_sheet WHERE create_by_inventory_id = '$user_id'  ORDER BY `inventory_id` DESC LIMIT 1"; 
                             $query1 = mysqli_query($connection, $query);
                             foreach ($query1 as $data) {
@@ -249,7 +212,20 @@ if (isset($_POST['search'])) {
                                 $mfg = $data['mfg'];
                         
                             }
-                            ?>
+                            $table_name = $brand."_model";
+                            $query_update = "SELECT `lcd_size` FROM $table_name WHERE brand = '$brand' AND model='$model'";
+                               $query_run = mysqli_query($connection, $query_update);
+                               $lcd_size="" ;
+                               foreach($query_run as $data){
+                                   $lcd_size=$data['lcd_size'];
+                               }
+                            ?><div class="row">
+                                <label class="col-sm-3 col-form-label">MFG</label>
+                                <div class="col-sm-8 w-100">
+                                    <input type="text" class="form-control" value="<?php echo $mfg; ?>" readonly>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <label class="col-sm-3 col-form-label">Device</label>
                                 <div class="col-sm-8 w-100">
                                     <input type="text" class="form-control" value="<?php echo $device; ?>" readonly>
@@ -297,12 +273,13 @@ if (isset($_POST['search'])) {
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">LCD Size</label>
                                 <div class="col-sm-8 w-100">
-                                    <input type="text" class="form-control" value="<?php echo $lcd_size; ?>" readonly>
 
+                                    <input type="number" class="form-control" name="lcd_size"
+                                        value="<?php echo $lcd_size; ?>" readonly>
                                 </div>
                             </div>
                             <div class="row">
-                                <label class="col-sm-3 col-form-label">Battery</label>
+                                <label class="col-sm-3 col-form-label">Battery </label>
                                 <div class="col-sm-8 w-100">
                                     <select name="battery" id="battery" class="info_select" style="border-radius: 5px;">
                                         <option selected value='<?php echo $battery ?>'>
@@ -329,8 +306,8 @@ if (isset($_POST['search'])) {
                                 <label class="col-sm-3 col-form-label">Optical</label>
                                 <div class="col-sm-8 w-100">
                                     <select name="touch" id="touch" class="info_select" style="border-radius: 5px;">
-                                        <option selected value='dvd'>
-                                            DVD need retrive
+                                        <option selected value='<?php $optical ?>'>
+                                            <?php echo $optical ?>
                                         </option>
                                         <option value='yes'>Yes</option>
                                         <option value='no'>No</option>
@@ -338,10 +315,23 @@ if (isset($_POST['search'])) {
                                 </div>
                             </div>
                             <div class="row">
+                                <label class="col-sm-3 col-form-label">Bios Check</label>
+                                <div class="col-sm-8 w-100">
+                                    <input type="text" class="form-control" value="<?php echo $bios_lock; ?>" readonly>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <label class="col-sm-3 col-form-label">Location</label>
                                 <div class="col-sm-8 w-100">
                                     <select name="location" id="location" class="info_select"
                                         style="border-radius: 5px;">
+                                        <?php  
+                                        $query = "SELECT location FROM warehouse_information_sheet WHERE create_by_inventory_id = '$user_id'  ORDER BY `inventory_id` DESC LIMIT 1"; 
+                                        $query1 = mysqli_query($connection, $query); 
+                                        foreach($query1 as $a){
+                                            $last_location = $a['location'];
+                                        }
+                                        ?>
                                         <option selected value='<?php $last_location ?>'><?php echo $last_location ?>
                                         </option>
                                         <option value='wh1'>WH1</option>

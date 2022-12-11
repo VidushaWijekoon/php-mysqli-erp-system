@@ -260,9 +260,9 @@ if (isset($_POST['insert'])) {
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">LCD Size</label>
                                 <div class="col-sm-8 w-100">
-                                    <!-- <input type="text" class="form-control" value="<?php echo $lcd_size; ?>" readonly> -->
-                                    <input type="text" min="1" class="form-control" placeholder="LCD Size"
-                                        name="lcd_size" required>
+                                    <select name="lcd_size" id="lcd_size" class="form-control select2"
+                                        style="border-radius: 5px;">
+                                    </select>
                                 </div>
                             </div>
                             <div class="row">
@@ -486,6 +486,16 @@ $(document).ready(function() {
         var getURL = "get-generation.php?model=" + model + "&brand=" + brand;
         $.get(getURL, function(data, status) {
             $("#generation").html(data);
+        });
+    });
+});
+
+$(document).ready(function() {
+    $("#model").on("change", function() {
+        var model = $("#model").val();
+        var getURL = "get_lcd.php?model=" + model + "&brand=" + brand;
+        $.get(getURL, function(data, status) {
+            $("#lcd_size").html(data);
         });
     });
 });
