@@ -460,31 +460,6 @@ $(document).ready(function() {
         });
     });
 });
-// $(document).ready(function() {
-//     $("#core").on("change", function() {
-//         model = $("#model").val();
-//         core = $("#core").val();
-//         var getURL = "get-generation.php?model=" + model + "&core=" + core + "&brand=" + brand;
-//         $.get(getURL, function(data, status) {
-//             $("#generation").html(data);
-//         });
-//     });
-// });
-// model = $("#model").val();
-// core = $("#core").val();
-// brand = $("#brand").val();
-// $(document).ready(function() {
-//     $("#generation").on("change", function() {
-
-//         var generation = $("#generation").val();
-//         var getURL = "get-qty.php?model=" + model + "&core=" + core + "&generation=" +
-//             generation + "&brand=" +
-//             brand;
-//         $.get(getURL, function(data, status) {
-//             $("#qty").html(data);
-//         });
-//     });
-// });
 </script>
 
 <?php include_once('../includes/footer.php'); }else{

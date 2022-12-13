@@ -25,7 +25,7 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
 
 <div class="row m-2">
     <div class="col-12 mt-3">
-        <a class="btn bg-gradient-info mx-2 text-white" type="button" href="warehouse_information_sheet.php"><i
+        <a class="btn bg-gradient-info mx-2 text-white" type="button" href="machine_from_supplier.php"><i
                 class="fa fa-plus"></i><span class="mx-1">Add Items</span></a>
         <a class="btn bg-gradient-warning mx-2 text-white" type="button" href="./warehouse_qr_report.php"><i
                 class="fa-solid fa-qrcode"></i><span class="mx-1">Update Item</span></a>
