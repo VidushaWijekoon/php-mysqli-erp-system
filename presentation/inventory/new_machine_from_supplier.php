@@ -58,7 +58,6 @@ if (isset($_POST['insert'])) {
     $lcd_size =$_POST['lcd_size'];
     $touch_or_non_touch =$_POST['touch'];
     $bios_lock =$_POST['bios'];
-    $supplier_name =$_POST['supplier_name'];
     $sql ="INSERT INTO `warehouse_information_sheet`(
         `device`,
         `processor`,
@@ -74,8 +73,7 @@ if (isset($_POST['insert'])) {
         `battery`,
         `lcd_size`,
         `touch_or_non_touch`,
-        `bios_lock`,
-        machine_from_supplier_id
+        `bios_lock`
     )
     VALUES(
         '$device',
@@ -92,8 +90,7 @@ if (isset($_POST['insert'])) {
         '$battery',
         '$lcd_size',
         '$touch_or_non_touch',
-        '$bios_lock',
-        '$supplier_name'
+        '$bios_lock'
     )";
     $result = mysqli_query($connection, $sql);
 
@@ -156,14 +153,15 @@ if (isset($_POST['insert'])) {
                                 <label class="col-sm-3 col-form-label">Brand</label>
                                 <div class="col-sm-8">
                                     <div class="form-group">
-                                        <?php $query ="SELECT * FROM `brand`"; 
+                                        <?php $query ="SELECT DISTINCT brand FROM `machine_from_supplier`"; 
                                 $query_run = mysqli_query($connection, $query);
                                 $brand="" ;
                                 foreach($query_run as $data){
                                     $brand .= "<option value=\"{$data['brand']}\">{$data['brand']}</option>";
                                 }
                                     ?>
-                                        <select name="brand" id="brand" class="info_select" style="border-radius: 5px;">
+                                        <select name="brand" id="brand" class="form-control select2"
+                                            style="border-radius: 5px;">
                                             <option selected>--Select brand--</option>
                                             <?php echo $brand ?>
                                         </select>
@@ -172,10 +170,12 @@ if (isset($_POST['insert'])) {
                             </div>
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Series</label>
-                                <div class="col-sm-8 w-100">
-                                    <input type="text" min="1" class="form-control" placeholder="Series" name="series"
-                                        required>
-
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                        <select name="series" id="series" class="form-control select2"
+                                            style="border-radius: 5px;">
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -213,48 +213,30 @@ if (isset($_POST['insert'])) {
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Core</label>
                                 <div class="col-sm-8">
-                                    <select name="core" class="info_select" style="border-radius: 5px;" required>
-                                        <option selected value="i5">i5</option>
-                                        <?php
-                                            $query = "SELECT * FROM core ORDER BY core";
-                                            $all_devices = mysqli_query($connection, $query);
-
-                                            while ($types = mysqli_fetch_array($all_devices, MYSQLI_ASSOC)) :;
-                                            ?>
-                                        <option value="<?php echo $types["core"]; ?>">
-                                            <?php echo strtoupper($types["core"]); ?>
-                                        </option>
-                                        <?php
-                                            endwhile;
-                                            ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label class="col-sm-3 col-form-label">Speed</label>
-                                <div class="col-sm-8 w-100">
-                                    <input type="text" min="1" class="form-control" placeholder="Speed" name="speed"
-                                        required>
+                                    <div class="form-group">
+                                        <select name="core" id="core" class="form-control select2"
+                                            style="border-radius: 5px;">
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Generation</label>
                                 <div class="col-sm-8">
-                                    <select name="generation" class="info_select" style="border-radius: 5px;" required>
-                                        <option selected value="6">6</option>
-                                        <?php
-                                            $query = "SELECT * FROM generation ORDER BY generation_id";
-                                            $all_devices = mysqli_query($connection, $query);
-
-                                            while ($generations = mysqli_fetch_array($all_devices, MYSQLI_ASSOC)) :;
-                                            ?>
-                                        <option value="<?php echo $generations["generation"]; ?>">
-                                            <?php echo strtoupper($generations["generation"]); ?>
-                                        </option>
-                                        <?php
-                                            endwhile;
-                                            ?>
+                                    <select name="generation" id="generation" class="form-control select2"
+                                        style="border-radius: 5px;">
                                     </select>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-3 col-form-label">Speed</label>
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                        <select name="speed" id="speed" class="form-control select2"
+                                            style="border-radius: 5px;">
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -325,14 +307,7 @@ if (isset($_POST['insert'])) {
                                     </select>
                                 </div>
                             </div>
-                            <div class="row">
-                                <label class="col-sm-3 col-form-label"> Supplier Name </label>
-                                <div class="col-sm-8 w-100">
-                                    <input type="text" min="1" class="form-control" placeholder="supplier_name"
-                                        name="supplier_name" required>
 
-                                </div>
-                            </div>
                             <button type="submit" name="insert" id="submit"
                                 class="btn mb-2 mt-4 btn-primary btn-sm  mx-auto text-center d-blok"><i
                                     class="fa-solid fa-qrcode" style="margin-right: 5px;"></i>Save</button>
@@ -457,6 +432,7 @@ var cost = 0;
 var model;
 var brand;
 var core;
+var generation;
 var windows_with_ac = 120;
 
 $(document).ready(function() {
@@ -489,13 +465,31 @@ $(document).ready(function() {
         });
     });
 });
+$(document).ready(function() {
+    $("#model").on("change", function() {
+        var model = $("#model").val();
+        var getURL = "get_speed.php?model=" + model;
+        $.get(getURL, function(data, status) {
+            $("#speed").html(data);
+        });
+    });
+});
 
 $(document).ready(function() {
     $("#model").on("change", function() {
         var model = $("#model").val();
-        var getURL = "get_lcd.php?model=" + model + "&brand=" + brand;
+        var getURL = "get_lcd.php?model=" + model;
         $.get(getURL, function(data, status) {
             $("#lcd_size").html(data);
+        });
+    });
+});
+$(document).ready(function() {
+    $("#brand").on("change", function() {
+        var model = $("#model").val();
+        var getURL = "get_series.php?brand=" + brand;
+        $.get(getURL, function(data, status) {
+            $("#series").html(data);
         });
     });
 });

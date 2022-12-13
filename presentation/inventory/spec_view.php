@@ -88,8 +88,8 @@ $brand = $_GET['brand'];
                                     <td><?php echo$screen_size ?></td>
                                     <td><?php echo$screen_type ?></td>
                                     <td><?php echo$optical ?></td>
-                                    <td>Can be upgrade</td>
-                                    <td>Can be upgrade</td>
+                                    <td>8GB</td>
+                                    <td>256GB</td>
                                     <td><?php echo$location ?></td>
                                 </tr>
                                 <?php } ?>

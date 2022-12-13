@@ -5,7 +5,7 @@
 		$brand = mysqli_real_escape_string($connection, $_GET['brand']);
 		$name = $brand."_model";
 		$i =0;
-		$query 	= "SELECT model FROM $name ";
+		$query 	= "SELECT DISTINCT model FROM `machine_from_supplier` WHERE brand='$brand' ";
 		$result_set = mysqli_query($connection, $query);
 
 		$model_list = "<option selected>--Select model--</option>";

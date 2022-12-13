@@ -8,14 +8,14 @@
 		$name = null;
 		// $name = $brand."_model";
 	
-		$query 	= "SELECT DISTINCT display_size AS lcd_size FROM `screen_resolution` LEFT JOIN machine_from_supplier ON machine_from_supplier.model = screen_resolution.model WHERE screen_resolution.model='$model' ";
+		$query 	= "SELECT DISTINCT speed FROM `machine_from_supplier` WHERE  model='$model' ";
 		$result_set = mysqli_query($connection, $query);
 
-		$lcd_list = " ";
+		$speed_list = " ";
 		while ( $result = mysqli_fetch_assoc($result_set) ) {
-			$lcd_list .= "<option value=\"{$result['lcd_size']}\" class='info_select'>{$result['lcd_size']}</option>";
+			$speed_list .= "<option value=\"{$result['speed']}\" class='info_select'>{$result['speed']}</option>";
 		}
-		echo $lcd_list;
+		echo $speed_list;
 	} else {
 		echo "<option>Error</option>";
 	}
