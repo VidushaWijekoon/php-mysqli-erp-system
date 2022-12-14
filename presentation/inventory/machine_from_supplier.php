@@ -21,6 +21,11 @@ $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 $user_id = $_SESSION['username'];
 $id=0;
+$second='0';
+if(!empty($_GET['second'])){
+$second=$_GET['second'];
+echo $second;
+}
 if(!empty($_GET['id'])){
 $id=$_GET['id'];
 }
@@ -67,9 +72,9 @@ if (isset($_POST['search'])) {
         $machine_id = $data['machine_id'];
     }
    if($machine_id == 0){
-    $exist = 'no';
-    $scan_id =$search_number;
-    // header("location: ./new_machine_from_supplier.php?scan_id=$search_number");  
+    // $exist = 'no';
+    // $scan_id =$search_number;
+    header("location: ./machine_from_supplier.php?second=second");  
    }else{
     
     foreach ($query1 as $data) {
@@ -140,7 +145,7 @@ if (isset($_POST['search'])) {
         $search_number = $_POST['search1'];
         $machine_id=0;
         $optical ='';
-        $query = "SELECT * FROM `machine_from_supplier`  WHERE  mfg ='$search_number'";
+        $query = "SELECT * FROM `machine_from_supplier`  WHERE  mfg ='$search_number' OR serial_no = '$search_number'";
         $query1 = mysqli_query($connection, $query);
         $start_print=0;
         foreach ($query1 as $data) {
@@ -234,6 +239,7 @@ if (isset($_POST['search'])) {
         $touch_or_non_touch=null;
         $bios_lock=null;
         $optical=null;
+        $screen_resolution=null;
         $query = "SELECT *  FROM warehouse_information_sheet WHERE create_by_inventory_id = '$user_id'  ORDER BY `inventory_id` DESC LIMIT 1"; 
                                 $query1 = mysqli_query($connection, $query);
                                 foreach ($query1 as $data) {
@@ -254,7 +260,8 @@ if (isset($_POST['search'])) {
         $lcd_size=$_POST['lcd_size'];
         $touch_or_non_touch=$_POST['touch'];
         $optical=$_POST['optical'];
-        $query = "UPDATE warehouse_information_sheet SET location ='$location', battery='$battery',touch_or_non_touch='$touch' WHERE inventory_id = '$last_inventory_id' ";
+        $screen_resolution=$_POST['screen_resolution'];
+        $query = "UPDATE warehouse_information_sheet SET location ='$location',lcd_size='$lcd_size',screen_resolution='$screen_resolution', battery='$battery',touch_or_non_touch='$touch' WHERE inventory_id = '$last_inventory_id' ";
         $query1 = mysqli_query($connection, $query);
         
             $tempDir = 'temp/';
@@ -316,6 +323,7 @@ if (isset($_POST['search'])) {
             '$bios_lock',
             '$optical'
         )";
+        echo $query;
             $query1 = mysqli_query($connection, $query);
             $query = "SELECT *  FROM warehouse_information_sheet WHERE create_by_inventory_id = '$user_id'  ORDER BY `inventory_id` DESC LIMIT 1"; 
                                 $query1 = mysqli_query($connection, $query);
@@ -380,7 +388,10 @@ if (isset($_POST['search'])) {
                                 </form>
                             </div>
                         </div>
-                        <p style="text:center "> OR</p>
+                        <p class="w-75" style="text-align:center"> OR</p>
+                        <?php if($second == 'second'){
+                                    echo "<div><p style='color:red !important;font-size:16px; text-align:center'> supplier barcode not in exist please scan or enter MFG code</p></div>";
+                                } ?>
                         <div class="row">
                             <label class="col-sm-3 col-form-label">MFG number </label>
                             <div class="col-sm-8 w-75">
@@ -396,8 +407,8 @@ if (isset($_POST['search'])) {
                                         class="btn mb-2 mt-4 btn-primary btn-sm  mx-auto text-center d-none"><i
                                             class="fa-solid fa-qrcode" style="margin-right: 5px;"></i>Genarate
                                         QR</button>
-
                                 </form>
+
                                 <?php }else{ ?>
                                 <input class="w-50" style="color:black !important" type="text"
                                     value="<?php echo $message; ?>">
@@ -453,8 +464,8 @@ if (isset($_POST['search'])) {
                                     if($mfg !='no mention'){ ?>
                             <input type="hidden" name='mfg' class="form-control" value="<?php echo $mfg; ?>" readonly>
                             <?php }else{ ?>
-                            <input type="text" class="form-control " name='mfg'
-                                placeholder="please enter mfg number here">
+                            <!-- <input type="text" class="form-control " name='mfg'
+                                placeholder="please enter mfg number here"> -->
                             <?php  }}else{ ?>
                             <input type="hidden" name='mfg' class="form-control" value="<?php echo $scan_id; ?>">
                             <?php  } ?>
@@ -931,7 +942,7 @@ textarea {
 
 select,
 option {
-    background: red;
+    background: #343a40 !important;
 }
 
 input[type="text"],
