@@ -5,7 +5,6 @@ include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
 include_once('../includes/header.php');
 include_once('../../dataAccess/403.php');
-include('phpqrcode/qrlib.php'); 
 
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];

@@ -35,6 +35,10 @@ if($role_id == 1 && $department == 11 || $role_id == 4 && $department == 2 || $r
                 class="fa-solid fa-user"></i><span class="mx-1">Our Team</span></a>
         <a class="btn bg-gradient-success mx-2 text-white" type="button" href="warehouse_completed_task.php"><i
                 class="fa-solid fa-check"></i><span class="mx-1">Completed Task</span></a>
+        <a class="btn bg-gradient-info mx-2 text-white" type="button" href="add_pending_machine_new_format.php"><i
+                class="fa-solid fa-layer-plus"></i><span class="mx-1">Upload Shipment</span></a>
+        <a class="btn bg-gradient-info mx-2 text-white" type="button" href="view_all_shipment_details.php"><i
+                class="fa-solid fa-layer-plus"></i><span class="mx-1">View All Shipment Details </span></a>
     </div>
 </div>
 

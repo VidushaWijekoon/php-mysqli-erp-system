@@ -71,6 +71,7 @@ $sales_order_id= null;
                                     <th>Camera</th>
                                     <th>Keyboard Backlight</th>
                                     <th>OS </th>
+                                    <th>Date and time</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -101,6 +102,7 @@ $sales_order_id= null;
                                     <td><?php echo $data['camera'];?></td>
                                     <td><?php echo $data['keyboard_backlight'];?></td>
                                     <td><?php echo $data['os'];?></td>
+                                    <td><?php echo $data['packing_date'];?></td>
 
                                     <?php } } ?>
                             </tbody>

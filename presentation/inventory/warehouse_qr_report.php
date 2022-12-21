@@ -310,56 +310,36 @@ if (isset($_POST['submit'])) {
 
                     <input type="button" onclick="printDiv('printableArea')" value="print a QR!" />
                     <div id="printableArea">
-                        <?php                      
+                        <?php
+                       
                           
-                            $last_update_id =0;
-                            $quantity = $_SESSION['quantity'];
-                            $_SESSION['quantity'] = 0;
-                            $brand = $_SESSION['brand'];
-                            $model = $_SESSION['model'];
-                            $generation = $_SESSION['generation'];
-                            $core = $_SESSION['core'];
-                            $location = $_SESSION['location'];
-                            $last_id = $_SESSION['last_id'] ;
-                                if(empty($_SESSION['last_update_id'])){ $last_update_id =0;}else{
-                                
-                                    $last_update_id = $_SESSION['last_update_id'];
-                                
-                                }
-                            if($last_update_id != 0){
-                                $last_id = $last_update_id  ;
-                                
-                            }else{
-                                $last_id = $last_id + 1;
-                            }
-                                $howManyCodes =     $quantity;
-                                $digits = 6;
-                                $start = $last_id; 
-                                $overText = $brand . "  " . $model ;
-                                $secondPart = $core . " GEN" . $generation;
-                                $downText = $generation . "-" . $model;
-                                $rack = $location; 
-                                $hideText = null;
+                    $last_update_id =0;
+                    $quantity = 1;
+                        $howManyCodes =$quantity;
+                        $digits = 6;
+                        $start = $last_id; 
+                        $overText = $_POST['brand']."  ".$model ;
+                        // $string = explode(" ",$speed);.
+                        $string = "abc";
+                        $secondPart = $core." ".$string[0];
+                        $downText = $generation."-".$model;
+                        if($brand=='HP'){
+                            $rack="WH3";
+                        }else{
+                            $rack="WH4";
+                        }
+                        $hideText = null;
 
-                             echo $last_id;
-echo $overText;
-echo $rack;
-echo $downText;
-echo $secondPart;
-                                if($start_print == 1){
-                                    $codeArray = (filterRaw('codeArray') != "") ? filterRaw('codeArray') : "";
-                                        function write($code,$last_id, $overText, $rack, $downText, $secondPart) {
-echo $last_id;
-echo $overText;
-echo $rack;
-echo $downText;
-echo $secondPart;
-                                ?>
+                        if($start_print == 1|| $id !=0){
+                           
+                    $codeArray = (filterRaw('codeArray') != "") ? filterRaw('codeArray') : "";
+                    function write($code,$last_id, $overText, $rack, $downText,$secondPart) {
+                        ?>
                         <table>
                             <tr>
                                 <th style="width :600mm"><?php if ($overText != "") {
                                 $abc= strtoupper( $overText);
-                                echo  "<div  ><p class = 'text-uppercase' style='font-size: 50;
+                                echo  "<div  ><p class = 'text-uppercase' style='font-size: 70;
                                 font-family: Arial, Helvetica, sans-serif;margin: 30px 0 0 0;
                                 color:black;text-weight:bold;text-align: left;margin:0'>$abc &nbsp $secondPart</p></div>";
                             } 
@@ -367,41 +347,43 @@ echo $secondPart;
                                 <th>
                             </tr>
                             <tr>
-                                <th>
-
-                                    <?php echo 'some'; echo '<img src="temp/'.$code.'.png" style="width:200px; height:200px;margin: 0px 0 0 0px;">';?>
-                                </th>
-                                <th> <?php 
-                            echo strtoupper("<div style = 'font-family: Arial, Helvetica, sans-serif; margin: 0px 100px 0 0px; font-size: 40; color:black;text-weight:bold;text-align: left;'>$rack </br>$downText </br>ALSAKB$code</div></br> ");
+                                <th style="width :400px">
+                                    <div style="display:flex">
+                                        <?php echo '<img src="temp/'.$code.'.png" style="width:350px; height:350px;margin: 0px 0 0 25px;">';?>
+                                        <?php 
+                                $text = $rack."-".$downText;
+                            echo strtoupper("<div style = 'font-family: Arial, Helvetica, sans-serif; margin: 225px 0 0 20px; font-size: 60px; color:black;text-weight:bold;'>$text </div></br> ");
                             
-                            ?></th>
+                            ?>
+                                    </div>
+                                </th>
                             </tr>
                             <tr>
-                                <?php echo "</br> </br>";
-                            echo "</br> ";
-                            echo "</br> ";
-                            echo "</br> ";
-                             ?>
+                                <th> <?php 
+                            echo strtoupper("<div style = 'font-family: Arial, Helvetica, sans-serif; margin: 0px 100px 0 0px; font-size: 60px; color:black;text-weight:bold;'>ALSAKB$code</div></br> ");
+                            
+                            ?></th>
                             </tr>
 
 
                         </table>
 
-                        <?php }
-                            echo "<div class='sheet'>";
-                                if ($codeArray != "") { // Specified array of codes
-                                    foreach (json_decode($codeArray) as $secondPart) {
-                                        write($code,$last_id, $overText, $rack,  $downText,$secondPart);
-                                    }
-                                } else { // Unspecified codes, let's go incremental
-                                    for ($i = $start; $i < $howManyCodes + $start; $i++) {
-                                        $code = str_pad($i, $digits, "0", STR_PAD_LEFT);
-                                        write($code,$last_id, $overText, $rack,  $downText,$secondPart);
-                                    }
+                        <?php
+                                            }
+                                        echo "<div class='sheet'>";
+                            if ($codeArray != "") { // Specified array of codes
+                                foreach (json_decode($codeArray) as $secondPart) {
+                                    write($code,$last_id, $overText, $rack,  $downText,$secondPart);
                                 }
-                                echo "</div>";
-                            
-                            } 
+                            } else { // Unspecified codes, let's go incremental
+                                for ($i = $start; $i < $howManyCodes + $start; $i++) {
+                                    $code = str_pad($i, $digits, "0", STR_PAD_LEFT);
+                                    write($code,$last_id, $overText, $rack,  $downText,$secondPart);
+                                }
+                            }
+                        echo "</div>";
+                        
+                          } 
                           ?>
 
                     </div>
