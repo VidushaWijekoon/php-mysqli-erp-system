@@ -8,7 +8,7 @@
 		$name = null;
 		// $name = $brand."_model";
 	
-		$query 	= "SELECT DISTINCT display_size AS lcd_size FROM `screen_resolution` LEFT JOIN machine_from_supplier ON machine_from_supplier.model = screen_resolution.model WHERE screen_resolution.model='$model' ";
+		$query 	= "SELECT DISTINCT display_size AS lcd_size FROM `screen_resolution` WHERE model='$model' ";
 		$result_set = mysqli_query($connection, $query);
 
 		$lcd_list = " ";

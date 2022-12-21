@@ -636,7 +636,210 @@ $values1 = array(
             $T4 => [4, 1],
             $T5 => [5, 1],
             );
-            
+            $values5 = array(
+                $A1 => [1, 20],
+                $A2 => [2, 20],
+                $A3 => [3, 20],
+                $A4 => [4, 20],
+                $A5 => [5, 20],
+                $B1 => [1, 19],
+                $B2 => [2, 19],
+                $B3 => [3, 19],
+                $B4 => [4, 19],
+                $B5 => [5, 19],
+                $C1 => [1, 18],
+                $C2 => [2, 18],
+                $C3 => [3, 18],
+                $C4 => [4, 18],
+                $C5 => [5, 18],
+                $D1 => [1, 17],
+                $D2 => [2, 17],
+                $D3 => [3, 17],
+                $D4 => [4, 17],
+                $D5 => [5, 17],
+                $E1 => [1, 16],
+                $E2 => [2, 16],
+                $E3 => [3, 16],
+                $E4 => [4, 16],
+                $E5 => [5, 16],
+                $F1 => [1, 15],
+                $F2 => [2, 15],
+                $F3 => [3, 15],
+                $F4 => [4, 15],
+                $F5 => [5, 15],
+                $G1 => [1, 14],
+                $G2 => [2, 14],
+                $G3 => [3, 14],
+                $G4 => [4, 14],
+                $G5 => [5, 14],
+                $H1 => [1, 13],
+                $H2 => [2, 13],
+                $H3 => [3, 13],
+                $H4 => [4, 13],
+                $H5 => [5, 13],
+                $I1 => [1, 12],
+                $I2 => [2, 12],
+                $I3 => [3, 12],
+                $I4 => [4, 12],
+                $I5 => [5, 12],
+                $J1 => [1, 11],
+                $J2 => [2, 11],
+                $J3 => [3, 11],
+                $J4 => [4, 11],
+                $J5 => [5, 11],
+                $K1 => [1, 10],
+                $K2 => [2, 10],
+                $K3 => [3, 10],
+                $K4 => [4, 10],
+                $K5 => [5, 10],
+                $L1 => [1, 9],
+                $L2 => [2, 9],
+                $L3 => [3, 9],
+                $L4 => [4, 9],
+                $L5 => [5, 9],
+                $M1 => [1, 8],
+                $M2 => [2, 8],
+                $M3 => [3, 8],
+                $M4 => [4, 8],
+                $M5 => [5, 8],
+                $N1 => [1, 7],
+                $N2 => [2, 7],
+                $N3 => [3, 7],
+                $N4 => [4, 7],
+                $N5 => [5, 7],
+                $O1 => [1, 6],
+                $O2 => [2, 6],
+                $O3 => [3, 6],
+                $O4 => [4, 6],
+                $O5 => [5, 6],
+                $P1 => [1, 5],
+                $P2 => [2, 5],
+                $P3 => [3, 5],
+                $P4 => [4, 5],
+                $P5 => [5, 5],
+                $Q1 => [1, 4],
+                $Q2 => [2, 4],
+                $Q3 => [3, 4],
+                $Q4 => [4, 4],
+                $Q5 => [5, 4],
+                $R1 => [1, 3],
+                $R2 => [2, 3],
+                $R3 => [3, 3],
+                $R4 => [4, 3],
+                $R5 => [5, 3],
+                $S1 => [1, 2],
+                $S2 => [2, 2],
+                $S3 => [3, 2],
+                $S4 => [4, 2],
+                $S5 => [5, 2],
+                $T1 => [1, 1],
+                $T2 => [2, 1],
+                $T3 => [3, 1],
+                $T4 => [4, 1],
+                $T5 => [5, 1],
+                );            
+                $values6 = array(
+                    $A1 => [1, 20],
+                    $A2 => [2, 20],
+                    $A3 => [3, 20],
+                    $A4 => [4, 20],
+                    $A5 => [5, 20],
+                    $B1 => [1, 19],
+                    $B2 => [2, 19],
+                    $B3 => [3, 19],
+                    $B4 => [4, 19],
+                    $B5 => [5, 19],
+                    $C1 => [1, 18],
+                    $C2 => [2, 18],
+                    $C3 => [3, 18],
+                    $C4 => [4, 18],
+                    $C5 => [5, 18],
+                    $D1 => [1, 17],
+                    $D2 => [2, 17],
+                    $D3 => [3, 17],
+                    $D4 => [4, 17],
+                    $D5 => [5, 17],
+                    $E1 => [1, 16],
+                    $E2 => [2, 16],
+                    $E3 => [3, 16],
+                    $E4 => [4, 16],
+                    $E5 => [5, 16],
+                    $F1 => [1, 15],
+                    $F2 => [2, 15],
+                    $F3 => [3, 15],
+                    $F4 => [4, 15],
+                    $F5 => [5, 15],
+                    $G1 => [1, 14],
+                    $G2 => [2, 14],
+                    $G3 => [3, 14],
+                    $G4 => [4, 14],
+                    $G5 => [5, 14],
+                    $H1 => [1, 13],
+                    $H2 => [2, 13],
+                    $H3 => [3, 13],
+                    $H4 => [4, 13],
+                    $H5 => [5, 13],
+                    $I1 => [1, 12],
+                    $I2 => [2, 12],
+                    $I3 => [3, 12],
+                    $I4 => [4, 12],
+                    $I5 => [5, 12],
+                    $J1 => [1, 11],
+                    $J2 => [2, 11],
+                    $J3 => [3, 11],
+                    $J4 => [4, 11],
+                    $J5 => [5, 11],
+                    $K1 => [1, 10],
+                    $K2 => [2, 10],
+                    $K3 => [3, 10],
+                    $K4 => [4, 10],
+                    $K5 => [5, 10],
+                    $L1 => [1, 9],
+                    $L2 => [2, 9],
+                    $L3 => [3, 9],
+                    $L4 => [4, 9],
+                    $L5 => [5, 9],
+                    $M1 => [1, 8],
+                    $M2 => [2, 8],
+                    $M3 => [3, 8],
+                    $M4 => [4, 8],
+                    $M5 => [5, 8],
+                    $N1 => [1, 7],
+                    $N2 => [2, 7],
+                    $N3 => [3, 7],
+                    $N4 => [4, 7],
+                    $N5 => [5, 7],
+                    $O1 => [1, 6],
+                    $O2 => [2, 6],
+                    $O3 => [3, 6],
+                    $O4 => [4, 6],
+                    $O5 => [5, 6],
+                    $P1 => [1, 5],
+                    $P2 => [2, 5],
+                    $P3 => [3, 5],
+                    $P4 => [4, 5],
+                    $P5 => [5, 5],
+                    $Q1 => [1, 4],
+                    $Q2 => [2, 4],
+                    $Q3 => [3, 4],
+                    $Q4 => [4, 4],
+                    $Q5 => [5, 4],
+                    $R1 => [1, 3],
+                    $R2 => [2, 3],
+                    $R3 => [3, 3],
+                    $R4 => [4, 3],
+                    $R5 => [5, 3],
+                    $S1 => [1, 2],
+                    $S2 => [2, 2],
+                    $S3 => [3, 2],
+                    $S4 => [4, 2],
+                    $S5 => [5, 2],
+                    $T1 => [1, 1],
+                    $T2 => [2, 1],
+                    $T3 => [3, 1],
+                    $T4 => [4, 1],
+                    $T5 => [5, 1],
+                    );
 $values_single = array(
     $A1 => [1, 25],
     $B1 => [1, 24],
@@ -3462,7 +3665,7 @@ $values_single = array(
         <div class="col-4 mt-5 text-uppercase">
             <div class="card card-primary">
                 <div class="card-header" ;>
-                    <h4 class=" card-title">Rack 03</h4>
+                    <h4 class=" card-title">Rack 16</h4>
 
 
                 </div>
@@ -3543,6 +3746,277 @@ $values_single = array(
        
     ?>
         </div>
+        <!-- rack 17 -->
+        <?php
+        
+        $query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'RACK-17'";
+        $result_set = mysqli_query($connection, $query);
+        foreach($result_set as $a){
+        $slot_name = $a['slot_name'];
+        $slot_name_change = $a['slot_name']."_0_0_0";
+        $part_name= $a['part_name'];
+        $part_model= $a['part_model'];
+        $qty= $a['qty'];
+        foreach($values5 as $k => $v){
+            
+            if($k == $slot_name_change){
+                $name= $slot_name."_".$part_name."_".$part_model."_".$qty;
+                $values5[$name] = $values5[$k];
+                unset($values5[$k]);
+            }
+        }
+        }
+        $grid17 = createGrid17(5, 20);
+        $grid17 = plotGridValues17($grid17, $values5);
+        echo renderGrid17($grid17,$slot_name_search_C,$search_qty_C,$common_slot,$test_c,$role_id,$department,$test, $test_b,$test_d,$test_e,$test_g,$test_f,$test_g,$test_h,$test_i,$test_j,$test_k,$test_l,$test_m,$test_n,$test_o,$test_p,$test_q);
+        function createGrid17($columns, $rows)
+        {
+        $grid17 = [];
+        $cell = 1;
+        for ($r = 0; $r < $rows; $r++) {
+            $row = [];
+            for ($c = 0; $c < $columns; $c++) {
+                $row[] = $cell++;
+            }
+            $grid17[] = $row;
+        }
+        return $grid17;
+        }
+        function plotGridValues17($grid17, $values5)
+        {
+        foreach ($values5 as $value => $coordinates) {
+            list($x, $y) = $coordinates;
+            $grid17[$y - 1][$x - 1] = $value;
+        }
+        return $grid17;
+        }
+        function renderGrid17($grid17 ,$slot_name_search_c,$search_qty_c,$common_slot,$test_c,$role_id,$department,$test, $test_b,$test_d,$test_e,$test_f,$test_g,$test_h,$test_i,$test_j,$test_k,$test_l,$test_m,$test_n,$test_o,$test_p,$test_q)
+        {
+        $grid17 = array_reverse($grid17); 
+        $i =0;
+        if((empty($test) && empty($test_b) && empty($test_c) && empty($test_d) && empty($test_e) && empty($test_f) && empty($test_g)&& empty($test_h) && empty($test_i) && empty($test_j) && empty($test_k)&& empty($test_l)&& empty($test_m) && empty($test_o) && empty($test_p) && empty($test_q)) || !empty($test_p)) {  
+        
+   ?>
+        <div class="col-4 mt-5 text-uppercase">
+            <div class="card card-primary">
+                <div class="card-header" ;>
+                    <h4 class=" card-title">Rack 17</h4>
+
+
+                </div>
+                <div class="card-body mx-auto justify-content-center mx-auto text-center">
+                    <?php  foreach ($grid17 as $row) { 
+            
+            foreach ($row as $k=>$v) { 
+                $substring = explode("_", $v);
+                //   empty qty 
+                if($substring[3] == 0){ ?>
+                    <!-- // slot name with empty qty -->
+                    <?php 
+                if(empty($test_p)){
+                if(($role_id == 4 && $department ==20) || ($role_id == 2 && $department ==18)){ ?>
+                    <a class="btn grid_btn bg-secondary mt-2" href="
+                        part_create_form.php?scan_id=<?php echo "rack-17_".$substring[0] ?>">
+                        <?php } else { ?>
+                        <a class="btn grid_btn bg-secondary mt-2">
+                            <?php } ?>
+                            <i class="fas fa-inbox"></i>
+                            <?php 
+           echo $substring[0]."</br>";
+           echo "</br>";
+           echo "</br>";
+           echo "</br>";
+            ?>
+                        </a>
+                        <?php } }else{
+             
+           ?>
+                        <!-- slot with value -->
+                        <?php if(empty($test_p)){?>
+                        <?php if(($role_id == 4 && $department ==20) || ($role_id == 2 && $department ==18)){ ?>
+                        <a class="btn grid_btn bg-success mt-2" href="
+                            add_additional_part.php?scan_id=<?php echo "rack-17_".$substring[0] ?>">
+                            <?php } else { ?>
+                            <a class="btn grid_btn bg-success mt-2">
+                                <?php } ?>
+
+                                <i class="fas fa-inbox"></i>
+                                <?php
+           echo $substring[0]."</br>";
+           echo $substring[1]."</br>";
+           echo $substring[2]."</br>";
+           echo $substring[3]."</br>";
+            ?>
+                            </a>
+                            <?php }else{ 
+        foreach($test_p as $a){
+           if($substring[0] == $a[0] ){ ?>
+                            <?php if(($role_id == 4 && $department ==20) || ($role_id == 2 && $department ==18)){ ?>
+                            <a class="btn grid_btn bg-danger mt-2" href="
+                            add_additional_part.php?scan_id=<?php echo "rack-17_".$substring[0] ?>">
+                                <?php } else { ?>
+                                <a class="btn grid_btn bg-danger mt-2">
+                                    <?php } ?>
+
+                                    <i class="fas fa-inbox"></i>
+                                    <?php
+                   echo $substring[0]."</br>";
+                   echo $substring[1]."</br>";
+                   echo $substring[2]."</br>";
+                   echo $substring[3]."</br>";
+                   $substring[0] =5;
+                    ?>
+                                </a><?php
+           // echo $a[0]."----".$slot_name_search;
+           // echo "</br>";
+       } }?>
+
+
+                                <?php  } } } } ?>
+
+
+                </div>
+            </div>
+            <?php } }
+       
+    ?>
+        </div>
+        <!-- rack 18  -->
+        <?php
+        
+        $query = "SELECT slot_name,part_name,part_model,qty FROM part_stock WHERE rack_number = 'RACK-18'";
+        $result_set = mysqli_query($connection, $query);
+        foreach($result_set as $a){
+        $slot_name = $a['slot_name'];
+        $slot_name_change = $a['slot_name']."_0_0_0";
+        $part_name= $a['part_name'];
+        $part_model= $a['part_model'];
+        $qty= $a['qty'];
+        foreach($values6 as $k => $v){
+            
+            if($k == $slot_name_change){
+                $name= $slot_name."_".$part_name."_".$part_model."_".$qty;
+                $values6[$name] = $values6[$k];
+                unset($values6[$k]);
+            }
+        }
+        }
+        $grid18 = createGrid18(5, 20);
+        $grid18 = plotGridValues18($grid18, $values6);
+        echo renderGrid18($grid18,$slot_name_search_C,$search_qty_C,$common_slot,$test_c,$role_id,$department,$test, $test_b,$test_d,$test_e,$test_g,$test_f,$test_g,$test_h,$test_i,$test_j,$test_k,$test_l,$test_m,$test_n,$test_o,$test_p,$test_q);
+        function createGrid18($columns, $rows)
+        {
+        $grid18 = [];
+        $cell = 1;
+        for ($r = 0; $r < $rows; $r++) {
+            $row = [];
+            for ($c = 0; $c < $columns; $c++) {
+                $row[] = $cell++;
+            }
+            $grid18[] = $row;
+        }
+        return $grid18;
+        }
+        function plotGridValues18($grid18, $values6)
+        {
+        foreach ($values6 as $value => $coordinates) {
+            list($x, $y) = $coordinates;
+            $grid18[$y - 1][$x - 1] = $value;
+        }
+        return $grid18;
+        }
+        function renderGrid18($grid18 ,$slot_name_search_c,$search_qty_c,$common_slot,$test_c,$role_id,$department,$test, $test_b,$test_d,$test_e,$test_f,$test_g,$test_h,$test_i,$test_j,$test_k,$test_l,$test_m,$test_n,$test_o,$test_p,$test_q)
+        {
+        $grid18 = array_reverse($grid18); 
+        $i =0;
+        if((empty($test) && empty($test_b) && empty($test_c) && empty($test_d) && empty($test_e) && empty($test_f) && empty($test_g)&& empty($test_h) && empty($test_i) && empty($test_j) && empty($test_k)&& empty($test_l)&& empty($test_m) && empty($test_o) && empty($test_p) && empty($test_q)) || !empty($test_q)) {  
+        
+   ?>
+        <div class="col-4 mt-5 text-uppercase">
+            <div class="card card-primary">
+                <div class="card-header" ;>
+                    <h4 class=" card-title">Rack 18</h4>
+
+
+                </div>
+                <div class="card-body mx-auto justify-content-center mx-auto text-center">
+                    <?php  foreach ($grid18 as $row) { 
+            
+            foreach ($row as $k=>$v) { 
+                $substring = explode("_", $v);
+                //   empty qty 
+                if($substring[3] == 0){ ?>
+                    <!-- // slot name with empty qty -->
+                    <?php 
+                if(empty($test_c)){
+                if(($role_id == 4 && $department ==20) || ($role_id == 2 && $department ==18)){ ?>
+                    <a class="btn grid_btn bg-secondary mt-2" href="
+                        part_create_form.php?scan_id=<?php echo "rack-18_".$substring[0] ?>">
+                        <?php } else { ?>
+                        <a class="btn grid_btn bg-secondary mt-2">
+                            <?php } ?>
+                            <i class="fas fa-inbox"></i>
+                            <?php 
+           echo $substring[0]."</br>";
+           echo "</br>";
+           echo "</br>";
+           echo "</br>";
+            ?>
+                        </a>
+                        <?php } }else{
+             
+           ?>
+                        <!-- slot with value -->
+                        <?php if(empty($test_c)){?>
+                        <?php if(($role_id == 4 && $department ==20) || ($role_id == 2 && $department ==18)){ ?>
+                        <a class="btn grid_btn bg-success mt-2" href="
+                            add_additional_part.php?scan_id=<?php echo "rack-18_".$substring[0] ?>">
+                            <?php } else { ?>
+                            <a class="btn grid_btn bg-success mt-2">
+                                <?php } ?>
+
+                                <i class="fas fa-inbox"></i>
+                                <?php
+           echo $substring[0]."</br>";
+           echo $substring[1]."</br>";
+           echo $substring[2]."</br>";
+           echo $substring[3]."</br>";
+            ?>
+                            </a>
+                            <?php }else{ 
+        foreach($test_c as $a){
+           if($substring[0] == $a[0] ){ ?>
+                            <?php if(($role_id == 4 && $department ==20) || ($role_id == 2 && $department ==18)){ ?>
+                            <a class="btn grid_btn bg-danger mt-2" href="
+                            add_additional_part.php?scan_id=<?php echo "rack-18_".$substring[0] ?>">
+                                <?php } else { ?>
+                                <a class="btn grid_btn bg-danger mt-2">
+                                    <?php } ?>
+
+                                    <i class="fas fa-inbox"></i>
+                                    <?php
+                   echo $substring[0]."</br>";
+                   echo $substring[1]."</br>";
+                   echo $substring[2]."</br>";
+                   echo $substring[3]."</br>";
+                   $substring[0] =5;
+                    ?>
+                                </a><?php
+           // echo $a[0]."----".$slot_name_search;
+           // echo "</br>";
+       } }?>
+
+
+                                <?php  } } } } ?>
+
+
+                </div>
+            </div>
+            <?php } }
+       
+    ?>
+        </div>
+
     </div>
 </div>
 <script>

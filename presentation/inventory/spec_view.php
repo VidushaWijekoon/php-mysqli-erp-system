@@ -54,6 +54,7 @@ $brand = $_GET['brand'];
                                     <th>RAM</th>
                                     <th>HDD</th>
                                     <th>Location</th>
+                                    <th>Inventory ID</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -74,6 +75,7 @@ $brand = $_GET['brand'];
                                     $optical = $data['dvd'];
                                     $processor = $data['processor'];
                                     $location = $data['location'];
+                                    $inventory_id = $data['inventory_id'];
                                     $i++; ?>
                                 <tr>
                                     <td><?php echo $i ?></td>
@@ -91,6 +93,7 @@ $brand = $_GET['brand'];
                                     <td>8GB</td>
                                     <td>256GB</td>
                                     <td><?php echo$location ?></td>
+                                    <td><?php echo "ALSAKB".$inventory_id ?></td>
                                 </tr>
                                 <?php } ?>
 
