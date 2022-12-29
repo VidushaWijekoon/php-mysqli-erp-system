@@ -42,7 +42,7 @@ if(isset($_POST['submit'])) {
             $_SESSION['department'] = $user['department'];
             $_SESSION['epf'] = $user['epf'];
             $_SESSION['first_name'] = $user['first_name'];
-
+            $_SESSION['timestamp'] = time();  
             // $_SESSION['role'] = $user['role'];
             // updating last login
             $query = "UPDATE users SET last_login = NOW() WHERE user_id = {$_SESSION['user_id']} LIMIT 1";

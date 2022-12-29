@@ -115,7 +115,7 @@ if(isset($_POST['logged_out'])){
                         data-accordion="false">
 
                         <!-- Warehouse Team Leader -->
-                        <?php if($role_id == 4 && $department == 2) { ?>
+                        <?php if($role_id == 4 && $department == 11) { ?>
                         <li class="nav-item menu-open">
                             <a href="../inventory/warehouse_dashboard.php" class="nav-link active">
                                 <i class="nav-icon fas fa-home"></i>
@@ -124,7 +124,7 @@ if(isset($_POST['logged_out'])){
                         </li>
 
                         <!-- Warehouse Member -->
-                        <?php } if($role_id == 10 && $department == 2) { ?>
+                        <?php } if($role_id == 10 && $department == 11) { ?>
                         <li class="nav-item menu-open">
                             <a href="../inventory/warehouse_member_sales_order.php" class="nav-link active">
                                 <i class="nav-icon fas fa-home"></i>
@@ -133,7 +133,7 @@ if(isset($_POST['logged_out'])){
                         </li>
 
                         <!-- Production Team Leader -->
-                        <?php } if($role_id == 4 && $department == 1) { ?>
+                        <?php } if($role_id == 4 && $department == 11) { ?>
                         <li class="nav-item menu-open">
                             <a href="../production/production_team_leader_dashboard.php" class="nav-link active">
                                 <i class="nav-icon fas fa-home"></i>
@@ -142,7 +142,7 @@ if(isset($_POST['logged_out'])){
                         </li>
 
                         <!-- Production Technician -->
-                        <?php } if($role_id == 6 && $department == 1) { ?>
+                        <?php } if($role_id == 6 && $department == 11) { ?>
                         <li class="nav-item menu-open">
                             <a href="../production/production_technician_dashboard.php" class="nav-link active">
                                 <i class="nav-icon fas fa-home"></i>
@@ -160,7 +160,7 @@ if(isset($_POST['logged_out'])){
                         </li>
 
                         <!-- QC  -->
-                        <?php } if($role_id == 4 && $department == 19) { ?>
+                        <?php } if($role_id == 4 && $department == 11) { ?>
                         <li class="nav-item menu-open">
                             <a href="../qc/create_mfg.php" class="nav-link active">
                                 <i class="nav-icon fas fa-home"></i>
@@ -169,7 +169,7 @@ if(isset($_POST['logged_out'])){
                         </li>
 
                         <!-- Packing  -->
-                        <?php } if($role_id == 4 && $department == 13) { ?>
+                        <?php } if($role_id == 4 && $department == 11) { ?>
                         <li class="nav-item menu-open">
                             <a href="../packing/packing.php" class="nav-link active">
                                 <i class="nav-icon fas fa-home"></i>
@@ -281,7 +281,7 @@ if(isset($_POST['logged_out'])){
 
                         <?php } ?>
 
-                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 2 && $department == 4)) { ?>
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) ) { ?>
 
                         <!-- Inventory -->
                         <li class="nav-item">
@@ -317,7 +317,7 @@ if(isset($_POST['logged_out'])){
 
                         <?php } ?>
 
-                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 20) || ($role_id == 4 && $department == 1)) { ?>
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 20) ) { ?>
 
                         <!-- Part -->
                         <li class="nav-item">
@@ -348,7 +348,7 @@ if(isset($_POST['logged_out'])){
 
                         <?php } ?>
 
-                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 1) || ($role_id == 2 && $department == 18)) { ?>
+                        <?php if(($role_id == 1 && $department == 11) ||($role_id == 2 && $department == 18)) { ?>
 
                         <!-- Production -->
                         <li class="nav-item">
@@ -413,27 +413,24 @@ if(isset($_POST['logged_out'])){
 
                         <?php } ?>
 
-                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18)) { ?>
 
                         <!-- LCD -->
+                        <?php if($department != 19){ ?>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="../performance/performance_record.php" class="nav-link">
                                 <i class="nav-icon fa-solid fa-display"></i>
-                                <p> LCD <i class="right fas fa-angle-left"></i> </p>
+                                <p> Performance <i class="right fas fa-angle-left"></i> </p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa fa-display nav-icon" style="font-size: 12px;"></i>
-                                        <p> LCD </p>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
-
-
                         <?php } ?>
-
+                        <?php if($department == 19){ ?>
+                        <li class="nav-item">
+                            <a href="../performance/qc_performance_record.php" class="nav-link">
+                                <i class="nav-icon fa-solid fa-display"></i>
+                                <p> Performance <i class="right fas fa-angle-left"></i> </p>
+                            </a>
+                        </li>
+                        <?php } ?>
                         <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18)) { ?>
 
                         <!-- Battery -->
@@ -521,7 +518,7 @@ if(isset($_POST['logged_out'])){
 
                         <?php } ?>
 
-                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 19)) { ?>
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18)) { ?>
 
                         <!-- QC -->
                         <li class="nav-item">
