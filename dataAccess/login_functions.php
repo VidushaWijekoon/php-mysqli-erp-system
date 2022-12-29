@@ -28,8 +28,8 @@ function Login($role_id, $department){
     }
     
     // Production Team Leader Redirect
-    elseif($role_id == 4 && $department == 1){
-        header('Location: presentation/production/production_team_leader_dashboard.php');
+    elseif( $department == 1){
+        header('Location: presentation/performance/performance_record.php');
     }
     // Production Technician Redirect
     elseif($role_id == 6 && $department == 1){
@@ -37,20 +37,44 @@ function Login($role_id, $department){
     }
 
     // Motherboard Team Leader Redirect
-     elseif($role_id == 4 && $department == 9){
-        header('Location: presentation/motherboard/motherboard_dashboard.php');
+     elseif( $department == 9){
+        header('Location: presentation/performance/performance_record.php');
     }
     // Motherboard Technician Redirect
-    elseif($role_id == 6 && $department == 9){
-        header('Location: presentation/motherboard/motherboard_technician.php');
+    elseif( $department == 9){
+        header('Location: presentation/performance/performance_record.php');
     }
      // QC Team Leader Redirect
-     elseif($role_id == 4 && $department == 19){
-        header('Location: presentation/qc/new_create_mfg.php');
+     elseif($department == 19){
+        header('Location: presentation/performance/qc_performance_record.php');
     }
     // Packing Technician Redirect
-    elseif($role_id == 4 && $department == 13){
-        header('Location: presentation/packing/packing_dashboard.php');
+    elseif($department == 13){
+        header('Location: presentation/performance/performance_record.php');
+    } 
+    // LCD Technician Redirect
+    elseif( $department == 10){
+        header('Location: presentation/performance/performance_record.php');
+    }
+    // bodywork Technician Redirect
+    elseif($department == 7){
+        header('Location: presentation/performance/performance_record.php');
+    }
+    // painting Technician Redirect
+    elseif( $department == 8){
+        header('Location: presentation/performance/performance_record.php');
+    }
+    elseif($department == 14){
+        header('Location: presentation/performance/performance_record.php');
+    }
+    elseif($department == 22){
+        header('Location: presentation/performance/performance_record.php');
+    }
+    elseif($department == 2){
+        header('Location: presentation/performance/performance_record.php');
+    }
+    elseif($department == 23){
+        header('Location: presentation/performance/performance_record.php');
     }
    
 

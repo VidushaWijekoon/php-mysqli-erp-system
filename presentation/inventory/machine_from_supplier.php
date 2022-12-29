@@ -57,6 +57,8 @@ $id=$_GET['id'];
     $check_mfg = 'null';
     $scan_id='';
     $update_id=null;
+    $ram='not mention';
+    $hdd_capacity='not mention';
     $machine_id=0;
 
 if (isset($_POST['search'])) {
@@ -98,57 +100,10 @@ if (isset($_POST['search'])) {
         $add_to_wis = $data['add_to_wis'];
         $optical = $data['dvd'];
         $screen_resolution = $data['resolution'];
+        $ram = $data['ram'];
+        $hdd_capacity = $data['hdd_capacity'];
 
     }
-    $_POST['brand']=$brand;
-    // $query = "INSERT INTO `warehouse_information_sheet`(
-    //     `device`,
-    //     `processor`,
-    //     `core`,
-    //     `generation`,
-    //     `model`,
-    //     `brand`,
-    //     `create_by_inventory_id`,
-    //     `mfg`,
-    //     `machine_from_supplier_id`,
-    //     `series`,
-    //     `speed`,
-    //     `battery`,
-    //     `lcd_size`,
-    //     `touch_or_non_touch`,
-    //     `bios_lock`,
-    //     dvd
-    // )
-    // VALUES(
-    //     '$device',
-    //     '$processor',
-    //     '$core',
-    //     '$generation',
-    //     '$model',
-    //     '$brand',
-    //     '$user_id',
-    //     '$mfg',
-    //     '$supplier',
-    //     '$series',
-    //     '$speed',
-    //     '$battery',
-    //     '$lcd_size',
-    //     '$touch_or_non_touch',
-    //     '$bios_lock',
-    //     '$optical'
-    // )";
-        // $query1 = mysqli_query($connection, $query);
-
-        $query_update = "UPDATE `machine_from_supplier` SET add_to_wis = '1' WHERE machine_id='$supplier'";
-        // $query1 = mysqli_query($connection, $query_update);
-
-        if(!empty($screen_resolution)){
-            $query ="SELECT screen_resolution FROM screen_resolution WHERE model='$model' AND screen_resolution='$screen_resolution'";
-            $query1 = mysqli_query($connection, $query);
-            foreach( $query1 as $data){
-
-            }
-        }
         
       
 }
@@ -191,50 +146,12 @@ if (isset($_POST['search'])) {
             $supplier = $data['machine_id'];
             $add_to_wis = $data['add_to_wis'];
             $optical = $data['dvd'];
-            echo $supplier;
+            $ram = $data['ram'];
+            $hdd_capacity = $data['hdd_capacity'];
     
         }
-        // $query = "INSERT INTO `warehouse_information_sheet`(
-        //     `device`,
-        //     `processor`,
-        //     `core`,
-        //     `generation`,
-        //     `model`,
-        //     `brand`,
-        //     `create_by_inventory_id`,
-        //     `mfg`,
-        //     `machine_from_supplier_id`,
-        //     `series`,
-        //     `speed`,
-        //     `battery`,
-        //     `lcd_size`,
-        //     `touch_or_non_touch`,
-        //     `bios_lock`,
-        //     dvd
-        // )
-        // VALUES(
-        //     '$device',
-        //     '$processor',
-        //     '$core',
-        //     '$generation',
-        //     '$model',
-        //     '$brand',
-        //     '$user_id',
-        //     '$mfg',
-        //     '$supplier',
-        //     '$series',
-        //     '$speed',
-        //     '$battery',
-        //     '$lcd_size',
-        //     '$touch_or_non_touch',
-        //     '$bios_lock',
-        //     '$optical'
-        // )";
-            // $query1 = mysqli_query($connection, $query);
-    
-            // $query_update = "UPDATE `machine_from_supplier` SET add_to_wis = '1' WHERE machine_id='$supplier'";
-            // $query1 = mysqli_query($connection, $query_update);
-          
+          echo $ram;
+          echo $hdd_capacity;
     }
         } 
         
@@ -277,26 +194,15 @@ if (isset($_POST['search'])) {
         $touch_or_non_touch=$_POST['touch'];
         $optical=$_POST['optical'];
         $screen_resolution=$_POST['screen_resolution'];
+        $processor=$_POST['processor'];
         $query = "SELECT * FROM `machine_from_supplier`  WHERE serial_no = '$supplier'";
         $query1 = mysqli_query($connection, $query);
         foreach ($query1 as $data) {
-            // $brand = $data['brand'];
-            // $series = $data['series'];
-            // $processor = $data['processor'];
-            // $core = $data['core'];
-            // $generation = $data['generation'];
-            // $model = $data['model'];
-            // $speed = $data['speed'];
-            // $battery= $data['battery'];
-            // $lcd_size = $data['lcd_size'];
-            // $touch_or_non_touch = $data['touch_or_non_touch'];
             $bios_lock = $data['bios_lock'];
-            // $mfg = $data['mfg'];
-            // $supplier = $data['machine_id'];
-            // $add_to_wis = $data['add_to_wis'];
-            // $optical = $data['dvd'];
         }
         $_POST['brand']=$brand;
+        $ram=$_POST['ram'];
+        $hdd_capacity=$_POST['hdd_capacity'];
         $query = "INSERT INTO `warehouse_information_sheet`(
             `device`,
             `processor`,
@@ -315,7 +221,10 @@ if (isset($_POST['search'])) {
             `bios_lock`,
             dvd,
             screen_resolution,
-            location
+            location,
+            ram,
+            hdd_capacity
+
         )
         VALUES(
             '$device',
@@ -335,7 +244,9 @@ if (isset($_POST['search'])) {
             '$bios_lock',
             '$optical',
             '$screen_resolution',
-            '$location'
+            '$location',
+            '$ram',
+            '$hdd_capacity'
         )";
             $query1 = mysqli_query($connection, $query);
     
@@ -373,6 +284,7 @@ if (isset($_POST['search'])) {
         $touch_or_non_touch=$_POST['touch'];
         $optical=$_POST['optical'];
         $screen_resolution=$_POST['screen_resolution'];
+        $processor=$_POST['processor'];
 
         $query = "INSERT INTO `warehouse_information_sheet`(
             `device`,
@@ -509,7 +421,8 @@ if (isset($_POST['search'])) {
     ?>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-6 grid-margin stretch-card justify-content-center align-item-center mx-auto mt-2">
+        <div
+            class="col-lg-6 grid-margin stretch-card justify-content-center align-item-center mx-auto mt-2 text-uppercase">
             <div class="card mt-3">
                 <div class="card-header bg-secondary">
                     <p class="text-uppercase m-0 p-0">Add Inventory Details </p>
@@ -602,6 +515,7 @@ if (isset($_POST['search'])) {
                                     $bios_lock = $data['bios_lock'];
                                     $mfg = $data['mfg'];
                                     $optical = $data['dvd'];
+                                    $processor  = $data['processor'];
                                 }
                             }
                            
@@ -631,7 +545,7 @@ if (isset($_POST['search'])) {
                             <!-- </div>
                             </div> -->
                             <div class="row">
-                                <label class="col-sm-3 col-form-label">Device</label>
+                                <label class="col-sm-3 col-form-label">Device </label>
                                 <div class="col-sm-8 w-75">
                                     <?php if($exist == 'yes'){ ?>
                                     <select name="device" id="device" class="form-control " style="border-radius: 5px;">
@@ -649,6 +563,7 @@ if (isset($_POST['search'])) {
                                 </div>
                             </div>
                             <div class="row">
+
                                 <label class="col-sm-3 col-form-label">Brand</label>
                                 <div class="col-sm-8 w-75">
                                     <?php if($exist == 'yes'){ ?>
@@ -779,6 +694,7 @@ if (isset($_POST['search'])) {
                                 </div>
                             </div>
                             <div class="row">
+                                <input type="hidden" id="search" name="processor" value="<?php echo $processor ?>">
                                 <label class="col-sm-3 col-form-label">Core</label>
                                 <div class="col-sm-8 w-75">
                                     <?php if($exist == 'yes'){ ?>
@@ -807,7 +723,7 @@ if (isset($_POST['search'])) {
                                         ?>
                                     <select name="core" id="core" class="form-control select2"
                                         style="border-radius: 5px;">
-                                        <option selected>--Select Core--</option>
+                                        <option selected></option>
                                         <?php echo $core ?>
                                     </select>
                                     <?php  } }else{ ?>
@@ -851,7 +767,7 @@ if (isset($_POST['search'])) {
                                         ?>
                                     <select name="generation" id="generation" class="form-control select2"
                                         style="border-radius: 5px;">
-                                        <option selected>--Select generation--</option>
+                                        <option selected></option>
                                         <?php echo $generation ?>
                                     </select>
                                     <?php  } }else{ ?>
@@ -966,6 +882,23 @@ if (isset($_POST['search'])) {
                                             if(empty($query_run)){
                                                 $query ="SELECT DISTINCT screen_resolution FROM `machine_from_supplier` GROUP BY screen_resolution"; 
                                                 $query_run = mysqli_query($connection, $query);
+                                            }else{
+                                                $brand='';
+                                                $series='';
+                                                $model='';
+                                                $display_size='';
+                                                $screen_resolution ='';
+
+                                                foreach($query_run as $data){
+                                                    $brand=$data['brand'];
+                                                    $series=$data['series'];
+                                                    $model=$data['model'];
+                                                    $display_size=$data['display_size'];
+                                                    $screen_resolution =$data['screen_resolution'];
+                                                }
+                                                $query="INSERT INTO `screen_resolution`(`brand`, `series`, `model`, `display_size`, `screen_resolution`) 
+                                                VALUES ('$brand','$series','$model','$display_size','$screen_resolution')";
+                                                 $query_update_display_size = mysqli_query($connection, $query);
                                             }
                                          }
                                         ?>
@@ -1109,6 +1042,8 @@ if (isset($_POST['search'])) {
                                 </div>
                             </div>
                             <input type="hidden" name="machine_id" value="<?php echo $search_number ?>">
+                            <input type="hidden" name="ram" value="<?php echo $ram ?>">
+                            <input type="hidden" name="hdd_capacity" value="<?php echo $hdd_capacity ?>">
                             <?php if($exist == 'yes'){ ?>
                             <button type="submit" name="update_new"
                                 class=" btn mb-2 mt-4 btn-primary btn-sm mx-auto text-center d-block"><i
@@ -1123,9 +1058,9 @@ if (isset($_POST['search'])) {
                 </div>
             </div>
         </div>
-        <div class="col-lg-6 grid-margin stretch-card justify-content-center mx-auto mt-2">
+        <div class="col-lg-6 grid-margin stretch-card justify-content-center mx-auto mt-2 d-none">
             <div class="card mt-3 w-100">
-                <div class="card-body d-none">
+                <div class="card-body ">
 
                     <input type="button" onclick="printDiv('printableArea')" value="print a QR!" />
                     <?php if($start_print == 1|| $id !=0){ ?>
@@ -1171,7 +1106,7 @@ if (isset($_POST['search'])) {
                                             <?php echo '<img src="temp/'.$code.'.png" style="width:350px; height:350px;margin: 0px 0 0 25px;">';?>
                                             <?php 
                                 $text = $rack."-".$downText;
-                            echo strtoupper("<div style = 'font-family: Arial, Helvetica, sans-serif; margin: 225px 0 0 20px; font-size: 60px; color:black;text-weight:bold;'>$text </div></br> ");
+                            // echo strtoupper("<div style = 'font-family: Arial, Helvetica, sans-serif; margin: 225px 0 0 20px; font-size: 60px; color:black;text-weight:bold;'>$text </div></br> ");
                             
                             ?>
                                         </div>
@@ -1179,7 +1114,7 @@ if (isset($_POST['search'])) {
                                 </tr>
                                 <tr>
                                     <th> <?php 
-                            echo strtoupper("<div style = 'font-family: Arial, Helvetica, sans-serif; margin: 0px 100px 0 0px; font-size: 60px; color:black;text-weight:bold;'>ALSAKB$code</div></br> ");
+                            echo strtoupper("<div style = 'font-family: Arial, Helvetica, sans-serif; margin: 0px 100px 0 0px; font-size: 50px; color:black;text-weight:bold;'>ALSAKB$code $text</div></br> ");
                             
                             ?></th>
                                 </tr>
@@ -1206,14 +1141,6 @@ if (isset($_POST['search'])) {
                           ?>
 
                         </div>
-                        <?php 
-                    if($start_print ==1){
-                        echo "<script>";
-                        // echo "alert('This is an alert from JavaScript!');";
-                        echo "startGame('printableArea'){alert('This is an alert from JavaScript!');}";
-                        echo "</script>";
-                    }
-                    ?>
                     </div>
                 </div>
 
