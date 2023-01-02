@@ -198,7 +198,7 @@ $dateTime = $currentDateTime->format('j-m-Y H:i:s');
                                 <label class="col-sm-3 col-form-label">Core</label>
                                 <div class="col-sm-8">
                                     <select name="core" class="info_select" style="border-radius: 5px;" required>
-                                        <option selected value="i6">i6</option>
+                                        <option selected value="i6">i5</option>
                                         <?php
                                             $query = "SELECT * FROM core ORDER BY core";
                                             $all_devices = mysqli_query($connection, $query);
@@ -219,7 +219,7 @@ $dateTime = $currentDateTime->format('j-m-Y H:i:s');
                                 <label class="col-sm-3 col-form-label">Generation</label>
                                 <div class="col-sm-8">
                                     <select name="generation" class="info_select" style="border-radius: 5px;" required>
-                                        <option selected value="5">5</option>
+                                        <option selected value="5">6</option>
                                         <?php
                                             $query = "SELECT * FROM generation ORDER BY generation_id";
                                             $all_devices = mysqli_query($connection, $query);

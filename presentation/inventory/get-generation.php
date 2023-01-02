@@ -8,7 +8,7 @@
 		$name = null;
 		$name = $brand."_model";
 	
-		$query 	= "SELECT generation FROM $name WHERE model ='$model'";
+		$query 	= "SELECT DISTINCT generation FROM `machine_from_supplier` WHERE brand='$brand' AND model='$model' ";
 		$result_set = mysqli_query($connection, $query);
 
 		$generation_list = "";
