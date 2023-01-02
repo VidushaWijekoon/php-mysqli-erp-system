@@ -171,7 +171,7 @@ $sales_order_id = $_GET['sales_order_id'];
                                     <th>Model</th>
                                     <th>Assign Time</th>
                                     <th>QTY</th>
-                                    <th>Update</th>
+                                    <!-- <th>Update</th> -->
                                 </tr>
                             </thead>
                             <tbody class="text-uppercase">
@@ -194,10 +194,10 @@ $sales_order_id = $_GET['sales_order_id'];
                                         <span
                                             class="badge bg-primary px-3"><?php echo $value['tech_assign_qty']; ?></span>
                                     </td>
-                                    <td>
+                                    <!-- <td>
                                         <?php 
                                     echo "<a class='btn btn-xs bg-gradient-primary mx-2' href=\"production_assign_update.php?assign_id={$value['tech_id']}&sales_order_id={$value['sales_order_id']}&model={$value['model']}&core={$value['core']}&generation={$value['generation']}&brand={$value['brand']}&device={$value['device_type']}&processor={$value['processor']}&emp_id={$value['emp_id']}&qty={$value['tech_assign_qty']}&status=update\" class='text-white text-capitalize'><i class='fa-solid fa-sun mx-1'></i></a>" ?>
-                                    </td>
+                                    </td> -->
                                 </tr>
                                 <?php } } ?>
                             </tbody>

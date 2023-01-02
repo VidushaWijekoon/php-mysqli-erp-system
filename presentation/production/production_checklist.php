@@ -46,11 +46,15 @@ $item_display = '';
 $item_screen = '';
 $item_graphic = '';
 $item_condition = '';
+$lcd_broken = null;
 
 //////////////////////////////////////////////////
 // created by anuradha gunasinghe 23-oct-2022 
 // radio button data retrieve variables
-/////////////////////////////////////////////////
+//////////////////////////////////////////////////
+
+$current_date = date("l");   
+
 $lunch_combine = 1;
 $lcd = 1;
 $body_work = 1;
@@ -116,7 +120,6 @@ $d_broken_retrive = 2;
 $d_dent_retrive = 2;
 $fan = null;
 $heat_sink = null ;
-$cpu = null;
 
 $keyboard1 = null;
 $keys1 = null;
@@ -201,7 +204,6 @@ if (isset($_GET['sales_order_id'])) {
         $lan_cover= $data['lan_cover'];
         $heat_sink= $data['heat_sink'];
         $fan= $data['fan'];
-        $cpu= $data['cpu'];
 
         if($keyboard ==1){ $keyboard1 =1; } 
         if($speakers ==1){$speakers1 =1;} 
@@ -226,7 +228,6 @@ if (isset($_GET['sales_order_id'])) {
         if($lan_cover==1){$lan_cover1 =1;} 
         if($heat_sink==1){$heat_sink1 =1;} 
         if($fan==1){$fan1 =1;} 
-        if($cpu==1){$cpu1 =1;} 
        
         if($comb_status == 0){
             $lunch_combine = 0;
@@ -238,7 +239,7 @@ if (isset($_GET['sales_order_id'])) {
     foreach($query_run_lcd as $data){
         $whitespot = $data['whitespot'];
         $scratch = $data['scratch'];
-        $broken = $data['broken'];
+        $lcd_broken = $data['broken'];
         $line_lcd = $data['line_lcd'];
         $yellow_shadow = $data['yellow_shadow'];
         $status = $data['status'];
@@ -273,21 +274,18 @@ if (isset($_GET['sales_order_id'])) {
     }
     
     $query = "SELECT * FROM warehouse_information_sheet 
-                        INNER JOIN sales_order_add_items
-                        ON warehouse_information_sheet.sales_order_id = sales_order_add_items.sales_order_id 
-                        WHERE  warehouse_information_sheet.inventory_id = {$inventory_id} 
-                        AND warehouse_information_sheet.sales_order_id ={$_GET['sales_order_id']}";
-
+            INNER JOIN sales_order_add_items ON warehouse_information_sheet.sales_order_id = sales_order_add_items.sales_order_id
+                        WHERE  warehouse_information_sheet.inventory_id = $inventory_id";
     $result_set = mysqli_query($connection, $query);
     if ($result_set) {
         if (mysqli_num_rows($result_set)) {
             $result = mysqli_fetch_assoc($result_set);
-            $item_type = $result['item_type'];
-            $item_brand = $result['item_brand'];
-            $item_model = $result['item_model'];
-            $item_processor = $result['item_processor'];
-            $item_core = $result['item_core'];
-            $item_generation = $result['item_generation'];
+            $item_type = $result['device'];
+            $item_brand = $result['brand'];
+            $item_model = $result['model'];
+            $item_processor = $result['processor'];
+            $item_core = $result['core'];
+            $item_generation = $result['generation'];
             $item_hdd = $result['item_hdd'];
             $item_ram = $result['item_ram'];
             $item_display = $result['item_display'];
@@ -567,47 +565,76 @@ if (isset($_GET['sales_order_id'])) {
         $emp_id = mysqli_real_escape_string($connection, $_GET['emp_id']);
         $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
         $bios_check = mysqli_real_escape_string($connection, $_POST['bios_check']);
-        $power = mysqli_real_escape_string($connection, $_POST['power']);
-        $ports = mysqli_real_escape_string($connection, $_POST['ports']);
+        $computrace_lock = mysqli_real_escape_string($connection, $_POST['computrace_lock']);
+        $other_errors = mysqli_real_escape_string($connection, $_POST['other_errors']);
+        $tpm_lock = mysqli_real_escape_string($connection, $_POST['tpm_lock']);
+        $region_lock = mysqli_real_escape_string($connection, $_POST['region_lock']);
         $status = 0;
         
-        if($bios_check == 1 || $power == 1 || $ports == 1){
+        if($bios_check == 1 || $power == 1 || $ports == 1 || $computrace_lock == 1 || $other_errors == 1 || $tpm_lock == 1 || $region_lock == 1){
             $status = 1;
         }
         
         if($mother_board == 1){
-        $query = "INSERT INTO motherboard_check (sales_order_id, emp_id, inventory_id, bios_check, power, ports,status) 
-                    VALUES ('$sales_order_id', '$emp_id', '$inventory_id', '$bios_check', '$power', '$ports','$status')";
+        $query = "INSERT INTO motherboard_check (sales_order_id, emp_id, inventory_id, bios_check, power, ports, region_lock, computrace_lock, 	tpm_lock, other_errors, status) 
+                    VALUES ('$sales_order_id', '$emp_id', '$inventory_id', '$bios_check', '$power', '$ports', '$region_lock', '$computrace_lock', '$tpm_lock', '$other_errors', '$status')";
         $query_run = mysqli_query($connection, $query);
         
         if($status == 1){
-        $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-                                                    $date = $date1->format('Y-m-d H:i:s');
-        $query_prod_info ="UPDATE prod_info SET end_date_time=' $date',status='0',m_board_issue='1' WHERE p_id ='$p_id' ";
+        $query_prod_info ="UPDATE prod_info SET end_date_time = now(),status = '1', m_board_issue = '1' WHERE p_id ='$p_id' ";
         $query_prod_run = mysqli_query($connection, $query_prod_info);
-        header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
-        }else{
-            echo "<script>
+
+        echo "
+        <script>
             var newHTML = document.createElement ('div');
-            newHTML.innerHTML =
-            newHTML = document.createElement ('div');
-            newHTML.innerHTML = '<div id=\"modal-combine\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"><div class=\"modal-dialog modal-xl\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
-            document.body.appendChild (newHTML);
-            $(window).load(function(){
-                $('#modal-combine').modal('show');
-            });
+                    newHTML.innerHTML =
+                    newHTML = document.createElement ('div');
+                    newHTML.innerHTML = '<div id=\"motherboard_issue\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"><div class=\"modal-dialog modal-xl\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+                document.body.appendChild (newHTML);
+                $(window).load(function(){
+                    $('#motherboard_issue').modal('show'); });
+                
         </script>";
+        }else{
+            echo "
+            <script>
+                var newHTML = document.createElement ('div');
+                    newHTML.innerHTML =
+                    newHTML = document.createElement ('div');
+                    newHTML.innerHTML = '<div id=\"modal-combine\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"><div class=\"modal-dialog modal-xl\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+                document.body.appendChild (newHTML);
+                $(window).load(function(){
+                    $('#modal-combine').modal('show'); });
+            </script>";
             }
         }
     }
-
 ?>
-<div class="modal fade" id="modal-motherboard" aria-labelledby="myModalLabel" data-backdrop="static"
+<div class="modal fade" id="motherboard_issue" aria-labelledby="myModalLabel" data-backdrop="static"
+    data-keyboard="false" aria-hidden="true" style="top: 25%;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Motherboard Issue</h4>
+            </div>
+            <div class="modal-body">
+                <p>Please Send to Motherboard Department&hellip;</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <a type="button" class="btn btn-outline-light float-end"
+                    href="<?php echo "production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}"; ?>">Confirm</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class=" modal fade" id="modal-motherboard" aria-labelledby="myModalLabel" data-backdrop="static"
     data-keyboard="false" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">01 Motherboard Form</h4>
+                <?php echo $item_brand; ?>
             </div>
             <form method="POST">
                 <div class="modal-body">
@@ -618,33 +645,32 @@ if (isset($_GET['sales_order_id'])) {
                                 <?php  if($bios == null){  ?>
                                 <div class="icheck-success d-inline">
                                     <input type="radio" id="r1" name="bios_check" value="0" required>
-                                    <label class="label_values" for="r1" style="margin-right: 15px;">Okay </label>
+                                    <label class="label_values" for="r1" style="margin-right: 15px;">Okay</label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="r2" name="bios_check" value="1">
-                                    <label class="label_values" for="r2">No </label>
+                                    <label class="label_values" for="r2">Lock </label>
                                 </div>
                                 <?php }elseif($bios == 0){?>
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="r1" name="bios_check" value="0" checked="checked">
-                                    <label class="label_values" for="r1" style="margin-right: 15px;">Okay </label>
+                                    <input type="radio" id="r1" name="bios_check" value="1" checked="checked">
+                                    <label class="label_values" for="r1" style="margin-right: 15px;">Lock </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="r2" name="bios_check" value="1">
-                                    <label class="label_values" for="r2">No </label>
+                                    <input type="radio" id="r2" name="bios_check" value="0">
+                                    <label class="label_values" for="r2">Okay </label>
                                 </div>
                                 <?php }elseif($bios == 1){ ?>
                                 <?php }elseif($bios == 0){?>
                                 <div class="icheck-success d-inline">
-                                    <input type="radio" id="r1" name="bios_check" value="0">
-                                    <label class="label_values" for="r1" style="margin-right: 15px;">Okay </label>
+                                    <input type="radio" id="r1" name="bios_check" value="1">
+                                    <label class="label_values" for="r1" style="margin-right: 15px;">Lock </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="r2" name="bios_check" value="1" checked="checked">
-                                    <label class="label_values" for="r2">No </label>
+                                    <input type="radio" id="r2" name="bios_check" value="0" checked="checked">
+                                    <label class="label_values" for="r2">Okay </label>
                                 </div>
-                                <?php }
-                             ?>
+                                <?php } ?>
                             </div>
                         </div>
                         <div class="row">
@@ -719,6 +745,81 @@ if (isset($_GET['sales_order_id'])) {
                                     <label class="label_values" for="r6">No </label>
                                 </div>
                             </div>
+                            <?php } if ($item_brand == 'lenovo') { ?>
+                            <label class="col-sm-4 col-form-label text-capitalize">Computrace
+                                Lock</label>
+                            <div class="col-sm-8 mt-2">
+                                <div class="icheck-success d-inline">
+                                    <input type="radio" id="lcl" name="computrace_lock" value="0">
+                                    <label class="label_values" for="lcl" style="margin-right: 15px;">Okay </label>
+                                </div>
+                                <div class="icheck-danger d-inline">
+                                    <input type="radio" id="lcl1" name="computrace_lock" value="1">
+                                    <label class="label_values" for="lcl1">No </label>
+                                </div>
+                            </div>
+                            <label class="col-sm-4 col-form-label text-capitalize">Any Others
+                                Error</label>
+                            <div class="col-sm-8 mt-2">
+                                <div class="icheck-success d-inline">
+                                    <input type="radio" id="o1" name="other_errors" value="0">
+                                    <label class="label_values" for="o1" style="margin-right: 15px;">Okay </label>
+                                </div>
+                                <div class="icheck-danger d-inline">
+                                    <input type="radio" id="o2" name="other_errors" value="1">
+                                    <label class="label_values" for="o2">No </label>
+                                </div>
+                            </div>
+                            <?php } if($item_brand == 'dell'){?>
+                            <label class="col-sm-4 col-form-label text-capitalize">Computrace
+                                Lock</label>
+                            <div class="col-sm-8 mt-2">
+                                <div class="icheck-success d-inline">
+                                    <input type="radio" id="dlc" name="computrace_lock" value="0">
+                                    <label class="label_values" for="dlc" style="margin-right: 15px;">Active </label>
+                                </div>
+                                <div class="icheck-danger d-inline">
+                                    <input type="radio" id="dlc1" name="computrace_lock" value="1">
+                                    <label class="label_values" for="dlc1">Disable </label>
+                                </div>
+                            </div>
+                            <label class="col-sm-4 col-form-label text-capitalize">TPM Lock</label>
+                            <div class="col-sm-8 mt-2">
+                                <div class="icheck-success d-inline">
+                                    <input type="radio" id="dtpm" name="tpm_lock" value="0">
+                                    <label class="label_values" for="dtpm" style="margin-right: 15px;">Okay </label>
+                                </div>
+                                <div class="icheck-danger d-inline">
+                                    <input type="radio" id="dtpm1" name="tpm_lock" value="1">
+                                    <label class="label_values" for="dtpm1">No </label>
+                                </div>
+                            </div>
+                            <?php } if($item_brand == 'hp') { ?>
+                            <label class="col-sm-4 col-form-label text-capitalize">Computrace / Absolute
+                                Software
+                                Lock</label>
+                            <div class="col-sm-8 mt-2">
+                                <div class="icheck-success d-inline">
+                                    <input type="radio" id="hpc/a" name="computrace_lock" value="0">
+                                    <label class="label_values" for="hpc/a" style="margin-right: 15px;">Okay </label>
+                                </div>
+                                <div class="icheck-danger d-inline">
+                                    <input type="radio" id="hpc/a1" name="computrace_lock" value="1">
+                                    <label class="label_values" for="hpc/a1">No </label>
+                                </div>
+                            </div>
+                            <label class="col-sm-4 col-form-label text-capitalize">Me Region
+                                Lock</label>
+                            <div class="col-sm-8 mt-2">
+                                <div class="icheck-success d-inline">
+                                    <input type="radio" id="merl1" name="region_lock" value="0">
+                                    <label class="label_values" for="merl1" style="margin-right: 15px;">Okay </label>
+                                </div>
+                                <div class="icheck-danger d-inline">
+                                    <input type="radio" id="merl2" name="region_lock" value="1">
+                                    <label class="label_values" for="merl2">No </label>
+                                </div>
+                            </div>
                             <?php } ?>
                         </div>
                     </fieldset>
@@ -760,7 +861,6 @@ if (isset($_GET['sales_order_id'])) {
         $back_cover= mysqli_real_escape_string($connection,  $_POST['back_cover']);
         $wifi_card= mysqli_real_escape_string($connection,  $_POST['wifi_card']);
         $lcd_cable= mysqli_real_escape_string($connection,  $_POST['lcd_cable']);
-        $battery= mysqli_real_escape_string($connection,  $_POST['battery']);
         $battery_cable= mysqli_real_escape_string($connection,  $_POST['battery_cable']);
         $dvd_rom= mysqli_real_escape_string($connection,  $_POST['dvd_rom']);
         $dvd_caddy= mysqli_real_escape_string($connection,  $_POST['dvd_caddy']);
@@ -772,9 +872,9 @@ if (isset($_GET['sales_order_id'])) {
         $lan_cover= mysqli_real_escape_string($connection,  $_POST['lan_cover']);
         $fan= mysqli_real_escape_string($connection,  $_POST['fan']);
         $heat_sink= mysqli_real_escape_string($connection,  $_POST['heat_sink']);
-        $cpu= mysqli_real_escape_string($connection, $_POST['cpu']);
         $keys = mysqli_real_escape_string($connection,  $_POST['keyboard_keys']);   
-
+        $laptop_battery = mysqli_real_escape_string($connection,  $_POST['laptop_battery']);   
+        $battery_production_number = mysqli_real_escape_string($connection,  $_POST['battery_production_number']);   
 
         $query = "SELECT location FROM users WHERE epf = '$emp_id'";
 
@@ -785,50 +885,45 @@ if (isset($_GET['sales_order_id'])) {
             $location10 = $a['location'];
         }   
         $status = 0;
-        if($keyboard1 == 1 || $keys1 == 1 || $speakers1 == 1 || $camera1 ==1 || $bazel1 ==1 || $mousepad1 == 1 || $mouse_pad_button1 == 1 || $camera_cable1 == 1 || $back_cover1 ==1 || $wifi_card1 ==1 ||
-            $lcd_cable1 == 1 || $battery1 == 1 || $battery_cable1 == 1 || $dvd_rom1 ==1 || $dvd_caddy1 ==1 ||
-            $hdd_caddy1 == 1 || $hdd_cable_connector1 == 1 || $c_panel_palm_rest1 == 1 || $mb_base1 ==1 || $hings_cover1 ==1 || $lan_cover1 ==1 || $heat_sink1 ==1 || $cpu1 ==1 || $fan1 ==1){
-                $second_attempt = true;
+        if($keyboard1 == 1 || $keys1 == 1 || $speakers1 == 1 || $camera1 == 1 || $bazel1 == 1 || $mousepad1 == 1 || $mouse_pad_button1 == 1 || $camera_cable1 == 1 || $back_cover1 == 1 || $wifi_card1 == 1 ||
+            $lcd_cable1 == 1 || $battery1 == 1 || $battery_cable1 == 1 || $dvd_rom1 == 1 || $dvd_caddy1 == 1 ||
+            $hdd_caddy1 == 1 || $hdd_cable_connector1 == 1 || $c_panel_palm_rest1 == 1 || $mb_base1 == 1 || $hings_cover1 == 1 || $lan_cover1 == 1 || $heat_sink1 == 1 || $fan1 == 1 || $battery_production_number == 1 || $laptop_battery == 1){
+            $second_attempt = true;
         }
-        if($keyboard == 1 || $keys == 1 || $speakers == 1 || $camera ==1 || $bazel ==1 || $mousepad == 1 || $mouse_pad_button == 1 || $camera_cable == 1 || $back_cover ==1 || $wifi_card ==1 ||
-            $lcd_cable == 1 || $battery == 1 || $battery_cable == 1 || $dvd_rom ==1 || $dvd_caddy ==1 ||
-            $hdd_caddy == 1 || $hdd_cable_connector == 1 || $c_panel_palm_rest == 1 || $mb_base ==1 || $hings_cover ==1 || $lan_cover ==1 || $heat_sink ==1 || $cpu ==1 || $fan ==1){
+        if($keyboard == 1 || $keys == 1 || $speakers == 1 || $camera == 1 || $bazel == 1 || $mousepad == 1 || $mouse_pad_button == 1 || $camera_cable == 1 || $back_cover == 1 || $wifi_card == 1 ||
+            $lcd_cable == 1 || $battery_cable == 1 || $dvd_rom ==1 || $dvd_caddy ==1 ||
+            $hdd_caddy == 1 || $hdd_cable_connector == 1 || $c_panel_palm_rest == 1 || $mb_base ==1 || $hings_cover ==1 || $lan_cover ==1 || $heat_sink ==1 || $fan ==1 || $battery_production_number == 1 || $laptop_battery == 1){
             $status = 1;
-            $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-            $date = $date1->format('Y-m-d');
-        
+          
             $query_6 = "INSERT INTO requested_part_from_production(brand, model, generation, sales_order_id, inventory_id, created_date, `delivery_date`,emp_id, location,status, keyboard, speakers, camera, bazel, lan_cover, mousepad, mouse_pad_button, camera_cable, back_cover, wifi_card, lcd_cable, 
                     battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, c_panel_palm_rest, mb_base, hings_cover, switch, switch_id)
             VALUES('$item_brand', '$item_model', '$item_generation', '$sales_order_id', '$inventory_id', '$date','0000-00-00' ,'$emp_id', '$location10', '$status', '$keyboard', '$speakers',
                 '$camera', '$bazel', '$lan_cover', '$mousepad', '$mouse_pad_button', '$camera_cable', '$back_cover', '$wifi_card', '$lcd_cable', '$battery', '$battery_cable',
                 '$dvd_rom', '$dvd_caddy', '$hdd_caddy', '$hdd_cable_connector', '$c_panel_palm_rest', '$mb_base', '$hings_cover', 0, 0)";
-                            
             $query_new = mysqli_query($connection, $query_6);           
             
         }
         if($lunch_combine == 1){
             
         $query_com = "INSERT INTO combine_check(inventory_id, emp_id, sales_order_id, keyboard, speakers, camera, bazel, status, keyboard_keys, mousepad, mouse_pad_button, 
-                                camera_cable, back_cover, wifi_card, lcd_cable, battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, c_panel_palm_rest, mb_base, 
-                                hings_cover, lan_cover, combined_id,heat_sink,fan,cpu)
+                                camera_cable, back_cover, wifi_card, lcd_cable, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, c_panel_palm_rest, mb_base, 
+                                hings_cover, lan_cover, combined_id,heat_sink,fan, battery_production_number, battery)
                     VALUES ('$inventory_id', '$emp_id', '$sales_order_id', '$keyboard', '$speakers', '$camera', '$bazel', '$status', '$keys','$mousepad','$mouse_pad_button',
-                    '$camera_cable','$back_cover','$wifi_card','$lcd_cable','$battery','$battery_cable','$dvd_rom','$dvd_caddy','$hdd_caddy','$hdd_cable_connector',
-                    '$c_panel_palm_rest','$mb_base','$hings_cover','$lan_cover', 0,'$heat_sink','$fan','$cpu')";
-                        
+                    '$camera_cable','$back_cover','$wifi_card','$lcd_cable', '$battery_cable','$dvd_rom','$dvd_caddy','$hdd_caddy','$hdd_cable_connector',
+                    '$c_panel_palm_rest','$mb_base','$hings_cover','$lan_cover', 0,'$heat_sink','$fan', '$battery_production_number', '$laptop_battery')";
         $query_run = mysqli_query($connection, $query_com);
         if($second_attempt == false){
-        echo "<script>
-                var newHTML = document.createElement ('div');
-                newHTML.innerHTML =
-                newHTML = document.createElement ('div');
-                // newHTML.innerHTML = ' <div id=\"modal-lcd\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
-                document.body.appendChild (newHTML);
-                $(window).load(function(){
-                    $('#modal-lcd').modal('show');
-                });
-            </script>";
-        }else{
-            header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+        echo "
+        <script>
+            var newHTML = document.createElement ('div');
+            newHTML.innerHTML =
+            newHTML = document.createElement ('div');
+            newHTML.innerHTML = ' <div id=\"modal-lcd\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+            document.body.appendChild (newHTML);
+            $(window).load(function(){
+                $('#modal-lcd').modal('show');
+            });
+        </script>";
         }
    
         if($scan_id !=0){
@@ -843,20 +938,20 @@ if (isset($_GET['sales_order_id'])) {
             }   
     
             //if not exist then insert new record with switch machine missing parts 
-            if( $test == 0){ 
+            if($test == 0){ 
             
             $query_in ="INSERT INTO combine_check(inventory_id, emp_id, sales_order_id, keyboard, speakers, camera, bazel, status, keyboard_keys, mousepad, mouse_pad_button, camera_cable, back_cover, wifi_card,
                                                 lcd_cable, battery, battery_cable, dvd_rom, dvd_caddy, hdd_caddy, hdd_cable_connector, c_panel_palm_rest, mb_base, hings_cover, lan_cover, combined_id, heat_sink, fan, cpu) 
                     VALUES('$scan_id', '$emp_id', '$sales_order_id', '$keyboard1', '$speakers1', '$camera1', '$bazel1', '$status1', '$keys1', '$mousepad1', '$mouse_pad_button1', '$camera_cable1', '$back_cover1',
                         '$wifi_card1', '$lcd_cable1', '$battery1', '$battery_cable1', '$dvd_rom1', '$dvd_caddy1', '$hdd_caddy1', '$hdd_cable_connector1', '$c_panel_palm_rest1', '$mb_base1', '$hings_cover1', '$lan_cover1',
-                        '$inventory_id1', '$heat_sink1', '$fan1', '$cpu1' )";
+                        '$inventory_id1', '$heat_sink1', '$fan1')";
             $query_run = mysqli_query($connection, $query_in);
             }else{
                 //if machine is exist update missing parts
                 $query_update ="UPDATE combine_check SET keyboard = '$keyboard1', speakers = '$speakers1', camera = '$camera1', bazel = '$bazel1', status = '$status1', damage_keys = '$damage_keys1', mousepad = '$mousepad1',
                 mouse_pad_button = '$mouse_pad_button1', camera_cable = '$camera_cable1', back_cover = '$back_cover1', wifi_card = '$wifi_card1', lcd_cable = '$lcd_cable1', battery = '$battery1', battery_cable = '$battery_cable1',
                 dvd_rom = '$dvd_rom1', dvd_caddy = '$dvd_caddy1', hdd_caddy = '$hdd_caddy1', hdd_cable_connector = '$hdd_cable_connector1', c_panel_palm_rest = '$c_panel_palm_rest1', mb_base = '$mb_base1',
-                hings_cover = '$hings_cover1', lan_cover = '$lan_cover1', combined_id = '$combined_id1', heat_sink = '$heat_sink1', fan = '$fan1', cpu = '$cpu1'        
+                hings_cover = '$hings_cover1', lan_cover = '$lan_cover1', combined_id = '$combined_id1', heat_sink = '$heat_sink1', fan = '$fan1',         
                 WHERE
                     inventory_id = '$inventory_id'";
                     $query_run = mysqli_query($connection, $query_update);
@@ -885,52 +980,70 @@ if (isset($_GET['sales_order_id'])) {
                 $second_attempt = true;
                 echo $second_attempt;
                 exit();
-                header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
-                // header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
             }
 
         }
 
         if($status == 1){
-        $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-        $date = $date1->format('Y-m-d H:i:s');
-        $query_prod_info ="UPDATE prod_info SET end_date_time=' $date',status='1',combine_issue='1' WHERE p_id ='$p_id' ";
-        $query_prod_run = mysqli_query($connection, $query_prod_info);
-            if($second_attempt == false){
-                echo "<script>
-                    var newHTML = document.createElement ('div');
-                    newHTML.innerHTML =
-                    newHTML = document.createElement ('div');
-                    // newHTML.innerHTML = ' <div id=\"modal-lcd\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
-                    document.body.appendChild (newHTML);
-                    $(window).load(function(){
-                        $('#modal-lcd').modal('show');
-                    });
-                </script>";
-            }else{
-                header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+            $query_prod_info ="UPDATE prod_info SET end_date_time = now(), status='1', combine_issue = '1' WHERE p_id ='$p_id' ";
+            $query_prod_run = mysqli_query($connection, $query_prod_info);
             }
-            }else{
-                if($second_attempt == false){
-                echo "<script>
-                    var newHTML = document.createElement ('div');
-                    newHTML.innerHTML =
-                    newHTML = document.createElement ('div');
-                    // newHTML.innerHTML = ' <div id=\"modal-lcd\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+        }
+
+        if($laptop_battery == 1){
+            $battery_issue ="UPDATE prod_info SET end_date_time = now(), battery_issue = '1', combine_issue = '0' WHERE p_id ='$p_id' ";
+            $run_battery_issues = mysqli_query($connection, $battery_issue);
+
+           echo "
+            <script>
+                var newHTML = document.createElement ('div');
+                        newHTML.innerHTML =
+                        newHTML = document.createElement ('div');
+                        newHTML.innerHTML = '<div id=\"battery_issue\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"><div class=\"modal-dialog modal-xl\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
                     document.body.appendChild (newHTML);
                     $(window).load(function(){
-                        $('#modal-lcd').modal('show');
-                    });
+                        $('#battery_issue').modal('show'); });
+                        
             </script>";
-            }else{
-                header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
-            }
-            // header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
-                // header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
-            }
         }
     }
 ?>
+
+<div class="modal fade" id="combine_issues" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false"
+    aria-hidden="true" style="top: 25%;">
+    <div class="modal-dialog">
+        <div class="modal-content bg-info">
+            <div class="modal-header">
+                <h4 class="modal-title">Combine Issues</h4>
+            </div>
+            <div class="modal-body">
+                <p>Please Keep it in <?php echo $current_date; ?> Combine Rack &hellip;</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <a type="button" class="btn btn-outline-light float-end"
+                    href="<?php echo "production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}"; ?>">Confirm</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="battery_issue" aria-labelledby="myModalLabel1" data-backdrop="static" data-keyboard="false"
+    aria-hidden="true" style="top: 25%; width: 99%;">
+    <div class="modal-dialog">
+        <div class="modal-content bg-info">
+            <div class=" modal-header">
+                <h4 class="modal-title">Battery Issue</h4>
+            </div>
+            <div class="modal-body">
+                <p>Please Send to Battery Department&hellip;</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <a type="button" class="btn btn-outline-light float-end"
+                    href="<?php echo "production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}"; ?>">Confirm</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- ============================================================== -->
 <!-- Combine check Form  -->
@@ -940,12 +1053,10 @@ if (isset($_GET['sales_order_id'])) {
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header bg-dark mx-2 mb-2">
-                <h4 class="modal-title">02 Combine Task</h4>
+                <h4 class="modal-title">02 Functional Check</h4>
             </div>
             <div class="">
-                <button class="btn btn-sm mx-2 bg-gradient-blue" onclick="myFunction()"></button>
-
-                <div id="myDIV">
+                <div id="">
                     <?php $query = "SELECT  COUNT(`inventory_id`) AS exist_count FROM combine_check WHERE inventory_id ='$inventory_id'";
                     
                     $query_run = mysqli_query($connection, $query);
@@ -976,7 +1087,6 @@ if (isset($_GET['sales_order_id'])) {
                     <fieldset class="d-flex">
                         <div class="col col-md-6 col-lg-6">
                             <div class="row">
-
                                 <label class="col-sm-4 col-form-label text-capitalize">01 Keyboard:</label>
                                 <?php if($keyboard == null || $keyboard == 2){ ?>
                                 <div class="col-sm-8 mt-2">
@@ -1058,7 +1168,7 @@ if (isset($_GET['sales_order_id'])) {
                                 </div>
                                 <?php } ?>
                             </div>
-
+                            <!-- Speakers -->
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">03 Speakers:</label>
                                 <?php if($speakers == null || $speakers == 2){ ?>
@@ -1101,7 +1211,7 @@ if (isset($_GET['sales_order_id'])) {
                                 <?php }?>
 
                             </div>
-
+                            <!-- Camera -->
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">04 Camera:</label>
                                 <?php if($camera == null || $camera == 2){ ?>
@@ -1144,9 +1254,9 @@ if (isset($_GET['sales_order_id'])) {
                                 <?php } ?>
 
                             </div>
-
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">05 Bazel Broken:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">05 Bazel
+                                    Broken:</label>
                                 <?php if($bazel == null || $bazel == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
@@ -1184,6 +1294,7 @@ if (isset($_GET['sales_order_id'])) {
                                 </div>
                                 <?php } ?>
                             </div>
+                            <!-- Mouse Pad -->
                             <div class="row">
                                 <label class="col-sm-4 col-form-label text-capitalize">06 Mouse Pad:</label>
                                 <?php if($mousepad == null || $mousepad == 2){ ?>
@@ -1226,8 +1337,10 @@ if (isset($_GET['sales_order_id'])) {
                                 <?php } ?>
 
                             </div>
+                            <!-- Mouse Pad Button -->
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">07 Mouse Pad Button:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">07 Mouse Pad
+                                    Button:</label>
                                 <?php if($mouse_pad_button == null || $mouse_pad_button == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
@@ -1269,8 +1382,10 @@ if (isset($_GET['sales_order_id'])) {
                                 <?php } ?>
 
                             </div>
+                            <!-- Camera Cable -->
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">08 Camera Cable:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">08 Camera
+                                    Cable:</label>
                                 <?php if($camera_cable == null || $camera_cable == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
@@ -1312,8 +1427,10 @@ if (isset($_GET['sales_order_id'])) {
                                 <?php } ?>
 
                             </div>
+                            <!-- Back Cover -->
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">09 Back Cover:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">09 Back
+                                    Cover:</label>
                                 <?php if($back_cover == null || $back_cover == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
@@ -1355,8 +1472,10 @@ if (isset($_GET['sales_order_id'])) {
                                 <?php } ?>
 
                             </div>
+                            <!-- WI-FI Card -->
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">10 WIFI Card: </label>
+                                <label class="col-sm-4 col-form-label text-capitalize">10 WIFI Card:
+                                </label>
                                 <?php if($wifi_card == null || $wifi_card == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
@@ -1440,97 +1559,10 @@ if (isset($_GET['sales_order_id'])) {
                                 </div>
                                 <?php } ?>
                             </div>
+
+                            <!-- DVD Rom -->
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">12 Battery:</label>
-                                <?php if($battery == null || $battery == 2){ ?>
-                                <div class="col-sm-8 mt-2">
-                                    <div class="icheck-success d-inline">
-                                        <input type="radio" id="c13" name="battery" value="0" required>
-                                        <label class="label_values" for="c13" style="margin-right: 15px;">Okay
-                                        </label>
-                                    </div>
-                                    <div class="icheck-danger d-inline">
-                                        <input type="radio" id="c14" name="battery" value="1">
-                                        <label class="label_values" for="c14">No </label>
-                                    </div>
-                                </div>
-                                <?php }elseif($battery == 0){ ?>
-                                <div class="col-sm-8 mt-2">
-                                    <div class="icheck-success d-inline">
-                                        <input type="radio" id="c13" name="battery" value="0" checked="checked">
-                                        <label class="label_values" for="c13" style="margin-right: 15px;">Okay
-                                        </label>
-                                    </div>
-                                    <div class="icheck-danger d-inline">
-                                        <input type="radio" id="c14" name="battery" value="1" disabled>
-                                        <label class="label_values" for="c14">No </label>
-                                    </div>
-                                </div>
-                                <?php }elseif($battery == 1){ ?>
-                                <div class="col-sm-8 mt-2">
-                                    <div class="icheck-success d-inline">
-                                        <input type="radio" id="c13" name="battery" class="battery" value="battery">
-                                        <label class="label_values" for="c13" style="margin-right: 15px;">Okay
-                                        </label>
-                                    </div>
-                                    <div class="icheck-danger d-inline">
-                                        <input type="radio" id="c14" name="battery" value="1" checked="checked">
-                                        <label class="label_values" for="c14">No </label>
-                                    </div>
-                                    <div id="result"></div>
-                                </div>
-                                <?php } ?>
-
-                            </div>
-                            <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">13 Battery Cable:</label>
-                                <?php if($battery_cable == null || $battery_cable == 2){ ?>
-                                <div class="col-sm-8 mt-2">
-                                    <div class="icheck-success d-inline">
-                                        <input type="radio" id="c15" name="battery_cable" value="0" required>
-                                        <label class="label_values" for="c15" style="margin-right: 15px;">Okay
-                                        </label>
-                                    </div>
-                                    <div class="icheck-danger d-inline">
-                                        <input type="radio" id="c16" name="battery_cable" value="1">
-                                        <label class="label_values" for="c16">No </label>
-                                    </div>
-                                </div>
-                                <?php }elseif($battery_cable == 0){ ?>
-                                <div class="col-sm-8 mt-2">
-                                    <div class="icheck-success d-inline">
-                                        <input type="radio" id="c15" name="battery_cable" value="0" checked="checked">
-                                        <label class="label_values" for="c15" style="margin-right: 15px;">Okay
-                                        </label>
-                                    </div>
-                                    <div class="icheck-danger d-inline">
-                                        <input type="radio" id="c16" name="battery_cable" value="1" disabled>
-                                        <label class="label_values" for="c16">No </label>
-                                    </div>
-                                </div>
-                                <?php }elseif($battery_cable == 1){ ?>
-                                <div class="col-sm-8 mt-2">
-                                    <div class="icheck-success d-inline">
-                                        <input type="radio" id="c15" name="battery_cable" class="battery_cable"
-                                            value="battery_cable">
-                                        <label class="label_values" for="c15" style="margin-right: 15px;">Okay
-                                        </label>
-                                    </div>
-                                    <div class="icheck-danger d-inline">
-                                        <input type="radio" id="c16" name="battery_cable" value="1" checked="checked">
-                                        <label class="label_values" for="c16">No </label>
-                                    </div>
-                                    <div id="result"></div>
-                                </div>
-                                <?php } ?>
-
-                            </div>
-                        </div>
-
-                        <div class="col col-md-6 col-lg-6">
-
-                            <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">14 DVD ROM: </label>
+                                <label class="col-sm-4 col-form-label text-capitalize">12 DVD ROM: </label>
                                 <?php if($dvd_rom == null || $dvd_rom == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
@@ -1571,9 +1603,9 @@ if (isset($_GET['sales_order_id'])) {
                                 <?php } ?>
 
                             </div>
-
+                            <!-- DVD Caddy -->
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">15 DVD Caddy:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">13 DVD Caddy:</label>
                                 <?php if($dvd_caddy == null || $dvd_caddy == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
@@ -1616,8 +1648,13 @@ if (isset($_GET['sales_order_id'])) {
 
                             </div>
 
+                        </div>
+
+                        <div class="col col-md-6 col-lg-6">
+
+                            <!-- HDD Caddy -->
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">16 HDD Caddy:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">14 HDD Caddy:</label>
                                 <?php if($hdd_caddy == null || $hdd_caddy == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
@@ -1659,8 +1696,9 @@ if (isset($_GET['sales_order_id'])) {
                                 <?php } ?>
 
                             </div>
+                            <!-- HDD Cable -->
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">17 HDD Cable
+                                <label class="col-sm-4 col-form-label text-capitalize">15 HDD Cable
                                     Connector:</label>
                                 <?php if($hdd_cable_connector == null || $hdd_cable_connector == 2){ ?>
                                 <div class="col-sm-8 mt-2">
@@ -1705,8 +1743,9 @@ if (isset($_GET['sales_order_id'])) {
                                 <?php } ?>
 
                             </div>
+                            <!-- C Panel / Palm Rest -->
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">18 C Panel / Palm
+                                <label class="col-sm-4 col-form-label text-capitalize">16 C Panel / Palm
                                     Rest:</label>
                                 <?php if($c_panel_palm_rest == null || $c_panel_palm_rest == 2){ ?>
                                 <div class="col-sm-8 mt-2">
@@ -1751,8 +1790,10 @@ if (isset($_GET['sales_order_id'])) {
                                 <?php } ?>
 
                             </div>
+                            <!-- D / MB Base -->
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">19 D / MB Base:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">17 D / MB
+                                    Base:</label>
                                 <?php if($mb_base == null || $mb_base == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
@@ -1793,8 +1834,10 @@ if (isset($_GET['sales_order_id'])) {
                                 <?php } ?>
 
                             </div>
+                            <!-- Hings Cover -->
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">20 Hings Cover:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">18 Hings
+                                    Cover:</label>
                                 <?php if($hings_cover == null || $hings_cover == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
@@ -1836,8 +1879,9 @@ if (isset($_GET['sales_order_id'])) {
                                 <?php } ?>
 
                             </div>
+                            <!-- LAN Cover -->
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">21 LAN Cover:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">19 LAN Cover:</label>
                                 <?php if($lan_cover == null || $lan_cover == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
@@ -1879,8 +1923,9 @@ if (isset($_GET['sales_order_id'])) {
                                 <?php } ?>
 
                             </div>
+                            <!-- Fan -->
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">22 Fan:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">20 Fan:</label>
                                 <?php if($fan == null || $fan == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
@@ -1901,7 +1946,7 @@ if (isset($_GET['sales_order_id'])) {
                                         </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine43" name="fan" value="1">
+                                        <input type="radio" id="combine43" name="fan" value="1" disabled>
                                         <label class="label_values" for="combine43">No </label>
                                     </div>
                                 </div>
@@ -1919,9 +1964,9 @@ if (isset($_GET['sales_order_id'])) {
                                 </div>
                                 <?php } ?>
                             </div>
-
+                            <!-- Heat Sink -->
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">23 Heat Sink:</label>
+                                <label class="col-sm-4 col-form-label text-capitalize">22 Heat Sink:</label>
                                 <?php if($heat_sink == null || $heat_sink == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
@@ -1942,7 +1987,7 @@ if (isset($_GET['sales_order_id'])) {
                                         </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine45" name="heat_sink" value="1">
+                                        <input type="radio" id="combine45" name="heat_sink" value="1" disabled>
                                         <label class="label_values" for="combine45">No </label>
                                     </div>
                                 </div>
@@ -1961,45 +2006,79 @@ if (isset($_GET['sales_order_id'])) {
                                 <?php } ?>
                             </div>
 
+                            <!-- Battery Cable -->
                             <div class="row">
-                                <label class="col-sm-4 col-form-label text-capitalize">24 CPU:</label>
-                                <?php if($cpu == null || $cpu == 2){ ?>
+                                <label class="col-sm-4 col-form-label text-capitalize">23 Battery
+                                    Cable:</label>
+                                <?php if($battery_cable == null || $battery_cable == 2){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine46" name="cpu" value="0" required>
-                                        <label class="label_values" for="combine46" style="margin-right: 15px;">Okay
+                                        <input type="radio" id="c15" name="battery_cable" value="0" required>
+                                        <label class="label_values" for="c15" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine47" name="cpu" value="1">
-                                        <label class="label_values" for="combine47">No </label>
+                                        <input type="radio" id="c16" name="battery_cable" value="1">
+                                        <label class="label_values" for="c16">No </label>
                                     </div>
                                 </div>
-                                <?php }elseif($cpu == 0){ ?>
+                                <?php }elseif($battery_cable == 0){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine46" name="cpu" value="0" checked="checked">
-                                        <label class="label_values" for="combine46" style="margin-right: 15px;">Okay
+                                        <input type="radio" id="c15" name="battery_cable" value="0" checked="checked">
+                                        <label class="label_values" for="c15" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine47" name="cpu" value="1">
-                                        <label class="label_values" for="combine47">No </label>
+                                        <input type="radio" id="c16" name="battery_cable" value="1" disabled>
+                                        <label class="label_values" for="c16">No </label>
                                     </div>
                                 </div>
-                                <?php }elseif($cpu == 1){ ?>
+                                <?php }elseif($battery_cable == 1){ ?>
                                 <div class="col-sm-8 mt-2">
                                     <div class="icheck-success d-inline">
-                                        <input type="radio" id="combine46" name="cpu" value="0">
-                                        <label class="label_values" for="combine46" style="margin-right: 15px;">Okay
+                                        <input type="radio" id="c15" name="battery_cable" class="battery_cable"
+                                            value="battery_cable">
+                                        <label class="label_values" for="c15" style="margin-right: 15px;">Okay
                                         </label>
                                     </div>
                                     <div class="icheck-danger d-inline">
-                                        <input type="radio" id="combine47" name="cpu" value="1" checked="checked">
-                                        <label class="label_values" for="combine47">No </label>
+                                        <input type="radio" id="c16" name="battery_cable" value="1" checked="checked">
+                                        <label class="label_values" for="c16">No </label>
                                     </div>
+                                    <div id="result"></div>
                                 </div>
                                 <?php } ?>
+
+                            </div>
+
+                            <!-- Battery -->
+                            <div class="row">
+                                <label class="col-sm-4 col-form-label text-capitalize">24 Battery:</label>
+                                <div class="col-sm-8 mt-2 d-flex">
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="b1" name="laptop_battery" value="0"
+                                            onclick="exellentBattery()" required>
+                                        <label class="label_values" for="b1" style="margin-right: 15px;">Exellent
+                                        </label>
+                                    </div>
+                                    <div class="icheck-success d-inline">
+                                        <input type="radio" id="b2" name="laptop_battery" value="0"
+                                            onclick="goodBatteryLife()" required>
+                                        <label class="label_values" for="b2" style="margin-right: 15px;">Good
+                                        </label>
+                                    </div>
+                                    <div class="icheck-danger d-inline">
+                                        <input type="radio" id="b3" name="laptop_battery" value="1"
+                                            onclick="scanBatteryQR()">
+                                        <label class="label_values" for="b3" style="margin-right: 15px;">Bad
+                                        </label>
+                                    </div>
+
+                                </div>
+                                <input type='text' id="text" name="battery_production_number"
+                                    placeholder="Please Scan or Create Barcode Number" style="display:none">
+
                             </div>
 
                             <!-- All SELECT BUTTON -->
@@ -2050,37 +2129,52 @@ if (isset($_GET['sales_order_id'])) {
         $query_run = mysqli_query($connection, $query);
 
         if($status == 1){
-        $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-                                                    $date = $date1->format('Y-m-d H:i:s');
-        $query_prod_info ="UPDATE prod_info SET end_date_time=' $date',status='1',lcd_issue='1' WHERE p_id ='$p_id' ";
+        $query_prod_info ="UPDATE prod_info SET end_date_time = now(), status='1', lcd_issue='1' WHERE p_id ='$p_id' ";
         $query_prod_run = mysqli_query($connection, $query_prod_info);
-        echo "<script>
-                    var newHTML = document.createElement ('div');
-                    newHTML.innerHTML =
-                    newHTML = document.createElement ('div');
-                    // newHTML.innerHTML = ' <div id=\"modal-bodywork\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+          echo "
+            <script>
+                var newHTML = document.createElement ('div');
+                        newHTML.innerHTML =
+                        newHTML = document.createElement ('div');
+                        newHTML.innerHTML = '<div id=\"modal-bodywork\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"><div class=\"modal-dialog modal-xl\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
                     document.body.appendChild (newHTML);
                     $(window).load(function(){
-                        $('#modal-bodywork').modal('show');
-                    });
-                </script>";
-        // header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+                        $('#modal-bodywork').modal('show'); });
+                        
+            </script>";
         }else{
             echo "<script>
                     var newHTML = document.createElement ('div');
                     newHTML.innerHTML =
                     newHTML = document.createElement ('div');
-                    // newHTML.innerHTML = ' <div id=\"modal-bodywork\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+                    newHTML.innerHTML = ' <div id=\"modal-bodywork\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
                     document.body.appendChild (newHTML);
                     $(window).load(function(){
                         $('#modal-bodywork').modal('show');
                     });
                 </script>";
-                // header("location: ./production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id}");
             }
     }
 
 ?>
+
+<div class="modal fade" id="lcd_issue" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false"
+    aria-hidden="true" style="top: 25%;">
+    <div class="modal-dialog">
+        <div class="modal-content bg-danger">
+            <div class="modal-header">
+                <h4 class="modal-title">LCD Issue</h4>
+            </div>
+            <div class="modal-body">
+                <p>Please Send to LCD Department&hellip;</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <a type="button" class="btn btn-outline-light float-end"
+                    href="<?php echo "production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}"; ?>">Confirm</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- ============================================================== -->
 <!-- LCD check Form  -->
@@ -2102,7 +2196,8 @@ if (isset($_GET['sales_order_id'])) {
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
                                     <input type="radio" id="r15" name="whitespot" value="0" required>
-                                    <label class="label_values" for="r15" style="margin-right: 15px;">Okay </label>
+                                    <label class="label_values" for="r15" style="margin-right: 15px;">Okay
+                                    </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="r16" name="whitespot" value="1">
@@ -2113,7 +2208,8 @@ if (isset($_GET['sales_order_id'])) {
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
                                     <input type="radio" id="r15" name="whitespot" value="0" checked="checked">
-                                    <label class="label_values" for="r15" style="margin-right: 15px;">Okay </label>
+                                    <label class="label_values" for="r15" style="margin-right: 15px;">Okay
+                                    </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="r16" name="whitespot" value="1">
@@ -2124,7 +2220,8 @@ if (isset($_GET['sales_order_id'])) {
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
                                     <input type="radio" id="r15" name="whitespot" value="0">
-                                    <label class="label_values" for="r15" style="margin-right: 15px;">Okay </label>
+                                    <label class="label_values" for="r15" style="margin-right: 15px;">Okay
+                                    </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="r16" name="whitespot" value="1" checked="checked">
@@ -2141,7 +2238,8 @@ if (isset($_GET['sales_order_id'])) {
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
                                     <input type="radio" id="r17" name="scratch" value="0" required>
-                                    <label class="label_values" for="r17" style="margin-right: 15px;">Okay </label>
+                                    <label class="label_values" for="r17" style="margin-right: 15px;">Okay
+                                    </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="18" name="scratch" value="1">
@@ -2152,7 +2250,8 @@ if (isset($_GET['sales_order_id'])) {
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
                                     <input type="radio" id="r17" name="scratch" value="0" checked="checked">
-                                    <label class="label_values" for="r17" style="margin-right: 15px;">Okay </label>
+                                    <label class="label_values" for="r17" style="margin-right: 15px;">Okay
+                                    </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="18" name="scratch" value="1">
@@ -2163,7 +2262,8 @@ if (isset($_GET['sales_order_id'])) {
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
                                     <input type="radio" id="r17" name="scratch" value="0">
-                                    <label class="label_values" for="r17" style="margin-right: 15px;">Okay </label>
+                                    <label class="label_values" for="r17" style="margin-right: 15px;">Okay
+                                    </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="18" name="scratch" value="1" checked="checked">
@@ -2180,10 +2280,11 @@ if (isset($_GET['sales_order_id'])) {
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
                                     <input type="radio" id="r19" name="broken" value="0" required>
-                                    <label class="label_values" for="r19" style="margin-right: 15px;">Okay </label>
+                                    <label class="label_values" for="r19" style="margin-right: 15px;">Okay
+                                    </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="r20" name="broken" value="0">
+                                    <input type="radio" id="r20" name="broken" value="1">
                                     <label class="label_values" for="r20">No </label>
                                 </div>
                             </div>
@@ -2191,10 +2292,11 @@ if (isset($_GET['sales_order_id'])) {
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
                                     <input type="radio" id="r19" name="broken" value="0" checked="checked">
-                                    <label class="label_values" for="r19" style="margin-right: 15px;">Okay </label>
+                                    <label class="label_values" for="r19" style="margin-right: 15px;">Okay
+                                    </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="r20" name="broken" value="0">
+                                    <input type="radio" id="r20" name="broken" value="1">
                                     <label class="label_values" for="r20">No </label>
                                 </div>
                             </div>
@@ -2202,10 +2304,11 @@ if (isset($_GET['sales_order_id'])) {
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
                                     <input type="radio" id="r19" name="broken" value="0">
-                                    <label class="label_values" for="r19" style="margin-right: 15px;">Okay </label>
+                                    <label class="label_values" for="r19" style="margin-right: 15px;">Okay
+                                    </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
-                                    <input type="radio" id="r20" name="broken" value="0" checked="checked">
+                                    <input type="radio" id="r20" name="broken" value="1" checked="checked">
                                     <label class="label_values" for="r20">No </label>
                                 </div>
                             </div>
@@ -2218,7 +2321,8 @@ if (isset($_GET['sales_order_id'])) {
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
                                     <input type="radio" id="r21" name="line_lcd" value="0" required>
-                                    <label class="label_values" for="r21" style="margin-right: 15px;">Okay </label>
+                                    <label class="label_values" for="r21" style="margin-right: 15px;">Okay
+                                    </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="r22" name="line_lcd" value="1">
@@ -2229,7 +2333,8 @@ if (isset($_GET['sales_order_id'])) {
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
                                     <input type="radio" id="r21" name="line_lcd" value="0" checked="checked">
-                                    <label class="label_values" for="r21" style="margin-right: 15px;">Okay </label>
+                                    <label class="label_values" for="r21" style="margin-right: 15px;">Okay
+                                    </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="r22" name="line_lcd" value="1">
@@ -2240,7 +2345,8 @@ if (isset($_GET['sales_order_id'])) {
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
                                     <input type="radio" id="r21" name="line_lcd" value="0">
-                                    <label class="label_values" for="r21" style="margin-right: 15px;">Okay </label>
+                                    <label class="label_values" for="r21" style="margin-right: 15px;">Okay
+                                    </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" id="r22" name="line_lcd" value="1" checked="checked">
@@ -2257,7 +2363,8 @@ if (isset($_GET['sales_order_id'])) {
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
                                     <input type="radio" name="yellow_shadow" id="r23" value="0" required>
-                                    <label class="label_values" for="r23" style="margin-right: 15px;">Okay </label>
+                                    <label class="label_values" for="r23" style="margin-right: 15px;">Okay
+                                    </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" name="yellow_shadow" id="r24" value="1">
@@ -2268,7 +2375,8 @@ if (isset($_GET['sales_order_id'])) {
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
                                     <input type="radio" name="yellow_shadow" id="r23" value="0" checked="checked">
-                                    <label class="label_values" for="r23" style="margin-right: 15px;">Okay </label>
+                                    <label class="label_values" for="r23" style="margin-right: 15px;">Okay
+                                    </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" name="yellow_shadow" id="r24" value="1">
@@ -2279,7 +2387,8 @@ if (isset($_GET['sales_order_id'])) {
                             <div class="col-sm-8 mt-2">
                                 <div class="icheck-success d-inline">
                                     <input type="radio" name="yellow_shadow" id="r23" value="0">
-                                    <label class="label_values" for="r23" style="margin-right: 15px;">Okay </label>
+                                    <label class="label_values" for="r23" style="margin-right: 15px;">Okay
+                                    </label>
                                 </div>
                                 <div class="icheck-danger d-inline">
                                     <input type="radio" name="yellow_shadow" id="r24" value="1" checked="checked">
@@ -2492,7 +2601,8 @@ if (isset($_GET['sales_order_id'])) {
 
                 </div>
                 <div class="modal-footer justify-content-end">
-                    <button type="submit" class="btn bg-gradient-success btn-sm" name="bodywork">Next </button>
+                    <button type="submit" class="btn bg-gradient-success btn-sm" name="bodywork">Next
+                    </button>
                 </div>
             </form>
         </div>
@@ -2500,6 +2610,7 @@ if (isset($_GET['sales_order_id'])) {
 </div>
 
 <?php 
+
     if(isset($_POST['bodywork'])){
         if($_POST['work'] != null){
         $checkBox = implode(',', $_POST['work']); 
@@ -2553,42 +2664,39 @@ if (isset($_GET['sales_order_id'])) {
         if($a_scratch == 1 || $a_broken == 1 || $a_dent == 1 || $b_scratch ==1 || $b_logo == 1 || $b_color == 1 || $c_scratch == 1 || $c_broken ==1 || $c_dent ==1 || $d_scratch == 1 || $d_broken == 1 || $d_dent==1){
             $status = 1;
         } 
-    
-        $query = "INSERT INTO bodywork(inventory_id, emp_id, sales_order_id, a_scratch, a_broken, a_dent, b_scratch, b_logo, b_color, c_scratch, c_broken, c_dent, d_scratch, d_broken, d_dent, status) 
-        VALUES ('$inventory_id', '$emp_id', '$sales_order_id','$a_scratch','$a_broken','$a_dent','$b_scratch', '$b_logo','$b_color','$c_scratch','$c_broken','$c_dent','$d_scratch','$d_broken','$d_dent','$status')";
-        echo $query;
-        $query_run = mysqli_query($connection, $query);
-        echo "<script>
-                var newHTML = document.createElement ('div');
-                newHTML.innerHTML =
-                newHTML = document.createElement ('div');
-                // newHTML.innerHTML = ' <div id=\"modal-production\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
-                document.body.appendChild (newHTML);
-                $(window).load(function(){
-                    $('#modal-production').modal('show');
-                });
-            </script>";
-    
-        if($status == 1){
-            $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-            $date = $date1->format('Y-m-d H:i:s');
-            $query_prod_info ="UPDATE prod_info SET end_date_time=' $date',status='1',bodywork_issue='1' WHERE p_id ='$p_id' ";
-            $query_prod_run = mysqli_query($connection, $query_prod_info);
-            // header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
-            }else{
-                echo "<script>
-                        var newHTML = document.createElement ('div');
-                        newHTML.innerHTML =
-                        newHTML = document.createElement ('div');
-                        // newHTML.innerHTML = ' <div id=\"modal-production\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+        if($lcd_broken == 0){
+            $query = "INSERT INTO bodywork(inventory_id, emp_id, sales_order_id, a_scratch, a_broken, a_dent, b_scratch, b_logo, b_color, c_scratch, c_broken, c_dent, d_scratch, d_broken, d_dent, status) 
+            VALUES ('$inventory_id', '$emp_id', '$sales_order_id','$a_scratch','$a_broken','$a_dent','$b_scratch', '$b_logo','$b_color','$c_scratch','$c_broken','$c_dent','$d_scratch','$d_broken','$d_dent','$status')";
+            $query_run = mysqli_query($connection, $query);
+            echo "<script>
+                    var newHTML = document.createElement ('div');
+                    newHTML.innerHTML =
+                    newHTML = document.createElement ('div');
+                    newHTML.innerHTML = ' <div id=\"modal-production\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"> <div class=\"modal-dialog\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+                    document.body.appendChild (newHTML);
+                    $(window).load(function(){
+                        $('#modal-production').modal('show');
+                    });
+                </script>";
+        }
+            if($status == 1){
+                $query_prod_info ="UPDATE prod_info SET end_date_time = now(), status='1', bodywork_issue = '1' WHERE p_id ='$p_id' ";
+                $query_prod_run = mysqli_query($connection, $query_prod_info);
+            }
+            if($lcd_broken == 1){
+                echo "
+                <script>
+                    var newHTML = document.createElement ('div');
+                            newHTML.innerHTML =
+                            newHTML = document.createElement ('div');
+                            newHTML.innerHTML = '<div id=\"lcd_broken\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"><div class=\"modal-dialog modal-xl\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
                         document.body.appendChild (newHTML);
                         $(window).load(function(){
-                            $('#modal-production').modal('show');
-                        });
-                    </script>";
+                            $('#lcd_broken').modal('show'); });
+                        
+                </script>";
             }
         }
- 
 
     if(isset($_POST['prduction_specification_form'])){
                             
@@ -2597,6 +2705,7 @@ if (isset($_GET['sales_order_id'])) {
         $inventory_id = mysqli_real_escape_string($connection, $_GET['inventory_id']);
         $processor = mysqli_real_escape_string($connection, $_POST['processor']);
         $generation = mysqli_real_escape_string($connection, $_POST['generation']);
+        $ram_type = mysqli_real_escape_string($connection, $_POST['ram_type']);
         $ram = mysqli_real_escape_string($connection, $_POST['ram']);
         $hdd_capacity = mysqli_real_escape_string($connection, $_POST['hdd_capacity']);
         $ssd_capacity = mysqli_real_escape_string($connection, $_POST['ssd_capacity']);
@@ -2605,13 +2714,10 @@ if (isset($_GET['sales_order_id'])) {
         $graphic = mysqli_real_escape_string($connection, $_POST['graphic']);
         $graphic_type = mysqli_real_escape_string($connection, $_POST['graphic_type']);
         $operating_system = mysqli_real_escape_string($connection, $_POST['operating_system']);
-        $battery_level = mysqli_real_escape_string($connection, $_POST['battery_level']);
-                        
-        $query = "INSERT INTO production_check(inventory_id, emp_id, sales_order_id, processor, generation, ram, hdd_capacity, ssd_capacity, display, resolutions, graphic, graphic_type, operating_system, battery_level, status, created_time) 
-                    VALUES ('$sales_order_id', '$emp_id', '$inventory_id', '$processor', '$generation', '$ram', '$hdd_capacity', '$ssd_capacity', '$display', '$resolutions', '$graphic', '$graphic_type', '$operating_system', '$battery_level', 0, CURRENT_TIMESTAMP)";
+                         
+        $query = "INSERT INTO production_check(inventory_id, emp_id, sales_order_id, processor, generation, ram_type,ram, hdd_capacity, ssd_capacity, display, resolutions, graphic, graphic_type, operating_system, status, created_time) 
+                    VALUES ('$sales_order_id', '$emp_id', '$inventory_id', '$processor', '$generation', '$ram_type','$ram', '$hdd_capacity', '$ssd_capacity', '$display', '$resolutions', '$graphic', '$graphic_type', '$operating_system', 0, CURRENT_TIMESTAMP)";
         $query_run = mysqli_query($connection, $query);
-        $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-        $date = $date1->format('Y-m-d H:i:s');
 
         $query = "SELECT * FROM prod_info WHERE inventory_id = '$inventory_id' ";
         $query_run = mysqli_query($connection, $query); 
@@ -2626,15 +2732,69 @@ if (isset($_GET['sales_order_id'])) {
             $all_ok =1;
         }
 
-        $query_prod_info ="UPDATE prod_info SET end_date_time = '$date', status = '{$all_ok}', production_spec = '0' WHERE p_id = '$p_id' ";
+        $query_prod_info ="UPDATE prod_info SET end_date_time = now(), status = '{$all_ok}', production_spec = '0' WHERE p_id = '$p_id' ";
         $query_prod_run = mysqli_query($connection, $query_prod_info);
-        
 
-        // header("location: ./production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}");
+        echo "
+        <script>
+            var newHTML = document.createElement ('div');
+                    newHTML.innerHTML =
+                    newHTML = document.createElement ('div');
+                    newHTML.innerHTML = '<div id=\"all_prodtion_issues\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"><div class=\"modal-dialog modal-xl\"><div class=\"modal-content\"><div class=\"modal-header\"></div>';
+                document.body.appendChild (newHTML);
+                $(window).load(function(){
+                    $('#all_prodtion_issues').modal('show'); });
+        </script>";
                                 
     }
 
 ?>
+
+<div class="modal fade" id="lcd_broken" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false"
+    aria-hidden="true" style="top: 25%;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">LCD Broken</h4>
+            </div>
+            <div class="modal-body">
+                <p>Please Send to LCD Department&hellip;</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <a type="button" class="btn btn-outline-light float-end"
+                    href="<?php echo "production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}"; ?>">Confirm</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="all_prodtion_issues" aria-labelledby="myModalLabel" data-backdrop="static"
+    data-keyboard="false" aria-hidden="true" style="top: 25%;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Production Issues</h4>
+            </div>
+            <div class="modal-body">
+                <?php if($prod_combine_issue == 1) { ?>
+                <p style="background-color: #dee2e6; padding: 3px; color: #000;">Please Keep it in
+                    <?php echo $current_date; ?> Combine Rack&hellip;
+                </p>
+                <?php } elseif($prod_lcd_issue == 1) { ?>
+                <p style="background-color: #dc3545; padding: 3px;">Please Send to LCD Department&hellip;</p>
+                <?php } elseif($prod_body_work_issue == 1) { ?>
+                <p style="background-color: #ffc107; padding: 3px; color: #000">Please Send to Bodywork
+                    Department&hellip;</p>
+                <?php } ?>
+                <p></p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <a type="button" class="btn btn-outline-light float-end"
+                    href="<?php echo "production_member_daily_task.php?sales_order_id={$sales_order_id}&tech_id={$tech_id}"; ?>">Confirm</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- ============================================================== -->
 <!-- Production check Form  -->
@@ -2666,7 +2826,8 @@ if (isset($_GET['sales_order_id'])) {
                                                 <div class="icheck-success d-inline">
                                                     <input type="radio" id="celeron" name="processor" value="celeron"
                                                         required>
-                                                    <label class="label_values my-1" for="celeron">Celeron </label>
+                                                    <label class="label_values my-1" for="celeron">Celeron
+                                                    </label>
                                                 </div>
                                             </label>
                                         </div>
@@ -2677,7 +2838,8 @@ if (isset($_GET['sales_order_id'])) {
                                                 <div class="icheck-success d-inline">
                                                     <input type="radio" id="pentium" name="processor" value="pentium"
                                                         required>
-                                                    <label class="label_values my-1" for="pentium">Pentium </label>
+                                                    <label class="label_values my-1" for="pentium">Pentium
+                                                    </label>
                                                 </div>
                                             </label>
                                         </div>
@@ -2985,6 +3147,59 @@ if (isset($_GET['sales_order_id'])) {
                                 </div>
 
                                 <div class="row">
+                                    <label class="col-sm-2 col-form-label text-capitalize " style="font-size:14px">RAM
+                                        Type</label>
+                                    <div class="col-sm-10 ">
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="ddr2" name="ram_type" value="ddr2" required>
+                                                    <label class="label_values my-1" for="ddr2"
+                                                        style="margin-right: 15px;">DDR2
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="ddr3" name="ram_type" value="ddr3" required>
+                                                    <label class="label_values my-1" for="ddr3"
+                                                        style="margin-right: 15px;">DDR3
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="ddr3l" name="ram_type" value="ddr3l"
+                                                        required>
+                                                    <label class="label_values my-1" for="ddr3l"
+                                                        style="margin-right: 15px;">DDR3L
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" id="ddr4" name="ram_type" value="ddr4" required>
+                                                    <label class="label_values my-1" for="ddr4"
+                                                        style="margin-right: 15px;">DDR4
+                                                    </label>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
                                     <label class="col-sm-2 col-form-label text-capitalize "
                                         style="font-size:14px">RAM</label>
                                     <div class="col-sm-10 ">
@@ -3004,7 +3219,7 @@ if (isset($_GET['sales_order_id'])) {
                                                 <div class="icheck-success d-inline">
                                                     <input type="radio" id="4gb" name="ram" value="4gb" required>
                                                     <label class="label_values my-1" for="4gb"
-                                                        style="margin-right: 15px;">4Gb
+                                                        style="margin-right: 15px;">4GB
                                                     </label>
                                                 </div>
                                             </label>
@@ -3519,67 +3734,6 @@ if (isset($_GET['sales_order_id'])) {
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <label class="col-sm-2 col-form-label text-capitalize" style="font-size:14px">
-                                        Battery Percentage</label>
-                                    <div class="col-sm-10 d-flex">
-                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
-                                                <div class="icheck-success d-inline d-flex">
-                                                    <input type="radio" id="excellent" name="battery_level"
-                                                        value="excellent" required>
-                                                    <label class="label_values" for="excellent"
-                                                        style="margin-right: 15px;">Excellent
-                                                    </label>
-                                                    <div class="progress mx-2 mb-0">
-                                                        <div class="progress-bar bg-gradient-success" role="progressbar"
-                                                            style="width: 96%" aria-valuenow="25" aria-valuemin="0"
-                                                            aria-valuemax="100">(100%-80%)
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </label>
-                                        </div>
-
-                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
-                                                <div class="icheck-success d-inline d-flex">
-                                                    <input type="radio" id="good" name="battery_level" value="good"
-                                                        required>
-                                                    <label class="label_values  " for="good"
-                                                        style="margin-right: 15px;">Good
-                                                    </label>
-                                                    <div class="progress mx-2 mb-0">
-                                                        <div class="progress-bar bg-gradient-warning" role="progressbar"
-                                                            style="width: 60%" aria-valuenow="25" aria-valuemin="0"
-                                                            aria-valuemax="100">(79%-60%)
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </label>
-                                        </div>
-
-                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                            <label class="btn btn-xs btn-dark mx-2 mb-2">
-
-                                                <div class="icheck-success d-inline d-flex">
-                                                    <input type="radio" id="weak" name="battery_level" value="weak"
-                                                        required>
-                                                    <label class="label_values  " for="weak"
-                                                        style="margin-right: 15px;">Weak
-                                                    </label>
-                                                    <div class="progress mx-2 mb-0">
-                                                        <div class="progress-bar bg-gradient-danger" role="progressbar"
-                                                            style="width: 25%" aria-valuenow="25" aria-valuemin="0"
-                                                            aria-valuemax="100">(59%-0)
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
 
@@ -3694,16 +3848,37 @@ function selectAll(form1) {
 
 window.history.forward();
 
-function noBack() {
+const noBack = () => {
     window.history.forward();
 }
 
-function myFunction() {
-    var x = document.getElementById("myDIV");
-    if (x.style.display === "none") {
-        x.style.display = "block";
+const scanBatteryQR = () => {
+    var checkBox = document.getElementById("b3");
+    var text = document.getElementById("text");
+    if (checkBox.checked == true) {
+        text.style.display = "block";
     } else {
-        x.style.display = "none";
+        text.style.display = "none";
+    }
+}
+
+const exellentBattery = () => {
+    var checkBox = document.getElementById("b1");
+    var text = document.getElementById("text");
+    if (checkBox.checked == true) {
+        text.style.display = "none";
+    } else {
+        text.style.display = "block";
+    }
+}
+
+const goodBatteryLife = () => {
+    var checkBox = document.getElementById("b2");
+    var text = document.getElementById("text");
+    if (checkBox.checked == true) {
+        text.style.display = "none";
+    } else {
+        text.style.display = "block";
     }
 }
 </script>

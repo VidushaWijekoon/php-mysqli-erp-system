@@ -48,8 +48,7 @@ if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) 
                         <tbody class="tbody_1">
 
                             <?php 
-                            $query_prod_tech ="SELECT * FROM `prod_technician_assign_info` WHERE emp_id ='{$emp_id}'";
-                           
+                            $query_prod_tech ="SELECT *,SUM(tech_assign_qty) AS Tech_Assign_QTY FROM `prod_technician_assign_info` WHERE emp_id ='{$emp_id}'";                           
                             $query_6 = mysqli_query($connection, $query_prod_tech);
                            
                             $i =0;
@@ -69,7 +68,7 @@ if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) 
                                 <td><?php echo $i; ?></td>
                                 <td><?php echo $values['sales_order_id'] ?></td>
                                 <td><?php echo $values['created_time'] ?></td>
-                                <td><?php echo $values['tech_assign_qty'] ?></td>
+                                <td><?php echo $values['Tech_Assign_QTY'] ?></td>
                                 <td><?php echo  $completed_qty; ?></td>
                                 <td>
                                     <?php

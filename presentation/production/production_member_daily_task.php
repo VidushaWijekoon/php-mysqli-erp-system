@@ -46,7 +46,8 @@ foreach($query_tech as $data){
     if (isset($_POST['search'])) {
         $inventory_id = $_POST['search'];
         
-        $query_assign_count = "SELECT tech_assign_qty AS assign_qty FROM `prod_technician_assign_info` WHERE prod_technician_assign_info.tech_id = '$tech_id'";
+        // $query_assign_count = "SELECT tech_assign_qty AS assign_qty FROM `prod_technician_assign_info` WHERE prod_technician_assign_info.tech_id = '$tech_id'";
+        $query_assign_count = "SELECT tech_assign_qty AS assign_qty FROM `prod_technician_assign_info`";
         $query_scanned_count = "SELECT COUNT(prod_info.tech_id) AS completed_count FROM `prod_info` WHERE prod_info.tech_id = '$tech_id'";
         $query_scanned_inventory_count = "SELECT COUNT(prod_info.inventory_id) AS inventory_id_count FROM `prod_info` WHERE prod_info.inventory_id = '$inventory_id'";
         $query_exists = "SELECT prod_info.inventory_id AS inventory_id FROM `prod_info` WHERE prod_info.inventory_id = '$inventory_id'";
@@ -107,12 +108,13 @@ foreach($query_tech as $data){
             if(($assign_qty*2 )>= $scaned_qty){
                 foreach($query_run as $data1){
                         if($exists_inventory_id == 0){
-                        $query_insert = "INSERT INTO prod_info(inventory_id, start_date_time, end_date_time,sales_order, emp_id, tech_id,status) 
-                                        VALUES ('{$inventory_id}', CURRENT_TIMESTAMP, 0,'{$sales_order_id}','{$emp_id}','{$tech_id}','1')";
+                        $query_insert = "INSERT INTO prod_info(inventory_id, start_date_time, end_date_time,sales_order, emp_id, tech_id,status, combine_issue, m_board_issue, lcd_issue, bodywork_issue, production_spec) 
+                                        VALUES ('{$inventory_id}', CURRENT_TIMESTAMP, 0,'{$sales_order_id}','{$emp_id}','{$tech_id}','1', 0, 0, 0, 0, 0)";
                         $query_prod_info = mysqli_query($connection, $query_insert);
-                            header("Location: production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id} ");
+
+                           header("Location: production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id} ");
                         }else{
-                            header("Location: production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id} ");
+                               header("Location: production_checklist.php?emp_id={$emp_id}&inventory_id={$inventory_id}&sales_order_id={$sales_order_id} ");
                         }
                     }
                 }else{
@@ -172,10 +174,9 @@ foreach($query_tech as $data){
                                                     <tr>
                                                         <?php
                                     
-                                                            $query = "SELECT *,item_ram,item_hdd,item_quantity FROM prod_technician_assign_info 
-                                                            LEFT JOIN sales_order_add_items ON sales_order_add_items.sales_order_id = prod_technician_assign_info.sales_order_id
-                                                             WHERE tech_id = '{$tech_id}'; ";
-
+                                                            $query = "SELECT * FROM prod_technician_assign_info 
+                                                            LEFT JOIN sales_order_add_items ON sales_order_add_items.sales_order_id = prod_technician_assign_info.sales_order_id WHERE emp_id = $emp_id
+                                                            GROUP BY model, processor, core, generation";
                                                             $query_run = mysqli_query($connection, $query);
 
                                                             if ($rowcount = mysqli_fetch_assoc($query_run)) {
@@ -190,7 +191,7 @@ foreach($query_tech as $data){
                                                         <td><?php echo $value['generation']; ?></td>
                                                         <td><?php echo $value['item_ram']."GB"; ?></td>
                                                         <td><?php echo $value['item_hdd']; ?></td>
-                                                        <td><?php echo $value['item_quantity']; ?></td>
+                                                        <td><?php echo $value['tech_assign_qty']; ?></td>
 
                                                         <td><span class="badge bg-primary px-3"><?php echo $value['tech_assign_qty']; 
                                                                 ?></span>
@@ -227,11 +228,11 @@ foreach($query_tech as $data){
                                     <th>S/O ID</th>
                                     <th>Brand</th>
                                     <th>Core</th>
-                                    <th>Genaration</th>
+                                    <th>Gen</th>
                                     <th>Model</th>
                                     <th>Starting Time</th>
                                     <th>End Time</th>
-                                    <th>Minutes to Complete</th>
+                                    <th>Timing</th>
                                     <th>&nbsp;</th>
 
                                 </tr>
@@ -241,8 +242,8 @@ foreach($query_tech as $data){
  
                                         $query = "SELECT *, brand,core,model,generation,processor,device FROM prod_info
                                                 LEFT JOIN warehouse_information_sheet ON prod_info.inventory_id = warehouse_information_sheet.inventory_id
-                                                WHERE prod_info.emp_id ='{$emp_id}' AND prod_info.tech_id ='{$tech_id}' ; ";
-                                      $query_run = mysqli_query($connection, $query);
+                                                WHERE prod_info.emp_id ='{$emp_id}' AND prod_info.tech_id ='{$tech_id}' ORDER BY start_date_time DESC";
+                                        $query_run = mysqli_query($connection, $query);
   
                                             if ($rowcount = mysqli_fetch_assoc($query_run)) {
                                                 foreach($query_run as $values) {
@@ -307,26 +308,30 @@ foreach($query_tech as $data){
                                                                 href=\"production_checklist.php?emp_id={$emp_id}&inventory_id={$values['inventory_id']}&sales_order_id={$values['sales_order_id']}\">
                                                                 <span class='badge badge-lg badge-warning text-white px-2'>Combine Issue</span>
                                                             </a>";
-                                                        }else{
-                                                            echo '<span class="badge badge-lg badge-info text-white px-2 p-1 mx-1">Waiting for parts</span>';
                                                             }
                                                         }
-                                                        if ($values['lcd_issue'] ==1) {
+                                                        // }else{
+                                                        //     echo '<span class="badge badge-lg badge-info text-white px-2 p-1 mx-1">Waiting for parts</span>';
+                                                        //     }
+                                                        // }
+
+                                                        if ($values['lcd_issue'] == 1) {
                                                             echo '<span class="badge badge-lg badge-danger text-white px-2 mx-1">LCD Issue</span>';
-                                                        }
-                                                        if ($values['bodywork_issue'] ==1) {
+                                                        }  
+                                                        if ($values['combine_issue'] == 1) {
+                                                            echo '<span class="badge badge-lg badge-info text-white px-2 mx-1">Combine Issue</span>';
+                                                        }                                                        
+                                                        if ($values['bodywork_issue'] == 1) {
                                                             echo '<span class="badge badge-lg badge-warning text-white px-2 mx-1">Bodywork Issue</span>';
                                                         } 
-                                                    }
-                                                    elseif($values['status'] == 0){
-                                                        if ($values['m_board_issue'] ==1) {
+                                                        if ($values['battery_issue'] == 1) {
+                                                            echo '<span class="badge badge-lg badge-primary text-white px-2 mx-1">Battery Issue</span>';
+                                                        } 
+                                                        if ($values['m_board_issue'] == 1) {
                                                             echo '<span class="badge badge-lg badge-secondary text-white px-2 mx-1">Motherboard Issue</span>';
                                                         }
-
-                                                        elseif ($values['production_spec'] ==0) {
-                                                            echo '<span class="badge badge-lg badge-success text-white px-2 mx-1">Production OK</span>';
-                                                        }
-                                                    } 
+                                                    }
+                                                     
                                         ?>
                                     </td>
                                 </tr>
