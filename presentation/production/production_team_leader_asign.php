@@ -107,21 +107,18 @@ foreach($query_run as $data){
                             <form action="" method="post">
                                 <tr>
                                     <td>
-
                                         <select name="emp_id" style="border-radius: 5px;" required>
                                             <option selected>--Select Technician--</option>
                                             <?php
-                                                    $query = "SELECT epf, first_name FROM users WHERE department = 1 ";
-                                                    $result = mysqli_query($connection, $query);
+                                                $query = "SELECT epf, first_name FROM users WHERE department = 1 ";
+                                                $result = mysqli_query($connection, $query);
 
-                                                    while ($worker = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                                    ?>
+                                                while ($worker = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
+                                            ?>
                                             <option value="<?php echo $worker["epf"]; ?>">
                                                 <?php echo strtoupper($worker["epf"] . " - " . ($worker["first_name"])); ?>
                                             </option>
-                                            <?php
-                                                    endwhile;
-                                                    ?>
+                                            <?php endwhile; ?>
                                         </select>
                                     </td>
 
@@ -129,7 +126,7 @@ foreach($query_run as $data){
                                     <td class="text-uppercase"><?php echo $order_qty; ?></td>
                                     <td>
                                         <!-- <input type="number" class="form-control" placeholder="Quantity" name="quantity"> -->
-                                        <input type="number" class="form-control" placeholder="Please Enter QTY"
+                                        <input type="number" class="form-control" placeholder="Please Enter QTY" min="1"
                                             name="qty">
                                     </td>
                                 </tr>

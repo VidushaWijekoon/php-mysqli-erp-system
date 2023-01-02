@@ -292,25 +292,18 @@ if(isset($_POST['logged_out'])){
                             <ul class="nav nav-treeview">
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa fa-warehouse nav-icon" style="font-size: 12px;"></i>
-                                        <p> Inventory <i class="right fas fa-angle-left"></i> </p>
+                                    <a href="../inventory/warehouse_dashboard.php" class="nav-link">
+                                        <i class="fa-solid fa-people-line nav-icon" style="font-size: 12px;"></i>
+                                        <p>Warehouse Dashboard</p>
                                     </a>
+                                </li>
 
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="../inventory/warehouse_dashboard.php" class="nav-link">
-                                                <i class="fa fa-people-line nav-icon" style="font-size: 12px;"></i>
-                                                <p>Team Leader</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="../inventory/warehouse_member_sales_order.php" class="nav-link">
-                                                <i class="fa fa-chalkboard-user nav-icon" style="font-size: 12px;"></i>
-                                                <p>Team Member </p>
-                                            </a>
-                                        </li>
-                                    </ul>
+                                <!-- Part -->
+                                <li class="nav-item">
+                                    <a href="../inventory/warehouse_member_sales_order.php" class="nav-link">
+                                        <i class="fa fa-chalkboard-user nav-icon" style="font-size: 12px;"></i>
+                                        <p>Team Member </p>
+                                    </a>
                                 </li>
                             </ul>
                         </li>
@@ -360,7 +353,7 @@ if(isset($_POST['logged_out'])){
 
                                 <li class="nav-item">
                                     <a href="../production/production_team_leader_dashboard.php" class="nav-link">
-                                        <i class="fa fa-people-line nav-icon" style="font-size: 12px;"></i>
+                                        <i class="fa-solid fa-people-group nav-icon" style="font-size: 12px;"></i>
                                         <p> Team Leader </p>
                                     </a>
                                 </li>
