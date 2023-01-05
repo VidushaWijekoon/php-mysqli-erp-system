@@ -230,9 +230,8 @@ if(isset($_POST['logged_out'])){
 
                         <?php } ?>
 
-                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18)) { ?>
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 5 && $department == 5)) { ?>
 
-                        <!-- Sales -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-receipt"></i>
@@ -241,21 +240,49 @@ if(isset($_POST['logged_out'])){
                             <ul class="nav nav-treeview">
 
                                 <li class="nav-item">
-                                    <a href="../sales/sales_dashboard.php" class="nav-link">
+                                    <a href="#" class="nav-link">
                                         <i class="fa fa-landmark nav-icon" style="font-size: 12px;"></i>
-                                        <p> Sales </p>
+                                        <p>
+                                            Sales
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
                                     </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="fa fa-landmark nav-icon" style="font-size: 12px;"></i>
+                                                <p>Create Customer</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="fa fa-landmark nav-icon" style="font-size: 12px;"></i>
+                                                <p>Create Quatation</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="fa fa-landmark nav-icon" style="font-size: 12px;"></i>
+                                                <p>Quatations</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="fa fa-landmark nav-icon" style="font-size: 12px;"></i>
+                                                <p>Packages</p>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
-
                                 <li class="nav-item">
                                     <a href="../e-commerce/e_commerce_dashboard.php" class="nav-link">
                                         <i class="fa fa-earth-americas fa-user nav-icon" style="font-size: 12px;"></i>
                                         <p>E-Commerce </p>
                                     </a>
                                 </li>
-
                             </ul>
                         </li>
+
 
                         <?php } ?>
 
