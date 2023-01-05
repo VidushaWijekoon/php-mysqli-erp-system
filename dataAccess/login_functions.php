@@ -18,8 +18,12 @@ function Login($role_id, $department){
     elseif($role_id == 10 && $department == 2){
         header('Location: presentation/inventory/warehouse_member_sales_order.php');
     }
-     elseif($role_id == 4 && $department == 2){
+    elseif($role_id == 4 && $department == 2){
         header('Location: presentation/inventory/warehouse_dashboard.php');
+    }
+
+    elseif($role_id == 5 && $department == 5){
+        header('Location: presentation/sales/sales_dashboard.php');
     }
     
     // Part Team Redirect

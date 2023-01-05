@@ -25,6 +25,8 @@ if (!isset($_SESSION['user_id'])) {
                 class="fa fa-plus"></i><span class="mx-1">Create Quatation</span></a>
         <a class="btn bg-gradient-info mx-2 text-white" type="button" href="quatations.php"><i
                 class="fa fa-plus"></i><span class="mx-1">Quatation List</span></a>
+        <a class="btn bg-gradient-info mx-2 text-white" type="button" href="customers_list.php"><i
+                class="fa fa-plus"></i><span class="mx-1">Customer List</span></a>
     </div>
 </div>
 

@@ -9,6 +9,7 @@ include_once('../includes/header.php');
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
+
 ?>
 
 <div class="row page-titles">
@@ -41,87 +42,54 @@ if (!isset($_SESSION['user_id'])) {
                     <table id="example2" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th>Quatation ID</th>
                                 <th>Customer Name</th>
                                 <th>Created Date</th>
-                                <th>Delivery Date</th>
+                                <th>Feedback</th>
                                 <th>&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php 
 
-                                if (isset($_GET['search'])) {
-                                    $filtervalues = $_GET['search'];
+                                $query = "SELECT * FROM sales_quatation_customer_information INNER JOIN sales_quatation_items 
+                                        ON sales_quatation_customer_information.quatation_id = sales_quatation_items.quatation_id
+                                        GROUP BY sales_quatation_items.quatation_id";
 
-                                $query = "SELECT * FROM sales_quatation
-                                        INNER JOIN sales_quatation_items ON sales_quatation.created_date = sales_quatation_items.created_date
-                                        WHERE CONCAT(
-                                                sales_quatation.quatation_id,
-                                                sales_quatation_items.sales_quatations_items_id,
-                                                sales_quatation.customer_name,
-                                                sales_quatation.contact_number,
-                                                sales_quatation.company_name,
-                                                sales_quatation.contact_person
-                                            ) LIKE '%$filtervalues%' GROUP BY sales_quatation.quatation_id ";
-                                $results = mysqli_query($connection, $query);
-
-                                foreach ($results as $items) {
+                                        $results = mysqli_query($connection, $query);
+                                        foreach ($results as $items) {
+                                            $item_status = $items['status'];
                             ?>
                             <tr>
                                 <td><?php echo $items['quatation_id']; ?></td>
                                 <td><?php echo $items['customer_name']; ?></td>
                                 <td><?php echo $items['created_date']; ?></td>
-                                <td><?php echo $items['item_delivery_date']; ?></td>
-                                <td class='text-center'>
-                                    <?php 
-                                        echo "<a class='btn btn-xs btn-secondary mx-1' href=\"quatation_view.php?quatation_id={$items['quatation_id']}\"><i class='fa-solid fa-eye'></i> </a>";
-                                        echo "<a class='btn btn-xs btn-success mx-1' href=\"\"><i class='fa-solid fa-download'></i> </a>";
-                                        echo "<a class='btn btn-xs btn-primary mx-1' href=\"\"><i class='fa-solid fa-envelope'></i> </a>";
-                                        echo "<a class='btn btn-xs btn-danger mx-1' href=\"\"><i class='fa-solid fa-trash-can'></i> </a>";
-                                    ?>
+                                <td>
+                                    <?php if($item_status == 0) {?>
+                                    <span class="badge badge-lg badge-primary text-white p-1 px-3">Pending</span>
+                                    <?php }if($item_status == 2) {?>
+                                    <span class="badge badge-lg badge-danger text-white p-1 px-3">Rejected</span>
+                                    <?php }if($item_status == 1) {?>
+                                    <span class="badge badge-lg badge-success text-white p-1 px-3">Accepted</span>
+                                    <?php } ?>
                                 </td>
-                            </tr>
-                            <?php }  
-                            
-                                }else{
-                                        $query = "SELECT * FROM sales_quatation
-                                                INNER JOIN sales_quatation_items ON sales_quatation.created_date = sales_quatation_items.created_date
-                                                WHERE CONCAT(
-                                                        sales_quatation.quatation_id,
-                                                        sales_quatation_items.sales_quatations_items_id,
-                                                        sales_quatation.customer_name,
-                                                        sales_quatation.contact_number,
-                                                        sales_quatation.company_name,
-                                                        sales_quatation.contact_person
-                                                    ) GROUP BY sales_quatation.quatation_id";
-
-                                                $results = mysqli_query($connection, $query);
-                                                foreach ($results as $items) {
-                                
-                            ?>
-                            <tr>
-                                <td><?php echo $items['quatation_id']; ?></td>
-                                <td><?php echo $items['customer_name']; ?></td>
-                                <td><?php echo $items['created_date']; ?></td>
-                                <td><?php echo $items['item_delivery_date']; ?></td>
                                 <td class='text-center'>
                                     <?php 
                                         echo "<a class='btn btn-xs btn-secondary mx-1' href=\"quatation_view.php?quatation_id={$items['quatation_id']}\"><i class='fa-solid fa-eye'></i> </a>";
-                                        echo "<a class='btn btn-xs btn-success mx-1' href=\"\"><i class='fa-solid fa-download'></i> </a>";
-                                        echo "<a class='btn btn-xs btn-primary mx-1' href=\"\"><i class='fa-solid fa-envelope'></i> </a>";
+                                        echo "<a class='btn btn-xs btn-success mx-1' href=\"invoice_pdf.php?quatation_id={$items['quatation_id']}\"><i class='fa-solid fa-download'></i> </a>";
                                         echo "<a class='btn btn-xs btn-danger mx-1' href=\"\"><i class='fa-solid fa-trash-can'></i> </a>";
                                     ?>
                                 </td>
                             </tr>
 
-                            <?php } } ?>
+                            <?php } ?>
+
+
                         </tbody>
 
                     </table>
 
                 </div>
-                <!-- /.card-body -->
             </div>
         </div>
     </div>
