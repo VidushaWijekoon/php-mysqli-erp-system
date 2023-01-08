@@ -45,7 +45,8 @@ if (!isset($_SESSION['user_id'])) {
                                 <th>Quatation ID</th>
                                 <th>Customer Name</th>
                                 <th>Created Date</th>
-                                <th>Feedback</th>
+                                <th>Country</th>
+                                <th>Staus</th>
                                 <th>&nbsp;</th>
                             </tr>
                         </thead>
@@ -64,6 +65,7 @@ if (!isset($_SESSION['user_id'])) {
                                 <td><?php echo $items['quatation_id']; ?></td>
                                 <td><?php echo $items['customer_name']; ?></td>
                                 <td><?php echo $items['created_date']; ?></td>
+                                <td><?php echo $items['country']; ?></td>
                                 <td>
                                     <?php if($item_status == 0) {?>
                                     <span class="badge badge-lg badge-primary text-white p-1 px-3">Pending</span>
@@ -71,6 +73,8 @@ if (!isset($_SESSION['user_id'])) {
                                     <span class="badge badge-lg badge-danger text-white p-1 px-3">Rejected</span>
                                     <?php }if($item_status == 1) {?>
                                     <span class="badge badge-lg badge-success text-white p-1 px-3">Accepted</span>
+                                    <span class="badge badge-lg text-white p-1 px-3"
+                                        style="background-color: green;">Approved By Sam</span>
                                     <?php } ?>
                                 </td>
                                 <td class='text-center'>

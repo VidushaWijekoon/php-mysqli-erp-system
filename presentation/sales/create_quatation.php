@@ -165,11 +165,14 @@ if(isset($_POST['add_items'])){
                 <form action="" method="POST">
                     <div class="row m-1">
                         <div class="col-md-6">
+                            <div class="">
+                                <a href="" class="" data-toggle="modal" data-target="#modal-lg">Load Exisitng
+                                    Customer</a>
+                            </div>
                             <fieldset class="mt-2 mb-2">
                                 <legend>Customer Information</legend>
                                 <div class="form-group">
 
-                                    <?php if($customer_name == null){ ?>
                                     <div class="row">
                                         <label class="col-sm-3 col-form-label">Customer Name</label>
                                         <div class="col-sm-8">
@@ -177,15 +180,8 @@ if(isset($_POST['add_items'])){
                                                 name="customer_name">
                                         </div>
                                     </div>
-                                    <?php }else{ ?>
-                                    <div class="row">
-                                        <label class="col-sm-3 col-form-label">Customer Name</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control"
-                                                <?php echo 'value="' . $customer_name . '"'; ?> name="customer_name">
-                                        </div>
-                                    </div>
-                                    <?php } if($customer_address == null) { ?>
+
+
                                     <div class="row">
                                         <label class="col-sm-3 col-form-label">Customer Address</label>
                                         <div class="col-sm-8">
@@ -193,16 +189,7 @@ if(isset($_POST['add_items'])){
                                                 name="customer_address">
                                         </div>
                                     </div>
-                                    <?php } else { ?>
-                                    <div class="row">
-                                        <label class="col-sm-3 col-form-label">Customer Address</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control"
-                                                <?php echo 'value="' . $customer_address . '"'; ?>
-                                                name="customer_address">
-                                        </div>
-                                    </div>
-                                    <?php } if($company_name == null) {?>
+
                                     <div class="row">
                                         <label class="col-sm-3 col-form-label">Company Name</label>
                                         <div class="col-sm-8">
@@ -210,44 +197,15 @@ if(isset($_POST['add_items'])){
                                                 name="company_name">
                                         </div>
                                     </div>
-                                    <?php } else { ?>
-                                    <div class="row">
-                                        <label class="col-sm-3 col-form-label">Company Name</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control"
-                                                <?php echo 'value="' . $company_name . '"'; ?> name="company_name">
-                                        </div>
-                                    </div>
-                                    <?php }if($country == null){ ?>
-                                    <div class="row">
-                                        <label class="col-sm-3 col-form-label">Country</label>
-                                        <div class="col-sm-8">
-                                            <select class="" name="country" style="border-radius: 5px">
-                                                <option selected>--Select Resident Country--</option>
-                                                <?php
-                                                    $query = "SELECT * FROM countries ORDER BY 'country_name' ASC";
-                                                    $result = mysqli_query($connection, $query);
-
-                                                    while ($resident_country = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                                ?>
-                                                <option value="<?php echo $resident_country["country_name"]; ?>">
-                                                    <?php echo strtoupper($resident_country["country_name"]); ?>
-                                                </option>
-                                                <?php endwhile; ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <?php } else { ?>
 
                                     <div class="row">
-                                        <label class="col-sm-3 col-form-label">Country</label>
+                                        <label class="col-sm-3 col-form-label">State Or Province</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control"
-                                                <?php echo 'value="' . $country . '"'; ?> name="country">
+                                            <input type="text" class="form-control" placeholder="State or Province"
+                                                name="shipping_state">
                                         </div>
                                     </div>
 
-                                    <?php } ?>
 
                                 </div>
                             </fieldset>
@@ -256,7 +214,6 @@ if(isset($_POST['add_items'])){
                             <fieldset class="mt-2 mb-2">
                                 <legend>Other Details</legend>
                                 <div class="form-group">
-                                    <?php if($shipping_state == null){ ?>
                                     <div class="row">
                                         <label class="col-sm-3 col-form-label">State Or Province</label>
                                         <div class="col-sm-8">
@@ -264,15 +221,7 @@ if(isset($_POST['add_items'])){
                                                 name="shipping_state">
                                         </div>
                                     </div>
-                                    <?php } else { ?>
-                                    <div class="row">
-                                        <label class="col-sm-3 col-form-label">State Or Province</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control"
-                                                <?php echo 'value="' . $shipping_state . '"'; ?> name="shipping_state">
-                                        </div>
-                                    </div>
-                                    <?php } if($zip_code == null) { ?>
+
 
                                     <div class="row">
                                         <label class="col-sm-3 col-form-label">Zip Code</label>
@@ -282,15 +231,7 @@ if(isset($_POST['add_items'])){
                                         </div>
                                     </div>
 
-                                    <?php } else { ?>
-                                    <div class="row">
-                                        <label class="col-sm-3 col-form-label">Zip Code</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control"
-                                                <?php echo 'value="' . $zip_code . '"'; ?> name="zip_code">
-                                        </div>
-                                    </div>
-                                    <?php } if($uae_number == null) {?>
+
 
                                     <div class="row">
                                         <label class="col-sm-3 col-form-label">UAE Number</label>
@@ -300,49 +241,20 @@ if(isset($_POST['add_items'])){
                                         </div>
                                     </div>
 
-                                    <?php } else {?>
-                                    <div class="row">
-                                        <label class="col-sm-3 col-form-label">UAE Number</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control"
-                                                <?php echo 'value="' . $uae_number . '"'; ?> name="uae_number">
-                                        </div>
-                                    </div>
-                                    <?php } if($other_number == null) {?>
+
                                     <div class="row d-flex">
                                         <label class="col-sm-3 col-form-label">Country Number</label>
 
-                                        <select class="" name="country_code" style="border-radius: 5px; width: 45px;">
-                                            <?php
-                                                    $query = "SELECT phone_code FROM countries ORDER BY 'phone_code' ASC";
-                                                    $result = mysqli_query($connection, $query);
-
-                                                    while ($phone_code = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                                ?>
-                                            <option value="<?php echo "+" . $phone_code["phone_code"]; ?>">
-                                                <?php echo strtoupper($phone_code["phone_code"]); ?>
-                                            </option>
-                                            <?php endwhile; ?>
-                                        </select>
                                         <div class="col-sm-8">
                                             <input type="number" class="form-control" placeholder="Other Number"
                                                 name="other_number">
                                         </div>
                                     </div>
-                                    <?php }else{ ?>
-                                    <div class="row">
-                                        <label class="col-sm-3 col-form-label">Other Number</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control"
-                                                <?php echo 'value="' . $other_number . '"'; ?> name="other_number">
-                                        </div>
-                                    </div>
-                                    <?php } ?>
+
 
                                 </div>
                             </fieldset>
                         </div>
-                        <button name="add_customer" class="btn btn-sm btn-default mx-auto">Add Customer</button>
                     </div>
                 </form>
             </div>
@@ -686,8 +598,9 @@ if(isset($_POST['add_items'])){
                                         </tbody>
                                     </table>
                                     <div class="mx-auto justify-content-center text-center">
-                                        <a href="./quatations.php" class="btn btn-sm btn-success">Submit</a>
-                                        <a href="./sales_dashboard.php" class="btn btn-sm btn-danger">Cancel</a>
+                                        <button type="button" class="btn btn-default" data-toggle="modal"
+                                            data-target="#modal-xl"> Order Details
+                                        </button>
                                     </div>
                                 </fieldset>
                             </div>
@@ -695,119 +608,202 @@ if(isset($_POST['add_items'])){
                     </div>
                 </form>
             </div>
-            <div class="card">
-                <div class="row m-1">
-                    <div class="col">
-                        <div class="col col-md-12 col-lg-12 mt-2 mb-2">
-                            <fieldset>
-                                <legend>Order Details</legend>
-                                <table class="table table-dark text-uppercase" id="tbl">
-                                    <thead>
-                                        <tr style="font-size: 9px;">
-                                            <th>Device</th>
-                                            <th>Brand</th>
-                                            <th>Model</th>
-                                            <th>Processor</th>
-                                            <th>Core</th>
-                                            <th>Generation</th>
-                                            <th>Speed</th>
-                                            <th>Screen Size</th>
-                                            <th>Resolution</th>
-                                            <th>Touch</th>
-                                            <th>RAM</th>
-                                            <th>HDD Capacity</th>
-                                            <th>HDD Type</th>
-                                            <th>Ghrphic Capacity</th>
-                                            <th>Ghrphic Brand</th>
-                                            <th>OS</th>
-                                            <th>Condition</th>
-                                            <th>Selling Type</th>
-                                            <th>Charger</th>
-                                            <th>Packing Type</th>
-                                            <th>Shipping Type</th>
-                                            <th>QTY</th>
-                                            <th>Unit Price</th>
-                                            <th>Discount</th>
-                                            <th>Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
 
-                                        <?php 
-
-                                            $query_d = "SELECT * FROM sales_quatation_items WHERE quatation_id = $quatation_id ORDER BY sales_quatations_items_id DESC";
-                                            $qd = mysqli_query($connection, $query_d);
-
-                                            if(empty($qd)){}else{
-
-                                            foreach($qd as $qd){
-                                                $device = $qd['device'];
-                                                $brand = $qd['brand'];
-                                                $model = $qd['model'];
-                                                $processor = $qd['processor'];
-                                                $core = $qd['core'];
-                                                $generation = $qd['generation'];
-                                                $speed = $qd['speed'];
-                                                $lcd_size = $qd['lcd_size'];
-                                                $resolution = $qd['resolution'];
-                                                $touch_or_non_touch = $qd['touch_or_non_touch'];
-                                                $ram = $qd['ram'];
-                                                $hdd_capacity = $qd['hdd_capacity'];
-                                                $hdd_type = $qd['hdd_type'];
-                                                $graphic_capacity = $qd['graphic_capacity'];
-                                                $graphic_type = $qd['graphic_type'];
-                                                $os = $qd['os'];
-                                                $condition = $qd['conditions'];
-                                                $selling_type = $qd['selling_type'];
-                                                $charger = $qd['charger'];
-                                                $packing_type = $qd['packing_type'];
-                                                $shipping_method = $qd['shipping_method'];
-                                                $qty = $qd['qty'];
-                                                $unit_price = $qd['unit_price'];
-                                                $discount = $qd['discount'];
-                                                $total = $qd['total'];
-                                            
-                                        
-                                        ?>
-
-                                        <tr style="font-size: 9px;">
-                                            <td><?php echo $device; ?></td>
-                                            <td><?php echo $brand; ?></td>
-                                            <td><?php echo $model; ?></td>
-                                            <td><?php echo $processor; ?></td>
-                                            <td><?php echo $core; ?></td>
-                                            <td><?php echo $generation; ?></td>
-                                            <td><?php echo $speed; ?></td>
-                                            <td><?php echo $lcd_size; ?></td>
-                                            <td><?php echo $resolution; ?></td>
-                                            <td><?php echo $touch_or_non_touch; ?></td>
-                                            <td><?php echo $ram; ?></td>
-                                            <td><?php echo $hdd_capacity; ?></td>
-                                            <td><?php echo $hdd_type; ?></td>
-                                            <td><?php echo $graphic_capacity; ?></td>
-                                            <td><?php echo $graphic_type; ?></td>
-                                            <td><?php echo $os; ?></td>
-                                            <td><?php echo $condition; ?></td>
-                                            <td><?php echo $selling_type; ?></td>
-                                            <td><?php echo $charger; ?></td>
-                                            <td><?php echo $packing_type; ?></td>
-                                            <td><?php echo $shipping_method; ?></td>
-                                            <td><?php echo $qty; ?></td>
-                                            <td><?php echo $unit_price; ?></td>
-                                            <td><?php echo $discount; ?></td>
-                                            <td><?php echo $total; ?></td>
-                                        </tr>
-                                        <?php } } ?>
-                                    </tbody>
-                                </table>
-                            </fieldset>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
+
+<!-- ============================================================== -->
+<!-- Customer Details Model  -->
+<!-- ============================================================== -->
+<div class="modal fade" id="modal-lg">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Responsive Hover Table</h3>
+
+                <div class="modal-tools d-flex">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Customer Name</th>
+                            <th>Customer Address</th>
+                            <th>country</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                                                    
+                                $query = "SELECT * FROM sales_quatation_customer_information ";                                
+                                $query_run = mysqli_query($connection, $query);
+
+                                foreach ($query_run as $users) {
+                                ?>
+                        <tr>
+                            <td><?php echo $users['customer_name'] ?></td>
+                            <td><?php echo $users['customer_address'] ?></td>
+                            <td><?php echo $users['country'] ?></td>
+                            <td>
+                                <a href="create_quatation.php" class="btn btn-sm btn-default">Select</a>
+                            </td>
+                        </tr>
+
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <a href="./create_customers.php" class="btn btn-primary">Create New Customer</a>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<!-- ============================================================== -->
+<!-- Order Details Model  -->
+<!-- ============================================================== -->
+<div class="modal fade" id="modal-xl">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Sales Order Details</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <fieldset>
+                    <legend>Order Details</legend>
+                    <table class="table table-dark text-uppercase" id="tbl">
+                        <thead>
+                            <tr style="font-size: 9px;">
+                                <th>Device</th>
+                                <th>Brand</th>
+                                <th>Model</th>
+                                <th>Processor</th>
+                                <th>Core</th>
+                                <th>Generation</th>
+                                <th>Speed</th>
+                                <th>Screen Size</th>
+                                <th>Resolution</th>
+                                <th>Touch</th>
+                                <th>RAM</th>
+                                <th>HDD Capacity</th>
+                                <th>HDD Type</th>
+                                <th>Ghrphic Capacity</th>
+                                <th>Ghrphic Brand</th>
+                                <th>OS</th>
+                                <th>Condition</th>
+                                <th>Selling Type</th>
+                                <th>Charger</th>
+                                <th>Packing Type</th>
+                                <th>Shipping Type</th>
+                                <th>QTY</th>
+                                <th>Unit Price</th>
+                                <th>Discount</th>
+                                <th>Total</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <?php 
+
+                                $query_d = "SELECT * FROM sales_quatation_items WHERE quatation_id = $quatation_id ORDER BY sales_quatations_items_id DESC";
+                                $qd = mysqli_query($connection, $query_d);
+
+                                if(empty($qd)){}else{
+
+                                foreach($qd as $qd){
+                                    $device = $qd['device'];
+                                    $brand = $qd['brand'];
+                                    $model = $qd['model'];
+                                    $processor = $qd['processor'];
+                                    $core = $qd['core'];
+                                    $generation = $qd['generation'];
+                                    $speed = $qd['speed'];
+                                    $lcd_size = $qd['lcd_size'];
+                                    $resolution = $qd['resolution'];
+                                    $touch_or_non_touch = $qd['touch_or_non_touch'];
+                                    $ram = $qd['ram'];
+                                    $hdd_capacity = $qd['hdd_capacity'];
+                                    $hdd_type = $qd['hdd_type'];
+                                    $graphic_capacity = $qd['graphic_capacity'];
+                                    $graphic_type = $qd['graphic_type'];
+                                    $os = $qd['os'];
+                                    $condition = $qd['conditions'];
+                                    $selling_type = $qd['selling_type'];
+                                    $charger = $qd['charger'];
+                                    $packing_type = $qd['packing_type'];
+                                    $shipping_method = $qd['shipping_method'];
+                                    $qty = $qd['qty'];
+                                    $unit_price = $qd['unit_price'];
+                                    $discount = $qd['discount'];
+                                    $total = $qd['total'];                                           
+                                        
+                            ?>
+
+                            <tr style="font-size: 9px;">
+                                <td><?php echo $device; ?></td>
+                                <td><?php echo $brand; ?></td>
+                                <td><?php echo $model; ?></td>
+                                <td><?php echo $processor; ?></td>
+                                <td><?php echo $core; ?></td>
+                                <td><?php echo $generation; ?></td>
+                                <td><?php echo $speed; ?></td>
+                                <td><?php echo $lcd_size; ?></td>
+                                <td><?php echo $resolution; ?></td>
+                                <td><?php echo $touch_or_non_touch; ?></td>
+                                <td><?php echo $ram; ?></td>
+                                <td><?php echo $hdd_capacity; ?></td>
+                                <td><?php echo $hdd_type; ?></td>
+                                <td><?php echo $graphic_capacity; ?></td>
+                                <td><?php echo $graphic_type; ?></td>
+                                <td><?php echo $os; ?></td>
+                                <td><?php echo $condition; ?></td>
+                                <td><?php echo $selling_type; ?></td>
+                                <td><?php echo $charger; ?></td>
+                                <td><?php echo $packing_type; ?></td>
+                                <td><?php echo $shipping_method; ?></td>
+                                <td><?php echo $qty; ?></td>
+                                <td><?php echo $unit_price; ?></td>
+                                <td><?php echo $discount; ?></td>
+                                <td><?php echo $total; ?></td>
+                                <td>
+                                    <button type='button' onclick='deleteRow(this);'
+                                        class='btn btn-sm btn-danger'>Remove</button>
+                                </td>
+                            </tr>
+                            <?php } } ?>
+                        </tbody>
+                    </table>
+                </fieldset>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success">Save Changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
 
 <style>
 textarea {
@@ -843,6 +839,20 @@ input[type="text"],
 .select2-selection__rendered {
     line-height: 18px !important;
 }
+
+@media (min-width: 1200px) {
+    .modal-xl {
+        max-width: 1789px;
+    }
+}
 </style>
+
+<script>
+function deleteRow(button) {
+    items--;
+    button.parentElement.parentElement.remove();
+    // first parentElement will be td and second will be tr.
+}
+</script>
 
 <?php include_once('../includes/footer.php'); ?>
