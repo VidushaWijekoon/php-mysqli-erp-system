@@ -13,7 +13,7 @@ if (!isset($_SESSION['user_id'])) {
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 $model = $_GET['model'];
-
+$core = $_GET['core'];
 $brand = $_GET['brand'];
 
 ?>
@@ -45,7 +45,7 @@ $brand = $_GET['brand'];
                                     <th>Series</th>
                                     <th>Model</th>
                                     <th>Processor</th>
-                                    <th>CPU</th>
+                                    <th>Core</th>
                                     <th>Generation</th>
                                     <th>Speed</th>
                                     <th>Screen Size</th>
@@ -59,7 +59,8 @@ $brand = $_GET['brand'];
                             </thead>
                             <tbody>
                                 <?php
-                                  $query = "SELECT * FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model' AND send_to_production= '0' ";
+                                  $query = "SELECT * FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND send_to_production= '0' ";
+                                
                                   $result = mysqli_query($connection, $query);
                                   $i=0;
                                 foreach($result as $data){
@@ -92,7 +93,7 @@ $brand = $_GET['brand'];
                                     <td><?php echo$optical ?></td>
                                     <td>8GB</td>
                                     <td>256GB</td>
-                                    <td><?php echo$location ?></td>
+                                    <td><?php echo$location."-".$generation."-".$model ?></td>
                                     <td><?php echo "ALSAKB".$inventory_id ?></td>
                                 </tr>
                                 <?php } ?>

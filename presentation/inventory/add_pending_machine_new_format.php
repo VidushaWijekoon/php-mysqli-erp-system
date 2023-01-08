@@ -92,9 +92,6 @@ if (isset($_POST['submit'])) {
                 $graphic_brand = $data[28];
                 $graphic_capacity =$data[29];
                 $os = $data[30];
-                $wholesale_price = $data[31];
-                $discount_price = $data[32];
-                $e_com_price = $data[33];
                 strtolower($device) ;
                 strtolower($brand) ;
                 strtolower($model);
@@ -146,9 +143,6 @@ if (isset($_POST['submit'])) {
                 $graphic_brand =  rtrim($graphic_brand);
                 $graphic_capacity =  rtrim($graphic_capacity);
                 $os = rtrim($os);
-                $wholesale_price = rtrim($wholesale_price);
-                $discount_price =  rtrim($discount_price);
-                $e_com_price = rtrim($e_com_price);
               
 if($i != 1){
      $sql = strtolower("INSERT INTO machine_from_supplier(`supplier_name`,
@@ -180,10 +174,7 @@ if($i != 1){
      `hard_disk_type`,
      `graphic_brand`,
      `graphic_capacity`,
-     `os`,
-     `wholesale_price`,
-     `discount_price`,
-     `ecommerce_price`) 
+     `os`) 
      VALUES('$supplier_name',
                 '$cci_number',
                 '$alsakb_qr',
@@ -213,10 +204,7 @@ if($i != 1){
                 '$hdd_type',
                 '$graphic_brand',
                 '$graphic_capacity',
-                '$os',
-                '$wholesale_price',
-                '$discount_price',
-                '$e_com_price')");
+                '$os')");
      
                 mysqli_query($connection, $sql);
 }

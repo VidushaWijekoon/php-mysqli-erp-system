@@ -249,34 +249,43 @@ if(isset($_POST['logged_out'])){
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                <i class="fa fa-landmark nav-icon" style="font-size: 12px;"></i>
+                                            <a href="../sales/create_customers.php" class="nav-link">
+                                                <i class="fa-sharp fa-solid fa-person nav-icon"
+                                                    style="font-size: 12px;"></i>
                                                 <p>Create Customer</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                <i class="fa fa-landmark nav-icon" style="font-size: 12px;"></i>
+                                            <a href="../sales/customers.php" class="nav-link">
+                                                <i class="fa-solid fa-user-group nav-icon" style="font-size: 12px;"></i>
+                                                <p>Customers</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="../sales/create_quatation.php" class="nav-link">
+                                                <i class="fa-sharp fa-solid fa-receipt nav-icon"
+                                                    style="font-size: 12px;"></i>
                                                 <p>Create Quatation</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                <i class="fa fa-landmark nav-icon" style="font-size: 12px;"></i>
+                                            <a href="../sales/quatations.php" class="nav-link">
+                                                <i class="fa-solid fa-files nav-icon" style="font-size: 12px;"></i>
                                                 <p>Quatations</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                <i class="fa fa-landmark nav-icon" style="font-size: 12px;"></i>
-                                                <p>Packages</p>
+                                            <a href="../sales/sales_team_leader.php" class="nav-link">
+                                                <i class="fa-solid fa-files nav-icon" style="font-size: 12px;"></i>
+                                                <p>Team Leader</p>
                                             </a>
                                         </li>
+
                                     </ul>
                                 </li>
                                 <li class="nav-item">
                                     <a href="../e-commerce/e_commerce_dashboard.php" class="nav-link">
-                                        <i class="fa fa-earth-americas fa-user nav-icon" style="font-size: 12px;"></i>
+                                        <i class="fa-brands fa-amazon nav-icon" style="font-size: 12px;"></i>
                                         <p>E-Commerce </p>
                                     </a>
                                 </li>

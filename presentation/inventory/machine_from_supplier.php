@@ -255,7 +255,8 @@ if (isset($_POST['search'])) {
           
         // $query = "UPDATE warehouse_information_sheet SET location ='$location',lcd_size='$lcd_size',screen_resolution='$screen_resolution', battery='$battery',touch_or_non_touch='$touch' WHERE inventory_id = '$last_inventory_id' ";
         // $query1 = mysqli_query($connection, $query);
-        $query = "SELECT *  FROM warehouse_information_sheet WHERE create_by_inventory_id = '$user_id'  ORDER BY `inventory_id` DESC LIMIT 1"; 
+        $query = "SELECT *  FROM warehouse_information_sheet ORDER BY `inventory_id` DESC LIMIT 1"; 
+        echo $query;
         $query1 = mysqli_query($connection, $query);
         foreach ($query1 as $data) {
             $last_inventory_id= $data['inventory_id'];
@@ -263,6 +264,8 @@ if (isset($_POST['search'])) {
             $tempDir = 'temp/';
             $filename = $last_inventory_id;
             $codeContents = $last_inventory_id;
+            echo $filename;
+
             QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5,1);
             $start_print=1;
             echo "<script>function printDiv(divName);</script>";
@@ -482,7 +485,7 @@ if (isset($_POST['search'])) {
                                 <input class="w-50" style="color:black !important" type="text"
                                     value="<?php echo $message; ?>">
                                 <?php } }else{ ?>
-                                <?php if($mfg !='No Mention' || $mfg !='no mention'){ ?>
+                                <?php if($mfg !='no mention'){ ?>
                                 <input class="w-50" style="color:black !important" type="text"
                                     value="<?php echo $mfg; ?>" name="search" placeholder="Supplier Barcode OR MFG">
                                 <?php }else{ ?>
@@ -500,7 +503,7 @@ if (isset($_POST['search'])) {
                                 $query1 = mysqli_query($connection, $query);
                                 // $query = "SELECT *  FROM warehouse_information_sheet WHERE create_by_inventory_id = '$user_id'  ORDER BY `inventory_id` DESC LIMIT 1"; 
                                 // $query1 = mysqli_query($connection, $query);
-                                $screen_resolution='No Mention';
+                                $screen_resolution;
                                 foreach ($query1 as $data) {
                                     $brand = $data['brand'];
                                     $series = $data['series'];
@@ -664,7 +667,7 @@ if (isset($_POST['search'])) {
                                     <?php if($exist == 'yes'){ 
                                         ?>
 
-                                    <?php if($model !='No Mention' || $model !='no mention'){ ?>
+                                    <?php if( $model !='no mention'){ ?>
                                     <select name="model" id="model" class="form-control select2"
                                         style="border-radius: 5px;">
                                         <option selected value="<?php echo $model; ?>"><?php echo $model; ?></option>
@@ -698,19 +701,11 @@ if (isset($_POST['search'])) {
                                 <label class="col-sm-3 col-form-label">Core</label>
                                 <div class="col-sm-8 w-75">
                                     <?php if($exist == 'yes'){ ?>
-                                    <?php if($core !='No Mention' || $core !='no mention'){
-                                         $query ="SELECT DISTINCT core FROM `machine_from_supplier` GROUP BY core"; 
-                                         $query_run = mysqli_query($connection, $query);
-                                         $core="" ;
-                                        ?>
-                                    <select name="core" id="core" class="form-control select2 "
+                                    <?php if( $core !='no mention'){ ?>
+                                    <select name="core" id="core" class="form-control select2"
                                         style="border-radius: 5px;">
-                                        <?php foreach($query_run as $data){ if($data['core'] != 'no mention'){ ?>
-
-                                        <option value="<?php echo $data['core']?>"><?php echo $data['core']?>
-                                        </option>" ;
-                                        <?php }
-                                        } ?>
+                                        <option selected value="<?php echo $core; ?>"><?php echo $core; ?></option>
+                                        <?php echo $core ?>
                                     </select>
 
                                     <?php }else{
@@ -738,24 +733,19 @@ if (isset($_POST['search'])) {
                                 <label class="col-sm-3 col-form-label">Generation</label>
                                 <div class="col-sm-8 w-75">
                                     <?php if($exist == 'yes'){ ?>
-                                    <?php if($generation !='No Mention' || $generation !='no mention'){ 
-                                         $query ="SELECT DISTINCT generation FROM `machine_from_supplier` GROUP BY generation"; 
-                                         $query_run = mysqli_query($connection, $query);
-                                         $generation="" ;
-                                         foreach($query_run as $data){
-                                             $generation .= "<option value=\"{$data['generation']}\">{$data['generation']}</option>";
-                                         }
+                                    <?php if( $generation !='no mention'){ 
+                                        //  $query ="SELECT DISTINCT generation FROM `machine_from_supplier` GROUP BY generation"; 
+                                        //  $query_run = mysqli_query($connection, $query);
+                                        //  $generation="" ;
+                                        //  foreach($query_run as $data){
+                                        //      $generation .= "<option value=\"{$data['generation']}\">{$data['generation']}</option>";
+                                        //  }
                                         ?>
-                                    <select name="generation" id="generation" class="form-control select2 "
+                                    <select name="generation" id="generation" class="form-control select2"
                                         style="border-radius: 5px;">
-                                        <?php foreach($query_run as $data){ 
-                                            if($data['generation'] != 'no mention'){
-                                            ?>
-                                        <option value="<?php echo $data['generation']?>">
-                                            <?php echo $data['generation']?>
-                                        </option>" ;
-                                        <?php } 
-                                        }?>
+                                        <option selected value="<?php echo $generation; ?>"><?php echo $generation; ?>
+                                        </option>
+                                        <?php echo $generation ?>
                                     </select>
                                     <?php }else{
                                         $query ="SELECT DISTINCT generation FROM `machine_from_supplier`"; 
@@ -781,22 +771,13 @@ if (isset($_POST['search'])) {
                                 <label class="col-sm-3 col-form-label">Speed</label>
                                 <div class="col-sm-8 w-75">
                                     <?php if($exist == 'yes'){ ?>
-                                    <?php if($speed !='No Mention' || $speed !='no mention'){ 
-                                        $query ="SELECT DISTINCT speed FROM `machine_from_supplier` GROUP BY speed"; 
-                                        $query_run = mysqli_query($connection, $query);
-                                        $speed="" ;
-                                        // foreach($query_run as $data){
-                                        //     $speed .= "<option value=\"{$data['speed']}\">{$data['speed']}</option>";
-                                        // }
+                                    <?php if($speed !='no mention'){ 
                                         ?>
-
-                                    <select name="speed" id="core" class="form-control select2"
+                                    <select name="speed" id="speed" class="form-control select2"
                                         style="border-radius: 5px;">
-                                        <!-- <option selected value="<?php echo $speed; ?>"><?php echo $speed; ?></option> -->
-                                        <?php foreach($query_run as $data){ ?>
-                                        <option value="<?php echo $data['speed']?>"><?php echo $data['speed']?>
-                                        </option>" ;
-                                        <?php } ?>
+                                        <option selected value="<?php echo $speed; ?>"><?php echo $speed; ?>
+                                        </option>
+                                        <?php echo $speed ?>
                                     </select>
                                     <?php }else{
                                         $query ="SELECT DISTINCT speed FROM `machine_from_supplier`"; 
@@ -864,8 +845,18 @@ if (isset($_POST['search'])) {
                                     ?>
                                     </select>
                                     <?php }else{ ?>
-                                    <select name="lcd_size" id="lcd_size" class="form-control select2"
+                                        <select name="lcd_size" id="lcd_size" class="form-control select2"
                                         style="border-radius: 5px;">
+                                        <option selected></option>
+                                        <?php $query ="SELECT DISTINCT display_size FROM screen_resolution";
+                                        $query_run = mysqli_query($connection,$query);
+                                        
+                                        foreach($query_run as $data){ ?>
+                                        <option value="<?php echo $data['display_size'] ?>">
+                                            <?php echo  $data['display_size'] ?>
+                                        </option>
+                                        <?php }
+                                        ?>
                                     </select>
                                     <?php }?>
                                 </div>
@@ -873,53 +864,33 @@ if (isset($_POST['search'])) {
                             <div class="row">
                                 <label class="col-sm-3 col-form-label">Screen Resolution</label>
                                 <div class="col-sm-8 w-75">
-                                    <?php if($exist == 'yes'){ 
-                                         $query ="SELECT DISTINCT screen_resolution FROM `screen_resolution` WHERE brand='$brand' AND model='$model'"; 
-                                         $query_run = mysqli_query($connection, $query);
-                                         if(empty($query_run)){
-                                            $query ="SELECT DISTINCT screen_resolution FROM `machine_from_supplier`  WHERE brand='$brand' AND model='$model' GROUP BY screen_resolution"; 
-                                            $query_run = mysqli_query($connection, $query);
-                                            if(empty($query_run)){
-                                                $query ="SELECT DISTINCT screen_resolution FROM `machine_from_supplier` GROUP BY screen_resolution"; 
-                                                $query_run = mysqli_query($connection, $query);
-                                            }else{
-                                                $brand='';
-                                                $series='';
-                                                $model='';
-                                                $display_size='';
-                                                $screen_resolution ='';
-
-                                                foreach($query_run as $data){
-                                                    $brand=$data['brand'];
-                                                    $series=$data['series'];
-                                                    $model=$data['model'];
-                                                    $display_size=$data['display_size'];
-                                                    $screen_resolution =$data['screen_resolution'];
-                                                }
-                                                $query="INSERT INTO `screen_resolution`(`brand`, `series`, `model`, `display_size`, `screen_resolution`) 
-                                                VALUES ('$brand','$series','$model','$display_size','$screen_resolution')";
-                                                 $query_update_display_size = mysqli_query($connection, $query);
-                                            }
-                                         }
-                                        ?>
-                                    <select name="screen_resolution" id="screen_resolution" class="form-control select2"
-                                        style="border-radius: 5px;">
-                                        <?php foreach($query_run as $data){ ?>
-                                        <option selected value="<?php echo $data['screen_resolution']?>">
-                                            <?php echo $data['screen_resolution']?>
-                                        </option>" ;
-                                        <?php } ?>
-                                    </select>
-                                    <?php }else{ ?>
+                                    <?php if($exist == 'yes'){ ?>
                                     <select name="screen_resolution" id="resolution" class="form-control select2"
                                         style="border-radius: 5px;">
+                                        <option selected value="<?php echo "1"; ?>">
+                                            <?php echo $screen_resolution; ?>
+                                        </option>
+                                        <?php echo $screen_resolution ?>
+                                    </select>
+                                    <?php }else{ ?>
+                                        <select name="screen_resolution" id="resolution" class="form-control select2"
+                                        style="border-radius: 5px;">
+                                        <option selected></option>
+                                        <?php $query ="SELECT DISTINCT screen_resolution FROM screen_resolution";
+                                        $query_run = mysqli_query($connection,$query);
+                                        
+                                        foreach($query_run as $data){ ?>
+                                        <option value="<?php echo $data['screen_resolution'] ?>">
+                                            <?php echo  $data['screen_resolution'] ?>
+                                        </option>
+                                        <?php }
+                                        ?>
                                     </select>
                                     <?php } ?>
                                 </div>
                             </div>
                             <div class="row">
-                                <label class="col-sm-3 col-form-label">Battery<?php
-                                        echo $battery;?> </label>
+                                <label class="col-sm-3 col-form-label">Battery </label>
                                 <div class="col-sm-8 w-75">
                                     <?php if($exist == 'yes'){ ?>
                                     <select name="battery" id="battery" class="form-control select2"
@@ -932,17 +903,17 @@ if (isset($_POST['search'])) {
                                         <?php }elseif($battery == 'no'){ ?>
                                         <option selected value='no'>No</option>
                                         <option value='yes'>Yes</option>
-                                        <?php }elseif($battery == 'No Mention' || $battery == 'no mention'){ ?>
-                                        <option selected></option>
-                                        <option value='no'>No</option>
+                                        <?php }elseif( $battery == 'no mention'){ ?>
+                                        <option selected value='no'>No</option>
+                                        <!-- <option value='no'>No</option> -->
                                         <option value='yes'>Yes</option>
                                         <?php } ?>
                                     </select>
                                     <?php }else{ ?>
                                     <select name="battery" id="battery" class="form-control select2"
                                         style="border-radius: 5px;">
-                                        <option selected></option>
-                                        <option value='no'>No</option>
+                                        <option selected value='no'>No</option>
+                                        <!-- <option value='no'>No</option> -->
                                         <option value='yes'>Yes</option>
 
                                     </select>
@@ -966,9 +937,9 @@ if (isset($_POST['search'])) {
                                             <?php echo $touch_or_non_touch ?>
                                         </option>
                                         <option value='yes'>Yes</option>
-                                        <?php }elseif($touch_or_non_touch == 'No Mention' || $touch_or_non_touch == 'no mention'){ ?>
-                                        <option selected></option>
-                                        <option value='no'>No</option>
+                                        <?php }elseif( $touch_or_non_touch == 'no mention'){ ?>
+                                        <option selected value='no'>No</option>
+                                        <!-- <option value='no'>No</option> -->
                                         <option value='yes'>Yes</option>
                                         <?php } ?>
                                     </select>
@@ -1003,12 +974,22 @@ if (isset($_POST['search'])) {
                                             <?php echo $optical ?>
                                         </option>
                                         <option value='yes'>Yes</option>
-                                        <?php }elseif($optical == 'No Mention' ||  $optical == 'no mention'){ ?>
-                                        <option selected></option>
-                                        <option value='no'>No</option>
+                                        <?php }elseif(  $optical == 'no mention'){ 
+                                             if($generation>5){ ?>
+                                            <option selected value='no'>No</option>
+                                            <option value='yes'>Yes</option>
+                                            <?php }else{ ?>
+                                                <option selected value='yes'>Yes</option>
+                                                <option value='no'>No</option>
+                                            <?php }
+                                             } ?>
+                                    </select> <?php }else{ ?>
+                                    <select name="optical" id="optical" class="form-control"
+                                        style="border-radius: 5px;">
+                                        <option selected value='no'>No</option>
                                         <option value='yes'>Yes</option>
-                                        <?php } ?>
-                                    </select> <?php } ?>
+                                    </select>
+                                    <?php } ?>
                                 </div>
                             </div>
                             <!-- <div class="row">
@@ -1073,7 +1054,7 @@ if (isset($_POST['search'])) {
                         $howManyCodes =$quantity;
                         $digits = 6;
                         $start = $last_id; 
-                        $overText = $_POST['brand']."  ".$series." ".$model ;
+                        $overText = $_POST['brand']."  ".$model ;
                         $string = explode(" ",$speed);
                         $secondPart = $core." ".$string[0];
                         $downText = $generation."-".$model;

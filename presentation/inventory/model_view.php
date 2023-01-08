@@ -33,6 +33,7 @@ $brand = $_GET['brand'];
                                 <th class="text-center">#</th>
                                 <th>Brand</th>
                                 <th>Model</th>
+                                <th>core</th>
                                 <th>In Total</th>
                                 <th>In Stock</th>
                                 <th>Dispatch</th>
@@ -43,36 +44,39 @@ $brand = $_GET['brand'];
 
                             <?php
                                 $model = null;
+                                $core = null;
                                 $in_total = null;
                                 $in_stock = null;
                                 $dispatch = null;
                                 $main_stock = null;
-                                $core='';
+                                $core=null;
                                 $generation='';
                                 $i=0;
                                 $a=0;
-                                  $query = "SELECT model FROM `warehouse_information_sheet` WHERE brand = '$brand' GROUP BY model";
+                                  $query = "SELECT model,core FROM `warehouse_information_sheet` WHERE brand = '$brand' GROUP BY core";
                                   $result = mysqli_query($connection, $query);
                                 foreach($result as $data){
                                     $model = $data['model'];
+                                    $core = $data['core'];
                                     $i++;
                                     $a++;
                                     echo "
                                     <tr class='cell-1' data-toggle='collapse' data-target='#demo-$a'>
                                     <td>$i</td>
                                     <td>$brand</td>
-                                    <td>$model</td>";
+                                    <td>$model</td>
+                                    <td>$core</td>";
                                     
                                     echo "<td>";
-                                    $query = "SELECT  COUNT(inventory_id) as in_total FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model= '$model'";
-                                  $result = mysqli_query($connection, $query);
-                                foreach($result as $data){
-                                    $in_total = $data['in_total'];
-                                }
+                                    $query = "SELECT *, COUNT(inventory_id) as in_total FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model= '$model' AND generation='$generation' ";
+                                    $result = mysqli_query($connection, $query);
+                                    foreach($result as $data){
+                                        $in_total = $data['in_total'];
+                                    }
                                     echo $in_total;
-                                     echo"</td>
+                                    echo"</td>
                                     <td>";
-                                    $query = "SELECT COUNT(inventory_id)as in_stock FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model' AND send_to_production='0'";
+                                    $query = "SELECT *,COUNT(inventory_id)as in_stock FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND send_to_production='0'";
                                     $result = mysqli_query($connection, $query);
                                     foreach($result as $data){
                                         $in_stock = $data['in_stock'];
@@ -81,7 +85,7 @@ $brand = $_GET['brand'];
                                     echo $in_stock;
                                     echo "</td>
                                     <td>";
-                                    $query = "SELECT COUNT(inventory_id)as dispatch FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model' AND send_to_production='1'";
+                                    $query = "SELECT COUNT(inventory_id)as dispatch FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND send_to_production='1'";
                                     $result = mysqli_query($connection, $query);
                                     foreach($result as $data){
                                         $dispatch = $data['dispatch'];
@@ -91,7 +95,7 @@ $brand = $_GET['brand'];
                                     </td>
                                     <td class='text-center'>
                                             <a class='btn btn-xs bg-primary ' 
-                                                href='spec_view.php?model=$model&brand=$brand'><i class='fas fa-eye'></i>
+                                                href='spec_view.php?model=$model&brand=$brand&core=$core'><i class='fas fa-eye'></i>
                                             </a>
                                         </td>
                                 </tr>";
@@ -125,7 +129,7 @@ $brand = $_GET['brand'];
                                 foreach($result as $data){
                                     $model = $data['model'];
                                     $in_total = $data['in_total'];
-                                    $cpu = $data['core'];;
+                                    $cpu = $data['core'];
                                     $generation = $data['generation'];
                                     $screen_size = $data['lcd_size'];
                                     $screen_type = $data['touch_or_non_touch'];
