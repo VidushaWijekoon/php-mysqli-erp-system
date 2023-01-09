@@ -249,34 +249,34 @@ if(isset($_POST['logged_out'])){
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
-                                            <a href="../sales/create_customers.php" class="nav-link">
-                                                <i class="fa-sharp fa-solid fa-person nav-icon"
-                                                    style="font-size: 12px;"></i>
-                                                <p>Create Customer</p>
+                                            <a href="../sales/quatations.php" class="nav-link">
+                                                <i class="fa-solid fa-receipt nav-icon" style="font-size: 12px;"></i>
+                                                <p>Quataion</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="fa-solid fa-files nav-icon" style="font-size: 12px;"></i>
+                                                <p>Sales Order</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="../sales/customers.php" class="nav-link">
-                                                <i class="fa-solid fa-user-group nav-icon" style="font-size: 12px;"></i>
+                                                <i class="fa-solid fa-people nav-icon" style="font-size: 12px;"></i>
                                                 <p>Customers</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="../sales/create_quatation.php" class="nav-link">
-                                                <i class="fa-sharp fa-solid fa-receipt nav-icon"
+                                            <a href="../sales/sales_dashboard.php" class="nav-link">
+                                                <i class="fa-solid fa-universal-access nav-icon"
                                                     style="font-size: 12px;"></i>
-                                                <p>Create Quatation</p>
+                                                <p>Daily Task</p>
                                             </a>
                                         </li>
+
                                         <li class="nav-item">
-                                            <a href="../sales/quatations.php" class="nav-link">
-                                                <i class="fa-solid fa-files nav-icon" style="font-size: 12px;"></i>
-                                                <p>Quatations</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="../sales/sales_team_leader.php" class="nav-link">
-                                                <i class="fa-solid fa-files nav-icon" style="font-size: 12px;"></i>
+                                            <a href="../sales/sales_team_leader_dashboard.php" class="nav-link">
+                                                <i class="fa-solid fa-user-group nav-icon" style="font-size: 12px;"></i>
                                                 <p>Team Leader</p>
                                             </a>
                                         </li>
@@ -593,7 +593,7 @@ if(isset($_POST['logged_out'])){
                         <?php } ?>
 
 
-                        <li class="nav-header text-uppercase">Other</li>
+                        <li class="nav-header text-capitalize">Inventory</li>
 
                         <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 6 && $department == 1) || ($role_id == 4 && $department == 1) ) { ?>
 
@@ -613,16 +613,16 @@ if(isset($_POST['logged_out'])){
                             </a>
                         </li>
 
-                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 2) || ($role_id == 10 && $department == 2)) { ?>
+                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 2) || ($role_id == 10 && $department == 2) || ($role_id == 5 && $department == 5)) { ?>
 
                         <li class="nav-item">
                             <a href="../inventory/warehouse_stock_report.php" class="nav-link">
                                 <i class="fa fa-cubes-stacked nav-icon" style="font-size: 12px;"></i>
-                                <p> Stock Report </p>
+                                <p> Laptop Inventory </p>
                             </a>
                         </li>
 
-                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 20) || ($role_id == 6 && $department == 1)) { ?>
+                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 20) || ($role_id == 6 && $department == 1) ) { ?>
 
                         <li class="nav-item">
                             <a href="../part/part_stock_dashboard.php" class="nav-link">

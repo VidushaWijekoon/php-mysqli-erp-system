@@ -17,7 +17,7 @@ if (!isset($_SESSION['user_id'])) {
             <div class="col-12">
                 <div class="card mt-5">
                     <div class="card-header">
-                        <h3 class="card-title">Customer Details</h3>
+                        <h3 class="card-title">Daily Marketing Update</h3>
 
                         <div class="card-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
@@ -33,38 +33,33 @@ if (!isset($_SESSION['user_id'])) {
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th>Country</th>
                                     <th>Customer Name</th>
                                     <th>Company Name</th>
-                                    <th>Country</th>
-                                    <th>Whatsapp</th>
+                                    <th>Model</th>
+                                    <th>Which Model He Like Most</th>
+                                    <th>Platform</th>
+                                    <td>Status</td>
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
-                                
-                                    $query = "SELECT * FROM customers";
-                                    $query_run = mysqli_query($connection, $query);
-                                    foreach($query_run as $qr){
-                                 
-                                ?>
                                 <tr>
-                                    <td>#</td>
+                                    <td>Zambia</td>
                                     <td>
-                                        <a href="<?php echo "cusomter_view.php?customer_id={$qr['customer_id']}"; ?>">
-                                            <?php echo $qr['first_name'] . " " . $qr['last_name']; ?></a>
+                                        <select class="w-100" name="salutation" style="border-radius: 5px; width: 10%;"
+                                            required>
+                                            <option value="2">John Doe</option>
+                                            <option value="4">Razer</option>
+                                            <option value="6">Sample Doe</option>
+                                            <option value="8">MSS</option>
+                                        </select>
                                     </td>
-                                    <td><?php echo $qr['company_name'] ?></td>
-                                    <td><?php echo $qr['country'] ?></td>
-                                    <td><?php echo $qr['whatsapp_number'] ?></td>
-                                    <td>
-                                        <?php 
-                                            echo "<a class='btn btn-xs btn-secondary mx-1' href=\"cusomter_view.php?customer_id={$qr['customer_id']}\"><i class='fa-solid fa-eye'></i> </a>";
-                                        ?>
-                                    </td>
+                                    <td>E7400</td>
+                                    <td>840 G3</td>
+                                    <td>Whatsapp</td>
+                                    <td></td>
                                 </tr>
-                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -73,3 +68,17 @@ if (!isset($_SESSION['user_id'])) {
         </div>
     </div>
 </div>
+
+<style>
+[type="text"] {
+    height: 22px;
+    margin-top: 4px;
+    font-size: 10px;
+    border: 1px solid #f1f1f1;
+    border-radius: 5px;
+    font-size: 12px;
+    padding: 10px;
+    font-family: "Poppins", sans-serif;
+    color: #fff !important;
+}
+</style>

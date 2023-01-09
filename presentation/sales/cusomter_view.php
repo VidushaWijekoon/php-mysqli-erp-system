@@ -22,6 +22,7 @@ foreach($query_1_run as $x){
 }
 
 ?>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-2">

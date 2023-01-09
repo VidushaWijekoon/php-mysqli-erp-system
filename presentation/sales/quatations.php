@@ -73,8 +73,8 @@ if (!isset($_SESSION['user_id'])) {
                                     <span class="badge badge-lg badge-danger text-white p-1 px-3">Rejected</span>
                                     <?php }if($item_status == 1) {?>
                                     <span class="badge badge-lg badge-success text-white p-1 px-3">Accepted</span>
-                                    <span class="badge badge-lg text-white p-1 px-3"
-                                        style="background-color: green;">Approved By Sam</span>
+                                    <span class="badge badge-lg badge-danger text-white p-1 px-3">Waiting for
+                                        Approve</span>
                                     <?php } ?>
                                 </td>
                                 <td class='text-center'>
