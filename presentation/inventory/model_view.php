@@ -25,24 +25,23 @@ $brand = $_GET['brand'];
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card justify-content-center mx-auto mt-2">
-            <div class="rounded">
-                <div class="table-responsive table-borderless">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th class="text-center">#</th>
-                                <th>Brand</th>
-                                <th>Model</th>
-                                <th>core</th>
-                                <th>In Total</th>
-                                <th>In Stock</th>
-                                <th>Dispatch</th>
-                                <th>&nbsp;</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-body">
+            <div class="card">
+                <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th>Brand</th>
+                            <th>Model</th>
+                            <th>core</th>
+                            <th>In Total</th>
+                            <th>In Stock</th>
+                            <th>Dispatch</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-body">
 
-                            <?php
+                        <?php
                                 $model = null;
                                 $core = null;
                                 $in_total = null;
@@ -68,7 +67,7 @@ $brand = $_GET['brand'];
                                     <td>$core</td>";
                                     
                                     echo "<td>";
-                                    $query = "SELECT *, COUNT(inventory_id) as in_total FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model= '$model' AND generation='$generation' ";
+                                    $query = "SELECT *, COUNT(inventory_id) as in_total FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model= '$model' AND core='$core' ";
                                     $result = mysqli_query($connection, $query);
                                     foreach($result as $data){
                                         $in_total = $data['in_total'];
@@ -112,7 +111,7 @@ $brand = $_GET['brand'];
                            <th>Screen Type</th>
                             </tr>
                             ";?>
-                            <?php
+                        <?php
                                 $cpu = '';
                                 $generation = '';
                                 $screen_resolution = '';
@@ -147,13 +146,13 @@ $brand = $_GET['brand'];
                                     <td>$screen_type</td>
                                     </tr>";
                                 } ?>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                </div>
+                        <?php } ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 
