@@ -80,6 +80,11 @@ function Login($role_id, $department){
     elseif($department == 23){
         header('Location: presentation/performance/performance_record.php');
     }
+
+    // Production Team Leader Redirect
+    elseif( $department == 5){
+        header('Location: presentation/sales/sales_dashboard.php');
+    }
    
 
 }
