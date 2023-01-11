@@ -230,7 +230,7 @@ if(isset($_POST['logged_out'])){
 
                         <?php } ?>
 
-                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 5 && $department == 5)) { ?>
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($department == 5)) { ?>
 
                         <li class="nav-item">
                             <a href="#" class="nav-link">
@@ -251,7 +251,7 @@ if(isset($_POST['logged_out'])){
                                         <li class="nav-item">
                                             <a href="../sales/quatations.php" class="nav-link">
                                                 <i class="fa-solid fa-receipt nav-icon" style="font-size: 12px;"></i>
-                                                <p>Quataion</p>
+                                                <p>Quataions</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
@@ -267,10 +267,17 @@ if(isset($_POST['logged_out'])){
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="../sales/sales_dashboard.php" class="nav-link">
+                                            <a href="../sales/create_post.php" class="nav-link">
                                                 <i class="fa-solid fa-universal-access nav-icon"
                                                     style="font-size: 12px;"></i>
                                                 <p>Daily Task</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="../sales/sales_dashboard.php" class="nav-link">
+                                                <i class="fa-solid fa-universal-access nav-icon"
+                                                    style="font-size: 12px;"></i>
+                                                <p>Sales Dashboard</p>
                                             </a>
                                         </li>
 
