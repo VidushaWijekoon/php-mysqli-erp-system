@@ -136,12 +136,15 @@ if(isset($_POST['posting_customer'])){
                         '{$instagram}', '{$lazada}', '{$shoppe}', '{$tokopedia}', '{$amazon_com}', '{$amazon_uk}', '{$tiktok}', '{$jiji_ng}', '{$jiji_co_ke}', '{$google}', '{$pcexpoters}', '{$jumia}',
                         '{$thebrokersite}', '{$username}', '{$member_id}')";
     $query_run = mysqli_query($connection, $query);
-    $_POST['posting_customer'] = '';
+
+    if($query_run){
     echo "<script>
             $(window).load(function() {
                 $('#posting_modal').modal('show');
-            })
+            });
+            
         </script>";
+    }
 }
 
 
