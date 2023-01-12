@@ -72,6 +72,32 @@ $member_id = null;
 
 $currrent_date = date("l");
 
+$customer_name = null;
+$customer_country_from = null;
+$customer_whatsapp_number = null;
+$model_selling_buying = null;
+$uae_pickup1 = null;
+$platform = null;
+
+$choose_country = null;
+
+$create_customer_name = null;
+$created_customer_whatsapp_number = null;
+$create_customer_id = null;
+
+$posting_customer_name = null;
+$posting_whatsapp_number = null;
+$platform2 = null;
+$model_selling_and_buying1 = null;
+$posted_model_1 = null;
+$posted_model_2 = null;
+$customer_asking_model = null;
+$customer_asking_price = null;
+$uae_pickup2 = null;
+
+$post_status = null;
+$created_posted_time = null;
+
 $query = "SELECT * FROM weekly_sales_set_target
             INNER JOIN weekly_sales_set_posting_to_customer 
             ON weekly_sales_set_target.id = weekly_sales_set_posting_to_customer.member_id 
@@ -133,10 +159,12 @@ foreach($query_run as $q){
 $currrent_date = date("l");
 echo $currrent_date;
 
+if(isset($_POST['get_country'])){
+    $choose_country = $_POST['choose_country'];
+    echo $choose_country;
+}
 
 ?>
-
-
 
 <div class="container-fluid">
     <div class="row">
@@ -146,14 +174,14 @@ echo $currrent_date;
                     <div class="card-header p-0 border-bottom-0">
                         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
                             <li class="nav-item text-center" style="width: 350px;">
-                                <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill"
+                                <a class="nav-link" id="custom-tabs-four-home-tab" data-toggle="pill"
                                     href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home"
-                                    aria-selected="true" style="color: #fff;">Create and Search Customer Task</a>
+                                    aria-selected="false" style="color: #fff;">Collect Customer Informations</a>
                             </li>
                             <li class="nav-item text-center" style="width: 350px;">
                                 <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill"
                                     href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile"
-                                    aria-selected="false" style="color: #fff;">Posting to Customer & Platform Task</a>
+                                    aria-selected="true" style="color: #fff;">Posting to Customer & Platform Task</a>
                             </li>
                         </ul>
                     </div>
@@ -162,7 +190,7 @@ echo $currrent_date;
                             <!-- ============================================================== -->
                             <!-- Tab 1  -->
                             <!-- ============================================================== -->
-                            <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel"
+                            <div class="tab-pane fade" id="custom-tabs-four-home" role="tabpanel"
                                 aria-labelledby="custom-tabs-four-home-tab">
                                 <table class="table table-striped">
                                     <thead>
@@ -177,7 +205,7 @@ echo $currrent_date;
                                     <tbody>
                                         <tr>
                                             <td>#</td>
-                                            <td><?php echo $currrent_date; ?></td>
+                                            <td><?php echo $day; ?></td>
                                             <td>
                                                 <div class="d-flex">
                                                     <div class="col col-md-6 col-lg-6">
@@ -188,21 +216,13 @@ echo $currrent_date;
                                                             <label class="label_values text-capitalize"
                                                                 for="facebook">Facebook</label>
                                                         </div>
-                                                        <?php } elseif($facebook == 0) {?>
-                                                        <div class="icheck-success d-none">
-                                                            <input type="checkbox" id="facebook" name="facebook"
-                                                                value="1" checked disabled>
-                                                            <label class="label_values text-capitalize"
-                                                                for="facebook">Facebook</label>
-                                                        </div>
-                                                        <?php } if($instagram == 1) { ?>
+
                                                         <div class="icheck-success">
                                                             <input type="checkbox" id="instagram" name="instagram"
                                                                 value="1" checked disabled>
                                                             <label class="label_values text-capitalize"
                                                                 for="instagram">Instagram</label>
                                                         </div>
-                                                        <?php } elseif($instagram == 0) { ?>
                                                         <div class="icheck-success d-none">
                                                             <input type="checkbox" id="lazada" name="lazada" value="1"
                                                                 checked disabled>
@@ -281,14 +301,14 @@ echo $currrent_date;
                                                         </div>
                                                         <?php } if($tiktok == 1) {?>
                                                         <div class="icheck-success">
-                                                            <input type="checkbox" id="tiktok" name="tiktok" value="1"
-                                                                checked disabled>
+                                                            <input type="checkbox" id="tiktok" name="tiktok" checked
+                                                                disabled>
                                                             <label class="label_values text-capitalize"
                                                                 for="tiktok">Tiktok</label>
                                                         </div>
                                                         <?php } elseif($tiktok == 0) { ?>
                                                         <div class="icheck-success">
-                                                            <input type="checkbox" id="tiktok" name="tiktok" value="1">
+                                                            <input type="checkbox" id="tiktok" name="tiktok">
                                                             <label class="label_values text-capitalize"
                                                                 for="tiktok">Tiktok</label>
                                                         </div>
@@ -408,18 +428,113 @@ echo $currrent_date;
                                                 <div class="h-100 d-flex align-items-center justify-content-center text-center"
                                                     style="font-size: 100px; margin-top: 10%; color: #e88c8c;">
                                                     <p id="showCounter"><?php echo $customer_target_qty ?></p>
-
                                                 </div>
                                             </td>
                                         </tr>
                                     </tbody>
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 10px">#</th>
+                                                <th>Country</th>
+                                                <th>Customer Name</th>
+                                                <th>Whatsapp Number</th>
+                                                <th>Platform</th>
+                                                <th>Model He Buying</th>
+                                                <th>He Can Pick Up From UAE?</th>
+                                                <th>&nbsp;</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <form method="POST">
+                                                <tr>
+                                                    <td>#</td>
+                                                    <td>
+                                                        <select name="create_customer_country" class="mt-1"
+                                                            style="border-radius: 5px;" required>
+                                                            <option value="" selected>--Select Country--</option>
+                                                            <?php
+                                                            $query = "SELECT country_name FROM countries ORDER BY 'country_name' ASC";
+                                                            $result = mysqli_query($connection, $query);
+
+                                                            while ($x = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
+                                                        ?>
+                                                            <option value="<?php echo $x["country_name"]; ?>">
+                                                                <?php echo $x["country_name"]; ?>
+                                                            </option>
+                                                            <?php endwhile; ?>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" name="customer_name"
+                                                            id="customer_name" value="">
+                                                    </td>
+
+                                                    <td>
+                                                        <input type="text" class="form-control"
+                                                            name="customer_whatsapp_number"
+                                                            placeholder="Whatsapp Number">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" name="platform1"
+                                                            placeholder="Platform">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control"
+                                                            name="model_selling_buying"
+                                                            placeholder="Model He Selling & Buying?">
+                                                    </td>
+
+                                                    <td class="d-flex">
+                                                        <div class="icheck-success d-inline">
+                                                            <input type="radio" id="keyboard_light_1" name="uae_pickup1"
+                                                                value="yes" required>
+                                                            <label class="label_values" for="keyboard_light_1"
+                                                                style="margin-right: 15px;">Yes
+                                                            </label>
+                                                        </div>
+                                                        <div class="icheck-danger d-inline">
+                                                            <input type="radio" id="keyboard_light_2" name="uae_pickup1"
+                                                                value="no">
+                                                            <label class="label_values" for="keyboard_light_2">No
+                                                            </label>
+                                                    </td>
+                                                    <td>
+                                                        <button type="submit" name="add_customer"
+                                                            style="background: transparent; border:none;">
+                                                            <i class="fa-solid fa-circle-plus fa-2x text-primary"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </form>
+                                        </tbody>
+                                    </table>
                                 </table>
                             </div>
+
+                            <?php 
+
+                                if(isset($_POST['add_customer'])){
+
+                                    $create_customer_country = $_POST['create_customer_country'];
+                                    $customer_name = $_POST['customer_name'];
+                                    $customer_whatsapp_number = $_POST['customer_whatsapp_number'];
+                                    $platform1 = $_POST['platform1'];
+                                    $model_selling_buying = $_POST['model_selling_buying'];
+                                    $uae_pickup1 = $_POST['uae_pickup1'];
+
+                                    $q_r = "INSERT INTO `sales_create_customer_informations`(`create_customer_country`, `customer_name`, `customer_whatsapp_number`, `platform1`, `model_selling_buying`, `uae_pickup1`, `created_by`) 
+                                                VALUES ('{$create_customer_country}', '{$customer_name}', '{$customer_whatsapp_number}', '{$platform1}', '{$model_selling_buying}', '{$uae_pickup1}', '{$username}')";
+                                    $insert_q_r = mysqli_query($connection, $q_r);
+
+                                }
+
+                            ?>
 
                             <!-- ============================================================== -->
                             <!-- Tab 2  -->
                             <!-- ============================================================== -->
-                            <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel"
+                            <div class="tab-pane fade show active" id="custom-tabs-four-profile" role="tabpanel"
                                 aria-labelledby="custom-tabs-four-profile-tab">
                                 <div class="d-flex">
                                     <div class="col col-md-6 col-lg-6">
@@ -590,8 +705,264 @@ echo $currrent_date;
                                         </table>
                                     </div>
                                 </div>
+                                <form method="POST">
+                                    <div class="d-flex">
+                                        <div class="mt-1 mx-1">
+                                            <p>Please Select Country First: </p>
+                                        </div>
+                                        <div class="">
+                                            <select name="choose_country" class="mt-1 mx-3" style="border-radius: 5px;"
+                                                required>
+                                                <option value="" selected>
+                                                    -- Please Select Country--
+                                                </option>
+                                                <?php
+                                                    $query = "SELECT create_customer_country FROM sales_create_customer_informations GROUP BY create_customer_country ORDER BY 'create_customer_country' ASC ";
+                                                    $result = mysqli_query($connection, $query);
+
+                                                    while ($x = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
+                                                ?>
+                                                <option value="<?php echo $x["create_customer_country"]; ?>">
+                                                    <?php echo $x["create_customer_country"]; ?>
+                                                </option>
+                                                <?php endwhile;  ?>
+                                            </select>
+                                        </div>
+                                        <div class="">
+                                            <button type="submit" name="get_country"
+                                                class="btn btn-sm btn-primary px-2 mt-1" style="padding: 0;">
+                                                Search
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr style="font-size: 10px;">
+                                            <th>#</th>
+                                            <!-- <th>Country</th> -->
+                                            <th>Customer Name</th>
+                                            <th>Whatsapp Number</th>
+                                            <th>Platform</th>
+                                            <th>Model He Selling/Buying?</th>
+                                            <th>Posted Model 1</th>
+                                            <th>Posted Model 2</th>
+                                            <th>Customer Asking Model</th>
+                                            <th>Customer Asking Price</th>
+                                            <!-- <th>Customer Reponose</th> -->
+                                            <th>He Can Pick Up From UAE?</th>
+                                            <th>Posted Status</th>
+                                            <th>Posted Date</th>
+                                            <th>&nbsp;</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody">
+
+                                        <?php                                                                               
+                                                        
+                                            $q_d = "SELECT * FROM sales_create_customer_informations WHERE create_customer_country = '{$choose_country}'";
+                                            $qd_run = mysqli_query($connection, $q_d);
+
+                                            foreach($qd_run as $qd_run){
+                                                $create_customer_name = $qd_run['customer_name'];
+                                                $created_customer_whatsapp_number = $qd_run['customer_whatsapp_number'];
+                                                $create_customer_id = $qd_run['id'];
+
+                                            $query1 = "SELECT * FROM sales_postiong_to_customer WHERE posting_customer_name = '$create_customer_name' AND posting_whatsapp_number = '$created_customer_whatsapp_number'";
+                                            $query_run2 = mysqli_query($connection, $query1);
+                                            $post_status1 = 0;
+                                            $created_posted_time = 0;
+                                            $posting_whatsapp_number = 0;
+                                            $posted_model_1 = 0;
+                                            $posted_model_2 = 0;
+                                            $customer_asking_model = 0;
+                                            $customer_asking_price = 0;
+                                            $uae_pickup2 = 0;
+
+                                            foreach($query_run2 as $x){
+                                                $post_status1 = $x['status'];
+                                                $created_posted_time = $x['created_time'];
+                                                $posting_customer_name = $x['posting_customer_name'];
+                                                $posting_whatsapp_number = $x['posting_whatsapp_number'];
+                                                $platform2 = $x['platform2'];
+                                                $model_selling_and_buying1 = $x['model_selling_and_buying1'];
+                                                $posted_model_1 = $x['posted_model_1'];
+                                                $posted_model_2 = $x['posted_model_2'];
+                                                $customer_asking_model = $x['customer_asking_model'];
+                                                $customer_asking_price = $x['customer_asking_price'];
+                                                $uae_pickup2 = $x['uae_pickup2'];                                                 
+
+                                                // echo $created_posted_time;
+                                                strtotime($created_posted_time);
+                                                $x = date($created_posted_time);
+
+                                                $today = Date('Y-m-d 00:00:00');
+
+                                                //Create the first date object that will assign the current date
+                                                $dateVal1 = date_create($today);
+                                                //Create the second date object that will assign a particular date
+                                                $dateVal2 = date_create($created_posted_time);
+
+                                                $dateVal3 = date_create($created_posted_time);
+
+                                                //Calculate the interval from the first date to the second date
+                                                $ival = date_diff($dateVal2, $dateVal1);
+                                                
+                                                //Calculate the interval from the second date to the first date
+                                                $ival = date_diff($dateVal1, $dateVal2);
+                                                $x = $ival->format('%r%a');
+
+
+
+                                            }                                                                                                                                                          
+                                        ?>
+                                        <tr>
+                                            <form method="POST">
+                                                <td>#</td>
+                                                <td>
+                                                    <input type="text" class="form-control" name="posting_customer_name"
+                                                        value="<?php echo $create_customer_name; ?>" readonly>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control"
+                                                        name="posting_whatsapp_number"
+                                                        value="<?php echo $created_customer_whatsapp_number; ?>"
+                                                        readonly>
+                                                </td>
+                                                <td>
+                                                    <?php if(($x == '-7') || ($platform2 == 0)) { ?>
+                                                    <input type="text" class="form-control" name="platform2"
+                                                        placeholder="Platform">
+                                                    <?php }else { ?>
+                                                    <input type="text" class="form-control" name="platform2"
+                                                        value="<?php echo $platform2 ?>">
+                                                    <?php } ?>
+                                                </td>
+                                                <td>
+                                                    <?php if(($x == '-7') || ($model_selling_and_buying1 == 0)) { ?>
+                                                    <input type="text" class="form-control"
+                                                        name="model_selling_and_buying1"
+                                                        placeholder="Model He Selling/Buying?">
+                                                    <?php } else { ?>
+                                                    <input type="text" class="form-control"
+                                                        name="model_selling_and_buying1"
+                                                        value="<?php echo $model_selling_and_buying1 ?>" readonly>
+                                                    <?php } ?>
+                                                </td>
+
+                                                <td>
+                                                    <?php if(($x == '-7') || ($posted_model_1 == 0)) { ?>
+                                                    <input type="text" class="form-control" name="posted_model_1"
+                                                        placeholder="Posted Model 1">
+                                                    <?php } else { ?>
+                                                    <input type="text" class="form-control" name="posted_model_1"
+                                                        value="<?php echo $posted_model_1 ?>" readonly>
+                                                    <?php } ?>
+                                                </td>
+
+                                                <td>
+                                                    <?php if(($x == '-7') || ($posted_model_2 == 0)) { ?>
+                                                    <input type="text" class="form-control" name="posted_model_2"
+                                                        placeholder="Posted Model">
+                                                    <?php } else { ?>
+                                                    <input type="text" class="form-control" name="posted_model_2"
+                                                        value="<?php echo $posted_model_2 ?>" readonly>
+                                                    <?php } ?>
+                                                </td>
+
+                                                <td>
+                                                    <?php if(($x == '-7') || ($customer_asking_model == 0)) { ?>
+                                                    <input type="text" class="form-control" name="customer_asking_model"
+                                                        placeholder="Customer Asking Model">
+                                                    <?php } else { ?>
+                                                    <input type="text" class="form-control" name="customer_asking_model"
+                                                        value="<?php echo $customer_asking_model ?>" readonly>
+                                                    <?php } ?>
+                                                </td>
+                                                <td>
+                                                    <?php if(($x == '-7') || ($customer_asking_price == 0)) { ?>
+                                                    <input type="text" class="form-control" name="customer_asking_price"
+                                                        placeholder="Customer Asking Price">
+                                                    <?php } else { ?>
+                                                    <input type="text" class="form-control" name="customer_asking_price"
+                                                        value="<?php echo $customer_asking_price ?>" readonly>
+                                                    <?php } ?>
+                                                </td>
+                                                <td class="d-flex">
+                                                    <?php if(($x == '-7') || ($customer_asking_price == 0)) { ?>
+                                                    <div class="icheck-success d-inline">
+                                                        <input type="radio" id="uae_pickup2" name="uae_pickup2"
+                                                            value="yes" required>
+                                                        <label class="label_values" for="uae_pickup2"
+                                                            style="margin-right: 15px;">Yes
+                                                        </label>
+                                                    </div>
+                                                    <div class="icheck-danger d-inline">
+                                                        <input type="radio" id="uae_pickup3" name="uae_pickup2"
+                                                            value="no">
+                                                        <label class="label_values" for="uae_pickup3">No
+                                                        </label>
+                                                    </div>
+                                                    <?php } else { if($uae_pickup2 == 'yes') { ?>
+                                                    <div class="icheck-success d-inline">
+                                                        <input type="radio" id="uae_pickup2" name="uae_pickup2"
+                                                            value="yes" checked disabled>
+                                                        <label class="label_values" for="uae_pickup2"
+                                                            style="margin-right: 15px;">Yes
+                                                        </label>
+                                                    </div>
+                                                    <div class="icheck-danger d-inline">
+                                                        <input type="radio" id="uae_pickup3" name="uae_pickup2"
+                                                            value="no" disabled>
+                                                        <label class="label_values" for="uae_pickup3">No
+                                                        </label>
+                                                    </div>
+                                                    <?php }if($uae_pickup2 == 'no') { ?>
+                                                    <div class="icheck-success d-inline">
+                                                        <input type="radio" id="uae_pickup2" name="uae_pickup2"
+                                                            value="yes" checked disabled>
+                                                        <label class="label_values" for="uae_pickup2"
+                                                            style="margin-right: 15px;">Yes
+                                                        </label>
+                                                    </div>
+                                                    <div class="icheck-danger d-inline">
+                                                        <input type="radio" id="uae_pickup3" name="uae_pickup2"
+                                                            value="no" checked disabled>
+                                                        <label class="label_values" for="uae_pickup3">No
+                                                        </label>
+                                                    </div>
+                                                    <?php } } ?>
+                                                </td>
+                                                <td>
+                                                    <?php if(($post_status1 == 0) || ($x == '-7')){ ?>
+                                                    <div class="icheck-success d-inline">
+                                                        <button class="btn btn-sm btn-primary px-2 mt-1" type="submit"
+                                                            id="post" name="submit_post_to_customer"
+                                                            style="padding: 0;">Post
+                                                        </button>
+                                                    </div>
+                                                    <?php  } elseif($post_status1 == 'post') { ?>
+                                                    <div class="icheck-success d-inline">
+                                                        <button class="btn btn-sm btn-primary mt-1 px-1" type="submit"
+                                                            id="posted" name="submit_post_to_customer" disabled
+                                                            style="padding: 0;">Posted
+                                                        </button>
+                                                    </div>
+                                                    <?php } ?>
+                                                </td>
+                                                <td>
+                                                    <?php if($created_posted_time != 0 ) { ?>
+                                                    <p style="font-size: 12px;"><?php echo $created_posted_time; ?></p>
+                                                    <?php } if($created_posted_time == 0) { ?>
+                                                    <p></p>
+                                                    <?php } ?>
+                                                </td>
+                                            </form>
+                                        </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -599,191 +970,30 @@ echo $currrent_date;
         </div>
     </div>
 </div>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-2">
-            <div class="card">
-                <div class="card-body">
-                    <button type="button" class="btn btn-sm btn-success mx-2" data-toggle="collapse"
-                        data-target="#daily_post">
-                        <i class="fas fa-plus mx-2"></i>
-                        Daily Posting to Customer
-                    </button>
 
-                    <button type="button" class="btn btn-sm btn-success mx-2" data-toggle="collapse"
-                        data-target="#customer_details">
-                        <i class="fas fa-plus mx-2"></i>
-                        Daily Create & Search Customer
-                    </button>
-                    <div id="daily_post" class="collapse">
+<?php 
 
-                        <div class="card-body">
-                            <h6>Create Posting to Customer</h6>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 10px">#</th>
-                                        <th>Country</th>
-                                        <th>Customer Name</th>
-                                        <th>Whatsapp Number</th>
-                                        <th>Posted Model</th>
-                                        <th>Posting Status</th>
-                                        <th>Model He Instrested</th>
-                                        <th>Custromer Asking Price</th>
-                                        <th>He Can Pick Up From UAE?</th>
-                                        <th>&nbsp;</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1.</td>
-                                        <td>
-                                            <select name="billing_country_region" class="info_select w-75"
-                                                style="border-radius: 5px;">
-                                                <option value="" selected>--Select Country--</option>
-                                                <?php
-                                            $query = "SELECT * FROM countries ORDER BY 'country_name' ASC";
-                                            $result = mysqli_query($connection, $query);
+if(isset($_POST['submit_post_to_customer'])){
 
-                                            while ($countries = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                        ?>
-                                                <option value="<?php echo $countries["country_name"]; ?>">
-                                                    <?php echo strtoupper($countries["country_name"]); ?>
-                                                </option>
-                                                <?php endwhile; ?>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" name="billing_city"
-                                                placeholder="Customer Name">
-                                        </td>
+    $posting_customer_name = $_POST['posting_customer_name'];
+    $posting_whatsapp_number = $_POST['posting_whatsapp_number'];
+    $platform2 = $_POST['platform2'];
+    $model_selling_and_buying1 = $_POST['model_selling_and_buying1'];
+    $posted_model_1 = $_POST['posted_model_1'];
+    $posted_model_2 = $_POST['posted_model_2'];
+    $customer_asking_model = $_POST['customer_asking_model'];
+    $customer_asking_price = $_POST['customer_asking_price'];
+    $uae_pickup2 = $_POST['uae_pickup2'];
 
-                                        <td>
-                                            <input type="text" class="form-control" name="billing_city"
-                                                placeholder="Whatsapp Number">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" name="billing_city"
-                                                placeholder="Posted Model">
-                                        </td>
-                                        <td>
-                                            <select name="billing_country_region" class="info_select w-75"
-                                                style="border-radius: 5px;">
-                                                <option value="" selected>--Select Posting Status--</option>
-                                                <option value>Yes</option>
-                                                <option value>No</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" name="billing_city"
-                                                placeholder="Model he Insterested">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" name="billing_city"
-                                                placeholder="Enter the Customer Price">
-                                        </td>
-                                        <td>
-                                            <select name="billing_country_region" class="info_select w-75"
-                                                style="border-radius: 5px;">
-                                                <option value="" selected>--Select Pickup--</option>
-                                                <option value>Yes</option>
-                                                <option value>No</option>
-                                            </select>
-                                        </td>
+    $d_r = "INSERT INTO `sales_postiong_to_customer`(`posting_customer_name`, `posting_whatsapp_number`, `platform2`, `model_selling_and_buying1`, `posted_model_1`, `posted_model_2`, `customer_asking_model`, `customer_asking_price`, `uae_pickup2`, `status`, `created_by`) 
+            VALUES ('{$posting_customer_name}', '{$posting_whatsapp_number}', '{$platform2}', '{$model_selling_and_buying1}', '{$posted_model_1}', '{$posted_model_2}', '{$customer_asking_model}', '{$customer_asking_price}', 
+                    '{$uae_pickup2}', 'post','{$username}') ";
+    $d_r_run = mysqli_query($connection, $d_r);
 
-                                    </tr>
+    // header("Location: create_post.php?chooese_country={$chooese_country}");
+}
 
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div id="customer_details" class="collapse">
-                        <div class="card-body">
-                            <h6> Daily Create & Search Customer</h6>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 10px">#</th>
-                                        <th>Country</th>
-                                        <th>Customer Name</th>
-                                        <th>Whatsapp Number</th>
-                                        <th>Posted Model</th>
-                                        <th>Posting Status</th>
-                                        <th>Model He Instrested</th>
-                                        <th>Custromer Asking Price</th>
-                                        <th>He Can Pick Up From UAE?</th>
-                                        <th>&nbsp;</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1.</td>
-                                        <td>
-                                            <select name="billing_country_region" class="info_select w-75"
-                                                style="border-radius: 5px;">
-                                                <option value="" selected>--Select Country--</option>
-                                                <?php
-                                            $query = "SELECT * FROM countries ORDER BY 'country_name' ASC";
-                                            $result = mysqli_query($connection, $query);
-
-                                            while ($countries = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                        ?>
-                                                <option value="<?php echo $countries["country_name"]; ?>">
-                                                    <?php echo strtoupper($countries["country_name"]); ?>
-                                                </option>
-                                                <?php endwhile; ?>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" name="billing_city"
-                                                placeholder="Customer Name">
-                                        </td>
-
-                                        <td>
-                                            <input type="text" class="form-control" name="billing_city"
-                                                placeholder="Whatsapp Number">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" name="billing_city"
-                                                placeholder="Posted Model">
-                                        </td>
-                                        <td>
-                                            <select name="billing_country_region" class="info_select w-75"
-                                                style="border-radius: 5px;">
-                                                <option value="" selected>--Select Posting Status--</option>
-                                                <option value>Yes</option>
-                                                <option value>No</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" name="billing_city"
-                                                placeholder="Model he Insterested">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" name="billing_city"
-                                                placeholder="Enter the Customer Price">
-                                        </td>
-                                        <td>
-                                            <select name="billing_country_region" class="info_select w-75"
-                                                style="border-radius: 5px;">
-                                                <option value="" selected>--Select Pickup--</option>
-                                                <option value>Yes</option>
-                                                <option value>No</option>
-                                            </select>
-                                        </td>
-
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+?>
 
 <style>
 [type="text"] {
@@ -798,6 +1008,7 @@ echo $currrent_date;
     color: #fff !important;
 }
 </style>
+
 
 
 <?php include_once("../includes/footer.php") ?>
