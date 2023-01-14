@@ -53,8 +53,8 @@ if (!isset($_SESSION['user_id'])) {
                         <tbody>
                             <?php 
 
-                                $query = "SELECT * FROM sales_quatation_customer_information INNER JOIN sales_quatation_items 
-                                        ON sales_quatation_customer_information.quatation_id = sales_quatation_items.quatation_id
+                                $query = "SELECT * FROM sales_customer_information INNER JOIN sales_quatation_items 
+                                        ON sales_customer_information.quatation_id = sales_quatation_items.quatation_id
                                         GROUP BY sales_quatation_items.quatation_id";
 
                                         $results = mysqli_query($connection, $query);

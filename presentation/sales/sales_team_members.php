@@ -52,8 +52,6 @@ $search_keyword_3 = null;
 $search_keyword_4 = null;
 $search_keyword_5 = null;
 
-$customer_target_qty = null;
-
 $customer_create_model_1 = null;
 $customer_create_model_2 = null;
 $customer_create_model_3 = null;
@@ -105,7 +103,8 @@ if(isset($_POST['get_user'])){
         </script>";
 }
 
-if(isset($_POST['posting_customer'])){
+
+if(isset($_POST['posting_customer_test'])){
 
     $facebook = $_POST['facebook'];
     $instagram = $_POST['instagram'];
@@ -127,7 +126,7 @@ if(isset($_POST['posting_customer'])){
     $search_keyword_4 = $_POST['search_keyword_4'];
     $search_keyword_5 = $_POST['search_keyword_5'];
     $customer_target_qty = $_POST['customer_target_qty'];
-
+    $_POST['posting_customer_test']='';
 
     $query = "INSERT INTO `weekly_sales_set_create_search_customer`(`day`, `sales_member`, `search_keyword_1`, `search_keyword_2`, `search_keyword_3`, `search_keyword_4`, `search_keyword_5`, `customer_target_qty`, 
                                             `facebook`, `instagram`, `lazada`, `shoppe`, `tokopedia`, `amazon.com`, `amazon.uk`, `tiktok`, `jiji.ng`, `jiji.co.ke`, `google`, `pcexporters`, `jumia`, `thebrokersite`, 
@@ -135,18 +134,18 @@ if(isset($_POST['posting_customer'])){
                         VALUES ('{$selected_date}', '{$sales_member_name}', '{$search_keyword_1}', '{$search_keyword_2}', '{$search_keyword_3}','{$search_keyword_4}', '{$search_keyword_5}', '{$customer_target_qty}', '{$facebook}', 
                         '{$instagram}', '{$lazada}', '{$shoppe}', '{$tokopedia}', '{$amazon_com}', '{$amazon_uk}', '{$tiktok}', '{$jiji_ng}', '{$jiji_co_ke}', '{$google}', '{$pcexpoters}', '{$jumia}',
                         '{$thebrokersite}', '{$username}', '{$member_id}')";
-    $query_run = mysqli_query($connection, $query);
-
-    if($query_run){
-    echo "<script>
+                     if($customer_target_qty !=null ){
+        $query_run = mysqli_query($connection, $query);
+        $customer_target_qty = null;
+        
+        echo "<script>
             $(window).load(function() {
                 $('#posting_modal').modal('show');
             });
-            
+                    
         </script>";
     }
 }
-
 
 if(isset($_POST['posting_modal'])){
     $customer_create_model_1 = $_POST['customer_create_model_1'];
@@ -734,7 +733,8 @@ if(isset($_POST['posting_modal'])){
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" name="posting_customer" class="btn btn-primary">Save changes</button>
+                    <button type="submit" name="posting_customer_test" onclick="submitForm()"
+                        class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </form>
@@ -753,7 +753,7 @@ if(isset($_POST['posting_modal'])){
                             <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill"
                                 href="#custom-tabs-four-customer" role="tab" aria-controls="custom-tabs-four-customer"
                                 aria-selected="true" style="color: #fff;">Customer</a>
-                            <input type="text" name="posting_customer" value="customer" class="d-none">
+                            <input type="text" name="posting_customer1" value="customer" class="d-none">
 
                         </li>
                         <li class="nav-item text-center" style="width: 150px;">
@@ -919,7 +919,18 @@ if(isset($_POST['posting_modal'])){
     color: #000 !important;
 }
 </style>
-
+<script>
+function submitForm() {
+    // Get the first form with the name
+    // Usually the form name is not repeated
+    // but duplicate names are possible in HTML
+    // Therefore to work around the issue, enforce the correct index
+    var frm = document.getElementsByName('contact-form')[0];
+    frm.submit(); // Submit the form
+    frm.reset(); // Reset all form data
+    return false; // Prevent page refresh
+}
+</script>
 
 
 <?php include_once('../includes/footer.php'); ?>

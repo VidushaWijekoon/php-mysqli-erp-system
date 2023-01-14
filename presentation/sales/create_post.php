@@ -713,15 +713,20 @@ if(isset($_POST['get_country'])){
                                         <div class="">
                                             <select name="choose_country" class="mt-1 mx-3" style="border-radius: 5px;"
                                                 required>
+
                                                 <option value="" selected>
                                                     -- Please Select Country--
                                                 </option>
                                                 <?php
+                                              
                                                     $query = "SELECT create_customer_country FROM sales_create_customer_informations GROUP BY create_customer_country ORDER BY 'create_customer_country' ASC ";
                                                     $result = mysqli_query($connection, $query);
 
                                                     while ($x = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
                                                 ?>
+
+
+
                                                 <option value="<?php echo $x["create_customer_country"]; ?>">
                                                     <?php echo $x["create_customer_country"]; ?>
                                                 </option>
@@ -763,12 +768,16 @@ if(isset($_POST['get_country'])){
                                             $q_d = "SELECT * FROM sales_create_customer_informations WHERE create_customer_country = '{$choose_country}'";
                                             $qd_run = mysqli_query($connection, $q_d);
 
+                                            $i = 0;
+
                                             foreach($qd_run as $qd_run){
                                                 $create_customer_name = $qd_run['customer_name'];
                                                 $created_customer_whatsapp_number = $qd_run['customer_whatsapp_number'];
                                                 $create_customer_id = $qd_run['id'];
+                                            
+                                                $i++;
 
-                                            $query1 = "SELECT * FROM sales_postiong_to_customer WHERE posting_customer_name = '$create_customer_name' AND posting_whatsapp_number = '$created_customer_whatsapp_number'";
+                                            $query1 = "SELECT * FROM sales_posting_to_customer WHERE posting_customer_name = '$create_customer_name' AND posting_whatsapp_number = '$created_customer_whatsapp_number'";
                                             $query_run2 = mysqli_query($connection, $query1);
                                             $post_status1 = 0;
                                             $created_posted_time = 0;
@@ -985,7 +994,7 @@ if(isset($_POST['submit_post_to_customer'])){
     $customer_asking_price = $_POST['customer_asking_price'];
     $uae_pickup2 = $_POST['uae_pickup2'];
 
-    $d_r = "INSERT INTO `sales_postiong_to_customer`(`posting_customer_name`, `posting_whatsapp_number`, `platform2`, `model_selling_and_buying1`, `posted_model_1`, `posted_model_2`, `customer_asking_model`, `customer_asking_price`, `uae_pickup2`, `status`, `created_by`) 
+    $d_r = "INSERT INTO `sales_posting_to_customer`(`posting_customer_name`, `posting_whatsapp_number`, `platform2`, `model_selling_and_buying1`, `posted_model_1`, `posted_model_2`, `customer_asking_model`, `customer_asking_price`, `uae_pickup2`, `status`, `created_by`) 
             VALUES ('{$posting_customer_name}', '{$posting_whatsapp_number}', '{$platform2}', '{$model_selling_and_buying1}', '{$posted_model_1}', '{$posted_model_2}', '{$customer_asking_model}', '{$customer_asking_price}', 
                     '{$uae_pickup2}', 'post','{$username}') ";
     $d_r_run = mysqli_query($connection, $d_r);

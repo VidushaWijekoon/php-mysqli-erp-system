@@ -44,7 +44,7 @@ if (!isset($_SESSION['user_id'])) {
                             <tbody>
                                 <?php 
                                 
-                                    $query = "SELECT * FROM customers";
+                                    $query = "SELECT * FROM sales_customer_information ORDER BY customer_id DESC";
                                     $query_run = mysqli_query($connection, $query);
                                     foreach($query_run as $qr){
                                  
@@ -52,7 +52,7 @@ if (!isset($_SESSION['user_id'])) {
                                 <tr>
                                     <td>#</td>
                                     <td>
-                                        <a href="<?php echo "cusomter_view.php?customer_id={$qr['customer_id']}"; ?>">
+                                        <a href="<?php echo "customer_view.php?customer_id={$qr['customer_id']}"; ?>">
                                             <?php echo $qr['first_name'] . " " . $qr['last_name']; ?></a>
                                     </td>
                                     <td><?php echo $qr['company_name'] ?></td>
@@ -60,7 +60,7 @@ if (!isset($_SESSION['user_id'])) {
                                     <td><?php echo $qr['whatsapp_number'] ?></td>
                                     <td>
                                         <?php 
-                                            echo "<a class='btn btn-xs btn-secondary mx-1' href=\"cusomter_view.php?customer_id={$qr['customer_id']}\"><i class='fa-solid fa-eye'></i> </a>";
+                                            echo "<a class='btn btn-xs btn-secondary mx-1' href=\"customer_view.php?customer_id={$qr['customer_id']}\"><i class='fa-solid fa-eye'></i> </a>";
                                         ?>
                                     </td>
                                 </tr>
