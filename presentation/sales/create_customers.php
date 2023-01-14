@@ -98,7 +98,7 @@ if(isset($_POST['submit_customer'])){
     $contact_person_mobile_number = mysqli_real_escape_string($connection, $_POST['contact_person_mobile_number']);
     $remarks = mysqli_real_escape_string($connection, $_POST['remarks']);
 
-    $query = "INSERT INTO `customers`(`salutation`, `first_name`, `last_name`, `company_name`, `company_email`, `country`,`UAE_number`, `country_code`, `local_number`, `pickup_method`, `billing_attention`, 
+    $query = "INSERT INTO `sales_customer_information`(`salutation`, `first_name`, `last_name`, `company_name`, `company_email`, `country`,`UAE_number`, `country_code`, `local_number`, `pickup_method`, `billing_attention`, 
                                     `billing_country_region`, `billing_street1`, `billing_street2`, `billing_city`, `billing_state`, `billing_zip_code`, `billing_customer_phone_number`, `shipping_attention`,
                                     `shipping_country_region`, `shipping_street1`, `shipping_street2`, `shipping_city`, `shipping_state`, `shipping_zip_code`, `shipping_customer_phone_number`, 
                                     `currency`, `language`, `payment_terms`, `whatsapp_number`, `facebook`, `contact_person_salutation`, `contact_person_first_name`, `contact_person_last_name`, 
@@ -151,7 +151,7 @@ if(isset($_POST['submit_customer'])){
                                     <div class="col-sm-10 d-flex">
                                         <select class="" name="salutation" style="border-radius: 5px; width: 10%;"
                                             required>
-                                            <option selected>--Select Salutaion--</option>
+                                            <option selected value="">--Select Salutaion--</option>
                                             <option value="2">MR</option>
                                             <option value="4">MRS</option>
                                             <option value="6">MS</option>

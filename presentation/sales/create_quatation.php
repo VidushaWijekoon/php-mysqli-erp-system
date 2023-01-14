@@ -20,7 +20,7 @@ $country = null;
 $shipping_state = null;
 $zip_code = null;
 $uae_number = null;
-$other_number = null;
+$local_number = null;
 $created_by = $_SESSION['username'];
 
 // Order Items
@@ -59,51 +59,6 @@ $shipping_state1 = null;
 $zip_code1 = null;
 $uae_number1 = null;
 $other_number1 = null;
-
-$s1 = "SELECT * FROM sales_quatation_customer_information WHERE uae_number = '$uae_number' OR other_number = '$other_number'";
-$s1_run = mysqli_query($connection, $s1);
-    foreach($s1_run as $s_r){
-        $customer_name = $s_r['customer_name'];
-        $customer_address = $s_r['customer_address'];
-        $company_name = $s_r['company_name'];
-        $country = $s_r['country'];
-        $shipping_state = $s_r['shipping_state'];
-        $zip_code = $s_r['zip_code'];
-            
-}
-
-if (isset($_POST['add_customer'])) {
-
-    $customer_name = mysqli_real_escape_string($connection, $_POST['customer_name']);
-    $customer_address = mysqli_real_escape_string($connection, $_POST['customer_address']);
-    $company_name = mysqli_real_escape_string($connection, $_POST['company_name']);
-    $country = mysqli_real_escape_string($connection, $_POST['country']);
-    $shipping_state = mysqli_real_escape_string($connection, $_POST['shipping_state']);
-    $zip_code = mysqli_real_escape_string($connection, $_POST['zip_code']);
-    $uae_number = mysqli_real_escape_string($connection, $_POST['uae_number']);
-    $other_number = mysqli_real_escape_string($connection, $_POST['other_number']);
-
-    $query = "INSERT INTO sales_quatation_customer_information(customer_name, customer_address, company_name, country, shipping_state, zip_code, uae_number, other_number, created_by, status)
-                VALUES ('{$customer_name}', '{$customer_address}', '{$company_name}', '{$country}', '{$shipping_state}', '{$zip_code}', '{$uae_number}','{$other_number}', '{$created_by}', '0')";
-    $query_run = mysqli_query($connection, $query);
-    $_POST['add_customer'] = '';
-}
-
-$retrive_create_user = "SELECT * FROM sales_quatation_customer_information ORDER BY quatation_id DESC LIMIT 1";
-    $result_run = mysqli_query($connection, $retrive_create_user);
-    foreach($result_run as $rr){
-        $customer_name1 = $rr['customer_name'];
-        $customer_address1 = $rr['customer_address'];
-        $company_name1 = $rr['company_name'];
-        $country1 = $rr['country'];
-        $shipping_state1 = $rr['shipping_state'];
-        $zip_code1 = $rr['zip_code'];
-        $$uae_number1 = $rr['uae_number'];
-        $other_number1 = $rr['other_number'];
-        $customer_created_by = $rr['created_by'];
-        $quatation_id = $rr['quatation_id'];
-}
-
 
 if(isset($_POST['add_items'])){
     $device = mysqli_real_escape_string($connection, $_POST['device']);
@@ -165,10 +120,7 @@ if(isset($_POST['add_items'])){
                 <form action="" method="POST">
                     <div class="row m-1">
                         <div class="col-md-6">
-                            <div class="">
-                                <a href="" class="" data-toggle="modal" data-target="#modal-lg">Load Exisitng
-                                    Customer</a>
-                            </div>
+
                             <fieldset class="mt-2 mb-2">
                                 <legend>Customer Information</legend>
                                 <div class="form-group">
@@ -199,7 +151,7 @@ if(isset($_POST['add_items'])){
                                     </div>
 
                                     <div class="row">
-                                        <label class="col-sm-3 col-form-label">State Or Province</label>
+                                        <label class="col-sm-3 col-form-label">Customer Email</label>
                                         <div class="col-sm-8">
                                             <input type="text" class="form-control" placeholder="State or Province"
                                                 name="shipping_state">
@@ -215,7 +167,7 @@ if(isset($_POST['add_items'])){
                                 <legend>Other Details</legend>
                                 <div class="form-group">
                                     <div class="row">
-                                        <label class="col-sm-3 col-form-label">State Or Province</label>
+                                        <label class="col-sm-3 col-form-label">Cou</label>
                                         <div class="col-sm-8">
                                             <input type="text" class="form-control" placeholder="State or Province"
                                                 name="shipping_state">
@@ -231,8 +183,6 @@ if(isset($_POST['add_items'])){
                                         </div>
                                     </div>
 
-
-
                                     <div class="row">
                                         <label class="col-sm-3 col-form-label">UAE Number</label>
                                         <div class="col-sm-8">
@@ -240,7 +190,6 @@ if(isset($_POST['add_items'])){
                                                 name="uae_number">
                                         </div>
                                     </div>
-
 
                                     <div class="row d-flex">
                                         <label class="col-sm-3 col-form-label">Country Number</label>
@@ -251,13 +200,20 @@ if(isset($_POST['add_items'])){
                                         </div>
                                     </div>
 
-
                                 </div>
                             </fieldset>
+                            <button type="submit" class="d-none"></button>
                         </div>
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="container_fluid">
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card">
                 <form method="POST">
                     <div class="row m-1">
@@ -608,69 +564,11 @@ if(isset($_POST['add_items'])){
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
 </div>
 
-<!-- ============================================================== -->
-<!-- Customer Details Model  -->
-<!-- ============================================================== -->
-<div class="modal fade" id="modal-lg">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Responsive Hover Table</h3>
 
-                <div class="modal-tools d-flex">
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                    </div>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </div>
-            <div class="modal-body">
-                <table id="example2" class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>Customer Name</th>
-                            <th>Customer Address</th>
-                            <th>country</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                                                    
-                                $query = "SELECT * FROM sales_quatation_customer_information ";                                
-                                $query_run = mysqli_query($connection, $query);
-
-                                foreach ($query_run as $users) {
-                                ?>
-                        <tr>
-                            <td><?php echo $users['customer_name'] ?></td>
-                            <td><?php echo $users['customer_address'] ?></td>
-                            <td><?php echo $users['country'] ?></td>
-                            <td>
-                                <a href="create_quatation.php" class="btn btn-sm btn-default">Select</a>
-                            </td>
-                        </tr>
-
-                        <?php } ?>
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <a href="./create_customers.php" class="btn btn-primary">Create New Customer</a>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
 
 <!-- ============================================================== -->
 <!-- Order Details Model  -->
