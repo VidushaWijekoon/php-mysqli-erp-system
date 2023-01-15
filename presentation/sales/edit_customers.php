@@ -10,113 +10,10 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
 
-$organization = null;
-$salutation = null;
-$first_name = null;
-$last_name = null;
-$company_name = null;
-$company_email = null;
-$country = null;
-$UAE_number = null;
-$country_code = null;
-$local_number = null;
-$pickup_method = null;
+$customer_id = $_GET['customer_id'];
 
-$billing_attention = null;
-$billing_country_region = null;
-$billing_street1 = null;
-$billing_street2 = null;
-$billing_city = null;
-$billing_state = null;
-$billing_zip_code = null;
-$billing_customer_phone_number = null;
-
-$shipping_attention = null;
-$shipping_country_region = null;
-$shipping_street1 = null;
-$shipping_street2 = null;
-$shipping_city = null;
-$shipping_state = null;
-$shipping_zip_code = null;
-$shipping_customer_phone_number = null;
-
-$currency = null;
-$language = null;
-$payment_terms = null;
-$whatsapp_number = null;
-$facebook = null;
-
-$contact_person_salutation = null;
-$contact_person_first_name = null;
-$contact_person_last_name = null;
-$contact_person_email = null;
-$contact_person_number = null;
-$contact_person_mobile_number = null;
-
-$remarks = null;
-$username = $_SESSION['username'];
-
-if(isset($_POST['submit_customer'])){
-
-    $organization = mysqli_real_escape_string($connection, $_POST['organization']);
-    $salutation = mysqli_real_escape_string($connection, $_POST['salutation']);
-    $first_name = mysqli_real_escape_string($connection, $_POST['first_name']);
-    $last_name = mysqli_real_escape_string($connection, $_POST['last_name']);
-    $company_name = mysqli_real_escape_string($connection, $_POST['company_name']);
-    $company_email = mysqli_real_escape_string($connection, $_POST['company_email']);
-    $country = mysqli_real_escape_string($connection, $_POST['country']);
-    $UAE_number = mysqli_real_escape_string($connection, $_POST['UAE_number']);
-    $country_code = mysqli_real_escape_string($connection, $_POST['country_code']);
-    $local_number = mysqli_real_escape_string($connection, $_POST['local_number']);
-    $pickup_method = mysqli_real_escape_string($connection, $_POST['pickup_method']);
-    $billing_attention = mysqli_real_escape_string($connection, $_POST['billing_attention']);
-    $billing_country_region = mysqli_real_escape_string($connection, $_POST['billing_country_region']);
-    $billing_street1 = mysqli_real_escape_string($connection, $_POST['billing_street1']);
-    $billing_street2 = mysqli_real_escape_string($connection, $_POST['billing_street2']);
-    $billing_city = mysqli_real_escape_string($connection, $_POST['billing_city']);
-    $billing_state = mysqli_real_escape_string($connection, $_POST['billing_state']);
-    $billing_zip_code = mysqli_real_escape_string($connection, $_POST['billing_zip_code']);
-    $billing_customer_phone_number = mysqli_real_escape_string($connection, $_POST['billing_customer_phone_number']);
-    $shipping_attention = mysqli_real_escape_string($connection, $_POST['shipping_attention']);
-    $shipping_country_region = mysqli_real_escape_string($connection, $_POST['shipping_country_region']);
-    $shipping_street1 = mysqli_real_escape_string($connection, $_POST['shipping_street1']);
-    $shipping_street2 = mysqli_real_escape_string($connection, $_POST['shipping_street2']);
-    $shipping_city = mysqli_real_escape_string($connection, $_POST['shipping_city']);
-    $shipping_state = mysqli_real_escape_string($connection, $_POST['shipping_state']);
-    $shipping_zip_code = mysqli_real_escape_string($connection, $_POST['shipping_zip_code']);
-    $shipping_customer_phone_number = mysqli_real_escape_string($connection, $_POST['shipping_customer_phone_number']);
-    $currency = mysqli_real_escape_string($connection, $_POST['currency']);
-    $language = mysqli_real_escape_string($connection, $_POST['language']);
-    $payment_terms = mysqli_real_escape_string($connection, $_POST['payment_terms']);
-    $whatsapp_number = mysqli_real_escape_string($connection, $_POST['whatsapp_number']);
-    $facebook = mysqli_real_escape_string($connection, $_POST['facebook']);
-    $contact_person_salutation = mysqli_real_escape_string($connection, $_POST['contact_person_salutation']);
-    $contact_person_first_name = mysqli_real_escape_string($connection, $_POST['contact_person_first_name']);
-    $contact_person_last_name = mysqli_real_escape_string($connection, $_POST['contact_person_last_name']);
-    $contact_person_email = mysqli_real_escape_string($connection, $_POST['contact_person_email']);
-    $contact_person_number = mysqli_real_escape_string($connection, $_POST['contact_person_number']);
-    $contact_person_mobile_number = mysqli_real_escape_string($connection, $_POST['contact_person_mobile_number']);
-    $remarks = mysqli_real_escape_string($connection, $_POST['remarks']);
-
-    $query = "INSERT INTO `sales_customer_information`(`salutation`, `first_name`, `last_name`, `company_name`, `company_email`, `country`,`UAE_number`, `country_code`, `local_number`, `pickup_method`, `billing_attention`, 
-                                    `billing_country_region`, `billing_street1`, `billing_street2`, `billing_city`, `billing_state`, `billing_zip_code`, `billing_customer_phone_number`, `shipping_attention`,
-                                    `shipping_country_region`, `shipping_street1`, `shipping_street2`, `shipping_city`, `shipping_state`, `shipping_zip_code`, `shipping_customer_phone_number`, 
-                                    `currency`, `language`, `payment_terms`, `whatsapp_number`, `facebook`, `contact_person_salutation`, `contact_person_first_name`, `contact_person_last_name`, 
-                                    `contact_person_email`, `contact_person_number`, `contact_person_mobile_number`, `remarks`, `created_by`,  `status`) 
-            VALUES ('{$salutation}', '{$first_name}', '{$last_name}', '{$company_name}', '{$company_email}', '{$country}','{$UAE_number}', '{$country_code}', '{$local_number}', '{$pickup_method}', '{$billing_attention}', 
-                    '{$billing_country_region}', '{$billing_street1}', '{$billing_street2}', '{$billing_city}', '{$billing_state}', '{$billing_zip_code}', '{$billing_customer_phone_number}', 
-                    '{$shipping_attention}', '{$shipping_country_region}', '{$shipping_street1}', '{$shipping_street2}', '{$shipping_city}', '{$shipping_state}', '{$shipping_zip_code}', '{$shipping_customer_phone_number}',
-                    '{$currency}', '{$language}', '{$payment_terms}', '{$whatsapp_number}', '{$facebook}', '{$contact_person_salutation}', '{$contact_person_first_name}', '{$contact_person_last_name}', 
-                    '{$contact_person_email}', '{$contact_person_number}', '{$contact_person_mobile_number}', '{$remarks}', '{$username}', '0')";
-    $query_run = mysqli_query($connection, $query);
-    if($query_run){
-        header("Location: ./customers.php");
-    }else{
-        echo "Something Wrong with Submit Form";
-    }
-     
-}
 ?>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-2">
@@ -745,25 +642,3 @@ if(isset($_POST['submit_customer'])){
         </div>
     </div>
 </div>
-
-<style>
-option,
-select {
-    border-radius: 5px;
-    height: 22px;
-    margin-top: 5px;
-}
-
-
-[type="text"] {
-    height: 22px;
-    margin-top: 4px;
-    font-size: 10px;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-    font-size: 12px;
-    padding: 10px;
-    font-family: "Poppins", sans-serif;
-    color: #fff !important;
-}
-</style>
