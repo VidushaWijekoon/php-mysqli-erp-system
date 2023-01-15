@@ -60,7 +60,43 @@ $zip_code1 = null;
 $uae_number1 = null;
 $other_number1 = null;
 
+$customer_id = 0;
+$customer_first_name = null;
+$customer_last_name = null;
+$customer_company_name = null;
+$customer_company_email = null;
+$customer_uae_number = null;
+$customer_country_code = null;
+$customer_local_number = null;
+
+$sales_quatations_items_id = null;
+
+$cs_id = 0;
+$cs_id = $_GET['customer_id'];
+
+if(isset($_POST['get_custmer_details'])){
+    $customer_id = $_POST['customer_id'];
+    header("Location: create_quatation.php?customer_id=$customer_id");
+
+}
+
+if($cs_id != 0){
+    $query = "SELECT * FROM sales_customer_information WHERE customer_id = '$cs_id'";
+    $run_query = mysqli_query($connection, $query);
+        foreach($run_query as $rq){
+            $customer_first_name = $rq['first_name'];
+            $customer_last_name = $rq['last_name'];
+            $customer_company_name = $rq['company_name'];
+            $customer_company_email = $rq['company_email'];
+            $customer_uae_number = $rq['UAE_number'];
+            $customer_country_code = $rq['country_code'];
+            $customer_local_number = $rq['local_number'];
+            $_SESSION['customer_id'] = $rq['customer_id'];
+        }
+}
+
 if(isset($_POST['add_items'])){
+    $customer_table_customer_id = $_SESSION['customer_id'];
     $device = mysqli_real_escape_string($connection, $_POST['device']);
     $brand = mysqli_real_escape_string($connection, $_POST['brand']);
     $model = mysqli_real_escape_string($connection, $_POST['model']);
@@ -86,20 +122,19 @@ if(isset($_POST['add_items'])){
     $unit_price = mysqli_real_escape_string($connection, $_POST['unit_price']);
     $discount = mysqli_real_escape_string($connection, $_POST['discount']);
     $total = mysqli_real_escape_string($connection, $_POST['total']);
-    $quatation_id;
     
-    $insert_items = "INSERT INTO `sales_quatation_items`(`quatation_id`, `device`, `brand`, `model`, `processor`, `core`, `generation`, `speed`, `lcd_size`, `resolution`, `touch_or_non_touch`, 
+    $insert_items = "INSERT INTO `sales_quatation_items`(`customer_id`, `device`, `brand`, `model`, `processor`, `core`, `generation`, `speed`, `lcd_size`, `resolution`, `touch_or_non_touch`, 
                                 `ram`, `hdd_capacity`, `hdd_type`, `graphic_capacity`, `graphic_type`, `os`, `conditions`, `selling_type`, `charger`, `packing_type`, `shipping_method`, `qty`, `unit_price`, `discount`, `total`, `created_by`)VALUES
-                    ('{$quatation_id}', '{$device}', '{$brand}', '{$model}', '{$processor}', '{$core}', '{$generation}', '{$speed}', '{$lcd_size}', '{$resolution}', '{$touch_or_non_touch}',
+                    ('{$customer_table_customer_id}', '{$device}', '{$brand}', '{$model}', '{$processor}', '{$core}', '{$generation}', '{$speed}', '{$lcd_size}', '{$resolution}', '{$touch_or_non_touch}',
                     '{$ram}', '{$hdd_capacity}', '{$hdd_type}', '{$graphic_capacity}', '{$graphic_type}', '{$os}', '{$condition}', '{$selling_type}', '{$charger}', '{$packing_type}', '{$shipping_method}',
                     '{$qty}', '{$unit_price}', '{$discount}', '{$total}', '{$created_by}')";
-                    echo $insert_items;
     $insert_items_run = mysqli_query($connection, $insert_items);
 
-    header("Location: create_quatation.php?quatation_id=$quatation_id");
+    // header("Location: create_quatation.php?customer_id=$customer_id");
 
 }
- 
+
+
 ?>
 
 <div class="row page-titles">
@@ -117,95 +152,102 @@ if(isset($_POST['add_items'])){
                     <i class="fa-solid fa-wallet bg-warning p-2"></i>
                     create quatation
                 </div>
-                <form action="" method="POST">
-                    <div class="row m-1">
-                        <div class="col-md-6">
+                <div class="row m-1">
+                    <div class="col-md-6">
 
-                            <fieldset class="mt-2 mb-2">
-                                <legend>Customer Information</legend>
-                                <div class="form-group">
-
-                                    <div class="row">
-                                        <label class="col-sm-3 col-form-label">Customer Name</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" placeholder="Customer Name"
-                                                name="customer_name">
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row">
-                                        <label class="col-sm-3 col-form-label">Customer Address</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" placeholder="Customer Address"
-                                                name="customer_address">
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <label class="col-sm-3 col-form-label">Company Name</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" placeholder="Company Name"
-                                                name="company_name">
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <label class="col-sm-3 col-form-label">Customer Email</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" placeholder="State or Province"
-                                                name="shipping_state">
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                            </fieldset>
-                        </div>
-                        <div class="col-md-6">
-                            <fieldset class="mt-2 mb-2">
-                                <legend>Other Details</legend>
+                        <fieldset class="mt-2 mb-2">
+                            <legend>Please Select Customer</legend>
+                            <form method="POST">
                                 <div class="form-group">
                                     <div class="row">
-                                        <label class="col-sm-3 col-form-label">Cou</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" placeholder="State or Province"
-                                                name="shipping_state">
+                                        <label class="col-sm-3 col-form-label">Choose Customer</label>
+                                        <div class="col-sm-8 mt-2">
+
+                                            <select name="customer_id" id="choose_customer" class="info_select w-50"
+                                                style="border-radius: 5px;">
+                                                <option selected value="">--Select Customer--
+                                                </option>
+                                                <?php
+                                                    $query = "SELECT * FROM sales_customer_information";
+                                                    $result = mysqli_query($connection, $query);
+
+                                                        while ($d = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
+                                                            $first_name = $d['first_name'];
+                                                            $last_name = $d['last_name'];
+                                                ?>
+                                                <option value="<?php echo $d["customer_id"]; ?>">
+                                                    <?php echo $first_name . " " . $last_name; ?>
+                                                </option>
+                                                <?php endwhile; ?>
+                                            </select>
+                                            <button name="get_custmer_details" type="submit"
+                                                class="btn btn-sm btn-primary p-0 px-2">Select Customer</button>
                                         </div>
                                     </div>
-
-
-                                    <div class="row">
-                                        <label class="col-sm-3 col-form-label">Zip Code</label>
-                                        <div class="col-sm-8">
-                                            <input type="number" class="form-control" placeholder="Zip Code"
-                                                name="zip_code">
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <label class="col-sm-3 col-form-label">UAE Number</label>
-                                        <div class="col-sm-8">
-                                            <input type="number" class="form-control" placeholder="UAE Number"
-                                                name="uae_number">
-                                        </div>
-                                    </div>
-
-                                    <div class="row d-flex">
-                                        <label class="col-sm-3 col-form-label">Country Number</label>
-
-                                        <div class="col-sm-8">
-                                            <input type="number" class="form-control" placeholder="Other Number"
-                                                name="other_number">
-                                        </div>
-                                    </div>
-
                                 </div>
-                            </fieldset>
-                            <button type="submit" class="d-none"></button>
-                        </div>
+                            </form>
+                        </fieldset>
                     </div>
-                </form>
+                    <div class="col-md-6">
+                        <fieldset class="mt-2 mb-2">
+                            <legend>Customer Details</legend>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="col-sm-3 col-form-label">Customer
+                                    </label>
+                                    <div class="col-sm-9 d-flex">
+                                        <input type="text" id="first_name" class="form-control w-50" readonly
+                                            value="<?php echo $customer_first_name ?>">
+                                        <input type="text" id="last_name" class="form-control w-50 mx-2" readonly
+                                            value="<?php echo $customer_last_name ?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="col-sm-3 col-form-label">Company
+                                    </label>
+                                    <div class="col-sm-9 d-flex">
+                                        <input type="text" class="form-control"
+                                            value="<?php echo $customer_company_name ?>" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="col-sm-3 col-form-label">Email
+                                    </label>
+                                    <div class="col-sm-9 d-flex">
+                                        <input type="text" class="form-control"
+                                            value="<?php echo $customer_company_email ?>" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="col-sm-3 col-form-label">UAE
+                                        Number</label>
+                                    <div class="col-sm-9 d-flex">
+                                        <input type="text" class="form-control"
+                                            value="<?php echo $customer_uae_number ?>" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="col-sm-3 col-form-label">Country
+                                        Number</label>
+                                    <div class="col-sm-9 d-flex">
+                                        <input type="text" class="form-control mx-2"
+                                            value="<?php echo '+' . $customer_country_code . ' ' . $customer_local_number ?>"
+                                            readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -243,23 +285,24 @@ if(isset($_POST['add_items'])){
                                         <tbody id="tbody" class="table-warning">
                                             <tr>
                                                 <td>
-                                                    <select class="" name="device" style="border-radius: 5px">
-                                                        <option selected>--Select Device--</option>
+                                                    <select name="device" id="device"
+                                                        style="border-radius: 5px; width: 100%">
+                                                        <option selected value="">--Select Device--</option>
                                                         <?php
                                                             $query = "SELECT device FROM machine_from_supplier GROUP BY device ASC";
                                                             $result = mysqli_query($connection, $query);
 
-                                                                while ($device = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
+                                                                while ($xd = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
                                                         ?>
-                                                        <option value="<?php echo $device["device"]; ?>">
-                                                            <?php echo strtoupper($device["device"]); ?>
+                                                        <option value="<?php echo $xd["device"]; ?>">
+                                                            <?php echo strtoupper($xd["device"]); ?>
                                                         </option>
                                                         <?php endwhile; ?>
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <select class="" name="brand" style="border-radius: 5px">
-                                                        <option selected>--Select Brand--</option>
+                                                    <select name="brand" style="border-radius: 5px; width: 100%">
+                                                        <option selected value="">--Select Brand--</option>
                                                         <?php
                                                         $query = "SELECT brand FROM machine_from_supplier GROUP BY brand ASC";
                                                         $result = mysqli_query($connection, $query);
@@ -274,8 +317,8 @@ if(isset($_POST['add_items'])){
                                                 </td>
 
                                                 <td>
-                                                    <select class="" name="model" style="border-radius: 5px">
-                                                        <option selected>--Select Model--</option>
+                                                    <select name="model" style="border-radius: 5px; width: 100%">
+                                                        <option selected value="">--Select Model--</option>
                                                         <?php
                                                         $query = "SELECT model FROM machine_from_supplier GROUP BY model ASC";
                                                         $result = mysqli_query($connection, $query);
@@ -290,8 +333,8 @@ if(isset($_POST['add_items'])){
                                                 </td>
 
                                                 <td>
-                                                    <select class="" name="processor" style="border-radius: 5px">
-                                                        <option selected>--Select Processor--</option>
+                                                    <select name="processor" style="border-radius: 5px; width: 100%">
+                                                        <option selected value="">--Select Processor--</option>
                                                         <?php
                                                         $query = "SELECT processor FROM machine_from_supplier GROUP BY processor ASC";
                                                         $result = mysqli_query($connection, $query);
@@ -306,8 +349,8 @@ if(isset($_POST['add_items'])){
                                                 </td>
 
                                                 <td>
-                                                    <select class="" name="core" style="border-radius: 5px">
-                                                        <option selected>--Select Core--</option>
+                                                    <select name="core" style="border-radius: 5px; width: 100%">
+                                                        <option selected value="">--Select Core--</option>
                                                         <?php
                                                         $query = "SELECT core FROM machine_from_supplier GROUP BY core ASC";
                                                         $result = mysqli_query($connection, $query);
@@ -322,8 +365,8 @@ if(isset($_POST['add_items'])){
                                                 </td>
 
                                                 <td>
-                                                    <select class="" name="generation" style="border-radius: 5px">
-                                                        <option selected>--Select Generation--</option>
+                                                    <select name="generation" style="border-radius: 5px; width: 100%">
+                                                        <option selected value="">--Select Generation--</option>
                                                         <?php
                                                         $query = "SELECT generation FROM machine_from_supplier GROUP BY generation ASC";
                                                         $result = mysqli_query($connection, $query);
@@ -338,14 +381,14 @@ if(isset($_POST['add_items'])){
                                                 </td>
 
                                                 <td>
-                                                    <select class="" name="speed" style="border-radius: 5px">
-                                                        <option selected>--Select Generation--</option>
+                                                    <select name="speed" style="border-radius: 5px; width: 100%">
+                                                        <option selected value="">--Select Generation--</option>
                                                         <?php
-                                                        $query = "SELECT speed FROM machine_from_supplier GROUP BY speed ASC";
-                                                        $result = mysqli_query($connection, $query);
+                                                                $query = "SELECT speed FROM machine_from_supplier GROUP BY speed ASC";
+                                                                $result = mysqli_query($connection, $query);
 
                                                             while ($speed = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                                    ?>
+                                                        ?>
                                                         <option value="<?php echo $speed["speed"]; ?>">
                                                             <?php echo strtoupper($speed["speed"]); ?>
                                                         </option>
@@ -354,7 +397,7 @@ if(isset($_POST['add_items'])){
                                                 </td>
 
                                                 <td>
-                                                    <select class="" name="lcd_size" style="border-radius: 5px">
+                                                    <select name="lcd_size" style="border-radius: 5px; width: 100%">
                                                         <option selected>--Select LCD Size--</option>
                                                         <option value="11">11"</option>
                                                         <option value="12.5">12.5"</option>
@@ -367,7 +410,7 @@ if(isset($_POST['add_items'])){
                                                 </td>
 
                                                 <td>
-                                                    <select class="" name="resolution" style="border-radius: 5px">
+                                                    <select name="resolution" style="border-radius: 5px; width: 100%">
                                                         <option selected>--Select Resolution--</option>
                                                         <option value="800x600">800 x 600</option>
                                                         <option value="1280x1024">1280 x 1024 (SXGA)</option>
@@ -382,8 +425,8 @@ if(isset($_POST['add_items'])){
                                                 </td>
 
                                                 <td>
-                                                    <select class="" name="touch_or_non_touch"
-                                                        style="border-radius: 5px">
+                                                    <select name="touch_or_non_touch"
+                                                        style="border-radius: 5px; width: 100%">
                                                         <option selected>--Select Touch--</option>
                                                         <option value="touch">Touch</option>
                                                         <option value="non_touch">Non Touch</option>
@@ -391,7 +434,7 @@ if(isset($_POST['add_items'])){
                                                 </td>
 
                                                 <td>
-                                                    <select class="" name="ram" style="border-radius: 5px">
+                                                    <select name="ram" style="border-radius: 5px; width: 100%">
                                                         <option selected>--Select Ram--</option>
                                                         <option value="2">2GB</option>
                                                         <option value="4">4GB</option>
@@ -409,7 +452,7 @@ if(isset($_POST['add_items'])){
                                                 </td>
 
                                                 <td>
-                                                    <select class="" name="hdd_type" style="border-radius: 5px">
+                                                    <select name="hdd_type" style="border-radius: 5px; width: 100%">
                                                         <option selected>--Select HDD Type--</option>
                                                         <option value="pata">PATA/HDD</option>
                                                         <option value="sata">SATA</option>
@@ -417,7 +460,6 @@ if(isset($_POST['add_items'])){
                                                         <option value="ssd">SSD</option>
                                                     </select>
                                                 </td>
-
                                             </tr>
                                         </tbody>
                                     </table>
@@ -442,7 +484,8 @@ if(isset($_POST['add_items'])){
                                         <tbody id="tbody" class="table-warning">
                                             <tr>
                                                 <td>
-                                                    <select class="" name="graphic_capacity" style="border-radius: 5px">
+                                                    <select class="" name="graphic_capacity"
+                                                        style="border-radius: 5px; width: 100%">
                                                         <option selected>--Select Graphic Capacity--</option>
                                                         <option value="2">2GB</option>
                                                         <option value="4">4GB</option>
@@ -454,7 +497,8 @@ if(isset($_POST['add_items'])){
                                                 </td>
 
                                                 <td>
-                                                    <select class="" name="graphic_type" style="border-radius: 5px">
+                                                    <select class="" name="graphic_type"
+                                                        style="border-radius: 5px; width: 100%">
                                                         <option selected>--Select Graphic Type--</option>
                                                         <option value="intel">Intel</option>
                                                         <option value="amd">Amd</option>
@@ -464,7 +508,7 @@ if(isset($_POST['add_items'])){
                                                 </td>
 
                                                 <td>
-                                                    <select class="" name="os" style="border-radius: 5px">
+                                                    <select class="" name="os" style="border-radius: 5px; width: 100%">
                                                         <option selected>--Select OS--</option>
                                                         <option value="windows">Test Windows</option>
                                                         <option value="windows">Original Windows 10</option>
@@ -477,7 +521,8 @@ if(isset($_POST['add_items'])){
                                                 </td>
 
                                                 <td>
-                                                    <select class="" name="condition" style="border-radius: 5px">
+                                                    <select class="" name="condition"
+                                                        style="border-radius: 5px; width: 100%">
                                                         <option selected>--Select Condition--</option>
                                                         <option value="fully refurbished"
                                                             title="A B C D Painting, LCD No Scratch, Battery Health 80%">
@@ -489,7 +534,8 @@ if(isset($_POST['add_items'])){
                                                 </td>
 
                                                 <td>
-                                                    <select class="" name="selling_type" style="border-radius: 5px">
+                                                    <select class="" name="selling_type"
+                                                        style="border-radius: 5px; width: 100%">
                                                         <option selected>--Select Selling Type--</option>
                                                         <option value="bulk">Bulk</option>
                                                         <option value="usa_amazon">USA Amazon</option>
@@ -501,7 +547,8 @@ if(isset($_POST['add_items'])){
                                                 </td>
 
                                                 <td>
-                                                    <select class="" name="charger" style="border-radius: 5px">
+                                                    <select class="" name="charger"
+                                                        style="border-radius: 5px; width: 100%">
                                                         <option selected>--Select Charger Type--</option>
                                                         <option value="us">US Standard</option>
                                                         <option value="uk">UK Standard</option>
@@ -511,7 +558,8 @@ if(isset($_POST['add_items'])){
                                                 </td>
 
                                                 <td>
-                                                    <select class="" name="packing_type" style="border-radius: 5px">
+                                                    <select class="" name="packing_type"
+                                                        style="border-radius: 5px; width: 100%">
                                                         <option selected>--Select Packing Type--</option>
                                                         <option value="single_box">Single Box</option>
                                                         <option value="bulk_packing">Bulk Packing</option>
@@ -519,7 +567,8 @@ if(isset($_POST['add_items'])){
                                                 </td>
 
                                                 <td>
-                                                    <select class="" name="shipping_method" style="border-radius: 5px">
+                                                    <select class="" name="shipping_method"
+                                                        style="border-radius: 5px; width: 100%">
                                                         <option selected>--Select Shipping Method--</option>
                                                         <option value="local_pickup">Local Pickup</option>
                                                         <option value="dhl">DHL</option>
@@ -529,21 +578,21 @@ if(isset($_POST['add_items'])){
                                                 </td>
 
                                                 <td>
-                                                    <input type="number" min="1" class="form-control" placeholder="QTY"
-                                                        name="quantity">
+                                                    <input type="number" min="1" id="quantity" class="form-control"
+                                                        placeholder="QTY" name="quantity">
                                                 </td>
 
                                                 <td>
-                                                    <input type="number" min="1" class="form-control"
+                                                    <input type="number" id="unit_price" min="1" class="form-control"
                                                         placeholder="Unit Price" name="unit_price">
                                                 </td>
                                                 <td>
-                                                    <input type="number" min="1" class="form-control"
+                                                    <input type="number" min="1" id="discount" class="form-control"
                                                         placeholder="Discount" name="discount">
                                                 </td>
                                                 <td>
                                                     <input type="number" min="1" class="form-control"
-                                                        placeholder="Total" name="total">
+                                                        placeholder="Total" name="total" id="total">
                                                 </td>
 
                                                 <td>
@@ -562,70 +611,71 @@ if(isset($_POST['add_items'])){
                             </div>
                         </div>
                     </div>
-                </form>
             </div>
+            </form>
         </div>
     </div>
 </div>
-
-
+</div>
 
 <!-- ============================================================== -->
 <!-- Order Details Model  -->
 <!-- ============================================================== -->
 <div class="modal fade" id="modal-xl">
     <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Sales Order Details</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <fieldset>
-                    <legend>Order Details</legend>
-                    <table class="table table-dark text-uppercase" id="tbl">
-                        <thead>
-                            <tr style="font-size: 9px;">
-                                <th>Device</th>
-                                <th>Brand</th>
-                                <th>Model</th>
-                                <th>Processor</th>
-                                <th>Core</th>
-                                <th>Generation</th>
-                                <th>Speed</th>
-                                <th>Screen Size</th>
-                                <th>Resolution</th>
-                                <th>Touch</th>
-                                <th>RAM</th>
-                                <th>HDD Capacity</th>
-                                <th>HDD Type</th>
-                                <th>Ghrphic Capacity</th>
-                                <th>Ghrphic Brand</th>
-                                <th>OS</th>
-                                <th>Condition</th>
-                                <th>Selling Type</th>
-                                <th>Charger</th>
-                                <th>Packing Type</th>
-                                <th>Shipping Type</th>
-                                <th>QTY</th>
-                                <th>Unit Price</th>
-                                <th>Discount</th>
-                                <th>Total</th>
-                                <th>&nbsp;</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+        <form method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Quatation</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <fieldset>
+                        <legend>Order Details</legend>
+                        <table class="table table-dark text-uppercase" id="tbl">
+                            <thead>
+                                <tr style="font-size: 9px;">
+                                    <th>Device</th>
+                                    <th>Brand</th>
+                                    <th>Model</th>
+                                    <th>Processor</th>
+                                    <th>Core</th>
+                                    <th>Generation</th>
+                                    <th>Speed</th>
+                                    <th>Screen Size</th>
+                                    <th>Resolution</th>
+                                    <th>Touch</th>
+                                    <th>RAM</th>
+                                    <th>HDD Capacity</th>
+                                    <th>HDD Type</th>
+                                    <th>Ghrphic Capacity</th>
+                                    <th>Ghrphic Brand</th>
+                                    <th>OS</th>
+                                    <th>Condition</th>
+                                    <th>Selling Type</th>
+                                    <th>Charger</th>
+                                    <th>Packing Type</th>
+                                    <th>Shipping Type</th>
+                                    <th>QTY</th>
+                                    <th>Unit Price</th>
+                                    <th>Discount</th>
+                                    <th>Total</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                            <?php 
+                                <?php 
 
-                                $query_d = "SELECT * FROM sales_quatation_items WHERE quatation_id = $quatation_id ORDER BY sales_quatations_items_id DESC";
+                                $query_d = "SELECT * FROM sales_quatation_items WHERE customer_id = $cs_id AND status = '0' AND quatation_id = '0'";
                                 $qd = mysqli_query($connection, $query_d);
 
                                 if(empty($qd)){}else{
 
                                 foreach($qd as $qd){
+                                    $sales_quatations_items_id = $qd['sales_quatations_items_id'];
                                     $device = $qd['device'];
                                     $brand = $qd['brand'];
                                     $model = $qd['model'];
@@ -654,53 +704,84 @@ if(isset($_POST['add_items'])){
                                         
                             ?>
 
-                            <tr style="font-size: 9px;">
-                                <td><?php echo $device; ?></td>
-                                <td><?php echo $brand; ?></td>
-                                <td><?php echo $model; ?></td>
-                                <td><?php echo $processor; ?></td>
-                                <td><?php echo $core; ?></td>
-                                <td><?php echo $generation; ?></td>
-                                <td><?php echo $speed; ?></td>
-                                <td><?php echo $lcd_size; ?></td>
-                                <td><?php echo $resolution; ?></td>
-                                <td><?php echo $touch_or_non_touch; ?></td>
-                                <td><?php echo $ram; ?></td>
-                                <td><?php echo $hdd_capacity; ?></td>
-                                <td><?php echo $hdd_type; ?></td>
-                                <td><?php echo $graphic_capacity; ?></td>
-                                <td><?php echo $graphic_type; ?></td>
-                                <td><?php echo $os; ?></td>
-                                <td><?php echo $condition; ?></td>
-                                <td><?php echo $selling_type; ?></td>
-                                <td><?php echo $charger; ?></td>
-                                <td><?php echo $packing_type; ?></td>
-                                <td><?php echo $shipping_method; ?></td>
-                                <td><?php echo $qty; ?></td>
-                                <td><?php echo $unit_price; ?></td>
-                                <td><?php echo $discount; ?></td>
-                                <td><?php echo $total; ?></td>
-                                <td>
-                                    <button type='button' onclick='deleteRow(this);'
-                                        class='btn btn-sm btn-danger'>Remove</button>
-                                </td>
-                            </tr>
-                            <?php } } ?>
-                        </tbody>
-                    </table>
-                </fieldset>
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success">Save Changes</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
+                                <tr style="font-size: 9px;">
+                                    <td><?php echo $device; ?></td>
+                                    <td><?php echo $brand; ?></td>
+                                    <td><?php echo $model; ?></td>
+                                    <td><?php echo $processor; ?></td>
+                                    <td><?php echo $core; ?></td>
+                                    <td><?php echo $generation; ?></td>
+                                    <td><?php echo $speed; ?></td>
+                                    <td><?php echo $lcd_size; ?></td>
+                                    <td><?php echo $resolution; ?></td>
+                                    <td><?php echo $touch_or_non_touch; ?></td>
+                                    <td><?php echo $ram; ?></td>
+                                    <td><?php echo $hdd_capacity; ?></td>
+                                    <td><?php echo $hdd_type; ?></td>
+                                    <td><?php echo $graphic_capacity; ?></td>
+                                    <td><?php echo $graphic_type; ?></td>
+                                    <td><?php echo $os; ?></td>
+                                    <td><?php echo $condition; ?></td>
+                                    <td><?php echo $selling_type; ?></td>
+                                    <td><?php echo $charger; ?></td>
+                                    <td><?php echo $packing_type; ?></td>
+                                    <td><?php echo $shipping_method; ?></td>
+                                    <td><?php echo $qty; ?></td>
+                                    <td><?php echo $unit_price; ?></td>
+                                    <td><?php echo $discount; ?></td>
+                                    <td><?php echo $total; ?></td>
+                                    <td>
+                                        <button type='submit' name="remove_certain_item"
+                                            class='btn btn-sm btn-danger'>Remove</button>
+                                    </td>
+                                </tr>
+                                <?php } } 
 
+                                    $insert_quatation_id = 0;
+                                
+                                    if(isset($_POST['remove_certain_item'])){
+                                        $remove_up = "UPDATE sales_quatation_items SET status = '1' WHERE sales_quatations_items_id = '$sales_quatations_items_id'";
+                                        $remove_run = mysqli_query($connection, $remove_up);
+
+                                        header("Location: create_quatation.php?customer_id=$cs_id");
+                                    }                                                             
+                                                            
+                                ?>
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" name="create_quatation" class="btn btn-success">Create Quatation</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<?php 
+
+if(isset($_POST['create_quatation'])){
+$qyer = "SELECT quatation_id FROM sales_quatation_items  ORDER BY quatation_id DESC";
+$run = mysqli_query($connection, $qyer);
+$insert_quatation_id=0;
+foreach($run as $x){
+    if($x['quatation_id'] !=0){
+        $insert_quatation_id = $x['quatation_id'];
+    break;
+    }
+}
+    $insert_quatation_id++;
+    $update_q_id = "UPDATE sales_quatation_items SET quatation_id = '$insert_quatation_id' WHERE customer_id = '$cs_id' AND quatation_id = '0'";
+    $update_q = mysqli_query($connection, $update_q_id);
+
+    header("Location: create_quatation.php?customer_id=$cs_id");
+
+    
+}   
+                            
+?>
 
 
 <style>
@@ -708,23 +789,6 @@ textarea {
     text-transform: uppercase;
 }
 
-select,
-input[type="text"],
-[type="number"],
-[type="email"],
-[type='date'] {
-    width: 100%;
-    height: 22px;
-    margin: inherit;
-    margin-top: 4px;
-    font-size: 10px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-    font-size: 12px;
-    color: #ffffff !important;
-    text-transform: uppercase;
-}
 
 .custom-select {
     font-size: 12px;
@@ -743,14 +807,23 @@ input[type="text"],
         max-width: 1789px;
     }
 }
+
+[type="text"] {
+    height: 22px;
+    margin-top: 4px;
+    font-size: 10px;
+    border: 1px solid #f1f1f1;
+    border-radius: 5px;
+    font-size: 12px;
+    padding: 10px;
+    font-family: "Poppins", sans-serif;
+    color: #fff !important;
+}
 </style>
 
 <script>
-function deleteRow(button) {
-    items--;
-    button.parentElement.parentElement.remove();
-    // first parentElement will be td and second will be tr.
-}
+
 </script>
+
 
 <?php include_once('../includes/footer.php'); ?>

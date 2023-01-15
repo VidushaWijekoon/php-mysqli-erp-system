@@ -97,6 +97,7 @@ $uae_pickup2 = null;
 
 $post_status = null;
 $created_posted_time = null;
+$gt_c = null;
 
 $query = "SELECT * FROM weekly_sales_set_target
             INNER JOIN weekly_sales_set_posting_to_customer 
@@ -159,8 +160,14 @@ foreach($query_run as $q){
 $currrent_date = date("l");
 echo $currrent_date;
 
+
+$gt_c = $_GET['choose_country'];
+echo $gt_c;
+
 if(isset($_POST['get_country'])){
     $choose_country = $_POST['choose_country'];
+    header("Location: create_post.php?choose_country=$choose_country");
+
     echo $choose_country;
 }
 
@@ -706,6 +713,16 @@ if(isset($_POST['get_country'])){
                                     </div>
                                 </div>
                                 <form method="POST">
+                                    <?php if ($gt_c != null) { ?>
+                                    <div class="d-flex">
+                                        <div class="mt-1 mx-1">
+                                            <p>Selected: </p>
+                                        </div>
+                                        <div class="">
+                                            <p class="mt-1 mx-2 badge badge-btn badge-primary"><?php echo $gt_c; ?></p>
+                                        </div>
+                                    </div>
+                                    <?php } else { ?>
                                     <div class="d-flex">
                                         <div class="mt-1 mx-1">
                                             <p>Please Select Country First: </p>
@@ -725,8 +742,6 @@ if(isset($_POST['get_country'])){
                                                     while ($x = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
                                                 ?>
 
-
-
                                                 <option value="<?php echo $x["create_customer_country"]; ?>">
                                                     <?php echo $x["create_customer_country"]; ?>
                                                 </option>
@@ -740,6 +755,7 @@ if(isset($_POST['get_country'])){
                                             </button>
                                         </div>
                                     </div>
+                                    <?php } ?>
                                 </form>
                                 <table class="table table-striped">
                                     <thead>
@@ -765,7 +781,7 @@ if(isset($_POST['get_country'])){
 
                                         <?php                                                                               
                                                         
-                                            $q_d = "SELECT * FROM sales_create_customer_informations WHERE create_customer_country = '{$choose_country}'";
+                                            $q_d = "SELECT * FROM sales_create_customer_informations WHERE create_customer_country = '{$gt_c}'";
                                             $qd_run = mysqli_query($connection, $q_d);
 
                                             $i = 0;
@@ -820,8 +836,6 @@ if(isset($_POST['get_country'])){
                                                 //Calculate the interval from the second date to the first date
                                                 $ival = date_diff($dateVal1, $dateVal2);
                                                 $x = $ival->format('%r%a');
-
-
 
                                             }                                                                                                                                                          
                                         ?>
@@ -994,12 +1008,12 @@ if(isset($_POST['submit_post_to_customer'])){
     $customer_asking_price = $_POST['customer_asking_price'];
     $uae_pickup2 = $_POST['uae_pickup2'];
 
-    $d_r = "INSERT INTO `sales_posting_to_customer`(`posting_customer_name`, `posting_whatsapp_number`, `platform2`, `model_selling_and_buying1`, `posted_model_1`, `posted_model_2`, `customer_asking_model`, `customer_asking_price`, `uae_pickup2`, `status`, `created_by`) 
+    $d_r = "INSERT INTO `sales_posting_to_customer`(`posting_customer_name`, `posting_whatsapp_number`, `platform2`, `model_selling_and_buying1`, `posted_model_1`, `posted_model_2`, `customer_asking_model`, `customer_asking_price`, `uae_pickup2`, `status`, `created_by`, `choose_country`) 
             VALUES ('{$posting_customer_name}', '{$posting_whatsapp_number}', '{$platform2}', '{$model_selling_and_buying1}', '{$posted_model_1}', '{$posted_model_2}', '{$customer_asking_model}', '{$customer_asking_price}', 
-                    '{$uae_pickup2}', 'post','{$username}') ";
+                    '{$uae_pickup2}', 'post','{$username}', '{$gt_c}') ";
+                    echo $d_r;
     $d_r_run = mysqli_query($connection, $d_r);
-
-    // header("Location: create_post.php?chooese_country={$chooese_country}");
+    header("Location: create_post.php?choose_country={$gt_c}");
 }
 
 ?>

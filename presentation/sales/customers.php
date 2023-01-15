@@ -61,6 +61,7 @@ if (!isset($_SESSION['user_id'])) {
                                     <td>
                                         <?php 
                                             echo "<a class='btn btn-xs btn-secondary mx-1' href=\"customer_view.php?customer_id={$qr['customer_id']}\"><i class='fa-solid fa-eye'></i> </a>";
+                                            echo "<a class='btn btn-xs btn-danger mx-1' href=\"edit_customers.php?customer_id={$qr['customer_id']}\"><i class='fa-solid fa-pen-to-square'></i> </a>";
                                         ?>
                                     </td>
                                 </tr>

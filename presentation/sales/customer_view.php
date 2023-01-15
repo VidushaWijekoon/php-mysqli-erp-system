@@ -35,7 +35,11 @@ $query_1_run = mysqli_query($connection, $query_1);
 foreach($query_1_run as $x){
     $first_name = $x['first_name'];
     $last_name = $x['last_name'];
+    $company_email = $x['company_email'];
+    $uae_number = $x['UAE_number'];
     $country = $x['country'];
+    $country_code = $x['country_code'];
+    $local_number = $x['local_number'];
     $billing_attention = $x['billing_attention'];
     $billing_country = $x['billing_country_region'];
     $billing_address_1 = $x['billing_street1'];
@@ -119,7 +123,7 @@ foreach($query_1_run as $x){
                                                         </label>
                                                         <div class="col-sm-9 d-flex">
                                                             <input type="text" class="form-control "
-                                                                value="<?php echo $last_name ?>">
+                                                                value="<?php echo $last_name ?>" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -128,8 +132,8 @@ foreach($query_1_run as $x){
                                                         <label class="col-sm-3 col-form-label">Email
                                                         </label>
                                                         <div class="col-sm-9 d-flex">
-                                                            <input type="email" class="form-control "
-                                                                value="sample@sample.com">
+                                                            <input type="email" class="form-control"
+                                                                value="<?php echo $company_email; ?>" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -138,7 +142,8 @@ foreach($query_1_run as $x){
                                                         <label class="col-sm-3 col-form-label">UAE
                                                             Number</label>
                                                         <div class="col-sm-9 d-flex">
-                                                            <input type="number" class="form-control" value="582240435">
+                                                            <input type="number" class="form-control"
+                                                                value="<?php echo $uae_number ?>" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -147,8 +152,9 @@ foreach($query_1_run as $x){
                                                         <label class="col-sm-3 col-form-label">Country
                                                             Number</label>
                                                         <div class="col-sm-9 d-flex">
-                                                            <input type="number" class="form-control mx-2"
-                                                                name="+6524145633235">
+                                                            <input type="text" class="form-control mx-2"
+                                                                value="<?php echo "+". $country_code . " " . $local_number ?>"
+                                                                readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -173,7 +179,7 @@ foreach($query_1_run as $x){
                                                         <label class="col-sm-4 col-form-label">Attention</label>
                                                         <div class="col-sm-8 d-flex">
                                                             <input type="text" class="form-control w-100"
-                                                                value="<?php echo $billing_attention ?>">
+                                                                value="<?php echo $billing_attention ?>" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -183,7 +189,7 @@ foreach($query_1_run as $x){
                                                             Region</label>
                                                         <div class="col-sm-8 d-flex">
                                                             <input type="text" class="form-control w-100"
-                                                                value="<?php echo $billing_country ?>">
+                                                                value="<?php echo $billing_country ?>" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -192,12 +198,12 @@ foreach($query_1_run as $x){
                                                         <label class="col-sm-4 col-form-label">Address</label>
                                                         <div class="col-sm-8 d-flex">
                                                             <input type="text" class="form-control w-100"
-                                                                value="<?php echo $billing_address_1 ?>">
+                                                                value="<?php echo $billing_address_1 ?>" readonly>
                                                         </div>
                                                         <label class="col-sm-4 col-form-label"></label>
                                                         <div class="col-sm-8 d-flex">
                                                             <input type="text" class="form-control w-100"
-                                                                value="<?php echo $billing_address_2 ?>">
+                                                                value="<?php echo $billing_address_2 ?>" readonly>
                                                         </div>
 
                                                     </div>
@@ -207,7 +213,7 @@ foreach($query_1_run as $x){
                                                         <label class="col-sm-4 col-form-label">City</label>
                                                         <div class="col-sm-8 d-flex">
                                                             <input type="text" class="form-control w-100"
-                                                                value="<?php echo $billing_city ?>">
+                                                                value="<?php echo $billing_city ?>" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -216,7 +222,7 @@ foreach($query_1_run as $x){
                                                         <label class="col-sm-4 col-form-label">State</label>
                                                         <div class="col-sm-8 d-flex">
                                                             <input type="text" class="form-control w-100"
-                                                                value="<?php echo $billing_state ?>">
+                                                                value="<?php echo $billing_state ?>" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -226,7 +232,7 @@ foreach($query_1_run as $x){
                                                             Code</label>
                                                         <div class="col-sm-8 d-flex">
                                                             <input type="text" class="form-control w-100"
-                                                                value="<?php echo $billing_zip_code ?>">
+                                                                value="<?php echo $billing_zip_code ?>" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -235,7 +241,7 @@ foreach($query_1_run as $x){
                                                         <label class="col-sm-4 col-form-label">Phone</label>
                                                         <div class="col-sm-8 d-flex">
                                                             <input type="text" class="form-control w-100"
-                                                                value="<?php echo $billing_phone ?>">
+                                                                value="<?php echo $billing_phone ?>" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -260,7 +266,7 @@ foreach($query_1_run as $x){
                                                         <label class="col-sm-4 col-form-label">Attention</label>
                                                         <div class="col-sm-8 d-flex">
                                                             <input type="text" class="form-control w-75"
-                                                                value="<?php echo $shipping_attention ?>">
+                                                                value="<?php echo $shipping_attention ?>" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -270,7 +276,7 @@ foreach($query_1_run as $x){
                                                             Region</label>
                                                         <div class="col-sm-8 d-flex">
                                                             <input type="text" class="form-control w-75"
-                                                                value="<?php echo $shipping_country ?>">
+                                                                value="<?php echo $shipping_country ?>" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -279,12 +285,12 @@ foreach($query_1_run as $x){
                                                         <label class="col-sm-4 col-form-label">Address</label>
                                                         <div class="col-sm-8 d-flex">
                                                             <input type="text" class="form-control w-75"
-                                                                value="<?php echo $shipping_address_1 ?>">
+                                                                value="<?php echo $shipping_address_1 ?>" readonly>
                                                         </div>
                                                         <label class="col-sm-4 col-form-label"></label>
                                                         <div class="col-sm-8 d-flex">
                                                             <input type="text" class="form-control w-75"
-                                                                value="<?php echo $shipping_address_2 ?>">
+                                                                value="<?php echo $shipping_address_2 ?>" readonly>
 
                                                         </div>
 
@@ -295,7 +301,7 @@ foreach($query_1_run as $x){
                                                         <label class="col-sm-4 col-form-label">City</label>
                                                         <div class="col-sm-8 d-flex">
                                                             <input type="text" class="form-control w-75"
-                                                                value="<?php echo $shipping_city ?>">
+                                                                value="<?php echo $shipping_city ?>" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -304,7 +310,7 @@ foreach($query_1_run as $x){
                                                         <label class="col-sm-4 col-form-label">State</label>
                                                         <div class="col-sm-8 d-flex">
                                                             <input type="text" class="form-control w-75"
-                                                                value="<?php echo $shipping_state ?>">
+                                                                value="<?php echo $shipping_state ?>" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -314,7 +320,7 @@ foreach($query_1_run as $x){
                                                             Code</label>
                                                         <div class="col-sm-8 d-flex">
                                                             <input type="text" class="form-control w-75"
-                                                                value="<?php echo $shipping_zip_code ?>">
+                                                                value="<?php echo $shipping_zip_code ?>" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -323,7 +329,7 @@ foreach($query_1_run as $x){
                                                         <label class="col-sm-4 col-form-label">Phone</label>
                                                         <div class="col-sm-8 d-flex">
                                                             <input type="text" class="form-control w-75"
-                                                                value="<?php echo $shipping_phone ?>">
+                                                                value="<?php echo $shipping_phone ?>" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
