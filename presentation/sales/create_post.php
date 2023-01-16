@@ -158,11 +158,8 @@ foreach($query_run as $q){
 }
 
 $currrent_date = date("l");
-echo $currrent_date;
-
 
 $gt_c = $_GET['choose_country'];
-echo $gt_c;
 
 if(isset($_POST['get_country'])){
     $choose_country = $_POST['choose_country'];
