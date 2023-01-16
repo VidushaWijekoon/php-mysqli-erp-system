@@ -740,12 +740,11 @@ if(isset($_POST['add_items'])){
                                     $insert_quatation_id = 0;
                                 
                                     if(isset($_POST['remove_certain_item'])){
-                                        $remove_up = "UPDATE sales_quatation_items SET status = '1' WHERE sales_quatations_items_id = '$sales_quatations_items_id'";
+                                        $remove_up = "DELETE FROM sales_quatation_items WHERE sales_quatations_items_id = '$sales_quatations_items_id'";
                                         $remove_run = mysqli_query($connection, $remove_up);
 
                                         header("Location: create_quatation.php?customer_id=$cs_id");
-                                    }                                                             
-                                                            
+                                    }                                                               
                                 ?>
                             </tbody>
                         </table>

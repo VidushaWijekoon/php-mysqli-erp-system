@@ -11,6 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $customer_id = $_GET['customer_id'];
+$username = $_SESSION['username'];
 
 $billing_attention = null;
 $billing_country = null;
@@ -355,52 +356,31 @@ foreach($query_1_run as $x){
                                                     <th>Customer</th>
                                                     <th>Country</th>
                                                     <th>Sales Person</th>
-                                                    <th>Sales Order</th>
+                                                    <th>Quatation</th>
                                                     <th>Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <?php 
+                                                
+                                                $query = "SELECT * FROM sales_customer_information LEFT JOIN sales_quatation_items 
+                                                        ON sales_customer_information.customer_id = sales_quatation_items.customer_id 
+                                                        WHERE sales_customer_information.created_by = '$username'";
+                                                $query_run = mysqli_query($connection, $query);
+                                                foreach($query_run as $row){
+                                                    $customer_first_name = $row['first_name'];
+                                                    $customer_last_name = $row['last_name'];
+                                                    $created_by = $row['created_by'];
+
+                                                ?>
                                                 <tr>
-                                                    <td>John Doe</td>
-                                                    <td>Senagal</td>
-                                                    <td>Sales</td>
+                                                    <td><?php echo $customer_first_name; ?></td>
+                                                    <td><?php echo $customer_first_name; ?></td>
+                                                    <td><?php echo $created_by; ?></td>
                                                     <td><a href="./quatation_view.php">SO1037</a></td>
                                                     <td><span class="badge badge-success">Shipped</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>John Doe</td>
-                                                    <td>Senagal</td>
-                                                    <td>Sales</td>
-                                                    <td><a href="./quatation_view.php">SO10234</a></td>
-                                                    <td><span class="badge badge-danger">Delivered</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>John Doe</td>
-                                                    <td>Senagal</td>
-                                                    <td>Sales</td>
-                                                    <td><a href="./quatation_view.php">SO1254</a></td>
-                                                    <td><span class="badge badge-info">Processing</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>John Doe</td>
-                                                    <td>Senagal</td>
-                                                    <td>Sales</td>
-                                                    <td><a href="./quatation_view.php">SO764</a></td>
-                                                    <td><span class="badge badge-success">Shipped</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>John Doe</td>
-                                                    <td>Senagal</td>
-                                                    <td>Sales</td>
-                                                    <td><a href="./quatation_view.php">SO5642</a></td>
-                                                    <td><span class="badge badge-warning">Pending</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>John Doe</td>
-                                                    <td>Senagal</td>
-                                                    <td>Sales</td>
-                                                    <td><a href="./quatation_view.php">SO4522</a></td>
-                                                    <td><span class="badge badge-success">Shipped</span></td>
+
+                                                    <?php } ?>
                                                 </tr>
                                             </tbody>
                                         </table>
