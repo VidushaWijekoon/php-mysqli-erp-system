@@ -76,107 +76,153 @@ if (!isset($_SESSION['user_id'])) {
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-12 grid-margin stretch-card justify-content-center mx-auto mt-2">
-            <div class="row">
-                <div class="col-12 col-sm-12 col-md-12 col-lg-8 col">
-                    <div class="card">
-                        <div class="card-header border-transparent">
-                            <h3 class="card-title">Last 7 Sales Orders</h3>
+        <div class="col-lg-10 grid-margin stretch-card mt-2">
+            <div class="card card-primary card-outline card-outline-tabs m-2 w-100">
+                <div class="card-header p-0 border-bottom-0">
+                    <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                        <li class="nav-item text-center" style="width: 150px;">
+                            <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill"
+                                href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home"
+                                aria-selected="true" style="color: #fff;">Sales Orders</a>
+                        </li>
+                        <li class="nav-item text-center" style="width: 150px;">
+                            <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill"
+                                href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile"
+                                aria-selected="false" style="color: #fff;">Quatations</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class=" card-body">
+                    <div class="tab-content" id="custom-tabs-four-tabContent">
+                        <!-- ============================================================== -->
+                        <!-- Sales Order  -->
+                        <!-- ============================================================== -->
+                        <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel"
+                            aria-labelledby="custom-tabs-four-home-tab">
+                            <table id="" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Customer</th>
+                                        <th>Country</th>
+                                        <th>Sales Person</th>
+                                        <th>Sales Order</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>John Doe</td>
+                                        <td>Senagal</td>
+                                        <td>Sales</td>
+                                        <td><a href="./quatation_view.php">SO1037</a></td>
+                                        <td><span class="badge badge-success">Shipped</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>John Doe</td>
+                                        <td>Senagal</td>
+                                        <td>Sales</td>
+                                        <td><a href="./quatation_view.php">SO10234</a></td>
+                                        <td><span class="badge badge-danger">Delivered</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>John Doe</td>
+                                        <td>Senagal</td>
+                                        <td>Sales</td>
+                                        <td><a href="./quatation_view.php">SO1254</a></td>
+                                        <td><span class="badge badge-info">Processing</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>John Doe</td>
+                                        <td>Senagal</td>
+                                        <td>Sales</td>
+                                        <td><a href="./quatation_view.php">SO764</a></td>
+                                        <td><span class="badge badge-success">Shipped</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>John Doe</td>
+                                        <td>Senagal</td>
+                                        <td>Sales</td>
+                                        <td><a href="./quatation_view.php">SO5642</a></td>
+                                        <td><span class="badge badge-warning">Pending</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>John Doe</td>
+                                        <td>Senagal</td>
+                                        <td>Sales</td>
+                                        <td><a href="./quatation_view.php">SO4522</a></td>
+                                        <td><span class="badge badge-success">Shipped</span></td>
+                                    </tr>
 
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
-                        <!-- /.card-header -->
-                        <div class="card-body p-0">
-                            <div class="table-responsive">
-                                <table class="table m-0">
-                                    <thead>
-                                        <tr>
-                                            <th>Customer</th>
-                                            <th>Country</th>
-                                            <th>Sales Person</th>
-                                            <th>Quatation ID</th>
-                                            <th>Sales Order</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>John Doe</td>
-                                            <td>Senagal</td>
-                                            <td>Sales</td>
-                                            <td><a href="./quatation_view.php">QA9842</a></td>
-                                            <td><a href="./quatation_view.php">1037</a></td>
-                                            <td><span class="badge badge-success">Shipped</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>John Doe</td>
-                                            <td>Senagal</td>
-                                            <td>Sales</td>
-                                            <td><a href="./quatation_view.php">QA9842</a></td>
-                                            <td><a href="./quatation_view.php">10234</a></td>
-                                            <td><span class="badge badge-danger">Delivered</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>John Doe</td>
-                                            <td>Senagal</td>
-                                            <td>Sales</td>
-                                            <td><a href="./quatation_view.php">QA9842</a></td>
-                                            <td><a href="./quatation_view.php">1254</a></td>
-                                            <td><span class="badge badge-info">Processing</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>John Doe</td>
-                                            <td>Senagal</td>
-                                            <td>Sales</td>
-                                            <td><a href="./quatation_view.php">QA9842</a></td>
-                                            <td><a href="./quatation_view.php">764</a></td>
-                                            <td><span class="badge badge-success">Shipped</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>John Doe</td>
-                                            <td>Senagal</td>
-                                            <td>Sales</td>
-                                            <td><a href="./quatation_view.php">QA9842</a></td>
-                                            <td><a href="./quatation_view.php">5642</a></td>
-                                            <td><span class="badge badge-warning">Pending</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>John Doe</td>
-                                            <td>Senagal</td>
-                                            <td>Sales</td>
-                                            <td><a href="./quatation_view.php">QA9842</a></td>
-                                            <td><a href="./quatation_view.php">4522</a></td>
-                                            <td><span class="badge badge-success">Shipped</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>John Doe</td>
-                                            <td>Senagal</td>
-                                            <td>Sales</td>
-                                            <td><a href="./quatation_view.php">QA9842</a></td>
-                                            <td><a href="./quatation_view.php">4522</a></td>
-                                            <td><span class="badge badge-success">Shipped</span></td>
-                                        </tr>
 
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.table-responsive -->
+                        <!-- ============================================================== -->
+                        <!-- Quatation  -->
+                        <!-- ============================================================== -->
+                        <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel"
+                            aria-labelledby="custom-tabs-four-profile-tab">
+
+                            <table id="" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Customer</th>
+                                        <th>Country</th>
+                                        <th>Sales Person</th>
+                                        <th>Quatation ID</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>John Doe</td>
+                                        <td>Senagal</td>
+                                        <td>Sales</td>
+                                        <td><a href="./quatation_view.php">QA9842</a></td>
+                                        <td><span class="badge badge-success">Shipped</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>John Doe</td>
+                                        <td>Senagal</td>
+                                        <td>Sales</td>
+                                        <td><a href="./quatation_view.php">QA9842</a></td>
+                                        <td><span class="badge badge-warning">Pending</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>John Doe</td>
+                                        <td>Senagal</td>
+                                        <td>Sales</td>
+                                        <td><a href="./quatation_view.php">QA9842</a></td>
+                                        <td><span class="badge badge-info">Processing</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>John Doe</td>
+                                        <td>Senagal</td>
+                                        <td>Sales</td>
+                                        <td><a href="./quatation_view.php">QA9842</a></td>
+                                        <td><span class="badge badge-success">Shipped</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>John Doe</td>
+                                        <td>Senagal</td>
+                                        <td>Sales</td>
+                                        <td><a href="./quatation_view.php">QA9842</a></td>
+                                        <td><span class="badge badge-warning">Pending</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>John Doe</td>
+                                        <td>Senagal</td>
+                                        <td>Sales</td>
+                                        <td><a href="./quatation_view.php">QA9842</a></td>
+                                        <td><span class="badge badge-success">Shipped</span></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
                         </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer clearfix">
-                            <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All
-                                Orders</a>
-                        </div>
+
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

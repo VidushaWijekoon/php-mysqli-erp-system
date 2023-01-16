@@ -37,7 +37,7 @@ if (!isset($_SESSION['user_id'])) {
                         <!-- ============================================================== -->
                         <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel"
                             aria-labelledby="custom-tabs-four-home-tab">
-                            <table class="table m-0">
+                            <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>Customer</th>
@@ -45,6 +45,8 @@ if (!isset($_SESSION['user_id'])) {
                                         <th>Sales Person</th>
                                         <th>Sales Order</th>
                                         <th>Status</th>
+                                        <th>&nbsp;</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -54,6 +56,16 @@ if (!isset($_SESSION['user_id'])) {
                                         <td>Sales</td>
                                         <td><a href="./quatation_view.php">SO1037</a></td>
                                         <td><span class="badge badge-success">Shipped</span></td>
+                                        <td>
+                                            <a class='btn btn-xs btn-secondary mx-1' href="">
+                                                <i class='fa-solid fa-eye'></i> </a>
+                                            <a class='btn btn-xs btn-warning mx-1' href="#">
+                                                <i class='fa-solid fa-pen-to-square'></i></a>
+                                            <a class='btn btn-xs btn-success mx-1' href="">
+                                                <i class='fa-solid fa-download'></i> </a>
+                                            <a class='btn btn-xs btn-danger mx-1' href="">
+                                                <i class='fa-solid fa-trash-can'></i> </a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>John Doe</td>
@@ -61,6 +73,16 @@ if (!isset($_SESSION['user_id'])) {
                                         <td>Sales</td>
                                         <td><a href="./quatation_view.php">SO10234</a></td>
                                         <td><span class="badge badge-danger">Delivered</span></td>
+                                        <td>
+                                            <a class='btn btn-xs btn-secondary mx-1' href="">
+                                                <i class='fa-solid fa-eye'></i> </a>
+                                            <a class='btn btn-xs btn-warning mx-1' href="#">
+                                                <i class='fa-solid fa-pen-to-square'></i></a>
+                                            <a class='btn btn-xs btn-success mx-1' href="">
+                                                <i class='fa-solid fa-download'></i> </a>
+                                            <a class='btn btn-xs btn-danger mx-1' href="">
+                                                <i class='fa-solid fa-trash-can'></i> </a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>John Doe</td>
@@ -68,6 +90,16 @@ if (!isset($_SESSION['user_id'])) {
                                         <td>Sales</td>
                                         <td><a href="./quatation_view.php">SO1254</a></td>
                                         <td><span class="badge badge-info">Processing</span></td>
+                                        <td>
+                                            <a class='btn btn-xs btn-secondary mx-1' href="">
+                                                <i class='fa-solid fa-eye'></i> </a>
+                                            <a class='btn btn-xs btn-warning mx-1' href="#">
+                                                <i class='fa-solid fa-pen-to-square'></i></a>
+                                            <a class='btn btn-xs btn-success mx-1' href="">
+                                                <i class='fa-solid fa-download'></i> </a>
+                                            <a class='btn btn-xs btn-danger mx-1' href="">
+                                                <i class='fa-solid fa-trash-can'></i> </a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>John Doe</td>
@@ -75,6 +107,16 @@ if (!isset($_SESSION['user_id'])) {
                                         <td>Sales</td>
                                         <td><a href="./quatation_view.php">SO764</a></td>
                                         <td><span class="badge badge-success">Shipped</span></td>
+                                        <td>
+                                            <a class='btn btn-xs btn-secondary mx-1' href="">
+                                                <i class='fa-solid fa-eye'></i> </a>
+                                            <a class='btn btn-xs btn-warning mx-1' href="#">
+                                                <i class='fa-solid fa-pen-to-square'></i></a>
+                                            <a class='btn btn-xs btn-success mx-1' href="">
+                                                <i class='fa-solid fa-download'></i> </a>
+                                            <a class='btn btn-xs btn-danger mx-1' href="">
+                                                <i class='fa-solid fa-trash-can'></i> </a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>John Doe</td>
@@ -82,6 +124,16 @@ if (!isset($_SESSION['user_id'])) {
                                         <td>Sales</td>
                                         <td><a href="./quatation_view.php">SO5642</a></td>
                                         <td><span class="badge badge-warning">Pending</span></td>
+                                        <td>
+                                            <a class='btn btn-xs btn-secondary mx-1' href="">
+                                                <i class='fa-solid fa-eye'></i> </a>
+                                            <a class='btn btn-xs btn-warning mx-1' href="#">
+                                                <i class='fa-solid fa-pen-to-square'></i></a>
+                                            <a class='btn btn-xs btn-success mx-1' href="">
+                                                <i class='fa-solid fa-download'></i> </a>
+                                            <a class='btn btn-xs btn-danger mx-1' href="">
+                                                <i class='fa-solid fa-trash-can'></i> </a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>John Doe</td>
@@ -89,6 +141,16 @@ if (!isset($_SESSION['user_id'])) {
                                         <td>Sales</td>
                                         <td><a href="./quatation_view.php">SO4522</a></td>
                                         <td><span class="badge badge-success">Shipped</span></td>
+                                        <td>
+                                            <a class='btn btn-xs btn-secondary mx-1' href="">
+                                                <i class='fa-solid fa-eye'></i> </a>
+                                            <a class='btn btn-xs btn-warning mx-1' href="#">
+                                                <i class='fa-solid fa-pen-to-square'></i></a>
+                                            <a class='btn btn-xs btn-success mx-1' href="">
+                                                <i class='fa-solid fa-download'></i> </a>
+                                            <a class='btn btn-xs btn-danger mx-1' href="">
+                                                <i class='fa-solid fa-trash-can'></i> </a>
+                                        </td>
                                     </tr>
 
                                 </tbody>
@@ -101,7 +163,7 @@ if (!isset($_SESSION['user_id'])) {
                         <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel"
                             aria-labelledby="custom-tabs-four-profile-tab">
 
-                            <table class="table m-0">
+                            <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>Customer</th>
@@ -109,6 +171,7 @@ if (!isset($_SESSION['user_id'])) {
                                         <th>Sales Person</th>
                                         <th>Quatation ID</th>
                                         <th>Status</th>
+                                        <th>&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -118,6 +181,16 @@ if (!isset($_SESSION['user_id'])) {
                                         <td>Sales</td>
                                         <td><a href="./quatation_view.php">QA9842</a></td>
                                         <td><span class="badge badge-success">Shipped</span></td>
+                                        <td>
+                                            <a class='btn btn-xs btn-secondary mx-1' href="">
+                                                <i class='fa-solid fa-eye'></i> </a>
+                                            <a class='btn btn-xs btn-warning mx-1' href="#">
+                                                <i class='fa-solid fa-pen-to-square'></i></a>
+                                            <a class='btn btn-xs btn-success mx-1' href="">
+                                                <i class='fa-solid fa-download'></i> </a>
+                                            <a class='btn btn-xs btn-danger mx-1' href="">
+                                                <i class='fa-solid fa-trash-can'></i> </a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>John Doe</td>
@@ -125,6 +198,16 @@ if (!isset($_SESSION['user_id'])) {
                                         <td>Sales</td>
                                         <td><a href="./quatation_view.php">QA9842</a></td>
                                         <td><span class="badge badge-warning">Pending</span></td>
+                                        <td>
+                                            <a class='btn btn-xs btn-secondary mx-1' href="">
+                                                <i class='fa-solid fa-eye'></i> </a>
+                                            <a class='btn btn-xs btn-warning mx-1' href="#">
+                                                <i class='fa-solid fa-pen-to-square'></i></a>
+                                            <a class='btn btn-xs btn-success mx-1' href="">
+                                                <i class='fa-solid fa-download'></i> </a>
+                                            <a class='btn btn-xs btn-danger mx-1' href="">
+                                                <i class='fa-solid fa-trash-can'></i> </a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>John Doe</td>
@@ -132,6 +215,16 @@ if (!isset($_SESSION['user_id'])) {
                                         <td>Sales</td>
                                         <td><a href="./quatation_view.php">QA9842</a></td>
                                         <td><span class="badge badge-info">Processing</span></td>
+                                        <td>
+                                            <a class='btn btn-xs btn-secondary mx-1' href="">
+                                                <i class='fa-solid fa-eye'></i> </a>
+                                            <a class='btn btn-xs btn-warning mx-1' href="#">
+                                                <i class='fa-solid fa-pen-to-square'></i></a>
+                                            <a class='btn btn-xs btn-success mx-1' href="">
+                                                <i class='fa-solid fa-download'></i> </a>
+                                            <a class='btn btn-xs btn-danger mx-1' href="">
+                                                <i class='fa-solid fa-trash-can'></i> </a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>John Doe</td>
@@ -139,6 +232,16 @@ if (!isset($_SESSION['user_id'])) {
                                         <td>Sales</td>
                                         <td><a href="./quatation_view.php">QA9842</a></td>
                                         <td><span class="badge badge-success">Shipped</span></td>
+                                        <td>
+                                            <a class='btn btn-xs btn-secondary mx-1' href="">
+                                                <i class='fa-solid fa-eye'></i> </a>
+                                            <a class='btn btn-xs btn-warning mx-1' href="#">
+                                                <i class='fa-solid fa-pen-to-square'></i></a>
+                                            <a class='btn btn-xs btn-success mx-1' href="">
+                                                <i class='fa-solid fa-download'></i> </a>
+                                            <a class='btn btn-xs btn-danger mx-1' href="">
+                                                <i class='fa-solid fa-trash-can'></i> </a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>John Doe</td>
@@ -146,6 +249,16 @@ if (!isset($_SESSION['user_id'])) {
                                         <td>Sales</td>
                                         <td><a href="./quatation_view.php">QA9842</a></td>
                                         <td><span class="badge badge-warning">Pending</span></td>
+                                        <td>
+                                            <a class='btn btn-xs btn-secondary mx-1' href="">
+                                                <i class='fa-solid fa-eye'></i> </a>
+                                            <a class='btn btn-xs btn-warning mx-1' href="#">
+                                                <i class='fa-solid fa-pen-to-square'></i></a>
+                                            <a class='btn btn-xs btn-success mx-1' href="">
+                                                <i class='fa-solid fa-download'></i> </a>
+                                            <a class='btn btn-xs btn-danger mx-1' href="">
+                                                <i class='fa-solid fa-trash-can'></i> </a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>John Doe</td>
@@ -153,6 +266,16 @@ if (!isset($_SESSION['user_id'])) {
                                         <td>Sales</td>
                                         <td><a href="./quatation_view.php">QA9842</a></td>
                                         <td><span class="badge badge-success">Shipped</span></td>
+                                        <td>
+                                            <a class='btn btn-xs btn-secondary mx-1' href="">
+                                                <i class='fa-solid fa-eye'></i> </a>
+                                            <a class='btn btn-xs btn-warning mx-1' href="#">
+                                                <i class='fa-solid fa-pen-to-square'></i></a>
+                                            <a class='btn btn-xs btn-success mx-1' href="">
+                                                <i class='fa-solid fa-download'></i> </a>
+                                            <a class='btn btn-xs btn-danger mx-1' href="">
+                                                <i class='fa-solid fa-trash-can'></i> </a>
+                                        </td>
                                     </tr>
 
                                 </tbody>

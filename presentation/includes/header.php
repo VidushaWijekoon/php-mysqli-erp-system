@@ -262,7 +262,7 @@ if(isset($_POST['logged_out'])){
                                         </li> -->
 
                                         <li class="nav-item">
-                                            <a href="./orders.php" class="nav-link">
+                                            <a href="../sales/orders.php" class="nav-link">
                                                 <i class="fa-solid fa-files nav-icon" style="font-size: 12px;"></i>
                                                 <p>Orders</p>
                                             </a>

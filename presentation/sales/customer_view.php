@@ -349,60 +349,62 @@ foreach($query_1_run as $x){
                             <div class="mt-3">
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col">
-                                        <table class="table table-hover text-nowrap">
+                                        <table id="example2" class="table table-bordered table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
-                                                    <th>Date</th>
-                                                    <th>Quatation No</th>
+                                                    <th>Customer</th>
+                                                    <th>Country</th>
+                                                    <th>Sales Person</th>
+                                                    <th>Sales Order</th>
                                                     <th>Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>#</td>
-                                                    <td>2023-01-07</td>
-                                                    <td><a href="./quatation_view.php">000123</a>
-                                                    </td>
-                                                    <td>
-                                                        <span class="tag tag-success">Pending</span>
-                                                    </td>
-
+                                                    <td>John Doe</td>
+                                                    <td>Senagal</td>
+                                                    <td>Sales</td>
+                                                    <td><a href="./quatation_view.php">SO1037</a></td>
+                                                    <td><span class="badge badge-success">Shipped</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>#</td>
-                                                    <td>2023-01-07</td>
-                                                    <td><a href="./quatation_view.php">000123</a>
-                                                    </td>
-                                                    <td>
-                                                        <span class="tag tag-success">Pending</span>
-                                                    </td>
-
+                                                    <td>John Doe</td>
+                                                    <td>Senagal</td>
+                                                    <td>Sales</td>
+                                                    <td><a href="./quatation_view.php">SO10234</a></td>
+                                                    <td><span class="badge badge-danger">Delivered</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>#</td>
-                                                    <td>2023-01-07</td>
-                                                    <td><a href="./quatation_view.php">000123</a>
-                                                    </td>
-                                                    <td>
-                                                        <span class="tag tag-success">Approved</span>
-                                                    </td>
-
+                                                    <td>John Doe</td>
+                                                    <td>Senagal</td>
+                                                    <td>Sales</td>
+                                                    <td><a href="./quatation_view.php">SO1254</a></td>
+                                                    <td><span class="badge badge-info">Processing</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>#</td>
-                                                    <td>2023-01-07</td>
-                                                    <td><a href="./quatation_view.php">000123</a>
-                                                    </td>
-                                                    <td>
-                                                        <span class="tag tag-success">Rejected</span>
-                                                    </td>
-
+                                                    <td>John Doe</td>
+                                                    <td>Senagal</td>
+                                                    <td>Sales</td>
+                                                    <td><a href="./quatation_view.php">SO764</a></td>
+                                                    <td><span class="badge badge-success">Shipped</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>John Doe</td>
+                                                    <td>Senagal</td>
+                                                    <td>Sales</td>
+                                                    <td><a href="./quatation_view.php">SO5642</a></td>
+                                                    <td><span class="badge badge-warning">Pending</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>John Doe</td>
+                                                    <td>Senagal</td>
+                                                    <td>Sales</td>
+                                                    <td><a href="./quatation_view.php">SO4522</a></td>
+                                                    <td><span class="badge badge-success">Shipped</span></td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -415,56 +417,60 @@ foreach($query_1_run as $x){
                             <div class="mt-3">
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col">
-                                        <table class="table table-hover text-nowrap">
+                                        <table id="example2" class="table table-bordered table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
-                                                    <th>Date</th>
-                                                    <th>Quatation No</th>
+                                                    <th>Customer</th>
+                                                    <th>Country</th>
+                                                    <th>Sales Person</th>
+                                                    <th>Sales Order</th>
                                                     <th>Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>#</td>
-                                                    <td>2023-01-07</td>
-                                                    <td><a href="./quatation_view.php">000123</a>
-                                                    </td>
-                                                    <td>
-                                                        <span class="tag tag-success">Pending</span>
-                                                    </td>
-
+                                                    <td>John Doe</td>
+                                                    <td>Senagal</td>
+                                                    <td>Sales</td>
+                                                    <td><a href="./quatation_view.php">SO1037</a></td>
+                                                    <td><span class="badge badge-success">Shipped</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>#</td>
-                                                    <td>2023-01-07</td>
-                                                    <td><a href="./quatation_view.php">000123</a>
-                                                    </td>
-                                                    <td>
-                                                        <span class="tag tag-success">Pending</span>
-                                                    </td>
-
+                                                    <td>John Doe</td>
+                                                    <td>Senagal</td>
+                                                    <td>Sales</td>
+                                                    <td><a href="./quatation_view.php">SO10234</a></td>
+                                                    <td><span class="badge badge-danger">Delivered</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>#</td>
-                                                    <td>2023-01-07</td>
-                                                    <td><a href="./quatation_view.php">000123</a>
-                                                    </td>
-                                                    <td>
-                                                        <span class="tag tag-success">Approved</span>
-                                                    </td>
-
+                                                    <td>John Doe</td>
+                                                    <td>Senagal</td>
+                                                    <td>Sales</td>
+                                                    <td><a href="./quatation_view.php">SO1254</a></td>
+                                                    <td><span class="badge badge-info">Processing</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>#</td>
-                                                    <td>2023-01-07</td>
-                                                    <td><a href="./quatation_view.php">000123</a>
-                                                    </td>
-                                                    <td>
-                                                        <span class="tag tag-success">Rejected</span>
-                                                    </td>
-
+                                                    <td>John Doe</td>
+                                                    <td>Senagal</td>
+                                                    <td>Sales</td>
+                                                    <td><a href="./quatation_view.php">SO764</a></td>
+                                                    <td><span class="badge badge-success">Shipped</span></td>
                                                 </tr>
+                                                <tr>
+                                                    <td>John Doe</td>
+                                                    <td>Senagal</td>
+                                                    <td>Sales</td>
+                                                    <td><a href="./quatation_view.php">SO5642</a></td>
+                                                    <td><span class="badge badge-warning">Pending</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>John Doe</td>
+                                                    <td>Senagal</td>
+                                                    <td>Sales</td>
+                                                    <td><a href="./quatation_view.php">SO4522</a></td>
+                                                    <td><span class="badge badge-success">Shipped</span></td>
+                                                </tr>
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -481,7 +487,7 @@ foreach($query_1_run as $x){
                             <div class="mt-3">
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col">
-                                        <table class="table table-hover text-nowrap">
+                                        <table id="example2" class="table table-bordered table-hover">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
