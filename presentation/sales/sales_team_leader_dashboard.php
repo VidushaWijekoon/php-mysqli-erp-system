@@ -21,7 +21,7 @@ if (!isset($_SESSION['user_id'])) {
                 class="fa fa-plus"></i><span class="mx-1">Sales Quatations List</span></a>
         <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./sales_team_daily_report.php"><i
                 class="fa fa-plus"></i><span class="mx-1">Members Daily Achivements</span></a>
-        <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./quatations.php"><i
+        <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./quatation_approval.php"><i
                 class="fa fa-plus"></i><span class="mx-1">To Approve</span></a>
     </div>
 </div>

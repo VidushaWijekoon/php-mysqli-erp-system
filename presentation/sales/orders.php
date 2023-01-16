@@ -10,6 +10,8 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
 
+$username = $_SESSION['username'];
+
 ?>
 
 <div class="container-fluid">
@@ -175,117 +177,69 @@ if (!isset($_SESSION['user_id'])) {
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php 
+                                              
+                                        $query = "SELECT * FROM sales_customer_information 
+                                            INNER JOIN sales_quatation_items ON sales_customer_information.customer_id = sales_quatation_items.customer_id
+                                            WHERE sales_quatation_items.created_by = '$username' GROUP BY quatation_id ";                                           
+                                                
+                                        $query_run = mysqli_query($connection, $query);
+                                        foreach($query_run as $row){
+                                            $customer_first_name = $row['first_name'];
+                                            $customer_last_name = $row['last_name'];
+                                            $created_by = $row['created_by'];
+                                            $quatation_id = $row['quatation_id'];
+                                            $item_status = $row['status'];
+                                            $approved = $row['approval'];
+                                            $approved_by = $row['approved_by'];
+                                    ?>
                                     <tr>
-                                        <td>John Doe</td>
-                                        <td>Senagal</td>
-                                        <td>Sales</td>
-                                        <td><a href="./quatation_view.php">QA9842</a></td>
-                                        <td><span class="badge badge-success">Shipped</span></td>
+                                        <td><?php echo $customer_first_name; ?></td>
+                                        <td><?php echo $customer_first_name; ?></td>
+                                        <td><?php echo $created_by; ?></td>
+                                        <td><a href="./quatation_view.php"><?php echo $quatation_id; ?></a></td>
                                         <td>
-                                            <a class='btn btn-xs btn-secondary mx-1' href="">
-                                                <i class='fa-solid fa-eye'></i> </a>
-                                            <a class='btn btn-xs btn-warning mx-1' href="#">
-                                                <i class='fa-solid fa-pen-to-square'></i></a>
-                                            <a class='btn btn-xs btn-success mx-1' href="">
-                                                <i class='fa-solid fa-download'></i> </a>
-                                            <a class='btn btn-xs btn-danger mx-1' href="">
-                                                <i class='fa-solid fa-trash-can'></i> </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>John Doe</td>
-                                        <td>Senagal</td>
-                                        <td>Sales</td>
-                                        <td><a href="./quatation_view.php">QA9842</a></td>
-                                        <td><span class="badge badge-warning">Pending</span></td>
-                                        <td>
-                                            <a class='btn btn-xs btn-secondary mx-1' href="">
-                                                <i class='fa-solid fa-eye'></i> </a>
-                                            <a class='btn btn-xs btn-warning mx-1' href="#">
-                                                <i class='fa-solid fa-pen-to-square'></i></a>
-                                            <a class='btn btn-xs btn-success mx-1' href="">
-                                                <i class='fa-solid fa-download'></i> </a>
-                                            <a class='btn btn-xs btn-danger mx-1' href="">
-                                                <i class='fa-solid fa-trash-can'></i> </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>John Doe</td>
-                                        <td>Senagal</td>
-                                        <td>Sales</td>
-                                        <td><a href="./quatation_view.php">QA9842</a></td>
-                                        <td><span class="badge badge-info">Processing</span></td>
-                                        <td>
-                                            <a class='btn btn-xs btn-secondary mx-1' href="">
-                                                <i class='fa-solid fa-eye'></i> </a>
-                                            <a class='btn btn-xs btn-warning mx-1' href="#">
-                                                <i class='fa-solid fa-pen-to-square'></i></a>
-                                            <a class='btn btn-xs btn-success mx-1' href="">
-                                                <i class='fa-solid fa-download'></i> </a>
-                                            <a class='btn btn-xs btn-danger mx-1' href="">
-                                                <i class='fa-solid fa-trash-can'></i> </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>John Doe</td>
-                                        <td>Senagal</td>
-                                        <td>Sales</td>
-                                        <td><a href="./quatation_view.php">QA9842</a></td>
-                                        <td><span class="badge badge-success">Shipped</span></td>
-                                        <td>
-                                            <a class='btn btn-xs btn-secondary mx-1' href="">
-                                                <i class='fa-solid fa-eye'></i> </a>
-                                            <a class='btn btn-xs btn-warning mx-1' href="#">
-                                                <i class='fa-solid fa-pen-to-square'></i></a>
-                                            <a class='btn btn-xs btn-success mx-1' href="">
-                                                <i class='fa-solid fa-download'></i> </a>
-                                            <a class='btn btn-xs btn-danger mx-1' href="">
-                                                <i class='fa-solid fa-trash-can'></i> </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>John Doe</td>
-                                        <td>Senagal</td>
-                                        <td>Sales</td>
-                                        <td><a href="./quatation_view.php">QA9842</a></td>
-                                        <td><span class="badge badge-warning">Pending</span></td>
-                                        <td>
-                                            <a class='btn btn-xs btn-secondary mx-1' href="">
-                                                <i class='fa-solid fa-eye'></i> </a>
-                                            <a class='btn btn-xs btn-warning mx-1' href="#">
-                                                <i class='fa-solid fa-pen-to-square'></i></a>
-                                            <a class='btn btn-xs btn-success mx-1' href="">
-                                                <i class='fa-solid fa-download'></i> </a>
-                                            <a class='btn btn-xs btn-danger mx-1' href="">
-                                                <i class='fa-solid fa-trash-can'></i> </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>John Doe</td>
-                                        <td>Senagal</td>
-                                        <td>Sales</td>
-                                        <td><a href="./quatation_view.php">QA9842</a></td>
-                                        <td><span class="badge badge-success">Shipped</span></td>
-                                        <td>
-                                            <a class='btn btn-xs btn-secondary mx-1' href="">
-                                                <i class='fa-solid fa-eye'></i> </a>
-                                            <a class='btn btn-xs btn-warning mx-1' href="#">
-                                                <i class='fa-solid fa-pen-to-square'></i></a>
-                                            <a class='btn btn-xs btn-success mx-1' href="">
-                                                <i class='fa-solid fa-download'></i> </a>
-                                            <a class='btn btn-xs btn-danger mx-1' href="">
-                                                <i class='fa-solid fa-trash-can'></i> </a>
-                                        </td>
-                                    </tr>
+                                            <?php if($item_status == 0) {?>
+                                            <span
+                                                class="badge badge-lg badge-primary text-white p-1 px-3">Pending</span>
+                                            <?php }if($item_status == 2) {?>
+                                            <span
+                                                class="badge badge-lg badge-danger text-white p-1 px-3">Rejected</span>
+                                            <?php }if(($item_status == 1) && ($approved == 0)) {?>
+                                            <span
+                                                class="badge badge-lg badge-success text-white p-1 px-3">Accepted</span>
+                                            <span class="badge badge-lg badge-danger text-white p-1 px-3">Waiting For
+                                                Approval
+                                            </span>
+                                            <?php }if(($item_status == 1) && ($approved == 1)) {?>
+                                            <span
+                                                class="badge badge-lg badge-success text-white p-1 px-3">Accepted</span>
+                                            <span class="badge badge-lg badge-info text-white p-1 px-3">Approved By
+                                                <?php echo $username; ?>
 
+                                            </span>
+                                            <?php } ?>
+                                        </td>
+                                        <td>
+                                            <?php 
+                                                echo " <a class='btn btn-xs btn-secondary mx-1' href='./quatation_view.php?quatation_id={$row['quatation_id']}'>
+                                                    <i class='fa-solid fa-eye'></i> </a>
+                                                <a class='btn btn-xs btn-warning mx-1' href=''>
+                                                    <i class='fa-solid fa-pen-to-square'></i></a>
+                                                <a class='btn btn-xs btn-success mx-1' href='invoice_pdf.php?quatation_id={$row['quatation_id']}'>
+                                                    <i class='fa-solid fa-download'></i> </a>
+                                                <a class='btn btn-xs btn-danger mx-1' href=''>
+                                                    <i class='fa-solid fa-trash-can'></i> </a>" 
+                                            ?>
+                                        </td>
+                                        <?php } ?>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

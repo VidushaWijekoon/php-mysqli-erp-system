@@ -28,7 +28,7 @@ if(isset($_POST['logged_out'])){
     <link rel="icon" type="image/x-icon" href="../../static/dist/img/alsakb logo.png">
 
     <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet"> -->
     <link rel="stylesheet" href="../../static/dist/fonts/Poppins-Regular.ttf">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../static/plugins/fontawesome-pro/css/all.css">
