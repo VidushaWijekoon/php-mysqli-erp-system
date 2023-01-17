@@ -303,16 +303,16 @@ if(isset($_POST['get_country'])){
                                                             <label class="label_values text-capitalize"
                                                                 for="amazon_uk">Amazon.uk</label>
                                                         </div>
-                                                        <?php } if($tiktok == 1) {?>
+                                                        <?php } if ($tiktok == 1) {?>
                                                         <div class="icheck-success">
-                                                            <input type="checkbox" id="tiktok" name="tiktok" checked
-                                                                disabled>
+                                                            <input type="checkbox" id="tiktok" name="tiktok" value="1"
+                                                                checked disabled>
                                                             <label class="label_values text-capitalize"
                                                                 for="tiktok">Tiktok</label>
                                                         </div>
-                                                        <?php } elseif($tiktok == 0) { ?>
-                                                        <div class="icheck-success">
-                                                            <input type="checkbox" id="tiktok" name="tiktok">
+                                                        <?php } elseif ($tiktok == 0) {?>
+                                                        <div class="icheck-success d-none">
+                                                            <input type="checkbox" id="tiktok" name="tiktok" value="1">
                                                             <label class="label_values text-capitalize"
                                                                 for="tiktok">Tiktok</label>
                                                         </div>
@@ -454,7 +454,7 @@ if(isset($_POST['get_country'])){
                                                 <tr>
                                                     <td>#</td>
                                                     <td>
-                                                        <select name="create_customer_country" class="mt-1"
+                                                        <select name="create_customer_country" class="mt-1 "
                                                             style="border-radius: 5px;" required>
                                                             <option value="" selected>--Select Country--</option>
                                                             <?php
@@ -474,8 +474,22 @@ if(isset($_POST['get_country'])){
                                                             id="customer_name" value="">
                                                     </td>
 
-                                                    <td>
-                                                        <input type="text" class="form-control"
+                                                    <td class="d-flex">
+                                                        <select name="create_phone_code" class="mt-1 "
+                                                            style="border-radius: 5px;" required>
+                                                            <option value=""></option>
+                                                            <?php
+                                                            $query = "SELECT phone_code FROM countries ORDER BY 'country_name' ASC";
+                                                            $result = mysqli_query($connection, $query);
+
+                                                            while ($x = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
+                                                        ?>
+                                                            <option value="<?php echo $x["phone_code"]; ?>">
+                                                                <?php echo "+" . $x["phone_code"]; ?>
+                                                            </option>
+                                                            <?php endwhile; ?>
+                                                        </select>
+                                                        <input type="number" class="form-control"
                                                             name="customer_whatsapp_number"
                                                             placeholder="Whatsapp Number">
                                                     </td>
@@ -489,7 +503,7 @@ if(isset($_POST['get_country'])){
                                                             placeholder="Model He Selling & Buying?">
                                                     </td>
 
-                                                    <td class="d-flex">
+                                                    <td class="">
                                                         <div class="icheck-success d-inline">
                                                             <input type="radio" id="keyboard_light_1" name="uae_pickup1"
                                                                 value="yes" required>
@@ -522,13 +536,14 @@ if(isset($_POST['get_country'])){
 
                                     $create_customer_country = $_POST['create_customer_country'];
                                     $customer_name = $_POST['customer_name'];
+                                    $create_phone_code = $_POST['create_phone_code'];
                                     $customer_whatsapp_number = $_POST['customer_whatsapp_number'];
                                     $platform1 = $_POST['platform1'];
                                     $model_selling_buying = $_POST['model_selling_buying'];
                                     $uae_pickup1 = $_POST['uae_pickup1'];
 
-                                    $q_r = "INSERT INTO `sales_create_customer_informations`(`create_customer_country`, `customer_name`, `customer_whatsapp_number`, `platform1`, `model_selling_buying`, `uae_pickup1`, `created_by`) 
-                                                VALUES ('{$create_customer_country}', '{$customer_name}', '{$customer_whatsapp_number}', '{$platform1}', '{$model_selling_buying}', '{$uae_pickup1}', '{$username}')";
+                                    $q_r = "INSERT INTO `sales_create_customer_informations`(`create_customer_country`, `customer_name`, `customer_whatspp_phone_code`, `customer_whatsapp_number`, `platform1`, `model_selling_buying`, `uae_pickup1`, `created_by`) 
+                                                VALUES ('{$create_customer_country}', '{$customer_name}', '{$create_phone_code}', '{$customer_whatsapp_number}', '{$platform1}', '{$model_selling_buying}', '{$uae_pickup1}', '{$username}')";
                                     $insert_q_r = mysqli_query($connection, $q_r);
 
                                 }
@@ -781,14 +796,11 @@ if(isset($_POST['get_country'])){
                                             $q_d = "SELECT * FROM sales_create_customer_informations WHERE create_customer_country = '{$gt_c}'";
                                             $qd_run = mysqli_query($connection, $q_d);
 
-                                            $i = 0;
-
                                             foreach($qd_run as $qd_run){
                                                 $create_customer_name = $qd_run['customer_name'];
+                                                $customer_whatspp_phone_code = $qd_run['customer_whatspp_phone_code'];
                                                 $created_customer_whatsapp_number = $qd_run['customer_whatsapp_number'];
                                                 $create_customer_id = $qd_run['id'];
-                                            
-                                                $i++;
 
                                             $query1 = "SELECT * FROM sales_posting_to_customer WHERE posting_customer_name = '$create_customer_name' AND posting_whatsapp_number = '$created_customer_whatsapp_number'";
                                             $query_run2 = mysqli_query($connection, $query1);
@@ -846,7 +858,7 @@ if(isset($_POST['get_country'])){
                                                 <td>
                                                     <input type="text" class="form-control"
                                                         name="posting_whatsapp_number"
-                                                        value="<?php echo $created_customer_whatsapp_number; ?>"
+                                                        value="<?php echo "+" . $customer_whatspp_phone_code . $created_customer_whatsapp_number; ?>"
                                                         readonly>
                                                 </td>
                                                 <td>
@@ -1016,7 +1028,8 @@ if(isset($_POST['submit_post_to_customer'])){
 ?>
 
 <style>
-[type="text"] {
+[type="text"],
+[type="number"] {
     height: 22px;
     margin-top: 4px;
     font-size: 10px;
@@ -1028,7 +1041,6 @@ if(isset($_POST['submit_post_to_customer'])){
     color: #fff !important;
 }
 </style>
-
 
 
 <?php include_once("../includes/footer.php") ?>

@@ -30,6 +30,7 @@ $username = $_SESSION['username'];
 
 $day = null;
 $sales_member = null;
+$current_date = null;
 
 $facebook = 0;
 $instagram = 0;
@@ -81,6 +82,9 @@ $platform_create_model_10 = null;
 $selected_date = null;
 $sales_member_name = null;
 $member_id = null;
+
+$current_date = date('d-m-Y');
+
 
 $returive_sales = "SELECT * FROM weekly_sales_set_target ORDER BY id DESC LIMIT 1";
 $query_set = mysqli_query($connection, $returive_sales);
@@ -246,7 +250,6 @@ if(isset($_POST['posting_modal'])){
                                         href="#custom-tabs-four-tab8" role="tab" aria-controls="custom-tabs-four-tab8"
                                         aria-selected="false" style="color: #fff;">Sunday</a>
                                 </li>
-
                             </ul>
                         </div>
                         <div class=" card-body">
@@ -611,9 +614,8 @@ if(isset($_POST['posting_modal'])){
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" name="submit_weekly_task" class="btn btn-primary">Save
-                                changes</button>
+                            <a href="./sales_team_leader_dashboard.php" class="btn btn-default"
+                                data-dismiss="modal">Close</a>
                         </div>
                     </div>
                 </div>
@@ -622,6 +624,28 @@ if(isset($_POST['posting_modal'])){
     </div>
 </div>
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-8 grid-margin stretch-card justify-content-center mx-auto mt-2">
+            <div class="card">
+                <div class="card-body">
+                    <?php 
+
+                        $query = "SELECT * FROM weekly_sales_set_target WHERE created_time = '$current_date'";
+                        $run = mysqli_query($connection, $query);
+                        foreach($run as $xd){
+                            print_r($xd);
+                        }
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- Create Modal  -->
+<!-- ============================================================== -->
 <div class="modal fade" id="create_search" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     data-backdrop="static" data-keyboard="false" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -741,6 +765,9 @@ if(isset($_POST['posting_modal'])){
     </div>
 </div>
 
+<!-- ============================================================== -->
+<!-- Posting Modal -->
+<!-- ============================================================== -->
 <div class="modal fade" id="posting_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     data-backdrop="static" data-keyboard="false" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -919,18 +946,7 @@ if(isset($_POST['posting_modal'])){
     color: #000 !important;
 }
 </style>
-<script>
-function submitForm() {
-    // Get the first form with the name
-    // Usually the form name is not repeated
-    // but duplicate names are possible in HTML
-    // Therefore to work around the issue, enforce the correct index
-    var frm = document.getElementsByName('contact-form')[0];
-    frm.submit(); // Submit the form
-    frm.reset(); // Reset all form data
-    return false; // Prevent page refresh
-}
-</script>
+
 
 
 <?php include_once('../includes/footer.php'); ?>

@@ -34,7 +34,6 @@ if(isset($_POST['reject'])){
 
     $reject_query = "UPDATE sales_quatation_items SET status = '2' WHERE quatation_id = {$quatation_id}";
     $reject_query_run = mysqli_query($connection, $reject_query);
-
     header("Location: orders.php");
 
 }
@@ -43,7 +42,6 @@ if(isset($_POST['accept'])){
 
     $accept_query = "UPDATE sales_quatation_items SET status = '1' WHERE quatation_id = {$quatation_id}";
     $accept_query_run = mysqli_query($connection, $accept_query);
-
     header("Location: orders.php");
 
 } 
@@ -168,7 +166,6 @@ if(isset($_POST['accept'])){
                                 <?php 
 
                                     $query_d = "SELECT * FROM sales_quatation_items WHERE quatation_id = $quatation_id ";
-                                    echo $query_d;
                                     $qd = mysqli_query($connection, $query_d);
 
                                         foreach($qd as $qd){
@@ -364,7 +361,6 @@ if(isset($_POST['accept'])){
                                 <?php 
 
                                     $query_d = "SELECT * FROM sales_quatation_items WHERE quatation_id = $quatation_id ";
-                                    echo $query_d;
                                     $qd = mysqli_query($connection, $query_d);
 
                                         foreach($qd as $qd){
@@ -559,7 +555,6 @@ if(isset($_POST['accept'])){
                                 <?php 
 
                                     $query_d = "SELECT * FROM sales_quatation_items WHERE quatation_id = $quatation_id ";
-                                    echo $query_d;
                                     $qd = mysqli_query($connection, $query_d);
 
                                         foreach($qd as $qd){

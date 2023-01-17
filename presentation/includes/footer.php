@@ -31,6 +31,8 @@
        <script src="../../static/plugins/jquery/jquery.min.js"></script>
        <!-- Select2 -->
        <script src="../../static/plugins/select2/js/select2.full.min.js"></script>
+       <!--  Chart JS -->
+       <script src="../../static/plugins/chart.js/Chart.min.js"></script>
 
        <!-- DataTables  & Plugins -->
        <script src="../../static/plugins/datatables/jquery.dataTables.min.js"></script>
