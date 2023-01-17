@@ -13,7 +13,7 @@ foreach($result as $r){
 }
   class PDF extends FPDF
   {
-    
+
     function Header(){
  
       //Display Company Info
@@ -33,7 +33,7 @@ foreach($result as $r){
 
       $this->SetFont('Arial','',10);
       $this->Cell(0,6," ",0,1,"R");
-       $this->Cell(0,6," Date: 01/16/2023",0,1,"R");
+      $this->Cell(0,6," Date: 01/16/2023",0,1,"R");
       $this->Cell(0,6," Quatation ID: CCI-HMP-QA220505",0,1,"R");
       $this->SetFont('Arial','',10);
       
@@ -47,14 +47,7 @@ foreach($result as $r){
       $this->SetFillColor(4,8,118);
       // Title
       $this->SetFont('Arial','B',12);
-      $this->Cell(100,6,"Invoice 5",0,1,'L',true);
-
-      $this->SetY(67);
-      $this->SetX(10);
-      $this->SetFont('Arial','',10);
-      $this->Cell(50, 6,"Contact: Tina Li",0,1);
-      $this->Cell(50, 6,"Contact: Tina Li",0,1);
-      $this->Cell(50, 6,"Contact: Tina Li",0,1);
+      $this->Cell(100,6,"Invoice to",0,1,'L',true);
 
     }
     

@@ -82,10 +82,12 @@ function Login($role_id, $department){
     }
 
     // Production Team Leader Redirect
-    elseif( $department == 5){
+    elseif($department == 5 && $role_id == 5){
         header('Location: presentation/sales/sales_dashboard.php');
     }
-   
+    elseif($department == 5 && $role_id == 8){
+           header('Location: presentation/sales/sales_team_leader_dashboard.php');
+    }
 
 }
 

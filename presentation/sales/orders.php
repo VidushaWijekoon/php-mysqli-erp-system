@@ -215,7 +215,7 @@ $username = $_SESSION['username'];
                                             <span
                                                 class="badge badge-lg badge-success text-white p-1 px-3">Accepted</span>
                                             <span class="badge badge-lg badge-info text-white p-1 px-3">Approved By
-                                                <?php echo $username; ?>
+                                                <?php echo $approved_by; ?>
 
                                             </span>
                                             <?php } ?>

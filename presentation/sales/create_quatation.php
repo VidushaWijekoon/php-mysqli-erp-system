@@ -163,8 +163,8 @@ if(isset($_POST['add_items'])){
                                         <label class="col-sm-3 col-form-label">Choose Customer</label>
                                         <div class="col-sm-8 mt-2">
 
-                                            <select name="customer_id" id="choose_customer" class="info_select w-50"
-                                                style="border-radius: 5px;">
+                                            <select name="customer_id" id="choose_customer"
+                                                class="info_select w-50 select2" style="border-radius: 5px;">
                                                 <option selected value="">--Select Customer--
                                                 </option>
                                                 <?php
@@ -183,6 +183,7 @@ if(isset($_POST['add_items'])){
                                             <button name="get_custmer_details" type="submit"
                                                 class="btn btn-sm btn-primary p-0 px-2">Select Customer</button>
                                         </div>
+
                                     </div>
                                 </div>
                             </form>
@@ -819,10 +820,6 @@ textarea {
     color: #fff !important;
 }
 </style>
-
-<script>
-
-</script>
 
 
 <?php include_once('../includes/footer.php'); ?>

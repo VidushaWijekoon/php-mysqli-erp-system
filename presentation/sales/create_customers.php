@@ -56,6 +56,14 @@ $contact_person_mobile_number = null;
 $remarks = null;
 $username = $_SESSION['username'];
 
+// Check Duplicate Customer First name , Last name, Country, Whatsapp Number
+$check_customer = "SELECT * FROM sales_customer_information";
+$check_run = mysqli_query($connection, $check_customer);
+foreach($check_run as $xd){
+    $check_customer_country = $xd['country'];
+    $check_customer_whatsapp_number = $xd['whatsapp_number'];
+}
+
 if(isset($_POST['submit_customer'])){
 
     $organization = mysqli_real_escape_string($connection, $_POST['organization']);
@@ -98,22 +106,31 @@ if(isset($_POST['submit_customer'])){
     $contact_person_mobile_number = mysqli_real_escape_string($connection, $_POST['contact_person_mobile_number']);
     $remarks = mysqli_real_escape_string($connection, $_POST['remarks']);
 
-    $query = "INSERT INTO `sales_customer_information`(`salutation`, `first_name`, `last_name`, `company_name`, `company_email`, `country`,`UAE_number`, `country_code`, `local_number`, `pickup_method`, `billing_attention`, 
-                                    `billing_country_region`, `billing_street1`, `billing_street2`, `billing_city`, `billing_state`, `billing_zip_code`, `billing_customer_phone_number`, `shipping_attention`,
-                                    `shipping_country_region`, `shipping_street1`, `shipping_street2`, `shipping_city`, `shipping_state`, `shipping_zip_code`, `shipping_customer_phone_number`, 
-                                    `currency`, `language`, `payment_terms`, `whatsapp_number`, `facebook`, `contact_person_salutation`, `contact_person_first_name`, `contact_person_last_name`, 
-                                    `contact_person_email`, `contact_person_number`, `contact_person_mobile_number`, `remarks`, `created_by`,  `status`) 
-            VALUES ('{$salutation}', '{$first_name}', '{$last_name}', '{$company_name}', '{$company_email}', '{$country}','{$UAE_number}', '{$country_code}', '{$local_number}', '{$pickup_method}', '{$billing_attention}', 
-                    '{$billing_country_region}', '{$billing_street1}', '{$billing_street2}', '{$billing_city}', '{$billing_state}', '{$billing_zip_code}', '{$billing_customer_phone_number}', 
-                    '{$shipping_attention}', '{$shipping_country_region}', '{$shipping_street1}', '{$shipping_street2}', '{$shipping_city}', '{$shipping_state}', '{$shipping_zip_code}', '{$shipping_customer_phone_number}',
-                    '{$currency}', '{$language}', '{$payment_terms}', '{$whatsapp_number}', '{$facebook}', '{$contact_person_salutation}', '{$contact_person_first_name}', '{$contact_person_last_name}', 
-                    '{$contact_person_email}', '{$contact_person_number}', '{$contact_person_mobile_number}', '{$remarks}', '{$username}', '0')";
-    $query_run = mysqli_query($connection, $query);
-    if($query_run){
-        header("Location: ./customers.php");
+    if(($check_customer_country == $country) && ($check_customer_whatsapp_number == $whatsapp_number)){
+        echo '<script>alert("This Customer Details Already Exists")</script>';
     }else{
-        echo "Something Wrong with Submit Form";
+        $query = "INSERT INTO `sales_customer_information`(`salutation`, `first_name`, `last_name`, `company_name`, `company_email`, `country`,`UAE_number`, `country_code`, `local_number`, `pickup_method`, `billing_attention`, 
+                                        `billing_country_region`, `billing_street1`, `billing_street2`, `billing_city`, `billing_state`, `billing_zip_code`, `billing_customer_phone_number`, `shipping_attention`,
+                                        `shipping_country_region`, `shipping_street1`, `shipping_street2`, `shipping_city`, `shipping_state`, `shipping_zip_code`, `shipping_customer_phone_number`, 
+                                        `currency`, `language`, `payment_terms`, `whatsapp_number`, `facebook`, `contact_person_salutation`, `contact_person_first_name`, `contact_person_last_name`, 
+                                        `contact_person_email`, `contact_person_number`, `contact_person_mobile_number`, `remarks`, `created_by`,  `status`) 
+                VALUES ('{$salutation}', '{$first_name}', '{$last_name}', '{$company_name}', '{$company_email}', '{$country}','{$UAE_number}', '{$country_code}', '{$local_number}', '{$pickup_method}', '{$billing_attention}', 
+                        '{$billing_country_region}', '{$billing_street1}', '{$billing_street2}', '{$billing_city}', '{$billing_state}', '{$billing_zip_code}', '{$billing_customer_phone_number}', 
+                        '{$shipping_attention}', '{$shipping_country_region}', '{$shipping_street1}', '{$shipping_street2}', '{$shipping_city}', '{$shipping_state}', '{$shipping_zip_code}', '{$shipping_customer_phone_number}',
+                        '{$currency}', '{$language}', '{$payment_terms}', '{$whatsapp_number}', '{$facebook}', '{$contact_person_salutation}', '{$contact_person_first_name}', '{$contact_person_last_name}', 
+                        '{$contact_person_email}', '{$contact_person_number}', '{$contact_person_mobile_number}', '{$remarks}', '{$username}', '0')";
+        $query_run = mysqli_query($connection, $query);
     }
+    if(empty($query_run)){
+
+    }else{
+        if($query_run){
+            header("Location: ./customers.php");
+        }else{
+            echo "Something Wrong with Submit Form";
+        }
+    }
+   
      
 }
 ?>
