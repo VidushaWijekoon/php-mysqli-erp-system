@@ -145,6 +145,7 @@ $qr_number = 0;
                                 <tr>
                                     <th>Date</th>
                                     <th>QR Code number</th>
+                                    <th>Job Description</th>
                                     <th>Name</th>
                                 </tr>
                             </thead>
@@ -157,20 +158,6 @@ $qr_number = 0;
                                       $from_date =0;
                                       $to_date =0;
                                       if(isset($_POST['from_date']) && isset($_POST['to_date'])){
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        
                                         $from_date = $_POST['from_date'];
                                         $to_date = $_POST['to_date'];
                                     }
@@ -183,6 +170,7 @@ $qr_number = 0;
                                 <tr>
                                     <td><?php echo $data['end_time'] ?></td>
                                     <td><?php echo $data['qr_number'] ?></td>
+                                    <td><?php echo $data['job_description'] ?></td>
                                     <td><?php $user_id= $data['user_id'];
                                             $query="SELECT full_name FROM employees LEFT JOIN users ON users.epf = employees.emp_id 
                                             WHERE users.user_id ='$user_id' "; 

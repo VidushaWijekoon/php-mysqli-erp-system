@@ -6,6 +6,8 @@
 		$name = $brand."_model";
 		$i =0;
 		$query 	= "SELECT DISTINCT series FROM `machine_from_supplier` WHERE brand='$brand' ";
+		echo $query;
+
 		$result_set = mysqli_query($connection, $query);
 
 		$series_list = "<option selected>--Select series--</option>";

@@ -10,10 +10,80 @@ if (!isset($_SESSION['user_id'])) {
 }
 $user_id =$_SESSION['user_id'];
 $user_role=$_SESSION['role_id'];
+$department_id =$_SESSION['department'];
+$query = "SELECT last_login FROM users WHERE user_id ='$user_id'";
+$query_run = mysqli_query($connection,$query);
+$last_login_time='';
+foreach($query_run as $data){
+ $last_login_time = $data['last_login'];
+}
+
+$time =  strtotime($last_login_time) ;
+$last_qr_number='0';
+$time =  strtotime($last_login_time)+2 ;
+                    $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+                    $date = $date1->format('Y-m-d H:i:s');
+                    $test=  strtotime($date);
+if($test<$time){
+    $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+    $date = $date1->format('Y-m-d 00:00:00');
+            //  $date2 = $date1->format('Y-m-d 23:59:59');
+    $query ="SELECT qr_number FROM performance_record_table WHERE user_id ='$user_id'AND status ='0'AND start_time between '$date'AND '$last_login_time' ";
+    $query_run = mysqli_query($connection,$query);
+    if(empty($query_run)){}else{
+        foreach($query_run as $data){
+            $last_qr_number = $data['qr_number'];
+        }
+        if($last_qr_number !='0'){
+            echo "<script>
+                                    $(window).load(function() {
+                                        $('#myModal4').modal('show');
+                                    });
+                                    </script>";
+        }  
+    }
+    
+}
+$date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+date_default_timezone_set('Asia/Dubai');
+$timestamp2 = strtotime(date('Y-m-d 13:55:00'));
+$timestamp3 = strtotime(date('Y-m-d 18:15:00'));
+$timestamp4 = strtotime(date('Y-m-d 20:55:00'));
+
+$_SESSION['expire1'] =$timestamp2;
+$_SESSION['expire2'] =$timestamp3;
+$_SESSION['expire3'] =$timestamp4; 
+$now = time();
+// later 
+    //   $after_tea_timestart =strtotime(date('Y-m-d 18:44:00'));
+    //   $after_tea_timeend=strtotime(date('Y-m-d 20:55:00'));
+    //   $after_lunch_timestart =strtotime(date('Y-m-d 14:59:00'));
+    //   $after_lunch_timeend=strtotime(date('Y-m-d 18:15:00'));
+    //   $morning_session_timestart =strtotime(date('Y-m-d 18:59:00'));
+    //   $morning_session_timeend=strtotime(date('Y-m-d 19:37:00'));
+
+        if( strtotime(date('Y-m-d 08:59:00'))<$now && $now > $_SESSION['expire1'] && $now<strtotime(date('Y-m-d 14:59:00'))) {
+            // header("Location: ../../index.php");
+            session_destroy();
+            echo "<p align='center'>Session has been destroyed!!";
+            // session_start();
+            header("Location: ../../index.php");  
+        }
+        elseif(strtotime(date('Y-m-d 14:59:00'))<$now && $now > $_SESSION['expire2'] && $now<strtotime(date('Y-m-d 18:15:00'))) {
+            session_destroy();
+            echo "<p align='center'>Session has been destroyed!!";
+            header("Location: ../../index.php");  
+        }elseif(strtotime(date('Y-m-d 18:44:00'))<$now && $now > $_SESSION['expire3'] && $now<strtotime(date('Y-m-d 20:55:00'))) {
+            session_destroy();
+            echo "<p align='center'>Session has been destroyed!!";
+            header("Location: ../../index.php");  
+        }
 ?>
-<?php if($user_role == 9){?>
+
 <div class="row ">
-    <div class="col-12 col-sm-6 col-md-3">
+
+    <?php if($user_role == 9){?>
+    <div class=" col col-sm-6 col-md-3">
         <?php 
         $date = date('Y-m-d 00:00:00');
         $date2 = date('Y-m-d 23:59:59');
@@ -32,10 +102,71 @@ $user_role=$_SESSION['role_id'];
             <!-- /.info-box -->
         </a>
     </div>
-</div>
-<?php } ?>
-<div class="row ">
-    <div class="col-12 col-sm-6 col-md-3">
+    <?php if($department_id == 13){ ?>
+    <div class="col col-sm-6 col-md-3">
+        <?php 
+        $date = date('Y-m-d 00:00:00');
+        $date2 = date('Y-m-d 23:59:59');
+        $start_time = $date;
+        $end_time =$date2; ?>
+        <a href="packing_department.php">
+            <div class="info-box">
+                <span class="info-box-icon bg-info elevation-1"><i class="fa-solid fa-warehouse"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Packing <?php echo $_SESSION['role_id'] ?>
+                    </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </a>
+    </div>
+    <?php } ?>
+
+    <?php if($department_id == 1){ ?>
+    <div class="col col-sm-6 col-md-3">
+        <?php 
+        $date = date('Y-m-d 00:00:00');
+        $date2 = date('Y-m-d 23:59:59');
+        $start_time = $date;
+        $end_time =$date2; ?>
+        <a href="production_view.php">
+            <div class="info-box">
+                <span class="info-box-icon bg-info elevation-1"><i class="fa-solid fa-warehouse"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Technician Task View
+                    </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </a>
+    </div>
+    <?php } } ?>
+    <?php if($department_id == 13 || $department_id == 7 ||$department_id == 22){ ?>
+    <div class="col col-sm-6 col-md-3">
+        <?php 
+        $date = date('Y-m-d 00:00:00');
+        $date2 = date('Y-m-d 23:59:59');
+        $start_time = $date;
+        $end_time =$date2; ?>
+        <a href="bubble_wrappping.php">
+            <div class="info-box">
+                <span class="info-box-icon bg-info elevation-1"><i class="fa-solid fa-warehouse"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Scanned Unit Packing
+                    </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </a>
+    </div>
+    <?php } ?>
+    <div class="col col-sm-6 col-md-3">
         <?php 
         $date = date('Y-m-d 00:00:00');
         $date2 = date('Y-m-d 23:59:59');
@@ -77,7 +208,7 @@ $user_role=$_SESSION['role_id'];
                         } ?><br>
                         EmpID :<?php echo $_SESSION['epf'] ?><br>
                         Department :
-                        <?php $department_id =$_SESSION['department'];
+                        <?php 
                         $query="SELECT department FROM departments WHERE department_id='$department_id'"; 
                         $query_run=mysqli_query($connection,$query);
                         foreach($query_run as $data){
@@ -87,10 +218,10 @@ $user_role=$_SESSION['role_id'];
                     </h1>
                     <div class="d-flex">
                         <div class="col-lg-6 grid-margin stretch-card justify-content-center mx-auto mt-2">
-                            <form method="POST">
+                            <form method="POST" action="performance_record_save.php">
                                 <div class="row">
                                     <label class="col-sm-4 col-form-label">Job Description</label>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-8 mt-2">
                                         <select onchange="checkOptions(this)" name="job_description"
                                             class="info_select w-75" style="border-radius: 5px;">
 
@@ -102,7 +233,9 @@ $user_role=$_SESSION['role_id'];
                                             <option value="Hard Disk Copy">Hard Disk Copy
                                             </option>
                                             <?php }elseif($_SESSION['role_id'] == 9){?>
-                                            <option value="production">Production
+                                            <option value="received from inventory">Received From Inventory
+                                            </option>
+                                            <option value="send to production">Send to Production
                                             </option>
                                             <option value="LCD Combine">LCD Combine </option>
                                             <option value="Battery Combine">Battery Combine </option>
@@ -130,9 +263,12 @@ $user_role=$_SESSION['role_id'];
                                             <!-- paint job description -->
                                             <option value="Low Generation">Low Generation</option>
                                             <option value="Full Painting">Full Painting A+C+D</option>
+                                            <option value="Keyboard Lacker">Keyboard Lacker</option>
+                                            <option value="A panel paint">A Panel Paint</option>
                                             <?php }elseif($department_id == 14){ ?>
                                             <!-- battery job description -->
-                                            <option value="Unlock And Chargine">Unlock And Chargine</option>
+                                            <option value="Unlock">Unlock </option>
+                                            <option value="Chargin">Chargin </option>
                                             <option value="Openning Battery And Cell Change">Openning Battery And Cell
                                                 Change
                                             </option>
@@ -147,7 +283,8 @@ $user_role=$_SESSION['role_id'];
                                                 Account Lock/ Ports Issue</option>
                                             <?php }elseif($department_id == 13){ ?>
                                             <!-- packing job description -->
-                                            <option value="Clean + Packing">Clean + Packing </option>
+                                            <option value="Clean">Clean </option>
+                                            <option value="Packing">Packing </option>
                                             <option value="Full Painting Packing">Full Painting Packing</option>
                                             <?php }elseif($department_id == 22){ ?>
                                             <!-- sticker job description -->
@@ -170,15 +307,15 @@ $user_role=$_SESSION['role_id'];
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label class="col-sm-4 col-form-label">Start Time</label>
-                                    <div class="col-sm-8">
+                                    <label class="col-sm-6 col-form-label">Start Time</label>
+                                    <div class="col-sm-4 mt-2" style="font-size:16px">
                                         <span id='time'></span>
 
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label class="col-sm-4 col-form-label">Today Completed QTY</label>
-                                    <div class="col-sm-8">
+                                    <label class="col-sm-6 col-form-label">Today Completed QTY</label>
+                                    <div class="col-sm-4 mt-2" style="font-size:16px">
                                         <?php  
                                           $date = date('Y-m-d 00:00:00');
                                           $date2 = date('Y-m-d 23:59:59');
@@ -191,26 +328,88 @@ $user_role=$_SESSION['role_id'];
                                     } ?>
                                     </div>
                                 </div>
+                                <?php if(($department_id ==1 && $user_role !=9)||($department_id !=1)){ ?>
                                 <div class="row">
-                                    <label class="col-sm-4 col-form-label">Target</label>
-                                    <div class="col-sm-8">
-                                        <?php  $query ="SELECT target FROM performance_record_table WHERE user_id = $user_id AND start_time between '$date'AND '$date2' ORDER BY performance_id DESC";
-                                    $query_run = mysqli_query($connection,$query);
-                                    
-                                    $row = mysqli_num_rows($query_run);
-                                    $sum=0;
-                                    if($row == 0){
-                                        $row=1;
-                                    }
-                                    $target=0;
-                                    foreach( $query_run as $data){
-                                       $sum += $data['target'];
-                                    } 
-                                    $target = $sum/$row;
-                                    echo round($target);
-                                    ?>
+                                    <label class="col-sm-6 col-form-label">Remaining Target Points</label>
+                                    <div class="col-sm-4 mt-2" style="font-size:16px">
+                                        <?php  $query ="SELECT SUM(target) as target_sum FROM performance_record_table WHERE user_id = $user_id AND end_time between '$date'AND '$date2' ";
+                                        
+                                        $query_run = mysqli_query($connection,$query);
+                                        $sum=0;
+                                        if($department_id== 1){
+                                            if($user_role==33){
+                                                $target= 400.00;
+                                            }else{
+                                            $target= 50;}   
+                                        }elseif($department_id==10){
+                                            $target= 120;
+                                        }elseif($department_id==7){
+                                            $target= 100;
+                                        }elseif($department_id==8){
+                                            $target= 200;
+                                        }elseif($department_id==14){
+                                            $target= 150;
+                                        }elseif($department_id==13){
+                                            $target= 200;
+                                        }elseif($department_id==9){
+                                            $target= 100;
+                                        }elseif($department_id==22){
+                                            $target= 150;
+                                        }elseif($department_id==23){
+                                            $target= 200;
+                                        }
+                                        foreach( $query_run as $data){
+                                        $sum = $data['target_sum'];
+                                        } 
+
+                                        
+                                        $final_target = $target-$sum;
+                                        echo $final_target;
+                                        ?>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <label class="col-sm-6 col-form-label">point view</label>
+                                    <div class="col-sm-4 mt-2" style="font-size:16px">
+                                        <?php  $query ="SELECT SUM(target) as target_sum FROM performance_record_table WHERE user_id = $user_id AND end_time between '$date'AND '$date2' ";
+                                        $query_run = mysqli_query($connection,$query);
+                                        $sum=0;
+                                        if($department_id==1){
+                                            if($user_role==33){
+                                               echo "Os Installation 1 point for 1 unit";
+                                            }else{
+                                                echo "1 point for 1 unit";
+                                            }
+                                        }elseif($department_id==10){
+                                            if($user_role==9){
+                                                echo "Team Leader 2 point for 1 unit";
+                                             }else{
+                                                 echo "Remove LCD 1 point/Install LCD 1 point/Fix LCD 4 point/Remove Polization Film  1 point/Install Polization Film  2 point";
+                                             }
+                                        }elseif($department_id==7){
+                                            echo "Sanding 1.3 point per unit/Taping 1.3 point per unit/Bodywork 2.5 point per unit ";
+                                        }elseif($department_id==8){
+                                            echo "Low Generation 1 point per unit/High Generation 4 point per unit/A Panel Paint 1 point per unit/Keyboard Lacker 0.4 point per unit";
+                                        }elseif($department_id==14){
+                                            echo"Openning Battery And Cell Change 3 point per unit/Unlock And Chargine 1 point per unit";
+                                        }elseif($department_id==13){
+                                            echo "Clean 1 point per unit/Packing 1 point per unit/full painting packing 3.3 point per unit ";
+                                        }elseif($department_id==9){
+                                            echo "BIOS Lock High Gen 1.66 point per unit/BIOS Lock Low Gen 2.85 point per unit/Other 4 point per unit ";
+                                        }elseif($department_id==22){
+                                            echo "Designing + Pasting 7.5 point per unit/ Sticker Pasting 1 point per unit";
+                                        }elseif($department_id==23){
+                                            echo "1 point per unit
+                                            ";
+                                        }
+                                        
+                                        ?>
+                                    </div>
+                                </div>
+                                <?php } ?>
+                                <input type="hidden" name="user_id" value="<?php echo $user_id ?>">
+                                <input type="hidden" name="user_role" value="<?php echo $user_role ?>">
+                                <input type="hidden" name="department_id" value="<?php echo $department_id ?>">
                                 <button type="submit" name="submit" id="submit"
                                     class="btn mb-2 mt-4 btn-primary btn-sm  mx-auto text-center d-none"></button>
                             </form>
@@ -227,7 +426,6 @@ $user_role=$_SESSION['role_id'];
                                             $duration =0;
                                             $spend_time =0;
                                             $query ="SELECT start_time  FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY performance_id ASC LIMIT 1";
-                                            
                                             $query_run = mysqli_query($connection,$query);
                                             $datetime_1=''; 
                                             $datetime_2 ='' ; 
@@ -239,6 +437,13 @@ $user_role=$_SESSION['role_id'];
                                             $start_datetime = new DateTime($datetime_1); 
                                             $diff = $start_datetime->diff(new DateTime($datetime_2));
                                             if($datetime_2 !=''){
+                                    $description ="morning session start";
+                                    $query="SELECT track_id FROM time_track WHERE user_id='$user_id' AND description='$description' AND date between '$date'AND '$date2'";
+                                    $query_run_for_time = mysqli_query($connection,$query);  
+                                    $exist_record=0;
+                                    foreach($query_run_for_time as $time){
+                                        $exist_record=$time['track_id'];
+                                    }      
                                             if ($datetime_2 < $datetime_1) {
                                                 // whatever you have to do here
                                                
@@ -246,13 +451,22 @@ $user_role=$_SESSION['role_id'];
                                     <label class="col-sm-12 col-form-label text-success">You are Earlier :
                                         <?php echo $diff->i.' Minutes' ?>
                                         minute &#128525;</label>
-                                    <?php
-                                            }else{
+                                    <?php 
+                                    if($exist_record==0){
+                                        $query="INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','1')";
+                                        $query_run = mysqli_query($connection,$query);
+                                    }
+                                }else{
                                                 ?>
                                     <label class="col-sm-12 col-form-label text-danger">You are Late :
                                         <?php echo $diff->h.":".$diff->i.' Minutes' ?>
                                         minute</label>
-                                    <?php }
+                                    <?php
+                                       if($exist_record==0){
+                                        $query="INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','0')";
+                                        $query_run = mysqli_query($connection,$query);
+                                    }
+                                     }
                                     }
                                     ?>
                                     <label class="col-sm-12 col-form-label">Lunch Break Start Time : 01.55PM
@@ -266,6 +480,54 @@ $user_role=$_SESSION['role_id'];
                                                         }
                                         ?>
                                     </label>
+                                    <?php  
+                                            $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+                                            $date = $date1->format('Y-m-d 13:30:00');
+                                          $date2 = $date1->format('Y-m-d 13:55:00');
+                                            $duration =0;
+                                            $spend_time =0;
+                                            $query ="SELECT end_time  FROM performance_record_table WHERE user_id=$user_id AND end_time between '$date'AND '$date2' ORDER BY performance_id DESC LIMIT 1";
+                                            $query_run = mysqli_query($connection,$query);
+                                            $datetime_1=''; 
+                                            $datetime_2 ='' ; 
+                                            foreach($query_run as $data){
+                                                $datetime_1 = date('Y-m-d 13:55:00'); 
+                                                $datetime_2 = $data['end_time']; 
+                                            } 
+                                            
+                                            $start_datetime = new DateTime($datetime_1); 
+                                            $diff = $start_datetime->diff(new DateTime($datetime_2));
+                                            if($datetime_2 !=''){
+                                                 $description ="Lunch Break start";
+                                    $query="SELECT track_id FROM time_track WHERE user_id='$user_id' AND description='$description' AND date between '$date'AND '$date2'";
+                                    $query_run_for_time = mysqli_query($connection,$query);  
+                                    $exist_record=0;
+                                    foreach($query_run_for_time as $time){
+                                        $exist_record=$time['track_id'];
+                                    }  
+                                            if ($datetime_2 < $datetime_1) {
+                                                // whatever you have to do here
+                                               ?>
+                                    <label class="col-sm-12 col-form-label text-danger">You are Earlier :
+                                        <?php echo $diff->i.' Minutes' ?></label>
+                                    <?php
+                                    if($exist_record==0){
+                                        $query="INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','1')";
+                                        $query_run = mysqli_query($connection,$query);
+                                    }
+                                            }else{
+                                                ?>
+                                    <label class="col-sm-12 col-form-label text-danger">You are Late :
+                                        <?php echo $diff->i.' Minutes' ?>
+                                    </label>
+                                    <?php 
+                                    if($exist_record==0){
+                                        $query="INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','0')";
+                                        $query_run = mysqli_query($connection,$query);
+                                    }
+                                    }
+                                             }
+                                            ?>
 
                                     <label class="col-sm-12 col-form-label">Afternoon Session Start Time :
                                         03.05PM</label>
@@ -286,6 +548,13 @@ $user_role=$_SESSION['role_id'];
                                             $diff = $start_datetime->diff(new DateTime($datetime_2));
                                             
                                             if($datetime_2 !=''){
+                                                $description ="afternoon session start";
+                                                $query="SELECT track_id FROM time_track WHERE user_id='$user_id' AND description='$description' AND date between '$date'AND '$date2'";
+                                                $query_run_for_time = mysqli_query($connection,$query);  
+                                                $exist_record=0;
+                                                foreach($query_run_for_time as $time){
+                                                    $exist_record=$time['track_id'];
+                                                }
                                             if ($datetime_2 < $datetime_1) {
                                                 // whatever you have to do here
                                                 
@@ -293,13 +562,23 @@ $user_role=$_SESSION['role_id'];
                                     <label class="col-sm-12 col-form-label text-success">You are Earlier :
                                         <?php echo $diff->i.' Minutes' ?>
                                         minute &#128525;</label>
-                                    <?php
+                                    <?php 
+                                     if($exist_record==0){
+                                        $query="INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','1')";
+                                        $query_run = mysqli_query($connection,$query);
+                                    }
                                             }else{
                                                 ?>
                                     <label class="col-sm-12 col-form-label text-danger">You are Late :
                                         <?php echo  $diff->i.' Minutes' ; ?>
                                         minute</label>
-                                    <?php }
+                                    <?php 
+                                     if($exist_record==0){
+                                        $query="INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','0')";
+                                        $query_run = mysqli_query($connection,$query);
+                                    }
+                                    
+                                }
                                     }  ?>
                                     <label class="col-sm-12 col-form-label">Tea Break Start Time : 06.15PM
                                         <?php 
@@ -313,8 +592,60 @@ $user_role=$_SESSION['role_id'];
                                                         }
                                         ?>
                                     </label>
-                                    <label class="col-sm-12 col-form-label">Evening Session Start Time : 06.45PM</label>
-                                    <?php  
+                                    <label>
+                                        <?php  
+                                            $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+                                            $date = $date1->format('Y-m-d 15:45:00');
+                                          $date2 = $date1->format('Y-m-d 18:15:00');
+                                            $duration =0;
+                                            $spend_time =0;
+                                            $query ="SELECT end_time  FROM performance_record_table WHERE user_id=$user_id AND end_time between '$date'AND '$date2' ORDER BY performance_id DESC LIMIT 1";
+                                            $query_run = mysqli_query($connection,$query);
+                                            $datetime_1=''; 
+                                            $datetime_2 ='' ; 
+                                            foreach($query_run as $data){
+                                                $datetime_1 = date('Y-m-d 18:15:00'); 
+                                                $datetime_2 = $data['end_time']; 
+                                            } 
+                                            
+                                            $start_datetime = new DateTime($datetime_1); 
+                                            $diff = $start_datetime->diff(new DateTime($datetime_2));
+                                            if($datetime_2 !=''){
+                                                $description ="tea session start";
+                                    $query="SELECT track_id FROM time_track WHERE user_id='$user_id' AND description='$description' AND date between '$date'AND '$date2'";
+                                    $query_run_for_time = mysqli_query($connection,$query);  
+                                    $exist_record=0;
+                                    foreach($query_run_for_time as $time){
+                                        $exist_record=$time['track_id'];
+                                    }      
+                                            if ($datetime_2 < $datetime_1) {
+                                                // whatever you have to do here
+                                               ?>
+                                        <label class="col-sm-12 col-form-label text-danger">You are Earlier :
+                                            <?php echo $diff->i.' Minutes' ?></label>
+                                        <?php
+                                        if($exist_record==0){
+                                        $query="INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','1')";
+                                        $query_run = mysqli_query($connection,$query);
+                                    }
+                                            }else{
+                                                ?>
+                                        <label class="col-sm-12 col-form-label text-danger">You are Late :
+                                            <?php echo $diff->i.' Minutes' ?>
+                                        </label>
+                                        <?php 
+                                        if($exist_record==0){
+                                        $query="INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','0')";
+                                        $query_run = mysqli_query($connection,$query);
+                                    }
+                                        
+                                    }
+                                             }
+                                            ?>
+                                        </lable>
+                                        <label class="col-sm-12 col-form-label">Evening Session Start Time :
+                                            06.45PM</label>
+                                        <?php  
                                     $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                             $date = $date1->format('Y-m-d 18:40:00');
                                             $date2 = $date1->format('Y-m-d 20:55:00');
@@ -332,23 +663,39 @@ $user_role=$_SESSION['role_id'];
                                             $start_datetime = new DateTime($datetime_1); 
                                             $diff = $start_datetime->diff(new DateTime($datetime_2));
                                             if($datetime_2 !=''){
+                                                $description ="evening session start";
+                                                $query="SELECT track_id FROM time_track WHERE user_id='$user_id' AND description='$description' AND date between '$date'AND '$date2'";
+                                                $query_run_for_time = mysqli_query($connection,$query);  
+                                                $exist_record=0;
+                                    foreach($query_run_for_time as $time){
+                                        $exist_record=$time['track_id'];
+                                    }  
                                             if ($datetime_2 < $datetime_1) {
                                                 // whatever you have to do here
                                                ?>
-                                    <label class="col-sm-12 col-form-label text-success">You are Earlier :
-                                        <?php echo $diff->i.' Minutes' ?>
-                                        minute &#128525;</label>
-                                    <?php
+                                        <label class="col-sm-12 col-form-label text-success">You are Earlier :
+                                            <?php echo $diff->i.' Minutes' ?>
+                                            minute &#128525;</label>
+                                        <?php
+                                        if($exist_record==0){
+                                        $query="INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','1')";
+                                        $query_run = mysqli_query($connection,$query);
+                                    }
                                             }else{
                                                 ?>
-                                    <label class="col-sm-12 col-form-label text-danger">You are Late :
-                                        <?php echo $diff->i.' Minutes' ?>
-                                        minute</label>
-                                    <?php } 
+                                        <label class="col-sm-12 col-form-label text-danger">You are Late :
+                                            <?php echo $diff->i.' Minutes' ?>
+                                            minute</label>
+                                        <?php 
+                                        if($exist_record==0){
+                                        $query="INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','0')";
+                                        $query_run = mysqli_query($connection,$query);
+                                    }
+                                    } 
                                     }
                                     ?>
-                                    <label class="col-sm-12 col-form-label">Evening Session End Time : 08.55PM
-                                        <?php 
+                                        <label class="col-sm-12 col-form-label">Evening Session End Time : 08.55PM
+                                            <?php 
                                             $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                             $current_time = $date1->format('Y-m-d H:i:s');
                                             $date = $date1->format('Y-m-d 20:55:00');
@@ -358,37 +705,37 @@ $user_role=$_SESSION['role_id'];
                                                             echo " Remaining Time ".round($remaining_time) ." minute";
                                                         }
                                         ?>
-                                    </label>
+                                        </label>
 
                                 </div>
                             </div>
 
                         </div>
                     </div>
-                    <table id="example2" class="table table-bordered table-striped">
-                        <table id="tblexportData" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Job Description</th>
-                                    <!-- <th>Model</th> -->
-                                    <?php if($department_id !=10){ ?>
-                                    <th>Scanned QR code</th>
-                                    <?php }elseif($department_id ==10){ ?>
-                                    <th>Scanned QR code / PN Code</th>
-                                    <?php } ?>
-                                    <!-- <th>Scanned MFG Code</th> -->
-                                    <th>Start Time</th>
-                                    <th>End Time</th>
-                                    <th>Time Duration</th>
-                                    <th>completed qty</th>
-                                    <th>Target</th>
+                    <?php if(($department_id !=1) || ($department_id ==1 && $user_role !=9)){ ?>
+                    <table id="tblexportData" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Job Description</th>
+                                <!-- <th>Model</th> -->
+                                <?php if($department_id !=10){ ?>
+                                <th>Scanned QR code</th>
+                                <?php }elseif($department_id ==10){ ?>
+                                <th>Scanned QR code / PN Code</th>
+                                <?php } ?>
+                                <!-- <th>Scanned MFG Code</th> -->
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Time Duration</th>
+                                <th>completed qty</th>
+                                <th>Target</th>
 
-                                </tr>
-                            </thead>
-                            <tbody>
+                            </tr>
+                        </thead>
+                        <tbody>
 
 
-                                <?php $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+                            <?php $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                         $date = $date1->format('Y-m-d 00:00:00');
                                       $date2 = $date1->format('Y-m-d 23:59:59');
                                       $i=-1;
@@ -403,208 +750,69 @@ $user_role=$_SESSION['role_id'];
                                         $i++;
                                         $y= $row - $i;
                                     ?>
-                                <tr>
-                                    <td><?php echo $data['job_description'] ?></td>
-                                    <!-- <td><?php 
+                            <tr>
+                                <td><?php echo $data['job_description'] ?></td>
+                                <!-- <td><?php 
                                     // echo $data['model'] 
                                     ?></td> -->
-                                    <td><?php if($department_id == 10){ 
+                                <td><?php if($department_id == 10){ 
                                         echo $data['qr_number']."/".$data['lcd_p_n_code']; 
                                         }elseif($department_id != 10){
                                             echo $data['qr_number'];
                                         } ?></td>
-                                    <!-- <td><?php 
+                                <!-- <td><?php 
                                     // echo $data['mfg_code']
                                      ?></td> -->
-                                    <td><?php echo $data['start_time'] ?></td>
-                                    <td><?php echo $data['end_time'] ?></td>
-                                    <td><?php echo $data['spend_time']?></td>
-                                    <td><?php if( $data['end_time'] == '0000-00-00 00:00:00'){
+                                <td><?php echo $data['start_time'] ?></td>
+                                <td><?php echo $data['end_time'] ?></td>
+                                <td><?php echo $data['spend_time']?></td>
+                                <td><?php if( $data['end_time'] == '0000-00-00 00:00:00'){
                                         echo "Not complete";
                                     }else{
                                          echo  $j; 
                                          } ?></td>
-                                    <td><?php echo $data['target']; if( $data['end_time'] == '0000-00-00 00:00:00'){ ?>
-                                        <i class="fa-duotone fa-circle" style="color:#00ff14"></i><?php } ?>
-                                    </td>
-                                </tr>
-                                <?php $y = 0;} ?>
+                                <td><?php echo $data['target']; if( $data['end_time'] == '0000-00-00 00:00:00'){ ?>
+                                    <i class="fa-duotone fa-circle" style="color:#00ff14"></i><?php } ?>
+                                </td>
+                            </tr>
+                            <?php $y = 0;} ?>
 
-                            </tbody>
-                        </table>
+                        </tbody>
+                    </table>
+                    <?php }
+                    if($department_id ==1 && $user_role ==9){  ?>
+                    <table id="tblexportData" class="table table-striped">
+                        <thead>
+                            <th>Job Description</th>
+                            <th>Scanned QR Code</th>
+                            <th>Date Time</th>
+                        </thead>
+                        <tbody>
+                            <?php 
+                            $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+                            $date = $date1->format('Y-m-d 00:00:00');
+                          $date2 = $date1->format('Y-m-d 23:59:59');
+                        $query ="SELECT job_description,qr_number,start_time FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY performance_id DESC";
+                        $query_run=mysqli_query($connection,$query);
+                        foreach($query_run as $data){ ?>
+                            <tr>
+                                <td><?php echo $data['job_description'] ?></td>
+                                <td><?php echo $data['qr_number'] ?></td>
+                                <td><?php echo $data['start_time'] ?></td>
+                            </tr>
+                            <?php }
+                        ?>
 
+                        </tbody>
+                        <table>
+                            <?php }
+                    ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<?php
-            if (isset($_POST['submit'])) {
-                $scanned_qr = '0';
-                $scanned_mfg = '0';
-                $search_value;
-                $scanned_qr = $_POST['qr'];
-                $job_description = $_POST['job_description'];
-                $previous_job_description='';
-                $end_time="0000-00-00";
-                $performance_id = 0;
-                $_POST['qr']='';
-                $_POST['job_description']='';
-                if($scanned_qr != '0'){
-                $search_value = $scanned_qr;
-                }elseif($scanned_mfg !=0){
-                $search_value = $scanned_mfg;
-                }
-                $query = "SELECT * FROM performance_record_table WHERE user_id ='$user_id'AND (qr_number ='$search_value') AND
-                job_description = '$job_description' ";
-                $query_run = mysqli_query($connection,$query);
-                foreach($query_run as $data){
-                $performance_id = $data['performance_id'];
-                $start_time = $data['start_time'];
-                $end_time = $data['end_time'];
-                $previous_job_description .= $data['job_description'].",";
-                }
-                $test =0;
-                $same_jd_count=0;
-                $test = explode(",",$previous_job_description);
-                foreach($test as $a){
-                if($a == $job_description){
-                $same_jd_count++;
-                }
-                }
-                
-                // if($performance_id !=0 && $end_time =="0000-00-00 00:00:00" && $same_jd_count==1 ){
-                if($end_time =="0000-00-00 00:00:00" && $same_jd_count==1 ){
-                // update existing task
-                $working_time_in_seconds;
-                $start_time=0000-00-00;
-                $query = "SELECT * FROM performance_record_table WHERE user_id ='$user_id'AND (qr_number ='$search_value') AND
-                job_description = '$job_description' ";
-                $query_run = mysqli_query($connection,$query);
-                foreach($query_run as $data){
-                $performance_id = $data['performance_id'];
-                $start_time = $data['start_time'];
-                }
-                $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-                $date = $date1->format('Y-m-d H:i:s');
-                $working_time_in_seconds = strtotime($date) - strtotime($start_time);
-                $duration= round($working_time_in_seconds/60)*100;
-                $query="UPDATE
-                `performance_record_table`
-                SET
-                `end_time` = '$date',
-                `spend_time` = '$duration'
-                WHERE performance_id = $performance_id";
-                echo $query;
-                $query_run = mysqli_query($connection,$query);
-                header('Location: performance_record.php');
-                }elseif($same_jd_count==0){
-                // echo "im inside 000";
-                // exit();
-                $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-                $start_date = $date1->format('Y-m-d H:i:s');
-                $target = 0;
-                if($department_id ==1){
-                // production target
-                if($_SESSION['role_id'] == 33){
-                $target = 400;
-                }else{
-                $target = 50;
-                }
-                }elseif($department_id ==10){
-                //lcd target
-                if($_SESSION['role_id'] == 4){
-                $target = 60;
-                }elseif($job_description == "Remove LCD"){
-                $target = 120;
-                }elseif($job_description == "Install LCD"){
-                $target = 120;
-                }elseif($job_description == "Fixed Lcd"){
-                $target = 30;
-                }elseif($job_description == "Remove Polization Film"){
-                $target = 120;
-                }elseif($job_description == "Clean+Glue+Install Polization Film"){
-                $target = 60;
-                } 
-                }elseif($department_id ==7){
-                //bodywork target
-                if($job_description == "Sanding"){
-                $target =70;
-                }elseif($job_description== "Bodywork"){
-                $target = 40;
-                }elseif($job_description== "Taping"){
-                $target = 70;
-                }
-                }elseif($department_id ==8){
-                //painting target
-                if($job_description == "Low Generation"){
-                $target =200;
-                }elseif($job_description== "Full Painting"){
-                $target = 50;
-                }
-                }elseif($department_id ==14){
-                //battery target
-                if($job_description=="Openning Battery And Cell Change"){
-                $target = 30;
-                }elseif($job_description == "Unlock And Chargine"){
-                $target = 45;
-                }
-                }elseif($department_id ==13){
-                //packing target
-                if($job_description == "Clean + Packing"){
-                $target = 200;
-                }elseif($job_description == "Full Painting Packing"){
-                $target = 60;
-                }
-                }elseif($department_id ==9){
-                //motherboard target
-                if($job_description=="BIOS Lock High Gen"){
-                $target = 60;
-                }elseif($job_description=="BIOS Lock Low Gen"){
-                $target = 35;
-                }elseif($job_description == "No Power / No Display / Account Lock/ Ports Issue"){
-                $target = 25;}
-                
-                }elseif($department_id ==22){
-                //sticker target
-                if($job_description=="Designing + Pasting"){
-                $target = 20;
-                }elseif($job_description=="Pasting"){
-                $target = 150;
-                }
-                }elseif($department_id ==2){
-                //inventory target
-                }elseif($department_id ==23){
-                //cleaning target
-                $target = 200;
-                }
-                $query = "INSERT INTO `performance_record_table`(
-                `user_id`,
-                `department_id`,
-                `qr_number`,
-                `job_description`,
-                `start_time`,
-                `target`
-                )
-                VALUES(
-                '$user_id',
-                '$department_id',
-                '$scanned_qr',
-                '$job_description',
-                '$start_date',
-                '$target'
-                ) ";
-                $query_run = mysqli_query($connection,$query);
-                header('Location: performance_record.php');
-                
-                } elseif($end_time !="0000-00-00 00:00:00" && $same_jd_count==1){
-                echo '<script>
-                alert("Already you completed this machine under this job description ")
-                </script>';
-                // echo "Already you completed this machine under ".$job_description;
-                }
-                }
-    ?>
+
 <script>
 var time = new Date();
 var today = time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate() + " " + time.getHours() + ":" + time
