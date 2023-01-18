@@ -19,7 +19,8 @@ $brand = $_GET['brand'];
 ?>
 
 <div class="row page-titles">
-    <div class="col-md-5 align-self-center"><a href="./model_view.php?brand=<?php echo $brand ?>">
+    <div class="col-md-5 align-self-center"><a
+            href="./model_view.php?brand=<?php echo $brand ?>&model=<?php echo $model ?>">
             <i class="fa-solid fa-left fa-2x m-2" style="color: #ced4da;"></i>
         </a>
     </div>
@@ -33,7 +34,7 @@ $brand = $_GET['brand'];
                 <div class="card-body"><input type="text" id="myInput" onkeyup="myFunction()"
                         placeholder="Search for names.." title="Type in a name">
                     <button onclick="exportToExcel('tblexportData', 'packing-details234')"
-                        class="btn bg-gradient-success mt-3">Export Table Data To Excel
+                        class="btn bg-gradient-success mt-3 float-right">Export Table Data To Excel
                         File</button>
                     <table id="example2" class="table table-bordered table-striped">
                         <table id="tblexportData" class="table table-striped">
@@ -49,12 +50,15 @@ $brand = $_GET['brand'];
                                     <th>Generation</th>
                                     <th>Speed</th>
                                     <th>Screen Size</th>
-                                    <th>Screen Type</th>
+                                    <th>Screen Resolution</th>
+                                    <th>Touch</th>
                                     <th>Optical</th>
                                     <th>RAM</th>
                                     <th>HDD</th>
                                     <th>Location</th>
+                                    <th>MFG</th>
                                     <th>Inventory ID</th>
+                                    <th>Battery Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -70,13 +74,16 @@ $brand = $_GET['brand'];
                                     $generation = $data['generation'];
                                     $speed = $data['speed'];
                                     $screen_size = $data['lcd_size'];
+                                    $screen_resolution = $data['screen_resolution'];
                                     $screen_type = $data['touch_or_non_touch'];
                                     $location = $data['location'];
                                     $series = $data['series'];
                                     $optical = $data['dvd'];
                                     $processor = $data['processor'];
                                     $location = $data['location'];
+                                    $mfg = $data['mfg'];
                                     $inventory_id = $data['inventory_id'];
+                                    $battery=$data['battery'];
                                     $i++; ?>
                                 <tr>
                                     <td><?php echo $i ?></td>
@@ -89,12 +96,17 @@ $brand = $_GET['brand'];
                                     <td><?php echo$generation ?></td>
                                     <td><?php echo$speed ?></td>
                                     <td><?php echo$screen_size ?></td>
+                                    <td><?php echo$screen_resolution ?></td>
                                     <td><?php echo$screen_type ?></td>
                                     <td><?php echo$optical ?></td>
                                     <td>8GB</td>
                                     <td>256GB</td>
                                     <td><?php echo$location."-".$generation."-".$model ?></td>
+                                    <td><?php echo $mfg ?></td>
                                     <td><?php echo "ALSAKB".$inventory_id ?></td>
+                                    <td><?php if($battery == 'yes'){
+                                        echo"<div class='text-success'>$battery</div>";
+                                    }else{echo "<div class='text-danger'>$battery</div>";} ?></td>
                                 </tr>
                                 <?php } ?>
 
