@@ -302,7 +302,8 @@ if(isset($_POST['add_items'])){
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <select name="brand" style="border-radius: 5px; width: 100%">
+                                                    <select name="brand" id="brand"
+                                                        style="border-radius: 5px; width: 100%">
                                                         <option selected value="">--Select Brand--</option>
                                                         <?php
                                                         $query = "SELECT brand FROM machine_from_supplier GROUP BY brand ASC";
@@ -820,6 +821,5 @@ textarea {
     color: #fff !important;
 }
 </style>
-
 
 <?php include_once('../includes/footer.php'); ?>
