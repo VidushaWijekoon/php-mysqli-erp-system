@@ -47,7 +47,7 @@ if(isset($_POST['accept'])){
 } 
 ?>
 <div class="row page-titles">
-    <div class="col-md-5 align-self-center"><a href="./quatations.php">
+    <div class="col-md-5 align-self-center"><a href="./orders.php">
             <i class="fa-regular fa-circle-left fa-2x m-2" style="color: #ced4da;"></i>
         </a>
     </div>
@@ -59,7 +59,7 @@ if(isset($_POST['accept'])){
 <div class="container-fluid">
     <form method="POST">
         <div class="row">
-            <div class="col-lg-12 grid-margin stretch-card justify-content-center mx-auto mt-2">
+            <div class="col-lg-12 grid-margin stretch-card justify-content-center mx-auto">
                 <div class="card mt-3">
                     <div class="card-header bg-secondary">
                         <p class="text-uppercase m-0 p-0">Sales Order

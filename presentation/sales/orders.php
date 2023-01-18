@@ -224,7 +224,7 @@ $username = $_SESSION['username'];
                                             <?php 
                                                 echo " <a class='btn btn-xs btn-secondary mx-1' href='./quatation_view.php?quatation_id={$row['quatation_id']}'>
                                                     <i class='fa-solid fa-eye'></i> </a>
-                                                <a class='btn btn-xs btn-warning mx-1' href=''>
+                                                <a class='btn btn-xs btn-warning mx-1' href='./quatation_edit.php?quatation_id={$row['quatation_id']}'>
                                                     <i class='fa-solid fa-pen-to-square'></i></a>
                                                 <a class='btn btn-xs btn-success mx-1' href='invoice_pdf.php?quatation_id={$row['quatation_id']}'>
                                                     <i class='fa-solid fa-download'></i> </a>

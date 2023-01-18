@@ -83,6 +83,9 @@ $selected_date = null;
 $sales_member_name = null;
 $member_id = null;
 
+$search_customer_id = null;
+$posting_id = null;
+
 $current_date = date('d-m-Y');
 
 
@@ -624,19 +627,82 @@ if(isset($_POST['posting_modal'])){
     </div>
 </div>
 
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-8 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card">
+                <h5 class="card-header">Weekly Assign Task</h5>
                 <div class="card-body">
-                    <?php 
+                    <table id="example2" class="table table-striped-columns">
+                        <thead>
+                            <tr>
+                                <th style="width: 10px">#</th>
+                                <th>Day</th>
+                                <th>Sales Person</th>
+                                <th>Create & Search</th>
+                                <th>Posting Customer</th>
+                                <th>Assigned Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                             
+                                $query = "SELECT *,
+                                        weekly_sales_set_target.sales_member AS sales_member,
+                                        weekly_sales_set_target.day AS day_1,
+                                        weekly_sales_set_posting_to_customer.id AS posting_id,
+                                        weekly_sales_set_create_search_customer.id AS search_customer_id,
+                                        weekly_sales_set_target.created_time AS created_date_1,
+                                        weekly_sales_set_create_search_customer.created_time AS created_date_2,
+                                        weekly_sales_set_posting_to_customer.created_time AS created_date_3
+                                        FROM weekly_sales_set_target LEFT JOIN weekly_sales_set_create_search_customer 
+                                        ON weekly_sales_set_target.sales_member = weekly_sales_set_create_search_customer.sales_member
+                                        LEFT JOIN weekly_sales_set_posting_to_customer 
+                                        ON weekly_sales_set_target.sales_member = weekly_sales_set_posting_to_customer.sales_member
+                                        ORDER BY weekly_sales_set_target.created_time DESC;
+                                        ";
+                                $result_query = mysqli_query($connection, $query);
+                                foreach($result_query as $row){
+                                    $assing_day = $row['current_day'];
+                                    $sales_person = $row['sales_member'];
+                                    $search_customer_id = $row['search_customer_id'];
+                                    $posting_id = $row['posting_id'];
+                                    $created_date_1 = $row['created_date_1'];
+                                    $created_date_2 = $row['created_date_2'];
+                                    $created_date_3 = $row['created_date_3'];
+                                    $day_1 = $row['day_1'];
+                            
+                            ?>
+                            <tr>
+                                <td>#</td>
+                                <td><?php echo $day_1; ?></td>
+                                <td><?php echo $sales_person; ?></td>
+                                <td>
+                                    <?php if($search_customer_id != null) { ?>
+                                    <span class="badge badge-lg badge-success text-white p-1 px-3">Assigned</span>
+                                    <?php }if($search_customer_id == null) { ?>
+                                    <span class="badge badge-lg badge-danger text-white p-1 px-3">Not Assigned</span>
+                                    <?php } ?>
+                                </td>
+                                <td>
+                                    <?php if($posting_id != null) { ?>
+                                    <span class="badge badge-lg badge-success text-white p-1 px-3">Assigned</span>
+                                    <?php }if($posting_id == null) { ?>
+                                    <span class="badge badge-lg badge-danger text-white p-1 px-3">Not Assigned</span>
+                                    <?php } ?>
+                                </td>
+                                <td>
+                                    <?php if($created_date_2 != null) { echo $created_date_1; }
+                                          elseif($created_date_3 != null) { echo $created_date_2; } 
+                                          elseif($created_date_2 == null && $created_date_3 == null) { echo $created_date_1; }
+                                    ?>
 
-                        $query = "SELECT * FROM weekly_sales_set_target WHERE created_time = '$current_date'";
-                        $run = mysqli_query($connection, $query);
-                        foreach($run as $xd){
-                            print_r($xd);
-                        }
-                    ?>
+                                </td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -747,7 +813,7 @@ if(isset($_POST['posting_modal'])){
 
                                 </td>
                                 <td>
-                                    <input type="number" min='1' max='10' class="form-control" placeholder="Target QTY"
+                                    <input type="number" min='1' max='300' class="form-control" placeholder="Target QTY"
                                         name="customer_target_qty">
 
                                 </td>
