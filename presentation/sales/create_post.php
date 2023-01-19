@@ -893,8 +893,6 @@ if(isset($_POST['get_country'])){
                                                 $customer_asking_price = $x['customer_asking_price'];
                                                 $uae_pickup2 = $x['uae_pickup2'];   
                                                 
-                                                $created_posted_time = Date('Y-m-d');
-
                                                 // echo $created_posted_time;
                                                 strtotime($created_posted_time);
                                                 $x = date($created_posted_time);

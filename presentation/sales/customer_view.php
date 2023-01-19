@@ -12,6 +12,9 @@ if (!isset($_SESSION['user_id'])) {
 
 $customer_id = $_GET['customer_id'];
 $username = $_SESSION['username'];
+$department = $_SESSION['department'];
+$role_id = $_SESSION['role_id'];
+
 
 $billing_attention = null;
 $billing_country = null;

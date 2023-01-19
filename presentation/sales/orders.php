@@ -181,7 +181,7 @@ $username = $_SESSION['username'];
                                               
                                         $query = "SELECT * FROM sales_customer_information 
                                             INNER JOIN sales_quatation_items ON sales_customer_information.customer_id = sales_quatation_items.customer_id
-                                            WHERE sales_quatation_items.created_by = '$username' GROUP BY quatation_id ";                                           
+                                            WHERE sales_quatation_items.created_by = '$username' GROUP BY quatation_id ORDER BY quatation_id DESC";                                           
                                                 
                                         $query_run = mysqli_query($connection, $query);
                                         foreach($query_run as $row){
@@ -197,7 +197,14 @@ $username = $_SESSION['username'];
                                         <td><?php echo $customer_first_name; ?></td>
                                         <td><?php echo $customer_first_name; ?></td>
                                         <td><?php echo $created_by; ?></td>
-                                        <td><a href="./quatation_view.php"><?php echo $quatation_id; ?></a></td>
+                                        <td>
+                                            <?php 
+                                            
+                                            echo "<a href='./quatation_view.php?quatation_id={$row['quatation_id']}&customer_id={$row['customer_id']}'>
+                                                        QA-$quatation_id</a>";
+                                            
+                                            ?>
+                                        </td>
                                         <td>
                                             <?php if($item_status == 0) {?>
                                             <span
@@ -222,7 +229,7 @@ $username = $_SESSION['username'];
                                         </td>
                                         <td>
                                             <?php 
-                                                echo " <a class='btn btn-xs btn-secondary mx-1' href='./quatation_view.php?quatation_id={$row['quatation_id']}'>
+                                                echo " <a class='btn btn-xs btn-secondary mx-1' href='./quatation_view.php?quatation_id={$row['quatation_id']}&customer_id={$row['customer_id']}'>
                                                     <i class='fa-solid fa-eye'></i> </a>
                                                 <a class='btn btn-xs btn-warning mx-1' href='./quatation_edit.php?quatation_id={$row['quatation_id']}'>
                                                     <i class='fa-solid fa-pen-to-square'></i></a>

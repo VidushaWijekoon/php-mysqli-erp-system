@@ -130,8 +130,6 @@ if(isset($_POST['add_items'])){
                     '{$qty}', '{$unit_price}', '{$discount}', '{$total}', '{$created_by}')";
     $insert_items_run = mysqli_query($connection, $insert_items);
 
-    // header("Location: create_quatation.php?customer_id=$customer_id");
-
 }
 
 
@@ -168,7 +166,7 @@ if(isset($_POST['add_items'])){
                                                 <option selected value="">--Select Customer--
                                                 </option>
                                                 <?php
-                                                    $query = "SELECT * FROM sales_customer_information";
+                                                    $query = "SELECT * FROM sales_customer_information GROUP BY first_name, last_name";
                                                     $result = mysqli_query($connection, $query);
 
                                                         while ($d = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
