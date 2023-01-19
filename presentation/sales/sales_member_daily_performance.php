@@ -13,7 +13,9 @@ if (!isset($_SESSION['user_id'])) {
 $sales_person_full_name = $_GET['full_name'];
 $sales_person_username = $_GET['username'];
 
-$month = date('F');
+
+$today = date("Y-m-d");
+
 
 ?>
 
@@ -33,7 +35,8 @@ $month = date('F');
                         <span class="badge badge-lg badge-primary text-white px-3 p-2" style="font-size: 12px;">
                             <?php echo $sales_person_full_name ?>
                         </span>
-                        <?php echo $month; ?> Performance
+                        <?php echo $today; ?>
+                        Performance
                     </h6>
                 </div>
                 <div class="card-body">
@@ -47,21 +50,7 @@ $month = date('F');
                             </tr>
                         </thead>
                         <tbody>
-                            <?php 
-                            
-                                $query = "SELECT id, uae_pickup1, created_by, created_time
-                                FROM sales_create_customer_informations WHERE created_by = '$sales_person_username' ";
-                                $query_run = mysqli_query($connection, $query);
-                                foreach($query_run as $xd){
-                                    $created_date = $xd['created_time'];
-                                    $uae_pickup = $xd['uae_pickup1'];
-                            ?>
-                            <tr>
-                                <td><?php echo $created_date; ?></td>
-                                <td></td>
-                                <td><?php echo $uae_pickup; ?></td>
-                            </tr>
-                            <?php } ?>
+
                         </tbody>
                     </table>
                 </div>
