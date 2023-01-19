@@ -284,14 +284,15 @@ if(isset($_POST['posting_modal'])){
                                                             required>
                                                             <option value="" selected>--Select Sales Member--</option>
                                                             <?php
-                                                                $query = "SELECT full_name, emp_id FROM employees WHERE department = '5' ORDER BY 'full_name' ASC";
+                                                                $query = "SELECT first_name, last_name, username FROM users WHERE department = 5 AND role = 5 ORDER BY 'first_name' ASC";
                                                                 $result = mysqli_query($connection, $query);
 
                                                                 while ($x = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                                                    $user_full_name = $x['full_name'];
+                                                                    $user_first_name = $x['first_name'];
+                                                                    $user_last_name = $x['last_name'];
                                                             ?>
-                                                            <option value="<?php echo $x['emp_id'];?>">
-                                                                <?php echo $x["full_name"]; ?>
+                                                            <option value="<?php echo $x['username'];?>">
+                                                                <?php echo $user_first_name . " " .$user_last_name; ?>
                                                             </option>
                                                             <?php endwhile; ?>
                                                         </select>
@@ -336,14 +337,15 @@ if(isset($_POST['posting_modal'])){
                                                         required>
                                                         <option value="" selected>--Select Sales Member--</option>
                                                         <?php
-                                                                $query = "SELECT full_name, emp_id FROM employees WHERE department = '5' ORDER BY 'full_name' ASC";
+                                                                $query = "SELECT first_name, last_name, username FROM users WHERE department = 5 AND role = 5 ORDER BY 'first_name' ASC";
                                                                 $result = mysqli_query($connection, $query);
 
                                                                 while ($x = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                                                    $user_full_name = $x['full_name'];
+                                                                    $user_first_name = $x['first_name'];
+                                                                    $user_last_name = $x['last_name'];
                                                             ?>
-                                                        <option value="<?php echo $x['emp_id'];?>">
-                                                            <?php echo $x["full_name"]; ?>
+                                                        <option value="<?php echo $x['username'];?>">
+                                                            <?php echo $user_first_name . " " .$user_last_name; ?>
                                                         </option>
                                                         <?php endwhile; ?>
                                                     </select>
@@ -387,14 +389,15 @@ if(isset($_POST['posting_modal'])){
                                                         required>
                                                         <option value="" selected>--Select Sales Member--</option>
                                                         <?php
-                                                                $query = "SELECT full_name, emp_id FROM employees WHERE department = '5' ORDER BY 'full_name' ASC";
+                                                                $query = "SELECT first_name, last_name, username FROM users WHERE department = 5 AND role = 5 ORDER BY 'first_name' ASC";
                                                                 $result = mysqli_query($connection, $query);
 
                                                                 while ($x = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                                                    $user_full_name = $x['full_name'];
+                                                                    $user_first_name = $x['first_name'];
+                                                                    $user_last_name = $x['last_name'];
                                                             ?>
-                                                        <option value="<?php echo $x['emp_id'];?>">
-                                                            <?php echo $x["full_name"]; ?>
+                                                        <option value="<?php echo $x['username'];?>">
+                                                            <?php echo $user_first_name . " " .$user_last_name; ?>
                                                         </option>
                                                         <?php endwhile; ?>
                                                     </select>
@@ -437,14 +440,15 @@ if(isset($_POST['posting_modal'])){
                                                         required>
                                                         <option value="" selected>--Select Sales Member--</option>
                                                         <?php
-                                                                $query = "SELECT full_name, emp_id FROM employees WHERE department = '5' ORDER BY 'full_name' ASC";
+                                                                $query = "SELECT first_name, last_name, username FROM users WHERE department = 5 AND role = 5 ORDER BY 'first_name' ASC";
                                                                 $result = mysqli_query($connection, $query);
 
                                                                 while ($x = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                                                    $user_full_name = $x['full_name'];
+                                                                    $user_first_name = $x['first_name'];
+                                                                    $user_last_name = $x['last_name'];
                                                             ?>
-                                                        <option value="<?php echo $x['emp_id'];?>">
-                                                            <?php echo $x["full_name"]; ?>
+                                                        <option value="<?php echo $x['username'];?>">
+                                                            <?php echo $user_first_name . " " .$user_last_name; ?>
                                                         </option>
                                                         <?php endwhile; ?>
                                                     </select>
@@ -487,14 +491,15 @@ if(isset($_POST['posting_modal'])){
                                                         required>
                                                         <option value="" selected>--Select Sales Member--</option>
                                                         <?php
-                                                                $query = "SELECT full_name, emp_id FROM employees WHERE department = '5' ORDER BY 'full_name' ASC";
+                                                                $query = "SELECT first_name, last_name, username FROM users WHERE department = 5 AND role = 5 ORDER BY 'first_name' ASC";
                                                                 $result = mysqli_query($connection, $query);
 
                                                                 while ($x = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                                                    $user_full_name = $x['full_name'];
+                                                                    $user_first_name = $x['first_name'];
+                                                                    $user_last_name = $x['last_name'];
                                                             ?>
-                                                        <option value="<?php echo $x['emp_id'];?>">
-                                                            <?php echo $x["full_name"]; ?>
+                                                        <option value="<?php echo $x['username'];?>">
+                                                            <?php echo $user_first_name . " " .$user_last_name; ?>
                                                         </option>
                                                         <?php endwhile; ?>
                                                     </select>
@@ -536,14 +541,15 @@ if(isset($_POST['posting_modal'])){
                                                         required>
                                                         <option value="" selected>--Select Sales Member--</option>
                                                         <?php
-                                                                $query = "SELECT full_name, emp_id FROM employees WHERE department = '5' ORDER BY 'full_name' ASC";
+                                                                $query = "SELECT first_name, last_name, username FROM users WHERE department = 5 AND role = 5 ORDER BY 'first_name' ASC";
                                                                 $result = mysqli_query($connection, $query);
 
                                                                 while ($x = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                                                    $user_full_name = $x['full_name'];
+                                                                    $user_first_name = $x['first_name'];
+                                                                    $user_last_name = $x['last_name'];
                                                             ?>
-                                                        <option value="<?php echo $x['emp_id'];?>">
-                                                            <?php echo $x["full_name"]; ?>
+                                                        <option value="<?php echo $x['username'];?>">
+                                                            <?php echo $user_first_name . " " .$user_last_name; ?>
                                                         </option>
                                                         <?php endwhile; ?>
                                                     </select>
@@ -587,14 +593,15 @@ if(isset($_POST['posting_modal'])){
                                                             required>
                                                             <option value="" selected>--Select Sales Member--</option>
                                                             <?php
-                                                                $query = "SELECT full_name, emp_id FROM employees WHERE department = '5' ORDER BY 'full_name' ASC";
+                                                                $query = "SELECT first_name, last_name, username FROM users WHERE department = 5 AND role = 5 ORDER BY 'first_name' ASC";
                                                                 $result = mysqli_query($connection, $query);
 
                                                                 while ($x = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                                                    $user_full_name = $x['full_name'];
+                                                                    $user_first_name = $x['first_name'];
+                                                                    $user_last_name = $x['last_name'];
                                                             ?>
-                                                            <option value="<?php echo $x['emp_id'];?>">
-                                                                <?php echo $x["full_name"]; ?>
+                                                            <option value="<?php echo $x['username'];?>">
+                                                                <?php echo $user_first_name . " " .$user_last_name; ?>
                                                             </option>
                                                             <?php endwhile; ?>
                                                         </select>
@@ -660,8 +667,7 @@ if(isset($_POST['posting_modal'])){
                                         ON weekly_sales_set_target.sales_member = weekly_sales_set_create_search_customer.sales_member
                                         LEFT JOIN weekly_sales_set_posting_to_customer 
                                         ON weekly_sales_set_target.sales_member = weekly_sales_set_posting_to_customer.sales_member
-                                        ORDER BY weekly_sales_set_target.created_time DESC;
-                                        ";
+                                        ORDER BY weekly_sales_set_target.created_time DESC ";
                                 $result_query = mysqli_query($connection, $query);
                                 foreach($result_query as $row){
                                     $assing_day = $row['current_day'];

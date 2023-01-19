@@ -283,6 +283,7 @@ if(isset($_POST['add_items'])){
                                                 <th>HDD Type</th>
                                             </tr>
                                         </thead>
+
                                         <tbody id="tbody" class="table-warning">
                                             <tr>
                                                 <td>
@@ -302,112 +303,44 @@ if(isset($_POST['add_items'])){
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <select name="brand" id="brand"
-                                                        style="border-radius: 5px; width: 100%">
-                                                        <option selected value="">--Select Brand--</option>
-                                                        <?php
-                                                        $query = "SELECT brand FROM machine_from_supplier GROUP BY brand ASC";
-                                                        $result = mysqli_query($connection, $query);
-
-                                                            while ($brand = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                                    ?>
-                                                        <option value="<?php echo $brand["brand"]; ?>">
-                                                            <?php echo strtoupper($brand["brand"]); ?>
-                                                        </option>
-                                                        <?php endwhile; ?>
+                                                    <select name="brand" id="brand" class="info_select"
+                                                        style="border-radius: 5px; width: 100%;">
                                                     </select>
                                                 </td>
 
                                                 <td>
-                                                    <select name="model" style="border-radius: 5px; width: 100%">
-                                                        <option selected value="">--Select Model--</option>
-                                                        <?php
-                                                        $query = "SELECT model FROM machine_from_supplier GROUP BY model ASC";
-                                                        $result = mysqli_query($connection, $query);
-
-                                                            while ($model = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                                    ?>
-                                                        <option value="<?php echo $model["model"]; ?>">
-                                                            <?php echo strtoupper($model["model"]); ?>
-                                                        </option>
-                                                        <?php endwhile; ?>
+                                                    <select name="model" id="model" class="info_select"
+                                                        style="border-radius: 5px; width: 100%;">
                                                     </select>
                                                 </td>
 
                                                 <td>
-                                                    <select name="processor" style="border-radius: 5px; width: 100%">
-                                                        <option selected value="">--Select Processor--</option>
-                                                        <?php
-                                                        $query = "SELECT processor FROM machine_from_supplier GROUP BY processor ASC";
-                                                        $result = mysqli_query($connection, $query);
-
-                                                            while ($processor = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                                    ?>
-                                                        <option value="<?php echo $processor["processor"]; ?>">
-                                                            <?php echo strtoupper($processor["processor"]); ?>
-                                                        </option>
-                                                        <?php endwhile; ?>
+                                                    <select name="processor" id="processor" class="info_select"
+                                                        style="border-radius: 5px; width: 100%;">
                                                     </select>
                                                 </td>
 
                                                 <td>
-                                                    <select name="core" style="border-radius: 5px; width: 100%">
-                                                        <option selected value="">--Select Core--</option>
-                                                        <?php
-                                                        $query = "SELECT core FROM machine_from_supplier GROUP BY core ASC";
-                                                        $result = mysqli_query($connection, $query);
-
-                                                            while ($core = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                                    ?>
-                                                        <option value="<?php echo $core["core"]; ?>">
-                                                            <?php echo strtoupper($core["core"]); ?>
-                                                        </option>
-                                                        <?php endwhile; ?>
+                                                    <select name="core" id="core" class="info_select"
+                                                        style="border-radius: 5px; width: 100%;">
                                                     </select>
                                                 </td>
 
                                                 <td>
-                                                    <select name="generation" style="border-radius: 5px; width: 100%">
-                                                        <option selected value="">--Select Generation--</option>
-                                                        <?php
-                                                        $query = "SELECT generation FROM machine_from_supplier GROUP BY generation ASC";
-                                                        $result = mysqli_query($connection, $query);
-
-                                                            while ($generation = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                                    ?>
-                                                        <option value="<?php echo $generation["generation"]; ?>">
-                                                            <?php echo strtoupper($generation["generation"]); ?>
-                                                        </option>
-                                                        <?php endwhile; ?>
+                                                    <select name="generation" id="generation" class="info_select"
+                                                        style="border-radius: 5px; width: 100%;">
                                                     </select>
                                                 </td>
 
                                                 <td>
-                                                    <select name="speed" style="border-radius: 5px; width: 100%">
-                                                        <option selected value="">--Select Generation--</option>
-                                                        <?php
-                                                                $query = "SELECT speed FROM machine_from_supplier GROUP BY speed ASC";
-                                                                $result = mysqli_query($connection, $query);
-
-                                                            while ($speed = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                                        ?>
-                                                        <option value="<?php echo $speed["speed"]; ?>">
-                                                            <?php echo strtoupper($speed["speed"]); ?>
-                                                        </option>
-                                                        <?php endwhile; ?>
+                                                    <select name="speed" id="speed" class="info_select"
+                                                        style="border-radius: 5px; width: 100%;">
                                                     </select>
                                                 </td>
 
                                                 <td>
-                                                    <select name="lcd_size" style="border-radius: 5px; width: 100%">
-                                                        <option selected>--Select LCD Size--</option>
-                                                        <option value="11">11"</option>
-                                                        <option value="12.5">12.5"</option>
-                                                        <option value="13.3">13.3"</option>
-                                                        <option value="15.6">15.6"</option>
-                                                        <option value="16">16"</option>
-                                                        <option value="17.3">17.3"</option>
-                                                        <option value="18">18"</option>
+                                                    <select name="lcd_size" id="lcd_size" class="info_select"
+                                                        style="border-radius: 5px; width: 100%;">
                                                     </select>
                                                 </td>
 
@@ -821,5 +754,77 @@ textarea {
     color: #fff !important;
 }
 </style>
+
+<script>
+$(document).ready(function() {
+    $("#device").on("change", function() {
+        var device = $("#device").val();
+        var getURL = "get_quatation_fields.php?device=" + device;
+        $.get(getURL, function(data, status) {
+            $("#brand").html(data);
+        });
+    });
+});
+
+$(document).ready(function() {
+    $("#brand").on("change", function() {
+        var brand = $("#brand").val();
+        var getURL = "get_quatation_fields.php?brand=" + brand;
+        $.get(getURL, function(data, status) {
+            $("#model").html(data);
+        });
+    });
+});
+
+$(document).ready(function() {
+    $("#model").on("change", function() {
+        var model = $("#model").val();
+        var getURL = "get_quatation_fields.php?model=" + model;
+        $.get(getURL, function(data, status) {
+            $("#processor").html(data);
+        });
+    });
+});
+
+$(document).ready(function() {
+    $("#processor").on("change", function() {
+        var processor = $("#processor").val();
+        var getURL = "get_quatation_fields.php?processor=" + processor;
+        $.get(getURL, function(data, status) {
+            $("#core").html(data);
+        });
+    });
+});
+
+$(document).ready(function() {
+    $("#core").on("change", function() {
+        var core = $("#core").val();
+        var getURL = "get_quatation_fields.php?core=" + core;
+        $.get(getURL, function(data, status) {
+            $("#generation").html(data);
+        });
+    });
+});
+
+$(document).ready(function() {
+    $("#generation").on("change", function() {
+        var generation = $("#generation").val();
+        var getURL = "get_quatation_fields.php?generation=" + generation;
+        $.get(getURL, function(data, status) {
+            $("#speed").html(data);
+        });
+    });
+});
+
+$(document).ready(function() {
+    $("#speed").on("change", function() {
+        var speed = $("#speed").val();
+        var getURL = "get_quatation_fields.php?speed=" + speed;
+        $.get(getURL, function(data, status) {
+            $("#lcd_size").html(data);
+        });
+    });
+});
+</script>
 
 <?php include_once('../includes/footer.php'); ?>
