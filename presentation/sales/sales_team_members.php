@@ -202,9 +202,10 @@ if(isset($_POST['posting_modal'])){
 
 ?>
 
-<div class="row page-titles m-2">
-    <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor"><i class="fa fa-warehouse" aria-hidden="true"></i></h3>
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center"><a href="./sales_team_leader_dashboard.php">
+            <i class="fa-solid fa-home fa-2x m-2" style="color: #ced4da;"></i>
+        </a>
     </div>
 </div>
 

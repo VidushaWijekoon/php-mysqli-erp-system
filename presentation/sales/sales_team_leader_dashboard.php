@@ -13,7 +13,6 @@ if (!isset($_SESSION['user_id'])) {
 ?>
 
 <div class="row m-2">
-
     <div class="col-12 mt-3">
         <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./sales_team_members.php">
             <span class="mx-1">Set Week Target</span></a>
@@ -105,7 +104,7 @@ if (!isset($_SESSION['user_id'])) {
                         <!-- ============================================================== -->
                         <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel"
                             aria-labelledby="custom-tabs-four-home-tab">
-                            <table id="example2" class="table table-bordered table-hover">
+                            <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>Customer</th>
@@ -162,6 +161,9 @@ if (!isset($_SESSION['user_id'])) {
 
                                 </tbody>
                             </table>
+                            <div class="float-right">
+                                <a class="btn btn-sm btn-default" href="#">View All Sales Orders</a>
+                            </div>
                         </div>
 
                         <!-- ============================================================== -->
@@ -170,7 +172,7 @@ if (!isset($_SESSION['user_id'])) {
                         <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel"
                             aria-labelledby="custom-tabs-four-profile-tab">
 
-                            <table id="example2" class="table table-bordered table-hover">
+                            <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>Customer</th>
@@ -244,13 +246,13 @@ if (!isset($_SESSION['user_id'])) {
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-8 grid-margin stretch-card mt-3">
-            <div class="card">
-                <div class="card-header border-transparent">
+        <div class="col-lg-7 grid-margin stretch-card justify-content-center mx-auto mt-2">
+            <div class="card card-primary card-outline card-outline-tabs m-2 w-100">
+                <div class="card-header border-transparent mx-2">
                     <h3 class="card-title">Sales Team Members Monthly Performance</h3>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body p-0">
+                <div class="card-body p-3">
                     <div class="table-responsive">
                         <table id="" class="table table-striped table-hover">
                             <thead>
@@ -275,6 +277,15 @@ if (!isset($_SESSION['user_id'])) {
                                     <td>
                                         <?php echo "<a href=\"sales_member_monthly_performance.php?full_name={$xd['full_name']}&username={$xd['username']}\">$sales_person_full_name</a>" ?>
                                     </td>
+                                    <td>
+                                        <?php echo "<a href=\"monthly_created_customers.php?full_name={$xd['full_name']}&username={$xd['username']}\">241</a>" ?>
+                                    </td>
+                                    <td>
+                                        <?php echo "<a href=\"monthly_created_posts.php?full_name={$xd['full_name']}&username={$xd['username']}\">4502</a>" ?>
+                                    </td>
+                                    <td>
+                                        <?php echo "<a href=\"monthly_created_customers.php?full_name={$xd['full_name']}&username={$xd['username']}\">22</a>" ?>
+                                    </td>
                                 </tr>
                                 <?php } ?>
                             </tbody>
@@ -283,13 +294,13 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 grid-margin stretch-card mt-3">
+        <div class="col-lg-5 grid-margin stretch-card mt-3">
             <div class="card">
                 <div class="card-header border-transparent">
                     <h3 class="card-title">Sales Team Members Daily Achivement</h3>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body p-0">
+                <div class="card-body p-3">
                     <div class="table-responsive">
                         <table id="" class="table table-striped table-hover">
                             <thead>
@@ -302,17 +313,39 @@ if (!isset($_SESSION['user_id'])) {
                             </thead>
                             <tbody>
                                 <?php 
+
+                                    $start_day = date('Y-m-d 00:00:00');
+                                    $end_day = date('Y-m-d 23:59:59');                                    
                                 
                                     $query = "SELECT * FROM employees INNER JOIN users ON employees.emp_id = users.epf
                                     WHERE users.department = '5' ";
                                     $query_run = mysqli_query($connection, $query);
                                     foreach($query_run as $xd){
                                         $sales_person_full_name = $xd['full_name'];
+
+                                        $q1 = "SELECT *,COUNT(sales_create_customer_informations.id) AS Total_Posted, COUNT(sales_create_customer_informations.id) AS Total_Customers 
+                                        FROM sales_create_customer_informations LEFT JOIN sales_posting_to_customer 
+                                        ON sales_create_customer_informations.customer_name = sales_posting_to_customer.posting_customer_name 
+                                        AND sales_create_customer_informations.create_customer_country = sales_posting_to_customer.choose_country 
+                                        AND sales_create_customer_informations.created_by = sales_posting_to_customer.created_by";
+                                        $q_run = mysqli_query($connection, $q1);
+                                        foreach($q_run as $qr){
+                                             
+                                        }
                                    
                                 ?>
                                 <tr>
                                     <td>
-                                        <?php echo "<a href=\"sales_member_monthly_performance.php?full_name={$xd['full_name']}&username={$xd['username']}\">$sales_person_full_name</a>" ?>
+                                        <?php echo "<a href=\"sales_member_daily_performance.php?full_name={$xd['full_name']}&username={$xd['username']}\">$sales_person_full_name</a>" ?>
+                                    </td>
+                                    <td>
+                                        <?php echo "<a href=\"daily_created_customers.php?full_name={$xd['full_name']}&username={$xd['username']}&daily={$xd['created_time']}\">16</a>" ?>
+                                    </td>
+                                    <td>
+                                        <?php echo "<a href=\"daily_created_posts.php?full_name={$xd['full_name']}&username={$xd['username']}&created_time={$xd['created_time']}\">452</a>" ?>
+                                    </td>
+                                    <td>
+                                        <?php echo "<a href=\"daily_created_customers.php?full_name={$xd['full_name']}&username={$xd['username']}\">2</a>" ?>
                                     </td>
                                 </tr>
                                 <?php } ?>
