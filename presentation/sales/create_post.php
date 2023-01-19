@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+use PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel\Date;
+
 session_start();
 include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
@@ -11,7 +14,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $username = $_SESSION['username'];
-$epf_id = $_SESSION['epf'];
+$user_id = $_SESSION['user_id'];
 
 $day = null;
 $sales_member = null;
@@ -108,7 +111,7 @@ $query = "SELECT * FROM weekly_sales_set_target
             ON weekly_sales_set_target.id = weekly_sales_set_create_search_customer.member_id
             AND weekly_sales_set_target.day = weekly_sales_set_create_search_customer.day
             AND weekly_sales_set_target.sales_member = weekly_sales_set_create_search_customer.sales_member
-            WHERE weekly_sales_set_target.sales_member = $epf_id AND weekly_sales_set_create_search_customer.day = '{$currrent_date}'";
+            WHERE weekly_sales_set_target.sales_member = '$username' AND weekly_sales_set_create_search_customer.day = '{$currrent_date}'";
 $query_run = mysqli_query($connection, $query);
 foreach($query_run as $q){
    $day = $q['day'];
@@ -172,7 +175,7 @@ if(isset($_POST['get_country'])){
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-2">
+        <div class="col-lg-11 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="row">
                 <div class="card card-success card-outline card-outline-tabs m-2 w-100">
                     <div class="card-header p-0 border-bottom-0">
@@ -479,11 +482,11 @@ if(isset($_POST['get_country'])){
                                                             style="border-radius: 5px;" required>
                                                             <option value=""></option>
                                                             <?php
-                                                            $query = "SELECT phone_code FROM countries ORDER BY 'country_name' ASC";
-                                                            $result = mysqli_query($connection, $query);
+                                                                $query = "SELECT phone_code FROM countries ORDER BY 'country_name' ASC";
+                                                                $result = mysqli_query($connection, $query);
 
-                                                            while ($x = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                                        ?>
+                                                                while ($x = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
+                                                            ?>
                                                             <option value="<?php echo $x["phone_code"]; ?>">
                                                                 <?php echo "+" . $x["phone_code"]; ?>
                                                             </option>
@@ -494,8 +497,63 @@ if(isset($_POST['get_country'])){
                                                             placeholder="Whatsapp Number">
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control" name="platform1"
-                                                            placeholder="Platform">
+                                                        <!-- <input type="text" class="form-control" name="platform1"
+                                                            placeholder="Platform"> -->
+                                                        <select name="platform1" class="mt-1 "
+                                                            style="border-radius: 5px;" required>
+                                                            <option value=""></option>
+                                                            <?php
+                                                            
+                                                                $query = "SELECT * FROM weekly_sales_set_create_search_customer WHERE sales_member = '$username' AND day = '$day' ";
+                                                                $result = mysqli_query($connection, $query);
+
+                                                                while ($x = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
+                                                                    $facebook = $x['facebook'];
+                                                                    $instagram = $x['instagram'];
+                                                                    $lazada = $x['lazada'];
+                                                                    $shoppe = $x['shoppe'];
+                                                                    $tokopedia = $x['tokopedia'];
+                                                                    $amazon_com = $x['amazon.com'];
+                                                                    $amazon_uk = $x['amazon.uk'];
+                                                                    $tiktok = $x['tiktok'];
+                                                                    $jiji_ng = $x['jiji.ng'];
+                                                                    $jiji_co_ke = $x['jiji.co.ke'];
+                                                                    $google = $x['google'];
+                                                                    $pcexporters = $x['pcexporters'];
+                                                                    $jumia = $x['jumia'];
+                                                                    $thebrokersite = $x['thebrokersite'];
+
+                                                            ?>
+                                                            <?php if($facebook == 1) { ?>
+                                                            <option value="facebook">Facebook</option>
+                                                            <?php } if($instagram == 1) { ?>
+                                                            <option value="instagram">Instagram</option>
+                                                            <?php } if($lazada == 1) { ?>
+                                                            <option value="lazada">Lazada</option>
+                                                            <?php } if($shoppe == 1) { ?>
+                                                            <option value="shoppe">Shoppe</option>
+                                                            <?php } if($tokopedia == 1) { ?>
+                                                            <option value="tokopedia">Tokopedia</option>
+                                                            <?php } if($amazon_com == 1) { ?>
+                                                            <option value="amazon.com">Amazon.com</option>
+                                                            <?php } if($amazon_uk == 1) { ?>
+                                                            <option value="amazon.uk">Amazon.uk</option>
+                                                            <?php } if($tiktok == 1) { ?>
+                                                            <option value="tiktok">Tiktok</option>
+                                                            <?php } if($jiji_ng == 1) { ?>
+                                                            <option value="jiji.ng">jiji.ng</option>
+                                                            <?php } if($jiji_co_ke == 1) { ?>
+                                                            <option value="jiji.co.ke">jiji.co.ke</option>
+                                                            <?php } if($google == 1) { ?>
+                                                            <option value="google">Google</option>
+                                                            <?php } if($pcexporters == 1) { ?>
+                                                            <option value="pcexporters">Pc Exporters</option>
+                                                            <?php } if($jumia == 1) { ?>
+                                                            <option value="jumia">Jumia</option>
+                                                            <?php } if($thebrokersite == 1) { ?>
+                                                            <option value="thebrokersite">The Brokersite</option>
+                                                            <?php } endwhile; ?>
+                                                        </select>
                                                     </td>
                                                     <td>
                                                         <input type="text" class="form-control"
@@ -775,6 +833,7 @@ if(isset($_POST['get_country'])){
                                             <th>#</th>
                                             <!-- <th>Country</th> -->
                                             <th>Customer Name</th>
+                                            <th>Phone Code</th>
                                             <th>Whatsapp Number</th>
                                             <th>Platform</th>
                                             <th>Model He Selling/Buying?</th>
@@ -785,7 +844,7 @@ if(isset($_POST['get_country'])){
                                             <!-- <th>Customer Reponose</th> -->
                                             <th>He Can Pick Up From UAE?</th>
                                             <th>Posted Status</th>
-                                            <th>Posted Date</th>
+                                            <th style="width: 100px;">Posted Date</th>
                                             <th>&nbsp;</th>
                                         </tr>
                                     </thead>
@@ -793,30 +852,38 @@ if(isset($_POST['get_country'])){
 
                                         <?php                                                                               
                                                         
-                                            $q_d = "SELECT * FROM sales_create_customer_informations WHERE create_customer_country = '{$gt_c}'";
+                                            $q_d = "SELECT * FROM sales_create_customer_informations WHERE create_customer_country = '{$gt_c}' AND created_by = '$username'";
                                             $qd_run = mysqli_query($connection, $q_d);
 
                                             foreach($qd_run as $qd_run){
                                                 $create_customer_name = $qd_run['customer_name'];
                                                 $customer_whatspp_phone_code = $qd_run['customer_whatspp_phone_code'];
                                                 $created_customer_whatsapp_number = $qd_run['customer_whatsapp_number'];
+                                                $created_platform = $qd_run['platform1'];
                                                 $create_customer_id = $qd_run['id'];
+                                                                                                                                 
+                                            
 
-                                            $query1 = "SELECT * FROM sales_posting_to_customer WHERE posting_customer_name = '$create_customer_name' AND posting_whatsapp_number = '$created_customer_whatsapp_number'";
+                                            $query1 = "SELECT * FROM sales_posting_to_customer 
+                                                                WHERE posting_customer_name = '$create_customer_name' AND posting_whatsapp_number = '$created_customer_whatsapp_number' AND posting_phone_code = '$customer_whatspp_phone_code'";
                                             $query_run2 = mysqli_query($connection, $query1);
                                             $post_status1 = 0;
                                             $created_posted_time = 0;
                                             $posting_whatsapp_number = 0;
                                             $posted_model_1 = 0;
                                             $posted_model_2 = 0;
+                                            $model_selling_and_buying1 = null;
                                             $customer_asking_model = 0;
                                             $customer_asking_price = 0;
                                             $uae_pickup2 = 0;
+                                            $i = 0;
 
                                             foreach($query_run2 as $x){
+                                                $i++;
                                                 $post_status1 = $x['status'];
                                                 $created_posted_time = $x['created_time'];
                                                 $posting_customer_name = $x['posting_customer_name'];
+                                                $posting_phone_code = $x['posting_phone_code'];
                                                 $posting_whatsapp_number = $x['posting_whatsapp_number'];
                                                 $platform2 = $x['platform2'];
                                                 $model_selling_and_buying1 = $x['model_selling_and_buying1'];
@@ -824,7 +891,9 @@ if(isset($_POST['get_country'])){
                                                 $posted_model_2 = $x['posted_model_2'];
                                                 $customer_asking_model = $x['customer_asking_model'];
                                                 $customer_asking_price = $x['customer_asking_price'];
-                                                $uae_pickup2 = $x['uae_pickup2'];                                                 
+                                                $uae_pickup2 = $x['uae_pickup2'];   
+                                                
+                                                $created_posted_time = Date('Y-m-d');
 
                                                 // echo $created_posted_time;
                                                 strtotime($created_posted_time);
@@ -845,40 +914,46 @@ if(isset($_POST['get_country'])){
                                                 //Calculate the interval from the second date to the first date
                                                 $ival = date_diff($dateVal1, $dateVal2);
                                                 $x = $ival->format('%r%a');
-
                                             }                                                                                                                                                          
                                         ?>
                                         <tr>
                                             <form method="POST">
-                                                <td>#</td>
+                                                <td><?php echo $i; ?></td>
                                                 <td>
                                                     <input type="text" class="form-control" name="posting_customer_name"
                                                         value="<?php echo $create_customer_name; ?>" readonly>
                                                 </td>
+
                                                 <td>
                                                     <input type="text" class="form-control"
-                                                        name="posting_whatsapp_number"
-                                                        value="<?php echo "+" . $customer_whatspp_phone_code . $created_customer_whatsapp_number; ?>"
+                                                        name="posting_customer_phone_code"
+                                                        value="<?php echo "+" . $customer_whatspp_phone_code; ?>"
                                                         readonly>
                                                 </td>
                                                 <td>
-                                                    <?php if(($x == '-7') || ($platform2 == 0)) { ?>
+                                                    <input type="text" class="form-control"
+                                                        name="posting_whatsapp_number"
+                                                        value="<?php echo $created_customer_whatsapp_number; ?>"
+                                                        readonly>
+                                                </td>
+                                                <td>
+                                                    <?php if(($x == '-7') || ($created_platform == 0)) { ?>
                                                     <input type="text" class="form-control" name="platform2"
                                                         placeholder="Platform">
                                                     <?php }else { ?>
                                                     <input type="text" class="form-control" name="platform2"
-                                                        value="<?php echo $platform2 ?>">
+                                                        value="<?php echo $created_platform ?>" readonly>
                                                     <?php } ?>
                                                 </td>
                                                 <td>
-                                                    <?php if(($x == '-7') || ($model_selling_and_buying1 == 0)) { ?>
+                                                    <?php if(($x == '-7') || ($model_selling_and_buying1 == null)) { ?>
                                                     <input type="text" class="form-control"
                                                         name="model_selling_and_buying1"
                                                         placeholder="Model He Selling/Buying?">
                                                     <?php } else { ?>
                                                     <input type="text" class="form-control"
                                                         name="model_selling_and_buying1"
-                                                        value="<?php echo $model_selling_and_buying1 ?>" readonly>
+                                                        value="<?php echo $model_selling_and_buying1 ?>">
                                                     <?php } ?>
                                                 </td>
 
@@ -1008,6 +1083,7 @@ if(isset($_POST['get_country'])){
 if(isset($_POST['submit_post_to_customer'])){
 
     $posting_customer_name = $_POST['posting_customer_name'];
+    $posting_customer_phone_code = $_POST['posting_customer_phone_code'];
     $posting_whatsapp_number = $_POST['posting_whatsapp_number'];
     $platform2 = $_POST['platform2'];
     $model_selling_and_buying1 = $_POST['model_selling_and_buying1'];
@@ -1017,8 +1093,8 @@ if(isset($_POST['submit_post_to_customer'])){
     $customer_asking_price = $_POST['customer_asking_price'];
     $uae_pickup2 = $_POST['uae_pickup2'];
 
-    $d_r = "INSERT INTO `sales_posting_to_customer`(`posting_customer_name`, `posting_whatsapp_number`, `platform2`, `model_selling_and_buying1`, `posted_model_1`, `posted_model_2`, `customer_asking_model`, `customer_asking_price`, `uae_pickup2`, `status`, `created_by`, `choose_country`) 
-            VALUES ('{$posting_customer_name}', '{$posting_whatsapp_number}', '{$platform2}', '{$model_selling_and_buying1}', '{$posted_model_1}', '{$posted_model_2}', '{$customer_asking_model}', '{$customer_asking_price}', 
+    $d_r = "INSERT INTO `sales_posting_to_customer`(`posting_customer_name`, `posting_phone_code`,`posting_whatsapp_number`, `platform2`, `model_selling_and_buying1`, `posted_model_1`, `posted_model_2`, `customer_asking_model`, `customer_asking_price`, `uae_pickup2`, `status`, `created_by`, `choose_country`) 
+            VALUES ('{$posting_customer_name}', '{$posting_customer_phone_code}','{$posting_whatsapp_number}', '{$platform2}', '{$model_selling_and_buying1}', '{$posted_model_1}', '{$posted_model_2}', '{$customer_asking_model}', '{$customer_asking_price}', 
                     '{$uae_pickup2}', 'post','{$username}', '{$gt_c}') ";
                     echo $d_r;
     $d_r_run = mysqli_query($connection, $d_r);
