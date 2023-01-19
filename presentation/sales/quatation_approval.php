@@ -12,10 +12,12 @@ if (!isset($_SESSION['user_id'])) {
 
 $username = $_SESSION['username'];
 
+$approved = 0;
+
 ?>
 
 <div class="row page-titles">
-    <div class="col-md-5 align-self-center"><a href="./sales_dashboard.php">
+    <div class="col-md-5 align-self-center"><a href="./sales_team_leader_dashboard.php">
             <i class="fa-solid fa-home fa-2x m-2" style="color: #ced4da;"></i>
         </a>
     </div>
@@ -71,10 +73,17 @@ $username = $_SESSION['username'];
 
                             ?>
                             <tr>
-                                <td><?php echo $customer_first_name . $customer_last_name; ?></td>
+                                <td><?php echo $customer_first_name . " " . $customer_last_name; ?></td>
                                 <td><?php echo $customer_country; ?></td>
                                 <td><?php echo $created_by; ?></td>
-                                <td><?php echo $quatation_id; ?></td>
+                                <td>
+                                    <?php 
+                                            
+                                        echo "<a href='./quatation_view.php?quatation_id={$row['quatation_id']}&customer_id={$row['customer_id']}'>
+                                                $quatation_id</a>"
+                                            
+                                    ?>
+                                </td>
                                 <td>
                                     <?php if($approved == 0) { ?>
                                     <span class="badge badge-lg badge-danger text-white p-1 px-3">Waiting for Approval
@@ -85,9 +94,12 @@ $username = $_SESSION['username'];
                                 </td>
                                 <td class='text-center'>
                                     <?php 
-                                        echo "<a class='btn btn-xs btn-secondary mx-1' href=\"quatation_view.php?quatation_id={$row['quatation_id']}\"><i class='fa-solid fa-eye'></i> </a>";
-                                        echo "<a  class='btn btn-xs btn-success mx-1' href=\"quatation_approval_update.php?quatation_id={$row['quatation_id']}\" onclick=\"return confirm('Make sure you want to $quatation_id want approve this quatation');\"><i class='fa-solid fa-check' style='padding-right: 2px;'></i></a>";                                   
-                                    ?>
+                                        if($approved == '0'){
+                                            echo "<a  class='badge badge-sm badge-primary mx-1 p-1 px-2' href=\"quatation_approval_update.php?quatation_id={$row['quatation_id']}\" onclick=\"return confirm('Make sure you want to $quatation_id want approve this quatation');\">Click to Approve</a>";                                   
+                                        }
+                                        if($approved == '1'){
+                                            echo "<a  class='badge badge-sm badge-success p-1 px-2'>Approved</a>";
+                                        } ?>
                                 </td>
                                 <?php } ?>
                         </tbody>

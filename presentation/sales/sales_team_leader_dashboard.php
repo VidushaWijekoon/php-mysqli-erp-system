@@ -15,44 +15,43 @@ if (!isset($_SESSION['user_id'])) {
 <div class="row m-2">
 
     <div class="col-12 mt-3">
-        <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./sales_team_members.php"><i
-                class="fa fa-plus"></i><span class="mx-1">Set Week Target</span></a>
-        <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./quatation_approval.php"><i
-                class="fa fa-plus"></i><span class="mx-1">To Approve</span></a>
+        <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./sales_team_members.php">
+            <span class="mx-1">Set Week Target</span></a>
+        <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./quatation_approval.php">
+            <span class="mx-1">To Approve</span></a>
     </div>
 </div>
 
 <div class="row m-2">
     <div class="col-12 col-sm-6 col-md-3 mt-2">
-        <div class="info-box">
-            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
-
-            <div class="info-box-content">
-                <span class="info-box-text">Pending Quatations</span>
-                <span class="info-box-number">
-                    10
-                </span>
-            </div>
-        </div>
-    </div>
-    <div class="col-12 col-sm-6 col-md-3 mt-2">
         <div class="info-box mb-3">
-            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-receipt"></i></span>
 
             <div class="info-box-content">
-                <span class="info-box-text">Accepted Quatations</span>
+                <span class="info-box-text">Sales Orders</span>
                 <span class="info-box-number">41</span>
             </div>
         </div>
     </div>
     <div class="clearfix hidden-md-up"></div>
     <div class="col-12 col-sm-6 col-md-3 mt-2">
-        <a href="./quatations.php">
+        <a href="./quatation_approval.php">
             <div class="info-box mb-3">
                 <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">Waiting for Approve</span>
-                    <span class="info-box-number">12</span>
+                    <span class="info-box-number">
+                        <?php
+
+                            $query = "SELECT quatation_id FROM `sales_quatation_items` WHERE approval = '0' AND status = '1' GROUP BY quatation_id";
+                            if ($result = mysqli_query($connection, $query)) {
+                                // Return the number of rows in result set
+                                $rowcount = mysqli_num_rows($result);
+                            
+                                echo "$rowcount";
+                            }   
+                        ?>
+                    </span>
                 </div>
             </div>
         </a>
@@ -63,157 +62,181 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">Sales Team Members</span>
-                    <span class="info-box-number">5</span>
+                    <span class="info-box-number">
+                        <?php
+
+                            $query = "SELECT department, role FROM `users`  WHERE department = '5' AND role = '5'";
+                            if ($result = mysqli_query($connection, $query)) {
+                                // Return the number of rows in result set
+                                $rowcount = mysqli_num_rows($result);
+                            
+                                echo "$rowcount";
+                            }   
+                        ?>
+                    </span>
                 </div>
             </div>
         </a>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-12 col-sm-12 col-md-12 col-lg-6">
-        <div class="card">
-            <div class="card-header">
-                <h6>Sales Orders</h6>
-            </div>
-            <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>Customer</th>
-                            <th>Country</th>
-                            <th>Sales Person</th>
-                            <th>Sales Order</th>
-                            <th>Status</th>
-                            <th>&nbsp;</th>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-2">
+            <div class="card card-primary card-outline card-outline-tabs m-2 w-100">
+                <div class="card-header p-0 border-bottom-0">
+                    <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                        <li class="nav-item text-center" style="width: 150px;">
+                            <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill"
+                                href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home"
+                                aria-selected="true" style="color: #fff;">Sales Orders</a>
+                        </li>
+                        <li class="nav-item text-center" style="width: 150px;">
+                            <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill"
+                                href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile"
+                                aria-selected="false" style="color: #fff;">Quatations</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class=" card-body">
+                    <div class="tab-content" id="custom-tabs-four-tabContent">
+                        <!-- ============================================================== -->
+                        <!-- Sales Order  -->
+                        <!-- ============================================================== -->
+                        <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel"
+                            aria-labelledby="custom-tabs-four-home-tab">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Customer</th>
+                                        <th>Country</th>
+                                        <th>Sales Person</th>
+                                        <th>Sales Order</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>John Doe</td>
+                                        <td>Senagal</td>
+                                        <td>Sales</td>
+                                        <td><a href="./quatation_view.php">SO1037</a></td>
+                                        <td><span class="badge badge-success">Shipped</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>John Doe</td>
+                                        <td>Senagal</td>
+                                        <td>Sales</td>
+                                        <td><a href="./quatation_view.php">SO10234</a></td>
+                                        <td><span class="badge badge-danger">Delivered</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>John Doe</td>
+                                        <td>Senagal</td>
+                                        <td>Sales</td>
+                                        <td><a href="./quatation_view.php">SO1254</a></td>
+                                        <td><span class="badge badge-info">Processing</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>John Doe</td>
+                                        <td>Senagal</td>
+                                        <td>Sales</td>
+                                        <td><a href="./quatation_view.php">SO764</a></td>
+                                        <td><span class="badge badge-success">Shipped</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>John Doe</td>
+                                        <td>Senagal</td>
+                                        <td>Sales</td>
+                                        <td><a href="./quatation_view.php">SO5642</a></td>
+                                        <td><span class="badge badge-warning">Pending</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>John Doe</td>
+                                        <td>Senagal</td>
+                                        <td>Sales</td>
+                                        <td><a href="./quatation_view.php">SO4522</a></td>
+                                        <td><span class="badge badge-success">Shipped</span></td>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>Senagal</td>
-                            <td>Sales</td>
-                            <td><a href="./quatation_view.php">SO1037</a></td>
-                            <td><span class="badge badge-success">Shipped</span></td>
-                            <td>
-                                <a class='btn btn-xs btn-secondary mx-1' href="">
-                                    <i class='fa-solid fa-eye'></i> </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>Senagal</td>
-                            <td>Sales</td>
-                            <td><a href="./quatation_view.php">SO10234</a></td>
-                            <td><span class="badge badge-danger">Delivered</span></td>
-                            <td>
-                                <a class='btn btn-xs btn-secondary mx-1' href="">
-                                    <i class='fa-solid fa-eye'></i> </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>Senagal</td>
-                            <td>Sales</td>
-                            <td><a href="./quatation_view.php">SO1254</a></td>
-                            <td><span class="badge badge-info">Processing</span></td>
-                            <td>
-                                <a class='btn btn-xs btn-secondary mx-1' href="">
-                                    <i class='fa-solid fa-eye'></i> </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>Senagal</td>
-                            <td>Sales</td>
-                            <td><a href="./quatation_view.php">SO764</a></td>
-                            <td><span class="badge badge-success">Shipped</span></td>
-                            <td>
-                                <a class='btn btn-xs btn-secondary mx-1' href="">
-                                    <i class='fa-solid fa-eye'></i> </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>Senagal</td>
-                            <td>Sales</td>
-                            <td><a href="./quatation_view.php">SO5642</a></td>
-                            <td><span class="badge badge-warning">Pending</span></td>
-                            <td>
-                                <a class='btn btn-xs btn-secondary mx-1' href="">
-                                    <i class='fa-solid fa-eye'></i> </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>Senagal</td>
-                            <td>Sales</td>
-                            <td><a href="./quatation_view.php">SO4522</a></td>
-                            <td><span class="badge badge-success">Shipped</span></td>
-                            <td>
-                                <a class='btn btn-xs btn-secondary mx-1' href="">
-                                    <i class='fa-solid fa-eye'></i> </a>
-                            </td>
-                        </tr>
+                                    </tr>
 
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="col-12 col-sm-12 col-md-12 col-lg-6">
-        <div class="card">
-            <div class="card-header">
-                <h6>Quatations</h6>
-            </div>
-            <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>Customer</th>
-                            <th>Country</th>
-                            <th>Sales Person</th>
-                            <th>Quatation ID</th>
-                            <th>Status</th>
-                            <th>&nbsp;</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- ============================================================== -->
+                        <!-- Quatation  -->
+                        <!-- ============================================================== -->
+                        <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel"
+                            aria-labelledby="custom-tabs-four-profile-tab">
+
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Customer</th>
+                                        <th>Country</th>
+                                        <th>Sales Person</th>
+                                        <th>Quatation ID</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
                                               
-                            $query = "SELECT * FROM sales_customer_information 
-                                INNER JOIN sales_quatation_items ON sales_customer_information.customer_id = sales_quatation_items.customer_id
-                                GROUP BY quatation_id LIMIT 6";                                           
+                                        $query = "SELECT * FROM sales_customer_information 
+                                            INNER JOIN sales_quatation_items ON sales_customer_information.customer_id = sales_quatation_items.customer_id
+                                            GROUP BY quatation_id ORDER BY quatation_id DESC LIMIT 7";                                           
                                                 
-                            $query_run = mysqli_query($connection, $query);
-                            foreach($query_run as $row){
-                                $customer_first_name = $row['first_name'];
-                                $customer_last_name = $row['last_name'];
-                                $created_by = $row['created_by'];
-                                $quatation_id = $row['quatation_id'];
-                                $item_status = $row['status'];
-                                $approved = $row['approval'];
-                                $approved_by = $row['approved_by'];
-                        ?>
-                        <tr>
-                            <td><?php echo $customer_first_name; ?></td>
-                            <td><?php echo $customer_first_name; ?></td>
-                            <td><?php echo $created_by; ?></td>
-                            <td><a href="./quatation_view.php"><?php echo $quatation_id; ?></a></td>
-                            <td>
-                                <span class="badge badge-lg badge-info text-white p-1 px-3">Approved</span>
-                            </td>
-                            <td>
-                                <?php 
-                                    echo " <a class='btn btn-xs btn-secondary mx-1' href='./quatation_view.php?quatation_id={$row['quatation_id']}'>
-                                                <i class='fa-solid fa-eye'></i> </a> " 
-                                ?>
-                            </td>
-                            <?php } ?>
-                        </tr>
-                    </tbody>
-                </table>
+                                        $query_run = mysqli_query($connection, $query);
+                                        foreach($query_run as $row){
+                                            $customer_first_name = $row['first_name'];
+                                            $customer_last_name = $row['last_name'];
+                                            $created_by = $row['created_by'];
+                                            $quatation_id = $row['quatation_id'];
+                                            $item_status = $row['status'];
+                                            $approved = $row['approval'];
+                                            $approved_by = $row['approved_by'];
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $customer_first_name; ?></td>
+                                        <td><?php echo $customer_first_name; ?></td>
+                                        <td><?php echo $created_by; ?></td>
+                                        <td>
+                                            <?php 
+                                            
+                                                echo "<a href='./quatation_view.php?quatation_id={$row['quatation_id']}&customer_id={$row['customer_id']}'>
+                                                        QA-$quatation_id</a>"
+                                            
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php if(($approved == '1') && ($item_status == '1')) { ?>
+                                            <span class="badge badge-lg badge-success text-white p-1 px-3">Approved
+                                            </span>
+                                            <?php }if($item_status == '0') { ?>
+                                            <span class="badge badge-lg badge-warning text-white p-1 px-3"
+                                                style="color: black !important;">Pending </span>
+                                            <?php }if($item_status == '2') { ?>
+                                            <span class="badge badge-lg badge-danger p-1 px-3">Customer
+                                                Rejected
+                                            </span>
+                                            <?php } if(($item_status == '1') && ($approved == '0')) { ?>
+                                            <span class="badge badge-lg badge-info text-white p-1 px-3">Waiting For
+                                                Approval
+                                            </span>
+                                            <?php } ?>
+                                        </td>
+                                        <?php } ?>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                            <div class="float-right">
+                                <a class="btn btn-sm btn-default" href="./quatations.php">View All Quatations</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -239,24 +262,21 @@ if (!isset($_SESSION['user_id'])) {
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php 
+                                
+                                    $query = "SELECT * FROM employees INNER JOIN users ON employees.emp_id = users.epf
+                                    WHERE users.department = '5' ";
+                                    $query_run = mysqli_query($connection, $query);
+                                    foreach($query_run as $xd){
+                                        $sales_person_full_name = $xd['full_name'];
+                                   
+                                ?>
                                 <tr>
-                                    <td><a href="./sales_monthly_performance_chart.php">Riskan</a></td>
-                                    <td>201</td>
-                                    <td>4602</td>
-                                    <td>55</td>
+                                    <td>
+                                        <?php echo "<a href=\"sales_member_monthly_performance.php?full_name={$xd['full_name']}&username={$xd['username']}\">$sales_person_full_name</a>" ?>
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <td><a href="./sales_monthly_performance_chart.php">Abdulla</a></td>
-                                    <td>119</td>
-                                    <td>4170</td>
-                                    <td>75</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="./sales_monthly_performance_chart.php">Harshan</a></td>
-                                    <td>112</td>
-                                    <td>5450</td>
-                                    <td>5</td>
-                                </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -281,30 +301,21 @@ if (!isset($_SESSION['user_id'])) {
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php 
+                                
+                                    $query = "SELECT * FROM employees INNER JOIN users ON employees.emp_id = users.epf
+                                    WHERE users.department = '5' ";
+                                    $query_run = mysqli_query($connection, $query);
+                                    foreach($query_run as $xd){
+                                        $sales_person_full_name = $xd['full_name'];
+                                   
+                                ?>
                                 <tr>
-                                    <td>Riskan</td>
-                                    <td>2</td>
-                                    <td>462</td>
-                                    <td>5</td>
+                                    <td>
+                                        <?php echo "<a href=\"sales_member_monthly_performance.php?full_name={$xd['full_name']}&username={$xd['username']}\">$sales_person_full_name</a>" ?>
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <td>Abdulla</td>
-                                    <td>1</td>
-                                    <td>417</td>
-                                    <td>5</td>
-                                </tr>
-                                <tr>
-                                    <td>Harshan</td>
-                                    <td>1</td>
-                                    <td>545</td>
-                                    <td>5</td>
-                                </tr>
-                                <tr>
-                                    <td>Harshan</td>
-                                    <td>1</td>
-                                    <td>545</td>
-                                    <td>5</td>
-                                </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
