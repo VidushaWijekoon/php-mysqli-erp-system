@@ -15,7 +15,6 @@ $username = $_SESSION['username'];
 $department = $_SESSION['department'];
 $role_id = $_SESSION['role_id'];
 
-
 $billing_attention = null;
 $billing_country = null;
 $billing_address_1 = null;

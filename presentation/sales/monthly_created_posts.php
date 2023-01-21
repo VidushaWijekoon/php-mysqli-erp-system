@@ -13,7 +13,6 @@ if (!isset($_SESSION['user_id'])) {
 $department = $_SESSION['department'];
 $role_id = $_SESSION['role_id'];
 $username = $_GET['username'];
-echo $username;
 
 ?>
 
@@ -61,7 +60,8 @@ echo $username;
 
                                 $i = 0;
                             
-                                $query = "SELECT * FROM sales_posting_to_customer WHERE created_by = '$username'";
+                                $query = "SELECT * FROM sales_posting_to_customer WHERE created_by = '$username'
+                                        AND MONTH(sales_posting_to_customer.created_time) = MONTH(now())";
                                 $result_set = mysqli_query($connection, $query);
                                 foreach($result_set as $count){
 

@@ -14,8 +14,6 @@ $department = $_SESSION['department'];
 $role_id = $_SESSION['role_id'];
 $username = $_GET['username'];
 
-echo $username;
-
 ?>
 
 <div class="row page-titles">
@@ -54,7 +52,8 @@ echo $username;
                         <tbody>
                             <?php 
                             
-                            $query_1 = "SELECT * FROM sales_create_customer_informations WHERE created_by = '$username' AND uae_pickup1 = 'yes'";
+                            $query_1 = "SELECT * FROM sales_create_customer_informations WHERE created_by = '$username' AND uae_pickup1 = 'yes'
+                            AND MONTH(sales_create_customer_informations.created_time) = MONTH(now())";
                             $result = mysqli_query($connection, $query_1);
                             foreach($result as $row){
                                 

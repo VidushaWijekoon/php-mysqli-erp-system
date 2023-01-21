@@ -60,8 +60,10 @@ echo $username;
                             <?php
 
                                 $i = 0;
+                                $start_time = date('Y-m-d 00:00:00');
+                                $end_time = date('Y-m-d 23:59:59');
                             
-                                $query = "SELECT * FROM sales_posting_to_customer WHERE created_by = '$username'";
+                                $query = "SELECT * FROM sales_posting_to_customer WHERE created_by = '$username' AND created_time BETWEEN '$start_time' AND '$end_time'";
                                 $result_set = mysqli_query($connection, $query);
                                 foreach($result_set as $count){
 
@@ -83,7 +85,7 @@ echo $username;
                                 <td><?php echo $i ?></td>
                                 <td><?php echo $posting_customer_name ?></td>
                                 <td><?php echo $posting_country ?></td>
-                                <td><?php echo $posting_phone_code . ' ' . $posting_whatsapp_number ?></td>
+                                <td><?php echo "+" . $posting_phone_code . ' ' . $posting_whatsapp_number ?></td>
                                 <td><?php echo $platform2 ?></td>
                                 <td><?php echo $model_selling_and_buying1 ?></td>
                                 <td><?php echo $posted_model_1; ?></td>

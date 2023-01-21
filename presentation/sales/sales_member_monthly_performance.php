@@ -13,8 +13,7 @@ if (!isset($_SESSION['user_id'])) {
 $sales_person_full_name = $_GET['full_name'];
 $sales_person_username = $_GET['username'];
 
-$month = date('F');
-
+$month = Date('F');
 ?>
 
 <div class="row page-titles">
@@ -48,18 +47,39 @@ $month = date('F');
                         </thead>
                         <tbody>
                             <?php 
-                            
-                                $query = "SELECT id, uae_pickup1, created_by, created_time
-                                FROM sales_create_customer_informations WHERE created_by = '$sales_person_username' ";
-                                $query_run = mysqli_query($connection, $query);
-                                foreach($query_run as $xd){
-                                    $created_date = $xd['created_time'];
-                                    $uae_pickup = $xd['uae_pickup1'];
+
+                                $query = "SELECT  CAST(created_time AS DATE) AS CURRENT_DATE_GFG,
+                                        COUNT(id) AS Created_Customers
+                                        FROM sales_create_customer_informations WHERE created_by = '$sales_person_username'
+                                        AND MONTH(sales_create_customer_informations.created_time) = MONTH(now())
+                                        GROUP BY CAST(created_time AS DATE)";
+                                        
+                                $result = mysqli_query($connection, $query);
+                                foreach($result as $x){
+
+                                    $created_customers = $x['Created_Customers'];
+                                    $created_date = $x['CURRENT_DATE_GFG'];
+                                    
+                                    $q1 = "SELECT  COUNT(uae_pickup1) AS UAE_Pickups
+                                        FROM sales_create_customer_informations WHERE created_by = '$sales_person_username' AND uae_pickup1 = 'yes'
+                                        AND created_time='$created_date'";                                        
+                                    $q1_run = mysqli_query($connection, $q1);
+                                    foreach($q1_run as $dx){
+                                        $uae_pickup = $dx['UAE_Pickups'];
+                                    }
+
+                                    $q2 = "SELECT COUNT(id) AS Posted FROM sales_posting_to_customer WHERE created_by = 'SAL181' AND CAST(created_time AS DATE)='$created_date'";
+                                    $q2_run = mysqli_query($connection, $q2);
+                                    foreach($q2_run as $xx){
+                                        $posted_to_customers = $xx['Posted'];
+                                    }
+                                       
                             ?>
                             <tr>
                                 <td><?php echo $created_date; ?></td>
-                                <td></td>
-                                <td><?php echo $uae_pickup; ?></td>
+                                <td><?php echo $created_customers ?></td>
+                                <td><?php echo $posted_to_customers ?></td>
+                                <td><?php echo $uae_pickup ?></td>
                             </tr>
                             <?php } ?>
                         </tbody>
