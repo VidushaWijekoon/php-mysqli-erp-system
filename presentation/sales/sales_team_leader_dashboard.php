@@ -284,7 +284,7 @@ if (!isset($_SESSION['user_id'])) {
                                         <?php echo "<a href=\"monthly_created_posts.php?full_name={$xd['full_name']}&username={$xd['username']}\">4502</a>" ?>
                                     </td>
                                     <td>
-                                        <?php echo "<a href=\"monthly_created_customers.php?full_name={$xd['full_name']}&username={$xd['username']}\">22</a>" ?>
+                                        <?php echo "<a href=\"monthly_uae_pickup_cusotmers.php?full_name={$xd['full_name']}&username={$xd['username']}\">22</a>" ?>
                                     </td>
                                 </tr>
                                 <?php } ?>
@@ -323,8 +323,7 @@ if (!isset($_SESSION['user_id'])) {
                                     foreach($query_run as $xd){
                                         $sales_person_full_name = $xd['full_name'];
 
-                                        $q1 = "SELECT *,COUNT(sales_create_customer_informations.id) AS Total_Posted, COUNT(sales_create_customer_informations.id) AS Total_Customers 
-                                        FROM sales_create_customer_informations LEFT JOIN sales_posting_to_customer 
+                                        $q1 = "SELECT * FROM sales_create_customer_informations LEFT JOIN sales_posting_to_customer 
                                         ON sales_create_customer_informations.customer_name = sales_posting_to_customer.posting_customer_name 
                                         AND sales_create_customer_informations.create_customer_country = sales_posting_to_customer.choose_country 
                                         AND sales_create_customer_informations.created_by = sales_posting_to_customer.created_by";
@@ -339,13 +338,13 @@ if (!isset($_SESSION['user_id'])) {
                                         <?php echo "<a href=\"sales_member_daily_performance.php?full_name={$xd['full_name']}&username={$xd['username']}\">$sales_person_full_name</a>" ?>
                                     </td>
                                     <td>
-                                        <?php echo "<a href=\"daily_created_customers.php?full_name={$xd['full_name']}&username={$xd['username']}&daily={$xd['created_time']}\">16</a>" ?>
+                                        <?php echo "<a href=\"daily_created_customers.php?full_name={$xd['full_name']}&username={$xd['username']}\">16</a>" ?>
                                     </td>
                                     <td>
-                                        <?php echo "<a href=\"daily_created_posts.php?full_name={$xd['full_name']}&username={$xd['username']}&created_time={$xd['created_time']}\">452</a>" ?>
+                                        <?php echo "<a href=\"daily_created_posts.php?full_name={$xd['full_name']}&username={$xd['username']}\">452</a>" ?>
                                     </td>
                                     <td>
-                                        <?php echo "<a href=\"daily_created_customers.php?full_name={$xd['full_name']}&username={$xd['username']}\">2</a>" ?>
+                                        <?php echo "<a href=\"daily_uae_pickup_customers.php?full_name={$xd['full_name']}&username={$xd['username']}\">2</a>" ?>
                                     </td>
                                 </tr>
                                 <?php } ?>

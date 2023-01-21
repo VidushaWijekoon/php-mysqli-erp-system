@@ -32,7 +32,7 @@ echo $username;
                 <div class="card-header d-flex bg-secondary">
                     <div class="mr-auto">
                         <div class="text-center mx-auto mt-1 text-uppercase" style="font-size: 14px;">
-                            Daily Created Customers
+                            Monthly UAE Pickup Customer List
                         </div>
                     </div>
                 </div>
@@ -54,7 +54,7 @@ echo $username;
                         <tbody>
                             <?php 
                             
-                            $query_1 = "SELECT * FROM sales_create_customer_informations WHERE created_by = '$username'";
+                            $query_1 = "SELECT * FROM sales_create_customer_informations WHERE created_by = '$username' AND uae_pickup1 = 'yes'";
                             $result = mysqli_query($connection, $query_1);
                             foreach($result as $row){
                                 
