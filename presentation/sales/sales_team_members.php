@@ -642,7 +642,7 @@ if(isset($_POST['posting_modal'])){
             <div class="card">
                 <h5 class="card-header">Weekly Assign Task</h5>
                 <div class="card-body">
-                    <table id="example2" class="table table-striped-columns">
+                    <table id="example1" class="table table-striped-columns">
                         <thead>
                             <tr>
                                 <th style="width: 10px">#</th>
@@ -655,35 +655,30 @@ if(isset($_POST['posting_modal'])){
                         </thead>
                         <tbody>
                             <?php 
-                             
-                                $query = "SELECT *,
-                                        weekly_sales_set_target.sales_member AS sales_member,
-                                        weekly_sales_set_target.day AS day_1,
-                                        weekly_sales_set_posting_to_customer.id AS posting_id,
-                                        weekly_sales_set_create_search_customer.id AS search_customer_id,
-                                        weekly_sales_set_target.created_time AS created_date_1,
-                                        weekly_sales_set_create_search_customer.created_time AS created_date_2,
-                                        weekly_sales_set_posting_to_customer.created_time AS created_date_3
-                                        FROM weekly_sales_set_target LEFT JOIN weekly_sales_set_create_search_customer 
-                                        ON weekly_sales_set_target.sales_member = weekly_sales_set_create_search_customer.sales_member
-                                        LEFT JOIN weekly_sales_set_posting_to_customer 
-                                        ON weekly_sales_set_target.sales_member = weekly_sales_set_posting_to_customer.sales_member
-                                        ORDER BY weekly_sales_set_target.created_time DESC ";
-                                $result_query = mysqli_query($connection, $query);
-                                foreach($result_query as $row){
-                                    $assing_day = $row['current_day'];
-                                    $sales_person = $row['sales_member'];
-                                    $search_customer_id = $row['search_customer_id'];
-                                    $posting_id = $row['posting_id'];
-                                    $created_date_1 = $row['created_date_1'];
-                                    $created_date_2 = $row['created_date_2'];
-                                    $created_date_3 = $row['created_date_3'];
-                                    $day_1 = $row['day_1'];
+
+                            $query = "SELECT * FROM weekly_sales_set_target";
+                            $result = mysqli_query($connection, $query);
+                            foreach($result as $row){
+                                $day = $row['day'];
+                                $sales_person = $row['sales_member'];
+                                $sales_person = $row['sales_member'];                          
+                            
+                            $query_1 = "SELECT * FROM weekly_sales_set_posting_to_customer";
+                            $query_1_run = mysqli_query($connection, $query_1);
+                            foreach($query_1_run as $lk){
+                                
+                            }
+
+                            $query_2 = "SELECT * FROM weekly_sales_set_create_search_customer";
+                            $query_2_run = mysqli_query($connection, $query_2);
+                            foreach($query_2_run as $lk){
+                                
+                            }
                             
                             ?>
                             <tr>
                                 <td>#</td>
-                                <td><?php echo $day_1; ?></td>
+                                <td><?php echo $day; ?></td>
                                 <td><?php echo $sales_person; ?></td>
                                 <td>
                                     <?php if($search_customer_id != null) { ?>

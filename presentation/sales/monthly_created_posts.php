@@ -10,6 +10,11 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
 
+$department = $_SESSION['department'];
+$role_id = $_SESSION['role_id'];
+$username = $_GET['username'];
+echo $username;
+
 ?>
 
 <div class="row page-titles">
@@ -26,7 +31,7 @@ if (!isset($_SESSION['user_id'])) {
                 <div class="card-header d-flex bg-secondary">
                     <div class="mr-auto">
                         <div class="text-center mx-auto mt-1 text-uppercase" style="font-size: 14px;">
-                            Monthly Created Customers
+                            Monthly Posting to Customers
                         </div>
                     </div>
                 </div>
@@ -47,15 +52,48 @@ if (!isset($_SESSION['user_id'])) {
                                 <th>Customer Asking Price</th>
                                 <!-- <th>Customer Reponose</th> -->
                                 <th>He Can Pick Up From UAE?</th>
-                                <th>Posted Status</th>
                                 <th style="width: 100px;">Posted Date</th>
                                 <th>&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php
+
+                                $i = 0;
+                            
+                                $query = "SELECT * FROM sales_posting_to_customer WHERE created_by = '$username'";
+                                $result_set = mysqli_query($connection, $query);
+                                foreach($result_set as $count){
+
+                                    $posting_customer_name = $count['posting_customer_name'];
+                                    $posting_country = $count['choose_country'];
+                                    $posting_phone_code = $count['posting_phone_code'];
+                                    $posting_whatsapp_number = $count['posting_whatsapp_number'];
+                                    $platform2 = $count['platform2'];
+                                    $model_selling_and_buying1 = $count['model_selling_and_buying1'];
+                                    $posted_model_1 = $count['posted_model_1'];
+                                    $posted_model_2 = $count['posted_model_2'];
+                                    $customer_asking_model = $count['customer_asking_model'];
+                                    $customer_asking_price = $count['customer_asking_price'];
+                                    $posted_time = $count['created_time'];
+                                    $i++;
+                                                               
+                            ?>
                             <tr>
+                                <td><?php echo $i ?></td>
+                                <td><?php echo $posting_customer_name ?></td>
+                                <td><?php echo $posting_country ?></td>
+                                <td><?php echo $posting_phone_code . ' ' . $posting_whatsapp_number ?></td>
+                                <td><?php echo $platform2 ?></td>
+                                <td><?php echo $model_selling_and_buying1 ?></td>
+                                <td><?php echo $posted_model_1; ?></td>
+                                <td><?php echo $posted_model_2 ?></td>
+                                <td><?php echo $customer_asking_model ?></td>
+                                <td><?php echo $customer_asking_price ?></td>
+                                <td><?php echo $posted_time ?></td>
 
                             </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>

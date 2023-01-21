@@ -10,6 +10,12 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
 
+$department = $_SESSION['department'];
+$role_id = $_SESSION['role_id'];
+$username = $_GET['username'];
+
+echo $username;
+
 ?>
 
 <div class="row page-titles">
@@ -41,13 +47,39 @@ if (!isset($_SESSION['user_id'])) {
                                 <th>Platform</th>
                                 <th>Model He Buying</th>
                                 <th>He Can Pick Up From UAE?</th>
+                                <th>Created Time</th>
                                 <th>&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php 
+                            
+                            $query_1 = "SELECT * FROM sales_create_customer_informations WHERE created_by = '$username'";
+                            $result = mysqli_query($connection, $query_1);
+                            foreach($result as $row){
+                                
+                                $customer_name = $row['customer_name'];
+                                $customer_country = $row['create_customer_country'];
+                                $customer_whatspp_phone_code = $row['customer_whatspp_phone_code'];
+                                $customer_whatsapp_number = $row['customer_whatsapp_number'];
+                                $platform1 = $row['platform1'];
+                                $model_selling_buying = $row['model_selling_buying'];
+                                $uae_pickup1 = $row['uae_pickup1'];
+                                $created_time = $row['created_time'];
+                            
+                            ?>
                             <tr>
-
+                                <td>#</td>
+                                <td><?php echo $customer_country ?></td>
+                                <td><?php echo $customer_name ?></td>
+                                <td><?php echo $customer_whatspp_phone_code . ' ' . $customer_whatsapp_number; ?></td>
+                                <td><?php echo $platform1 ?></td>
+                                <td><?php echo $model_selling_buying ?></td>
+                                <td><?php echo $uae_pickup1 ?></td>
+                                <td><?php echo $created_time ?></td>
+                                <td></td>
                             </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
