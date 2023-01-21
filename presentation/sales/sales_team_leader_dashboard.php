@@ -265,12 +265,40 @@ if (!isset($_SESSION['user_id'])) {
                             </thead>
                             <tbody>
                                 <?php 
-                                
-                                    $query = "SELECT * FROM employees INNER JOIN users ON employees.emp_id = users.epf
-                                    WHERE users.department = '5' ";
+
+                                    $query = "SELECT * FROM employees INNER JOIN users ON employees.emp_id = users.epf WHERE users.department = '5' ";
                                     $query_run = mysqli_query($connection, $query);
                                     foreach($query_run as $xd){
                                         $sales_person_full_name = $xd['full_name'];
+                                        $sales_person_username = $xd['username'];
+
+                                        $q1 = "SELECT *,
+                                            COUNT(sales_create_customer_informations.id) AS Created_Customers
+                                            FROM sales_create_customer_informations 
+                                            WHERE sales_create_customer_informations.created_by = '$sales_person_username' 
+                                            AND MONTH(sales_create_customer_informations.created_time) = MONTH(now())";
+                                        $q_run = mysqli_query($connection, $q1);
+                                        foreach($q_run as $qr){
+                                            $total_customers = $qr['Created_Customers'];
+                                        }
+                                        
+                                        $q2 = "SELECT *, COUNT(sales_create_customer_informations.uae_pickup1) AS UAE_Pickup_Customers
+                                            FROM sales_create_customer_informations 
+                                            WHERE sales_create_customer_informations.created_by = '$sales_person_username' AND uae_pickup1 = 'yes'  
+                                            AND MONTH(sales_create_customer_informations.created_time) = MONTH(now()) ";
+                                        $q_run_2 = mysqli_query($connection, $q2);
+                                        foreach($q_run_2 as $qr2){
+                                            $uae_pickup_customers = $qr2['UAE_Pickup_Customers'];                
+                                        }
+                                        
+                                        $q3 = "SELECT *, COUNT(sales_posting_to_customer.id) AS Posted_Customer
+                                            FROM sales_posting_to_customer 
+                                            WHERE sales_posting_to_customer.created_by = '$sales_person_username' 
+                                            AND MONTH(sales_posting_to_customer.created_time) = MONTH(now()) ";
+                                        $q_run_1 = mysqli_query($connection, $q3);
+                                        foreach($q_run_1 as $qr_1){
+                                            $posted_customer = $qr_1['Posted_Customer'];
+                                        }
                                    
                                 ?>
                                 <tr>
@@ -278,13 +306,13 @@ if (!isset($_SESSION['user_id'])) {
                                         <?php echo "<a href=\"sales_member_monthly_performance.php?full_name={$xd['full_name']}&username={$xd['username']}\">$sales_person_full_name</a>" ?>
                                     </td>
                                     <td>
-                                        <?php echo "<a href=\"monthly_created_customers.php?full_name={$xd['full_name']}&username={$xd['username']}\">241</a>" ?>
+                                        <?php echo "<a href=\"monthly_created_customers.php?full_name={$xd['full_name']}&username={$xd['username']}\">$total_customers</a>" ?>
                                     </td>
                                     <td>
-                                        <?php echo "<a href=\"monthly_created_posts.php?full_name={$xd['full_name']}&username={$xd['username']}\">4502</a>" ?>
+                                        <?php echo "<a href=\"monthly_created_posts.php?full_name={$xd['full_name']}&username={$xd['username']}\">$posted_customer</a>" ?>
                                     </td>
                                     <td>
-                                        <?php echo "<a href=\"monthly_uae_pickup_cusotmers.php?full_name={$xd['full_name']}&username={$xd['username']}\">22</a>" ?>
+                                        <?php echo "<a href=\"monthly_uae_pickup_cusotmers.php?full_name={$xd['full_name']}&username={$xd['username']}\">$uae_pickup_customers</a>" ?>
                                     </td>
                                 </tr>
                                 <?php } ?>
@@ -313,38 +341,55 @@ if (!isset($_SESSION['user_id'])) {
                             </thead>
                             <tbody>
                                 <?php 
-
+                                
                                     $start_day = date('Y-m-d 00:00:00');
                                     $end_day = date('Y-m-d 23:59:59');                                    
                                 
-                                    $query = "SELECT * FROM employees INNER JOIN users ON employees.emp_id = users.epf
-                                    WHERE users.department = '5' ";
+                                    $query = "SELECT * FROM employees INNER JOIN users ON employees.emp_id = users.epf WHERE users.department = '5' ";
                                     $query_run = mysqli_query($connection, $query);
                                     foreach($query_run as $xd){
                                         $sales_person_full_name = $xd['full_name'];
+                                        $sales_person_username = $xd['username'];
 
-                                        $q1 = "SELECT * FROM sales_create_customer_informations LEFT JOIN sales_posting_to_customer 
-                                        ON sales_create_customer_informations.customer_name = sales_posting_to_customer.posting_customer_name 
-                                        AND sales_create_customer_informations.create_customer_country = sales_posting_to_customer.choose_country 
-                                        AND sales_create_customer_informations.created_by = sales_posting_to_customer.created_by";
+                                        $q1 = "SELECT *,
+                                            COUNT(sales_create_customer_informations.id) AS Created_Customers
+                                            FROM sales_create_customer_informations 
+                                            WHERE sales_create_customer_informations.created_by = '$sales_person_username' 
+                                            AND sales_create_customer_informations.created_time BETWEEN '$start_day' AND '$end_day'";
                                         $q_run = mysqli_query($connection, $q1);
                                         foreach($q_run as $qr){
-                                             
+                                            $total_customers = $qr['Created_Customers'];
+                                        }
+                                        
+                                        $q2 = "SELECT *, COUNT(sales_create_customer_informations.uae_pickup1) AS UAE_Pickup_Customers
+                                            FROM sales_create_customer_informations 
+                                            WHERE sales_create_customer_informations.created_by = '$sales_person_username' AND uae_pickup1 = 'yes'  
+                                            AND sales_create_customer_informations.created_time BETWEEN '$start_day' AND '$end_day'";
+                                        $q_run_2 = mysqli_query($connection, $q2);
+                                        foreach($q_run_2 as $qr2){
+                                            $uae_pickup_customers = $qr2['UAE_Pickup_Customers'];                
+                                        }
+                                        
+                                        $q2 = "SELECT *, COUNT(sales_posting_to_customer.id) AS Posted_Customer
+                                            FROM sales_posting_to_customer 
+                                            WHERE sales_posting_to_customer.created_by = '$sales_person_username' 
+                                            AND sales_posting_to_customer.created_time BETWEEN '$start_day' AND '$end_day'";
+                                        $q_run_1 = mysqli_query($connection, $q2);
+                                        foreach($q_run_1 as $qr_1){
+                                            $posted_customer = $qr_1['Posted_Customer'];
                                         }
                                    
                                 ?>
                                 <tr>
+                                    <td><?php echo $sales_person_full_name; ?></td>
                                     <td>
-                                        <?php echo "<a href=\"sales_member_daily_performance.php?full_name={$xd['full_name']}&username={$xd['username']}\">$sales_person_full_name</a>" ?>
+                                        <?php echo "<a href=\"daily_created_customers.php?full_name={$xd['full_name']}&username={$xd['username']}\">$total_customers</a>" ?>
                                     </td>
                                     <td>
-                                        <?php echo "<a href=\"daily_created_customers.php?full_name={$xd['full_name']}&username={$xd['username']}\">16</a>" ?>
+                                        <?php echo "<a href=\"daily_created_posts.php?full_name={$xd['full_name']}&username={$xd['username']}\">$posted_customer</a>" ?>
                                     </td>
                                     <td>
-                                        <?php echo "<a href=\"daily_created_posts.php?full_name={$xd['full_name']}&username={$xd['username']}\">452</a>" ?>
-                                    </td>
-                                    <td>
-                                        <?php echo "<a href=\"daily_uae_pickup_customers.php?full_name={$xd['full_name']}&username={$xd['username']}\">2</a>" ?>
+                                        <?php echo "<a href=\"daily_uae_pickup_customers.php?full_name={$xd['full_name']}&username={$xd['username']}\">$uae_pickup_customers</a>" ?>
                                     </td>
                                 </tr>
                                 <?php } ?>

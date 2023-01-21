@@ -53,8 +53,13 @@ echo $username;
                         </thead>
                         <tbody>
                             <?php 
+
+                            $i = 0;
+
+                            $start_time = date('Y-m-d 00:00:00');
+                            $end_time = date('Y-m-d 23:59:59');
                             
-                            $query_1 = "SELECT * FROM sales_create_customer_informations WHERE created_by = '$username' AND uae_pickup1 = 'yes'";
+                            $query_1 = "SELECT * FROM sales_create_customer_informations WHERE created_by = '$username' AND uae_pickup1 = 'yes' AND created_time BETWEEN '$start_time' and '$end_time'";
                             $result = mysqli_query($connection, $query_1);
                             foreach($result as $row){
                                 
@@ -66,13 +71,16 @@ echo $username;
                                 $model_selling_buying = $row['model_selling_buying'];
                                 $uae_pickup1 = $row['uae_pickup1'];
                                 $created_time = $row['created_time'];
+                                $i++;
                             
                             ?>
                             <tr>
-                                <td>#</td>
+                                <td><?php echo $i; ?></td>
                                 <td><?php echo $customer_country ?></td>
                                 <td><?php echo $customer_name ?></td>
-                                <td><?php echo $customer_whatspp_phone_code . ' ' . $customer_whatsapp_number; ?></td>
+                                <td>
+                                    <?php echo "+" . $customer_whatspp_phone_code . ' ' . $customer_whatsapp_number; ?>
+                                </td>
                                 <td><?php echo $platform1 ?></td>
                                 <td><?php echo $model_selling_buying ?></td>
                                 <td><?php echo $uae_pickup1 ?></td>
