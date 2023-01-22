@@ -11,10 +11,13 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $username = $_SESSION['username'];
+$role_id = $_SESSION['role_id'];
+$department = $_SESSION['department'];
 
-$date = date('Y-m-d 00:00:00');
-$date2 = date('Y-m-d 23:59:59');
+if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 2) || ($role_id == 2 && $department == 18) || ($role_id == 5 && $department == 5)){
 
+$start_time = date('Y-m-d 00:00:00');
+$end_time = date('Y-m-d 23:59:59');
 
 ?>
 
@@ -60,7 +63,7 @@ $date2 = date('Y-m-d 23:59:59');
                 <span class="info-box-number">
                     <?php
 
-                        $query = "SELECT id, created_time FROM `sales_posting_to_customer` WHERE created_by = '$username' BETWEEN '$date'AND '$date2'";
+                        $query = "SELECT id, created_time FROM `sales_posting_to_customer` WHERE created_by = '$username' AND created_time BETWEEN '$start_time'AND '$end_time'";
                         if ($result = mysqli_query($connection, $query)) {
                             // Return the number of rows in result set
                             $rowcount = mysqli_num_rows($result);
@@ -115,4 +118,6 @@ $date2 = date('Y-m-d 23:59:59');
     </div>
 </div>
 
-<?php include_once("../includes/footer.php") ?>
+<?php include_once('../includes/footer.php'); }else{
+        die(access_denied());
+} ?>

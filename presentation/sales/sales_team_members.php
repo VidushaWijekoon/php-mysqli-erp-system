@@ -656,24 +656,12 @@ if(isset($_POST['posting_modal'])){
                         <tbody>
                             <?php 
 
-                            $query = "SELECT * FROM weekly_sales_set_target";
+                            $query = "SELECT day, created_time, sales_member FROM weekly_sales_set_target ORDER BY created_time DESC LIMIT 20";
                             $result = mysqli_query($connection, $query);
                             foreach($result as $row){
                                 $day = $row['day'];
-                                $sales_person = $row['sales_member'];
-                                $sales_person = $row['sales_member'];                          
-                            
-                            $query_1 = "SELECT * FROM weekly_sales_set_posting_to_customer";
-                            $query_1_run = mysqli_query($connection, $query_1);
-                            foreach($query_1_run as $lk){
+                                $sales_person = $row['sales_member'];    
                                 
-                            }
-
-                            $query_2 = "SELECT * FROM weekly_sales_set_create_search_customer";
-                            $query_2_run = mysqli_query($connection, $query_2);
-                            foreach($query_2_run as $lk){
-                                
-                            }
                             
                             ?>
                             <tr>
