@@ -107,11 +107,20 @@ if (!isset($_SESSION['user_id'])) {
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Customer</th>
+                                        <th>Date</th>
+                                        <th>Customer Name</th>
                                         <th>Country</th>
-                                        <th>Sales Person</th>
+                                        <th>Invoice No</th>
                                         <th>Sales Order</th>
-                                        <th>Status</th>
+                                        <th>Order Status</th>
+                                        <th>Shipment Date</th>
+                                        <th>Sales Person</th>
+                                        <th>Invoiced</th>
+                                        <th>Payment</th>
+                                        <th>Shipped</th>
+                                        <th>Amount</th>
+                                        <th>Delivery Method</th>
+                                        <th>&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody>
