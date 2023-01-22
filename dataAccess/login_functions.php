@@ -81,7 +81,7 @@ function Login($role_id, $department){
         header('Location: presentation/performance/performance_record.php');
     }
 
-    // Production Team Leader Redirect
+    // Sales Team Leader Redirect
     elseif($department == 5 && $role_id == 5){
         header('Location: presentation/sales/sales_dashboard.php');
     }
@@ -89,6 +89,11 @@ function Login($role_id, $department){
            header('Location: presentation/sales/sales_team_leader_dashboard.php');
     }
 
+    // Accounts
+     elseif($department == 3 && $role_id == 5){
+        header('Location: presentation/accounts/accounts_dashboard.php');
+    }
+    
 }
 
 

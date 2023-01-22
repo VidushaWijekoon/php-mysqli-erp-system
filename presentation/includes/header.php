@@ -108,6 +108,11 @@ if(isset($_POST['logged_out'])){
                 <img src="../../static/dist/img/alsakb logo1.jpg" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
             </a>
+            <?php } if(($department == 11 && $role_id == 1)) { ?>
+            <a href="../includes/main.php" class="brand-link text-center mx-auto d-flex justify-content-center">
+                <img src="../../static/dist/img/alsakb logo1.jpg" class="brand-image img-circle elevation-3"
+                    style="opacity: .8">
+            </a>
             <?php } ?>
 
             <!-- Sidebar -->
@@ -130,10 +135,28 @@ if(isset($_POST['logged_out'])){
                                 <p> Home Page </p>
                             </a>
                         </li>
+                        <!-- Software Member -->
+                        <?php } if(($department == 11 && $role_id == 1)) { ?>
+                        <li class="nav-item menu-open">
+                            <a href="../includes/main.php" class="nav-link active">
+                                <i class="nav-icon fas fa-home"></i>
+                                <p> Home Page </p>
+                            </a>
+                        </li>
+
                         <!-- Sales Member -->
                         <?php } if(($department == 5 && $role_id == 5)) { ?>
                         <li class="nav-item menu-open">
                             <a href="../sales/sales_dashboard.php" class="nav-link active">
+                                <i class="nav-icon fas fa-home"></i>
+                                <p> Home Page </p>
+                            </a>
+                        </li>
+
+                        <!-- Accounts -->
+                        <?php } if(($department == 3 && $role_id == 5)) { ?>
+                        <li class="nav-item menu-open">
+                            <a href="../accounts/accounts_dashboard.php" class="nav-link active">
                                 <i class="nav-icon fas fa-home"></i>
                                 <p> Home Page </p>
                             </a>
@@ -221,9 +244,7 @@ if(isset($_POST['logged_out'])){
                             </ul>
                         </li>
 
-                        <?php } ?>
-
-                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) ) { ?>
+                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) ) { ?>
 
                         <!-- HR -->
                         <li class="nav-item">
@@ -251,9 +272,7 @@ if(isset($_POST['logged_out'])){
                             </ul>
                         </li>
 
-                        <?php } ?>
-
-                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($department == 5)) { ?>
+                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($department == 5) || ($role_id == 3 && $department == 5)) { ?>
 
                         <li class="nav-item">
                             <a href="#" class="nav-link">
@@ -283,7 +302,7 @@ if(isset($_POST['logged_out'])){
                                                 <p>Sales Order</p>
                                             </a>
                                         </li> -->
-                                        <?php if($department == 5 && $role_id == 5) { ?>
+                                        <?php if(($department == 5 && $role_id == 5) || ($role_id == 1 && $department == 11)) { ?>
                                         <li class="nav-item">
                                             <a href="../sales/orders.php" class="nav-link">
                                                 <i class="fa-solid fa-files nav-icon" style="font-size: 12px;"></i>
@@ -311,7 +330,7 @@ if(isset($_POST['logged_out'])){
                                                 <p>Sales Dashboard</p>
                                             </a>
                                         </li>
-                                        <?php } if($department == 5 && $role_id == 8) { ?>
+                                        <?php } if(($department == 5 && $role_id == 8) || ($role_id == 1 && $department == 11)) { ?>
                                         <li class="nav-item">
                                             <a href="../sales/sales_team_leader_dashboard.php" class="nav-link">
                                                 <i class="fa-solid fa-user-group nav-icon" style="font-size: 12px;"></i>
@@ -321,7 +340,7 @@ if(isset($_POST['logged_out'])){
                                         <?php } ?>
                                     </ul>
                                 </li>
-                                <?php if($department == 16) { ?>
+                                <?php if(($department == 16) || ($role_id == 1 && $department == 11)) { ?>
                                 <li class="nav-item">
                                     <a href="../e-commerce/e_commerce_dashboard.php" class="nav-link">
                                         <i class="fa-brands fa-amazon nav-icon" style="font-size: 12px;"></i>
@@ -332,7 +351,7 @@ if(isset($_POST['logged_out'])){
                             </ul>
                         </li>
 
-                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 8 && $department == 5)) { ?>
+                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 8 && $department == 5) || ($role_id == 5 && $department == 3)) { ?>
 
                         <!-- Accounts -->
                         <li class="nav-item">
@@ -346,6 +365,12 @@ if(isset($_POST['logged_out'])){
                                     <a href="../accounts/accounts_dashboard.php" class="nav-link">
                                         <i class="fa fa-coins nav-icon" style="font-size: 12px;"></i>
                                         <p> Accounts </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="../accounts/account_packing_dashboard.php" class="nav-link">
+                                        <i class="fa fa-boxes nav-icon" style="font-size: 12px;"></i>
+                                        <p> Packing </p>
                                     </a>
                                 </li>
                             </ul>

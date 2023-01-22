@@ -16,7 +16,7 @@ $username = $_SESSION['username'];
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-5">
+        <div class="col-lg-11 grid-margin stretch-card justify-content-center mx-auto mt-5">
             <div class="card card-primary card-outline card-outline-tabs m-2 w-100">
                 <div class="card-header p-0 border-bottom-0">
                     <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
@@ -39,131 +39,232 @@ $username = $_SESSION['username'];
                         <!-- ============================================================== -->
                         <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel"
                             aria-labelledby="custom-tabs-four-home-tab">
-                            <table id="example2" class="table table-bordered table-hover">
+                            <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>Date</th>
                                         <th>Customer Name</th>
                                         <th>Country</th>
+                                        <th>Invoice No</th>
                                         <th>Sales Order</th>
                                         <th>Order Status</th>
                                         <th>Shipment Date</th>
                                         <th>Sales Person</th>
-                                        <th>Invoiced</th>
                                         <th>Payment</th>
-                                        <th>Shipped</th>
+                                        <th>Packed</th>
                                         <th>Amount</th>
                                         <th>Delivery Method</th>
-                                        <th>&nbsp;</th>
-
+                                        <th>Shipping</th>
+                                        <th style="width: 200px;">&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <td>01/01/2023</td>
                                         <td>John Doe</td>
                                         <td>Senagal</td>
-                                        <td>Sales</td>
+                                        <td>IN-0001</td>
+                                        <td>SO-0001</td>
+                                        <td>Confirmed</td>
+                                        <td>01/25/2022</td>
+                                        <td>Riskan</td>
+                                        <td><i class="fa-solid fa-circle"></i></td>
+                                        <td><i class="fa-solid fa-circle"></i></td>
+                                        <td>$1000</td>
                                         <td><a href="./quatation_view.php">SO1037</a></td>
-                                        <td><span class="badge badge-success">Shipped</span></td>
                                         <td>
-                                            <a class='btn btn-xs btn-secondary mx-1' href="">
+                                            <span>
+                                                <i class="fa-solid fa-circle mx-1" style="color: #28a745;"></i>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a class='btn btn-xs btn-secondary mx-1' href='#'>
                                                 <i class='fa-solid fa-eye'></i> </a>
-                                            <a class='btn btn-xs btn-warning mx-1' href="#">
+                                            <a class='btn btn-xs btn-warning mx-1' href='#'>
                                                 <i class='fa-solid fa-pen-to-square'></i></a>
-                                            <a class='btn btn-xs btn-success mx-1' href="">
+                                            <a class='btn btn-xs btn-success mx-1' href='#'>
                                                 <i class='fa-solid fa-download'></i> </a>
-                                            <a class='btn btn-xs btn-danger mx-1' href="">
+                                            <a class='btn btn-xs btn-danger mx-1' href='#'>
                                                 <i class='fa-solid fa-trash-can'></i> </a>
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td>01/01/2023</td>
                                         <td>John Doe</td>
                                         <td>Senagal</td>
-                                        <td>Sales</td>
-                                        <td><a href="./quatation_view.php">SO10234</a></td>
-                                        <td><span class="badge badge-danger">Delivered</span></td>
+                                        <td>IN-0001</td>
+                                        <td>SO-0001</td>
+                                        <td>Confirmed</td>
+                                        <td>01/25/2022</td>
+                                        <td>Riskan</td>
+                                        <td><i class="fa-solid fa-circle"></i></td>
+                                        <td><i class="fa-solid fa-circle"></i></td>
+                                        <td>$1000</td>
+                                        <td><a href="./quatation_view.php">SO1037</a></td>
                                         <td>
-                                            <a class='btn btn-xs btn-secondary mx-1' href="">
+                                            <span>
+                                                <i class="fa-solid fa-circle mx-1" style="color: #dc3545;"></i>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a class='btn btn-xs btn-secondary mx-1' href='#'>
                                                 <i class='fa-solid fa-eye'></i> </a>
-                                            <a class='btn btn-xs btn-warning mx-1' href="#">
+                                            <a class='btn btn-xs btn-warning mx-1' href='#'>
                                                 <i class='fa-solid fa-pen-to-square'></i></a>
-                                            <a class='btn btn-xs btn-success mx-1' href="">
+                                            <a class='btn btn-xs btn-success mx-1' href='#'>
                                                 <i class='fa-solid fa-download'></i> </a>
-                                            <a class='btn btn-xs btn-danger mx-1' href="">
+                                            <a class='btn btn-xs btn-danger mx-1' href='#'>
                                                 <i class='fa-solid fa-trash-can'></i> </a>
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td>01/01/2023</td>
                                         <td>John Doe</td>
                                         <td>Senagal</td>
-                                        <td>Sales</td>
-                                        <td><a href="./quatation_view.php">SO1254</a></td>
-                                        <td><span class="badge badge-info">Processing</span></td>
+                                        <td>IN-0001</td>
+                                        <td>SO-0001</td>
+                                        <td>Confirmed</td>
+                                        <td>01/25/2022</td>
+                                        <td>Riskan</td>
+                                        <td><i class="fa-solid fa-circle"></i></td>
+                                        <td><i class="fa-solid fa-circle"></i></td>
+                                        <td>$1000</td>
+                                        <td><a href="./quatation_view.php">SO1037</a></td>
                                         <td>
-                                            <a class='btn btn-xs btn-secondary mx-1' href="">
+                                            <span>
+                                                <i class="fa-solid fa-circle mx-1" style="color: #17a2b8;"></i>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a class='btn btn-xs btn-secondary mx-1' href='#'>
                                                 <i class='fa-solid fa-eye'></i> </a>
-                                            <a class='btn btn-xs btn-warning mx-1' href="#">
+                                            <a class='btn btn-xs btn-warning mx-1' href='#'>
                                                 <i class='fa-solid fa-pen-to-square'></i></a>
-                                            <a class='btn btn-xs btn-success mx-1' href="">
+                                            <a class='btn btn-xs btn-success mx-1' href='#'>
                                                 <i class='fa-solid fa-download'></i> </a>
-                                            <a class='btn btn-xs btn-danger mx-1' href="">
+                                            <a class='btn btn-xs btn-danger mx-1' href='#'>
                                                 <i class='fa-solid fa-trash-can'></i> </a>
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td>01/01/2023</td>
                                         <td>John Doe</td>
                                         <td>Senagal</td>
-                                        <td>Sales</td>
-                                        <td><a href="./quatation_view.php">SO764</a></td>
-                                        <td><span class="badge badge-success">Shipped</span></td>
+                                        <td>IN-0001</td>
+                                        <td>SO-0001</td>
+                                        <td>Confirmed</td>
+                                        <td>01/25/2022</td>
+                                        <td>Riskan</td>
+                                        <td><i class="fa-solid fa-circle"></i></td>
+                                        <td><i class="fa-solid fa-circle"></i></td>
+                                        <td>$1000</td>
+                                        <td><a href="./quatation_view.php">SO1037</a></td>
                                         <td>
-                                            <a class='btn btn-xs btn-secondary mx-1' href="">
+                                            <span>
+                                                <i class="fa-solid fa-circle mx-1" style="color: #28a745;"></i>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a class='btn btn-xs btn-secondary mx-1' href='#'>
                                                 <i class='fa-solid fa-eye'></i> </a>
-                                            <a class='btn btn-xs btn-warning mx-1' href="#">
+                                            <a class='btn btn-xs btn-warning mx-1' href='#'>
                                                 <i class='fa-solid fa-pen-to-square'></i></a>
-                                            <a class='btn btn-xs btn-success mx-1' href="">
+                                            <a class='btn btn-xs btn-success mx-1' href='#'>
                                                 <i class='fa-solid fa-download'></i> </a>
-                                            <a class='btn btn-xs btn-danger mx-1' href="">
+                                            <a class='btn btn-xs btn-danger mx-1' href='#'>
                                                 <i class='fa-solid fa-trash-can'></i> </a>
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td>01/01/2023</td>
                                         <td>John Doe</td>
                                         <td>Senagal</td>
-                                        <td>Sales</td>
-                                        <td><a href="./quatation_view.php">SO5642</a></td>
-                                        <td><span class="badge badge-warning">Pending</span></td>
+                                        <td>IN-0001</td>
+                                        <td>SO-0001</td>
+                                        <td>Confirmed</td>
+                                        <td>01/25/2022</td>
+                                        <td>Riskan</td>
+                                        <td><i class="fa-solid fa-circle"></i></td>
+                                        <td><i class="fa-solid fa-circle"></i></td>
+                                        <td>$1000</td>
+                                        <td><a href="./quatation_view.php">SO1037</a></td>
                                         <td>
-                                            <a class='btn btn-xs btn-secondary mx-1' href="">
+                                            <span>
+                                                <i class="fa-solid fa-circle mx-1" style="color: #ffc107;"></i>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a class='btn btn-xs btn-secondary mx-1' href='#'>
                                                 <i class='fa-solid fa-eye'></i> </a>
-                                            <a class='btn btn-xs btn-warning mx-1' href="#">
+                                            <a class='btn btn-xs btn-warning mx-1' href='#'>
                                                 <i class='fa-solid fa-pen-to-square'></i></a>
-                                            <a class='btn btn-xs btn-success mx-1' href="">
+                                            <a class='btn btn-xs btn-success mx-1' href='#'>
                                                 <i class='fa-solid fa-download'></i> </a>
-                                            <a class='btn btn-xs btn-danger mx-1' href="">
+                                            <a class='btn btn-xs btn-danger mx-1' href='#'>
                                                 <i class='fa-solid fa-trash-can'></i> </a>
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td>01/01/2023</td>
                                         <td>John Doe</td>
                                         <td>Senagal</td>
-                                        <td>Sales</td>
-                                        <td><a href="./quatation_view.php">SO4522</a></td>
-                                        <td><span class="badge badge-success">Shipped</span></td>
+                                        <td>IN-0001</td>
+                                        <td>SO-0001</td>
+                                        <td>Confirmed</td>
+                                        <td>01/25/2022</td>
+                                        <td>Riskan</td>
+                                        <td><i class="fa-solid fa-circle"></i></td>
+                                        <td><i class="fa-solid fa-circle"></i></td>
+                                        <td>$1000</td>
+                                        <td><a href="./quatation_view.php">SO1037</a></td>
                                         <td>
-                                            <a class='btn btn-xs btn-secondary mx-1' href="">
+                                            <span>
+                                                <i class="fa-solid fa-circle mx-1" style="color: #28a745;">
+                                                </i>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a class='btn btn-xs btn-secondary mx-1' href='#'>
                                                 <i class='fa-solid fa-eye'></i> </a>
-                                            <a class='btn btn-xs btn-warning mx-1' href="#">
+                                            <a class='btn btn-xs btn-warning mx-1' href='#'>
                                                 <i class='fa-solid fa-pen-to-square'></i></a>
-                                            <a class='btn btn-xs btn-success mx-1' href="">
+                                            <a class='btn btn-xs btn-success mx-1' href='#'>
                                                 <i class='fa-solid fa-download'></i> </a>
-                                            <a class='btn btn-xs btn-danger mx-1' href="">
+                                            <a class='btn btn-xs btn-danger mx-1' href='#'>
                                                 <i class='fa-solid fa-trash-can'></i> </a>
                                         </td>
                                     </tr>
-
                                 </tbody>
                             </table>
+                            <div class="d-flex">
+                                <div class="float-start">
+                                    <a class="btn btn-sm btn-default" href="#">View All Sales Orders</a>
+                                </div>
+                                <div class="float-end ml-auto mt-auto">
+                                    <span>
+                                        <i class="fa-solid fa-circle mx-1" style="color: #28a745;"></i>Dispatched
+                                    </span>
+                                    <span>
+                                        <i class="fa-solid fa-circle mx-1" style="color: #dc3545;"></i>Delivered
+                                    </span>
+                                    <span>
+                                        <i class="fa-solid fa-circle mx-1" style="color: #17a2b8;"></i>Shipped
+                                    </span>
+                                    <span>
+                                        <i class="fa-solid fa-circle mx-1" style="color: #ff006f;"></i>Advance Paid
+                                    </span>
+                                    <span>
+                                        <i class="fa-solid fa-circle mx-1" style="color: #007bff;"></i>Fully Paid
+                                    </span>
+                                    <span>
+                                        <i class="fa-solid fa-circle mx-1" style="color: #6c757d;"></i>Pending
+                                    </span>
+                                    <span>
+                                        <i class="fa-solid fa-circle mx-1" style="color: #ffc107;"></i>Packing
+                                    </span>
+
+                                </div>
+                            </div>
                         </div>
 
                         <!-- ============================================================== -->
