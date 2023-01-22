@@ -529,7 +529,7 @@ if(isset($_POST['add_items'])){
                                                         placeholder="Discount" name="discount">
                                                 </td>
                                                 <td>
-                                                    <input type="number" min="1" class="form-control"
+                                                    <input type="number" min="1" class="form-control" onclick="Total()"
                                                         placeholder="Total" name="total" id="total">
                                                 </td>
 

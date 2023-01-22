@@ -28,7 +28,7 @@ if (!isset($_SESSION['user_id'])) {
                     <div class="row">
                         <div class="col-12">
                             <h4>
-                                <i class="fas fa-globe"></i> Create Invoice
+                                <i class="fas fa-globe"></i> Create Sales Order
                                 <small class="float-right">Date: 2/10/2014</small>
                             </h4>
                         </div>
@@ -173,8 +173,9 @@ if (!isset($_SESSION['user_id'])) {
                                 Payment
                             </button>
                             <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                                <i class="fas fa-download"></i> Generate PDF
+                                <i class="fas fa-download"></i> Generate PDF For Production
                             </button>
+
                         </div>
                     </div>
                 </div>

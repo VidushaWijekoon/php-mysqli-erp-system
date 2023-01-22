@@ -17,13 +17,25 @@ if (!isset($_SESSION['user_id'])) {
     </div>
 </div>
 
-
 <div class="row m-2">
     <div class="col-12 mt-3">
-        <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./approved_quatations.php"><i
-                class="fa fa-plus"></i><span class="mx-1">Approved Quatations</span></a>
-        <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./sales_orders.php"><i
-                class="fa fa-plus"></i><span class="mx-1">Sales Order List</span></a>
+        <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./approved_quatations.php">
+            <span class="mx-1">Approved Quatations</span>
+        </a>
+        <!-- after create SO start production -->
+        <a class="btn bg-gradient-primary mx-2 text-white" type="button" href="./create_sales_order.php">
+            <span class="mx-1">Create Sales Order</span>
+        </a>
+        <!-- Invoice given to a customer to request to make final payment  -->
+        <a class="btn bg-gradient-primary mx-2 text-white" type="button" href="./create_invoice.php">
+            <span class="mx-1">Create Invoice</span>
+        </a>
+        <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./sales_orders.php">
+            <span class="mx-1">Invoice List</span>
+        </a>
+        <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./sales_orders.php">
+            <span class="mx-1">Sales Order List</span>
+        </a>
     </div>
 </div>
 

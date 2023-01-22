@@ -10,6 +10,9 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
 
+$current_month = Date('F');
+$current_date = Date('m-d-Y');
+
 ?>
 
 <div class="row m-2">
@@ -81,7 +84,7 @@ if (!isset($_SESSION['user_id'])) {
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-2">
+        <div class="col-lg-11 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card card-primary card-outline card-outline-tabs m-2 w-100">
                 <div class="card-header p-0 border-bottom-0">
                     <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
@@ -115,63 +118,220 @@ if (!isset($_SESSION['user_id'])) {
                                         <th>Order Status</th>
                                         <th>Shipment Date</th>
                                         <th>Sales Person</th>
-                                        <th>Invoiced</th>
                                         <th>Payment</th>
-                                        <th>Shipped</th>
+                                        <th>Packed</th>
                                         <th>Amount</th>
                                         <th>Delivery Method</th>
-                                        <th>&nbsp;</th>
+                                        <th>Shipping</th>
+                                        <th style="width: 200px;">&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <td>01/01/2023</td>
                                         <td>John Doe</td>
                                         <td>Senagal</td>
-                                        <td>Sales</td>
+                                        <td>IN-0001</td>
+                                        <td>SO-0001</td>
+                                        <td>Confirmed</td>
+                                        <td>01/25/2022</td>
+                                        <td>Riskan</td>
+                                        <td><i class="fa-solid fa-circle"></i></td>
+                                        <td><i class="fa-solid fa-circle"></i></td>
+                                        <td>$1000</td>
                                         <td><a href="./quatation_view.php">SO1037</a></td>
-                                        <td><span class="badge badge-success">Shipped</span></td>
+                                        <td>
+                                            <span>
+                                                <i class="fa-solid fa-circle mx-1" style="color: #28a745;"></i>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a class='btn btn-xs btn-secondary mx-1' href='#'>
+                                                <i class='fa-solid fa-eye'></i> </a>
+                                            <a class='btn btn-xs btn-warning mx-1' href='#'>
+                                                <i class='fa-solid fa-pen-to-square'></i></a>
+                                            <a class='btn btn-xs btn-success mx-1' href='#'>
+                                                <i class='fa-solid fa-download'></i> </a>
+                                            <a class='btn btn-xs btn-danger mx-1' href='#'>
+                                                <i class='fa-solid fa-trash-can'></i> </a>
+                                        </td>
                                     </tr>
                                     <tr>
+                                        <td>01/01/2023</td>
                                         <td>John Doe</td>
                                         <td>Senagal</td>
-                                        <td>Sales</td>
-                                        <td><a href="./quatation_view.php">SO10234</a></td>
-                                        <td><span class="badge badge-danger">Delivered</span></td>
+                                        <td>IN-0001</td>
+                                        <td>SO-0001</td>
+                                        <td>Confirmed</td>
+                                        <td>01/25/2022</td>
+                                        <td>Riskan</td>
+                                        <td><i class="fa-solid fa-circle"></i></td>
+                                        <td><i class="fa-solid fa-circle"></i></td>
+                                        <td>$1000</td>
+                                        <td><a href="./quatation_view.php">SO1037</a></td>
+                                        <td>
+                                            <span>
+                                                <i class="fa-solid fa-circle mx-1" style="color: #dc3545;"></i>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a class='btn btn-xs btn-secondary mx-1' href='#'>
+                                                <i class='fa-solid fa-eye'></i> </a>
+                                            <a class='btn btn-xs btn-warning mx-1' href='#'>
+                                                <i class='fa-solid fa-pen-to-square'></i></a>
+                                            <a class='btn btn-xs btn-success mx-1' href='#'>
+                                                <i class='fa-solid fa-download'></i> </a>
+                                            <a class='btn btn-xs btn-danger mx-1' href='#'>
+                                                <i class='fa-solid fa-trash-can'></i> </a>
+                                        </td>
                                     </tr>
                                     <tr>
+                                        <td>01/01/2023</td>
                                         <td>John Doe</td>
                                         <td>Senagal</td>
-                                        <td>Sales</td>
-                                        <td><a href="./quatation_view.php">SO1254</a></td>
-                                        <td><span class="badge badge-info">Processing</span></td>
+                                        <td>IN-0001</td>
+                                        <td>SO-0001</td>
+                                        <td>Confirmed</td>
+                                        <td>01/25/2022</td>
+                                        <td>Riskan</td>
+                                        <td><i class="fa-solid fa-circle"></i></td>
+                                        <td><i class="fa-solid fa-circle"></i></td>
+                                        <td>$1000</td>
+                                        <td><a href="./quatation_view.php">SO1037</a></td>
+                                        <td>
+                                            <span>
+                                                <i class="fa-solid fa-circle mx-1" style="color: #17a2b8;"></i>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a class='btn btn-xs btn-secondary mx-1' href='#'>
+                                                <i class='fa-solid fa-eye'></i> </a>
+                                            <a class='btn btn-xs btn-warning mx-1' href='#'>
+                                                <i class='fa-solid fa-pen-to-square'></i></a>
+                                            <a class='btn btn-xs btn-success mx-1' href='#'>
+                                                <i class='fa-solid fa-download'></i> </a>
+                                            <a class='btn btn-xs btn-danger mx-1' href='#'>
+                                                <i class='fa-solid fa-trash-can'></i> </a>
+                                        </td>
                                     </tr>
                                     <tr>
+                                        <td>01/01/2023</td>
                                         <td>John Doe</td>
                                         <td>Senagal</td>
-                                        <td>Sales</td>
-                                        <td><a href="./quatation_view.php">SO764</a></td>
-                                        <td><span class="badge badge-success">Shipped</span></td>
+                                        <td>IN-0001</td>
+                                        <td>SO-0001</td>
+                                        <td>Confirmed</td>
+                                        <td>01/25/2022</td>
+                                        <td>Riskan</td>
+                                        <td><i class="fa-solid fa-circle"></i></td>
+                                        <td><i class="fa-solid fa-circle"></i></td>
+                                        <td>$1000</td>
+                                        <td><a href="./quatation_view.php">SO1037</a></td>
+                                        <td>
+                                            <span>
+                                                <i class="fa-solid fa-circle mx-1" style="color: #28a745;"></i>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a class='btn btn-xs btn-secondary mx-1' href='#'>
+                                                <i class='fa-solid fa-eye'></i> </a>
+                                            <a class='btn btn-xs btn-warning mx-1' href='#'>
+                                                <i class='fa-solid fa-pen-to-square'></i></a>
+                                            <a class='btn btn-xs btn-success mx-1' href='#'>
+                                                <i class='fa-solid fa-download'></i> </a>
+                                            <a class='btn btn-xs btn-danger mx-1' href='#'>
+                                                <i class='fa-solid fa-trash-can'></i> </a>
+                                        </td>
                                     </tr>
                                     <tr>
+                                        <td>01/01/2023</td>
                                         <td>John Doe</td>
                                         <td>Senagal</td>
-                                        <td>Sales</td>
-                                        <td><a href="./quatation_view.php">SO5642</a></td>
-                                        <td><span class="badge badge-warning">Pending</span></td>
+                                        <td>IN-0001</td>
+                                        <td>SO-0001</td>
+                                        <td>Confirmed</td>
+                                        <td>01/25/2022</td>
+                                        <td>Riskan</td>
+                                        <td><i class="fa-solid fa-circle"></i></td>
+                                        <td><i class="fa-solid fa-circle"></i></td>
+                                        <td>$1000</td>
+                                        <td><a href="./quatation_view.php">SO1037</a></td>
+                                        <td>
+                                            <span>
+                                                <i class="fa-solid fa-circle mx-1" style="color: #ffc107;"></i>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a class='btn btn-xs btn-secondary mx-1' href='#'>
+                                                <i class='fa-solid fa-eye'></i> </a>
+                                            <a class='btn btn-xs btn-warning mx-1' href='#'>
+                                                <i class='fa-solid fa-pen-to-square'></i></a>
+                                            <a class='btn btn-xs btn-success mx-1' href='#'>
+                                                <i class='fa-solid fa-download'></i> </a>
+                                            <a class='btn btn-xs btn-danger mx-1' href='#'>
+                                                <i class='fa-solid fa-trash-can'></i> </a>
+                                        </td>
                                     </tr>
                                     <tr>
+                                        <td>01/01/2023</td>
                                         <td>John Doe</td>
                                         <td>Senagal</td>
-                                        <td>Sales</td>
-                                        <td><a href="./quatation_view.php">SO4522</a></td>
-                                        <td><span class="badge badge-success">Shipped</span></td>
-
+                                        <td>IN-0001</td>
+                                        <td>SO-0001</td>
+                                        <td>Confirmed</td>
+                                        <td>01/25/2022</td>
+                                        <td>Riskan</td>
+                                        <td><i class="fa-solid fa-circle"></i></td>
+                                        <td><i class="fa-solid fa-circle"></i></td>
+                                        <td>$1000</td>
+                                        <td><a href="./quatation_view.php">SO1037</a></td>
+                                        <td>
+                                            <span>
+                                                <i class="fa-solid fa-circle mx-1" style="color: #28a745;">
+                                                </i>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a class='btn btn-xs btn-secondary mx-1' href='#'>
+                                                <i class='fa-solid fa-eye'></i> </a>
+                                            <a class='btn btn-xs btn-warning mx-1' href='#'>
+                                                <i class='fa-solid fa-pen-to-square'></i></a>
+                                            <a class='btn btn-xs btn-success mx-1' href='#'>
+                                                <i class='fa-solid fa-download'></i> </a>
+                                            <a class='btn btn-xs btn-danger mx-1' href='#'>
+                                                <i class='fa-solid fa-trash-can'></i> </a>
+                                        </td>
                                     </tr>
-
                                 </tbody>
                             </table>
-                            <div class="float-right">
-                                <a class="btn btn-sm btn-default" href="#">View All Sales Orders</a>
+                            <div class="d-flex">
+                                <div class="float-start">
+                                    <a class="btn btn-sm btn-default" href="#">View All Sales Orders</a>
+                                </div>
+                                <div class="float-end ml-auto mt-auto">
+                                    <span>
+                                        <i class="fa-solid fa-circle mx-1" style="color: #28a745;"></i>Dispatched
+                                    </span>
+                                    <span>
+                                        <i class="fa-solid fa-circle mx-1" style="color: #dc3545;"></i>Delivered
+                                    </span>
+                                    <span>
+                                        <i class="fa-solid fa-circle mx-1" style="color: #17a2b8;"></i>Shipped
+                                    </span>
+                                    <span>
+                                        <i class="fa-solid fa-circle mx-1" style="color: #ff006f;"></i>Advance Paid
+                                    </span>
+                                    <span>
+                                        <i class="fa-solid fa-circle mx-1" style="color: #007bff;"></i>Fully Paid
+                                    </span>
+                                    <span>
+                                        <i class="fa-solid fa-circle mx-1" style="color: #6c757d;"></i>Pending
+                                    </span>
+                                    <span>
+                                        <i class="fa-solid fa-circle mx-1" style="color: #ffc107;"></i>Packing
+                                    </span>
+
+                                </div>
                             </div>
                         </div>
 
@@ -258,10 +418,36 @@ if (!isset($_SESSION['user_id'])) {
         <div class="col-lg-7 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card card-primary card-outline card-outline-tabs m-2 w-100">
                 <div class="card-header border-transparent mx-2">
-                    <h3 class="card-title">Sales Team Members Monthly Performance</h3>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">
+                                <h6><?php echo $current_month . " " ?>Month Performance</h6>
+                            </div>
+                        </div>
+                        <!-- <div class="col">
+                            <div class="row">
+                                <label for="">Please Select Month</label>
+                                <select class="w-25" name="language" style="border-radius: 5px;" required>
+                                    <option value="" selected>--Select Languages--
+                                    </option>
+                                    <option value="january">January</option>
+                                    <option value="february">February</option>
+                                    <option value="march">March</option>
+                                    <option value="april">April</option>
+                                    <option value="may">May</option>
+                                    <option value="june">June</option>
+                                    <option value="july">July</option>
+                                    <option value="august">August</option>
+                                    <option value="september">September</option>
+                                    <option value="octomber">Octomber</option>
+                                    <option value="november">November</option>
+                                    <option value="december">December</option>
+                                </select>
+                            </div>
+                        </div> -->
+                    </div>
                 </div>
-                <!-- /.card-header -->
-                <div class="card-body p-3">
+                <div class="card-body px-3 p-0">
                     <div class="table-responsive">
                         <table id="" class="table table-striped table-hover">
                             <thead>
@@ -334,10 +520,13 @@ if (!isset($_SESSION['user_id'])) {
         <div class="col-lg-5 grid-margin stretch-card mt-3">
             <div class="card">
                 <div class="card-header border-transparent">
-                    <h3 class="card-title">Sales Team Members Daily Achivement</h3>
+                    <h3 class="card-title">
+                        <span><?php echo $current_date; ?></span>
+                        Sales Team Members Daily Achivement
+                    </h3>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body p-3">
+                <div class="card-body px-3 p-0">
                     <div class="table-responsive">
                         <table id="" class="table table-striped table-hover">
                             <thead>
