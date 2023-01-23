@@ -38,6 +38,7 @@ $query_1_run = mysqli_query($connection, $query_1);
 foreach($query_1_run as $x){
     $first_name = $x['first_name'];
     $last_name = $x['last_name'];
+    $company_name = $x['company_name'];
     $company_email = $x['company_email'];
     $uae_number = $x['UAE_number'];
     $country = $x['country'];
@@ -126,7 +127,7 @@ foreach($query_1_run as $x){
                                                         </label>
                                                         <div class="col-sm-9 d-flex">
                                                             <input type="text" class="form-control "
-                                                                value="<?php echo $last_name ?>" readonly>
+                                                                value="<?php echo $company_name ?>" readonly>
                                                         </div>
                                                     </div>
                                                 </div>

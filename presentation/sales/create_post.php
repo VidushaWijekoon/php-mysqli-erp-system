@@ -895,7 +895,7 @@ if(isset($_POST['get_country'])){
                                             $customer_asking_model = 0;
                                             $customer_asking_price = 0;
                                             $uae_pickup2 = 0;
-                                            $i = 0;
+       
 
                                             foreach($query_run2 as $x){
                                                 $i++;
@@ -1005,10 +1005,12 @@ if(isset($_POST['get_country'])){
                                                 </td>
                                                 <td>
                                                     <?php if(($x == '-7') || ($customer_asking_price == 0)) { ?>
-                                                    <input type="text" class="form-control" name="customer_asking_price"
+                                                    <input type="number" min="1" class="form-control"
+                                                        name="customer_asking_price" required
                                                         placeholder="Customer Asking Price">
                                                     <?php } else { ?>
-                                                    <input type="text" class="form-control" name="customer_asking_price"
+                                                    <input type="number" min="1" class="form-control"
+                                                        name="customer_asking_price" required
                                                         value="<?php echo $customer_asking_price ?>" readonly>
                                                     <?php } ?>
                                                 </td>
@@ -1029,30 +1031,30 @@ if(isset($_POST['get_country'])){
                                                     </div>
                                                     <?php } else { if($uae_pickup2 == 'yes') { ?>
                                                     <div class="icheck-success d-inline">
-                                                        <input type="radio" id="uae_pickup2" name="uae_pickup2"
+                                                        <input type="radio" id="uae_pickup1" name="uae_pickup2"
                                                             value="yes" checked disabled>
-                                                        <label class="label_values" for="uae_pickup2"
+                                                        <label class="label_values" for="uae_pickup1"
                                                             style="margin-right: 15px;">Yes
                                                         </label>
                                                     </div>
                                                     <div class="icheck-danger d-inline">
-                                                        <input type="radio" id="uae_pickup3" name="uae_pickup2"
+                                                        <input type="radio" id="uae_pickup2" name="uae_pickup2"
                                                             value="no" disabled>
-                                                        <label class="label_values" for="uae_pickup3">No
+                                                        <label class="label_values" for="uae_pickup2">No
                                                         </label>
                                                     </div>
                                                     <?php }if($uae_pickup2 == 'no') { ?>
                                                     <div class="icheck-success d-inline">
-                                                        <input type="radio" id="uae_pickup2" name="uae_pickup2"
+                                                        <input type="radio" id="uae_pickup3" name="uae_pickup2"
                                                             value="yes" checked disabled>
-                                                        <label class="label_values" for="uae_pickup2"
+                                                        <label class="label_values" for="uae_pickup3"
                                                             style="margin-right: 15px;">Yes
                                                         </label>
                                                     </div>
                                                     <div class="icheck-danger d-inline">
-                                                        <input type="radio" id="uae_pickup3" name="uae_pickup2"
+                                                        <input type="radio" id="uae_pickup4" name="uae_pickup2"
                                                             value="no" checked disabled>
-                                                        <label class="label_values" for="uae_pickup3">No
+                                                        <label class="label_values" for="uae_pickup4">No
                                                         </label>
                                                     </div>
                                                     <?php } } ?>
@@ -1104,6 +1106,8 @@ if(isset($_POST['get_country'])){
 
 if(isset($_POST['submit_post_to_customer'])){
 
+    $choose_country = $_GET['choose_country'];
+
     $posting_customer_name = $_POST['posting_customer_name'];
     $posting_customer_phone_code = $_POST['posting_customer_phone_code'];
     $posting_whatsapp_number = $_POST['posting_whatsapp_number'];
@@ -1120,7 +1124,7 @@ if(isset($_POST['submit_post_to_customer'])){
                     '{$uae_pickup2}', 'post','{$username}', '{$gt_c}') ";
                     echo $d_r;
     $d_r_run = mysqli_query($connection, $d_r);
-    header("Location: create_post.php");
+    header("Location: create_post.php?choose_country=$choose_country");
 
 }
 

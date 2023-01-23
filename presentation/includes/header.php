@@ -225,25 +225,6 @@ if(isset($_POST['logged_out'])){
                             </a>
                         </li>
 
-                        <!-- Admin  -->
-                        <?php } if($role_id == 1 && $department == 11) { ?>
-
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-lock"></i>
-                                <p> Users <i class="right fas fa-angle-left"></i> </p>
-                            </a>
-
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../users/users_dashboard.php" class="nav-link">
-                                        <i class="fa fa-user-circle nav-icon" style="font-size: 12px;"></i>
-                                        <p> Admin </p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
                         <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) ) { ?>
 
                         <!-- HR -->
@@ -254,6 +235,7 @@ if(isset($_POST['logged_out'])){
                             </a>
 
                             <ul class="nav nav-treeview">
+
                                 <li class="nav-item">
                                     <a href="../employee/employee_dashboard.php" class="nav-link">
                                         <i class="fa fa-user nav-icon" style="font-size: 12px;"></i>
@@ -269,6 +251,7 @@ if(isset($_POST['logged_out'])){
                                         </p>
                                     </a>
                                 </li>
+
                             </ul>
                         </li>
 
@@ -375,7 +358,8 @@ if(isset($_POST['logged_out'])){
                             </ul>
                         </li>
 
-                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) ) { ?>
+
+                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 2)) { ?>
 
                         <!-- Inventory -->
                         <li class="nav-item">
@@ -386,18 +370,25 @@ if(isset($_POST['logged_out'])){
                             <ul class="nav nav-treeview">
 
                                 <li class="nav-item">
-                                    <a href="../inventory/warehouse_dashboard.php" class="nav-link">
-                                        <i class="fa-solid fa-people-line nav-icon" style="font-size: 12px;"></i>
-                                        <p>Warehouse Dashboard</p>
+                                    <a href="#" class="nav-link">
+                                        <i class="fa fa-warehouse nav-icon" style="font-size: 12px;"></i>
+                                        <p> Inventory <i class="right fas fa-angle-left"></i> </p>
                                     </a>
-                                </li>
 
-                                <!-- Part -->
-                                <li class="nav-item">
-                                    <a href="../inventory/warehouse_member_sales_order.php" class="nav-link">
-                                        <i class="fa fa-chalkboard-user nav-icon" style="font-size: 12px;"></i>
-                                        <p>Team Member </p>
-                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="../inventory/warehouse_dashboard.php" class="nav-link">
+                                                <i class="fa fa-people-line nav-icon" style="font-size: 12px;"></i>
+                                                <p>Team Leader</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="../inventory/warehouse_member_sales_order.php" class="nav-link">
+                                                <i class="fa fa-chalkboard-user nav-icon" style="font-size: 12px;"></i>
+                                                <p>Team Member </p>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </li>
@@ -426,9 +417,10 @@ if(isset($_POST['logged_out'])){
                                         <p>Part Stock Report</p>
                                     </a>
                                 </li>
-                            </ul>
-                        </li>
 
+                            </ul>
+
+                        </li>
 
                         <?php } if(($role_id == 1 && $department == 11) ||($role_id == 2 && $department == 18)) { ?>
 
@@ -439,9 +431,10 @@ if(isset($_POST['logged_out'])){
                                 <p> Production <i class="right fas fa-angle-left"></i> </p>
                             </a>
                             <ul class="nav nav-treeview">
+
                                 <li class="nav-item">
                                     <a href="../production/production_team_leader_dashboard.php" class="nav-link">
-                                        <i class="fa-solid fa-people-group nav-icon" style="font-size: 12px;"></i>
+                                        <i class="fa fa-people-line nav-icon" style="font-size: 12px;"></i>
                                         <p> Team Leader </p>
                                     </a>
                                 </li>
@@ -452,12 +445,11 @@ if(isset($_POST['logged_out'])){
                                         <p> Technician </p>
                                     </a>
                                 </li>
+
                             </ul>
                         </li>
 
-                        <?php } ?>
-
-                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18)) { ?>
+                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18)) { ?>
 
                         <!-- Motherboard -->
                         <li class="nav-item">
@@ -466,6 +458,7 @@ if(isset($_POST['logged_out'])){
                                 <p> Motherboard <i class="right fas fa-angle-left"></i> </p>
                             </a>
                             <ul class="nav nav-treeview">
+
                                 <li class="nav-item">
                                     <a href="../motherboard/motherboard_dashboard.php" class="nav-link">
                                         <i class="fa fa-people-line nav-icon" style="font-size: 12px;"></i>
@@ -486,16 +479,36 @@ if(isset($_POST['logged_out'])){
                                         <p> Laptop Technician </p>
                                     </a>
                                 </li>
+
                             </ul>
                         </li>
 
-                        <?php } ?>
-
-
-                        <!-- Performance -->
-                        <?php if(($department == 5 && $role_id == 5) || ($department == 5 && $role_id == 8) || ($department == 16)){ ?>
-                        <li class="nav-item d-none">
+                        <!-- LCD -->
+                        <?php } if($department == 1 && $role_id == 11 ){ ?>
+                        <li class="nav-item">
+                            <a href="../performance/distributor.php" class="nav-link">
+                                <i class="nav-icon fa-solid fa-display"></i>
+                                <p> Performance <i class="right fas fa-angle-left"></i> </p>
+                            </a>
+                        </li>
+                        <?php } if($department == 1 && $role_id == 9 ){ ?>
+                        <li class="nav-item">
+                            <a href="../performance/prod_team_lead.php" class="nav-link">
+                                <i class="nav-icon fa-solid fa-display"></i>
+                                <p> Performance <i class="right fas fa-angle-left"></i> </p>
+                            </a>
+                        </li>
+                        <?php } if(($department != 19 && $department != 2 && ($department == 1 && $role_id != 9 ) && ($department == 1 && $role_id != 11 ))){ ?>
+                        <li class="nav-item">
                             <a href="../performance/performance_record.php" class="nav-link">
+                                <i class="nav-icon fa-solid fa-display"></i>
+                                <p> Performance <i class="right fas fa-angle-left"></i> </p>
+                            </a>
+                        </li>
+                        <?php } ?>
+                        <?php if( $department == 2){ ?>
+                        <li class="nav-item">
+                            <a href="../performance/inventory_performance.php" class="nav-link">
                                 <i class="nav-icon fa-solid fa-display"></i>
                                 <p> Performance <i class="right fas fa-angle-left"></i> </p>
                             </a>
@@ -509,6 +522,7 @@ if(isset($_POST['logged_out'])){
                             </a>
                         </li>
                         <?php } ?>
+
                         <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18)) { ?>
 
                         <!-- Battery -->
@@ -518,11 +532,13 @@ if(isset($_POST['logged_out'])){
                                 <p> Battery <i class="right fas fa-angle-left"></i> </p>
                             </a>
                             <ul class="nav nav-treeview">
+
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
                                         <i class="fa fa-battery nav-icon" style="font-size: 12px;"></i>
                                         <p> Battery </p>
                                     </a>
+
                                 </li>
                             </ul>
                         </li>
@@ -536,6 +552,7 @@ if(isset($_POST['logged_out'])){
                                 <p> Bodywork <i class="right fas fa-angle-left"></i> </p>
                             </a>
                             <ul class="nav nav-treeview">
+
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
                                         <i class="fa fa-laptop nav-icon" style="font-size: 12px;"></i>
@@ -554,6 +571,7 @@ if(isset($_POST['logged_out'])){
                                 <p> Sanding <i class="right fas fa-angle-left"></i> </p>
                             </a>
                             <ul class="nav nav-treeview">
+
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
                                         <i class="fa fa-soap nav-icon" style="font-size: 12px;"></i>
@@ -592,12 +610,14 @@ if(isset($_POST['logged_out'])){
                                 <p> QC <i class="right fas fa-angle-left"></i> </p>
                             </a>
                             <ul class="nav nav-treeview">
+
                                 <li class="nav-item">
                                     <a href="../qc/new_create_mfg.php" class="nav-link">
                                         <i class="fa fa-stethoscope nav-icon" style="font-size: 12px;"></i>
                                         <p> QC </p>
                                     </a>
                                 </li>
+
                             </ul>
                         </li>
 
@@ -610,19 +630,20 @@ if(isset($_POST['logged_out'])){
                                 <p> Packing <i class="right fas fa-angle-left"></i> </p>
                             </a>
                             <ul class="nav nav-treeview">
+
                                 <li class="nav-item">
                                     <a href="../packing/packing_dashboard.php" class="nav-link">
                                         <i class="fa fa-boxes nav-icon" style="font-size: 12px;"></i>
                                         <p> Packing </p>
                                     </a>
                                 </li>
+
                             </ul>
                         </li>
 
                         <?php } ?>
 
-
-                        <li class="nav-header text-capitalize">Inventory</li>
+                        <li class="nav-header text-uppercase">Other</li>
 
                         <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 6 && $department == 1) || ($role_id == 4 && $department == 1) ) { ?>
 
@@ -642,16 +663,16 @@ if(isset($_POST['logged_out'])){
                             </a>
                         </li>
 
-                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 2) || ($role_id == 10 && $department == 2) || ($role_id == 5 && $department == 5) || ($role_id == 8 && $department == 5) || ($role_id == 5 && $department == 19)) { ?>
+                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 2) || ($role_id == 10 && $department == 2)) { ?>
 
                         <li class="nav-item">
                             <a href="../inventory/warehouse_stock_report.php" class="nav-link">
                                 <i class="fa fa-cubes-stacked nav-icon" style="font-size: 12px;"></i>
-                                <p> Laptop Inventory </p>
+                                <p> Stock Report </p>
                             </a>
                         </li>
 
-                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 20) || ($role_id == 6 && $department == 1) ) { ?>
+                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 20) || ($role_id == 6 && $department == 1)|| ($role_id == 4 && $department == 19)) { ?>
 
                         <li class="nav-item">
                             <a href="../part/part_stock_dashboard.php" class="nav-link">

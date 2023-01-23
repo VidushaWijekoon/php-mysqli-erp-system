@@ -4,16 +4,6 @@ include_once('../../dataAccess/connection.php');
 
 $quatation_id = $_GET['quatation_id'];
 
-
-
-$packing_type = null;
-
-$query = "SELECT * FROM sales_quatation_items WHERE quatation_id = '$quatation_id'";
-$query_run = mysqli_query($connection, $query);
-foreach($query_run as $l){
-  $packing_type = $l['packing_type'];
-}
-
 $query = "SELECT * FROM sales_customer_information 
         INNER JOIN sales_quatation_items ON sales_customer_information.customer_id = sales_quatation_items.customer_id
         WHERE sales_quatation_items.quatation_id = '$quatation_id'
@@ -25,28 +15,22 @@ foreach($query_run as $xd){
   $customer_country = $xd['country'];
   $customer_uae_number = $xd['UAE_number'];
   $customer_purchsaing_currency = $xd['currency'];
-  $pickup_method = $xd['pickup_method'];
-  $payment_terms = $xd['payment_terms'];
 
 }
- 
 
 class PDF extends FPDF
 {
 // Page header
   function Header(){
-    $myImage = "../../static/dist/img/alsakb logo.png";  // this is where you get your Image
-    $this->Image($myImage, 163, $this->GetY(), 33.78);
 
     //Display Company Info
     $this->SetFont('Arial','B',16);
- 
     $this->SetTextColor(141, 180, 204);
-    $this->Cell(50, 8,"Alsakb Computer",0,1);
+    $this->Cell(50,10,"CCI COMPUTER GLOBAL INC.",0,1);
     $this->SetFont('Arial','',12);
     $this->SetTextColor(0, 0, 0);
-    $this->Cell(50, 6,"Shubra No.15 - 19 Maliha Rd - behind City Retail Hypermarket,",0,1);
-    $this->Cell(50, 6,"Industrial Area 5 - Al Sharjah",0,1);
+    $this->Cell(50, 6,"39 Pemberton Avenue Suite 51 6,",0,1);
+    $this->Cell(50, 6,"North York, ON M2M 4L6 Canada",0,1);
     $this->Cell(50, 6,"Contact: Tina Li",0,1);
     $this->Cell(50, 6,"Contact No: +971551553288",0,1);
         
@@ -56,13 +40,12 @@ class PDF extends FPDF
     $this->SetFont('Arial','B',18);
     $this->SetTextColor(141, 180, 204);
     $this->Cell(50,0,"QUOTATION",0,1);
-
-
     
     $this->SetTextColor(0, 0, 0);
     $this->SetFont('Arial','',10);
     $this->Cell(0,6," ",0,1,"R");
-    // $this->Cell(0,6," Date: 01/16/2023",0,1,"R");
+    $this->Cell(0,6," Date: 01/16/2023",0,1,"R");
+    $this->Cell(0,6," Quatation ID: ",0,1,"R");
     $this->SetFont('Arial','',10);
         
     //Display Horizontal line
@@ -74,18 +57,31 @@ class PDF extends FPDF
     $this->SetFillColor(30,29,136);
     // Title
     $this->SetFont('Arial','B',12);
-    $this->Cell(100,6,"Quotation to",0,1,'L',true);
+    $this->Cell(100,6,"Invoice to",0,1,'L',true);
   }
 
   // Page footer
   function Footer(){
-    $this->SetY(-120);
+    $this->SetY(-80);
     $this->SetFont('Arial','B', 12);
     $this->SetTextColor(0, 0, 0);
+    $this->Cell(0,6,"Bank Details: ",0,1,"L");
     $this->SetFont('Arial','', 10);
-    $this->Cell(0,6,"",0,1,"C");
-    $this->Cell(0,6,"Welcome to Make a Business with Alsakb Computers",0,1,"C");
-    $this->Cell(0,6,"Visit https://alsakbcomputer.com",0,1,"C");
+    $this->Cell(0,6,"Bank Name: TD Canada Trust",0,1,"L");
+    $this->Cell(0,6,"Bank Address: 3477 Sheppard Ave East,Scarborough.ON,M1T 3K6",0,1,"L");
+    $this->Cell(0,6,"Branch Transit Code: 10332",0,1,"L");
+    $this->Cell(0,6,"Bank I.D. Code:004",0,1,"L");
+    $this->Cell(0,6,"Account NO: 7311188",0,1,"L");
+    $this->Cell(0,6,"CC code: 000410332",0,1,"L");
+    $this->Cell(0,6,"Swift code: TDOMCATTTOR",0,1,"L");
+    $this->Cell(0,6,"Bank Tel: 416 291 9566",0,1,"L");
+    //$this->Ln(5);
+    $this->SetFont('Arial','',8);
+    $this->Cell(0,5," ",0,1,"R");
+    $this->Cell(0,5,"Benificiary Name: CCI COMPUTER GLOBAL INC.",0,1,"R");
+    $this->Cell(0,5,"Beneficiary Address: 39 Pemberton Avenue Suite 517 North York,ON M2M 4L6 Canada",0,1,"R");
+    $this->Cell(0,5,"Benificiary Tel: 647-267-0818",0,1,"R");
+    $this->SetFont('Arial','',10);
   }
 }
 
@@ -96,14 +92,9 @@ $pdf->AddPage();
 $pdf->SetFont('Times','',12);
 
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(120,2," ",0,1,"R");
+$pdf->Cell(2,2," ",0,1,"R");
 $pdf->Cell(2,6, $customer_first_name . " " . $customer_last_name . " " . $customer_country . '',0,1);
 $pdf->Cell(2,5,'Contact: +971 '. $customer_uae_number .'',0,1);
-$pdf->SetFont('Arial','',10);
-$pdf->Cell(2,5,'Payment Method: '. ucfirst($payment_terms) .'',0,1);
-$pdf->Cell(2,5,'Pickup Method: '. ucfirst($pickup_method) .'',0,1);
-$pdf->Cell(2,5,'Packing Type: '. ucfirst($packing_type) .'',0,1);
-
 
 $pdf->SetFillColor(95,10,161);
 $pdf->SetTextColor(255, 255, 255);
@@ -134,7 +125,6 @@ foreach($query_run as $d){
   $qty = $d['qty'];
   $unit_price = $d['unit_price'];
   $total = $d['total'];
-  $packing_type = $d['packing_type'];
   
   $pdf->SetFont('Arial','',10);
   $pdf->SetTextColor(0, 0, 0);
