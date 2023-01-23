@@ -97,7 +97,7 @@ foreach($query_set as $q){
     $member_id = $q['id'];
 }
 
-if(isset($_POST['get_user'])){
+if(isset($_POST['get_user1'])){
     $day = mysqli_real_escape_string($connection, $_POST['day']);
     $sales_member = mysqli_real_escape_string($connection, $_POST['sales_member']);
 
@@ -106,6 +106,19 @@ if(isset($_POST['get_user'])){
     echo "<script>
             $(window).load(function() {
                 $('#create_search').modal('show');
+            });
+        </script>";
+}
+
+if(isset($_POST['get_user2'])){
+    $day = mysqli_real_escape_string($connection, $_POST['day']);
+    $sales_member = mysqli_real_escape_string($connection, $_POST['sales_member']);
+
+    $qd = "INSERT INTO `weekly_sales_set_target`(`day`, `sales_member`, `created_by`, `epf`) VALUES ('{$day}', '{$sales_member}', '{$username}', '{$epf}')";
+    $q_run = mysqli_query($connection, $qd);
+    echo "<script>
+            $(window).load(function() {
+                $('#posting_modal').modal('show');
             });
         </script>";
 }
@@ -299,11 +312,11 @@ if(isset($_POST['posting_modal'])){
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <button type="submit" name="get_user"
+                                                        <button type="submit" name="get_user1"
                                                             class="btn btn-sm btn-primary" data-toggle="modal"
                                                             data-target="#create_search">Create & Search
                                                             Customer</button>
-                                                        <button type="submit" name="get_user"
+                                                        <button type="submit" name="get_user2"
                                                             class="btn btn-sm btn-success" data-toggle="modal"
                                                             data-target="#posting_modal">Posting to Customer</button>
                                                     </td>
@@ -352,12 +365,13 @@ if(isset($_POST['posting_modal'])){
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <button type="submit" name="get_user" class="btn btn-sm btn-primary"
-                                                        data-toggle="modal" data-target="#create_search">Create & Search
+                                                    <button type="submit" name="get_user1"
+                                                        class="btn btn-sm btn-primary" data-toggle="modal"
+                                                        data-target="#create_search">Create & Search
                                                         Customer</button>
-                                                    <button type="submit" name="get_user" class="btn btn-sm btn-success"
-                                                        data-toggle="modal" data-target="#posting_modal">Posting to
-                                                        Customer</button>
+                                                    <button type="submit" name="get_user2"
+                                                        class="btn btn-sm btn-success" data-toggle="modal"
+                                                        data-target="#posting_modal">Posting to Customer</button>
                                                 </td>
                                             </form>
                                         </tbody>
@@ -404,12 +418,13 @@ if(isset($_POST['posting_modal'])){
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <button type="submit" name="get_user" class="btn btn-sm btn-primary"
-                                                        data-toggle="modal" data-target="#create_search">Create & Search
+                                                    <button type="submit" name="get_user1"
+                                                        class="btn btn-sm btn-primary" data-toggle="modal"
+                                                        data-target="#create_search">Create & Search
                                                         Customer</button>
-                                                    <button type="submit" name="get_user" class="btn btn-sm btn-success"
-                                                        data-toggle="modal" data-target="#posting_modal">Posting to
-                                                        Customer</button>
+                                                    <button type="submit" name="get_user2"
+                                                        class="btn btn-sm btn-success" data-toggle="modal"
+                                                        data-target="#posting_modal">Posting to Customer</button>
                                                 </td>
                                             </form>
                                         </tbody>
@@ -455,12 +470,13 @@ if(isset($_POST['posting_modal'])){
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <button type="submit" name="get_user" class="btn btn-sm btn-primary"
-                                                        data-toggle="modal" data-target="#create_search">Create & Search
+                                                    <button type="submit" name="get_user1"
+                                                        class="btn btn-sm btn-primary" data-toggle="modal"
+                                                        data-target="#create_search">Create & Search
                                                         Customer</button>
-                                                    <button type="submit" name="get_user" class="btn btn-sm btn-success"
-                                                        data-toggle="modal" data-target="#posting_modal">Posting to
-                                                        Customer</button>
+                                                    <button type="submit" name="get_user2"
+                                                        class="btn btn-sm btn-success" data-toggle="modal"
+                                                        data-target="#posting_modal">Posting to Customer</button>
                                                 </td>
                                             </form>
                                         </tbody>
@@ -506,12 +522,13 @@ if(isset($_POST['posting_modal'])){
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <button type="submit" name="get_user" class="btn btn-sm btn-primary"
-                                                        data-toggle="modal" data-target="#create_search">Create & Search
+                                                    <button type="submit" name="get_user1"
+                                                        class="btn btn-sm btn-primary" data-toggle="modal"
+                                                        data-target="#create_search">Create & Search
                                                         Customer</button>
-                                                    <button type="submit" name="get_user" class="btn btn-sm btn-success"
-                                                        data-toggle="modal" data-target="#posting_modal">Posting to
-                                                        Customer</button>
+                                                    <button type="submit" name="get_user2"
+                                                        class="btn btn-sm btn-success" data-toggle="modal"
+                                                        data-target="#posting_modal">Posting to Customer</button>
                                                 </td>
                                             </form>
                                         </tbody>
@@ -556,12 +573,13 @@ if(isset($_POST['posting_modal'])){
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <button type="submit" name="get_user" class="btn btn-sm btn-primary"
-                                                        data-toggle="modal" data-target="#create_search">Create & Search
+                                                    <button type="submit" name="get_user1"
+                                                        class="btn btn-sm btn-primary" data-toggle="modal"
+                                                        data-target="#create_search">Create & Search
                                                         Customer</button>
-                                                    <button type="submit" name="get_user" class="btn btn-sm btn-success"
-                                                        data-toggle="modal" data-target="#posting_modal">Posting to
-                                                        Customer</button>
+                                                    <button type="submit" name="get_user2"
+                                                        class="btn btn-sm btn-success" data-toggle="modal"
+                                                        data-target="#posting_modal">Posting to Customer</button>
                                                 </td>
                                             </form>
                                         </tbody>
@@ -608,11 +626,11 @@ if(isset($_POST['posting_modal'])){
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <button type="submit" name="get_user"
+                                                        <button type="submit" name="get_user1"
                                                             class="btn btn-sm btn-primary" data-toggle="modal"
                                                             data-target="#create_search">Create & Search
                                                             Customer</button>
-                                                        <button type="submit" name="get_user"
+                                                        <button type="submit" name="get_user2"
                                                             class="btn btn-sm btn-success" data-toggle="modal"
                                                             data-target="#posting_modal">Posting to Customer</button>
                                                     </td>
@@ -660,7 +678,19 @@ if(isset($_POST['posting_modal'])){
                             $result = mysqli_query($connection, $query);
                             foreach($result as $row){
                                 $day = $row['day'];
-                                $sales_person = $row['sales_member'];    
+                                $sales_person = $row['sales_member'];   
+                                
+                                $q1 = "SELECT created_time, day, sales_member FROM weekly_sales_set_create_search_customer WHERE day = '$day' AND sales_member = '$sales_person'";
+                                $q1_run = mysqli_query($connection, $q1);
+                                foreach($q1_run as $x){
+                                    $search_customer_created_time = $x['created_time'];
+                                }
+
+                                $q2 = "SELECT created_time, day, sales_member FROM weekly_sales_set_posting_to_customer WHERE day = '$day' AND sales_member = '$sales_person'";
+                                $q2_run = mysqli_query($connection, $q2);
+                                foreach($q2_run as $i){
+                                    $posted_customer_created_time = $i['created_time'];
+                                }
                                 
                             
                             ?>
@@ -669,16 +699,16 @@ if(isset($_POST['posting_modal'])){
                                 <td><?php echo $day; ?></td>
                                 <td><?php echo $sales_person; ?></td>
                                 <td>
-                                    <?php if($search_customer_id != null) { ?>
+                                    <?php if($search_customer_created_time != null) { ?>
                                     <span class="badge badge-lg badge-success text-white p-1 px-3">Assigned</span>
-                                    <?php }if($search_customer_id == null) { ?>
+                                    <?php }if($search_customer_created_time == null) { ?>
                                     <span class="badge badge-lg badge-danger text-white p-1 px-3">Not Assigned</span>
                                     <?php } ?>
                                 </td>
                                 <td>
-                                    <?php if($posting_id != null) { ?>
+                                    <?php if($posted_customer_created_time != null) { ?>
                                     <span class="badge badge-lg badge-success text-white p-1 px-3">Assigned</span>
-                                    <?php }if($posting_id == null) { ?>
+                                    <?php }if($posted_customer_created_time == null) { ?>
                                     <span class="badge badge-lg badge-danger text-white p-1 px-3">Not Assigned</span>
                                     <?php } ?>
                                 </td>
@@ -804,7 +834,7 @@ if(isset($_POST['posting_modal'])){
                                 </td>
                                 <td>
                                     <input type="number" min='1' max='300' class="form-control" placeholder="Target QTY"
-                                        name="customer_target_qty">
+                                        name="customer_target_qty" required>
 
                                 </td>
                             </tr>

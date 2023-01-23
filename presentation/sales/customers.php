@@ -10,6 +10,8 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
 
+$username = $_SESSION['username'];
+
 ?>
 <div class="container-fluid">
     <div class="row">
@@ -44,7 +46,7 @@ if (!isset($_SESSION['user_id'])) {
                             <tbody>
                                 <?php 
                                 
-                                    $query = "SELECT * FROM sales_customer_information ORDER BY customer_id DESC";
+                                    $query = "SELECT * FROM sales_customer_information WHERE created_by = '$username' ORDER BY customer_id DESC ";
                                     $query_run = mysqli_query($connection, $query);
                                     foreach($query_run as $qr){
                                  

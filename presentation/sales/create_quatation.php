@@ -498,8 +498,8 @@ if(isset($_POST['add_items'])){
                                                     <select class="" name="packing_type"
                                                         style="border-radius: 5px; width: 100%">
                                                         <option selected>--Select Packing Type--</option>
-                                                        <option value="single_box">Single Box</option>
-                                                        <option value="bulk_packing">Bulk Packing</option>
+                                                        <option value="single box">Single Box</option>
+                                                        <option value="bulk packing">Bulk Packing</option>
                                                     </select>
                                                 </td>
 
@@ -507,7 +507,7 @@ if(isset($_POST['add_items'])){
                                                     <select class="" name="shipping_method"
                                                         style="border-radius: 5px; width: 100%">
                                                         <option selected>--Select Shipping Method--</option>
-                                                        <option value="local_pickup">Local Pickup</option>
+                                                        <option value="local pickup">Local Pickup</option>
                                                         <option value="dhl">DHL</option>
                                                         <option value="fedex">Fedex</option>
                                                         <option value="ups">UPS</option>
