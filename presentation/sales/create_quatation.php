@@ -137,7 +137,6 @@ if(isset($_POST['add_items'])){
 
 }
 
-
 ?>
 
 <div class="row page-titles">
@@ -165,7 +164,6 @@ if(isset($_POST['add_items'])){
                                     <div class="row">
                                         <label class="col-sm-3 col-form-label">Choose Customer</label>
                                         <div class="col-sm-8 mt-2">
-
                                             <select name="customer_id" id="choose_customer"
                                                 class="info_select w-50 select2" style="border-radius: 5px;">
                                                 <option selected value="">--Select Customer--
@@ -183,6 +181,7 @@ if(isset($_POST['add_items'])){
                                                 </option>
                                                 <?php endwhile; ?>
                                             </select>
+
                                             <button name="get_custmer_details" type="submit"
                                                 class="btn btn-sm btn-primary p-0 px-2">Select Customer</button>
                                         </div>
@@ -525,12 +524,12 @@ if(isset($_POST['add_items'])){
                                                         placeholder="Unit Price" name="unit_price">
                                                 </td>
                                                 <td>
-                                                    <input type="number" min="1" id="discount" class="form-control"
+                                                    <input type="number" id="discount" class="form-control"
                                                         placeholder="Discount" name="discount">
                                                 </td>
                                                 <td>
-                                                    <input type="number" min="1" class="form-control" onclick="Total()"
-                                                        placeholder="Total" name="total" id="total">
+                                                    <input type="number" class="form-control" placeholder="Total"
+                                                        name="total" id="total">
                                                 </td>
 
                                                 <td>

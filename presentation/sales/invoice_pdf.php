@@ -2,10 +2,27 @@
 require_once ('includes/fpdf.php');
 include_once('../../dataAccess/connection.php');
 
+$quatation_id = $_GET['quatation_id'];
+
+$query = "SELECT * FROM sales_customer_information 
+        INNER JOIN sales_quatation_items ON sales_customer_information.customer_id = sales_quatation_items.customer_id
+        WHERE sales_quatation_items.quatation_id = '$quatation_id'
+        GROUP BY quatation_id ORDER BY quatation_id";
+$query_run = mysqli_query($connection, $query);
+foreach($query_run as $xd){
+  $customer_first_name = $xd['first_name'];
+  $customer_last_name = $xd['last_name'];
+  $customer_country = $xd['country'];
+  $customer_uae_number = $xd['UAE_number'];
+  $customer_purchsaing_currency = $xd['currency'];
+
+}
+
 class PDF extends FPDF
 {
 // Page header
   function Header(){
+
     //Display Company Info
     $this->SetFont('Arial','B',16);
     $this->SetTextColor(141, 180, 204);
@@ -17,7 +34,7 @@ class PDF extends FPDF
     $this->Cell(50, 6,"Contact: Tina Li",0,1);
     $this->Cell(50, 6,"Contact No: +971551553288",0,1);
         
-        //Display INVOICE text
+    //Display INVOICE text
     $this->SetY(8);
     $this->SetX(-50);
     $this->SetFont('Arial','B',18);
@@ -28,18 +45,17 @@ class PDF extends FPDF
     $this->SetFont('Arial','',10);
     $this->Cell(0,6," ",0,1,"R");
     $this->Cell(0,6," Date: 01/16/2023",0,1,"R");
-    $this->Cell(0,6," Quatation ID: CCI-HMP-QA220505",0,1,"R");
+    $this->Cell(0,6," Quatation ID: ",0,1,"R");
     $this->SetFont('Arial','',10);
         
-        //Display Horizontal line
-
+    //Display Horizontal line
     $this->SetY(47);
     $this->SetX(1);
     $this->SetFont('Arial','',12);
         // Background color
     $this->SetTextColor(255, 255, 255);
     $this->SetFillColor(30,29,136);
-        // Title
+    // Title
     $this->SetFont('Arial','B',12);
     $this->Cell(100,6,"Invoice to",0,1,'L',true);
   }
@@ -77,34 +93,63 @@ $pdf->SetFont('Times','',12);
 
 $pdf->SetFont('Arial','B',10);
 $pdf->Cell(2,2," ",0,1,"R");
-$pdf->Cell(2,6,'COSCO COMPUTERS NIGERIA'.'',0,1);
-$pdf->Cell(2,5,'Contact: 2348067356096'.'',0,1);
+$pdf->Cell(2,6, $customer_first_name . " " . $customer_last_name . " " . $customer_country . '',0,1);
+$pdf->Cell(2,5,'Contact: +971 '. $customer_uae_number .'',0,1);
 
 $pdf->SetFillColor(95,10,161);
 $pdf->SetTextColor(255, 255, 255);
-$pdf->Cell(120,5,'Description',1,0,'C',true);
-$pdf->Cell(25,5,'Unit Price',1,0,'C',true);
-$pdf->Cell(25,5,'Quantity',1,0,'C',true);
-$pdf->Cell(25,5,'Total Price',1,0,'C',true);
+$pdf->SetFont('Arial','B',8);
+$pdf->Cell(135,5,'Description',1,0,'C',true);
+$pdf->Cell(20,5,'Unit Price',1,0,'C',true);
+$pdf->Cell(20,5,'Quantity',1,0,'C',true);
+$pdf->Cell(20,5,'Total Price',1,0,'C',true);
 
-$query = "SELECT * FROM users LIMIT 20";
+
+$query = "SELECT * FROM sales_quatation_items WHERE quatation_id = '$quatation_id'";
 $query_run = mysqli_query($connection, $query);
-foreach($query_run as $result){
+foreach($query_run as $d){
+  $device = $d['device'];
+  $brand = $d['brand'];
+  $model = $d['model'];
+  $processor = $d['processor'];
+  $core = $d['device'];
+  $generation = $d['generation'];
+  $speed = $d['speed'];
+  $lcd_size = $d['lcd_size'];
+  $resolution = $d['resolution'];
+  $touch_or_non_touch = $d['touch_or_non_touch'];
+  $ram = $d['ram'];
+  $hdd_capacity = $d['hdd_capacity'];
+  $hdd_type = $d['hdd_type'];
+  $os = $d['os'];
+  $qty = $d['qty'];
+  $unit_price = $d['unit_price'];
+  $total = $d['total'];
+  
   $pdf->SetFont('Arial','',10);
   $pdf->SetTextColor(0, 0, 0);
   $pdf->Cell(2,5," ",0,1,"R");
-  $pdf->Cell(120,5,'HP 1030 G2 X360 I7 7TH GEN 16/512SSD NO AC',1,0,'L',0);
-  $pdf->Cell(25,5,'1500',1,0,'L',0);
-  $pdf->Cell(25,5,'10',1,0,'L',0);
-  $pdf->Cell(25,5,'14500',1,0,'L',0);
+  $pdf->SetFont('Arial','',7);
+  $pdf->Cell(135,5, strtoupper($device . '/' . $brand . '/' . $model . '/' . $processor . '/' . $core . '/' . $speed . '/' . $lcd_size . '/' . $resolution . '/' . $touch_or_non_touch . '/' . $ram . '/' . $hdd_capacity . '/' . $hdd_type . '/' . $os ),1,0,'L',0);
+  $pdf->Cell(20,5, $unit_price, 1,0,'L',0);
+  $pdf->Cell(20,5, $qty, 1,0,'L',0);
+  $pdf->Cell(20,5, $total ,1,0,'L',0);
+
+}
+
+$query_1 = "SELECT SUM(qty) AS Total_Qty, SUM(total) AS Total_Amount FROM sales_quatation_items WHERE quatation_id = '$quatation_id'";
+$query_result = mysqli_query($connection, $query_1);
+foreach($query_result as $x){
+  $total_qty = $x['Total_Qty'];
+  $total_amount = $x['Total_Amount'];
 }
 
 $pdf->SetFont('Arial','B',10);
 $pdf->Cell(2,5,"",0,1,"R");
-$pdf->Cell(120,5,'',1,0,'L',0);
-$pdf->Cell(25,5,'',1,0,'L',0);
-$pdf->Cell(25,5,'200',1,0,'L',0);
-$pdf->Cell(25,5,'300000',1,0,'L',0);
+$pdf->Cell(135,5,'',1,0,'L',0);
+$pdf->Cell(20,5,'',1,0,'L',0);
+$pdf->Cell(20,5, $total_qty,1,0,'L',0);
+$pdf->Cell(20,5, $total_amount,1,0,'L',0);
 
 $pdf->Cell(2,5," ",0,1,"R");
 $pdf->SetFont('Arial','',12);
@@ -113,17 +158,17 @@ $pdf->SetTextColor(255, 255, 255);
 $pdf->SetFillColor(30,29,136);
 // Title
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(145,6,"Other Comment and Remarks",0,1,'L',true);
+$pdf->Cell(135,6,"Other Comment and Remarks",0,1,'L',true);
 
 $pdf->SetFont('Arial','',10);
 $pdf->SetTextColor(0, 0, 0);
-$pdf->Cell(145,6,"Purchasing Currency in AED",0,1,'L');
+$pdf->Cell(145,6,"Purchasing Currency in " . strtoupper($customer_purchsaing_currency) ,0,1,'L');
 
 $pdf->SetFont('Arial','',10);
 $pdf->SetTextColor(0, 0, 0);
-$pdf->Cell(145,5,'Total Quatation Price: Three Hundress Thousands',1,0,'L');
-$pdf->Cell(25,5,'Total',1,0,'C');
-$pdf->Cell(25,5,'300,000',1,0,'C');
+$pdf->Cell(145,5,'Total Quatation Price: ',1,0,'R');
+$pdf->Cell(25,5,'',1,0,'C');
+$pdf->Cell(25,5, $total_amount,1,0,'C');
 $pdf->Output();
 
 ?>

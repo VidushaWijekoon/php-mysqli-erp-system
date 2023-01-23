@@ -1,5 +1,13 @@
 <?php
+error_reporting (E_ALL ^ E_NOTICE);
+// Toggle this to change the setting
+define('DEBUG', true);
 
+// You want all errors to be triggered
+error_reporting(E_ALL);
+ 
+error_reporting(E_ERROR | E_PARSE);
+ob_start();
 session_start();
 include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
@@ -176,6 +184,13 @@ if(isset($_POST['get_country'])){
 
 ?>
 
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center"><a href="./sales_dashboard.php">
+            <i class="fa-solid fa-home fa-2x m-2" style="color: #ced4da;"></i>
+        </a>
+    </div>
+</div>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-11 grid-margin stretch-card justify-content-center mx-auto mt-2">
@@ -189,7 +204,7 @@ if(isset($_POST['get_country'])){
                                     aria-selected="false" style="color: #fff;">Collect Customer Informations</a>
                             </li>
                             <li class="nav-item text-center" style="width: 350px;">
-                                <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill"
+                                <a class="nav-link active" id="custom-tabs-four-profile-tab" data-toggle="pill"
                                     href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile"
                                     aria-selected="true" style="color: #fff;">Posting to Customer & Platform Task</a>
                             </li>
@@ -215,7 +230,7 @@ if(isset($_POST['get_country'])){
                                     <tbody>
                                         <tr>
                                             <td>#</td>
-                                            <td><?php echo $day; ?></td>
+                                            <td><span class="badge badge-info p-2"><?php echo $day; ?></span></td>
                                             <td>
                                                 <div class="d-flex">
                                                     <div class="col col-md-6 col-lg-6">
@@ -450,7 +465,7 @@ if(isset($_POST['get_country'])){
                                                 <th>Customer Name</th>
                                                 <th>Whatsapp Number</th>
                                                 <th>Platform</th>
-                                                <th>Model He Buying</th>
+                                                <th>Model He Selling & Buying</th>
                                                 <th>He Can Pick Up From UAE?</th>
                                                 <th>&nbsp;</th>
                                             </tr>
@@ -636,7 +651,8 @@ if(isset($_POST['get_country'])){
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td><?php echo $day; ?></td>
+                                                    <td><span class="badge badge-info p-2"><?php echo $day; ?></span>
+                                                    </td>
                                                     <td>
                                                         <input type="text" class="form-control" placeholder="Model 1"
                                                             name="customer_create_model_1"
@@ -1070,6 +1086,11 @@ if(isset($_POST['get_country'])){
                                         <?php } ?>
                                     </tbody>
                                 </table>
+                                <div class="float-end" style="text-align: end;">
+                                    <a href="./create_post.php"
+                                        class="btn btn-sm btn-default mx-auto text-center">Cancel</a>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -1099,7 +1120,8 @@ if(isset($_POST['submit_post_to_customer'])){
                     '{$uae_pickup2}', 'post','{$username}', '{$gt_c}') ";
                     echo $d_r;
     $d_r_run = mysqli_query($connection, $d_r);
-    header("Location: create_post.php?choose_country={$gt_c}");
+    header("Location: create_post.php");
+
 }
 
 ?>

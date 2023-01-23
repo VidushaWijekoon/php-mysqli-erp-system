@@ -123,7 +123,6 @@ $current_date = Date('m-d-Y');
                                         <th>Amount</th>
                                         <th>Delivery Method</th>
                                         <th>Shipping</th>
-                                        <th style="width: 200px;">&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -145,16 +144,7 @@ $current_date = Date('m-d-Y');
                                                 <i class="fa-solid fa-circle mx-1" style="color: #28a745;"></i>
                                             </span>
                                         </td>
-                                        <td>
-                                            <a class='btn btn-xs btn-secondary mx-1' href='#'>
-                                                <i class='fa-solid fa-eye'></i> </a>
-                                            <a class='btn btn-xs btn-warning mx-1' href='#'>
-                                                <i class='fa-solid fa-pen-to-square'></i></a>
-                                            <a class='btn btn-xs btn-success mx-1' href='#'>
-                                                <i class='fa-solid fa-download'></i> </a>
-                                            <a class='btn btn-xs btn-danger mx-1' href='#'>
-                                                <i class='fa-solid fa-trash-can'></i> </a>
-                                        </td>
+
                                     </tr>
                                     <tr>
                                         <td>01/01/2023</td>
@@ -174,16 +164,7 @@ $current_date = Date('m-d-Y');
                                                 <i class="fa-solid fa-circle mx-1" style="color: #dc3545;"></i>
                                             </span>
                                         </td>
-                                        <td>
-                                            <a class='btn btn-xs btn-secondary mx-1' href='#'>
-                                                <i class='fa-solid fa-eye'></i> </a>
-                                            <a class='btn btn-xs btn-warning mx-1' href='#'>
-                                                <i class='fa-solid fa-pen-to-square'></i></a>
-                                            <a class='btn btn-xs btn-success mx-1' href='#'>
-                                                <i class='fa-solid fa-download'></i> </a>
-                                            <a class='btn btn-xs btn-danger mx-1' href='#'>
-                                                <i class='fa-solid fa-trash-can'></i> </a>
-                                        </td>
+
                                     </tr>
                                     <tr>
                                         <td>01/01/2023</td>
@@ -203,16 +184,7 @@ $current_date = Date('m-d-Y');
                                                 <i class="fa-solid fa-circle mx-1" style="color: #17a2b8;"></i>
                                             </span>
                                         </td>
-                                        <td>
-                                            <a class='btn btn-xs btn-secondary mx-1' href='#'>
-                                                <i class='fa-solid fa-eye'></i> </a>
-                                            <a class='btn btn-xs btn-warning mx-1' href='#'>
-                                                <i class='fa-solid fa-pen-to-square'></i></a>
-                                            <a class='btn btn-xs btn-success mx-1' href='#'>
-                                                <i class='fa-solid fa-download'></i> </a>
-                                            <a class='btn btn-xs btn-danger mx-1' href='#'>
-                                                <i class='fa-solid fa-trash-can'></i> </a>
-                                        </td>
+
                                     </tr>
                                     <tr>
                                         <td>01/01/2023</td>
@@ -232,16 +204,7 @@ $current_date = Date('m-d-Y');
                                                 <i class="fa-solid fa-circle mx-1" style="color: #28a745;"></i>
                                             </span>
                                         </td>
-                                        <td>
-                                            <a class='btn btn-xs btn-secondary mx-1' href='#'>
-                                                <i class='fa-solid fa-eye'></i> </a>
-                                            <a class='btn btn-xs btn-warning mx-1' href='#'>
-                                                <i class='fa-solid fa-pen-to-square'></i></a>
-                                            <a class='btn btn-xs btn-success mx-1' href='#'>
-                                                <i class='fa-solid fa-download'></i> </a>
-                                            <a class='btn btn-xs btn-danger mx-1' href='#'>
-                                                <i class='fa-solid fa-trash-can'></i> </a>
-                                        </td>
+
                                     </tr>
                                     <tr>
                                         <td>01/01/2023</td>
@@ -261,16 +224,7 @@ $current_date = Date('m-d-Y');
                                                 <i class="fa-solid fa-circle mx-1" style="color: #ffc107;"></i>
                                             </span>
                                         </td>
-                                        <td>
-                                            <a class='btn btn-xs btn-secondary mx-1' href='#'>
-                                                <i class='fa-solid fa-eye'></i> </a>
-                                            <a class='btn btn-xs btn-warning mx-1' href='#'>
-                                                <i class='fa-solid fa-pen-to-square'></i></a>
-                                            <a class='btn btn-xs btn-success mx-1' href='#'>
-                                                <i class='fa-solid fa-download'></i> </a>
-                                            <a class='btn btn-xs btn-danger mx-1' href='#'>
-                                                <i class='fa-solid fa-trash-can'></i> </a>
-                                        </td>
+
                                     </tr>
                                     <tr>
                                         <td>01/01/2023</td>
@@ -291,16 +245,7 @@ $current_date = Date('m-d-Y');
                                                 </i>
                                             </span>
                                         </td>
-                                        <td>
-                                            <a class='btn btn-xs btn-secondary mx-1' href='#'>
-                                                <i class='fa-solid fa-eye'></i> </a>
-                                            <a class='btn btn-xs btn-warning mx-1' href='#'>
-                                                <i class='fa-solid fa-pen-to-square'></i></a>
-                                            <a class='btn btn-xs btn-success mx-1' href='#'>
-                                                <i class='fa-solid fa-download'></i> </a>
-                                            <a class='btn btn-xs btn-danger mx-1' href='#'>
-                                                <i class='fa-solid fa-trash-can'></i> </a>
-                                        </td>
+
                                     </tr>
                                 </tbody>
                             </table>
@@ -353,7 +298,7 @@ $current_date = Date('m-d-Y');
                                 </thead>
                                 <tbody>
                                     <?php 
-                                              
+                                                                                  
                                         $query = "SELECT * FROM sales_customer_information 
                                             INNER JOIN sales_quatation_items ON sales_customer_information.customer_id = sales_quatation_items.customer_id
                                             GROUP BY quatation_id ORDER BY quatation_id DESC LIMIT 7";                                           
