@@ -318,8 +318,7 @@ if(isset($_POST['logged_out'])){
                                         </li>
                                         <li class="nav-item">
                                             <a href="../sales/create_post.php" class="nav-link">
-                                                <i class="fa-solid fa-universal-access nav-icon"
-                                                    style="font-size: 12px;"></i>
+                                                <i class="fa-solid fa-list nav-icon" style="font-size: 12px;"></i>
                                                 <p>Daily Task</p>
                                             </a>
                                         </li>

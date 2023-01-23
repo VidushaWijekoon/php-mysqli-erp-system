@@ -237,9 +237,7 @@ $username = $_SESSION['username'];
                                 </tbody>
                             </table>
                             <div class="d-flex">
-                                <div class="float-start">
-                                    <a class="btn btn-sm btn-default" href="#">View All Sales Orders</a>
-                                </div>
+
                                 <div class="float-end ml-auto mt-auto">
                                     <span>
                                         <i class="fa-solid fa-circle mx-1" style="color: #28a745;"></i>Dispatched
