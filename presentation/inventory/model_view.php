@@ -25,13 +25,14 @@ $model = $_GET['model'];
 </div>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-12 grid-margin stretch-card justify-content-center mx-auto mt-2">
+        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="rounded">
-            <button onclick="exportToExcel('tblexportData', 'model-details')"
+
+                <div class="" style="overflow-y: scroll; height: auto;">
+                    <button onclick="exportToExcel('tblexportData', 'model-details')"
                         class="btn bg-gradient-success mt-3 float-right">Export Table Data To Excel
                         File</button>
-                <div class="table-responsive table-borderless">
-                    <table class="table">
+                    <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th class="text-center">#</th>

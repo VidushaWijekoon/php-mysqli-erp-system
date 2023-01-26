@@ -101,7 +101,7 @@ if($role_id = 1 && $department == 11) {
                 <span class="info-box-number">
                     <?php
 
-                        $query = "SELECT * FROM users WHERE is_deleted = 0";
+                        $query = "SELECT * FROM users WHERE is_deleted = 0 AND isActive = 0";
 
                         if ($result = mysqli_query($connection, $query)) {
 

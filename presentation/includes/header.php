@@ -225,6 +225,25 @@ if(isset($_POST['logged_out'])){
                             </a>
                         </li>
 
+                        <!-- Admin -->
+                        <?php } if($role_id == 1 && $department == 11) { ?>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-lock"></i>
+                                <p> Users <i class="right fas fa-angle-left"></i> </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+
+                                <li class="nav-item">
+                                    <a href="../users/users_dashboard.php" class="nav-link">
+                                        <i class="fa fa-user-circle nav-icon" style="font-size: 12px;"></i>
+                                        <p> Admin </p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
                         <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) ) { ?>
 
                         <!-- HR -->
@@ -300,7 +319,7 @@ if(isset($_POST['logged_out'])){
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="../sales/create_post.php" class="nav-link">
+                                            <a href="../sales/create_collect_customer_information.php" class="nav-link">
                                                 <i class="fa-solid fa-list nav-icon" style="font-size: 12px;"></i>
                                                 <p>Daily Task</p>
                                             </a>
@@ -324,10 +343,41 @@ if(isset($_POST['logged_out'])){
                                 </li>
                                 <?php if(($department == 16) || ($role_id == 1 && $department == 11)) { ?>
                                 <li class="nav-item">
-                                    <a href="../e-commerce/e_commerce_dashboard.php" class="nav-link">
+                                    <a href="#" class="nav-link">
                                         <i class="fa-brands fa-amazon nav-icon" style="font-size: 12px;"></i>
-                                        <p>E-Commerce </p>
+                                        <p>
+                                            E-Commerce
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
                                     </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="../sales/quatations.php" class="nav-link">
+                                                <i class="fa-solid fa-grid-horizontal nav-icon"
+                                                    style="font-size: 12px;"></i>
+                                                <p>Dashboard</p>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="fa-solid fa-suitcase nav-icon" style="font-size: 12px;"></i>
+                                                <p>E-Commerce Inventory</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="fa-solid fa-files nav-icon" style="font-size: 12px;"></i>
+                                                <p>Sales Report</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="fa-solid fa-envelopes nav-icon" style="font-size: 12px;"></i>
+                                                <p>Listing</p>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
                                 <?php } ?>
                             </ul>
@@ -345,14 +395,51 @@ if(isset($_POST['logged_out'])){
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="../accounts/accounts_dashboard.php" class="nav-link">
-                                        <i class="fa fa-coins nav-icon" style="font-size: 12px;"></i>
-                                        <p> Accounts </p>
+                                        <i class="fa fa-grid-horizontal nav-icon" style="font-size: 12px;"></i>
+                                        <p>Dashboard</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../accounts/account_packing_dashboard.php" class="nav-link">
+                                    <a href="../accounts/account_sales_orders.php" class="nav-link">
+                                        <i class="fa fa-business-time nav-icon" style="font-size: 12px;"></i>
+                                        <p>Sales Orders</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="../accounts/account_invoices.php" class="nav-link">
+                                        <i class="fa fa-receipt nav-icon" style="font-size: 12px;"></i>
+                                        <p>Invoices</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="../accounts/account_packing.php" class="nav-link">
                                         <i class="fa fa-boxes nav-icon" style="font-size: 12px;"></i>
-                                        <p> Packing </p>
+                                        <p>Packing</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="../accounts/account_payments.php" class="nav-link">
+                                        <i class="fa fa-cart-shopping nav-icon" style="font-size: 12px;"></i>
+                                        <p>payments</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="../accounts/account_sales_return.php" class="nav-link">
+                                        <i class="fa-sharp fa-solid fa-rotate-left nav-icon"
+                                            style="font-size: 12px;"></i>
+                                        <p>Sales Returns</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="../accounts/account_shipments.php" class="nav-link">
+                                        <i class="fa fa-ship nav-icon" style="font-size: 12px;"></i>
+                                        <p>Shipments</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="../accounts/account_reports.php" class="nav-link">
+                                        <i class="fa fa-file nav-icon" style="font-size: 12px;"></i>
+                                        <p>Reports</p>
                                     </a>
                                 </li>
                             </ul>
@@ -645,7 +732,8 @@ if(isset($_POST['logged_out'])){
 
                         <li class="nav-header text-uppercase">Other</li>
 
-                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 6 && $department == 1) || ($role_id == 4 && $department == 1) ) { ?>
+                        <?php if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 6 && $department == 1) 
+                                || ($role_id == 4 && $department == 1) ) { ?>
 
                         <li class="nav-item">
                             <a href="../search/search_inventory_id.php" class="nav-link">
@@ -663,16 +751,19 @@ if(isset($_POST['logged_out'])){
                             </a>
                         </li>
 
-                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 2) || ($role_id == 10 && $department == 2)) { ?>
+                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 2) 
+                                    || ($role_id == 10 && $department == 2) || ($department == 5 && $role_id == 8) || ($department == 5 && $role_id == 5)
+                                    || ($role_id == 12 && $department == 16) || ($department == 3 && $role_id == 5 || ($department == 3 && $role_id == 8))) { ?>
 
                         <li class="nav-item">
                             <a href="../inventory/warehouse_stock_report.php" class="nav-link">
-                                <i class="fa fa-cubes-stacked nav-icon" style="font-size: 12px;"></i>
-                                <p> Stock Report </p>
+                                <i class="fas fa-laptop nav-icon" style="font-size: 12px;"></i>
+                                <p> Laptop Inventory </p>
                             </a>
                         </li>
 
-                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 20) || ($role_id == 6 && $department == 1)|| ($role_id == 4 && $department == 19)) { ?>
+                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 4 && $department == 20) 
+                                || ($role_id == 6 && $department == 1)|| ($role_id == 4 && $department == 19)) { ?>
 
                         <li class="nav-item">
                             <a href="../part/part_stock_dashboard.php" class="nav-link">

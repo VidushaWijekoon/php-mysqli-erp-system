@@ -24,26 +24,28 @@ $brand = $_GET['brand'];
 </div>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-12 grid-margin stretch-card justify-content-center mx-auto mt-2">
+        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="rounded">
                 <a href="stock_for_excel.php?brand=<?php echo $brand?>" class="btn btn-sm btn-success">Download excel
-                    file</a>
-                <div class="table-responsive table-borderless">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th class="text-center">#</th>
-                                <th>Brand</th>
-                                <th>Model</th>
-                                <th>In Total</th>
-                                <th>In Stock</th>
-                                <th>Dispatch</th>
-                                <th>&nbsp;</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-body">
+                    file
+                </a>
+                <div class="" style="overflow-y: scroll; height: 90vh">
+                    <table class="table table-bordered table-hover mt-1">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th>Brand</th>
+                                    <th>Model</th>
+                                    <th>In Total</th>
+                                    <th>In Stock</th>
+                                    <th>Dispatch</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                            <?php
+                                <?php
                                 $model = null;
                                 $core = null;
                                 $in_total = null;
@@ -116,7 +118,7 @@ $brand = $_GET['brand'];
                            <th>Screen Type</th>
                             </tr>
                             ";?>
-                            <?php
+                                <?php
                                 $cpu = '';
                                 $generation = '';
                                 $screen_resolution = '';
@@ -151,13 +153,15 @@ $brand = $_GET['brand'];
                                     <td>$screen_type</td>
                                     </tr>";
                                 } ?>
-                            <?php } ?>
-                        </tbody>
-                    </table>
+                                <?php } ?>
+                            </tbody>
+                        </table>
                 </div>
+
             </div>
         </div>
     </div>
+</div>
 </div>
 
 

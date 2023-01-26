@@ -36,7 +36,7 @@ echo $username;
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped">
+                    <table id="example2" class="table table-striped">
                         <thead>
                             <tr style="font-size: 10px;">
                                 <th>#</th>
@@ -63,7 +63,7 @@ echo $username;
                                 $start_time = date('Y-m-d 00:00:00');
                                 $end_time = date('Y-m-d 23:59:59');
                             
-                                $query = "SELECT * FROM sales_posting_to_customer WHERE created_by = '$username' AND created_time BETWEEN '$start_time' AND '$end_time'";
+                                $query = "SELECT * FROM sales_posting_to_customer WHERE created_by = '$username' AND created_time BETWEEN '$start_time' AND '$end_time' ORDER BY created_time DESC";
                                 $result_set = mysqli_query($connection, $query);
                                 foreach($result_set as $count){
 

@@ -21,6 +21,8 @@ $current_date = Date('m-d-Y');
             <span class="mx-1">Set Week Target</span></a>
         <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./quatation_approval.php">
             <span class="mx-1">To Approve</span></a>
+        <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./set_price.php">
+            <span class="mx-1">Set Laptop Price</span></a>
     </div>
 </div>
 
@@ -59,26 +61,24 @@ $current_date = Date('m-d-Y');
         </a>
     </div>
     <div class="col-12 col-sm-6 col-md-3 mt-2">
-        <a href="./sales_team_members.php">
-            <div class="info-box mb-3">
-                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">Sales Team Members</span>
-                    <span class="info-box-number">
-                        <?php
+        <div class="info-box mb-3">
+            <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Sales Team Members</span>
+                <span class="info-box-number">
+                    <?php
 
-                            $query = "SELECT department, role FROM `users`  WHERE department = '5' AND role = '5'";
-                            if ($result = mysqli_query($connection, $query)) {
-                                // Return the number of rows in result set
-                                $rowcount = mysqli_num_rows($result);
+                        $query = "SELECT department, role FROM `users`  WHERE department = '5' AND role = '5'";
+                        if ($result = mysqli_query($connection, $query)) {
+                            // Return the number of rows in result set
+                            $rowcount = mysqli_num_rows($result);
                             
-                                echo "$rowcount";
-                            }   
-                        ?>
-                    </span>
-                </div>
+                            echo "$rowcount";
+                        }   
+                    ?>
+                </span>
             </div>
-        </a>
+        </div>
     </div>
 </div>
 
@@ -362,37 +362,10 @@ $current_date = Date('m-d-Y');
     <div class="row">
         <div class="col-lg-7 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card card-primary card-outline card-outline-tabs m-2 w-100">
-                <div class="card-header border-transparent mx-2">
-                    <div class="row">
-                        <div class="col">
-                            <div class="row">
-                                <h6><?php echo $current_month . " " ?>Month Performance</h6>
-                            </div>
-                        </div>
-                        <!-- <div class="col">
-                            <div class="row">
-                                <label for="">Please Select Month</label>
-                                <select class="w-25" name="language" style="border-radius: 5px;" required>
-                                    <option value="" selected>--Select Languages--
-                                    </option>
-                                    <option value="january">January</option>
-                                    <option value="february">February</option>
-                                    <option value="march">March</option>
-                                    <option value="april">April</option>
-                                    <option value="may">May</option>
-                                    <option value="june">June</option>
-                                    <option value="july">July</option>
-                                    <option value="august">August</option>
-                                    <option value="september">September</option>
-                                    <option value="octomber">Octomber</option>
-                                    <option value="november">November</option>
-                                    <option value="december">December</option>
-                                </select>
-                            </div>
-                        </div> -->
-                    </div>
+                <div class="card-header border-transparent">
+                    <h6><?php echo $current_month . " " ?>Month Performance</h6>
                 </div>
-                <div class="card-body px-3 p-0">
+                <div class="card-body">
                     <div class="table-responsive">
                         <table id="" class="table table-striped table-hover">
                             <thead>
@@ -471,7 +444,7 @@ $current_date = Date('m-d-Y');
                     </h3>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body px-3 p-0">
+                <div class="card-body ">
                     <div class="table-responsive">
                         <table id="" class="table table-striped table-hover">
                             <thead>

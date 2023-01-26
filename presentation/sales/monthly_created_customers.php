@@ -35,7 +35,7 @@ $username = $_GET['username'];
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped">
+                    <table id="example2" class="table table-striped">
                         <thead>
                             <tr>
                                 <th style="width: 10px">#</th>
@@ -53,7 +53,7 @@ $username = $_GET['username'];
                             <?php 
                             
                             $query_1 = "SELECT * FROM sales_create_customer_informations WHERE 
-                            created_by = '$username' AND MONTH(sales_create_customer_informations.created_time) = MONTH(now())";
+                            created_by = '$username' AND MONTH(sales_create_customer_informations.created_time) = MONTH(now()) ORDER BY created_time DESC";
                             $result = mysqli_query($connection, $query_1);
                             foreach($result as $row){
                                 
