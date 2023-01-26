@@ -15,6 +15,9 @@ function Login($role_id, $department){
     elseif($department == 3 && $role_id == 5){
         header('Location: presentation/accounts/accounts_dashboard.php');
     }
+    elseif($department == 3 && $role_id == 8){
+        header('Location: presentation/accounts/accounts_dashboard.php');
+    }
 
     // Sales Team Leader Redirect
     elseif($department == 5 && $role_id == 5){
@@ -96,8 +99,10 @@ function Login($role_id, $department){
         header('Location: presentation/performance/performance_record.php');
     }
 
-  
-
+    // HR Assistant
+    elseif ($department == 4 && $role_id == 5) {
+        header('Location: presentation/employee/employee_dashboard.php');
+    }
 }
 
 ?>

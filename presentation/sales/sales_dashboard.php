@@ -23,7 +23,8 @@ $end_time = date('Y-m-d 23:59:59');
 
 <div class="row m-2">
     <div class="col-12 mt-3">
-        <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./create_post.php"><span class="mx-1">Daily
+        <a class="btn bg-gradient-info mx-2 text-white" type="button"
+            href="./create_collect_customer_information.php"><span class="mx-1">Daily
                 Task</span></a>
         <a class="btn bg-gradient-primary mx-2 text-white" type="button" href="./create_customers.php"><span
                 class="mx-1">Create Customer</span></a>

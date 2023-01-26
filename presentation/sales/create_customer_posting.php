@@ -177,7 +177,7 @@ $gt_c = $_GET['choose_country'];
 
 if(isset($_POST['get_country'])){
     $choose_country = $_POST['choose_country'];
-    header("Location: create_post.php?choose_country=$choose_country");
+    header("Location: create_customer_posting.php?choose_country=$choose_country");
 
     echo $choose_country;
 }
@@ -201,436 +201,18 @@ if(isset($_POST['get_country'])){
                             <li class="nav-item text-center" style="width: 350px;">
                                 <a class="nav-link" id="custom-tabs-four-home-tab" data-toggle="pill"
                                     href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home"
-                                    aria-selected="false" style="color: #fff;">Collect Customer Informations</a>
-                            </li>
-                            <li class="nav-item text-center" style="width: 350px;">
-                                <a class="nav-link active" id="custom-tabs-four-profile-tab" data-toggle="pill"
-                                    href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile"
-                                    aria-selected="true" style="color: #fff;">Posting to Customer & Platform Task</a>
+                                    aria-selected="false" style="color: #fff;">Posting to Customer & Platform Task</a>
                             </li>
                         </ul>
                     </div>
-                    <div class=" card-body">
+                    <div class="card-body">
                         <div class="tab-content" id="custom-tabs-four-tabContent">
                             <!-- ============================================================== -->
                             <!-- Tab 1  -->
                             <!-- ============================================================== -->
-                            <div class="tab-pane fade" id="custom-tabs-four-home" role="tabpanel"
+
+                            <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel"
                                 aria-labelledby="custom-tabs-four-home-tab">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 10px">#</th>
-                                            <th>Day</th>
-                                            <th>Platfrom</th>
-                                            <th>Search by Keyword</th>
-                                            <th>Today Need Create New Customer</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>#</td>
-                                            <td><span class="badge badge-info p-2"><?php echo $day; ?></span></td>
-                                            <td>
-                                                <div class="d-flex">
-                                                    <div class="col col-md-6 col-lg-6">
-                                                        <?php if($facebook == 1) {?>
-                                                        <div class="icheck-success">
-                                                            <input type="checkbox" id="facebook" name="facebook"
-                                                                value="1" checked disabled>
-                                                            <label class="label_values text-capitalize"
-                                                                for="facebook">Facebook</label>
-                                                        </div>
-
-                                                        <div class="icheck-success">
-                                                            <input type="checkbox" id="instagram" name="instagram"
-                                                                value="1" checked disabled>
-                                                            <label class="label_values text-capitalize"
-                                                                for="instagram">Instagram</label>
-                                                        </div>
-                                                        <div class="icheck-success d-none">
-                                                            <input type="checkbox" id="lazada" name="lazada" value="1"
-                                                                checked disabled>
-                                                            <label class="label_values text-capitalize"
-                                                                for="lazada">lazada</label>
-                                                        </div>
-                                                        <?php } if($lazada == 1) {?>
-                                                        <div class="icheck-success">
-                                                            <input type="checkbox" id="lazada" name="lazada" value="1"
-                                                                checked disabled>
-                                                            <label class="label_values text-capitalize"
-                                                                for="lazada">lazada</label>
-                                                        </div>
-                                                        <?php } elseif($lazada == 0) { ?>
-                                                        <div class="icheck-success d-none">
-                                                            <input type="checkbox" id="lazada" name="lazada" value="1"
-                                                                checked disabled>
-                                                            <label class="label_values text-capitalize"
-                                                                for="lazada">lazada</label>
-                                                        </div>
-                                                        <?php } if($shoppe == 1) {?>
-                                                        <div class="icheck-success">
-                                                            <input type="checkbox" id="shoppe" name="shoppe" value="1"
-                                                                checked disabled>
-                                                            <label class="label_values text-capitalize"
-                                                                for="shoppe">Shoppe</label>
-                                                        </div>
-                                                        <?php } elseif($shoppe == 0) {?>
-                                                        <div class="icheck-success d-none">
-                                                            <input type="checkbox" id="shoppe" name="shoppe" value="1"
-                                                                checked disabled>
-                                                            <label class="label_values text-capitalize"
-                                                                for="shoppe">Shoppe</label>
-                                                        </div>
-                                                        <?php } if($tokopedia == 1) {?>
-                                                        <div class="icheck-success">
-                                                            <input type="checkbox" id="tokopedia" name="tokopedia"
-                                                                value="1" checked disabled>
-                                                            <label class="label_values text-capitalize"
-                                                                for="tokopedia">Tokopedia</label>
-                                                        </div>
-                                                        <?php } elseif($tokopedia == 0) { ?>
-                                                        <div class="icheck-success d-none">
-                                                            <input type="checkbox" id="tokopedia" name="tokopedia"
-                                                                value="1">
-                                                            <label class="label_values text-capitalize"
-                                                                for="tokopedia">Tokopedia</label>
-                                                        </div>
-                                                        <?php } if($amazon_com == 1) {?>
-                                                        <div class="icheck-success">
-                                                            <input type="checkbox" id="amazon_com" name="amazon_com"
-                                                                value="1" disabled checked>
-                                                            <label class="label_values text-capitalize"
-                                                                for="amazon_com">Amazon.com</label>
-                                                        </div>
-                                                        <?php } elseif($amazon_com == 0) { ?>
-                                                        <div class="icheck-success d-none">
-                                                            <input type="checkbox" id="amazon_com" name="amazon_com"
-                                                                value="1">
-                                                            <label class="label_values text-capitalize"
-                                                                for="amazon_com">Amazon.com</label>
-                                                        </div>
-                                                        <?php } if($amazon_uk == 1) { ?>
-                                                        <div class="icheck-success">
-                                                            <input type="checkbox" id="amazon_uk" name="amazon_uk"
-                                                                value="1" checked disabled>
-                                                            <label class="label_values text-capitalize"
-                                                                for="amazon_uk">Amazon.uk</label>
-                                                        </div>
-                                                        <?php } elseif($amazon_uk == 0) { ?>
-                                                        <div class="icheck-success d-none">
-                                                            <input type="checkbox" id="amazon_uk" name="amazon_uk"
-                                                                value="1">
-                                                            <label class="label_values text-capitalize"
-                                                                for="amazon_uk">Amazon.uk</label>
-                                                        </div>
-                                                        <?php } if ($tiktok == 1) {?>
-                                                        <div class="icheck-success">
-                                                            <input type="checkbox" id="tiktok" name="tiktok" value="1"
-                                                                checked disabled>
-                                                            <label class="label_values text-capitalize"
-                                                                for="tiktok">Tiktok</label>
-                                                        </div>
-                                                        <?php } elseif ($tiktok == 0) {?>
-                                                        <div class="icheck-success d-none">
-                                                            <input type="checkbox" id="tiktok" name="tiktok" value="1">
-                                                            <label class="label_values text-capitalize"
-                                                                for="tiktok">Tiktok</label>
-                                                        </div>
-                                                        <?php } ?>
-
-                                                    </div>
-                                                    <div class="col col-md-6 col-lg-6">
-                                                        <?php if($jiji_ng == 1) {  ?>
-                                                        <div class="icheck-success">
-                                                            <input type="checkbox" id="jiji_ng" name="jiji_ng" value="1"
-                                                                checked disabled>
-                                                            <label class="label_values text-capitalize"
-                                                                for="jiji_ng">Jiji.ng</label>
-                                                        </div>
-                                                        <?php } elseif($jiji_ng == 0) { ?>
-                                                        <div class="icheck-success d-none">
-                                                            <input type="checkbox" id="jiji_ng" name="jiji_ng"
-                                                                value="1">
-                                                            <label class="label_values text-capitalize"
-                                                                for="jiji_ng">Jiji.ng</label>
-                                                        </div>
-                                                        <?php } if($jiji_co_ke == 1) { ?>
-                                                        <div class="icheck-success">
-                                                            <input type="checkbox" id="jiji_co_ke" name="jiji_co_ke"
-                                                                value="1" checked disabled>
-                                                            <label class="label_values text-capitalize"
-                                                                for="jiji_co_ke">Jiji.co.ke</label>
-                                                        </div>
-                                                        <?php } elseif($jiji_co_ke == 0) { ?>
-                                                        <div class="icheck-success d-none">
-                                                            <input type="checkbox" id="jiji_co_ke" name="jiji_co_ke"
-                                                                value="1" checked disabled>
-                                                            <label class="label_values text-capitalize"
-                                                                for="jiji_co_ke">Jiji.co.ke</label>
-                                                        </div>
-                                                        <?php } if ($google == 1) {?>
-                                                        <div class="icheck-success">
-                                                            <input type="checkbox" id="google" name="google" value="1"
-                                                                checked disabled>
-                                                            <label class="label_values text-capitalize"
-                                                                for="google">Google.com</label>
-                                                        </div>
-                                                        <?php } elseif($google == 0){?>
-                                                        <div class="icheck-success d-none">
-                                                            <input type="checkbox" id="google" name="google" value="1">
-                                                            <label class="label_values text-capitalize"
-                                                                for="google">Google.com</label>
-                                                        </div>
-                                                        <?php } if($pcexporters == 1) { ?>
-                                                        <div class="icheck-success">
-                                                            <input type="checkbox" id="pcexpoters" name="pcexpoters"
-                                                                value="1" checked disabled>
-                                                            <label class="label_values text-capitalize"
-                                                                for="pcexpoters">PC
-                                                                Exporters</label>
-                                                        </div>
-                                                        <?php } elseif($pcexporters == 0) {?>
-                                                        <div class="icheck-success d-none">
-                                                            <input type="checkbox" id="pcexpoters" name="pcexpoters"
-                                                                value="1">
-                                                            <label class="label_values text-capitalize"
-                                                                for="pcexpoters">PC
-                                                                Exporters</label>
-                                                        </div>
-                                                        <?php } if($jumia == 1) { ?>
-
-                                                        <div class="icheck-success">
-                                                            <input type="checkbox" id="jumia" name="jumia" value="1"
-                                                                checked disabled>
-                                                            <label class="label_values text-capitalize"
-                                                                for="jumia">Jumia.Com</label>
-                                                        </div>
-                                                        <?php }elseif($jumia == 0) { ?>
-                                                        <div class="icheck-success d-none">
-                                                            <input type="checkbox" id="jumia" name="jumia" value="1">
-                                                            <label class="label_values text-capitalize"
-                                                                for="jumia">Jumia.Com</label>
-                                                        </div>
-                                                        <?php } if($thebrokersite == 1) {?>
-                                                        <div class="icheck-success">
-                                                            <input type="checkbox" id="thebrokersite"
-                                                                name="thebrokersite" value="1" checked disabled>
-                                                            <label class="label_values text-capitalize"
-                                                                for="thebrokersite">thebrokersite.com</label>
-                                                        </div>
-                                                        <?php } elseif($thebrokersite == 0){ ?>
-                                                        <div class="icheck-success d-none">
-                                                            <input type="checkbox" id="thebrokersite"
-                                                                name="thebrokersite" value="1">
-                                                            <label class="label_values text-capitalize"
-                                                                for="thebrokersite">thebrokersite.com</label>
-                                                        </div>
-                                                        <?php } ?>
-                                                    </div>
-                                                </div>
-
-                                            </td>
-
-                                            <td id="myDIV1">
-                                                <input type="text" class="form-control" placeholder="Search Keyword 1"
-                                                    name="search_keyword_1" value="<?php echo $search_keyword_1 ?>"
-                                                    readonly>
-                                                <input type="text" class="form-control" placeholder="Search Keyword 2"
-                                                    name="search_keyword_2" value="<?php echo $search_keyword_2 ?>"
-                                                    readonly>
-                                                <input type="text" class="form-control" placeholder="Search Keyword 3"
-                                                    name="search_keyword_3" value="<?php echo $search_keyword_3 ?>"
-                                                    readonly>
-                                                <input type="text" class="form-control" placeholder="Search Keyword 4"
-                                                    name="search_keyword_4" value="<?php echo $search_keyword_4 ?>"
-                                                    readonly>
-                                                <input type="text" class="form-control" placeholder="Search Keyword 5"
-                                                    name="search_keyword_5" value="<?php echo $search_keyword_5 ?>"
-                                                    readonly>
-                                            </td>
-                                            <td>
-                                                <div class="h-100 d-flex align-items-center justify-content-center text-center"
-                                                    style="font-size: 100px; margin-top: 10%; color: #e88c8c;">
-                                                    <p id="showCounter"><?php echo $customer_target_qty ?></p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 10px">#</th>
-                                                <th>Country</th>
-                                                <th>Customer Name</th>
-                                                <th>Whatsapp Number</th>
-                                                <th>Platform</th>
-                                                <th>Model He Selling & Buying</th>
-                                                <th>He Can Pick Up From UAE?</th>
-                                                <th>&nbsp;</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <form method="POST">
-                                                <tr>
-                                                    <td>#</td>
-                                                    <td>
-                                                        <select name="create_customer_country" class="mt-1 "
-                                                            style="border-radius: 5px;" required>
-                                                            <option value="" selected>--Select Country--</option>
-                                                            <?php
-                                                            $query = "SELECT country_name FROM countries ORDER BY 'country_name' ASC";
-                                                            $result = mysqli_query($connection, $query);
-
-                                                            while ($x = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                                        ?>
-                                                            <option value="<?php echo $x["country_name"]; ?>">
-                                                                <?php echo $x["country_name"]; ?>
-                                                            </option>
-                                                            <?php endwhile; ?>
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="customer_name"
-                                                            id="customer_name" value="">
-                                                    </td>
-
-                                                    <td class="d-flex">
-                                                        <select name="create_phone_code" class="mt-1 "
-                                                            style="border-radius: 5px;" required>
-                                                            <option value=""></option>
-                                                            <?php
-                                                                $query = "SELECT phone_code FROM countries ORDER BY 'country_name' ASC";
-                                                                $result = mysqli_query($connection, $query);
-
-                                                                while ($x = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                                            ?>
-                                                            <option value="<?php echo $x["phone_code"]; ?>">
-                                                                <?php echo "+" . $x["phone_code"]; ?>
-                                                            </option>
-                                                            <?php endwhile; ?>
-                                                        </select>
-                                                        <input type="number" class="form-control"
-                                                            name="customer_whatsapp_number"
-                                                            placeholder="Whatsapp Number">
-                                                    </td>
-                                                    <td>
-                                                        <!-- <input type="text" class="form-control" name="platform1"
-                                                            placeholder="Platform"> -->
-                                                        <select name="platform1" class="mt-1 "
-                                                            style="border-radius: 5px;" required>
-                                                            <option value=""></option>
-                                                            <?php
-                                                            
-                                                                $query = "SELECT * FROM weekly_sales_set_create_search_customer WHERE sales_member = '$username' AND day = '$day' ";
-                                                                $result = mysqli_query($connection, $query);
-
-                                                                while ($x = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                                                    $facebook = $x['facebook'];
-                                                                    $instagram = $x['instagram'];
-                                                                    $lazada = $x['lazada'];
-                                                                    $shoppe = $x['shoppe'];
-                                                                    $tokopedia = $x['tokopedia'];
-                                                                    $amazon_com = $x['amazon.com'];
-                                                                    $amazon_uk = $x['amazon.uk'];
-                                                                    $tiktok = $x['tiktok'];
-                                                                    $jiji_ng = $x['jiji.ng'];
-                                                                    $jiji_co_ke = $x['jiji.co.ke'];
-                                                                    $google = $x['google'];
-                                                                    $pcexporters = $x['pcexporters'];
-                                                                    $jumia = $x['jumia'];
-                                                                    $thebrokersite = $x['thebrokersite'];
-
-                                                            ?>
-                                                            <?php if($facebook == 1) { ?>
-                                                            <option value="facebook">Facebook</option>
-                                                            <?php } if($instagram == 1) { ?>
-                                                            <option value="instagram">Instagram</option>
-                                                            <?php } if($lazada == 1) { ?>
-                                                            <option value="lazada">Lazada</option>
-                                                            <?php } if($shoppe == 1) { ?>
-                                                            <option value="shoppe">Shoppe</option>
-                                                            <?php } if($tokopedia == 1) { ?>
-                                                            <option value="tokopedia">Tokopedia</option>
-                                                            <?php } if($amazon_com == 1) { ?>
-                                                            <option value="amazon.com">Amazon.com</option>
-                                                            <?php } if($amazon_uk == 1) { ?>
-                                                            <option value="amazon.uk">Amazon.uk</option>
-                                                            <?php } if($tiktok == 1) { ?>
-                                                            <option value="tiktok">Tiktok</option>
-                                                            <?php } if($jiji_ng == 1) { ?>
-                                                            <option value="jiji.ng">jiji.ng</option>
-                                                            <?php } if($jiji_co_ke == 1) { ?>
-                                                            <option value="jiji.co.ke">jiji.co.ke</option>
-                                                            <?php } if($google == 1) { ?>
-                                                            <option value="google">Google</option>
-                                                            <?php } if($pcexporters == 1) { ?>
-                                                            <option value="pcexporters">Pc Exporters</option>
-                                                            <?php } if($jumia == 1) { ?>
-                                                            <option value="jumia">Jumia</option>
-                                                            <?php } if($thebrokersite == 1) { ?>
-                                                            <option value="thebrokersite">The Brokersite</option>
-                                                            <?php } endwhile; ?>
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control"
-                                                            name="model_selling_buying"
-                                                            placeholder="Model He Selling & Buying?">
-                                                    </td>
-
-                                                    <td class="">
-                                                        <div class="icheck-success d-inline">
-                                                            <input type="radio" id="keyboard_light_1" name="uae_pickup1"
-                                                                value="yes" required>
-                                                            <label class="label_values" for="keyboard_light_1"
-                                                                style="margin-right: 15px;">Yes
-                                                            </label>
-                                                        </div>
-                                                        <div class="icheck-danger d-inline">
-                                                            <input type="radio" id="keyboard_light_2" name="uae_pickup1"
-                                                                value="no">
-                                                            <label class="label_values" for="keyboard_light_2">No
-                                                            </label>
-                                                    </td>
-                                                    <td>
-                                                        <button type="submit" name="add_customer"
-                                                            style="background: transparent; border:none;">
-                                                            <i class="fa-solid fa-circle-plus fa-2x text-primary"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </form>
-                                        </tbody>
-                                    </table>
-                                </table>
-                            </div>
-
-                            <?php 
-
-                                if(isset($_POST['add_customer'])){
-
-                                    $create_customer_country = $_POST['create_customer_country'];
-                                    $customer_name = $_POST['customer_name'];
-                                    $create_phone_code = $_POST['create_phone_code'];
-                                    $customer_whatsapp_number = $_POST['customer_whatsapp_number'];
-                                    $platform1 = $_POST['platform1'];
-                                    $model_selling_buying = $_POST['model_selling_buying'];
-                                    $uae_pickup1 = $_POST['uae_pickup1'];
-
-                                    $q_r = "INSERT INTO `sales_create_customer_informations`(`create_customer_country`, `customer_name`, `customer_whatspp_phone_code`, `customer_whatsapp_number`, `platform1`, `model_selling_buying`, `uae_pickup1`, `created_by`) 
-                                                VALUES ('{$create_customer_country}', '{$customer_name}', '{$create_phone_code}', '{$customer_whatsapp_number}', '{$platform1}', '{$model_selling_buying}', '{$uae_pickup1}', '{$username}')";
-                                    $insert_q_r = mysqli_query($connection, $q_r);
-
-                                }
-
-                            ?>
-
-                            <!-- ============================================================== -->
-                            <!-- Tab 2  -->
-                            <!-- ============================================================== -->
-                            <div class="tab-pane fade show active" id="custom-tabs-four-profile" role="tabpanel"
-                                aria-labelledby="custom-tabs-four-profile-tab">
                                 <div class="d-flex">
                                     <div class="col col-md-6 col-lg-6">
                                         <table class="table table-striped">
@@ -808,9 +390,15 @@ if(isset($_POST['get_country'])){
                                             <p>Selected: </p>
                                         </div>
                                         <div class="">
-                                            <p class="mt-1 mx-2 badge badge-btn badge-primary"><?php echo $gt_c; ?></p>
+                                            <p class="mt-1 mx-2 badge badge-btn badge-primary"><?php echo $gt_c; ?>
+                                            </p>
+                                        </div>
+                                        <div class="float-end mx-2" style="text-align: end;">
+                                            <a href="./create_customer_posting.php"
+                                                class="btn btn-sm btn-default mx-auto text-center">Clear</a>
                                         </div>
                                     </div>
+
                                     <?php } else { ?>
                                     <div class="d-flex">
                                         <div class="mt-1 mx-1">
@@ -820,12 +408,11 @@ if(isset($_POST['get_country'])){
                                             <select name="choose_country" class="mt-1 mx-3" style="border-radius: 5px;"
                                                 required>
 
-                                                <option value="" selected>
-                                                    -- Please Select Country--
-                                                </option>
+                                                <option value="" selected>--Please Select Country--</option>
                                                 <?php
                                               
-                                                    $query = "SELECT create_customer_country FROM sales_create_customer_informations GROUP BY create_customer_country ORDER BY 'create_customer_country' ASC ";
+                                                    $query = "SELECT create_customer_country, created_by FROM sales_create_customer_informations 
+                                                            WHERE created_by = '$username' GROUP BY create_customer_country ORDER BY create_customer_country ASC";
                                                     $result = mysqli_query($connection, $query);
 
                                                     while ($x = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
@@ -837,16 +424,20 @@ if(isset($_POST['get_country'])){
                                                 <?php endwhile;  ?>
                                             </select>
                                         </div>
-                                        <div class="">
-                                            <button type="submit" name="get_country"
-                                                class="btn btn-sm btn-primary px-2 mt-1" style="padding: 0;">
-                                                Search
-                                            </button>
+                                        <div class="d-flex">
+                                            <div class="float-end" style="text-align: end;">
+                                                <button type="submit" name="get_country"
+                                                    class="btn btn-sm btn-default mx-auto text-center">Search</button>
+                                            </div>
+                                            <div class="float-end mx-2" style="text-align: end;">
+                                                <a href="./create_post.php"
+                                                    class="btn btn-sm btn-default mx-auto text-center">Cancel</a>
+                                            </div>
                                         </div>
                                     </div>
                                     <?php } ?>
                                 </form>
-                                <table class="table table-striped">
+                                <table id="example2" class="table table-striped">
                                     <thead>
                                         <tr style="font-size: 10px;">
                                             <th>#</th>
@@ -879,10 +470,10 @@ if(isset($_POST['get_country'])){
                                                 $customer_whatspp_phone_code = $qd_run['customer_whatspp_phone_code'];
                                                 $created_customer_whatsapp_number = $qd_run['customer_whatsapp_number'];
                                                 $created_platform = $qd_run['platform1'];
-                                                $create_customer_id = $qd_run['id'];
-                                                                                                                                 
-                                            
-
+                                                $uae_pickup1 = $qd_run['uae_pickup1'];
+                                                $create_customer_id = $qd_run['id'];                                                                                                                                 
+                                                $model_selling_buying = $qd_run['model_selling_buying'];                                                                                                                                 
+                                        
                                             $query1 = "SELECT * FROM sales_posting_to_customer 
                                                                 WHERE posting_customer_name = '$create_customer_name' AND posting_whatsapp_number = '$created_customer_whatsapp_number' AND posting_phone_code = '$customer_whatspp_phone_code'";
                                             $query_run2 = mysqli_query($connection, $query1);
@@ -898,7 +489,6 @@ if(isset($_POST['get_country'])){
        
 
                                             foreach($query_run2 as $x){
-                                                $i++;
                                                 $post_status1 = $x['status'];
                                                 $created_posted_time = $x['created_time'];
                                                 $posting_customer_name = $x['posting_customer_name'];
@@ -963,14 +553,12 @@ if(isset($_POST['get_country'])){
                                                     <?php } ?>
                                                 </td>
                                                 <td>
-                                                    <?php if(($x == '-7') || ($model_selling_and_buying1 == null)) { ?>
-                                                    <input type="text" class="form-control"
-                                                        name="model_selling_and_buying1"
+                                                    <?php if(($x == '-7') || ($model_selling_buying == null)) { ?>
+                                                    <input type="text" class="form-control" name="model_selling_buying"
                                                         placeholder="Model He Selling/Buying?">
                                                     <?php } else { ?>
-                                                    <input type="text" class="form-control"
-                                                        name="model_selling_and_buying1"
-                                                        value="<?php echo $model_selling_and_buying1 ?>">
+                                                    <input type="text" class="form-control" name="model_selling_buying"
+                                                        value="<?php echo $model_selling_buying ?>" disabled>
                                                     <?php } ?>
                                                 </td>
 
@@ -1015,49 +603,35 @@ if(isset($_POST['get_country'])){
                                                     <?php } ?>
                                                 </td>
                                                 <td class="d-flex">
-                                                    <?php if(($x == '-7') || ($customer_asking_price == 0)) { ?>
+                                                    <?php if($uae_pickup1 == 'yes') { ?>
                                                     <div class="icheck-success d-inline">
-                                                        <input type="radio" id="uae_pickup2" name="uae_pickup2"
-                                                            value="yes" required>
-                                                        <label class="label_values" for="uae_pickup2"
-                                                            style="margin-right: 15px;">Yes
-                                                        </label>
-                                                    </div>
-                                                    <div class="icheck-danger d-inline">
-                                                        <input type="radio" id="uae_pickup3" name="uae_pickup2"
-                                                            value="no">
-                                                        <label class="label_values" for="uae_pickup3">No
-                                                        </label>
-                                                    </div>
-                                                    <?php } else { if($uae_pickup2 == 'yes') { ?>
-                                                    <div class="icheck-success d-inline">
-                                                        <input type="radio" id="uae_pickup1" name="uae_pickup2"
+                                                        <input type="radio" id="keyboard_light_1" name="uae_pickup2"
                                                             value="yes" checked disabled>
-                                                        <label class="label_values" for="uae_pickup1"
+                                                        <label class="label_values" for="keyboard_light_1"
                                                             style="margin-right: 15px;">Yes
                                                         </label>
                                                     </div>
                                                     <div class="icheck-danger d-inline">
-                                                        <input type="radio" id="uae_pickup2" name="uae_pickup2"
+                                                        <input type="radio" id="keyboard_light_2" name="uae_pickup2"
                                                             value="no" disabled>
-                                                        <label class="label_values" for="uae_pickup2">No
+                                                        <label class="label_values" for="keyboard_light_2">No
                                                         </label>
                                                     </div>
-                                                    <?php }if($uae_pickup2 == 'no') { ?>
+                                                    <?php }if($uae_pickup1 == 'no') { ?>
                                                     <div class="icheck-success d-inline">
-                                                        <input type="radio" id="uae_pickup3" name="uae_pickup2"
-                                                            value="yes" checked disabled>
-                                                        <label class="label_values" for="uae_pickup3"
+                                                        <input type="radio" id="keyboard_light_1" name="uae_pickup2"
+                                                            value="yes" disabled>
+                                                        <label class="label_values" for="keyboard_light_1"
                                                             style="margin-right: 15px;">Yes
                                                         </label>
                                                     </div>
                                                     <div class="icheck-danger d-inline">
-                                                        <input type="radio" id="uae_pickup4" name="uae_pickup2"
-                                                            value="no" checked disabled>
-                                                        <label class="label_values" for="uae_pickup4">No
+                                                        <input type="radio" id="keyboard_light_2" name="uae_pickup2"
+                                                            value="no" disabled checked>
+                                                        <label class="label_values" for="keyboard_light_2">No
                                                         </label>
                                                     </div>
-                                                    <?php } } ?>
+                                                    <?php } ?>
                                                 </td>
                                                 <td>
                                                     <?php if(($post_status1 == 0) || ($x == '-7')){ ?>
@@ -1078,7 +652,8 @@ if(isset($_POST['get_country'])){
                                                 </td>
                                                 <td>
                                                     <?php if($created_posted_time != 0 ) { ?>
-                                                    <p style="font-size: 12px;"><?php echo $created_posted_time; ?></p>
+                                                    <p style="font-size: 12px;"><?php echo $created_posted_time; ?>
+                                                    </p>
                                                     <?php } if($created_posted_time == 0) { ?>
                                                     <p></p>
                                                     <?php } ?>
@@ -1088,12 +663,8 @@ if(isset($_POST['get_country'])){
                                         <?php } ?>
                                     </tbody>
                                 </table>
-                                <div class="float-end" style="text-align: end;">
-                                    <a href="./create_post.php"
-                                        class="btn btn-sm btn-default mx-auto text-center">Cancel</a>
-                                </div>
-
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -1101,6 +672,7 @@ if(isset($_POST['get_country'])){
         </div>
     </div>
 </div>
+
 
 <?php 
 
@@ -1122,10 +694,11 @@ if(isset($_POST['submit_post_to_customer'])){
     $d_r = "INSERT INTO `sales_posting_to_customer`(`posting_customer_name`, `posting_phone_code`,`posting_whatsapp_number`, `platform2`, `model_selling_and_buying1`, `posted_model_1`, `posted_model_2`, `customer_asking_model`, `customer_asking_price`, `uae_pickup2`, `status`, `created_by`, `choose_country`) 
             VALUES ('{$posting_customer_name}', '{$posting_customer_phone_code}','{$posting_whatsapp_number}', '{$platform2}', '{$model_selling_and_buying1}', '{$posted_model_1}', '{$posted_model_2}', '{$customer_asking_model}', '{$customer_asking_price}', 
                     '{$uae_pickup2}', 'post','{$username}', '{$gt_c}') ";
-                    echo $d_r;
     $d_r_run = mysqli_query($connection, $d_r);
-    header("Location: create_post.php?choose_country=$choose_country");
-
+    if($d_r_run){
+        header("Location: create_customer_posting.php?choose_country=$choose_country");
+    }
+    
 }
 
 ?>
@@ -1141,9 +714,21 @@ if(isset($_POST['submit_post_to_customer'])){
     font-size: 12px;
     padding: 10px;
     font-family: "Poppins", sans-serif;
-    color: #fff !important;
+    color: black !important;
 }
 </style>
+
+<script>
+$(document).ready(function() {
+    $("#country_name").on("change", function() {
+        var country_name = $("#country_name").val();
+        var getURL = "get_phone_code.php?country_name=" + country_name;
+        $.get(getURL, function(data, status) {
+            $("#create_phone_code").html(data);
+        });
+    });
+});
+</script>
 
 <?php include_once('../includes/footer.php'); }else{
         die(access_denied());

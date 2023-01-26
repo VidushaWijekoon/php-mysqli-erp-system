@@ -1,4 +1,14 @@
-<?php 
+<?php
+
+error_reporting (E_ALL ^ E_NOTICE);
+// Toggle this to change the setting
+define('DEBUG', true);
+
+// You want all errors to be triggered
+error_reporting(E_ALL);
+ 
+error_reporting(E_ERROR | E_PARSE);
+
 session_start();
 include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
@@ -305,7 +315,7 @@ if(isset($_POST['add_items'])){
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <select name="brand" id="brand" class="info_select"
+                                                    <select name="brand" id="brand" class="info_select select2"
                                                         style="border-radius: 5px; width: 100%;">
                                                     </select>
                                                 </td>
@@ -553,7 +563,6 @@ if(isset($_POST['add_items'])){
         </div>
     </div>
 </div>
-</div>
 
 <!-- ============================================================== -->
 <!-- Order Details Model  -->
@@ -608,8 +617,6 @@ if(isset($_POST['add_items'])){
 
                                 $query_d = "SELECT * FROM sales_quatation_items WHERE customer_id = $cs_id AND status = '0' AND quatation_id = '0'";
                                 $qd = mysqli_query($connection, $query_d);
-
-                                if(empty($qd)){}else{
 
                                 foreach($qd as $qd){
                                     $sales_quatations_items_id = $qd['sales_quatations_items_id'];
@@ -672,7 +679,7 @@ if(isset($_POST['add_items'])){
                                             class='btn btn-sm btn-danger'>Remove</button>
                                     </td>
                                 </tr>
-                                <?php } } 
+                                <?php } 
 
                                     $insert_quatation_id = 0;
                                 
@@ -681,7 +688,8 @@ if(isset($_POST['add_items'])){
                                         $remove_run = mysqli_query($connection, $remove_up);
 
                                         header("Location: create_quatation.php?customer_id=$cs_id");
-                                    }                                                               
+                                    }   
+                                                                                           
                                 ?>
                             </tbody>
                         </table>
@@ -758,6 +766,12 @@ textarea {
 </style>
 
 <script>
+$(function() {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+})
+
 $(document).ready(function() {
     $("#device").on("change", function() {
         var device = $("#device").val();

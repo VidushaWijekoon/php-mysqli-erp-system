@@ -36,7 +36,7 @@ $username = $_GET['username'];
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped">
+                    <table id="example2" class="table table-striped">
                         <thead>
                             <tr>
                                 <th style="width: 10px">#</th>

@@ -22,20 +22,7 @@ if (!isset($_SESSION['user_id'])) {
         <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./approved_quatations.php">
             <span class="mx-1">Approved Quatations</span>
         </a>
-        <!-- after create SO start production -->
-        <a class="btn bg-gradient-primary mx-2 text-white" type="button" href="./create_sales_order.php">
-            <span class="mx-1">Create Sales Order</span>
-        </a>
-        <!-- Invoice given to a customer to request to make final payment  -->
-        <a class="btn bg-gradient-primary mx-2 text-white" type="button" href="./create_invoice.php">
-            <span class="mx-1">Create Invoice</span>
-        </a>
-        <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./sales_orders.php">
-            <span class="mx-1">Invoice List</span>
-        </a>
-        <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./sales_orders.php">
-            <span class="mx-1">Sales Order List</span>
-        </a>
+
     </div>
 </div>
 
@@ -76,6 +63,19 @@ if (!isset($_SESSION['user_id'])) {
 
             <div class="info-box-content">
                 <span class="info-box-text">Due Bills</span>
+                <span class="info-box-number">
+                    16
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-3 mt-3">
+        <div class="info-box mb-3">
+            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-boxes "></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Total Dispatch</span>
                 <span class="info-box-number">
                     16
                 </span>

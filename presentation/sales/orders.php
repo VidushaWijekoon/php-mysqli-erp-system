@@ -55,7 +55,6 @@ $username = $_SESSION['username'];
                                         <th>Amount</th>
                                         <th>Delivery Method</th>
                                         <th>Shipping</th>
-                                        <th style="width: 200px;">&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -77,16 +76,7 @@ $username = $_SESSION['username'];
                                                 <i class="fa-solid fa-circle mx-1" style="color: #28a745;"></i>
                                             </span>
                                         </td>
-                                        <td>
-                                            <a class='btn btn-xs btn-secondary mx-1' href='#'>
-                                                <i class='fa-solid fa-eye'></i> </a>
-                                            <a class='btn btn-xs btn-warning mx-1' href='#'>
-                                                <i class='fa-solid fa-pen-to-square'></i></a>
-                                            <a class='btn btn-xs btn-success mx-1' href='#'>
-                                                <i class='fa-solid fa-download'></i> </a>
-                                            <a class='btn btn-xs btn-danger mx-1' href='#'>
-                                                <i class='fa-solid fa-trash-can'></i> </a>
-                                        </td>
+
                                     </tr>
                                     <tr>
                                         <td>01/01/2023</td>
@@ -106,16 +96,7 @@ $username = $_SESSION['username'];
                                                 <i class="fa-solid fa-circle mx-1" style="color: #dc3545;"></i>
                                             </span>
                                         </td>
-                                        <td>
-                                            <a class='btn btn-xs btn-secondary mx-1' href='#'>
-                                                <i class='fa-solid fa-eye'></i> </a>
-                                            <a class='btn btn-xs btn-warning mx-1' href='#'>
-                                                <i class='fa-solid fa-pen-to-square'></i></a>
-                                            <a class='btn btn-xs btn-success mx-1' href='#'>
-                                                <i class='fa-solid fa-download'></i> </a>
-                                            <a class='btn btn-xs btn-danger mx-1' href='#'>
-                                                <i class='fa-solid fa-trash-can'></i> </a>
-                                        </td>
+
                                     </tr>
                                     <tr>
                                         <td>01/01/2023</td>
@@ -135,16 +116,7 @@ $username = $_SESSION['username'];
                                                 <i class="fa-solid fa-circle mx-1" style="color: #17a2b8;"></i>
                                             </span>
                                         </td>
-                                        <td>
-                                            <a class='btn btn-xs btn-secondary mx-1' href='#'>
-                                                <i class='fa-solid fa-eye'></i> </a>
-                                            <a class='btn btn-xs btn-warning mx-1' href='#'>
-                                                <i class='fa-solid fa-pen-to-square'></i></a>
-                                            <a class='btn btn-xs btn-success mx-1' href='#'>
-                                                <i class='fa-solid fa-download'></i> </a>
-                                            <a class='btn btn-xs btn-danger mx-1' href='#'>
-                                                <i class='fa-solid fa-trash-can'></i> </a>
-                                        </td>
+
                                     </tr>
                                     <tr>
                                         <td>01/01/2023</td>
@@ -164,16 +136,7 @@ $username = $_SESSION['username'];
                                                 <i class="fa-solid fa-circle mx-1" style="color: #28a745;"></i>
                                             </span>
                                         </td>
-                                        <td>
-                                            <a class='btn btn-xs btn-secondary mx-1' href='#'>
-                                                <i class='fa-solid fa-eye'></i> </a>
-                                            <a class='btn btn-xs btn-warning mx-1' href='#'>
-                                                <i class='fa-solid fa-pen-to-square'></i></a>
-                                            <a class='btn btn-xs btn-success mx-1' href='#'>
-                                                <i class='fa-solid fa-download'></i> </a>
-                                            <a class='btn btn-xs btn-danger mx-1' href='#'>
-                                                <i class='fa-solid fa-trash-can'></i> </a>
-                                        </td>
+
                                     </tr>
                                     <tr>
                                         <td>01/01/2023</td>
@@ -193,16 +156,7 @@ $username = $_SESSION['username'];
                                                 <i class="fa-solid fa-circle mx-1" style="color: #ffc107;"></i>
                                             </span>
                                         </td>
-                                        <td>
-                                            <a class='btn btn-xs btn-secondary mx-1' href='#'>
-                                                <i class='fa-solid fa-eye'></i> </a>
-                                            <a class='btn btn-xs btn-warning mx-1' href='#'>
-                                                <i class='fa-solid fa-pen-to-square'></i></a>
-                                            <a class='btn btn-xs btn-success mx-1' href='#'>
-                                                <i class='fa-solid fa-download'></i> </a>
-                                            <a class='btn btn-xs btn-danger mx-1' href='#'>
-                                                <i class='fa-solid fa-trash-can'></i> </a>
-                                        </td>
+
                                     </tr>
                                     <tr>
                                         <td>01/01/2023</td>
@@ -223,16 +177,7 @@ $username = $_SESSION['username'];
                                                 </i>
                                             </span>
                                         </td>
-                                        <td>
-                                            <a class='btn btn-xs btn-secondary mx-1' href='#'>
-                                                <i class='fa-solid fa-eye'></i> </a>
-                                            <a class='btn btn-xs btn-warning mx-1' href='#'>
-                                                <i class='fa-solid fa-pen-to-square'></i></a>
-                                            <a class='btn btn-xs btn-success mx-1' href='#'>
-                                                <i class='fa-solid fa-download'></i> </a>
-                                            <a class='btn btn-xs btn-danger mx-1' href='#'>
-                                                <i class='fa-solid fa-trash-can'></i> </a>
-                                        </td>
+
                                     </tr>
                                 </tbody>
                             </table>

@@ -434,7 +434,7 @@ if (isset($_POST['search'])) {
             class="col-lg-6 grid-margin stretch-card justify-content-center align-item-center mx-auto mt-2 text-uppercase">
             <div class="card mt-3">
                 <div class="card-header bg-secondary">
-                    <p class="text-uppercase m-0 p-0">Add Inventory Details </p>
+                    <h5 class="text-uppercase m-0 p-0">Add Inventory Details </h5>
                 </div>
                 <div class="card-body">
 
@@ -453,10 +453,10 @@ if (isset($_POST['search'])) {
                                     }
                                 } ?>
                         <div class="row">
-                            <label class="col-sm-3 col-form-label">Supplier Barcode </label>
-                            <div class="col-sm-8 w-75">
+                            <label class="col-sm-5 col-form-label">Supplier Barcode </label>
+                            <div class="col-sm-7 w-75">
                                 <form action="#" method="POST">
-                                    <input class="w-50" style="color:black !important" type="text" id="search"
+                                    <input class="w-75" style="color:black !important" type="text" id="search"
                                         name="search" placeholder="Supplier Barcode OR MFG">
                                     <button type="submit" name="insert" id="submit"
                                         class="btn mb-2 mt-4 btn-primary btn-sm  mx-auto text-center d-none"><i
@@ -466,20 +466,20 @@ if (isset($_POST['search'])) {
                                 </form>
                             </div>
                         </div>
-                        <p class="w-75" style="text-align:center"> OR</p>
+                        <p class="w-100" style="text-align:center"> OR</p>
                         <?php if($second == 'second'){
                                     echo "<div><p style='color:red !important;font-size:16px; text-align:center'> supplier barcode not in exist please scan or enter MFG code</p></div>";
                                 } ?>
                         <div class="row">
-                            <label class="col-sm-3 col-form-label">MFG number </label>
-                            <div class="col-sm-8 w-75">
+                            <label class="col-sm-5 col-form-label">MFG number </label>
+                            <div class="col-sm-7">
                                 <?php 
                                 if($check ==0){ 
 
                                     if($message == 'null'){
                                     ?>
                                 <form action="#" method="POST">
-                                    <input class="w-50" style="color:black !important" type="text" id="search"
+                                    <input class="w-75" style="color:black !important" type="text" id="search"
                                         name="search1" placeholder=" MFG">
                                     <button type="submit" name="search_mfg" id="submit"
                                         class="btn mb-2 mt-4 btn-primary btn-sm  mx-auto text-center d-none"><i
@@ -552,8 +552,8 @@ if (isset($_POST['search'])) {
                             <!-- </div>
                             </div> -->
                             <div class="row">
-                                <label class="col-sm-3 col-form-label">Device </label>
-                                <div class="col-sm-8 w-75">
+                                <label class="col-sm-5 col-form-label">Device </label>
+                                <div class="col-sm-7 w-75">
                                     <?php if($exist == 'yes'){ ?>
                                     <select name="device" id="device" class="form-control " style="border-radius: 5px;"
                                         required="required">
@@ -573,8 +573,8 @@ if (isset($_POST['search'])) {
                             </div>
                             <div class="row">
 
-                                <label class="col-sm-3 col-form-label">Brand</label>
-                                <div class="col-sm-8 w-75">
+                                <label class="col-sm-5 col-form-label">Brand</label>
+                                <div class="col-sm-7 w-75">
                                     <?php if($exist == 'yes'){ ?>
                                     <?php if($brand !='No Mention' || $brand !='no mention'){ ?>
                                     <select name="brand" id="brand" class="form-control select2 "
@@ -623,8 +623,8 @@ if (isset($_POST['search'])) {
                             </div>
 
                             <div class="row">
-                                <label class="col-sm-3 col-form-label">Series</label>
-                                <div class="col-sm-8 w-75">
+                                <label class="col-sm-5 col-form-label">Series</label>
+                                <div class="col-sm-7 w-75">
 
                                     <?php if($exist == 'yes'){ ?>
                                     <?php if($series !='No Mention' || $series !='no mention'){ ?>
@@ -668,8 +668,8 @@ if (isset($_POST['search'])) {
                                 </div>
                             </div>
                             <div class="row">
-                                <label class="col-sm-3 col-form-label">Model</label>
-                                <div class="col-sm-8 w-75">
+                                <label class="col-sm-5 col-form-label">Model</label>
+                                <div class="col-sm-7 w-75">
                                     <?php if($exist == 'yes'){ 
                                         ?>
 
@@ -713,8 +713,8 @@ if (isset($_POST['search'])) {
                             </div>
                             <div class="row">
                                 <input type="hidden" id="search" name="processor" value="<?php echo $processor ?>">
-                                <label class="col-sm-3 col-form-label">Core</label>
-                                <div class="col-sm-8 w-75">
+                                <label class="col-sm-5 col-form-label">Core</label>
+                                <div class="col-sm-7 w-75">
                                     <?php if($exist == 'yes'){ ?>
                                     <?php if( $core !='no mention'){ ?>
                                     <select name="core" id="core" class="form-control select2"
@@ -754,8 +754,8 @@ if (isset($_POST['search'])) {
                             </div>
 
                             <div class="row">
-                                <label class="col-sm-3 col-form-label">Generation</label>
-                                <div class="col-sm-8 w-75">
+                                <label class="col-sm-5 col-form-label">Generation</label>
+                                <div class="col-sm-7 w-75">
                                     <?php if($exist == 'yes'){ ?>
                                     <?php if( $generation !='no mention'){ 
                                         //  $query ="SELECT DISTINCT generation FROM `machine_from_supplier` GROUP BY generation"; 
@@ -802,8 +802,8 @@ if (isset($_POST['search'])) {
                                 </div>
                             </div>
                             <div class="row">
-                                <label class="col-sm-3 col-form-label">Speed</label>
-                                <div class="col-sm-8 w-75">
+                                <label class="col-sm-5 col-form-label">Speed</label>
+                                <div class="col-sm-7 w-75">
                                     <?php if($exist == 'yes'){ ?>
                                     <?php if($speed !='no mention'){ 
                                         ?>
@@ -834,8 +834,8 @@ if (isset($_POST['search'])) {
                                 </div>
                             </div>
                             <div class="row">
-                                <label class="col-sm-3 col-form-label">LCD Size</label>
-                                <div class="col-sm-8 w-75">
+                                <label class="col-sm-5 col-form-label">LCD Size</label>
+                                <div class="col-sm-7 w-75">
                                     <?php if($exist == 'yes'){ 
                                         $query ="SELECT DISTINCT lcd_size FROM `machine_from_supplier` WHERE model='$model' GROUP BY lcd_size"; 
                                         $query_run = mysqli_query($connection, $query);
@@ -896,8 +896,8 @@ if (isset($_POST['search'])) {
                                 </div>
                             </div>
                             <div class="row">
-                                <label class="col-sm-3 col-form-label">Screen Resolution</label>
-                                <div class="col-sm-8 w-75">
+                                <label class="col-sm-5 col-form-label">Screen Resolution</label>
+                                <div class="col-sm-7 w-75">
                                     <?php if($exist == 'yes'){ ?>
                                     <?php if($screen_resolution !=''){ ?>
                                     <select name="screen_resolution" id="resolution" class="form-control select2"
@@ -940,8 +940,8 @@ if (isset($_POST['search'])) {
                                 </div>
                             </div>
                             <div class="row">
-                                <label class="col-sm-3 col-form-label">Battery </label>
-                                <div class="col-sm-8 w-75">
+                                <label class="col-sm-5 col-form-label">Battery </label>
+                                <div class="col-sm-7 w-75">
                                     <?php if($exist == 'yes'){ ?>
                                     <select name="battery" id="battery" class="form-control select2"
                                         style="border-radius: 5px;">
@@ -971,8 +971,8 @@ if (isset($_POST['search'])) {
                                 </div>
                             </div>
                             <div class="row">
-                                <label class="col-sm-3 col-form-label">Screen Type (Touch / None Touch)</label>
-                                <div class="col-sm-8 w-75">
+                                <label class="col-sm-5 col-form-label">Screen Type (Touch / None Touch)</label>
+                                <div class="col-sm-7 w-75">
                                     <?php if($exist == 'yes'){ ?>
                                     <select name="touch" id="touch" class="form-control " style="border-radius: 5px;"
                                         required="required">
@@ -1006,8 +1006,8 @@ if (isset($_POST['search'])) {
 
                             </div>
                             <div class="row">
-                                <label class="col-sm-3 col-form-label">Optical</label>
-                                <div class="col-sm-8 w-75">
+                                <label class="col-sm-5 col-form-label">Optical</label>
+                                <div class="col-sm-7 w-75">
 
                                     <?php
                                     if($exist == 'yes'){ 
@@ -1045,8 +1045,8 @@ if (isset($_POST['search'])) {
                                 </div>
                             </div>
                             <div class="row">
-                                <label class="col-sm-3 col-form-label">Location </label>
-                                <div class="col-sm-8 w-75">
+                                <label class="col-sm-5 col-form-label">Location </label>
+                                <div class="col-sm-7 w-75">
                                     <?php if($exist == 'yes'){ ?>
                                     <select name="location" id="location" class="form-control"
                                         style="border-radius: 5px;">
@@ -1189,259 +1189,201 @@ if (isset($_POST['search'])) {
 
         </div>
     </div>
-    </body>
+</div>
 
-    <script>
-    $(document).ready(function() {
-        $('#example1').dataTable();
-    });
-    </script>
-    <script>
-    var int = setInterval('check()', 300);
+<script>
+$(document).ready(function() {
+    $('#example1').dataTable();
+});
 
-    function check() {
-        if (chobj('div') == true) {
-            printDiv('printableArea')
-            // window.alert('true');
-            int = window.clearInterval(int);
-        } else {
-            // document.write('<p>false</p>');
-        }
+var int = setInterval('check()', 300);
+
+function check() {
+    if (chobj('div') == true) {
+        printDiv('printableArea')
+        // window.alert('true');
+        int = window.clearInterval(int);
+    } else {
+        // document.write('<p>false</p>');
     }
+}
 
-    function chobj(printableArea) {
-        return (document.getElementById('printableArea')) ? true : false;
+function chobj(printableArea) {
+    return (document.getElementById('printableArea')) ? true : false;
+}
+document.getElementById("printableArea").innerHTML = x;
+
+function printDiv(divName) {
+    var printContents = document.getElementById(divName).innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    window.location.href = './machine_from_supplier.php';
+}
+
+setTimeout(function() {
+    if ($('#msg').length > 0) {
+        $('#msg').remove();
     }
-    document.getElementById("printableArea").innerHTML = x;
+}, 10000)
 
-    function printDiv(divName) {
-        var printContents = document.getElementById(divName).innerHTML;
-        var originalContents = document.body.innerHTML;
+let searchbar = document.querySelector('input[name="search"]');
+searchbar.focus();
+search.value = '';
 
-        document.body.innerHTML = printContents;
+$(document).ready(function() {
+    $('#example1').dataTable();
+});
 
-        window.print();
+// function printDiv(divName) {
+//     var printContents = document.getElementById(divName).innerHTML;
+//     var originalContents = document.body.innerHTML;
 
-        window.location.href = './machine_from_supplier.php';
-    }
-    </script>
-    <style>
-    fieldset,
-    legend {
-        all: revert;
-        font-size: 12px;
-    }
+//     document.body.innerHTML = printContents;
 
-    textarea {
-        text-transform: uppercase;
-    }
+//     window.print();
 
-    select,
-    option {
-        background: #343a40 !important;
-    }
+//     window.location.href = './machine_from_supplier.php';
+// }
+$(function() {
+    //Initialize Select2 Elements
+    $('.select2').select2()
 
-    input[type="text"],
-    [type="number"],
-    [type='date'] {
-        height: 22px;
-        margin: inherit;
-        margin-top: 4px;
-        font-size: 10px;
-        text-transform: uppercase;
-        border: 1px solid #f1f1f1;
-        border-radius: 5px;
-        font-size: 12px;
-        color: #ffffff !important;
-    }
+})
 
-    .custom-select {
-        font-size: 12px;
-    }
+var sum = 0;
+var cost = 0;
+var model;
+var brand;
+var core;
+var generation;
+var windows_with_ac = 120;
 
-    #exampleFormControlTextarea1 {
-        font-size: 12px;
-    }
-    </style>
-
-    <script>
-    setTimeout(function() {
-        if ($('#msg').length > 0) {
-            $('#msg').remove();
-        }
-    }, 10000)
-
-    let searchbar = document.querySelector('input[name="search"]');
-    searchbar.focus();
-    search.value = '';
-    </script>
-    <script>
-    $(document).ready(function() {
-        $('#example1').dataTable();
-    });
-
-    // function printDiv(divName) {
-    //     var printContents = document.getElementById(divName).innerHTML;
-    //     var originalContents = document.body.innerHTML;
-
-    //     document.body.innerHTML = printContents;
-
-    //     window.print();
-
-    //     window.location.href = './machine_from_supplier.php';
-    // }
-    $(function() {
-        //Initialize Select2 Elements
-        $('.select2').select2()
-
-    })
-
-    var sum = 0;
-    var cost = 0;
-    var model;
-    var brand;
-    var core;
-    var generation;
-    var windows_with_ac = 120;
-
-    $(document).ready(function() {
-        $("#brand").on("change", function() {
-            brand = $("#brand").val();
-            var getURL = "get-model.php?brand=" + brand;
-            $.get(getURL, function(data, status) {
-                $("#model").html(data);
-            });
+$(document).ready(function() {
+    $("#brand").on("change", function() {
+        brand = $("#brand").val();
+        var getURL = "get-model.php?brand=" + brand;
+        $.get(getURL, function(data, status) {
+            $("#model").html(data);
         });
     });
-    $(document).ready(function() {
-        $("#brand").on("change", function() {
-            var model = $("#model").val();
-            var getURL = "get_series.php?brand=" + brand;
-            $.get(getURL, function(data, status) {
-                $("#series").html(data);
-            });
+});
+$(document).ready(function() {
+    $("#brand").on("change", function() {
+        var model = $("#model").val();
+        var getURL = "get_series.php?brand=" + brand;
+        $.get(getURL, function(data, status) {
+            $("#series").html(data);
         });
     });
+});
 
-    $(document).ready(function() {
-        $("#model").on("change", function() {
-            var model = $("#model").val();
-            var getURL = "get-cpu.php?model=" + model + "&brand=" + brand;
-            $.get(getURL, function(data, status) {
-                $("#core").html(data);
-            });
+$(document).ready(function() {
+    $("#model").on("change", function() {
+        var model = $("#model").val();
+        var getURL = "get-cpu.php?model=" + model + "&brand=" + brand;
+        $.get(getURL, function(data, status) {
+            $("#core").html(data);
         });
     });
-    $(document).ready(function() {
-        $("#model").on("change", function() {
-            var model = $("#model").val();
-            var getURL = "get-generation.php?model=" + model + "&brand=" + brand;
-            $.get(getURL, function(data, status) {
-                $("#generation").html(data);
-            });
+});
+$(document).ready(function() {
+    $("#model").on("change", function() {
+        var model = $("#model").val();
+        var getURL = "get-generation.php?model=" + model + "&brand=" + brand;
+        $.get(getURL, function(data, status) {
+            $("#generation").html(data);
         });
     });
-    $(document).ready(function() {
-        $("#model").on("change", function() {
-            var model = $("#model").val();
-            var getURL = "get_speed.php?model=" + model;
-            $.get(getURL, function(data, status) {
-                $("#speed").html(data);
-            });
+});
+$(document).ready(function() {
+    $("#model").on("change", function() {
+        var model = $("#model").val();
+        var getURL = "get_speed.php?model=" + model;
+        $.get(getURL, function(data, status) {
+            $("#speed").html(data);
         });
     });
+});
 
-    $(document).ready(function() {
-        $("#model").on("change", function() {
-            var model = $("#model").val();
-            var getURL = "get_lcd.php?model=" + model;
-            $.get(getURL, function(data, status) {
-                $("#lcd_size").html(data);
-            });
+$(document).ready(function() {
+    $("#model").on("change", function() {
+        var model = $("#model").val();
+        var getURL = "get_lcd.php?model=" + model;
+        $.get(getURL, function(data, status) {
+            $("#lcd_size").html(data);
         });
     });
+});
 
-    $(document).ready(function() {
-        $("#brand").on("change", function() {
-            var model = $("#model").val();
-            var getURL = "get_location.php?brand=" + brand;
-            $.get(getURL, function(data, status) {
-                $("#location").html(data);
-            });
+$(document).ready(function() {
+    $("#brand").on("change", function() {
+        var model = $("#model").val();
+        var getURL = "get_location.php?brand=" + brand;
+        $.get(getURL, function(data, status) {
+            $("#location").html(data);
         });
     });
-    $(document).ready(function() {
-        $("#model").on("change", function() {
-            var model = $("#model").val();
-            var getURL = "get_resolution.php?brand=" + brand + "&model=" + model;
-            $.get(getURL, function(data, status) {
-                $("#resolution").html(data);
-            });
+});
+$(document).ready(function() {
+    $("#model").on("change", function() {
+        var model = $("#model").val();
+        var getURL = "get_resolution.php?brand=" + brand + "&model=" + model;
+        $.get(getURL, function(data, status) {
+            $("#resolution").html(data);
         });
     });
-    </script>
-    <style>
-    fieldset,
-    legend {
-        all: revert;
-        font-size: 12px;
-    }
+});
+</script>
 
-    textarea {
-        text-transform: uppercase;
-    }
+<style>
+textarea {
+    text-transform: uppercase;
+}
 
-    select,
-    input[type="text"],
-    [type="number"],
-    [type='date'] {
-        height: 28px;
-        margin: inherit;
-        margin-top: 4px;
-        font-size: 16px;
-        text-transform: uppercase;
-        border: 1px solid #f1f1f1;
-        border-radius: 5px;
-        font-size: 12px;
-        color: #ffffff !important;
-    }
+select,
+input[type="text"],
+[type="number"],
+[type='date'] {
+    height: 28px;
+    margin: inherit;
+    margin-top: 4px;
+    font-size: 16px;
+    text-transform: uppercase;
+    border: 1px solid #f1f1f1;
+    border-radius: 5px;
+    font-size: 12px;
+    color: #ffffff !important;
+}
 
-    .custom-select {
-        font-size: 12px;
-    }
+.custom-select {
+    font-size: 12px;
+}
 
-    #exampleFormControlTextarea1 {
-        font-size: 16px;
-    }
+#exampleFormControlTextarea1 {
+    font-size: 16px;
+}
 
-    .col-form-label {
-        font-size: 14px !important;
-    }
+.col-form-label {
+    font-size: 14px !important;
+}
 
-    .select2-selection {
-        background: #343a40 !important;
+.select2-selection__rendered {
+    color: white !important;
+    font-size: 18px;
+}
 
-    }
+.custom-select {
+    font-size: 12px;
+}
 
-    .select2-selection__rendered {
-        color: white !important;
-        font-size: 18px;
-    }
-    </style>
-
-    <script>
-    setTimeout(function() {
-        if ($('#msg').length > 0) {
-            $('#msg').remove();
-        }
-    }, 10000)
-
-    let searchbar = document.querySelector('input[name="search"]');
-    searchbar.focus();
-    search.value = '';
-    /////////////////////////////////////////////////////////////////
-    //  test timer
-    </script>
+#exampleFormControlTextarea1 {
+    font-size: 12px;
+}
+</style>
 
 
-    <?php include_once('../includes/footer.php');?>
+<?php include_once('../includes/footer.php');?>

@@ -14,8 +14,6 @@ $department = $_SESSION['department'];
 $role_id = $_SESSION['role_id'];
 $username = $_GET['username'];
 
-echo $username;
-
 ?>
 
 <div class="row page-titles">
@@ -37,7 +35,7 @@ echo $username;
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped">
+                    <table id="example2" class="table table-striped">
                         <thead>
                             <tr>
                                 <th style="width: 10px">#</th>
@@ -59,7 +57,7 @@ echo $username;
                             $start_time = date('Y-m-d 00:00:00');
                             $end_time = date('Y-m-d 23:59:59');
                             
-                            $query_1 = "SELECT * FROM sales_create_customer_informations WHERE created_by = '$username' AND uae_pickup1 = 'yes' AND created_time BETWEEN '$start_time' and '$end_time'";
+                            $query_1 = "SELECT * FROM sales_create_customer_informations WHERE created_by = '$username' AND uae_pickup1 = 'yes' AND created_time BETWEEN '$start_time' and '$end_time' ORDER BY created_time DESC";
                             $result = mysqli_query($connection, $query_1);
                             foreach($result as $row){
                                 
