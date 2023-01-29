@@ -299,11 +299,11 @@ if(isset($_POST['add_items'])){
                                         <tbody id="tbody" class="table-warning">
                                             <tr>
                                                 <td>
-                                                    <select name="device" id="device"
+                                                    <select name="device" id="device" class=""
                                                         style="border-radius: 5px; width: 100%">
                                                         <option selected value="">--Select Device--</option>
                                                         <?php
-                                                            $query = "SELECT device FROM machine_from_supplier GROUP BY device ASC";
+                                                            $query = "SELECT device FROM warehouse_information_sheet GROUP BY device ASC";
                                                             $result = mysqli_query($connection, $query);
 
                                                                 while ($xd = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
@@ -315,7 +315,7 @@ if(isset($_POST['add_items'])){
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <select name="brand" id="brand" class="info_select select2"
+                                                    <select name="brand" id="brand" class="info_select"
                                                         style="border-radius: 5px; width: 100%;">
                                                     </select>
                                                 </td>

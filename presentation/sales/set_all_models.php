@@ -1,4 +1,5 @@
-<?php 
+<?php
+ob_start(); 
 session_start();
 include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
@@ -8,17 +9,20 @@ include_once('../includes/header.php');
 // checking if a user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
+
 }
 
-?>
+$device = $_GET['device'];
+$brand = $_GET['brand'];
 
+?>
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-5">
-            <div class="card">
-                <div class="card-header mt-1">
-                    <h6>Set Price for the Laptop</h6>
+            <div class="card mt-3">
+                <div class="card-header d-flex bg-secondary">
+                    <h6 class="text-capitalize"><?= $device . " " . $brand;  ?></h6>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered table-hover">
@@ -33,22 +37,25 @@ if (!isset($_SESSION['user_id'])) {
                         </thead>
                         <tbody>
                             <?php 
+
+                            $i = 0;
                             
-                            $query = "SELECT inventory_id, device, brand, COUNT(inventory_id) AS Total_inventory  FROM warehouse_information_sheet WHERE send_to_production = 0 GROUP BY device, brand";
-                            $query_run = mysqli_query($connection, $query);
-                            foreach($query_run as $row){
-                                $device = $row['device'];
+                            $query = "SELECT inventory_id, device, brand, model, core, processor, COUNT(inventory_id) as Total_number FROM warehouse_information_sheet WHERE device = '$device' AND brand = '$brand'
+                                    GROUP BY device, brand, model ORDER BY Total_number DESC";
+                            $result = mysqli_query($connection, $query);
+                            foreach($result as $row){
+                                $i++;
                                 $brand = $row['brand'];
-                                $total_nventory = $row['Total_inventory'];
-                            
+                                $model = $row['model'];
+                                $count = $row['Total_number'];
                             ?>
                             <tr>
-                                <td>#</td>
-                                <td><?php echo $device ?></td>
-                                <td><?php echo $brand ?></td>
-                                <td><?php echo $total_nventory ?></td>
+                                <td><?= $i; ?></td>
+                                <td><?= $brand; ?></td>
+                                <td><?= $model; ?></td>
+                                <td><?= $count; ?></td>
                                 <td>
-                                    <?php echo "<a class='btn btn-xs btn-primary mx-1' href=\"set_all_models.php?device={$row['device']}&brand={$row['brand']}\"><i class='fa-solid fa-eye'></i> </a>" ?>
+                                    <?php echo "<a class='btn btn-xs btn-primary mx-1' href=\"set_price_by_model.php?device={$row['device']}&brand={$row['brand']}&model={$row['model']}\"><i class='fa-solid fa-eye'></i> </a>" ?>
                                 </td>
                             </tr>
                             <?php } ?>
@@ -59,5 +66,3 @@ if (!isset($_SESSION['user_id'])) {
         </div>
     </div>
 </div>
-
-<?php include_once('../includes/footer.php'); ?>

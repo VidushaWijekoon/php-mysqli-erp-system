@@ -91,5 +91,20 @@
 		}
 		echo $lcd_size_list;
 	}  
+	
+	if (isset($_GET['lcd_size']) ) {
+
+		$lcd_size = mysqli_real_escape_string($connection, $_GET['lcd_size']);
+		$query 		= "SELECT DISTINCT screen_resolution FROM warehouse_information_sheet WHERE lcd_size = '{$lcd_size}'";
+		$result_set = mysqli_query($connection, $query);
+        
+		$resolution_list = "<option selected>--Select LCD Size--</option>";
+		while ($result = mysqli_fetch_assoc($result_set) ) {
+			$resolution_list .= "<option value=\"{$result['screen_resolution']}\" class='info_select'>{$result['screen_resolution']}</option>";
+		}
+		echo $resolution_list;
+	}  
+
+
 
 ?>

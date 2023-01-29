@@ -486,9 +486,11 @@ if(isset($_POST['get_country'])){
                                             $customer_asking_model = 0;
                                             $customer_asking_price = 0;
                                             $uae_pickup2 = 0;
+                                            $i = 0;
        
 
                                             foreach($query_run2 as $x){
+                                                $i++;
                                                 $post_status1 = $x['status'];
                                                 $created_posted_time = $x['created_time'];
                                                 $posting_customer_name = $x['posting_customer_name'];
@@ -631,6 +633,20 @@ if(isset($_POST['get_country'])){
                                                         <label class="label_values" for="keyboard_light_2">No
                                                         </label>
                                                     </div>
+                                                    <?php }if($uae_pickup1 == 'n/a') { ?>
+                                                    <div class="icheck-success d-inline">
+                                                        <input type="radio" id="keyboard_light_1" name="uae_pickup2"
+                                                            value="">
+                                                        <label class="label_values" for="keyboard_light_1"
+                                                            style="margin-right: 15px;">Yes
+                                                        </label>
+                                                    </div>
+                                                    <div class="icheck-danger d-inline">
+                                                        <input type="radio" id="keyboard_light_2" name="uae_pickup2"
+                                                            value="no">
+                                                        <label class="label_values" for="keyboard_light_2">No
+                                                        </label>
+                                                    </div>
                                                     <?php } ?>
                                                 </td>
                                                 <td>
@@ -714,7 +730,7 @@ if(isset($_POST['submit_post_to_customer'])){
     font-size: 12px;
     padding: 10px;
     font-family: "Poppins", sans-serif;
-    color: black !important;
+    color: #fff !important;
 }
 </style>
 
