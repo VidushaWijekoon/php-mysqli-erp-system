@@ -344,8 +344,7 @@ $user_id = $_SESSION['user_id'];
                                                             id="create_phone_code" style="border-radius: 5px;" required>
                                                         </select>
 
-                                                        <input type="number" min="1" class="form-control"
-                                                            name="customer_whatsapp_number"
+                                                        <input type="text" min="1" class="form-control" name="whatsapp"
                                                             placeholder="Whatsapp Number">
                                                     </td>
                                                     <td>
@@ -361,6 +360,11 @@ $user_id = $_SESSION['user_id'];
                                                             <option value="amazon.com">amazon.com</option>
                                                             <option value="amazon.uk">amazon.uk</option>
                                                             <option value="tiktok">tiktok</option>
+                                                            <option value="loopzap">Loopzap</option>
+                                                            <option value="pigiame">Pigiame</option>
+                                                            <option value="kebuysell">Kebuysell</option>
+                                                            <option value="kenyagroup">Kenya Group</option>
+                                                            <option value="loozap">Loozap</option>
                                                             <option value="jiji.co.ke">jiji.co.ke</option>
                                                             <option value="jiji.ng">jiji.ng</option>
                                                             <option value="google">google</option>
@@ -460,8 +464,6 @@ $user_id = $_SESSION['user_id'];
                                                             style="background: transparent; border:none;">
                                                             <i class="fa-solid fa-circle-plus fa-2x text-primary"></i>
                                                         </button>
-                                                        <a href="./create_collect_customer_information.php"
-                                                            class="btn btn-xs btn-default">Clear</a>
                                                     </td>
                                                 </tr>
                                             </form>
@@ -470,29 +472,30 @@ $user_id = $_SESSION['user_id'];
                                 </table>
                             </div>
 
-                            <?php 
+                            <?php                                
 
                                 if(isset($_POST['add_customer'])){
-
                                     $create_customer_country = $_POST['create_customer_country'];
                                     $customer_name = $_POST['customer_name'];
                                     $create_phone_code = $_POST['create_phone_code'];
-                                    $customer_whatsapp_number = $_POST['customer_whatsapp_number'];
+                                    $customer_whatsapp_number = trim($_POST['whatsapp']);
                                     $platform1 = $_POST['platform1'];
                                     $model_selling_buying = $_POST['model_selling_buying'];
                                     $uae_pickup1 = $_POST['uae_pickup1'];
 
-                                    
-                                    $q_r = "INSERT INTO `sales_create_customer_informations`(`create_customer_country`, `customer_name`, `customer_whatspp_phone_code`, `customer_whatsapp_number`, `platform1`, `model_selling_buying`, `uae_pickup1`, `created_by`) 
-                                                VALUES ('{$create_customer_country}', '{$customer_name}', '{$create_phone_code}', '{$customer_whatsapp_number}', '{$platform1}', '{$model_selling_buying}', '{$uae_pickup1}', '{$username}')";
-                                    $insert_q_r = mysqli_query($connection, $q_r);
-
-                                    if($insert_q_r){
-                                        header("Location: create_collect_customer_information.php");
-                                    }
-                                }
+                                    $row = 0;
+                                    $q1 = "SELECT id FROM sales_create_customer_informations WHERE customer_whatsapp_number = '$customer_whatsapp_number' AND customer_whatspp_phone_code = '$create_phone_code'";
+                                    $q_run = mysqli_query($connection, $q1);
+                                    $row = mysqli_num_rows($q_run);
+                                    if($row == 0){
+                                        $q_r = "INSERT INTO sales_create_customer_informations(`create_customer_country`, `customer_name`, `customer_whatspp_phone_code`, `customer_whatsapp_number`, `platform1`, `model_selling_buying`, `uae_pickup1`, `created_by`) 
+                                                    VALUES ('$create_customer_country', '$customer_name', '$create_phone_code', '$customer_whatsapp_number', '$platform1', '$model_selling_buying', '$uae_pickup1', '$username')";
+                                        $insert_q_r = mysqli_query($connection, $q_r);
+                                    }else{
+                                        echo "<script>alert('This Number Exists')</script>";                                        
+                                    }  
+                                }                                                                    
                             ?>
-
                         </div>
                     </div>
                 </div>

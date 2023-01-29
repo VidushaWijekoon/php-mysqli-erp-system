@@ -15,11 +15,24 @@ if (!isset($_SESSION['user_id'])) {
 $device = $_GET['device'];
 $brand = $_GET['brand'];
 
+$qd = "SELECT inventory_id, COUNT(inventory_id) as something FROM warehouse_information_sheet WHERE set_price = 0 AND brand = '$brand' AND device = '$device'";
+$qdx = mysqli_query($connection, $qd);
+foreach($qdx as $l){
+    $count = $l['something'];
+}
+
 ?>
+
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center"><a href="./employees.php">
+            <i class="fa-solid fa-circle fa-4x"><?= $count; ?></i>
+        </a>
+    </div>
+</div>
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-5">
+        <div class="col-lg-9 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card mt-3">
                 <div class="card-header d-flex bg-secondary">
                     <h6 class="text-capitalize"><?= $device . " " . $brand;  ?></h6>
@@ -31,6 +44,7 @@ $brand = $_GET['brand'];
                                 <th>#</th>
                                 <th>Device</th>
                                 <th>Brand</th>
+                                <th>Core</th>
                                 <th>Total QTY</th>
                                 <th>&nbsp;</th>
                             </tr>
@@ -45,12 +59,14 @@ $brand = $_GET['brand'];
                             $result = mysqli_query($connection, $query);
                             foreach($result as $row){
                                 $i++;
+                                $device = $row['device'];
                                 $brand = $row['brand'];
                                 $model = $row['model'];
                                 $count = $row['Total_number'];
                             ?>
                             <tr>
                                 <td><?= $i; ?></td>
+                                <td><?= $device; ?></td>
                                 <td><?= $brand; ?></td>
                                 <td><?= $model; ?></td>
                                 <td><?= $count; ?></td>

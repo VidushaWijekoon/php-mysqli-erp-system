@@ -440,10 +440,8 @@ if(isset($_POST['get_country'])){
                                 <table id="example2" class="table table-striped">
                                     <thead>
                                         <tr style="font-size: 10px;">
-                                            <th>#</th>
                                             <!-- <th>Country</th> -->
                                             <th>Customer Name</th>
-                                            <th>Phone Code</th>
                                             <th>Whatsapp Number</th>
                                             <th>Platform</th>
                                             <th>Model He Selling/Buying?</th>
@@ -527,41 +525,22 @@ if(isset($_POST['get_country'])){
                                         ?>
                                         <tr>
                                             <form method="POST">
-                                                <td><?php echo $i; ?></td>
                                                 <td>
-                                                    <input type="text" class="form-control" name="posting_customer_name"
-                                                        value="<?php echo $create_customer_name; ?>" readonly>
+                                                    <p style="font-size: 11px"><?php echo $create_customer_name; ?></p>
                                                 </td>
 
+
                                                 <td>
-                                                    <input type="text" class="form-control"
-                                                        name="posting_customer_phone_code"
-                                                        value="<?php echo "+" . $customer_whatspp_phone_code; ?>"
-                                                        readonly>
+                                                    <p style="font-size: 11px">
+                                                        <?php echo "+" . $customer_whatspp_phone_code . " " . $created_customer_whatsapp_number; ?>
+                                                    </p>
+
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control"
-                                                        name="posting_whatsapp_number"
-                                                        value="<?php echo $created_customer_whatsapp_number; ?>"
-                                                        readonly>
+                                                    <p style="font-size: 11px"><?php echo $created_platform ?></p>
                                                 </td>
                                                 <td>
-                                                    <?php if(($x == '-7') || ($created_platform == 0)) { ?>
-                                                    <input type="text" class="form-control" name="platform2"
-                                                        placeholder="Platform">
-                                                    <?php }else { ?>
-                                                    <input type="text" class="form-control" name="platform2"
-                                                        value="<?php echo $created_platform ?>" readonly>
-                                                    <?php } ?>
-                                                </td>
-                                                <td>
-                                                    <?php if(($x == '-7') || ($model_selling_buying == null)) { ?>
-                                                    <input type="text" class="form-control" name="model_selling_buying"
-                                                        placeholder="Model He Selling/Buying?">
-                                                    <?php } else { ?>
-                                                    <input type="text" class="form-control" name="model_selling_buying"
-                                                        value="<?php echo $model_selling_buying ?>" disabled>
-                                                    <?php } ?>
+                                                    <p style="font-size: 11px;"><?php echo $model_selling_buying ?></p>
                                                 </td>
 
                                                 <td>
