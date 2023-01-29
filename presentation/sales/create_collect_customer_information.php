@@ -26,8 +26,7 @@ if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 2) |
 
 $username = $_SESSION['username'];
 $user_id = $_SESSION['user_id'];
-
-
+ 
 ?>
 
 <div class="row page-titles">
@@ -304,9 +303,8 @@ $user_id = $_SESSION['user_id'];
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th style="width: 10px">#</th>
-                                                <th style="width: 25%;">Customer Name</th>
-                                                <th style="width: 10%;">Country</th>
+                                                <th>Customer Name</th>
+                                                <th style="width: 15%;">Country</th>
                                                 <th>Whatsapp Number</th>
                                                 <th>Platform</th>
                                                 <th>Model He Selling & Buying</th>
@@ -317,10 +315,9 @@ $user_id = $_SESSION['user_id'];
                                         <tbody>
                                             <form method="POST">
                                                 <tr>
-                                                    <td>#</td>
                                                     <td>
-                                                        <input type="text" class="form-control" name="customer_name"
-                                                            id="customer_name" value="" style="width: 90%;">
+                                                        <input type="text" class="form-control w-100"
+                                                            name="customer_name" id="customer_name" value="">
                                                     </td>
                                                     <td>
                                                         <select name="create_customer_country" class="mt-1 w-100"
@@ -336,8 +333,9 @@ $user_id = $_SESSION['user_id'];
                                                             <option value="<?php echo $x["country_name"]; ?>">
                                                                 <?php echo $x["country_name"]; ?>
                                                             </option>
-                                                            <?php endwhile; ?>
+                                                            <?php endwhile;?>
                                                         </select>
+
                                                     </td>
 
 
@@ -345,6 +343,7 @@ $user_id = $_SESSION['user_id'];
                                                         <select name="create_phone_code" class="mt-1 w-50"
                                                             id="create_phone_code" style="border-radius: 5px;" required>
                                                         </select>
+
                                                         <input type="number" min="1" class="form-control"
                                                             name="customer_whatsapp_number"
                                                             placeholder="Whatsapp Number">
@@ -369,6 +368,8 @@ $user_id = $_SESSION['user_id'];
                                                             <option value="jumia">Jumia</option>
                                                             <option value="thebrokersite">The Brokersite</option>
                                                         </select>
+
+
                                                         <!-- <input type="text" class="form-control" name="platform1"
                                                             placeholder="Platform"> -->
                                                         <!-- <select name="platform1" class="mt-1 "
@@ -459,6 +460,8 @@ $user_id = $_SESSION['user_id'];
                                                             style="background: transparent; border:none;">
                                                             <i class="fa-solid fa-circle-plus fa-2x text-primary"></i>
                                                         </button>
+                                                        <a href="./create_collect_customer_information.php"
+                                                            class="btn btn-xs btn-default">Clear</a>
                                                     </td>
                                                 </tr>
                                             </form>
@@ -479,6 +482,7 @@ $user_id = $_SESSION['user_id'];
                                     $model_selling_buying = $_POST['model_selling_buying'];
                                     $uae_pickup1 = $_POST['uae_pickup1'];
 
+                                    
                                     $q_r = "INSERT INTO `sales_create_customer_informations`(`create_customer_country`, `customer_name`, `customer_whatspp_phone_code`, `customer_whatsapp_number`, `platform1`, `model_selling_buying`, `uae_pickup1`, `created_by`) 
                                                 VALUES ('{$create_customer_country}', '{$customer_name}', '{$create_phone_code}', '{$customer_whatsapp_number}', '{$platform1}', '{$model_selling_buying}', '{$uae_pickup1}', '{$username}')";
                                     $insert_q_r = mysqli_query($connection, $q_r);
@@ -567,7 +571,7 @@ $user_id = $_SESSION['user_id'];
     font-size: 12px;
     padding: 10px;
     font-family: "Poppins", sans-serif;
-    color: black !important;
+    color: #fff !important;
 }
 </style>
 
