@@ -113,63 +113,63 @@ $post_status = null;
 $created_posted_time = null;
 $gt_c = null;
 
-$query = "SELECT * FROM weekly_sales_set_target
-            INNER JOIN weekly_sales_set_posting_to_customer 
-            ON weekly_sales_set_target.id = weekly_sales_set_posting_to_customer.member_id 
-            AND weekly_sales_set_target.day = weekly_sales_set_posting_to_customer.day
-            AND weekly_sales_set_target.sales_member = weekly_sales_set_posting_to_customer.sales_member
-            INNER JOIN weekly_sales_set_create_search_customer
-            ON weekly_sales_set_target.id = weekly_sales_set_create_search_customer.member_id
-            AND weekly_sales_set_target.day = weekly_sales_set_create_search_customer.day
-            AND weekly_sales_set_target.sales_member = weekly_sales_set_create_search_customer.sales_member
-            WHERE weekly_sales_set_target.sales_member = '$username' AND weekly_sales_set_create_search_customer.day = '{$currrent_date}'";
-$query_run = mysqli_query($connection, $query);
-foreach($query_run as $q){
-   $day = $q['day'];
-   $facebook = $q['facebook'];
-   $instagram = $q['instagram'];
-   $lazada = $q['lazada'];
-   $shoppe = $q['shoppe'];
-   $tokopedia = $q['tokopedia'];
-   $amazon_com = $q['amazon.com'];
-   $amazon_uk = $q['amazon.uk'];
-   $tiktok = $q['tiktok'];
-   $jiji_ng = $q['jiji.ng'];
-   $jiji_co_ke = $q['jiji.co.ke'];
-   $google = $q['google'];
-   $pcexporters = $q['pcexporters'];
-   $jumia = $q['jumia'];
-   $thebrokersite = $q['thebrokersite'];
-   $search_keyword_1 = $q['search_keyword_1'];
-   $search_keyword_2 = $q['search_keyword_2'];
-   $search_keyword_3 = $q['search_keyword_3'];
-   $search_keyword_4 = $q['search_keyword_4'];
-   $search_keyword_5 = $q['search_keyword_5'];
-   $customer_target_qty = $q['customer_target_qty'];
-   $customer_create_model_1 = $q['customer_create_model_1'];
-   $customer_create_model_2 = $q['customer_create_model_2'];
-   $customer_create_model_3 = $q['customer_create_model_3'];
-   $customer_create_model_4 = $q['customer_create_model_4'];
-   $customer_create_model_5 = $q['customer_create_model_5'];
-   $customer_create_model_6 = $q['customer_create_model_6'];
-   $customer_create_model_7 = $q['customer_create_model_7'];
-   $customer_create_model_8 = $q['customer_create_model_2'];
-   $customer_create_model_9 = $q['customer_create_model_9'];
-   $customer_create_model_10 = $q['customer_create_model_10'];
-   $thebrokersite1 = $q['thebrokersite1'];
-   $pcexporters1 = $q['pcexporters1'];
-   $facebook1 = $q['facebook1'];
-   $platform_create_model_1 = $q['platform_create_model_1'];
-   $platform_create_model_2 = $q['platform_create_model_2'];
-   $platform_create_model_3 = $q['platform_create_model_3'];
-   $platform_create_model_4 = $q['platform_create_model_4'];
-   $platform_create_model_5 = $q['platform_create_model_5'];
-   $platform_create_model_6 = $q['platform_create_model_6'];
-   $platform_create_model_7 = $q['platform_create_model_7'];
-   $platform_create_model_8 = $q['platform_create_model_8'];
-   $platform_create_model_9 = $q['platform_create_model_9'];
-   $platform_create_model_10 = $q['platform_create_model_110'];
-}
+// $query = "SELECT * FROM weekly_sales_set_target
+//             INNER JOIN weekly_sales_set_posting_to_customer 
+//             ON weekly_sales_set_target.id = weekly_sales_set_posting_to_customer.member_id 
+//             AND weekly_sales_set_target.day = weekly_sales_set_posting_to_customer.day
+//             AND weekly_sales_set_target.sales_member = weekly_sales_set_posting_to_customer.sales_member
+//             INNER JOIN weekly_sales_set_create_search_customer
+//             ON weekly_sales_set_target.id = weekly_sales_set_create_search_customer.member_id
+//             AND weekly_sales_set_target.day = weekly_sales_set_create_search_customer.day
+//             AND weekly_sales_set_target.sales_member = weekly_sales_set_create_search_customer.sales_member
+//             WHERE weekly_sales_set_target.sales_member = '$username' AND weekly_sales_set_create_search_customer.day = '{$currrent_date}'";
+// $query_run = mysqli_query($connection, $query);
+// foreach($query_run as $q){
+//    $day = $q['day'];
+//    $facebook = $q['facebook'];
+//    $instagram = $q['instagram'];
+//    $lazada = $q['lazada'];
+//    $shoppe = $q['shoppe'];
+//    $tokopedia = $q['tokopedia'];
+//    $amazon_com = $q['amazon.com'];
+//    $amazon_uk = $q['amazon.uk'];
+//    $tiktok = $q['tiktok'];
+//    $jiji_ng = $q['jiji.ng'];
+//    $jiji_co_ke = $q['jiji.co.ke'];
+//    $google = $q['google'];
+//    $pcexporters = $q['pcexporters'];
+//    $jumia = $q['jumia'];
+//    $thebrokersite = $q['thebrokersite'];
+//    $search_keyword_1 = $q['search_keyword_1'];
+//    $search_keyword_2 = $q['search_keyword_2'];
+//    $search_keyword_3 = $q['search_keyword_3'];
+//    $search_keyword_4 = $q['search_keyword_4'];
+//    $search_keyword_5 = $q['search_keyword_5'];
+//    $customer_target_qty = $q['customer_target_qty'];
+//    $customer_create_model_1 = $q['customer_create_model_1'];
+//    $customer_create_model_2 = $q['customer_create_model_2'];
+//    $customer_create_model_3 = $q['customer_create_model_3'];
+//    $customer_create_model_4 = $q['customer_create_model_4'];
+//    $customer_create_model_5 = $q['customer_create_model_5'];
+//    $customer_create_model_6 = $q['customer_create_model_6'];
+//    $customer_create_model_7 = $q['customer_create_model_7'];
+//    $customer_create_model_8 = $q['customer_create_model_2'];
+//    $customer_create_model_9 = $q['customer_create_model_9'];
+//    $customer_create_model_10 = $q['customer_create_model_10'];
+//    $thebrokersite1 = $q['thebrokersite1'];
+//    $pcexporters1 = $q['pcexporters1'];
+//    $facebook1 = $q['facebook1'];
+//    $platform_create_model_1 = $q['platform_create_model_1'];
+//    $platform_create_model_2 = $q['platform_create_model_2'];
+//    $platform_create_model_3 = $q['platform_create_model_3'];
+//    $platform_create_model_4 = $q['platform_create_model_4'];
+//    $platform_create_model_5 = $q['platform_create_model_5'];
+//    $platform_create_model_6 = $q['platform_create_model_6'];
+//    $platform_create_model_7 = $q['platform_create_model_7'];
+//    $platform_create_model_8 = $q['platform_create_model_8'];
+//    $platform_create_model_9 = $q['platform_create_model_9'];
+//    $platform_create_model_10 = $q['platform_create_model_110'];
+// }
 
 $currrent_date = date("l");
 
@@ -197,13 +197,7 @@ if(isset($_POST['get_country'])){
             <div class="row">
                 <div class="card card-success card-outline card-outline-tabs m-2 w-100">
                     <div class="card-header p-0 border-bottom-0">
-                        <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
-                            <li class="nav-item text-center" style="width: 350px;">
-                                <a class="nav-link" id="custom-tabs-four-home-tab" data-toggle="pill"
-                                    href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home"
-                                    aria-selected="false" style="color: #fff;">Posting to Customer & Platform Task</a>
-                            </li>
-                        </ul>
+                        <h6 class="p-3">Posting to Customer & Platform Task</h6>
                     </div>
                     <div class="card-body">
                         <div class="tab-content" id="custom-tabs-four-tabContent">
@@ -458,11 +452,11 @@ if(isset($_POST['get_country'])){
                                     </thead>
                                     <tbody id="tbody">
 
-                                        <?php                                                                               
-                                                        
+                                        <?php      
+                                            
                                             $q_d = "SELECT * FROM sales_create_customer_informations WHERE create_customer_country = '{$gt_c}' AND created_by = '$username'";
                                             $qd_run = mysqli_query($connection, $q_d);
-
+                                            $test_id=0;
                                             foreach($qd_run as $qd_run){
                                                 $create_customer_name = $qd_run['customer_name'];
                                                 $customer_whatspp_phone_code = $qd_run['customer_whatspp_phone_code'];
@@ -470,10 +464,12 @@ if(isset($_POST['get_country'])){
                                                 $created_platform = $qd_run['platform1'];
                                                 $uae_pickup1 = $qd_run['uae_pickup1'];
                                                 $create_customer_id = $qd_run['id'];                                                                                                                                 
-                                                $model_selling_buying = $qd_run['model_selling_buying'];                                                                                                                                 
-                                        
+                                                $model_selling_buying = $qd_run['model_selling_buying'];   
+                                                 $test_id= $create_customer_id;   
+                                                $contact = $customer_whatspp_phone_code . $created_customer_whatsapp_number;                                                                                                                                                                           
+                                         
                                             $query1 = "SELECT * FROM sales_posting_to_customer 
-                                                                WHERE posting_customer_name = '$create_customer_name' AND posting_whatsapp_number = '$created_customer_whatsapp_number' AND posting_phone_code = '$customer_whatspp_phone_code'";
+                                                                WHERE posting_customer_name = '$create_customer_name' AND posting_contact_number = '$contact'";
                                             $query_run2 = mysqli_query($connection, $query1);
                                             $post_status1 = 0;
                                             $created_posted_time = 0;
@@ -486,7 +482,7 @@ if(isset($_POST['get_country'])){
                                             $uae_pickup2 = 0;
                                             $i = 0;
        
-
+                                            if(empty($query_run2)){}else{
                                             foreach($query_run2 as $x){
                                                 $i++;
                                                 $post_status1 = $x['status'];
@@ -521,26 +517,34 @@ if(isset($_POST['get_country'])){
                                                 //Calculate the interval from the second date to the first date
                                                 $ival = date_diff($dateVal1, $dateVal2);
                                                 $x = $ival->format('%r%a');
-                                            }                                                                                                                                                          
+                                            }  }                                          
+                                                                                                                                                                                                   
                                         ?>
                                         <tr>
                                             <form method="POST">
+                                                <td class="d-none"><?= $i ?></td>
                                                 <td>
-                                                    <p style="font-size: 11px"><?php echo $create_customer_name; ?></p>
-                                                </td>
-
-
-                                                <td>
-                                                    <p style="font-size: 11px">
-                                                        <?php echo "+" . $customer_whatspp_phone_code . " " . $created_customer_whatsapp_number; ?>
-                                                    </p>
+                                                    <input type="text" class="form-control w-100" name="customer_name"
+                                                        id="customer_name" readonly
+                                                        value="<?php echo $create_customer_name; ?>">
 
                                                 </td>
+
                                                 <td>
-                                                    <p style="font-size: 11px"><?php echo $created_platform ?></p>
+                                                    <input type="text" class="form-control w-100" name="contact_number"
+                                                        id="customer_name" readonly
+                                                        value="<?php echo $customer_whatspp_phone_code . $created_customer_whatsapp_number ?>">
+
                                                 </td>
                                                 <td>
-                                                    <p style="font-size: 11px;"><?php echo $model_selling_buying ?></p>
+                                                    <input type="text" class="form-control w-100" name="platform2"
+                                                        id="customer_name" readonly
+                                                        value="<?php echo $created_platform; ?>">
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control w-100"
+                                                        name="model_selling_and_buying1" id="customer_name" readonly
+                                                        value="<?php echo $model_selling_buying; ?>">
                                                 </td>
 
                                                 <td>
@@ -574,11 +578,11 @@ if(isset($_POST['get_country'])){
                                                 </td>
                                                 <td>
                                                     <?php if(($x == '-7') || ($customer_asking_price == 0)) { ?>
-                                                    <input type="number" min="1" class="form-control"
+                                                    <input type="text" min="1" class="form-control"
                                                         name="customer_asking_price" required
                                                         placeholder="Customer Asking Price">
                                                     <?php } else { ?>
-                                                    <input type="number" min="1" class="form-control"
+                                                    <input type="text" min="1" class="form-control"
                                                         name="customer_asking_price" required
                                                         value="<?php echo $customer_asking_price ?>" readonly>
                                                     <?php } ?>
@@ -612,15 +616,15 @@ if(isset($_POST['get_country'])){
                                                         <label class="label_values" for="keyboard_light_2">No
                                                         </label>
                                                     </div>
-                                                    <?php }if($uae_pickup1 == 'n/a') { ?>
-                                                    <div class="icheck-success d-inline">
+                                                    <?php }if($uae_pickup1 == 'n/a') {?>
+                                                    <div class="">
                                                         <input type="radio" id="keyboard_light_1" name="uae_pickup2"
-                                                            value="">
+                                                            value="yes">
                                                         <label class="label_values" for="keyboard_light_1"
                                                             style="margin-right: 15px;">Yes
                                                         </label>
                                                     </div>
-                                                    <div class="icheck-danger d-inline">
+                                                    <div>
                                                         <input type="radio" id="keyboard_light_2" name="uae_pickup2"
                                                             value="no">
                                                         <label class="label_values" for="keyboard_light_2">No
@@ -672,27 +676,24 @@ if(isset($_POST['get_country'])){
 <?php 
 
 if(isset($_POST['submit_post_to_customer'])){
-
+    $create_customer_name= $_POST['customer_name'];
+    $contact_number= $_POST['contact_number'];
+    $platform2= $_POST['platform2'];
+    $model_selling_and_buying1= $_POST['model_selling_and_buying1'];
     $choose_country = $_GET['choose_country'];
-
-    $posting_customer_name = $_POST['posting_customer_name'];
-    $posting_customer_phone_code = $_POST['posting_customer_phone_code'];
-    $posting_whatsapp_number = $_POST['posting_whatsapp_number'];
-    $platform2 = $_POST['platform2'];
-    $model_selling_and_buying1 = $_POST['model_selling_and_buying1'];
     $posted_model_1 = $_POST['posted_model_1'];
     $posted_model_2 = $_POST['posted_model_2'];
     $customer_asking_model = $_POST['customer_asking_model'];
     $customer_asking_price = $_POST['customer_asking_price'];
     $uae_pickup2 = $_POST['uae_pickup2'];
-
-    $d_r = "INSERT INTO `sales_posting_to_customer`(`posting_customer_name`, `posting_phone_code`,`posting_whatsapp_number`, `platform2`, `model_selling_and_buying1`, `posted_model_1`, `posted_model_2`, `customer_asking_model`, `customer_asking_price`, `uae_pickup2`, `status`, `created_by`, `choose_country`) 
-            VALUES ('{$posting_customer_name}', '{$posting_customer_phone_code}','{$posting_whatsapp_number}', '{$platform2}', '{$model_selling_and_buying1}', '{$posted_model_1}', '{$posted_model_2}', '{$customer_asking_model}', '{$customer_asking_price}', 
-                    '{$uae_pickup2}', 'post','{$username}', '{$gt_c}') ";
+    $test_id = $_POST['test_id'];
+    
+    $d_r = "INSERT INTO sales_posting_to_customer(`posting_customer_name`, `posting_contact_number`, `platform2`, `model_selling_and_buying1`, `posted_model_1`, `posted_model_2`, `customer_asking_model`, `customer_asking_price`, `uae_pickup2`, `status`, `created_by`, `choose_country`) 
+                VALUES  ('$create_customer_name', '$contact_number', '$platform2', '$model_selling_and_buying1', '$posted_model_1', '$posted_model_2', '$customer_asking_model', '$customer_asking_price', 
+                    '$uae_pickup2', 'post','$username', '$gt_c') ";     
     $d_r_run = mysqli_query($connection, $d_r);
-    if($d_r_run){
-        header("Location: create_customer_posting.php?choose_country=$choose_country");
-    }
+    
+    header("Location: create_customer_posting.php?choose_country=$choose_country");
     
 }
 
@@ -710,6 +711,15 @@ if(isset($_POST['submit_post_to_customer'])){
     padding: 10px;
     font-family: "Poppins", sans-serif;
     color: #fff !important;
+}
+
+.form-check-input,
+input[type="radio"],
+input[type="checkbox"] {
+    width: 1.6em;
+    height: 0.65em;
+    /* border-radius: 50%; */
+    transform: scale(2);
 }
 </style>
 

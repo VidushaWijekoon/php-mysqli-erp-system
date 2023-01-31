@@ -14,7 +14,8 @@ if (!isset($_SESSION['user_id'])) {
 
 $device = $_GET['device'];
 $brand = $_GET['brand'];
-$model = $_GET['model']
+$model = $_GET['model'];
+$username = $_SESSION['username'];
 
 ?>
 
@@ -29,55 +30,113 @@ $model = $_GET['model']
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Device</th>
-                                <th>Brand</th>
                                 <th>Model</th>
-                                <th>Processor</th>
-                                <th>Core</th>
+                                <th style="width: 120px;">Core</th>
+                                <th>Generation</th>
                                 <th>Touch</th>
-                                <th>Total</th>
+                                <th>Non Touch</th>
+                                <th>In Stock</th>
+                                <th style="width: 100px;">RAM</th>
+                                <th style="width: 120px;">HDD</th>
+                                <th>Wholesale Price</th>
+                                <th>Discount Precentage</th>
+                                <th>Final Price</th>
                                 <th>&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
+                            <?php  
+                               
 
-                            $i = 0;
-                            
-                            $query = "SELECT inventory_id, device, brand, model, core, processor, touch_or_non_touch, COUNT(inventory_id) as Total_number FROM warehouse_information_sheet 
-                                    WHERE device = '$device' AND brand = '$brand' AND model = '$model' GROUP BY device, brand, model, processor, core, touch_or_non_touch 
-                                    ORDER BY Total_number DESC";
-                            $result = mysqli_query($connection, $query);
-                            foreach($result as $x){
-                                $device = $x['device'];
-                                $brand = $x['brand'];
-                                $model = $x['model'];
-                                $processor = $x['processor'];
-                                $core = $x['core'];
-                                $touch = $x['touch_or_non_touch'];
-                                $total_count = $x['Total_number'];
-                                $i++;
-
+                                $query = "SELECT inventory_id, device, brand, model, core, processor, generation, touch_or_non_touch, dispatch, 
+                                        COUNT(inventory_id) as Total_number
+                                        FROM warehouse_information_sheet 
+                                        WHERE device = '$device' AND brand = '$brand' AND model = '$model' AND dispatch = '0' AND touch_or_non_touch = 'no' GROUP BY device, brand, model, processor, core 
+                                        ORDER BY Total_number DESC";
+                                $result = mysqli_query($connection, $query);
+                                foreach($result as $key=>$x){
+                                    $device = $x['device'];
+                                    $brand = $x['brand'];
+                                    $model = $x['model'];
+                                    $processor = $x['processor'];
+                                    $generation = $x['generation'];
+                                    $core = $x['core'];
+                                    $touch = $x['touch_or_non_touch'];
+                                    $total_count = $x['Total_number'];  
+                                   
                             ?>
+
                             <tr>
-                                <td><?= $i ?></td>
-                                <td><?= $device ?></td>
-                                <td><?= $brand ?></td>
-                                <td><?= $model ?></td>
-                                <td><?= $processor ?></td>
-                                <td><?= $core ?></td>
-                                <td><?= $touch ?></td>
-                                <td><?= $total_count ?></td>
-                                <td>
-                                    <?php echo "<a class='btn btn-xs btn-primary mx-1' href=\"set_final_price_list.php?device={$x['device']}&brand={$x['brand']}&model={$x['model']}&core={$x['core']}&processor={$x['processor']}&touch={$x['touch_or_non_touch']}&count={$x['Total_number']}\"><i class='fa-solid fa-eye'></i> </a>" ?>
-                                </td>
+                                <form method="POST">
+                                    <td><?= $model ?></td>
+                                    <td><?= $core ?></td>
+                                    <td><?= $generation ?></td>
+                                    <td><?= 1 ?></td>
+                                    <td><?= $total_count ?></td>
+                                    <td>
+                                        <select class="" name="ram" style="border-radius: 5px; width: 100%">
+                                            <option value="8">8GB</option>
+                                            <option value="4">4GB</option>
+                                            <option value="16">16GB</option>
+                                            <option value="32">32GB</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="" name="hdd" style="border-radius: 5px; width: 100%">
+                                            <option value="256">256GB</option>
+                                            <option value="512">512GB</option>
+                                            <option value="1tb">1TB</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="number" min="1" class="form-control" name="wholesale_price"
+                                            placeholder="Wholesale Price">
+                                    </td>
+                                    <td>
+                                        <input type="number" min="1" class="form-control" name="discount_price"
+                                            placeholder="Discount Price">
+                                    </td>
+                                    <td>
+                                        <input type="number" min="1" class="form-control" name="total_price"
+                                            placeholder="Total Price">
+                                    </td>
+                                    <td>
+                                        <button type="submit" name="submit"
+                                            class="btn btn-xs btn-success mx-2 float-right">Submit</button>
+                                    </td>
+                                </form>
                             </tr>
                             <?php } ?>
                         </tbody>
                     </table>
+                    <div class="col">
+                        <?php echo "<a class='btn btn-xs btn-primary px-2 mt-2 float-right' href=\"set_all_models.php?device={$x['device']}&brand={$x['brand']}\">Back</a>" ?>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<?php 
+
+if(isset($_POST['submit'])){
+
+    $ram = $_POST['ram'];
+    $hdd = $_POST['hdd'];
+    $wholesale_price = $_POST['wholesale_price'];
+    $discount_price = $_POST['discount_price'];
+    $e_commerce_price = $_POST['e_commerce_price'];
+
+    $insert_q = "INSERT INTO sales_laptop_unit_price(`device`, `brand`, `model`, `processor`, `core`, `touch_status`, `hdd`, `ram`, `e-commerce_price`, `discount_price`, `wholesale_price`, `created_by`) 
+        VALUES('$device', '$brand', '$model', '$processor', '$core', '$touch', '$ram', '$hdd', '$e_commerce_price', '$discount_price', '$wholesale_price', '$username')";
+    echo $insert_q;
+    $result_run = mysqli_query($connection, $insert_q);
+
+    $update = "UPDATE warehouse_information_sheet SET set_price = '1' WHERE device = '$device' AND brand = '$brand' AND model = '$model' AND core = '$core' AND processor = 'processor' AND touch_or_non_touch = '$touch'";
+            echo $update;
+    $update_run = mysqli_query($connection, $update);
+}
+
+
+?>

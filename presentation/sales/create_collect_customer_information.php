@@ -26,7 +26,39 @@ if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 2) |
 
 $username = $_SESSION['username'];
 $user_id = $_SESSION['user_id'];
- 
+
+if(isset($_POST['add_customer'])){
+    $create_customer_country = $_POST['create_customer_country'];
+    $customer_name = $_POST['customer_name'];
+    $create_phone_code = $_POST['create_phone_code'];
+    $customer_whatsapp_number = trim($_POST['whatsapp']);
+    $platform1 = $_POST['platform1'];
+    $model_selling_buying = $_POST['model_selling_buying'];
+    $uae_pickup1 = $_POST['uae_pickup1'];
+
+    $row = 0;
+    $q1 = "SELECT id FROM sales_create_customer_informations WHERE customer_whatsapp_number = '$customer_whatsapp_number' AND customer_whatspp_phone_code = '$create_phone_code'";
+    $q_run = mysqli_query($connection, $q1);
+    $row = mysqli_num_rows($q_run);
+    if($row == 0){
+        $q_r = "INSERT INTO sales_create_customer_informations(`create_customer_country`, `customer_name`, `customer_whatspp_phone_code`, `customer_whatsapp_number`, `platform1`, `model_selling_buying`, `uae_pickup1`, `created_by`) 
+                    VALUES ('$create_customer_country', '$customer_name', '$create_phone_code', '$customer_whatsapp_number', '$platform1', '$model_selling_buying', '$uae_pickup1', '$username')";
+        $insert_q_r = mysqli_query($connection, $q_r);
+        }else{
+            echo "<script>alert('This Number Exists')</script>";                                        
+    }  
+}  
+
+$his = "SELECT create_customer_country, platform1, customer_whatspp_phone_code FROM sales_create_customer_informations WHERE created_by ='$username' ORDER BY id DESC LIMIT 1";
+$run = mysqli_query($connection, $his);
+$create_customer_country = 0;
+$platform1 = 0;
+$create_phone_code = 0;
+foreach($run as $dx){
+    $create_customer_country = $dx['create_customer_country'];
+    $platform1 = $dx['platform1'];
+    $create_phone_code = $dx['customer_whatspp_phone_code'];
+}
 ?>
 
 <div class="row page-titles">
@@ -323,7 +355,14 @@ $user_id = $_SESSION['user_id'];
                                                         <select name="create_customer_country" class="mt-1 w-100"
                                                             id="create_customer_country" style="border-radius: 5px;"
                                                             required>
-                                                            <option value="" selected>--Select Country--</option>
+                                                            <?php if($create_customer_country !=0){ ?>
+                                                            <option value="<?php echo $create_customer_country ?>"
+                                                                selected><?php echo $create_customer_country ?></option>
+                                                            <?php } else { ?>
+                                                            <option value="" selected><?php echo "Please select" ?>
+                                                            </option>
+                                                            <?php } ?>
+
                                                             <?php
                                                                 $query = "SELECT country_name FROM countries ORDER BY 'country_name' ASC";
                                                                 $result = mysqli_query($connection, $query);
@@ -335,23 +374,37 @@ $user_id = $_SESSION['user_id'];
                                                             </option>
                                                             <?php endwhile;?>
                                                         </select>
-
                                                     </td>
 
-
                                                     <td class="d-flex">
+
                                                         <select name="create_phone_code" class="mt-1 w-50"
                                                             id="create_phone_code" style="border-radius: 5px;" required>
+                                                            <?php if($create_phone_code !=0){ ?>
+                                                            <option value="<?php echo $create_phone_code ?>" selected>
+                                                                <?php echo $create_phone_code ?></option>
+                                                            <?php } else { ?>
+                                                            <option value="" selected>
+                                                                <?php echo "Please select" ?>
+                                                            </option>
+                                                            <?php } ?>
                                                         </select>
 
                                                         <input type="text" min="1" class="form-control" name="whatsapp"
                                                             placeholder="Whatsapp Number">
                                                     </td>
                                                     <td>
-                                                        <select class="" name="platform1" style="border-radius: 5px;"
-                                                            required>
-                                                            <option value="" selected>--Select Platform--
+
+                                                        <select class="text-capitalize" name="platform1"
+                                                            style="border-radius: 5px;" required>
+                                                            <?php if($platform1 !=0){ ?>
+                                                            <option value="<?php echo $platform1 ?>" selected>
+                                                                <?php echo $platform1 ?></option>
+                                                            <?php } else { ?>
+                                                            <option value="" selected>
+                                                                <?php echo "Please select" ?>
                                                             </option>
+                                                            <?php } ?>
                                                             <option value="facebook">Facebook</option>
                                                             <option value="instgram">Instgram</option>
                                                             <option value="lazada">Lazada</option>
@@ -471,31 +524,6 @@ $user_id = $_SESSION['user_id'];
                                     </table>
                                 </table>
                             </div>
-
-                            <?php                                
-
-                                if(isset($_POST['add_customer'])){
-                                    $create_customer_country = $_POST['create_customer_country'];
-                                    $customer_name = $_POST['customer_name'];
-                                    $create_phone_code = $_POST['create_phone_code'];
-                                    $customer_whatsapp_number = trim($_POST['whatsapp']);
-                                    $platform1 = $_POST['platform1'];
-                                    $model_selling_buying = $_POST['model_selling_buying'];
-                                    $uae_pickup1 = $_POST['uae_pickup1'];
-
-                                    $row = 0;
-                                    $q1 = "SELECT id FROM sales_create_customer_informations WHERE customer_whatsapp_number = '$customer_whatsapp_number' AND customer_whatspp_phone_code = '$create_phone_code'";
-                                    $q_run = mysqli_query($connection, $q1);
-                                    $row = mysqli_num_rows($q_run);
-                                    if($row == 0){
-                                        $q_r = "INSERT INTO sales_create_customer_informations(`create_customer_country`, `customer_name`, `customer_whatspp_phone_code`, `customer_whatsapp_number`, `platform1`, `model_selling_buying`, `uae_pickup1`, `created_by`) 
-                                                    VALUES ('$create_customer_country', '$customer_name', '$create_phone_code', '$customer_whatsapp_number', '$platform1', '$model_selling_buying', '$uae_pickup1', '$username')";
-                                        $insert_q_r = mysqli_query($connection, $q_r);
-                                    }else{
-                                        echo "<script>alert('This Number Exists')</script>";                                        
-                                    }  
-                                }                                                                    
-                            ?>
                         </div>
                     </div>
                 </div>

@@ -15,20 +15,8 @@ if (!isset($_SESSION['user_id'])) {
 $device = $_GET['device'];
 $brand = $_GET['brand'];
 
-$qd = "SELECT inventory_id, COUNT(inventory_id) as something FROM warehouse_information_sheet WHERE set_price = 0 AND brand = '$brand' AND device = '$device'";
-$qdx = mysqli_query($connection, $qd);
-foreach($qdx as $l){
-    $count = $l['something'];
-}
-
 ?>
 
-<div class="row page-titles">
-    <div class="col-md-5 align-self-center"><a href="./employees.php">
-            <i class="fa-solid fa-circle fa-4x"><?= $count; ?></i>
-        </a>
-    </div>
-</div>
 
 <div class="container-fluid">
     <div class="row">
@@ -54,7 +42,7 @@ foreach($qdx as $l){
 
                             $i = 0;
                             
-                            $query = "SELECT inventory_id, device, brand, model, core, processor, COUNT(inventory_id) as Total_number FROM warehouse_information_sheet WHERE device = '$device' AND brand = '$brand'
+                            $query = "SELECT inventory_id, device, brand, model, core, processor, COUNT(inventory_id) as Total_number FROM warehouse_information_sheet WHERE device = '$device' AND brand = '$brand' AND dispatch = '0'
                                     GROUP BY device, brand, model ORDER BY Total_number DESC";
                             $result = mysqli_query($connection, $query);
                             foreach($result as $row){
@@ -62,7 +50,7 @@ foreach($qdx as $l){
                                 $device = $row['device'];
                                 $brand = $row['brand'];
                                 $model = $row['model'];
-                                $count = $row['Total_number'];
+                                $count = $row['Total_number'];                               
                             ?>
                             <tr>
                                 <td><?= $i; ?></td>
