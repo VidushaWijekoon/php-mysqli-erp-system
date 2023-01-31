@@ -12,10 +12,17 @@ if (!isset($_SESSION['user_id'])) {
 
 ?>
 
+<div class="row m-2">
+    <div class="col-12 mt-3">
+        <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./download_pricelist_excel.php">
+            <span class="mx-1">Download Price List CSV</span></a>
+    </div>
+</div>
+
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-5">
+        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-3">
             <div class="card">
                 <div class="card-header mt-1">
                     <h6>Set Price for the Laptop</h6>
@@ -34,7 +41,7 @@ if (!isset($_SESSION['user_id'])) {
                         <tbody>
                             <?php 
                             
-                            $query = "SELECT inventory_id, device, brand, COUNT(inventory_id) AS Total_inventory  FROM warehouse_information_sheet WHERE send_to_production = 0 GROUP BY device, brand";
+                            $query = "SELECT inventory_id, device, brand, COUNT(inventory_id) AS Total_inventory  FROM warehouse_information_sheet WHERE send_to_production = 0 AND dispatch = '0' GROUP BY device, brand";
                             $query_run = mysqli_query($connection, $query);
                             foreach($query_run as $row){
                                 $device = $row['device'];
