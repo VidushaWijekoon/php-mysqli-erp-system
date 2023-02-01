@@ -34,7 +34,7 @@ $brand = $_GET['brand'];
                 <div class="card-body"><input type="text" id="myInput" onkeyup="myFunction()"
                         placeholder="Search for names.." title="Type in a name">
                     <button onclick="exportToExcel('tblexportData', 'packing-details234')"
-                        class="btn bg-gradient-success mt-3 float-right">Export Table Data To Excel
+                        class="btn bg-gradient-success mt-3">Export Table Data To Excel
                         File</button>
                     <table id="example2" class="table table-bordered table-striped">
                         <table id="tblexportData" class="table table-striped">
@@ -50,8 +50,7 @@ $brand = $_GET['brand'];
                                     <th>Generation</th>
                                     <th>Speed</th>
                                     <th>Screen Size</th>
-                                    <th>Screen Resolution</th>
-                                    <th>Touch</th>
+                                    <th>Screen Type</th>
                                     <th>Optical</th>
                                     <th>RAM</th>
                                     <th>HDD</th>
@@ -63,7 +62,7 @@ $brand = $_GET['brand'];
                             </thead>
                             <tbody>
                                 <?php
-                                  $query = "SELECT * FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND send_to_production= '0' ";
+                                  $query = "SELECT * FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND dispatch= '0' ";
                                 
                                   $result = mysqli_query($connection, $query);
                                   $i=0;
@@ -74,7 +73,6 @@ $brand = $_GET['brand'];
                                     $generation = $data['generation'];
                                     $speed = $data['speed'];
                                     $screen_size = $data['lcd_size'];
-                                    $screen_resolution = $data['screen_resolution'];
                                     $screen_type = $data['touch_or_non_touch'];
                                     $location = $data['location'];
                                     $series = $data['series'];
@@ -96,7 +94,6 @@ $brand = $_GET['brand'];
                                     <td><?php echo$generation ?></td>
                                     <td><?php echo$speed ?></td>
                                     <td><?php echo$screen_size ?></td>
-                                    <td><?php echo$screen_resolution ?></td>
                                     <td><?php echo$screen_type ?></td>
                                     <td><?php echo$optical ?></td>
                                     <td>8GB</td>

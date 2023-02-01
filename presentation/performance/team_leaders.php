@@ -10,23 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 $user_id = $_SESSION['user_id'];
 $department=$_SESSION['department'];
-// $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-// $current_time = $date1->format('Y-m-d 2:58:00');
-// echo strtotime($current_time);
-// echo "</br>";
-// echo $_SESSION['timestamp'];
-// echo "</br>";
-// echo time();
-// echo "</br>";
-// if(time()- strtotime($current_time) ==0 ) { //subtract new timestamp from the old one
-//     echo"<script>alert('15 Minutes over!');</script>";
-//     unset($_SESSION['username'], $_SESSION['password'], $_SESSION['timestamp']);
-//     $_SESSION['logged_in'] = false;
-//     header("Location: ../../index.php"); //redirect to index.php
-//     exit;
-// } else {
-//     $_SESSION['timestamp'] = time(); //set new timestamp
-// }
+
 ?>
 <div class="row page-titles">
     <div class="col-md-5 align-self-center"><a href="./performance_record.php">
@@ -164,7 +148,7 @@ $qr_number = 0;
                                     if($from_date != 0){
                                     $query ="SELECT * FROM performance_record_table WHERE department_id=$department_id AND end_time between '$from_date'AND '$to_date'ORDER BY end_time DESC";
                                     $query_run = mysqli_query($connection,$query);
-                                    // $row = mysqli_num_rows($query_run);
+                                   
                                     foreach( $query_run as $data){
                                     ?>
                                 <tr>

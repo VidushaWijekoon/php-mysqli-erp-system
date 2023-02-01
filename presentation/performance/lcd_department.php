@@ -169,7 +169,7 @@ $user_role=$_SESSION['role_id'];
                         </div>
                         <div class="col-lg-6 grid-margin stretch-card justify-content-center mx-auto mt-2">
                             <div class="text-danger">
-                                <!-- <h1>Must be Started Work at 9.05AM</h1> -->
+
                                 <div class="row">
                                     <label class="col-sm-12 col-form-label">Morning Session Start Time : 09.05AM</label>
                                     <?php  
@@ -192,7 +192,7 @@ $user_role=$_SESSION['role_id'];
                                             $diff = $start_datetime->diff(new DateTime($datetime_2));
                                             if($datetime_2 !=''){
                                             if ($datetime_2 < $datetime_1) {
-                                                // whatever you have to do here
+                                                
                                                
                                                ?>
                                     <label class="col-sm-12 col-form-label text-success">You are Earlier :
@@ -239,7 +239,7 @@ $user_role=$_SESSION['role_id'];
                                             
                                             if($datetime_2 !=''){
                                             if ($datetime_2 < $datetime_1) {
-                                                // whatever you have to do here
+                                               
                                                 
                                                ?>
                                     <label class="col-sm-12 col-form-label text-success">You are Earlier :
@@ -285,7 +285,7 @@ $user_role=$_SESSION['role_id'];
                                             $diff = $start_datetime->diff(new DateTime($datetime_2));
                                             if($datetime_2 !=''){
                                             if ($datetime_2 < $datetime_1) {
-                                                // whatever you have to do here
+                                                
                                                ?>
                                     <label class="col-sm-12 col-form-label text-success">You are Earlier :
                                         <?php echo $diff->i.' Minutes' ?>
@@ -351,14 +351,10 @@ $user_role=$_SESSION['role_id'];
                                     ?>
                                 <tr>
                                     <td><?php echo $data['job_description'] ?></td>
-                                    <!-- <td><?php 
-                                    // echo $data['model'] 
-                                    ?></td> -->
+
                                     <td><?php 
                                             echo $data['qr_number'];?></td>
-                                    <!-- <td><?php 
-                                    // echo $data['mfg_code']
-                                     ?></td> -->
+
                                     <td><?php echo $data['start_time'] ?></td>
                                     <td><?php echo $data['end_time'] ?></td>
                                     <td><?php echo $data['spend_time']?></td>
@@ -416,9 +412,9 @@ $user_role=$_SESSION['role_id'];
                 }
                 }
                 
-                // if($performance_id !=0 && $end_time =="0000-00-00 00:00:00" && $same_jd_count==1 ){
+               
                 if($end_time =="0000-00-00 00:00:00" && $same_jd_count==1 ){
-                // update existing task
+               
                 $working_time_in_seconds;
                 $start_time=0000-00-00;
                 $query = "SELECT * FROM performance_record_table WHERE user_id ='$user_id'AND (qr_number ='$search_value') AND
@@ -442,8 +438,6 @@ $user_role=$_SESSION['role_id'];
                 $query_run = mysqli_query($connection,$query);
                 header('Location: performance_record.php');
                 }elseif($same_jd_count==0){
-                // echo "im inside 000";
-                // exit();
                 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                 $start_date = $date1->format('Y-m-d H:i:s');
                 $target = 0;
@@ -486,7 +480,7 @@ $user_role=$_SESSION['role_id'];
                 echo '<script>
                 alert("Already you completed this machine under this job description ")
                 </script>';
-                // echo "Already you completed this machine under ".$job_description;
+               
                 }
                 }
     ?>
@@ -496,12 +490,10 @@ var today = time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDat
     .getMinutes() + ":" + time.getSeconds();
 document.getElementById("time").textContent = today;
 
-//curser hold in input field
+
 let searchbar = document.querySelector('input[name="qr"]');
 searchbar.focus();
 search.value = '';
-
-//show input field after dropdown select
 var otherInput;
 
 function checkOptions(select) {
