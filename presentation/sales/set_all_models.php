@@ -17,6 +17,13 @@ $brand = $_GET['brand'];
 
 ?>
 
+<div class="row m-2">
+    <div class="col-12 mt-3">
+        <a class="" type="button" href=""
+            style="background-color: #293ea6; float: right; font-size: 35px; margin-right: 5%; border-radius: 20px; color: white;">
+            <span class="mx-4">New 55</span></a>
+    </div>
+</div>
 
 <div class="container-fluid">
     <div class="row">

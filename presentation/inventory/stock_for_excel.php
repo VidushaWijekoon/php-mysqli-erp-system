@@ -37,7 +37,7 @@ $spreadsheet->setActiveSheetIndex(0)
             ->setCellValue("A$i", "$brand");
             $spreadsheet->setActiveSheetIndex(0)
             ->setCellValue("B$i", "$model");
-            $query_stock = "SELECT COUNT(inventory_id)as in_stock FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND send_to_production='0'";
+            $query_stock = "SELECT COUNT(inventory_id)as in_stock FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND dispatch='0'";
             $result_stock = mysqli_query($connection, $query_stock);
             foreach($result_stock as $data){
             $in_stock = $data['in_stock'];
@@ -78,13 +78,13 @@ $spreadsheet->setActiveSheetIndex($k)
             ->setCellValue("B$b", "$model");
             $spreadsheet->setActiveSheetIndex($k)
             ->setCellValue("C$b", "$core");
-            $query = "SELECT COUNT(inventory_id)as in_stock FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND send_to_production='0'";
+            $query = "SELECT COUNT(inventory_id)as in_stock FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND dispatch='0'";
             $result = mysqli_query($connection, $query);
             $in_stock=0;
             foreach($result as $data){
                 $in_stock = $data['in_stock'];
             }
-            $query = "SELECT COUNT(touch_or_non_touch)as touch_or_non_touch FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND send_to_production='0' AND touch_or_non_touch='yes'";
+            $query = "SELECT COUNT(touch_or_non_touch)as touch_or_non_touch FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND dispatch='0' AND touch_or_non_touch='yes'";
             $result = mysqli_query($connection, $query);
             $touch_or_non_touch=0;
             foreach($result as $data){
@@ -96,23 +96,18 @@ $spreadsheet->setActiveSheetIndex($k)
             ->setCellValue("E$b", "$in_stock");
         }
 
-// Rename worksheet
 $spreadsheet->getActiveSheet()->setTitle("$model");
 }
-// Set active sheet index to the first sheet, so Excel opens this as the first sheet
 $spreadsheet->setActiveSheetIndex(0);
     
-// Redirect output to a client’s web browser (Xlsx)
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 header('Content-Disposition: attachment;filename="01simple.xlsx"');
 header('Cache-Control: max-age=0');
-// If you're serving to IE 9, then the following may be needed
 header('Cache-Control: max-age=1');
-// If you're serving to IE over SSL, then the following may be needed
-header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
-header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
-header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
-header('Pragma: public'); // HTTP/1.0
+header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); 
+header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); 
+header('Cache-Control: cache, must-revalidate'); 
+header('Pragma: public'); 
 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 $writer->save('php://output');
 exit;

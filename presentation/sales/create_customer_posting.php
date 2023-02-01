@@ -465,7 +465,7 @@ if(isset($_POST['get_country'])){
                                                 $uae_pickup1 = $qd_run['uae_pickup1'];
                                                 $create_customer_id = $qd_run['id'];                                                                                                                                 
                                                 $model_selling_buying = $qd_run['model_selling_buying'];   
-                                                 $test_id= $create_customer_id;   
+                                                $test_id= $create_customer_id;   
                                                 $contact = $customer_whatspp_phone_code . $created_customer_whatsapp_number;                                                                                                                                                                           
                                          
                                             $query1 = "SELECT * FROM sales_posting_to_customer 

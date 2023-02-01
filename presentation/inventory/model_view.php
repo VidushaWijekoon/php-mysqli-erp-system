@@ -25,24 +25,23 @@ $model = $_GET['model'];
 </div>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-2">
+        <div class="col-lg-12 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="rounded">
 
-                <div class="" style="overflow-y: scroll; height: auto;">
-                    <button onclick="exportToExcel('tblexportData', 'model-details')"
-                        class="btn bg-gradient-success mt-3 float-right">Export Table Data To Excel
-                        File</button>
-                    <table class="table table-bordered table-hover">
+                <div class="table-responsive table-borderless">
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th class="text-center">#</th>
                                 <th>Brand</th>
                                 <th>Model</th>
                                 <th>core</th>
+                                <th>Generation</th>
                                 <th>In Total</th>
                                 <th>In Stock</th>
                                 <th>Dispatch</th>
                                 <th>Touch Screen Count</th>
+                                <th>None Touch Screen Count</th>
                                 <th>No Battery Count</th>
                                 <th>&nbsp;</th>
                             </tr>
@@ -60,12 +59,13 @@ $model = $_GET['model'];
                                 $generation='';
                                 $i=0;
                                 $a=0;
-                                  $query = "SELECT model,core,COUNT(inventory_id) as in_total FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model = '$model' GROUP BY core ORDER BY in_total DESC";
+                                  $query = "SELECT model,generation,core,COUNT(inventory_id) as in_total FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model = '$model' GROUP BY core";
                               
                                   $result = mysqli_query($connection, $query);
                                 foreach($result as $data){
                                     $model = $data['model'];
                                     $core = $data['core'];
+                                    $generation= $data['generation'];
                                     $in_total = $data['in_total'];
                                     $i++;
                                     $a++;
@@ -75,6 +75,7 @@ $model = $_GET['model'];
                                     <td>$brand</td>
                                     <td>$model</td>
                                     <td>$core</td>
+                                    <td>$generation</td>
                                     <td>$in_total</td>";
                                     
                                 //     echo "<td>";
@@ -94,19 +95,21 @@ $model = $_GET['model'];
                                         $in_stock = $data['in_stock'];
 
                                     }
-                                    echo $in_stock;
-                                    echo "</td>
-                                    <td>";
-                                    $query = "SELECT COUNT(inventory_id)as dispatch FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND send_to_production='1'";
+                                    $query = "SELECT COUNT(inventory_id)as dispatch FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND dispatch='1'";
                                     $result = mysqli_query($connection, $query);
                                     foreach($result as $data){
                                         $dispatch = $data['dispatch'];
                                     }
+                                    $available = $in_stock-$dispatch;
+                                    echo $available;
+                                    echo "</td>
+                                    <td>";
+                                   
                                     echo $dispatch;
                                     echo "
                                     </td>";
                                     echo"<td>";
-                                    $query = "SELECT COUNT(touch_or_non_touch)as touch_or_non_touch FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND send_to_production='0' AND touch_or_non_touch='yes'";
+                                    $query = "SELECT COUNT(touch_or_non_touch)as touch_or_non_touch FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND dispatch='0' AND touch_or_non_touch='yes'";
                                     
                                     $result = mysqli_query($connection, $query);
                                     foreach($result as $data){
@@ -115,9 +118,10 @@ $model = $_GET['model'];
                                     }
                                     echo $touch_or_non_touch;
                                     echo "</td>";
-                                    
+                                    $no_touch = $in_stock-$touch_or_non_touch;
+                                    echo "<td>".$no_touch."</td>";
                                     echo"<td>";
-                                    $query = "SELECT COUNT(battery)as battery FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND send_to_production='0' AND battery='no'";
+                                    $query = "SELECT COUNT(battery)as battery FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND dispatch='0' AND battery='no'";
                                     
                                     $result = mysqli_query($connection, $query);
                                     foreach($result as $data){
@@ -190,59 +194,7 @@ $model = $_GET['model'];
     </div>
 </div>
 
-<script type="text/javascript">
-function exportToExcel(tableID, filename = '') {
-    var downloadurl;
-    var dataFileType = 'application/vnd.ms-excel';
-    var tableSelect = document.getElementById(tableID);
-    var tableHTMLData = tableSelect.outerHTML.replace(/ /g, '%20');
 
-    // Specify file name
-    filename = filename ? filename + '.xls' : 'export_excel_data.xls';
-
-    // Create download link element
-    downloadurl = document.createElement("a");
-
-    document.body.appendChild(downloadurl);
-
-    if (navigator.msSaveOrOpenBlob) {
-        var blob = new Blob(['\ufeff', tableHTMLData], {
-            type: dataFileType
-        });
-        navigator.msSaveOrOpenBlob(blob, filename);
-    } else {
-        // Create a link to the file
-        downloadurl.href = 'data:' + dataFileType + ', ' + tableHTMLData;
-
-        // Setting the file name
-        downloadurl.download = filename;
-
-        //triggering the function
-        downloadurl.click();
-    }
-}
-
-
-/////////////////////////////////////////////////////
-function myFunction() {
-    var input, filter, table, tr, td, i, txtValue;
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("tblexportData");
-    tr = table.getElementsByTagName("tr");
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[0];
-        if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-            } else {
-                tr[i].style.display = "none";
-            }
-        }
-    }
-}
-</script>
 <style>
 .modal-header {
     display: block;

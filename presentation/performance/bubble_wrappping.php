@@ -9,7 +9,6 @@ include_once('../includes/header.php');?>
 <script src="../../static/plugins/jquery/1.11.3/jquery.min.js"></script>
 <script src="../../static/plugins/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 <?php
-// checking if a user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
@@ -138,7 +137,7 @@ $user_name=$_SESSION['username'];
                         </div>
                         <div class="col-lg-6 grid-margin stretch-card justify-content-center mx-auto mt-2">
                             <div class="text-danger">
-                                <!-- <h1>Must be Started Work at 9.05AM</h1> -->
+
                                 <div class="row">
                                     <label class="col-sm-12 col-form-label">Morning Session Start Time : 09.05AM</label>
                                     <?php  
@@ -161,7 +160,7 @@ $user_name=$_SESSION['username'];
                                             $diff = $start_datetime->diff(new DateTime($datetime_2));
                                             if($datetime_2 !=''){
                                             if ($datetime_2 < $datetime_1) {
-                                                // whatever you have to do here
+                                              
                                                
                                                ?>
                                     <label class="col-sm-12 col-form-label text-success">You are Earlier :
@@ -206,7 +205,7 @@ $user_name=$_SESSION['username'];
                                             $diff = $start_datetime->diff(new DateTime($datetime_2));
                                             if($datetime_2 !=''){
                                             if ($datetime_2 < $datetime_1) {
-                                                // whatever you have to do here
+                                               
                                                ?>
                                     <label class="col-sm-12 col-form-label text-danger">You are Earlier :
                                         <?php echo $diff->i.' Minutes' ?></label>
@@ -240,7 +239,6 @@ $user_name=$_SESSION['username'];
                                             
                                             if($datetime_2 !=''){
                                             if ($datetime_2 < $datetime_1) {
-                                                // whatever you have to do here
                                                 
                                                ?>
                                     <label class="col-sm-12 col-form-label text-success">You are Earlier :
@@ -286,7 +284,6 @@ $user_name=$_SESSION['username'];
                                             $diff = $start_datetime->diff(new DateTime($datetime_2));
                                             if($datetime_2 !=''){
                                             if ($datetime_2 < $datetime_1) {
-                                                // whatever you have to do here
                                                ?>
                                         <label class="col-sm-12 col-form-label text-danger">You are Earlier :
                                             <?php echo $diff->i.' Minutes' ?></label>
@@ -321,7 +318,6 @@ $user_name=$_SESSION['username'];
                                             $diff = $start_datetime->diff(new DateTime($datetime_2));
                                             if($datetime_2 !=''){
                                             if ($datetime_2 < $datetime_1) {
-                                                // whatever you have to do here
                                                ?>
                                     <label class="col-sm-12 col-form-label text-success">You are Earlier :
                                         <?php echo $diff->i.' Minutes' ?>
@@ -353,7 +349,6 @@ $user_name=$_SESSION['username'];
 
                         </div>
                     </div>
-                    <!-- <table id="example2" class="table table-bordered table-striped"> -->
                     <table id="tblexportData" class="table table-striped">
                         <thead>
                             <tr>
@@ -486,7 +481,6 @@ var today = time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDat
     .getMinutes() + ":" + time.getSeconds();
 document.getElementById("time").textContent = today;
 
-//curser hold in input field
 let searchbar = document.querySelector('input[name="qr"]');
 searchbar.focus();
 search.value = '';

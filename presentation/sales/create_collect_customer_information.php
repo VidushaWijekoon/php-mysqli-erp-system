@@ -27,14 +27,16 @@ if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 2) |
 $username = $_SESSION['username'];
 $user_id = $_SESSION['user_id'];
 
-if(isset($_POST['add_customer'])){
-    $create_customer_country = $_POST['create_customer_country'];
-    $customer_name = $_POST['customer_name'];
-    $create_phone_code = $_POST['create_phone_code'];
-    $customer_whatsapp_number = trim($_POST['whatsapp']);
-    $platform1 = $_POST['platform1'];
-    $model_selling_buying = $_POST['model_selling_buying'];
-    $uae_pickup1 = $_POST['uae_pickup1'];
+// if(isset($_POST['add_customer'])){
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $create_customer_country = $_REQUEST['create_customer_country'];
+    $customer_name = $_REQUEST['customer_name'];
+    $create_phone_code = $_REQUEST['create_phone_code'];
+    $customer_whatsapp_number = trim($_REQUEST['whatsapp']);
+    $platform1 = $_REQUEST['platform1'];
+    $model_selling_buying = $_REQUEST['model_selling_buying'];
+    $uae_pickup1 = $_REQUEST['uae_pickup1'];
 
     $row = 0;
     $q1 = "SELECT id FROM sales_create_customer_informations WHERE customer_whatsapp_number = '$customer_whatsapp_number' AND customer_whatspp_phone_code = '$create_phone_code'";
@@ -345,7 +347,7 @@ foreach($run as $dx){
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <form method="POST">
+                                            <form method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
                                                 <tr>
                                                     <td>
                                                         <input type="text" class="form-control w-100"
