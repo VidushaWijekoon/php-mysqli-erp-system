@@ -538,7 +538,7 @@ if(isset($_POST['add_items'])){
                                                         placeholder="Discount" name="discount" onblur="get_total()">
                                                 </td>
                                                 <td>
-                                                    <input type="number" class="form-control" placeholder="Total"
+                                                    <input type="text" class="form-control" placeholder="Total"
                                                         name="total" id="total">
                                                 </td>
 
@@ -847,9 +847,17 @@ const get_total = () => {
     var unit_price = $('#unit_price').val();
     var discount = $('#discount').val();
 
-    console.log(quantity);
-    console.log(unit_price);
-    console.log(discount);
+    var x = parseInt(quantity);
+    var y = parseInt(unit_price);
+    var z = parseInt(discount);
+
+    var a = x * y;
+    var b = a / 100 * z;
+    var c = a - b;
+
+    $('#total').val(c);
+
+
 }
 </script>
 

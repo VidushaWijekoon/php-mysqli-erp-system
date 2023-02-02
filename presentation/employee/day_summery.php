@@ -1,19 +1,19 @@
-<?php 
+<?php
 session_start();
-include_once('../../dataAccess/connection.php');
-include_once('../../dataAccess/functions.php');
-include_once('../../dataAccess/403.php');
-include_once('../includes/header.php');
+include_once '../../dataAccess/connection.php';
+include_once '../../dataAccess/functions.php';
+include_once '../../dataAccess/403.php';
+include_once '../includes/header.php';
 // checking if a user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
-} 
-$user_id=$_GET['user_id'];
-$from_date=$_GET['from_date'];
-$to_date=$_GET['to_date'];
-$count=$_GET['count'];
-$department_id='';
-$department_name='';
+}
+$user_id = $_GET['user_id'];
+$from_date = $_GET['from_date'];
+$to_date = $_GET['to_date'];
+$count = $_GET['count'];
+$department_id = '';
+$department_name = '';
 ?>
 <div class="row page-titles">
     <div class="col-md-5 align-self-center"><a href="./report.php">
@@ -26,22 +26,22 @@ $department_name='';
         <div class="col-lg-11 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card mt-3">
                 <div class="card-body">
-                    <?php 
-                    $name='';
-                $emp_id='';
-                $query="SELECT * FROM employees LEFT JOIN users ON users.epf = employees.emp_id WHERE user_id = $user_id"; 
-                $query_run = mysqli_query($connection,$query);
-                foreach($query_run as $data){
-                    $name= $data['full_name'];
-                    $emp_id= $data['emp_id'];
-                    $department_id= $data['department'];
-                    } 
-                    $query="SELECT department FROM departments  WHERE department_id = $department_id"; 
-                $query_run = mysqli_query($connection,$query);
-                foreach($query_run as $data){
-                    $department_name=$data['department'];
-                }
-                    ?>
+                    <?php
+$name = '';
+$emp_id = '';
+$query = "SELECT * FROM employees LEFT JOIN users ON users.epf = employees.emp_id WHERE user_id = $user_id";
+$query_run = mysqli_query($connection, $query);
+foreach ($query_run as $data) {
+    $name = $data['full_name'];
+    $emp_id = $data['emp_id'];
+    $department_id = $data['department'];
+}
+$query = "SELECT department FROM departments  WHERE department_id = $department_id";
+$query_run = mysqli_query($connection, $query);
+foreach ($query_run as $data) {
+    $department_name = $data['department'];
+}
+?>
                     <h1> Name : <?php echo $name ?><br>
                         EmpID :<?php echo $emp_id ?><br>
                         Department :
@@ -50,35 +50,34 @@ $department_name='';
                         To Date : <?php echo $to_date ?><br>
                         Completed Count : <?php echo $count ?><br>
                     </h1>
-                    <button onclick="exportToExcel('tblexportData', '<?php echo $name;?>')"
+                    <button onclick="exportToExcel('tblexportData', '<?php echo 'never try'; ?>')"
                         class="btn bg-gradient-success mt-3">Export Table Data To Excel
                         File</button>
                     <table id="example2" class="table table-bordered table-striped">
                         <table id="tblexportData" class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>From Date</th>
-                                    <th>To Date</th>
+                                    <th>Date</th>
                                     <th>Completed QR</th>
-                                    <th>Job Description</th>
+                                    <th>Target</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
-                                    $query ="SELECT * FROM performance_record_table WHERE user_id=$user_id AND end_time between $from_date AND $to_date";
-                                    $query_run = mysqli_query($connection,$query);
-                                    // $row = mysqli_num_rows($query_run);
-                                    foreach( $query_run as $a){
-                                        
-                                    ?>
+                                <?php
+$query = "SELECT start_time,COUNT(qr_number) AS qr_number FROM performance_record_table WHERE user_id=$user_id AND end_time between $from_date AND $to_date GROUP BY CAST(start_time AS DATE)";
+$query_run = mysqli_query($connection, $query);
+// $row = mysqli_num_rows($query_run);
+foreach ($query_run as $a) {
+
+    ?>
                                 <tr>
                                     <td><?php echo $a['start_time']; ?></td>
-                                    <td><?php echo $a['end_time']; ?></td>
                                     <td><?php echo $a['qr_number']; ?></td>
-                                    <td><?php echo $a['job_description']; ?></td>
+                                    <td><?php if ($department_id == 1) {if ($emp_id != 43) {echo "50";} else {echo "400";}} else {echo "still not complete";}?>
+                                    </td>
                                 </tr>
                                 <?php }
-                                ?>
+?>
                             </tbody>
                         </table>
                 </div>

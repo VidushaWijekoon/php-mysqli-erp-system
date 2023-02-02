@@ -8,13 +8,13 @@ $quatation_id = $_GET['quatation_id'];
 
 $packing_type = null;
 
-$query = "SELECT * FROM sales_quatation_items WHERE quatation_id = '$quatation_id'";
+$query = "SELECT packing_type FROM sales_quatation_items WHERE quatation_id = '$quatation_id'";
 $query_run = mysqli_query($connection, $query);
 foreach($query_run as $l){
   $packing_type = $l['packing_type'];
 }
 
-$query = "SELECT * FROM sales_customer_information 
+$query = "SELECT first_name, last_name, country, UAE_number, currency, pickup_method, payment_terms FROM sales_customer_information 
         INNER JOIN sales_quatation_items ON sales_customer_information.customer_id = sales_quatation_items.customer_id
         WHERE sales_quatation_items.quatation_id = '$quatation_id'
         GROUP BY quatation_id ORDER BY quatation_id";
@@ -114,7 +114,8 @@ $pdf->Cell(20,5,'Quantity',1,0,'C',true);
 $pdf->Cell(20,5,'Total Price',1,0,'C',true);
 
 
-$query = "SELECT * FROM sales_quatation_items WHERE quatation_id = '$quatation_id'";
+$query = "SELECT device, brand, model, processor, device, generation, speed, lcd_size, resolution, touch_or_non_touch, ram, hdd_capacity, hdd_type, os, qty, unit_price, total, packing_type
+    FROM sales_quatation_items WHERE quatation_id = '$quatation_id'";
 $query_run = mysqli_query($connection, $query);
 foreach($query_run as $d){
   $device = $d['device'];

@@ -26,8 +26,11 @@ if (!isset($_SESSION['user_id'])) {
                 class="mx-1">Create Employee</span></a>
         <a class="btn btn-primary mx-2 text-white" type="button" href="employees.php"><i
                 class="fa-solid fa-users"></i><span class="mx-1">Employee List</span></a>
+        <a class="btn btn-primary mx-2 text-white" type="button" href="report.php"><i
+                class="fa-solid fa-users"></i><span class="mx-1">Employee Task Report</span></a>
     </div>
 </div>
+
 
 <!-- HR Department -->
 <!-- Info boxes -->
