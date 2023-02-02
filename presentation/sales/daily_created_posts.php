@@ -63,7 +63,10 @@ echo $username;
                                 $start_time = date('Y-m-d 00:00:00');
                                 $end_time = date('Y-m-d 23:59:59');
                             
-                                $query = "SELECT * FROM sales_posting_to_customer WHERE created_by = '$username' AND created_time BETWEEN '$start_time' AND '$end_time' ORDER BY created_time DESC";
+                                $query = "SELECT posting_customer_name, choose_country, posting_phone_code, posting_whatsapp_number, platform2, model_selling_and_buying1, 
+                                                posted_model_1, posted_model_2, customer_asking_model, customer_asking_price, created_time
+                                        FROM sales_posting_to_customer 
+                                        WHERE created_by = '$username' AND created_time BETWEEN '$start_time' AND '$end_time' ORDER BY created_time DESC";
                                 $result_set = mysqli_query($connection, $query);
                                 foreach($result_set as $count){
 

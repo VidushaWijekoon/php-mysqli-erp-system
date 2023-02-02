@@ -559,7 +559,8 @@ foreach($run as $dx){
                             $end_day = date('Y-m-d 23:59:59'); 
                             $i = 0;  
                             
-                            $query = "SELECT * FROM sales_create_customer_informations WHERE created_by = '$username' AND created_time BETWEEN '$start_day' AND '$end_day' ORDER BY created_time DESC";
+                            $query = "SELECT create_customer_country, customer_name, customer_whatspp_phone_code, customer_whatsapp_number, platform1, model_selling_buying, uae_pickup1, created_time 
+                                    FROM sales_create_customer_informations WHERE created_by = '$username' AND created_time BETWEEN '$start_day' AND '$end_day' ORDER BY created_time DESC";
                             $result = mysqli_query($connection, $query);
                             foreach($result as $row){
                                 $create_customer_country = $row['create_customer_country'];

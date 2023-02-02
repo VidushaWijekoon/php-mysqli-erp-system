@@ -230,7 +230,8 @@ $username = $_SESSION['username'];
                                 <tbody>
                                     <?php 
                                               
-                                        $query = "SELECT * FROM sales_customer_information 
+                                        $query = "SELECT first_name, last_name, sales_quatation_items.created_by, quatation_id, sales_quatation_items.status, approval, approved_by  
+                                            FROM sales_customer_information 
                                             INNER JOIN sales_quatation_items ON sales_customer_information.customer_id = sales_quatation_items.customer_id
                                             WHERE sales_quatation_items.created_by = '$username' GROUP BY quatation_id ORDER BY quatation_id DESC";                                           
                                                 
@@ -246,7 +247,7 @@ $username = $_SESSION['username'];
                                     ?>
                                     <tr>
                                         <td><?php echo $customer_first_name; ?></td>
-                                        <td><?php echo $customer_first_name; ?></td>
+                                        <td><?php echo $customer_last_name; ?></td>
                                         <td><?php echo $created_by; ?></td>
                                         <td>
                                             <?php 

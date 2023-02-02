@@ -55,10 +55,10 @@ if(isset($_POST['submit'])){
         <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-5">
             <div class="card mt-3">
                 <div class="card-header d-flex bg-secondary">
-                    <h6 class="text-capitalize"><?= $device . " " . $brand . " " . $model ?></h6>
+                    <h6 class="text-capitalize"><?= $device . " " . $brand ?></h6>
                 </div>
                 <div class="card-body">
-                    <table id="price_table" class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th style="width: 12%;">Model</th>
@@ -72,7 +72,6 @@ if(isset($_POST['submit'])){
                                 <th>Wholesale Touch Price</th>
                                 <th>Wholesale Non Touch Price</th>
                                 <th>&nbsp;</th>
-                                <th>Last Update Date</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -81,11 +80,11 @@ if(isset($_POST['submit'])){
                                 $i = 0;
                                 $last_updated_time = 0;
                                 
-                                $query = "SELECT *, COUNT(inventory_id) as Total_number,
+                                $query = "SELECT inventory_id, device, brand, model, generation, core, touch_wholesale_price, non_touch_wholesale_price, price_set_time, COUNT(inventory_id) as Total_number,
                                         COUNT(touch_or_non_touch) as touch_or_non_touch
                                         FROM warehouse_information_sheet 
-                                        WHERE device = '$device' AND brand = '$brand' AND model = '$model'  AND dispatch = '0' 
-                                        GROUP BY brand, model, core
+                                        WHERE device = '$device' AND brand = '$brand' AND dispatch = '0' AND touch_wholesale_price = '0' AND non_touch_wholesale_price = '0'
+                                        GROUP BY brand, model, core, generation
                                         ORDER BY Total_number DESC";
                                 $result = mysqli_query($connection, $query);
                                 foreach($result as $x){
@@ -99,7 +98,8 @@ if(isset($_POST['submit'])){
                                     $non_touch_wholesale_price = $x['non_touch_wholesale_price'];     
                                     $last_updated_time = $x['price_set_time'];     
 
-                                    $query1 = "SELECT COUNT(touch_or_non_touch)as touch_yes FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model = '$model' AND core = '$core' AND dispatch = '0' AND touch_or_non_touch = 'yes'";
+                                    $query1 = "SELECT COUNT(touch_or_non_touch)as touch_yes FROM `warehouse_information_sheet` 
+                                        WHERE brand = '$brand' AND model = '$model' AND core = '$core' AND dispatch = '0' AND touch_or_non_touch = 'yes' ";
                                     $q1_run = mysqli_query($connection, $query1);
                                     foreach($q1_run as $data){
                                         $touch_yes = $data['touch_yes'];
@@ -107,18 +107,20 @@ if(isset($_POST['submit'])){
                                     
                                 $touch_no = $total_count - $touch_yes;
                             ?>
-
                             <tr>
-
                                 <form method="POST">
-                                    <td><input type="text" min="1" class="form-control" name="model" readonly
-                                            value="<?= $model ?>"></td>
-                                    <td><input type="text" min="1" class="form-control" name="core" readonly
-                                            value="<?= $core ?>"></td>
+                                    <td>
+                                        <input type="text" min="1" class="form-control" name="model" readonly
+                                            value="<?php echo $model ?>">
+                                    </td>
+                                    <td>
+                                        <input type="text" min="1" class="form-control" name="core" readonly
+                                            value="<?php echo $core ?>">
+                                    </td>
 
-                                    <td><?php echo $generation ?>
-                                        <input type="text" min="1" class="form-control w-50 d-none" name="generation"
-                                            value="<?= $generation ?>">
+                                    <td>
+                                        <input type="text" min="1" class="form-control" name="generation" readonly
+                                            value="<?php echo $generation ?>">
                                     </td>
                                     <td><?php echo $total_count ?></td>
                                     <td><?php echo $touch_yes ?></td>
@@ -139,98 +141,36 @@ if(isset($_POST['submit'])){
                                         </select>
                                     </td>
                                     <td>
-                                        <?php if($touch_wholesale_price == 0) { ?>
                                         <input type="number" min="1" class="form-control" id="touch_wholesale_price"
                                             name="touch_wholesale_price" placeholder="Touch Wholesale Price">
-                                        <?php } else { ?>
-                                        <input type="number" min="1" class="form-control" id="touch_wholesale_price"
-                                            name="touch_wholesale_price" value="<?php echo $touch_wholesale_price ?>">
-                                        <?php } ?>
+
                                     </td>
                                     <td>
-                                        <?php if($non_touch_wholesale_price == 0) { ?>
                                         <input type="number" min="1" class="form-control" id="non_touch_wholesale_price"
                                             name="non_touch_wholesale_price" placeholder="Touch Wholesale Price">
-                                        <?php } else { ?>
-                                        <input type="number" min="1" class="form-control" id="non_touch_wholesale_price"
-                                            name="non_touch_wholesale_price"
-                                            value="<?php echo $non_touch_wholesale_price ?>">
-                                        <?php } ?>
+
                                     </td>
 
                                     <td>
-                                        <?php if($touch_wholesale_price == 0) { ?>
                                         <button type="submit" name="submit"
                                             class="btn btn-xs btn-success mx-2 float-right">Submit
                                         </button>
-                                        <?php } else { ?>
-                                        <button type="submit" name="submit"
-                                            class="btn btn-xs btn-warning mx-2 float-right">Update
-                                        </button>
-                                        <?php } ?>
-                                    </td>
-                                    <td>
 
-                                        <?php if($last_updated_time == '0000-00-00 00:00:00') {} else { echo $last_updated_time; }?>
                                     </td>
+
                                 </form>
                             </tr>
                             <?php } ?>
                         </tbody>
                     </table>
-                    <div class="col">
+                    <!-- <div class="col">
                         <?php echo "<a class='btn btn-xs btn-primary px-2 mt-2 float-right' href=\"set_all_models.php?device={$x['device']}&brand={$x['brand']}\">Back</a>" ?>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-// Touch price
-const get_touch_price = () => {
-    var touch_price = $('#touch_price').val();
-    console.log(touch_price);
-    var x = parseInt(touch_price)
-    var touch_discount_price = $('#touch_discount_price').val();
-    console.log(touch_discount_price);
-    var y = parseInt(touch_discount_price)
-
-    var percentage = x * (y / 100)
-
-    var total = x - percentage;
-    document.getElementById('touch_total_final_cut').value = Math.round(total);
-}
-// Non Touch price
-const get_non_touch = () => {
-    var non_touch_price = $('#non_touch_price').val();
-    var x = parseInt(non_touch_price)
-    var non_touch_discount_price = $('#non_touch_discount_price').val();
-    var y = parseInt(non_touch_discount_price)
-    var percentage = x * (y / 100)
-
-    var total = x - percentage;
-    document.getElementById('non_touch_total_final_cut').value = Math.round(total);
-}
-
-var table = document.getElementById('price_table');
-var rows = table.getElementsByTagName('tr');
-for (i = 0; i < rows.length; i++) {
-    var currentRow = table.rows[i];
-
-    var cell = table.getElementsByTagName('td')[i];
-    console.log(cell);
-}
-
-console.log(cell);
-
-
-
-// $(document).ready(function() {
-//     $('#price_table').DataTable();
-// });
-</script>
 
 <style>
 [type="text"] {

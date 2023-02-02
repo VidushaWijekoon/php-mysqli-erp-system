@@ -57,7 +57,8 @@ $approved = 0;
                         <tbody>
                             <?php 
 
-                                $query = "SELECT * FROM sales_customer_information INNER JOIN sales_quatation_items 
+                                $query = "SELECT first_name, last_name, country,  created_by, quatation_id, status, approval 
+                                        FROM sales_customer_information INNER JOIN sales_quatation_items 
                                         ON sales_customer_information.customer_id = sales_quatation_items.customer_id
                                         WHERE sales_quatation_items.status = 1 AND sales_quatation_items.approval = 0
                                         GROUP BY quatation_id ";

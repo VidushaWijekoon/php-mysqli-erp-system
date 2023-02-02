@@ -454,7 +454,8 @@ if(isset($_POST['get_country'])){
 
                                         <?php      
                                             
-                                            $q_d = "SELECT * FROM sales_create_customer_informations WHERE create_customer_country = '{$gt_c}' AND created_by = '$username'";
+                                            $q_d = "SELECT customer_name, customer_whatspp_phone_code, customer_whatsapp_number, platform1, uae_pickup1, id, model_selling_buying
+                                                    FROM sales_create_customer_informations WHERE create_customer_country = '{$gt_c}' AND created_by = '$username'";
                                             $qd_run = mysqli_query($connection, $q_d);
                                             $test_id=0;
                                             foreach($qd_run as $qd_run){
@@ -468,8 +469,9 @@ if(isset($_POST['get_country'])){
                                                 $test_id= $create_customer_id;   
                                                 $contact = $customer_whatspp_phone_code . $created_customer_whatsapp_number;                                                                                                                                                                           
                                          
-                                            $query1 = "SELECT * FROM sales_posting_to_customer 
-                                                                WHERE posting_customer_name = '$create_customer_name' AND posting_contact_number = '$contact'";
+                                            $query1 = "SELECT status, created_time, posting_customer_name, posting_contact_number, platform2, model_selling_and_buying1, posted_model_1, posted_model_2, customer_asking_model, customer_asking_price, uae_pickup2
+                                                    FROM sales_posting_to_customer 
+                                                    WHERE posting_customer_name = '$create_customer_name' AND posting_contact_number = '$contact'";
                                             $query_run2 = mysqli_query($connection, $query1);
                                             $post_status1 = 0;
                                             $created_posted_time = 0;
