@@ -22,7 +22,8 @@ if (!isset($_SESSION['user_id'])) {
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 
-if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 2) || ($role_id == 2 && $department == 18) || ($role_id == 5 && $department == 5)){
+if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 2) || ($role_id == 2 && $department == 18) || 
+    ($role_id == 5 && $department == 5) || ($role_id == 8 && $department == 5)){
 
 $username = $_SESSION['username'];
 $user_id = $_SESSION['user_id'];
@@ -421,6 +422,7 @@ foreach($run as $dx){
                                                             <option value="kenyagroup">Kenya Group</option>
                                                             <option value="loozap">Loozap</option>
                                                             <option value="jiji.co.ke">jiji.co.ke</option>
+                                                            <option value="olist">olist.ng</option>
                                                             <option value="jiji.ng">jiji.ng</option>
                                                             <option value="google">google</option>
                                                             <option value="pcexporters">Pc Exporters</option>

@@ -93,7 +93,7 @@ if(isset($_POST['accept'])){
             <div class="col-lg-12 grid-margin stretch-card justify-content-center mx-auto mt-2">
                 <div class="card mt-3">
                     <div class="card-header bg-secondary">
-                        <p class="text-uppercase m-0 p-0">Sales Order
+                        <p class="text-uppercase m-0 p-0">Order
                             <?php echo $quatation_id; ?></p>
                     </div>
 
@@ -159,40 +159,41 @@ if(isset($_POST['accept'])){
                         </div>
                     </div>
                     <div class="col col-lg-12 mb-3">
+                        <div class="table-responsive">
 
-                        <table class="table table-bordered table-dark text-uppercase" id="tbl">
-                            <thead>
-                                <tr style="font-size: 9px;">
-                                    <th>Device</th>
-                                    <th>Brand</th>
-                                    <th>Model</th>
-                                    <th>Processor</th>
-                                    <th>Core</th>
-                                    <th>Generation</th>
-                                    <th>Speed</th>
-                                    <th>Screen Size</th>
-                                    <th>Resolution</th>
-                                    <th>Touch</th>
-                                    <th>RAM</th>
-                                    <th>HDD Capacity</th>
-                                    <th>HDD Type</th>
-                                    <th>Ghrphic Capacity</th>
-                                    <th>Ghrphic Brand</th>
-                                    <th>OS</th>
-                                    <th>Condition</th>
-                                    <th>Selling Type</th>
-                                    <th>Charger</th>
-                                    <th>Packing Type</th>
-                                    <th>Shipping Type</th>
-                                    <th>QTY</th>
-                                    <th>Unit Price</th>
-                                    <th>Discount</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                            <table class="table table-bordered table-dark text-uppercase" id="tbl">
+                                <thead>
+                                    <tr style="font-size: 9px;">
+                                        <th>Device</th>
+                                        <th>Brand</th>
+                                        <th>Model</th>
+                                        <th>Processor</th>
+                                        <th>Core</th>
+                                        <th>Generation</th>
+                                        <th>Speed</th>
+                                        <th>Screen Size</th>
+                                        <th>Resolution</th>
+                                        <th>Touch</th>
+                                        <th>RAM</th>
+                                        <th>HDD Capacity</th>
+                                        <th>HDD Type</th>
+                                        <th>Ghrphic Capacity</th>
+                                        <th>Ghrphic Brand</th>
+                                        <th>OS</th>
+                                        <th>Condition</th>
+                                        <th>Selling Type</th>
+                                        <th>Charger</th>
+                                        <th>Packing Type</th>
+                                        <th>Shipping Type</th>
+                                        <th>QTY</th>
+                                        <th>Unit Price</th>
+                                        <th>Discount</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                                <?php 
+                                    <?php 
 
                                     $query_d = "SELECT * FROM sales_quatation_items WHERE quatation_id = $quatation_id ";
                                     $qd = mysqli_query($connection, $query_d);
@@ -224,69 +225,71 @@ if(isset($_POST['accept'])){
                                             $discount = $qd['discount'];
                                             $total = $qd['total'];                                                                           
                                 ?>
-                                <tr style="font-size: 9px;">
-                                    <td><?php echo $device; ?></td>
-                                    <td><?php echo $brand; ?></td>
-                                    <td><?php echo $model; ?></td>
-                                    <td><?php echo $processor; ?></td>
-                                    <td><?php echo $core; ?></td>
-                                    <td><?php echo $generation; ?></td>
-                                    <td><?php echo $speed; ?></td>
-                                    <td><?php echo $lcd_size; ?></td>
-                                    <td><?php echo $resolution; ?></td>
-                                    <td><?php echo $touch_or_non_touch; ?></td>
-                                    <td><?php echo $ram; ?></td>
-                                    <td><?php echo $hdd_capacity; ?></td>
-                                    <td><?php echo $hdd_type; ?></td>
-                                    <td><?php echo $graphic_capacity; ?></td>
-                                    <td><?php echo $graphic_type; ?></td>
-                                    <td><?php echo $os; ?></td>
-                                    <td><?php echo $condition; ?></td>
-                                    <td><?php echo $selling_type; ?></td>
-                                    <td><?php echo $charger; ?></td>
-                                    <td><?php echo $packing_type; ?></td>
-                                    <td><?php echo $shipping_method; ?></td>
-                                    <td><?php echo $qty; ?></td>
-                                    <td><?php echo $unit_price; ?></td>
-                                    <td><?php echo $discount; ?></td>
-                                    <td><?php echo $total; ?></td>
-                                </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
+                                    <tr style="font-size: 9px;">
+                                        <td><?php echo $device; ?></td>
+                                        <td><?php echo $brand; ?></td>
+                                        <td><?php echo $model; ?></td>
+                                        <td><?php echo $processor; ?></td>
+                                        <td><?php echo $core; ?></td>
+                                        <td><?php echo $generation; ?></td>
+                                        <td><?php echo $speed; ?></td>
+                                        <td><?php echo $lcd_size; ?></td>
+                                        <td><?php echo $resolution; ?></td>
+                                        <td><?php echo $touch_or_non_touch; ?></td>
+                                        <td><?php echo $ram; ?></td>
+                                        <td><?php echo $hdd_capacity; ?></td>
+                                        <td><?php echo $hdd_type; ?></td>
+                                        <td><?php echo $graphic_capacity; ?></td>
+                                        <td><?php echo $graphic_type; ?></td>
+                                        <td><?php echo $os; ?></td>
+                                        <td><?php echo $condition; ?></td>
+                                        <td><?php echo $selling_type; ?></td>
+                                        <td><?php echo $charger; ?></td>
+                                        <td><?php echo $packing_type; ?></td>
+                                        <td><?php echo $shipping_method; ?></td>
+                                        <td><?php echo $qty; ?></td>
+                                        <td><?php echo $unit_price; ?></td>
+                                        <td><?php echo $discount; ?></td>
+                                        <td><?php echo $total; ?></td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
 
-                        <div class="d-flex float-end justify-content-end">
-                            <?php if($department == 5 && $role_id == 8) { ?>
-                            <a href="./sales_team_leader_dashboard.php" class="btn bg-gradient-warning mx-2 text-white">
-                                <i class="fa fa-arrow-left"></i><span class="mx-1">Cancel</span>
-                            </a>
-                            <?php } else { ?>
-                            <a href="./orders.php" class="btn bg-gradient-warning mx-2 text-white">
-                                <i class="fa fa-arrow-left"></i><span class="mx-1">Cancel</span>
-                            </a>
-                            <?php } if($department == 5 && $role_id == 8) { ?>
-                            <button type="submit" name="reject"
-                                onclick="return confirm('Are you Sure Want to Reject this Quatation <?php echo $quatation_id ?>');"
-                                class="btn bg-gradient-danger mx-2 text-white" disabled>
-                                <i class="fa fa-check"></i><span class="mx-1">Reject</span>
-                            </button>
-                            <button type="submit" name="accept"
-                                onclick="return confirm('Are you Sure Want to Accept this Quatation <?php echo $quatation_id ?>');"
-                                class="btn bg-gradient-success mx-2 text-white" disabled>
-                                <i class="fa fa-check"></i><span class="mx-1">Accept</span>
-                            </button>
-                            <?php } if($department == 5 && $role_id == 5) {  ?>
-                            <button type="submit" name="reject"
-                                onclick="return confirm('Are you Sure Want to Reject this Quatation <?php echo $quatation_id ?>');"
-                                class="btn bg-gradient-danger mx-2 text-white">
-                                <i class="fa fa-check"></i><span class="mx-1">Reject</span>
-                            </button>
-                            <button type="submit" name="accept"
-                                onclick="return confirm('Are you Sure Want to Accept this Quatation <?php echo $quatation_id ?>');"
-                                class="btn bg-gradient-success mx-2 text-white">
-                                <i class="fa fa-check"></i><span class="mx-1">Accept</span>
-                            </button>
-                            <?php } ?>
+                            <div class="d-flex float-end justify-content-end">
+                                <?php if($department == 5 && $role_id == 8) { ?>
+                                <a href="./sales_team_leader_dashboard.php"
+                                    class="btn bg-gradient-warning mx-2 text-white">
+                                    <i class="fa fa-arrow-left"></i><span class="mx-1">Cancel</span>
+                                </a>
+                                <?php } else { ?>
+                                <a href="./orders.php" class="btn bg-gradient-warning mx-2 text-white">
+                                    <i class="fa fa-arrow-left"></i><span class="mx-1">Cancel</span>
+                                </a>
+                                <?php } if(($department == 5 && $role_id == 8) || ($department == 11 && $role_id == 1)) { ?>
+                                <button type="submit" name="reject"
+                                    onclick="return confirm('Are you Sure Want to Reject this Quatation <?php echo $quatation_id ?>');"
+                                    class="btn bg-gradient-danger mx-2 text-white" disabled>
+                                    <i class="fa fa-check"></i><span class="mx-1">Reject</span>
+                                </button>
+                                <button type="submit" name="accept"
+                                    onclick="return confirm('Are you Sure Want to Accept this Quatation <?php echo $quatation_id ?>');"
+                                    class="btn bg-gradient-success mx-2 text-white" disabled>
+                                    <i class="fa fa-check"></i><span class="mx-1">Accept</span>
+                                </button>
+                                <?php } if($department == 5 && $role_id == 5) {  ?>
+                                <button type="submit" name="reject"
+                                    onclick="return confirm('Are you Sure Want to Reject this Quatation <?php echo $quatation_id ?>');"
+                                    class="btn bg-gradient-danger mx-2 text-white">
+                                    <i class="fa fa-check"></i><span class="mx-1">Reject</span>
+                                </button>
+                                <button type="submit" name="accept"
+                                    onclick="return confirm('Are you Sure Want to Accept this Quatation <?php echo $quatation_id ?>');"
+                                    class="btn bg-gradient-success mx-2 text-white">
+                                    <i class="fa fa-check"></i><span class="mx-1">Accept</span>
+                                </button>
+                                <?php } ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -296,7 +299,7 @@ if(isset($_POST['accept'])){
 </div>
 
 <!-- ============================================================== -->
-<!-- Rejected -->
+<!-- Rejected
 <!-- ============================================================== -->
 <?php } elseif($status == 2) { ?>
 <div class="container-fluid">
@@ -305,7 +308,7 @@ if(isset($_POST['accept'])){
             <div class="col-lg-12 grid-margin stretch-card justify-content-center mx-auto mt-2">
                 <div class="card mt-3">
                     <div class="card-header bg-secondary">
-                        <p class="text-uppercase m-0 p-0">Sales Order
+                        <p class="text-uppercase m-0 p-0">Order
                             <?php echo $quatation_id; ?></p>
                     </div>
 
@@ -371,40 +374,41 @@ if(isset($_POST['accept'])){
                         </div>
                     </div>
                     <div class="col col-lg-12 mb-3">
+                        <div class="table-responsive">
 
-                        <table class="table table-bordered table-dark text-uppercase" id="tbl">
-                            <thead>
-                                <tr style="font-size: 9px;">
-                                    <th>Device</th>
-                                    <th>Brand</th>
-                                    <th>Model</th>
-                                    <th>Processor</th>
-                                    <th>Core</th>
-                                    <th>Generation</th>
-                                    <th>Speed</th>
-                                    <th>Screen Size</th>
-                                    <th>Resolution</th>
-                                    <th>Touch</th>
-                                    <th>RAM</th>
-                                    <th>HDD Capacity</th>
-                                    <th>HDD Type</th>
-                                    <th>Ghrphic Capacity</th>
-                                    <th>Ghrphic Brand</th>
-                                    <th>OS</th>
-                                    <th>Condition</th>
-                                    <th>Selling Type</th>
-                                    <th>Charger</th>
-                                    <th>Packing Type</th>
-                                    <th>Shipping Type</th>
-                                    <th>QTY</th>
-                                    <th>Unit Price</th>
-                                    <th>Discount</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                            <table class="table table-bordered table-dark text-uppercase" id="tbl">
+                                <thead>
+                                    <tr style="font-size: 9px;">
+                                        <th>Device</th>
+                                        <th>Brand</th>
+                                        <th>Model</th>
+                                        <th>Processor</th>
+                                        <th>Core</th>
+                                        <th>Generation</th>
+                                        <th>Speed</th>
+                                        <th>Screen Size</th>
+                                        <th>Resolution</th>
+                                        <th>Touch</th>
+                                        <th>RAM</th>
+                                        <th>HDD Capacity</th>
+                                        <th>HDD Type</th>
+                                        <th>Ghrphic Capacity</th>
+                                        <th>Ghrphic Brand</th>
+                                        <th>OS</th>
+                                        <th>Condition</th>
+                                        <th>Selling Type</th>
+                                        <th>Charger</th>
+                                        <th>Packing Type</th>
+                                        <th>Shipping Type</th>
+                                        <th>QTY</th>
+                                        <th>Unit Price</th>
+                                        <th>Discount</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                                <?php 
+                                    <?php 
 
                                     $query_d = "SELECT * FROM sales_quatation_items WHERE quatation_id = $quatation_id ";
                                     $qd = mysqli_query($connection, $query_d);
@@ -436,61 +440,62 @@ if(isset($_POST['accept'])){
                                             $discount = $qd['discount'];
                                             $total = $qd['total'];                                                                           
                                 ?>
-                                <tr style="font-size: 9px;">
-                                    <td><?php echo $device; ?></td>
-                                    <td><?php echo $brand; ?></td>
-                                    <td><?php echo $model; ?></td>
-                                    <td><?php echo $processor; ?></td>
-                                    <td><?php echo $core; ?></td>
-                                    <td><?php echo $generation; ?></td>
-                                    <td><?php echo $speed; ?></td>
-                                    <td><?php echo $lcd_size; ?></td>
-                                    <td><?php echo $resolution; ?></td>
-                                    <td><?php echo $touch_or_non_touch; ?></td>
-                                    <td><?php echo $ram; ?></td>
-                                    <td><?php echo $hdd_capacity; ?></td>
-                                    <td><?php echo $hdd_type; ?></td>
-                                    <td><?php echo $graphic_capacity; ?></td>
-                                    <td><?php echo $graphic_type; ?></td>
-                                    <td><?php echo $os; ?></td>
-                                    <td><?php echo $condition; ?></td>
-                                    <td><?php echo $selling_type; ?></td>
-                                    <td><?php echo $charger; ?></td>
-                                    <td><?php echo $packing_type; ?></td>
-                                    <td><?php echo $shipping_method; ?></td>
-                                    <td><?php echo $qty; ?></td>
-                                    <td><?php echo $unit_price; ?></td>
-                                    <td><?php echo $discount; ?></td>
-                                    <td><?php echo $total; ?></td>
-                                </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
+                                    <tr style="font-size: 9px;">
+                                        <td><?php echo $device; ?></td>
+                                        <td><?php echo $brand; ?></td>
+                                        <td><?php echo $model; ?></td>
+                                        <td><?php echo $processor; ?></td>
+                                        <td><?php echo $core; ?></td>
+                                        <td><?php echo $generation; ?></td>
+                                        <td><?php echo $speed; ?></td>
+                                        <td><?php echo $lcd_size; ?></td>
+                                        <td><?php echo $resolution; ?></td>
+                                        <td><?php echo $touch_or_non_touch; ?></td>
+                                        <td><?php echo $ram; ?></td>
+                                        <td><?php echo $hdd_capacity; ?></td>
+                                        <td><?php echo $hdd_type; ?></td>
+                                        <td><?php echo $graphic_capacity; ?></td>
+                                        <td><?php echo $graphic_type; ?></td>
+                                        <td><?php echo $os; ?></td>
+                                        <td><?php echo $condition; ?></td>
+                                        <td><?php echo $selling_type; ?></td>
+                                        <td><?php echo $charger; ?></td>
+                                        <td><?php echo $packing_type; ?></td>
+                                        <td><?php echo $shipping_method; ?></td>
+                                        <td><?php echo $qty; ?></td>
+                                        <td><?php echo $unit_price; ?></td>
+                                        <td><?php echo $discount; ?></td>
+                                        <td><?php echo $total; ?></td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
 
-                        <div class="d-flex float-end justify-content-end">
-                            <?php if($department == 5 && $role_id == 8) { ?>
-                            <button type="submit" name="reject"
-                                onclick="return confirm('Are you Sure Want to Reject this Quatation <?php echo $quatation_id ?>');"
-                                class="btn bg-gradient-danger mx-2 text-white" disabled>
-                                <i class="fa fa-check"></i><span class="mx-1">Reject</span>
-                            </button>
-                            <button type="submit" name="accept"
-                                onclick="return confirm('Are you Sure Want to Accept this Quatation <?php echo $quatation_id ?>');"
-                                class="btn bg-gradient-success mx-2 text-white" disabled>
-                                <i class="fa fa-check"></i><span class="mx-1">Accept</span>
-                            </button>
-                            <?php } if($department == 5 && $role_id == 5) {  ?>
-                            <button type="submit" name="reject"
-                                onclick="return confirm('Are you Sure Want to Reject this Quatation <?php echo $quatation_id ?>');"
-                                class="btn bg-gradient-danger mx-2 text-white">
-                                <i class="fa fa-check"></i><span class="mx-1">Reject</span>
-                            </button>
-                            <button type="submit" name="accept"
-                                onclick="return confirm('Are you Sure Want to Accept this Quatation <?php echo $quatation_id ?>');"
-                                class="btn bg-gradient-success mx-2 text-white">
-                                <i class="fa fa-check"></i><span class="mx-1">Accept</span>
-                            </button>
-                            <?php } ?>
+                            <div class="d-flex float-end justify-content-end">
+                                <?php if($department == 5 && $role_id == 8) { ?>
+                                <button type="submit" name="reject"
+                                    onclick="return confirm('Are you Sure Want to Reject this Quatation <?php echo $quatation_id ?>');"
+                                    class="btn bg-gradient-danger mx-2 text-white" disabled>
+                                    <i class="fa fa-check"></i><span class="mx-1">Reject</span>
+                                </button>
+                                <button type="submit" name="accept"
+                                    onclick="return confirm('Are you Sure Want to Accept this Quatation <?php echo $quatation_id ?>');"
+                                    class="btn bg-gradient-success mx-2 text-white" disabled>
+                                    <i class="fa fa-check"></i><span class="mx-1">Accept</span>
+                                </button>
+                                <?php } if(($department == 5 && $role_id == 5) || ($department == 11 && $role_id == 1)) {  ?>
+                                <button type="submit" name="reject"
+                                    onclick="return confirm('Are you Sure Want to Reject this Quatation <?php echo $quatation_id ?>');"
+                                    class="btn bg-gradient-danger mx-2 text-white">
+                                    <i class="fa fa-check"></i><span class="mx-1">Reject</span>
+                                </button>
+                                <button type="submit" name="accept"
+                                    onclick="return confirm('Are you Sure Want to Accept this Quatation <?php echo $quatation_id ?>');"
+                                    class="btn bg-gradient-success mx-2 text-white">
+                                    <i class="fa fa-check"></i><span class="mx-1">Accept</span>
+                                </button>
+                                <?php } ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -502,14 +507,14 @@ if(isset($_POST['accept'])){
 <!-- ============================================================== -->
 <!-- Accepted -->
 <!-- ============================================================== -->
-<?php } elseif($status == 1) { ?>
+<!-- <?php } elseif($status == 1) { ?>
 <div class="container-fluid">
     <form method="POST">
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card justify-content-center mx-auto mt-2">
                 <div class="card mt-3">
                     <div class="card-header bg-secondary">
-                        <p class="text-uppercase m-0 p-0">Sales Order
+                        <p class="text-uppercase m-0 p-0">Order
                             <?php echo $quatation_id; ?></p>
                     </div>
 
@@ -575,40 +580,41 @@ if(isset($_POST['accept'])){
                         </div>
                     </div>
                     <div class="col col-lg-12 mb-3">
+                        <div class="table-responsive">
 
-                        <table class="table table-bordered table-dark text-uppercase" id="tbl">
-                            <thead>
-                                <tr style="font-size: 9px;">
-                                    <th>Device</th>
-                                    <th>Brand</th>
-                                    <th>Model</th>
-                                    <th>Processor</th>
-                                    <th>Core</th>
-                                    <th>Generation</th>
-                                    <th>Speed</th>
-                                    <th>Screen Size</th>
-                                    <th>Resolution</th>
-                                    <th>Touch</th>
-                                    <th>RAM</th>
-                                    <th>HDD Capacity</th>
-                                    <th>HDD Type</th>
-                                    <th>Ghrphic Capacity</th>
-                                    <th>Ghrphic Brand</th>
-                                    <th>OS</th>
-                                    <th>Condition</th>
-                                    <th>Selling Type</th>
-                                    <th>Charger</th>
-                                    <th>Packing Type</th>
-                                    <th>Shipping Type</th>
-                                    <th>QTY</th>
-                                    <th>Unit Price</th>
-                                    <th>Discount</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                            <table class="table table-bordered table-dark text-uppercase" id="tbl">
+                                <thead>
+                                    <tr style="font-size: 9px;">
+                                        <th>Device</th>
+                                        <th>Brand</th>
+                                        <th>Model</th>
+                                        <th>Processor</th>
+                                        <th>Core</th>
+                                        <th>Generation</th>
+                                        <th>Speed</th>
+                                        <th>Screen Size</th>
+                                        <th>Resolution</th>
+                                        <th>Touch</th>
+                                        <th>RAM</th>
+                                        <th>HDD Capacity</th>
+                                        <th>HDD Type</th>
+                                        <th>Ghrphic Capacity</th>
+                                        <th>Ghrphic Brand</th>
+                                        <th>OS</th>
+                                        <th>Condition</th>
+                                        <th>Selling Type</th>
+                                        <th>Charger</th>
+                                        <th>Packing Type</th>
+                                        <th>Shipping Type</th>
+                                        <th>QTY</th>
+                                        <th>Unit Price</th>
+                                        <th>Discount</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                                <?php 
+                                    <?php 
 
                                     $query_d = "SELECT * FROM sales_quatation_items WHERE quatation_id = $quatation_id ";
                                     $qd = mysqli_query($connection, $query_d);
@@ -640,72 +646,73 @@ if(isset($_POST['accept'])){
                                             $discount = $qd['discount'];
                                             $total = $qd['total'];                                                                           
                                 ?>
-                                <tr style="font-size: 9px;">
-                                    <td><?php echo $device; ?></td>
-                                    <td><?php echo $brand; ?></td>
-                                    <td><?php echo $model; ?></td>
-                                    <td><?php echo $processor; ?></td>
-                                    <td><?php echo $core; ?></td>
-                                    <td><?php echo $generation; ?></td>
-                                    <td><?php echo $speed; ?></td>
-                                    <td><?php echo $lcd_size; ?></td>
-                                    <td><?php echo $resolution; ?></td>
-                                    <td><?php echo $touch_or_non_touch; ?></td>
-                                    <td><?php echo $ram; ?></td>
-                                    <td><?php echo $hdd_capacity; ?></td>
-                                    <td><?php echo $hdd_type; ?></td>
-                                    <td><?php echo $graphic_capacity; ?></td>
-                                    <td><?php echo $graphic_type; ?></td>
-                                    <td><?php echo $os; ?></td>
-                                    <td><?php echo $condition; ?></td>
-                                    <td><?php echo $selling_type; ?></td>
-                                    <td><?php echo $charger; ?></td>
-                                    <td><?php echo $packing_type; ?></td>
-                                    <td><?php echo $shipping_method; ?></td>
-                                    <td><?php echo $qty; ?></td>
-                                    <td><?php echo $unit_price; ?></td>
-                                    <td><?php echo $discount; ?></td>
-                                    <td><?php echo $total; ?></td>
-                                </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
+                                    <tr style="font-size: 9px;">
+                                        <td><?php echo $device; ?></td>
+                                        <td><?php echo $brand; ?></td>
+                                        <td><?php echo $model; ?></td>
+                                        <td><?php echo $processor; ?></td>
+                                        <td><?php echo $core; ?></td>
+                                        <td><?php echo $generation; ?></td>
+                                        <td><?php echo $speed; ?></td>
+                                        <td><?php echo $lcd_size; ?></td>
+                                        <td><?php echo $resolution; ?></td>
+                                        <td><?php echo $touch_or_non_touch; ?></td>
+                                        <td><?php echo $ram; ?></td>
+                                        <td><?php echo $hdd_capacity; ?></td>
+                                        <td><?php echo $hdd_type; ?></td>
+                                        <td><?php echo $graphic_capacity; ?></td>
+                                        <td><?php echo $graphic_type; ?></td>
+                                        <td><?php echo $os; ?></td>
+                                        <td><?php echo $condition; ?></td>
+                                        <td><?php echo $selling_type; ?></td>
+                                        <td><?php echo $charger; ?></td>
+                                        <td><?php echo $packing_type; ?></td>
+                                        <td><?php echo $shipping_method; ?></td>
+                                        <td><?php echo $qty; ?></td>
+                                        <td><?php echo $unit_price; ?></td>
+                                        <td><?php echo $discount; ?></td>
+                                        <td><?php echo $total; ?></td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
 
-                        <div class="d-flex float-end justify-content-end">
-                            <?php  if($department == 5 && $role_id == 8) { 
+                            <div class="d-flex float-end justify-content-end">
+                                <?php  if($department == 5 && $role_id == 8) { 
                                 echo "<a  class='btn btn-sm btn-success mt-1' href=\"quatation_approval_update.php?quatation_id={$qd['quatation_id']}\" onclick=\"return confirm('Make sure you want to $quatation_id want approve this quatation');\"><i class='fa fa-check'></i>Click to Approve</a>";                                       
                             } 
-                            if(($department == 5 && $role_id == 5)) {  ?>
-                            <button type="submit" name="reject"
-                                onclick="return confirm('Are you Sure Want to Reject this Quatation <?php echo $quatation_id ?>');"
-                                class="btn bg-gradient-danger mx-2 text-white" disabled>
-                                <i class="fa fa-check"></i><span class="mx-1">Reject</span>
-                            </button>
-                            <button type="submit" name="accept"
-                                onclick="return confirm('Are you Sure Want to Accept this Quatation <?php echo $quatation_id ?>');"
-                                class="btn bg-gradient-success mx-2 text-white" disabled>
-                                <i class="fa fa-check"></i><span class="mx-1">Accept</span>
-                            </button>
-                            <?php } ?>
+                            if (($department == 5 && $role_id == 5) || ($department == 11 && $role_id == 1)) {  ?>
+                                <button type="submit" name="reject"
+                                    onclick="return confirm('Are you Sure Want to Reject this Quatation <?php echo $quatation_id ?>');"
+                                    class="btn bg-gradient-danger mx-2 text-white" disabled>
+                                    <i class="fa fa-check"></i><span class="mx-1">Reject</span>
+                                </button>
+                                <button type="submit" name="accept"
+                                    onclick="return confirm('Are you Sure Want to Accept this Quatation <?php echo $quatation_id ?>');"
+                                    class="btn bg-gradient-success mx-2 text-white" disabled>
+                                    <i class="fa fa-check"></i><span class="mx-1">Accept</span>
+                                </button>
+                                <?php } ?>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </form>
-</div>
+</div> --> -->
 
 <!-- ============================================================== -->
 <!-- Pending -->
 <!-- ============================================================== -->
-<?php } elseif($status == 0) { ?>
+<?php } elseif($status == 0 || $approval == 0) { ?>
 <div class="container-fluid">
     <form method="POST">
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card justify-content-center mx-auto mt-2">
                 <div class="card mt-3">
                     <div class="card-header bg-secondary">
-                        <p class="text-uppercase m-0 p-0">Sales Order
+                        <p class="text-uppercase m-0 p-0">Order
                             <?php echo $quatation_id; ?></p>
                     </div>
 
@@ -716,8 +723,7 @@ if(isset($_POST['accept'])){
                                     <legend>Customer Details</legend>
 
                                     <div class="row">
-                                        <label class="col-sm-3 col-form-label">Customer
-                                            Name</label>
+                                        <label class="col-sm-3 col-form-label">Customer Name</label>
                                         <div class="col-sm-8">
                                             <input type="text"
                                                 value="<?php echo $customer_first_name . " " . $customer_last_name  ?>"
@@ -726,8 +732,7 @@ if(isset($_POST['accept'])){
                                     </div>
 
                                     <div class="row">
-                                        <label class="col-sm-3 col-form-label">Company
-                                            Name</label>
+                                        <label class="col-sm-3 col-form-label">Company Name</label>
                                         <div class="col-sm-8">
                                             <input type="text" <?php echo 'value="' . $customer_company_name . '"'; ?>
                                                 readonly class="form-control" style="background-color: black;">
@@ -771,43 +776,44 @@ if(isset($_POST['accept'])){
                         </div>
                     </div>
                     <div class="col col-lg-12 mb-3">
+                        <div class="table-responsive">
 
-                        <table class="table table-bordered table-dark text-uppercase" id="tbl">
-                            <thead>
-                                <tr style="font-size: 9px;">
-                                    <th>Device</th>
-                                    <th>Brand</th>
-                                    <th>Model</th>
-                                    <th>Processor</th>
-                                    <th>Core</th>
-                                    <th>Generation</th>
-                                    <th>Speed</th>
-                                    <th>Screen Size</th>
-                                    <th>Resolution</th>
-                                    <th>Touch</th>
-                                    <th>RAM</th>
-                                    <th>HDD Capacity</th>
-                                    <th>HDD Type</th>
-                                    <th>Ghrphic Capacity</th>
-                                    <th>Ghrphic Brand</th>
-                                    <th>OS</th>
-                                    <th>Condition</th>
-                                    <th>Selling Type</th>
-                                    <th>Charger</th>
-                                    <th>Packing Type</th>
-                                    <th>Shipping Type</th>
-                                    <th>QTY</th>
-                                    <th>Unit Price</th>
-                                    <th>Discount</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                            <table class="table table-bordered table-dark text-uppercase" id="tbl">
+                                <thead>
+                                    <tr style="font-size: 9px;">
+                                        <th>Device</th>
+                                        <th>Brand</th>
+                                        <th>Model</th>
+                                        <th>Processor</th>
+                                        <th>Core</th>
+                                        <th>Generation</th>
+                                        <th>Speed</th>
+                                        <th>Screen Size</th>
+                                        <th>Resolution</th>
+                                        <th>Touch</th>
+                                        <th>RAM</th>
+                                        <th>HDD Capacity</th>
+                                        <th>HDD Type</th>
+                                        <th>Ghrphic Capacity</th>
+                                        <th>Ghrphic Brand</th>
+                                        <th>OS</th>
+                                        <th>Condition</th>
+                                        <th>Selling Type</th>
+                                        <th>Charger</th>
+                                        <th>Packing Type</th>
+                                        <th>Shipping Type</th>
+                                        <th>QTY</th>
+                                        <th>Unit Price</th>
+                                        <th>Discount</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                                <?php 
+                                    <?php 
 
-                                    $query_d = "SELECT * FROM sales_quatation_items WHERE quatation_id = $quatation_id ";
-                                    $qd = mysqli_query($connection, $query_d);
+                                        $query_d = "SELECT * FROM sales_quatation_items WHERE quatation_id = $quatation_id ";
+                                        $qd = mysqli_query($connection, $query_d);
 
                                         foreach($qd as $qd){
                                             $device = $qd['device'];
@@ -835,62 +841,52 @@ if(isset($_POST['accept'])){
                                             $unit_price = $qd['unit_price'];
                                             $discount = $qd['discount'];
                                             $total = $qd['total'];                                                                           
-                                ?>
-                                <tr style="font-size: 9px;">
-                                    <td><?php echo $device; ?></td>
-                                    <td><?php echo $brand; ?></td>
-                                    <td><?php echo $model; ?></td>
-                                    <td><?php echo $processor; ?></td>
-                                    <td><?php echo $core; ?></td>
-                                    <td><?php echo $generation; ?></td>
-                                    <td><?php echo $speed; ?></td>
-                                    <td><?php echo $lcd_size; ?></td>
-                                    <td><?php echo $resolution; ?></td>
-                                    <td><?php echo $touch_or_non_touch; ?></td>
-                                    <td><?php echo $ram; ?></td>
-                                    <td><?php echo $hdd_capacity; ?></td>
-                                    <td><?php echo $hdd_type; ?></td>
-                                    <td><?php echo $graphic_capacity; ?></td>
-                                    <td><?php echo $graphic_type; ?></td>
-                                    <td><?php echo $os; ?></td>
-                                    <td><?php echo $condition; ?></td>
-                                    <td><?php echo $selling_type; ?></td>
-                                    <td><?php echo $charger; ?></td>
-                                    <td><?php echo $packing_type; ?></td>
-                                    <td><?php echo $shipping_method; ?></td>
-                                    <td><?php echo $qty; ?></td>
-                                    <td><?php echo $unit_price; ?></td>
-                                    <td><?php echo $discount; ?></td>
-                                    <td><?php echo $total; ?></td>
-                                </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
+                                    ?>
+                                    <tr style="font-size: 9px;">
+                                        <td><?php echo $device; ?></td>
+                                        <td><?php echo $brand; ?></td>
+                                        <td><?php echo $model; ?></td>
+                                        <td><?php echo $processor; ?></td>
+                                        <td><?php echo $core; ?></td>
+                                        <td><?php echo $generation; ?></td>
+                                        <td><?php echo $speed; ?></td>
+                                        <td><?php echo $lcd_size; ?></td>
+                                        <td><?php echo $resolution; ?></td>
+                                        <td><?php echo $touch_or_non_touch; ?></td>
+                                        <td><?php echo $ram; ?></td>
+                                        <td><?php echo $hdd_capacity; ?></td>
+                                        <td><?php echo $hdd_type; ?></td>
+                                        <td><?php echo $graphic_capacity; ?></td>
+                                        <td><?php echo $graphic_type; ?></td>
+                                        <td><?php echo $os; ?></td>
+                                        <td><?php echo $condition; ?></td>
+                                        <td><?php echo $selling_type; ?></td>
+                                        <td><?php echo $charger; ?></td>
+                                        <td><?php echo $packing_type; ?></td>
+                                        <td><?php echo $shipping_method; ?></td>
+                                        <td><?php echo $qty; ?></td>
+                                        <td><?php echo $unit_price; ?></td>
+                                        <td><?php echo $discount . "%" ?></td>
+                                        <td><?php echo $total; ?></td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
 
-                        <div class="d-flex float-end justify-content-end">
-                            <?php if($department == 5 && $role_id == 8) { ?>
-                            <button type="submit" name="reject"
-                                onclick="return confirm('Are you Sure Want to Reject this Quatation <?php echo $quatation_id ?>');"
-                                class="btn bg-gradient-danger mx-2 text-white" disabled>
-                                <i class="fa fa-check"></i><span class="mx-1">Reject</span>
-                            </button>
-                            <button type="submit" name="accept"
-                                onclick="return confirm('Are you Sure Want to Accept this Quatation <?php echo $quatation_id ?>');"
-                                class="btn bg-gradient-success mx-2 text-white" disabled>
-                                <i class="fa fa-check"></i><span class="mx-1">Accept</span>
-                            </button>
-                            <?php } if($department == 5 && $role_id == 5) {  ?>
-                            <button type="submit" name="reject"
-                                onclick="return confirm('Are you Sure Want to Reject this Quatation <?php echo $quatation_id ?>');"
-                                class="btn bg-gradient-danger mx-2 text-white">
-                                <i class="fa fa-check"></i><span class="mx-1">Reject</span>
-                            </button>
-                            <button type="submit" name="accept"
-                                onclick="return confirm('Are you Sure Want to Accept this Quatation <?php echo $quatation_id ?>');"
-                                class="btn bg-gradient-success mx-2 text-white">
-                                <i class="fa fa-check"></i><span class="mx-1">Accept</span>
-                            </button>
-                            <?php } ?>
+                            <div class="d-flex float-end justify-content-end">
+                                <?php if(($department == 5 && $role_id == 8) || ($department == 11 && $role_id == 1)) {  ?>
+                                <button type="submit" name="reject"
+                                    onclick="return confirm('Are you Sure Want to Reject this Quatation <?php echo $quatation_id ?>');"
+                                    class="btn bg-gradient-danger mx-2 text-white">
+                                    <i class="fa fa-check"></i><span class="mx-1">Reject</span>
+                                </button>
+                                <button type="submit" name="accept"
+                                    onclick="return confirm('Are you Sure Want to Accept this Quatation <?php echo $quatation_id ?>');"
+                                    class="btn bg-gradient-success mx-2 text-white">
+                                    <i class="fa fa-check"></i><span class="mx-1">Approve</span>
+                                </button>
+                                <?php } ?>
+                            </div>
                         </div>
                     </div>
                 </div>

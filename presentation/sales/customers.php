@@ -46,7 +46,7 @@ $username = $_SESSION['username'];
                             <tbody>
                                 <?php 
                                 
-                                    $query = "SELECT company_name, country, whatsapp_number FROM sales_customer_information WHERE created_by = '$username' ORDER BY customer_id DESC ";
+                                    $query = "SELECT company_name, country, whatsapp_number, customer_id, first_name, last_name FROM sales_customer_information WHERE created_by = '$username' ORDER BY customer_id DESC ";
                                     $query_run = mysqli_query($connection, $query);
                                     foreach($query_run as $qr){
                                  

@@ -18,37 +18,43 @@ $model = $_GET['model'];
 ?>
 
 <div class="row page-titles">
-    <div class="col-md-5 align-self-center"><a href="./model_summery.php?brand=<?php echo $brand ?>">
+    <div class="col-md-5 align-self-center">
+        <a href="./model_summery.php?brand=<?php echo $brand ?>">
             <i class="fa-solid fa-left fa-2x m-2" style="color: #ced4da;"></i>
         </a>
     </div>
 </div>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-12 grid-margin stretch-card justify-content-center mx-auto mt-2">
-            <div class="rounded">
+        <div class="col-lg-11 grid-margin stretch-card justify-content-center mx-auto mt-2">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="text-uppercase p-1"><?php echo $brand . ' ' . $model ?></h6>
+                </div>
+                <div class="card-body">
+                    <table id="" class="table table-bordered table-hover">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th>Brand</th>
+                                    <th>Model</th>
+                                    <th>core</th>
+                                    <th>Generation</th>
+                                    <th>In Total</th>
+                                    <th>In Stock</th>
+                                    <th>Dispatch</th>
+                                    <th>Touch Screen Count</th>
+                                    <th>Non Touch Count</th>
+                                    <th>Touch Wholesale Price</th>
+                                    <th>Non Touch Wholesale Price</th>
+                                    <th>No Battery Count</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-body">
 
-                <div class="table-responsive table-borderless">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th class="text-center">#</th>
-                                <th>Brand</th>
-                                <th>Model</th>
-                                <th>core</th>
-                                <th>Generation</th>
-                                <th>In Total</th>
-                                <th>In Stock</th>
-                                <th>Dispatch</th>
-                                <th>Touch Screen Count</th>
-                                <th>None Touch Screen Count</th>
-                                <th>No Battery Count</th>
-                                <th>&nbsp;</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-body">
-
-                            <?php
+                                <?php
                                 // $model = null;
                                 $core = null;
                                 $in_total = null;
@@ -59,9 +65,11 @@ $model = $_GET['model'];
                                 $generation='';
                                 $i=0;
                                 $a=0;
-                                  $query = "SELECT model,generation,core,COUNT(inventory_id) as in_total FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model = '$model' GROUP BY core";
+                                $touch_wholesale_price = 0;
+                                $non_touch_wholesale_price = 0;
+                                $query = "SELECT model,generation,core, COUNT(inventory_id) as in_total FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model = '$model' GROUP BY core";
                               
-                                  $result = mysqli_query($connection, $query);
+                                $result = mysqli_query($connection, $query);
                                 foreach($result as $data){
                                     $model = $data['model'];
                                     $core = $data['core'];
@@ -76,7 +84,8 @@ $model = $_GET['model'];
                                     <td>$model</td>
                                     <td>$core</td>
                                     <td>$generation</td>
-                                    <td>$in_total</td>";
+                                    <td>$in_total</td>
+                                    ";
                                     
                                 //     echo "<td>";
                                 //     $query = "SELECT  COUNT(inventory_id) as in_total FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model= '$model' AND core='$core'";
@@ -109,28 +118,33 @@ $model = $_GET['model'];
                                     echo "
                                     </td>";
                                     echo"<td>";
-                                    $query = "SELECT COUNT(touch_or_non_touch)as touch_or_non_touch FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND dispatch='0' AND touch_or_non_touch='yes'";
+                                    $query = "SELECT non_touch_wholesale_price, COUNT(touch_or_non_touch)as touch_or_non_touch 
+                                            FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND dispatch='0' AND touch_or_non_touch='yes'";
                                     
                                     $result = mysqli_query($connection, $query);
                                     foreach($result as $data){
                                         $touch_or_non_touch = $data['touch_or_non_touch'];
-
+                                        $non_touch_wholesale_price = $data['non_touch_wholesale_price'];
+  
                                     }
                                     echo $touch_or_non_touch;
                                     echo "</td>";
                                     $no_touch = $in_stock-$touch_or_non_touch;
                                     echo "<td>".$no_touch."</td>";
-                                    echo"<td>";
-                                    $query = "SELECT COUNT(battery)as battery FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND dispatch='0' AND battery='no'";
+                                    echo "<td>".$non_touch_wholesale_price."</td>";
                                     
+                                    $query = "SELECT touch_wholesale_price, COUNT(battery)as battery FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND dispatch='0' AND battery='no'";
                                     $result = mysqli_query($connection, $query);
                                     foreach($result as $data){
                                         $battery = $data['battery'];
-
+                                        $touch_wholesale_price = $data['touch_wholesale_price'];
+ 
                                     }
-                                    echo $battery;
-                                    echo "</td>
+                                    echo "<td>$touch_wholesale_price </td>";
+                                    echo "<td>$battery </td>";
+                                    echo "</td>";
                                     
+                                    echo "
                                     <td class='text-center'>
                                             <a class='btn btn-xs bg-primary ' 
                                                 href='spec_view.php?model=$model&brand=$brand&core=$core'><i class='fas fa-eye'></i>
@@ -150,7 +164,7 @@ $model = $_GET['model'];
                            <th>Screen Type</th>
                             </tr>
                             ";?>
-                            <?php
+                                <?php
                                 $cpu = '';
                                 $generation = '';
                                 $screen_resolution = '';
@@ -183,16 +197,18 @@ $model = $_GET['model'];
                                     <td>$speed</td>
                                     <td>$screen_size</td>
                                     <td>$screen_type</td>
-                                    </tr>";
+                                     </tr>";
                                 } ?>
-                            <?php } ?>
-                        </tbody>
-                    </table>
+                                <?php } ?>
+                            </tbody>
+                        </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+</div>
+
 
 
 <style>
