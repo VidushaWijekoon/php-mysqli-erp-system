@@ -14,6 +14,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $device = $_GET['device'];
 $brand = $_GET['brand'];
+$model = $_GET['model'];
 $username = $_SESSION['username'];
 $touch_wholesale_price = 0;
 $non_touch_wholesale_price = 0;
@@ -33,13 +34,14 @@ if(isset($_POST['submit'])){
             VALUES  ('$device', '$brand', '$model', '$core', '$ram', '$hdd', '$generation','$touch_wholesale_price', '$non_touch_wholesale_price', '$username') ";
     $query_run = mysqli_query($connection, $query);
 
-    $update = "UPDATE warehouse_information_sheet SET touch_wholesale_price = '$touch_wholesale_price', sale_set_ram = '$ram', sale_set_hdd = '$hdd', price_set_by = '$username', price_set_time = now()
+    $update = "UPDATE warehouse_information_sheet SET touch_wholesale_price = '$touch_wholesale_price', sale_set_ram = '$ram', sale_set_hdd = '$hdd', 
+                                                    price_set_by = '$username', price_set_time = now()
                 WHERE device = '$device' AND brand = '$brand' AND model = '$model' AND core = '$core' AND generation = '$generation' AND touch_or_non_touch = 'yes' ";
     $result_run = mysqli_query($connection, $update);
 
     $update2 = "UPDATE warehouse_information_sheet SET non_touch_wholesale_price = '$non_touch_wholesale_price', sale_set_ram = '$ram', 
                                                     sale_set_hdd = '$hdd', price_set_by = '$username' , price_set_time = now() 
-                WHERE device = '$device' AND brand = '$brand' AND model = '$model' AND core = '$core' AND generation = '$generation'  AND touch_or_non_touch = 'no' ";
+                WHERE device = '$device' AND brand = '$brand' AND model = '$model' AND core = '$core' AND generation = '$generation' AND touch_or_non_touch = 'no' ";
     $result_run1 = mysqli_query($connection, $update2);
 
     $update3 = "UPDATE warehouse_information_sheet SET touch_wholesale_price = '$touch_wholesale_price', non_touch_wholesale_price = '$non_touch_wholesale_price', sale_set_ram = '$ram', 
@@ -140,19 +142,19 @@ if(isset($_POST['submit'])){
                                     </td>
                                     <td>
                                         <?php if($touch_wholesale_price == 0) { ?>
-                                        <input type="number" min="1" class="form-control" id="touch_wholesale_price"
+                                        <input type="number" min="0" class="form-control" id="touch_wholesale_price"
                                             name="touch_wholesale_price" placeholder="Touch Wholesale Price">
                                         <?php } else { ?>
-                                        <input type="number" min="1" class="form-control" id="touch_wholesale_price"
+                                        <input type="number" min="0" class="form-control" id="touch_wholesale_price"
                                             name="touch_wholesale_price" value="<?php echo $touch_wholesale_price ?>">
                                         <?php } ?>
                                     </td>
                                     <td>
                                         <?php if($non_touch_wholesale_price == 0) { ?>
-                                        <input type="number" min="1" class="form-control" id="non_touch_wholesale_price"
+                                        <input type="number" min="0" class="form-control" id="non_touch_wholesale_price"
                                             name="non_touch_wholesale_price" placeholder="Touch Wholesale Price">
                                         <?php } else { ?>
-                                        <input type="number" min="1" class="form-control" id="non_touch_wholesale_price"
+                                        <input type="number" min="0" class="form-control" id="non_touch_wholesale_price"
                                             name="non_touch_wholesale_price"
                                             value="<?php echo $non_touch_wholesale_price ?>">
                                         <?php } ?>
@@ -186,51 +188,6 @@ if(isset($_POST['submit'])){
         </div>
     </div>
 </div>
-
-<script>
-// Touch price
-const get_touch_price = () => {
-    var touch_price = $('#touch_price').val();
-    console.log(touch_price);
-    var x = parseInt(touch_price)
-    var touch_discount_price = $('#touch_discount_price').val();
-    console.log(touch_discount_price);
-    var y = parseInt(touch_discount_price)
-
-    var percentage = x * (y / 100)
-
-    var total = x - percentage;
-    document.getElementById('touch_total_final_cut').value = Math.round(total);
-}
-// Non Touch price
-const get_non_touch = () => {
-    var non_touch_price = $('#non_touch_price').val();
-    var x = parseInt(non_touch_price)
-    var non_touch_discount_price = $('#non_touch_discount_price').val();
-    var y = parseInt(non_touch_discount_price)
-    var percentage = x * (y / 100)
-
-    var total = x - percentage;
-    document.getElementById('non_touch_total_final_cut').value = Math.round(total);
-}
-
-var table = document.getElementById('price_table');
-var rows = table.getElementsByTagName('tr');
-for (i = 0; i < rows.length; i++) {
-    var currentRow = table.rows[i];
-
-    var cell = table.getElementsByTagName('td')[i];
-    console.log(cell);
-}
-
-console.log(cell);
-
-
-
-// $(document).ready(function() {
-//     $('#price_table').DataTable();
-// });
-</script>
 
 <style>
 [type="text"] {

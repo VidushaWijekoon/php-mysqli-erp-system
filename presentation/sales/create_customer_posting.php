@@ -22,8 +22,9 @@ if (!isset($_SESSION['user_id'])) {
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 
-if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 2) || ($role_id == 2 && $department == 18) || ($role_id == 5 && $department == 5)){
-
+if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 2) || ($role_id == 2 && $department == 18) || 
+    ($role_id == 5 && $department == 5) || ($role_id == 8 && $department == 5)){
+        
 $username = $_SESSION['username'];
 $user_id = $_SESSION['user_id'];
 
@@ -550,7 +551,7 @@ if(isset($_POST['get_country'])){
                                                 </td>
 
                                                 <td>
-                                                    <?php if(($x == '-7') || ($posted_model_1 == 0)) { ?>
+                                                    <?php if(($x <= '-6') || ($posted_model_1 == 0)) { ?>
                                                     <input type="text" class="form-control" name="posted_model_1"
                                                         placeholder="Posted Model 1">
                                                     <?php } else { ?>
@@ -560,7 +561,7 @@ if(isset($_POST['get_country'])){
                                                 </td>
 
                                                 <td>
-                                                    <?php if(($x == '-7') || ($posted_model_2 == 0)) { ?>
+                                                    <?php if(($x <= '-6') || ($posted_model_2 == 0)) { ?>
                                                     <input type="text" class="form-control" name="posted_model_2"
                                                         placeholder="Posted Model">
                                                     <?php } else { ?>
@@ -570,7 +571,7 @@ if(isset($_POST['get_country'])){
                                                 </td>
 
                                                 <td>
-                                                    <?php if(($x == '-7') || ($customer_asking_model == 0)) { ?>
+                                                    <?php if(($x <= '-6') || ($customer_asking_model == 0)) { ?>
                                                     <input type="text" class="form-control" name="customer_asking_model"
                                                         placeholder="Customer Asking Model">
                                                     <?php } else { ?>
@@ -579,13 +580,13 @@ if(isset($_POST['get_country'])){
                                                     <?php } ?>
                                                 </td>
                                                 <td>
-                                                    <?php if(($x == '-7') || ($customer_asking_price == 0)) { ?>
+                                                    <?php if(($x <= '-6') || ($customer_asking_price == 0)) { ?>
                                                     <input type="text" min="1" class="form-control"
-                                                        name="customer_asking_price" required
+                                                        name="customer_asking_price"
                                                         placeholder="Customer Asking Price">
                                                     <?php } else { ?>
                                                     <input type="text" min="1" class="form-control"
-                                                        name="customer_asking_price" required
+                                                        name="customer_asking_price"
                                                         value="<?php echo $customer_asking_price ?>" readonly>
                                                     <?php } ?>
                                                 </td>
@@ -635,7 +636,7 @@ if(isset($_POST['get_country'])){
                                                     <?php } ?>
                                                 </td>
                                                 <td>
-                                                    <?php if(($post_status1 == 0) || ($x == '-7')){ ?>
+                                                    <?php if(($post_status1 == 0) || ($x <= '-6')){ ?>
                                                     <div class="icheck-success d-inline">
                                                         <button class="btn btn-sm btn-primary px-2 mt-1" type="submit"
                                                             id="post" name="submit_post_to_customer"

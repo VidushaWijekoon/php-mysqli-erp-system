@@ -29,7 +29,7 @@ $brand = $_GET['brand'];
 
 <div class="col col-lg-12 justify-content-center m-auto">
     <div class="row">
-        <div class="col-lg-11 grid-margin stretch-card justify-content-center mx-auto mt-2">
+        <div class="col-lg-12 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card mt-3">
                 <div class="card-body"><input type="text" id="myInput" onkeyup="myFunction()"
                         placeholder="Search for names.." title="Type in a name">
@@ -40,10 +40,8 @@ $brand = $_GET['brand'];
                         <table id="tblexportData" class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>No</th>
                                     <th>Device</th>
                                     <th>Brand</th>
-                                    <th>Series</th>
                                     <th>Model</th>
                                     <th>Processor</th>
                                     <th>Core</th>
@@ -58,36 +56,53 @@ $brand = $_GET['brand'];
                                     <th>MFG</th>
                                     <th>Inventory ID</th>
                                     <th>Battery Status</th>
+                                    <th>Wholesale Price</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                  $query = "SELECT * FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND dispatch= '0' ";
+
+                                    $non_touch_wholesale_price = 0;
+                                    $touch_wholesale_price = 0;
+                                    $i=0;
                                 
-                                  $result = mysqli_query($connection, $query);
-                                  $i=0;
-                                foreach($result as $data){
-                                    $device = $data['device'];
-                                    $model = $data['model'];
-                                    $cpu = $data['core'];
-                                    $generation = $data['generation'];
-                                    $speed = $data['speed'];
-                                    $screen_size = $data['lcd_size'];
-                                    $screen_type = $data['touch_or_non_touch'];
-                                    $location = $data['location'];
-                                    $series = $data['series'];
-                                    $optical = $data['dvd'];
-                                    $processor = $data['processor'];
-                                    $location = $data['location'];
-                                    $mfg = $data['mfg'];
-                                    $inventory_id = $data['inventory_id'];
-                                    $battery=$data['battery'];
-                                    $i++; ?>
+                                    $query = "SELECT * FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND dispatch= '0' ";
+                                    $result = mysqli_query($connection, $query);
+                                    foreach($result as $data){
+                                        $device = $data['device'];
+                                        $model = $data['model'];
+                                        $cpu = $data['core'];
+                                        $generation = $data['generation'];
+                                        $speed = $data['speed'];
+                                        $screen_size = $data['lcd_size'];
+                                        $screen_type = $data['touch_or_non_touch'];
+                                        $location = $data['location'];
+                                        $optical = $data['dvd'];
+                                        $processor = $data['processor'];
+                                        $location = $data['location'];
+                                        $mfg = $data['mfg'];
+                                        $inventory_id = $data['inventory_id'];
+                                        $battery=$data['battery'];
+                                        $touch_wholesale_price = $data['touch_wholesale_price'];
+                                        $non_touch_wholesale_price = $data['non_touch_wholesale_price'];                                                  
+
+                                        // $query1 = "SELECT touch_wholesale_price FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND dispatch= '0' AND touch_or_non_touch = 'yes'";
+                                        // $result1 = mysqli_query($connection, $query1);
+                                        // foreach($result1 as $x){
+                                        //     $touch_wholesale_price = $x['touch_wholesale_price'];
+                                        // }
+                                        
+                                        // $query2 = "SELECT non_touch_wholesale_price FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND dispatch= '0' AND touch_or_non_touch = 'no' ";
+                                        // $result2 = mysqli_query($connection, $query2);
+                                        // foreach($result2 as $i){
+                                        //     $non_touch_wholesale_price = $i['non_touch_wholesale_price'];
+                                        // }
+
+
+                                ?>
                                 <tr>
-                                    <td><?php echo $i ?></td>
                                     <td><?php echo$device ?></td>
                                     <td><?php echo$brand ?></td>
-                                    <td><?php echo$series ?></td>
                                     <td><?php echo$model?></td>
                                     <td><?php echo$processor?></td>
                                     <td><?php echo$cpu ?></td>
@@ -98,12 +113,19 @@ $brand = $_GET['brand'];
                                     <td><?php echo$optical ?></td>
                                     <td>8GB</td>
                                     <td>256GB</td>
-                                    <td><?php echo$location."-".$generation."-".$model ?></td>
+                                    <td><?php echo$location."-".$generation."-".$model ?>
+                                    </td>
                                     <td><?php echo $mfg ?></td>
                                     <td><?php echo "ALSAKB".$inventory_id ?></td>
-                                    <td><?php if($battery == 'yes'){
+                                    <td>
+                                        <?php if($battery == 'yes'){
                                         echo"<div class='text-success'>$battery</div>";
-                                    }else{echo "<div class='text-danger'>$battery</div>";} ?></td>
+                                    }else{echo "<div class='text-danger'>$battery</div>";} ?>
+                                    </td>
+                                    <td>
+                                        <?php if($screen_type == 'yes') { echo $touch_wholesale_price; }
+                                              elseif($screen_type == 'no') { echo $non_touch_wholesale_price; } ?>
+                                    </td>
                                 </tr>
                                 <?php } ?>
 

@@ -304,7 +304,7 @@ if(isset($_POST['logged_out'])){
                                                 <p>Sales Order</p>
                                             </a>
                                         </li> -->
-                                        <?php if(($department == 5 && $role_id == 5) || ($role_id == 1 && $department == 11)) { ?>
+                                        <?php if(($department == 5 && $role_id == 5) || ($department == 5 && $role_id == 8) || ($role_id == 1 && $department == 11)) { ?>
                                         <li class="nav-item">
                                             <a href="../sales/orders.php" class="nav-link">
                                                 <i class="fa-solid fa-files nav-icon" style="font-size: 12px;"></i>
@@ -341,9 +341,9 @@ if(isset($_POST['logged_out'])){
                                         <?php } ?>
                                     </ul>
                                 </li>
-                                <?php if(($department == 16) || ($role_id == 1 && $department == 11)) { ?>
+                                <?php if(($role_id == 1 && $department == 11)) { ?>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="" class="nav-link">
                                         <i class="fa-brands fa-amazon nav-icon" style="font-size: 12px;"></i>
                                         <p>
                                             E-Commerce
@@ -352,7 +352,7 @@ if(isset($_POST['logged_out'])){
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
-                                            <a href="../sales/quatations.php" class="nav-link">
+                                            <a href="../e-commerce/e_commerce_dashboard.php" class="nav-link">
                                                 <i class="fa-solid fa-grid-horizontal nav-icon"
                                                     style="font-size: 12px;"></i>
                                                 <p>Dashboard</p>
@@ -383,7 +383,7 @@ if(isset($_POST['logged_out'])){
                             </ul>
                         </li>
 
-                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 8 && $department == 5) || ($role_id == 5 && $department == 3)) { ?>
+                        <?php } if(($role_id == 1 && $department == 11) || ($role_id == 2 && $department == 18) || ($role_id == 5 && $department == 3)) { ?>
 
                         <!-- Accounts -->
                         <li class="nav-item">
