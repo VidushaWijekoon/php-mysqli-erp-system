@@ -9,7 +9,11 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
 $user_id = $_SESSION['user_id'];
+<<<<<<< HEAD
 $department = $_SESSION['department'];
+=======
+$department=$_SESSION['department'];
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 
 ?>
 <div class="row page-titles">
@@ -145,6 +149,7 @@ if (isset($_POST['submit1'])) {
                                         $from_date = $_POST['from_date'];
                                         $to_date = $_POST['to_date'];
                                     }
+<<<<<<< HEAD
                                     if ($from_date != 0) {
                                         $query = "SELECT * FROM performance_record_table WHERE department_id=$department_id AND end_time between '$from_date'AND '$to_date'ORDER BY end_time DESC";
                                         $query_run = mysqli_query($connection, $query);
@@ -164,6 +169,27 @@ if (isset($_POST['submit1'])) {
                                                     } ?></td>
                                             </tr>
                                     <?php }
+=======
+                                    if($from_date != 0){
+                                    $query ="SELECT * FROM performance_record_table WHERE department_id=$department_id AND end_time between '$from_date'AND '$to_date'ORDER BY end_time DESC";
+                                    $query_run = mysqli_query($connection,$query);
+                                   
+                                    foreach( $query_run as $data){
+                                    ?>
+                                <tr>
+                                    <td><?php echo $data['end_time'] ?></td>
+                                    <td><?php echo $data['qr_number'] ?></td>
+                                    <td><?php echo $data['job_description'] ?></td>
+                                    <td><?php $user_id= $data['user_id'];
+                                            $query="SELECT full_name FROM employees LEFT JOIN users ON users.epf = employees.emp_id 
+                                            WHERE users.user_id ='$user_id' "; 
+                                            $query_run = mysqli_query($connection,$query);
+                                            foreach($query_run as $data){
+                                                echo $data['full_name'];
+                                            }?></td>
+                                </tr>
+                                <?php }
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                                     }
                                 } else { ?>
                                     <tr>

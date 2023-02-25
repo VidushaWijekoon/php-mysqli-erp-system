@@ -27,6 +27,7 @@ if (!isset($_SESSION['user_id'])) {
                         </button>
                     </form>
                     <?php $sales_order_id = '001';
+<<<<<<< HEAD
                     if (isset($_POST['submit'])) {
                         $sales_order_id = $_POST['sales_order'];
                     }
@@ -42,6 +43,22 @@ if (!isset($_SESSION['user_id'])) {
                         echo "Unit Count=";
                         echo $row;
                     } ?>
+=======
+if (isset($_POST['submit'])) {
+    $sales_order_id = $_POST['sales_order'];
+}
+
+$query = "SELECT * FROM packing_mfg WHERE sales_order_id ='$sales_order_id'";
+$query_run = mysqli_query($connection, $query);
+$row = mysqli_num_rows($query_run);
+?>
+
+                    <button onclick="exportToExcel('tblexportData', '<?php echo $sales_order_id; ?>')"
+                        class="btn bg-gradient-info mt-3 float-right">Export Table Data To Excel
+                        File</button>
+                    <?php if (!empty($row)) {echo "Unit Count=";
+    echo $row;}?>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                     <table id="example2" class="table table-bordered table-striped">
                         <table id="tblexportData" class="table table-striped">
                             <thead>
@@ -61,6 +78,25 @@ if (!isset($_SESSION['user_id'])) {
                             </thead>
                             <tbody>
                                 <?php
+<<<<<<< HEAD
+=======
+
+foreach ($query_run as $a) {
+
+    ?>
+                                <tr>
+                                    <td><?php echo $a['sales_order_id']; ?></td>
+                                    <td><?php echo $a['mfg']; ?></td>
+                                    <td><?php echo $a['model']; ?></td>
+                                    <td><?php echo $a['core']; ?></td>
+                                    <td><?php echo $a['generation']; ?></td>
+                                    <td><?php echo $a['ram_capacity']."GB"; ?></td>
+                                    <td><?php echo $a['hdd_capacity']."GB"; ?></td>
+                                    <td><?php echo $a['screen_size']; ?></td>
+                                    <td><?php echo $a['screen_resolution']; ?></td>
+                                    <td><?php echo $a['charger']; ?></td>
+                                    <td><?php echo $a['cartoon_number']; ?></td>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 
                                 foreach ($query_run as $a) {
 
@@ -80,7 +116,7 @@ if (!isset($_SESSION['user_id'])) {
 
                                     </tr>
                                 <?php }
-                                ?>
+?>
                             </tbody>
                         </table>
                 </div>

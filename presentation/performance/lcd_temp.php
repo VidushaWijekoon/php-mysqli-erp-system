@@ -31,9 +31,15 @@ $department_id = $_SESSION['department'];
 
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 date_default_timezone_set('Asia/Dubai');
+<<<<<<< HEAD
 $timestamp2 = strtotime(date('Y-m-d 13:57:00'));
 $timestamp3 = strtotime(date('Y-m-d 18:17:00'));
 $timestamp4 = strtotime(date('Y-m-d 20:57:00'));
+=======
+$timestamp2 = strtotime(date('Y-m-d 13:55:00'));
+$timestamp3 = strtotime(date('Y-m-d 18:15:00'));
+$timestamp4 = strtotime(date('Y-m-d 20:55:00'));
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 
 $_SESSION['expire1'] = $timestamp2;
 $_SESSION['expire2'] = $timestamp3;
@@ -46,11 +52,19 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
     echo "<p align='center'>Session has been destroyed!!";
     // session_start();
     header("Location: ../../index.php");
+<<<<<<< HEAD
 } elseif (strtotime(date('Y-m-d 14:59:00')) < $now && $now > $_SESSION['expire2'] && $now < strtotime(date('Y-m-d 18:15:50'))) {
     session_destroy();
     echo "<p align='center'>Session has been destroyed!!";
     header("Location: ../../index.php");
 } elseif (strtotime(date('Y-m-d 18:44:00')) < $now && $now > $_SESSION['expire3'] && $now < strtotime(date('Y-m-d 20:55:50'))) {
+=======
+} elseif (strtotime(date('Y-m-d 14:59:00')) < $now && $now > $_SESSION['expire2'] && $now < strtotime(date('Y-m-d 18:15:00'))) {
+    session_destroy();
+    echo "<p align='center'>Session has been destroyed!!";
+    header("Location: ../../index.php");
+} elseif (strtotime(date('Y-m-d 18:44:00')) < $now && $now > $_SESSION['expire3'] && $now < strtotime(date('Y-m-d 20:55:00'))) {
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
     session_destroy();
     echo "<p align='center'>Session has been destroyed!!";
     header("Location: ../../index.php");

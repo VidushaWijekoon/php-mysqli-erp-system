@@ -228,7 +228,8 @@ if (isset($_POST['submit'])) {
                                     </select> </td>
                                 <td> <input type="text" class="form-control" placeholder="Catalog SKU"
                                         name="catelog_sku"> </td>
-                                <td> <?php $query ="SELECT * FROM `brand`"; 
+                                <td> 
+                                    <?php $query ="SELECT * FROM `brand`"; 
                                 $query_run = mysqli_query($connection, $query);
                                 $brand="" ;
                                 foreach($query_run as $data){

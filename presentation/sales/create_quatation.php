@@ -527,19 +527,19 @@ if(isset($_POST['add_items'])){
 
                                                 <td>
                                                     <input type="number" min="1" id="quantity" class="form-control"
-                                                        placeholder="QTY" name="quantity">
+                                                        placeholder="QTY" name="quantity" onblur="get_total()">
                                                 </td>
 
                                                 <td>
                                                     <input type="number" id="unit_price" min="1" class="form-control"
-                                                        placeholder="Unit Price" name="unit_price">
+                                                        placeholder="Unit Price" name="unit_price" onblur="get_total()">
                                                 </td>
                                                 <td>
                                                     <input type="number" id="discount" class="form-control"
-                                                        placeholder="Discount" name="discount">
+                                                        placeholder="Discount" name="discount" onblur="get_total()">
                                                 </td>
                                                 <td>
-                                                    <input type="number" class="form-control" placeholder="Total"
+                                                    <input type="text" class="form-control" placeholder="Total"
                                                         name="total" id="total">
                                                 </td>
 
@@ -559,8 +559,8 @@ if(isset($_POST['add_items'])){
                             </div>
                         </div>
                     </div>
+                </form>
             </div>
-            </form>
         </div>
     </div>
 </div>
@@ -842,6 +842,24 @@ $(document).ready(function() {
         });
     });
 });
+
+const get_total = () => {
+    var quantity = $('#quantity').val();
+    var unit_price = $('#unit_price').val();
+    var discount = $('#discount').val();
+
+    var x = parseInt(quantity);
+    var y = parseInt(unit_price);
+    var z = parseInt(discount);
+
+    var a = x * y;
+    var b = a / 100 * z;
+    var c = a - b;
+
+    $('#total').val(c);
+
+
+}
 </script>
 
 <?php include_once('../includes/footer.php'); }else{

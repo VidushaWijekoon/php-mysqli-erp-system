@@ -12,8 +12,13 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
 $user_name = $_SESSION['username'];
+<<<<<<< HEAD
 $department_id = $_SESSION['department'];
 $user_role = $_SESSION['role_id'];
+=======
+$department_id=$_SESSION['department'];
+$user_role =$_SESSION['role_id'];
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 if (isset($_POST['submit'])) {
     $model = 0;
     $p_n = 0;
@@ -31,6 +36,7 @@ if (isset($_POST['submit'])) {
     }
 }
 ?>
+<<<<<<< HEAD
 <?php if ($department_id == 1 && $user_role == 4) { ?>
     <div class="row page-titles">
         <div class="col-md-5 align-self-center mt-2"><a href="./performance_record.php">
@@ -46,6 +52,23 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
 <?php } ?>
+=======
+ <?php if ($department_id == 1 && $user_role == 4) {?>
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center mt-2"><a href="./performance_record.php">
+            <i class="fa-solid fa-left fa-4x " style="color: #ced4da;"></i>
+        </a>
+    </div>
+</div>
+<?php }elseif($department_id == 19 && $user_role == 4){ ?> \
+    <div class="row page-titles">
+    <div class="col-md-5 align-self-center mt-2"><a href="./qc_performance_record.php">
+            <i class="fa-solid fa-left fa-4x " style="color: #ced4da;"></i>
+        </a>
+    </div>
+</div>
+    <?php } ?>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 <div class="col col-lg-12 justify-content-center m-auto text-uppercase float-left">
     <div class="row ">
         <div class="col-lg-6 grid-margin stretch-card justify-content-center mx-auto ">
@@ -60,16 +83,30 @@ if (isset($_POST['submit'])) {
                             <div class=" row">
                                 <label class="col-sm-6 col-form-label">Model</label>
                                 <div class="col-sm-6">
+<<<<<<< HEAD
                                     <input class="w-200" style="color:black !important" type="text" name="model" placeholder="Enter Model here">
+=======
+                                    <input class="w-200" style="color:black !important" type="text" name="model"
+                                        placeholder="Enter Model here">
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                                 </div>
                             </div>
                             <div class=" row">
                                 <label class="col-sm-6 col-form-label">Battery P/N Code</label>
                                 <div class="col-sm-6">
+<<<<<<< HEAD
                                     <input class="w-200" style="color:black !important" type="text" name="p_n" placeholder="Scan Battery P/N Code">
                                 </div>
                             </div>
                             <button type="submit" name="submit" id="submit" class="btn btn-default bg-gradient-success btn-next d-none">
+=======
+                                    <input class="w-200" style="color:black !important" type="text" name="p_n"
+                                        placeholder="Scan Battery P/N Code">
+                                </div>
+                            </div>
+                            <button type="submit" name="submit" id="submit"
+                                class="btn btn-default bg-gradient-success btn-next d-none">
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                                 <?php echo $month ?>
                             </button>
                         </form>
@@ -86,6 +123,7 @@ if (isset($_POST['submit'])) {
             </thead>
             <tbody>
                 <?php
+<<<<<<< HEAD
                 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                 $date = $date1->format('Y-m-d 00:00:00');
                 $date2 = $date1->format('Y-m-d 23:59:59');
@@ -100,6 +138,22 @@ if (isset($_POST['submit'])) {
                         <td><?php echo $a['battery_p_n'] ?></td>
                     </tr>
                 <?php } ?>
+=======
+$date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+$date = $date1->format('Y-m-d 00:00:00');
+$date2 = $date1->format('Y-m-d 23:59:59');
+$technician_name = $_SESSION['username'];
+$query = "SELECT model,battery_p_n FROM battery_request WHERE technician_name='$technician_name' AND request_date between '$date'AND '$date2'";
+$sql = mysqli_query($connection, $query);
+foreach ($sql as $a) {
+
+    ?>
+                <tr>
+                    <td><?php echo $a['model'] ?></td>
+                    <td><?php echo $a['battery_p_n'] ?></td>
+                </tr>
+                <?php }?>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
             </tbody>
         </table>
     </div>

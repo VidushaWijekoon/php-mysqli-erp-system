@@ -20,15 +20,15 @@ $username = $_SESSION['username'];
             <div class="card card-primary card-outline card-outline-tabs m-2 w-100">
                 <div class="card-header p-0 border-bottom-0">
                     <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
-                        <li class="nav-item text-center" style="width: 150px;">
+                        <!-- <li class="nav-item text-center" style="width: 150px;">
                             <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill"
                                 href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home"
                                 aria-selected="true" style="color: #fff;">Sales Orders</a>
-                        </li>
+                        </li> -->
                         <li class="nav-item text-center" style="width: 150px;">
-                            <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill"
+                            <a class="nav-link active" id="custom-tabs-four-profile-tab" data-toggle="pill"
                                 href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile"
-                                aria-selected="false" style="color: #fff;">Quatations</a>
+                                aria-selected="false" style="color: #fff;">Orders</a>
                         </li>
                     </ul>
                 </div>
@@ -37,7 +37,7 @@ $username = $_SESSION['username'];
                         <!-- ============================================================== -->
                         <!-- Sales Order  -->
                         <!-- ============================================================== -->
-                        <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel"
+                        <!-- <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel"
                             aria-labelledby="custom-tabs-four-home-tab">
                             <table class="table table-bordered table-hover">
                                 <thead>
@@ -208,92 +208,97 @@ $username = $_SESSION['username'];
 
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- ============================================================== -->
                         <!-- Quatation  -->
                         <!-- ============================================================== -->
-                        <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel"
+                        <div class="tab-pane fade show active" id="custom-tabs-four-profile" role="tabpanel"
                             aria-labelledby="custom-tabs-four-profile-tab">
+                            <div class="table-responsive">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Order Number</th>
+                                            <th scope="col">Customer Name</th>
+                                            <th scope="col">Country</th>
+                                            <th scope="col">Shipping Type</th>
+                                            <th scope="col">Order Type</th>
+                                            <th scope="col">Created By</th>
+                                            <th scope="col">Qty</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Created Date</th>
+                                            <th scope="col">Deadline Date</th>
+                                            <th scope="col">Remaining Time</th>
+                                            <th scope="col">Approved By</th>
+                                            <th scope="col">&nbsp;</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php 
 
-                            <table id="example2" class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Customer</th>
-                                        <th>Country</th>
-                                        <th>Sales Person</th>
-                                        <th>Quatation ID</th>
-                                        <th>Status</th>
-                                        <th>&nbsp;</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php 
-                                              
-                                        $query = "SELECT * FROM sales_customer_information 
-                                            INNER JOIN sales_quatation_items ON sales_customer_information.customer_id = sales_quatation_items.customer_id
-                                            WHERE sales_quatation_items.created_by = '$username' GROUP BY quatation_id ORDER BY quatation_id DESC";                                           
+                                            $i = 0;
                                                 
-                                        $query_run = mysqli_query($connection, $query);
-                                        foreach($query_run as $row){
-                                            $customer_first_name = $row['first_name'];
-                                            $customer_last_name = $row['last_name'];
-                                            $created_by = $row['created_by'];
-                                            $quatation_id = $row['quatation_id'];
-                                            $item_status = $row['status'];
-                                            $approved = $row['approval'];
-                                            $approved_by = $row['approved_by'];
-                                    ?>
-                                    <tr>
-                                        <td><?php echo $customer_first_name; ?></td>
-                                        <td><?php echo $customer_first_name; ?></td>
-                                        <td><?php echo $created_by; ?></td>
-                                        <td>
-                                            <?php 
-                                            
-                                            echo "<a href='./quatation_view.php?quatation_id={$row['quatation_id']}&customer_id={$row['customer_id']}'>
-                                                        QA-$quatation_id</a>";
-                                            
-                                            ?>
-                                        </td>
-                                        <td>
-                                            <?php if($item_status == 0) {?>
-                                            <span
-                                                class="badge badge-lg badge-primary text-white p-1 px-3">Pending</span>
-                                            <?php }if($item_status == 2) {?>
-                                            <span
-                                                class="badge badge-lg badge-danger text-white p-1 px-3">Rejected</span>
-                                            <?php }if(($item_status == 1) && ($approved == 0)) {?>
-                                            <span
-                                                class="badge badge-lg badge-success text-white p-1 px-3">Accepted</span>
-                                            <span class="badge badge-lg badge-danger text-white p-1 px-3">Waiting For
-                                                Approval
-                                            </span>
-                                            <?php }if(($item_status == 1) && ($approved == 1)) {?>
-                                            <span
-                                                class="badge badge-lg badge-success text-white p-1 px-3">Accepted</span>
-                                            <span class="badge badge-lg badge-info text-white p-1 px-3">Approved By
-                                                <?php echo $approved_by; ?>
+                                            $query = "SELECT first_name, last_name, country, sales_quatation_items.created_by, sales_customer_information.customer_id, quatation_id, 
+                                                            sales_quatation_items.status, approval, qty, total, approved_by, sales_quatation_items.created_time, shipping_date  
+                                                FROM sales_customer_information 
+                                                INNER JOIN sales_quatation_items ON sales_customer_information.customer_id = sales_quatation_items.customer_id
+                                                WHERE sales_quatation_items.created_by = '$username' GROUP BY quatation_id ORDER BY quatation_id DESC";                                           
+                                                    
+                                            $query_run = mysqli_query($connection, $query);
+                                            foreach($query_run as $row){
+                                                $customer_first_name = $row['first_name'];
+                                                $customer_last_name = $row['last_name'];
+                                                $country = $row['country'];
+                                                $created_by = $row['created_by'];
+                                                $quatation_id = $row['quatation_id'];
+                                                $item_status = $row['status'];
+                                                $approved = $row['approval'];
+                                                $approved_by = $row['approved_by'];
+                                                $qty = $row['qty'];
+                                                $total = $row['total'];
+                                                $created_time = $row['created_time'];
+                                                $created_time = Date('Y-m-d');
+                                                $shipping_date = $row['shipping_date'];
 
-                                            </span>
+                                                $i++;
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $i; ?></td>
+                                            <td>
+                                                <?php                                             
+                                                    echo "<a href='./quatation_view.php?quatation_id={$row['quatation_id']}&customer_id={$row['customer_id']}'>
+                                                            QA-$quatation_id</a>";                                                
+                                                ?>
+                                            </td>
+                                            <td><?php echo $customer_first_name . " " . $customer_last_name ?></td>
+                                            <td><?php echo $country; ?></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><?php echo $created_by; ?></td>
+                                            <td><?php echo $qty ?></td>
+                                            <td><?php echo $total ?></td>
+                                            <td></td>
+                                            <td><?php echo $created_time ?></td>
+                                            <td><?php echo $shipping_date ?></td>
+                                            <td></td>
+                                            <td>
+                                                <?php if($item_status == 0 && $approved == 0) { ?>
+                                                <span class="badge badge-lg badge-warning text-white p-1 px-3">Waiting
+                                                    for Approve</span>
+                                                <?php } if($item_status == 1 && $approved == 1){ ?>
+                                                <span class="badge badge-lg badge-success text-white p-1 px-3">Approved
+                                                    <?php echo $approved_by ?></span>
+                                                <?php } ?>
+                                            </td>
+                                            <td></td>
                                             <?php } ?>
-                                        </td>
-                                        <td>
-                                            <?php 
-                                                echo " <a class='btn btn-xs btn-secondary mx-1' href='./quatation_view.php?quatation_id={$row['quatation_id']}&customer_id={$row['customer_id']}'>
-                                                    <i class='fa-solid fa-eye'></i> </a>
-                                                <a class='btn btn-xs btn-warning mx-1' href='./quatation_edit.php?quatation_id={$row['quatation_id']}'>
-                                                    <i class='fa-solid fa-pen-to-square'></i></a>
-                                                <a class='btn btn-xs btn-success mx-1' href='invoice_pdf.php?quatation_id={$row['quatation_id']}'>
-                                                    <i class='fa-solid fa-download'></i> </a>
-                                                <a class='btn btn-xs btn-danger mx-1' href=''>
-                                                    <i class='fa-solid fa-trash-can'></i> </a>" 
-                                            ?>
-                                        </td>
-                                        <?php } ?>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

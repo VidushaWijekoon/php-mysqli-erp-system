@@ -47,12 +47,19 @@ foreach ($result_brand as $row) {
     $generation = $row['generation'];
     $touch_price = $row['touch_wholesale_price'];
     $non_touch_price = $row['non_touch_wholesale_price'];
+<<<<<<< HEAD
     if (empty($touch_price)) {
     } else {
         $touch_price = "$" . $touch_price;
     }
     if (empty($touch_price)) {
     } else {
+=======
+    if (empty($touch_price)) {} else {
+        $touch_price = "$" . $touch_price;
+    }
+    if (empty($touch_price)) {} else {
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
         $non_touch_price = "$" . $non_touch_price;
     }
 
@@ -91,6 +98,10 @@ foreach ($result_brand as $row) {
         ->setCellValue("J$i", "$touch_price");
     $spreadsheet->setActiveSheetIndex(0)
         ->setCellValue("K$i", "$non_touch_price");
+<<<<<<< HEAD
+=======
+
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 }
 $spreadsheet->getActiveSheet()->setTitle('Stock Summery');
 
@@ -102,7 +113,11 @@ foreach ($result_brand_group as $row) {
 
     $brand1 = $row['brand'];
     $spreadsheet->createSheet();
+<<<<<<< HEAD
     // Add some data
+=======
+// Add some data
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
     $spreadsheet->setActiveSheetIndex($k)
         ->setCellValue('A1', 'Brand');
     $spreadsheet->setActiveSheetIndex($k)
@@ -134,12 +149,19 @@ foreach ($result_brand_group as $row) {
         $generation = $spec['generation'];
         $touch_price1 = $spec['touch_wholesale_price'];
         $non_touch_price1 = $spec['non_touch_wholesale_price'];
+<<<<<<< HEAD
         if (empty($touch_price1)) {
         } else {
             $touch_price1 = "$" . $touch_price1;
         }
         if (empty($non_touch_price1)) {
         } else {
+=======
+        if (empty($touch_price1)) {} else {
+            $touch_price1 = "$" . $touch_price1;
+        }
+        if (empty($non_touch_price1)) {} else {
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
             $non_touch_price1 = "$" . $non_touch_price1;
         }
         $b++;

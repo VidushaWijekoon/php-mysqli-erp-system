@@ -39,3 +39,8 @@ $query = "INSERT INTO `performance_record_table`(
     )";
     $query_run = mysqli_query($connection,$query);
     header('Location: prod_team_lead.php');
+<<<<<<< HEAD
+=======
+
+?>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45

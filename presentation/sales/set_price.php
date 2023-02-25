@@ -14,7 +14,7 @@ if (!isset($_SESSION['user_id'])) {
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-3">
+        <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-5">
             <div class="card">
                 <div class="card-header mt-1">
                     <h6>Set Price for the Laptop</h6>

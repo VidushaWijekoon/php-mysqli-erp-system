@@ -164,7 +164,11 @@ if ($department_id == 13) {
                                     <?php
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 $date = $date1->format('Y-m-d 09:00:00');
+<<<<<<< HEAD
 $date2 = $date1->format('Y-m-d 13:55:50');
+=======
+$date2 = $date1->format('Y-m-d 13:55:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $duration = 0;
 $spend_time = 0;
 $query = "SELECT start_time  FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY performance_id ASC LIMIT 1";
@@ -199,7 +203,11 @@ if ($datetime_2 != '') {
                                         <?php
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 $current_time = $date1->format('Y-m-d H:i:s');
+<<<<<<< HEAD
 $date = $date1->format('Y-m-d 13:55:50');
+=======
+$date = $date1->format('Y-m-d 13:55:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $remaining_time = (strtotime($date) - strtotime($current_time)) / 60;
 if ($remaining_time > 0) {
     echo " Remaining Time " . round($remaining_time) . " minute";
@@ -209,7 +217,11 @@ if ($remaining_time > 0) {
                                     <?php
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 $date = $date1->format('Y-m-d 13:30:00');
+<<<<<<< HEAD
 $date2 = $date1->format('Y-m-d 13:55:50');
+=======
+$date2 = $date1->format('Y-m-d 13:55:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $duration = 0;
 $spend_time = 0;
 $query = "SELECT end_time  FROM performance_record_table WHERE user_id=$user_id AND end_time between '$date'AND '$date2' ORDER BY performance_id DESC LIMIT 1";
@@ -217,7 +229,11 @@ $query_run = mysqli_query($connection, $query);
 $datetime_1 = '';
 $datetime_2 = '';
 foreach ($query_run as $data) {
+<<<<<<< HEAD
     $datetime_1 = date('Y-m-d 13:55:50');
+=======
+    $datetime_1 = date('Y-m-d 13:55:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
     $datetime_2 = $data['end_time'];
 }
 
@@ -242,7 +258,11 @@ if ($datetime_2 != '') {
                                         03.05PM</label>
                                     <?php
 $date = date('Y-m-d 15:00:00');
+<<<<<<< HEAD
 $date2 = date('Y-m-d 18:15:50');
+=======
+$date2 = date('Y-m-d 18:15:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $query = "SELECT start_time  FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY performance_id ASC LIMIT 1";
 $query_run = mysqli_query($connection, $query);
 $datetime_1 = '';
@@ -275,7 +295,11 @@ if ($datetime_2 != '') {
                                         <?php
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 $current_time = $date1->format('Y-m-d H:i:s');
+<<<<<<< HEAD
 $date = $date1->format('Y-m-d 18:15:50');
+=======
+$date = $date1->format('Y-m-d 18:15:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $date_old = $date1->format('Y-m-d 15:05:00');
 $remaining_time = (strtotime($date) - strtotime($current_time)) / 60;
 if ($remaining_time > 0 && $date_old < $current_time) {
@@ -287,7 +311,11 @@ if ($remaining_time > 0 && $date_old < $current_time) {
                                         <?php
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 $date = $date1->format('Y-m-d 15:45:00');
+<<<<<<< HEAD
 $date2 = $date1->format('Y-m-d 18:15:50');
+=======
+$date2 = $date1->format('Y-m-d 18:15:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $duration = 0;
 $spend_time = 0;
 $query = "SELECT end_time  FROM performance_record_table WHERE user_id=$user_id AND end_time between '$date'AND '$date2' ORDER BY performance_id DESC LIMIT 1";
@@ -295,7 +323,11 @@ $query_run = mysqli_query($connection, $query);
 $datetime_1 = '';
 $datetime_2 = '';
 foreach ($query_run as $data) {
+<<<<<<< HEAD
     $datetime_1 = date('Y-m-d 18:15:50');
+=======
+    $datetime_1 = date('Y-m-d 18:15:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
     $datetime_2 = $data['end_time'];
 }
 
@@ -322,7 +354,11 @@ if ($datetime_2 != '') {
                                     <?php
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 $date = $date1->format('Y-m-d 18:40:00');
+<<<<<<< HEAD
 $date2 = $date1->format('Y-m-d 20:55:50');
+=======
+$date2 = $date1->format('Y-m-d 20:55:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $duration = 0;
 $spend_time = 0;
 $query = "SELECT start_time  FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY performance_id ASC LIMIT 1";
@@ -356,7 +392,11 @@ if ($datetime_2 != '') {
                                         <?php
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 $current_time = $date1->format('Y-m-d H:i:s');
+<<<<<<< HEAD
 $date = $date1->format('Y-m-d 20:55:50');
+=======
+$date = $date1->format('Y-m-d 20:55:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $remaining_time = (strtotime($date) - strtotime($current_time)) / 60;
 $date_old = $date1->format('Y-m-d 18:45:00');
 if ($remaining_time > 0 && $date_old < $current_time) {

@@ -139,6 +139,35 @@ $user_name = $_SESSION['username'];
 
                                 <div class="row">
                                     <label class="col-sm-12 col-form-label">Morning Session Start Time : 09.05AM</label>
+<<<<<<< HEAD
+=======
+                                    <?php  
+                                            $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+                                            $date = $date1->format('Y-m-d 09:00:00');
+                                          $date2 = $date1->format('Y-m-d 13:55:00');
+                                            $duration =0;
+                                            $spend_time =0;
+                                            $query ="SELECT start_time  FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY performance_id ASC LIMIT 1";
+                                            
+                                            $query_run = mysqli_query($connection,$query);
+                                            $datetime_1=''; 
+                                            $datetime_2 ='' ; 
+                                            foreach($query_run as $data){
+                                                $datetime_1 = date('Y-m-d 09:05:00'); 
+                                                $datetime_2 = $data['start_time']; 
+                                            } 
+                                            
+                                            $start_datetime = new DateTime($datetime_1); 
+                                            $diff = $start_datetime->diff(new DateTime($datetime_2));
+                                            if($datetime_2 !=''){
+                                            if ($datetime_2 < $datetime_1) {
+                                              
+                                               
+                                               ?>
+                                    <label class="col-sm-12 col-form-label text-success">You are Earlier :
+                                        <?php echo $diff->i.' Minutes' ?>
+                                        minute &#128525;</label>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                                     <?php
                                     $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                     $date = $date1->format('Y-m-d 09:00:00');
@@ -185,6 +214,32 @@ $user_name = $_SESSION['username'];
                                         }
                                         ?>
                                     </label>
+<<<<<<< HEAD
+=======
+                                    <?php  
+                                            $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+                                            $date = $date1->format('Y-m-d 13:30:00');
+                                          $date2 = $date1->format('Y-m-d 13:55:00');
+                                            $duration =0;
+                                            $spend_time =0;
+                                            $query ="SELECT end_time  FROM performance_record_table WHERE user_id=$user_id AND end_time between '$date'AND '$date2' ORDER BY performance_id DESC LIMIT 1";
+                                            $query_run = mysqli_query($connection,$query);
+                                            $datetime_1=''; 
+                                            $datetime_2 ='' ; 
+                                            foreach($query_run as $data){
+                                                $datetime_1 = date('Y-m-d 13:55:00'); 
+                                                $datetime_2 = $data['end_time']; 
+                                            } 
+                                            
+                                            $start_datetime = new DateTime($datetime_1); 
+                                            $diff = $start_datetime->diff(new DateTime($datetime_2));
+                                            if($datetime_2 !=''){
+                                            if ($datetime_2 < $datetime_1) {
+                                               
+                                               ?>
+                                    <label class="col-sm-12 col-form-label text-danger">You are Earlier :
+                                        <?php echo $diff->i.' Minutes' ?></label>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                                     <?php
                                     $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                     $date = $date1->format('Y-m-d 13:30:00');
@@ -220,6 +275,32 @@ $user_name = $_SESSION['username'];
 
                                     <label class="col-sm-12 col-form-label">Afternoon Session Start Time :
                                         03.05PM</label>
+<<<<<<< HEAD
+=======
+                                    <?php 
+                                            $date = date('Y-m-d 15:00:00');
+                                            $date2 = date('Y-m-d 18:15:00');
+                                            $query ="SELECT start_time  FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY performance_id ASC LIMIT 1";
+                                            $query_run = mysqli_query($connection,$query);
+                                            $datetime_1=''; 
+                                            $datetime_2 ='' ; 
+                                            foreach($query_run as $data){
+                                                $datetime_1 = date('Y-m-d 15:05:00'); 
+                                                $datetime_2 = $data['start_time']; 
+                                                
+                                            } 
+                                            
+                                            $start_datetime = new DateTime($datetime_1); 
+                                            $diff = $start_datetime->diff(new DateTime($datetime_2));
+                                            
+                                            if($datetime_2 !=''){
+                                            if ($datetime_2 < $datetime_1) {
+                                                
+                                               ?>
+                                    <label class="col-sm-12 col-form-label text-success">You are Earlier :
+                                        <?php echo $diff->i.' Minutes' ?>
+                                        minute &#128525;</label>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                                     <?php
                                     $date = date('Y-m-d 15:00:00');
                                     $date2 = date('Y-m-d 18:15:50');
@@ -263,6 +344,31 @@ $user_name = $_SESSION['username'];
                                         ?>
                                     </label>
                                     <label>
+<<<<<<< HEAD
+=======
+                                        <?php  
+                                            $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+                                            $date = $date1->format('Y-m-d 15:45:00');
+                                          $date2 = $date1->format('Y-m-d 18:15:00');
+                                            $duration =0;
+                                            $spend_time =0;
+                                            $query ="SELECT end_time  FROM performance_record_table WHERE user_id=$user_id AND end_time between '$date'AND '$date2' ORDER BY performance_id DESC LIMIT 1";
+                                            $query_run = mysqli_query($connection,$query);
+                                            $datetime_1=''; 
+                                            $datetime_2 ='' ; 
+                                            foreach($query_run as $data){
+                                                $datetime_1 = date('Y-m-d 18:15:00'); 
+                                                $datetime_2 = $data['end_time']; 
+                                            } 
+                                            
+                                            $start_datetime = new DateTime($datetime_1); 
+                                            $diff = $start_datetime->diff(new DateTime($datetime_2));
+                                            if($datetime_2 !=''){
+                                            if ($datetime_2 < $datetime_1) {
+                                               ?>
+                                        <label class="col-sm-12 col-form-label text-danger">You are Earlier :
+                                            <?php echo $diff->i.' Minutes' ?></label>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                                         <?php
                                         $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                         $date = $date1->format('Y-m-d 15:45:00');
@@ -297,6 +403,32 @@ $user_name = $_SESSION['username'];
                                     </label>
                                     <label class="col-sm-12 col-form-label">Evening Session Start Time :
                                         06.45PM</label>
+<<<<<<< HEAD
+=======
+                                    <?php  
+                                    $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+                                            $date = $date1->format('Y-m-d 18:40:00');
+                                            $date2 = $date1->format('Y-m-d 20:55:00');
+                                            $duration =0;
+                                            $spend_time =0;
+                                            $query ="SELECT start_time  FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY performance_id ASC LIMIT 1";
+                                            $query_run = mysqli_query($connection,$query);
+                                            $datetime_1 = ''; 
+                                                $datetime_2 = ''; 
+                                            foreach($query_run as $data){
+                                                $datetime_1 = date('Y-m-d 18:45:00'); 
+                                                $datetime_2 = $data['start_time']; 
+                                            } 
+                                            
+                                            $start_datetime = new DateTime($datetime_1); 
+                                            $diff = $start_datetime->diff(new DateTime($datetime_2));
+                                            if($datetime_2 !=''){
+                                            if ($datetime_2 < $datetime_1) {
+                                               ?>
+                                    <label class="col-sm-12 col-form-label text-success">You are Earlier :
+                                        <?php echo $diff->i.' Minutes' ?>
+                                        minute &#128525;</label>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                                     <?php
                                     $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                     $date = $date1->format('Y-m-d 18:40:00');
@@ -475,9 +607,15 @@ if (isset($_POST['submit1'])) {
         .getMinutes() + ":" + time.getSeconds();
     document.getElementById("time").textContent = today;
 
+<<<<<<< HEAD
     let searchbar = document.querySelector('input[name="qr"]');
     searchbar.focus();
     search.value = '';
+=======
+let searchbar = document.querySelector('input[name="qr"]');
+searchbar.focus();
+search.value = '';
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 </script>
 <style>
     [type="text"] {

@@ -54,6 +54,9 @@ function Login($role_id, $department){
         header('Location: presentation/performance/prod_team_lead.php');
     } elseif ($department == 1 && $role_id == 11) {
         header('Location: presentation/performance/distributor.php');
+    
+    } elseif ($department == 1 && $role_id == 6) {
+        header('Location: presentation/production/production_technician_dashboard.php');
     }
 
     // Motherboard Team Leader Redirect

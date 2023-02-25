@@ -4,14 +4,14 @@
 	if (isset($_GET['device']) ) {
 
 		$device = mysqli_real_escape_string($connection, $_GET['device']);
-		$query 		= "SELECT DISTINCT brand FROM warehouse_information_sheet WHERE device = '{$device}'";
+		$query 		= "SELECT DISTINCT brand FROM warehouse_information_sheet WHERE device = '{$device}' ORDER BY brand ASC";
 		$result_set = mysqli_query($connection, $query);
         
 		$brand_list = "<option selected>--Select Brand--</option>";
 		while ($result = mysqli_fetch_assoc($result_set) ) {
 			$brand_list .= "<option value=\"{$result['brand']}\" class='info_select'>{$result['brand']}</option>";
 		}
-		echo $brand_list;
+		echo strtoupper($brand_list);
 	} 
 	
  	if (isset($_GET['brand']) ) {
@@ -24,7 +24,7 @@
 		while ($result = mysqli_fetch_assoc($result_set) ) {
 			$model_list .= "<option value=\"{$result['model']}\" class='info_select'>{$result['model']}</option>";
 		}
-		echo $model_list;
+		echo strtoupper($model_list);
 	}  
 	
  	if (isset($_GET['model']) ) {
@@ -37,7 +37,7 @@
 		while ($result = mysqli_fetch_assoc($result_set) ) {
 			$processor_list .= "<option value=\"{$result['processor']}\" class='info_select'>{$result['processor']}</option>";
 		}
-		echo $processor_list;
+		echo strtoupper($processor_list);
 	}  
 
 	if (isset($_GET['processor']) ) {
@@ -50,7 +50,7 @@
 		while ($result = mysqli_fetch_assoc($result_set) ) {
 			$core_list .= "<option value=\"{$result['core']}\" class='info_select'>{$result['core']}</option>";
 		}
-		echo $core_list;
+		echo strtoupper($core_list);
 	}  
 
 	if (isset($_GET['core']) ) {
@@ -63,7 +63,7 @@
 		while ($result = mysqli_fetch_assoc($result_set) ) {
 			$generation_list .= "<option value=\"{$result['generation']}\" class='info_select'>{$result['generation']}</option>";
 		}
-		echo $generation_list;
+		echo strtoupper($generation_list);
 	}  
 
 	if (isset($_GET['generation']) ) {
@@ -76,7 +76,7 @@
 		while ($result = mysqli_fetch_assoc($result_set) ) {
 			$speed_list .= "<option value=\"{$result['speed']}\" class='info_select'>{$result['speed']}</option>";
 		}
-		echo $speed_list;
+		echo strtoupper($speed_list);
 	}  
 
 	if (isset($_GET['speed']) ) {
@@ -89,7 +89,7 @@
 		while ($result = mysqli_fetch_assoc($result_set) ) {
 			$lcd_size_list .= "<option value=\"{$result['lcd_size']}\" class='info_select'>{$result['lcd_size']}</option>";
 		}
-		echo $lcd_size_list;
+		echo strtoupper($lcd_size_list);
 	}  
 	
 	if (isset($_GET['lcd_size']) ) {
@@ -102,9 +102,21 @@
 		while ($result = mysqli_fetch_assoc($result_set) ) {
 			$resolution_list .= "<option value=\"{$result['screen_resolution']}\" class='info_select'>{$result['screen_resolution']}</option>";
 		}
-		echo $resolution_list;
+		echo strtoupper($resolution_list);
 	}  
+	
+	if (isset($_GET['resolution']) ) {
 
-
-
+		$resolution = mysqli_real_escape_string($connection, $_GET['resolution']);
+		$query 		= "SELECT DISTINCT touch_or_non_touch FROM warehouse_information_sheet WHERE screen_resolution = '{$resolution}'";
+		$result_set = mysqli_query($connection, $query);
+        
+		$touch_list = "<option selected>--Select Touch--</option>";
+		while ($result = mysqli_fetch_assoc($result_set) ) {
+			$touch_list .= "<option value=\"{$result['touch_or_non_touch']}\" class='info_select'>{$result['touch_or_non_touch']}</option>";
+		}
+		echo strtoupper($touch_list);
+	}
+	  
+	
 ?>

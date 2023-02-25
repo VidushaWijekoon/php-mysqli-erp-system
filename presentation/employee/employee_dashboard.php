@@ -22,9 +22,18 @@ if (!isset($_SESSION['user_id'])) {
 <div class="row m-2">
 
     <div class="col-12 mt-3">
+<<<<<<< HEAD
         <a class="btn btn-info mx-2 text-white" type="button" href="create_employee.php"><i class="fa fa-plus"></i><span class="mx-1">Create Employee</span></a>
         <a class="btn btn-primary mx-2 text-white" type="button" href="employees.php"><i class="fa-solid fa-users"></i><span class="mx-1">Employee List</span></a>
         <a class="btn btn-primary mx-2 text-white" type="button" href="report.php"><i class="fa-solid fa-users"></i><span class="mx-1">Employee Task Report</span></a>
+=======
+        <a class="btn btn-info mx-2 text-white" type="button" href="create_employee.php"><i class="fa fa-plus"></i><span
+                class="mx-1">Create Employee</span></a>
+        <a class="btn btn-primary mx-2 text-white" type="button" href="employees.php"><i
+                class="fa-solid fa-users"></i><span class="mx-1">Employee List</span></a>
+        <a class="btn btn-primary mx-2 text-white" type="button" href="report.php"><i
+                class="fa-solid fa-users"></i><span class="mx-1">Employee Task Report</span></a>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
     </div>
 </div>
 

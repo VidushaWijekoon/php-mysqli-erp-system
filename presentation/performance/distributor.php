@@ -8,11 +8,14 @@ include_once '../includes/header.php';
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
+<<<<<<< HEAD
 ?>
 <link rel="stylesheet" href="../../static/plugins/bootstrap-3.3.5-dist/css/bootstrap.min.css">
 <script src="../../static/plugins/jquery/1.11.3/jquery.min.js"></script>
 <script src="../../static/plugins/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 <?php
+=======
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $user_id = $_SESSION['user_id'];
 $user_role = $_SESSION['role_id'];
 $department_id = $_SESSION['department'];
@@ -59,9 +62,15 @@ $model = '';
 // }
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 date_default_timezone_set('Asia/Dubai');
+<<<<<<< HEAD
 $timestamp2 = strtotime(date('Y-m-d 13:57:00'));
 $timestamp3 = strtotime(date('Y-m-d 18:17:00'));
 $timestamp4 = strtotime(date('Y-m-d 20:57:00'));
+=======
+$timestamp2 = strtotime(date('Y-m-d 13:55:00'));
+$timestamp3 = strtotime(date('Y-m-d 18:15:00'));
+$timestamp4 = strtotime(date('Y-m-d 20:55:00'));
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 
 $_SESSION['expire1'] = $timestamp2;
 $_SESSION['expire2'] = $timestamp3;
@@ -74,11 +83,19 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
     echo "<p align='center'>Session has been destroyed!!";
     // session_start();
     header("Location: ../../index.php");
+<<<<<<< HEAD
 } elseif (strtotime(date('Y-m-d 14:59:00')) < $now && $now > $_SESSION['expire2'] && $now < strtotime(date('Y-m-d 18:15:50'))) {
     session_destroy();
     echo "<p align='center'>Session has been destroyed!!";
     header("Location: ../../index.php");
 } elseif (strtotime(date('Y-m-d 18:44:00')) < $now && $now > $_SESSION['expire3'] && $now < strtotime(date('Y-m-d 20:55:50'))) {
+=======
+} elseif (strtotime(date('Y-m-d 14:59:00')) < $now && $now > $_SESSION['expire2'] && $now < strtotime(date('Y-m-d 18:15:00'))) {
+    session_destroy();
+    echo "<p align='center'>Session has been destroyed!!";
+    header("Location: ../../index.php");
+} elseif (strtotime(date('Y-m-d 18:44:00')) < $now && $now > $_SESSION['expire3'] && $now < strtotime(date('Y-m-d 20:55:00'))) {
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
     session_destroy();
     echo "<p align='center'>Session has been destroyed!!";
     header("Location: ../../index.php");
@@ -230,7 +247,11 @@ foreach ($query_run as $data) {
                                     <?php
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 $date = $date1->format('Y-m-d 09:00:00');
+<<<<<<< HEAD
 $date2 = $date1->format('Y-m-d 13:55:50');
+=======
+$date2 = $date1->format('Y-m-d 13:55:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $duration = 0;
 $spend_time = 0;
 $query = "SELECT start_time  FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY performance_id ASC LIMIT 1";
@@ -280,7 +301,11 @@ if ($exist_record == 0) {
                                         <?php
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 $current_time = $date1->format('Y-m-d H:i:s');
+<<<<<<< HEAD
 $date = $date1->format('Y-m-d 13:55:50');
+=======
+$date = $date1->format('Y-m-d 13:55:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $remaining_time = (strtotime($date) - strtotime($current_time)) / 60;
 if ($remaining_time > 0) {
     echo " Remaining Time " . round($remaining_time) . " minute";
@@ -290,7 +315,11 @@ if ($remaining_time > 0) {
                                     <?php
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 $date = $date1->format('Y-m-d 13:30:00');
+<<<<<<< HEAD
 $date2 = $date1->format('Y-m-d 13:55:50');
+=======
+$date2 = $date1->format('Y-m-d 13:55:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $duration = 0;
 $spend_time = 0;
 $query = "SELECT end_time  FROM performance_record_table WHERE user_id=$user_id AND end_time between '$date'AND '$date2' ORDER BY performance_id DESC LIMIT 1";
@@ -298,7 +327,11 @@ $query_run = mysqli_query($connection, $query);
 $datetime_1 = '';
 $datetime_2 = '';
 foreach ($query_run as $data) {
+<<<<<<< HEAD
     $datetime_1 = date('Y-m-d 13:55:50');
+=======
+    $datetime_1 = date('Y-m-d 13:55:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
     $datetime_2 = $data['end_time'];
 }
 
@@ -340,7 +373,11 @@ if ($exist_record == 0) {
                                         03.05PM</label>
                                     <?php
 $date = date('Y-m-d 15:00:00');
+<<<<<<< HEAD
 $date2 = date('Y-m-d 18:15:50');
+=======
+$date2 = date('Y-m-d 18:15:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $query = "SELECT start_time  FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY performance_id ASC LIMIT 1";
 $query_run = mysqli_query($connection, $query);
 $datetime_1 = '';
@@ -390,7 +427,11 @@ if ($exist_record == 0) {
                                         <?php
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 $current_time = $date1->format('Y-m-d H:i:s');
+<<<<<<< HEAD
 $date = $date1->format('Y-m-d 18:15:50');
+=======
+$date = $date1->format('Y-m-d 18:15:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $date_old = $date1->format('Y-m-d 15:05:00');
 $remaining_time = (strtotime($date) - strtotime($current_time)) / 60;
 if ($remaining_time > 0 && $date_old < $current_time) {
@@ -402,7 +443,11 @@ if ($remaining_time > 0 && $date_old < $current_time) {
                                         <?php
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 $date = $date1->format('Y-m-d 15:45:00');
+<<<<<<< HEAD
 $date2 = $date1->format('Y-m-d 18:15:50');
+=======
+$date2 = $date1->format('Y-m-d 18:15:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $duration = 0;
 $spend_time = 0;
 $query = "SELECT end_time  FROM performance_record_table WHERE user_id=$user_id AND end_time between '$date'AND '$date2' ORDER BY performance_id DESC LIMIT 1";
@@ -410,7 +455,11 @@ $query_run = mysqli_query($connection, $query);
 $datetime_1 = '';
 $datetime_2 = '';
 foreach ($query_run as $data) {
+<<<<<<< HEAD
     $datetime_1 = date('Y-m-d 18:15:50');
+=======
+    $datetime_1 = date('Y-m-d 18:15:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
     $datetime_2 = $data['end_time'];
 }
 
@@ -454,7 +503,11 @@ if ($exist_record == 0) {
                                         <?php
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 $date = $date1->format('Y-m-d 18:40:00');
+<<<<<<< HEAD
 $date2 = $date1->format('Y-m-d 20:55:50');
+=======
+$date2 = $date1->format('Y-m-d 20:55:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $duration = 0;
 $spend_time = 0;
 $query = "SELECT start_time  FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY performance_id ASC LIMIT 1";
@@ -504,7 +557,11 @@ if ($exist_record == 0) {
                                             <?php
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 $current_time = $date1->format('Y-m-d H:i:s');
+<<<<<<< HEAD
 $date = $date1->format('Y-m-d 20:55:50');
+=======
+$date = $date1->format('Y-m-d 20:55:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $remaining_time = (strtotime($date) - strtotime($current_time)) / 60;
 $date_old = $date1->format('Y-m-d 18:45:00');
 if ($remaining_time > 0 && $date_old < $current_time) {
@@ -603,6 +660,7 @@ $date = date("Y-m-d 00:00:00", strtotime("yesterday"));
 // $date = $date_yesterday->format('Y-m-d 00:00:00');
 // $date = $date1->format('Y-m-d 00:00:00');
 $date2 = $date1->format('Y-m-d 23:59:59');
+<<<<<<< HEAD
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // SQL pagination from anuradha
 if (isset($_GET['pageno'])) {
@@ -625,6 +683,9 @@ $total_rows = mysqli_fetch_array($result)[0];
 $total_pages = ceil($total_rows / $no_of_records_per_page);
 
 $query = "SELECT DISTINCT qr_number,username,end_time FROM performance_record_table LEFT JOIN users ON users.user_id = performance_record_table.user_id WHERE status='1' AND (job_description='Put RAM + Hard Disk + Test' OR job_description='Combine+ Test') AND start_time between '$date'AND '$date2' ORDER BY performance_id DESC LIMIT $offset, $no_of_records_per_page";
+=======
+$query = "SELECT DISTINCT qr_number,username,end_time FROM performance_record_table LEFT JOIN users ON users.user_id = performance_record_table.user_id WHERE status='1' AND (job_description='Put RAM + Hard Disk + Test' OR job_description='Combine+ Test') AND start_time between '$date'AND '$date2' ORDER BY performance_id DESC";
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $query_run = mysqli_query($connection, $query);
 foreach ($query_run as $data) {
     $received_qr = $data['qr_number'];
@@ -721,6 +782,7 @@ if ($bodywork == 1) {
 
                                     </tbody>
                                     <table>
+<<<<<<< HEAD
                                         <ul class="pagination">
                                             <li><a href="?pageno=1">First</a></li>
                                             <li class="<?php if ($pageno <= 1) {echo 'disabled';}?>">
@@ -733,6 +795,8 @@ if ($bodywork == 1) {
                                             </li>
                                             <li><a href="?pageno=<?php echo $total_pages; ?>">Last</a></li>
                                         </ul>
+=======
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                             </div>
                         </div>
                     </div>
