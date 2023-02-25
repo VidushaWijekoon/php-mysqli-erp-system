@@ -87,14 +87,22 @@ $search_customer_id = null;
 $posting_id = null;
 
 $current_date = date('d-m-Y');
+$sales_member_1 = null;
+$sales_member_1 = $_GET['sales_member'];
 
+$user_first_name = null;
+$user_last_name = null;
+$first_name = null;
+$last_name = null;
 
-$returive_sales = "SELECT * FROM weekly_sales_set_target ORDER BY id DESC LIMIT 1";
+$returive_sales = "SELECT day, sales_member, id, username, first_name, last_name FROM weekly_sales_set_target LEFT JOIN users ON weekly_sales_set_target.sales_member = users.username ORDER BY id DESC LIMIT 1;";
 $query_set = mysqli_query($connection, $returive_sales);
 foreach($query_set as $q){
     $selected_date = $q['day'];
     $sales_member_name = $q['sales_member'];
     $member_id = $q['id'];
+    $first_name = $q['first_name'];
+    $last_name = $q['last_name'];
 }
 
 if(isset($_POST['get_user1'])){
@@ -103,26 +111,14 @@ if(isset($_POST['get_user1'])){
 
     $qd = "INSERT INTO `weekly_sales_set_target`(`day`, `sales_member`, `created_by`, `epf`) VALUES ('{$day}', '{$sales_member}', '{$username}', '{$epf}')";
     $q_run = mysqli_query($connection, $qd);
+
+    header("Location: ./sales_team_members.php?sales_member=$sales_member_name&first_name=$first_name&last_name=$last_name");
     echo "<script>
             $(window).load(function() {
                 $('#create_search').modal('show');
             });
         </script>";
-}
-
-if(isset($_POST['get_user2'])){
-    $day = mysqli_real_escape_string($connection, $_POST['day']);
-    $sales_member = mysqli_real_escape_string($connection, $_POST['sales_member']);
-
-    $qd = "INSERT INTO `weekly_sales_set_target`(`day`, `sales_member`, `created_by`, `epf`) VALUES ('{$day}', '{$sales_member}', '{$username}', '{$epf}')";
-    $q_run = mysqli_query($connection, $qd);
-    echo "<script>
-            $(window).load(function() {
-                $('#posting_modal').modal('show');
-            });
-        </script>";
-}
-
+    }
 
 if(isset($_POST['posting_customer_test'])){
 
@@ -296,7 +292,15 @@ if(isset($_POST['posting_modal'])){
                                                     <td>
                                                         <select class="" name="sales_member" style="border-radius: 5px;"
                                                             required>
-                                                            <option value="" selected>--Select Sales Member--</option>
+
+                                                            <?php if($first_name !=0 && $last_name != 0){ ?>
+                                                            <option value="<?php echo $first_name . " " . $last_name ?>"
+                                                                selected><?php echo $first_name . " " . $last_name ?>
+                                                            </option>
+                                                            <?php } else { ?>
+                                                            <option value="" selected><?php echo "Select Member" ?>
+                                                            </option>
+                                                            <?php } ?>
                                                             <?php
                                                                 $query = "SELECT first_name, last_name, username FROM users WHERE department = 5 AND role = 5 ORDER BY 'first_name' ASC";
                                                                 $result = mysqli_query($connection, $query);
@@ -310,15 +314,18 @@ if(isset($_POST['posting_modal'])){
                                                             </option>
                                                             <?php endwhile; ?>
                                                         </select>
+                                                        <button type="submit" name="get_user1"
+                                                            class="btn btn-xs btn-primary">Select Member</button>
                                                     </td>
                                                     <td>
-                                                        <button type="submit" name="get_user1"
-                                                            class="btn btn-sm btn-primary" data-toggle="modal"
-                                                            data-target="#create_search">Create & Search
+                                                        <?php if($sales_member_1 != null) { ?>
+                                                        <button class="btn btn-sm btn-primary" data-toggle="modal"
+                                                            data-target="#create_search">Create &
+                                                            Search Customer</button>
+                                                        <button class="btn btn-sm btn-success" data-toggle="modal"
+                                                            data-target="#posting_modal">Posting to
                                                             Customer</button>
-                                                        <button type="submit" name="get_user2"
-                                                            class="btn btn-sm btn-success" data-toggle="modal"
-                                                            data-target="#posting_modal">Posting to Customer</button>
+                                                        <?php } ?>
                                                     </td>
                                                 </form>
                                             </tbody>
@@ -349,7 +356,15 @@ if(isset($_POST['posting_modal'])){
                                                 <td>
                                                     <select class="" name="sales_member" style="border-radius: 5px;"
                                                         required>
-                                                        <option value="" selected>--Select Sales Member--</option>
+
+                                                        <?php if($first_name !=0 && $last_name != 0){ ?>
+                                                        <option value="<?php echo $first_name . " " . $last_name ?>"
+                                                            selected><?php echo $first_name . " " . $last_name ?>
+                                                        </option>
+                                                        <?php } else { ?>
+                                                        <option value="" selected><?php echo "Select Member" ?>
+                                                        </option>
+                                                        <?php } ?>
                                                         <?php
                                                                 $query = "SELECT first_name, last_name, username FROM users WHERE department = 5 AND role = 5 ORDER BY 'first_name' ASC";
                                                                 $result = mysqli_query($connection, $query);
@@ -363,15 +378,18 @@ if(isset($_POST['posting_modal'])){
                                                         </option>
                                                         <?php endwhile; ?>
                                                     </select>
+                                                    <button type="submit" name="get_user1"
+                                                        class="btn btn-xs btn-primary">Select Member</button>
                                                 </td>
                                                 <td>
-                                                    <button type="submit" name="get_user1"
-                                                        class="btn btn-sm btn-primary" data-toggle="modal"
-                                                        data-target="#create_search">Create & Search
+                                                    <?php if($sales_member_1 != null) { ?>
+                                                    <button class="btn btn-sm btn-primary" data-toggle="modal"
+                                                        data-target="#create_search">Create &
+                                                        Search Customer</button>
+                                                    <button class="btn btn-sm btn-success" data-toggle="modal"
+                                                        data-target="#posting_modal">Posting to
                                                         Customer</button>
-                                                    <button type="submit" name="get_user2"
-                                                        class="btn btn-sm btn-success" data-toggle="modal"
-                                                        data-target="#posting_modal">Posting to Customer</button>
+                                                    <?php } ?>
                                                 </td>
                                             </form>
                                         </tbody>
@@ -402,7 +420,15 @@ if(isset($_POST['posting_modal'])){
                                                 <td>
                                                     <select class="" name="sales_member" style="border-radius: 5px;"
                                                         required>
-                                                        <option value="" selected>--Select Sales Member--</option>
+
+                                                        <?php if($first_name !=0 && $last_name != 0){ ?>
+                                                        <option value="<?php echo $first_name . " " . $last_name ?>"
+                                                            selected><?php echo $first_name . " " . $last_name ?>
+                                                        </option>
+                                                        <?php } else { ?>
+                                                        <option value="" selected><?php echo "Select Member" ?>
+                                                        </option>
+                                                        <?php } ?>
                                                         <?php
                                                                 $query = "SELECT first_name, last_name, username FROM users WHERE department = 5 AND role = 5 ORDER BY 'first_name' ASC";
                                                                 $result = mysqli_query($connection, $query);
@@ -416,15 +442,18 @@ if(isset($_POST['posting_modal'])){
                                                         </option>
                                                         <?php endwhile; ?>
                                                     </select>
+                                                    <button type="submit" name="get_user1"
+                                                        class="btn btn-xs btn-primary">Select Member</button>
                                                 </td>
                                                 <td>
-                                                    <button type="submit" name="get_user1"
-                                                        class="btn btn-sm btn-primary" data-toggle="modal"
-                                                        data-target="#create_search">Create & Search
+                                                    <?php if($sales_member_1 != null) { ?>
+                                                    <button class="btn btn-sm btn-primary" data-toggle="modal"
+                                                        data-target="#create_search">Create &
+                                                        Search Customer</button>
+                                                    <button class="btn btn-sm btn-success" data-toggle="modal"
+                                                        data-target="#posting_modal">Posting to
                                                         Customer</button>
-                                                    <button type="submit" name="get_user2"
-                                                        class="btn btn-sm btn-success" data-toggle="modal"
-                                                        data-target="#posting_modal">Posting to Customer</button>
+                                                    <?php } ?>
                                                 </td>
                                             </form>
                                         </tbody>
@@ -454,7 +483,15 @@ if(isset($_POST['posting_modal'])){
                                                 <td>
                                                     <select class="" name="sales_member" style="border-radius: 5px;"
                                                         required>
-                                                        <option value="" selected>--Select Sales Member--</option>
+
+                                                        <?php if($first_name !=0 && $last_name != 0){ ?>
+                                                        <option value="<?php echo $first_name . " " . $last_name ?>"
+                                                            selected><?php echo $first_name . " " . $last_name ?>
+                                                        </option>
+                                                        <?php } else { ?>
+                                                        <option value="" selected><?php echo "Select Member" ?>
+                                                        </option>
+                                                        <?php } ?>
                                                         <?php
                                                                 $query = "SELECT first_name, last_name, username FROM users WHERE department = 5 AND role = 5 ORDER BY 'first_name' ASC";
                                                                 $result = mysqli_query($connection, $query);
@@ -468,15 +505,18 @@ if(isset($_POST['posting_modal'])){
                                                         </option>
                                                         <?php endwhile; ?>
                                                     </select>
+                                                    <button type="submit" name="get_user1"
+                                                        class="btn btn-xs btn-primary">Select Member</button>
                                                 </td>
                                                 <td>
-                                                    <button type="submit" name="get_user1"
-                                                        class="btn btn-sm btn-primary" data-toggle="modal"
-                                                        data-target="#create_search">Create & Search
+                                                    <?php if($sales_member_1 != null) { ?>
+                                                    <button class="btn btn-sm btn-primary" data-toggle="modal"
+                                                        data-target="#create_search">Create &
+                                                        Search Customer</button>
+                                                    <button class="btn btn-sm btn-success" data-toggle="modal"
+                                                        data-target="#posting_modal">Posting to
                                                         Customer</button>
-                                                    <button type="submit" name="get_user2"
-                                                        class="btn btn-sm btn-success" data-toggle="modal"
-                                                        data-target="#posting_modal">Posting to Customer</button>
+                                                    <?php } ?>
                                                 </td>
                                             </form>
                                         </tbody>
@@ -506,7 +546,15 @@ if(isset($_POST['posting_modal'])){
                                                 <td>
                                                     <select class="" name="sales_member" style="border-radius: 5px;"
                                                         required>
-                                                        <option value="" selected>--Select Sales Member--</option>
+
+                                                        <?php if($first_name !=0 && $last_name != 0){ ?>
+                                                        <option value="<?php echo $first_name . " " . $last_name ?>"
+                                                            selected><?php echo $first_name . " " . $last_name ?>
+                                                        </option>
+                                                        <?php } else { ?>
+                                                        <option value="" selected><?php echo "Select Member" ?>
+                                                        </option>
+                                                        <?php } ?>
                                                         <?php
                                                                 $query = "SELECT first_name, last_name, username FROM users WHERE department = 5 AND role = 5 ORDER BY 'first_name' ASC";
                                                                 $result = mysqli_query($connection, $query);
@@ -520,15 +568,18 @@ if(isset($_POST['posting_modal'])){
                                                         </option>
                                                         <?php endwhile; ?>
                                                     </select>
+                                                    <button type="submit" name="get_user1"
+                                                        class="btn btn-xs btn-primary">Select Member</button>
                                                 </td>
                                                 <td>
-                                                    <button type="submit" name="get_user1"
-                                                        class="btn btn-sm btn-primary" data-toggle="modal"
-                                                        data-target="#create_search">Create & Search
+                                                    <?php if($sales_member_1 != null) { ?>
+                                                    <button class="btn btn-sm btn-primary" data-toggle="modal"
+                                                        data-target="#create_search">Create &
+                                                        Search Customer</button>
+                                                    <button class="btn btn-sm btn-success" data-toggle="modal"
+                                                        data-target="#posting_modal">Posting to
                                                         Customer</button>
-                                                    <button type="submit" name="get_user2"
-                                                        class="btn btn-sm btn-success" data-toggle="modal"
-                                                        data-target="#posting_modal">Posting to Customer</button>
+                                                    <?php } ?>
                                                 </td>
                                             </form>
                                         </tbody>
@@ -557,7 +608,15 @@ if(isset($_POST['posting_modal'])){
                                                 <td>
                                                     <select class="" name="sales_member" style="border-radius: 5px;"
                                                         required>
-                                                        <option value="" selected>--Select Sales Member--</option>
+
+                                                        <?php if($first_name !=0 && $last_name != 0){ ?>
+                                                        <option value="<?php echo $first_name . " " . $last_name ?>"
+                                                            selected><?php echo $first_name . " " . $last_name ?>
+                                                        </option>
+                                                        <?php } else { ?>
+                                                        <option value="" selected><?php echo "Select Member" ?>
+                                                        </option>
+                                                        <?php } ?>
                                                         <?php
                                                                 $query = "SELECT first_name, last_name, username FROM users WHERE department = 5 AND role = 5 ORDER BY 'first_name' ASC";
                                                                 $result = mysqli_query($connection, $query);
@@ -571,15 +630,18 @@ if(isset($_POST['posting_modal'])){
                                                         </option>
                                                         <?php endwhile; ?>
                                                     </select>
+                                                    <button type="submit" name="get_user1"
+                                                        class="btn btn-xs btn-primary">Select Member</button>
                                                 </td>
                                                 <td>
-                                                    <button type="submit" name="get_user1"
-                                                        class="btn btn-sm btn-primary" data-toggle="modal"
-                                                        data-target="#create_search">Create & Search
+                                                    <?php if($sales_member_1 != null) { ?>
+                                                    <button class="btn btn-sm btn-primary" data-toggle="modal"
+                                                        data-target="#create_search">Create &
+                                                        Search Customer</button>
+                                                    <button class="btn btn-sm btn-success" data-toggle="modal"
+                                                        data-target="#posting_modal">Posting to
                                                         Customer</button>
-                                                    <button type="submit" name="get_user2"
-                                                        class="btn btn-sm btn-success" data-toggle="modal"
-                                                        data-target="#posting_modal">Posting to Customer</button>
+                                                    <?php } ?>
                                                 </td>
                                             </form>
                                         </tbody>
@@ -610,7 +672,15 @@ if(isset($_POST['posting_modal'])){
                                                     <td>
                                                         <select class="" name="sales_member" style="border-radius: 5px;"
                                                             required>
-                                                            <option value="" selected>--Select Sales Member--</option>
+
+                                                            <?php if($first_name !=0 && $last_name != 0){ ?>
+                                                            <option value="<?php echo $first_name . " " . $last_name ?>"
+                                                                selected><?php echo $first_name . " " . $last_name ?>
+                                                            </option>
+                                                            <?php } else { ?>
+                                                            <option value="" selected><?php echo "Select Member" ?>
+                                                            </option>
+                                                            <?php } ?>
                                                             <?php
                                                                 $query = "SELECT first_name, last_name, username FROM users WHERE department = 5 AND role = 5 ORDER BY 'first_name' ASC";
                                                                 $result = mysqli_query($connection, $query);
@@ -624,15 +694,18 @@ if(isset($_POST['posting_modal'])){
                                                             </option>
                                                             <?php endwhile; ?>
                                                         </select>
+                                                        <button type="submit" name="get_user1"
+                                                            class="btn btn-xs btn-primary">Select Member</button>
                                                     </td>
                                                     <td>
-                                                        <button type="submit" name="get_user1"
-                                                            class="btn btn-sm btn-primary" data-toggle="modal"
-                                                            data-target="#create_search">Create & Search
+                                                        <?php if($sales_member_1 != null) { ?>
+                                                        <button class="btn btn-sm btn-primary" data-toggle="modal"
+                                                            data-target="#create_search">Create &
+                                                            Search Customer</button>
+                                                        <button class="btn btn-sm btn-success" data-toggle="modal"
+                                                            data-target="#posting_modal">Posting to
                                                             Customer</button>
-                                                        <button type="submit" name="get_user2"
-                                                            class="btn btn-sm btn-success" data-toggle="modal"
-                                                            data-target="#posting_modal">Posting to Customer</button>
+                                                        <?php } ?>
                                                     </td>
                                                 </form>
                                             </tr>
@@ -674,24 +747,31 @@ if(isset($_POST['posting_modal'])){
                         <tbody>
                             <?php 
 
-                            $query = "SELECT day, created_time, sales_member FROM weekly_sales_set_target ORDER BY created_time DESC LIMIT 20";
-                            $result = mysqli_query($connection, $query);
-                            foreach($result as $row){
-                                $day = $row['day'];
-                                $sales_person = $row['sales_member'];   
-                                
-                                $q1 = "SELECT created_time, day, sales_member FROM weekly_sales_set_create_search_customer WHERE day = '$day' AND sales_member = '$sales_person'";
-                                $q1_run = mysqli_query($connection, $q1);
-                                foreach($q1_run as $x){
-                                    $search_customer_created_time = $x['created_time'];
-                                }
+                            $set_target_time = 0;
+                            $search_customer_created_time = 0;
+                            $posted_customer_created_time = 0;
 
-                                $q2 = "SELECT created_time, day, sales_member FROM weekly_sales_set_posting_to_customer WHERE day = '$day' AND sales_member = '$sales_person'";
-                                $q2_run = mysqli_query($connection, $q2);
-                                foreach($q2_run as $i){
-                                    $posted_customer_created_time = $i['created_time'];
-                                }
-                                
+                            $query = "SELECT
+                                        weekly_sales_set_target.day AS set_day,
+                                        weekly_sales_set_target.sales_member AS set_sales_person,
+                                        weekly_sales_set_target.created_time AS Set_target_time,
+                                        weekly_sales_set_posting_to_customer.day,
+                                        weekly_sales_set_posting_to_customer.sales_member,
+                                        weekly_sales_set_posting_to_customer.created_time AS Customer_Created_time,
+                                        weekly_sales_set_create_search_customer.day,
+                                        weekly_sales_set_create_search_customer.sales_member,
+                                        weekly_sales_set_create_search_customer.created_time AS Post_Created_time
+                                    FROM
+                                        weekly_sales_set_target
+                                    LEFT JOIN weekly_sales_set_posting_to_customer ON weekly_sales_set_target.day = weekly_sales_set_posting_to_customer.day
+                                    LEFT JOIN weekly_sales_set_create_search_customer ON weekly_sales_set_target.day = weekly_sales_set_create_search_customer.day";
+                            $query_run = mysqli_query($connection, $query);
+                            foreach($query_run as $xd){
+                                $day = $xd['set_day'];
+                                $sales_person = $xd['set_sales_person'];
+                                $set_target_time = $xd['Set_target_time'];
+                                $search_customer_created_time = $xd['Customer_Created_time'];
+                                $posted_customer_created_time = $xd['Post_Created_time'];                                                       
                             
                             ?>
                             <tr>
@@ -699,16 +779,16 @@ if(isset($_POST['posting_modal'])){
                                 <td><?php echo $day; ?></td>
                                 <td><?php echo $sales_person; ?></td>
                                 <td>
-                                    <?php if($search_customer_created_time != null) { ?>
+                                    <?php if($search_customer_created_time != 0) { ?>
                                     <span class="badge badge-lg badge-success text-white p-1 px-3">Assigned</span>
-                                    <?php }if($search_customer_created_time == null) { ?>
+                                    <?php }if($search_customer_created_time == 0) { ?>
                                     <span class="badge badge-lg badge-danger text-white p-1 px-3">Not Assigned</span>
                                     <?php } ?>
                                 </td>
                                 <td>
-                                    <?php if($posted_customer_created_time != null) { ?>
+                                    <?php if($posted_customer_created_time != 0) { ?>
                                     <span class="badge badge-lg badge-success text-white p-1 px-3">Assigned</span>
-                                    <?php }if($posted_customer_created_time == null) { ?>
+                                    <?php }if($posted_customer_created_time == 0) { ?>
                                     <span class="badge badge-lg badge-danger text-white p-1 px-3">Not Assigned</span>
                                     <?php } ?>
                                 </td>

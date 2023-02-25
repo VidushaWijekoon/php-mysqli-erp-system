@@ -1,4 +1,4 @@
-<?php 
+<?php
 ob_start();
 session_start();
 include_once('../../dataAccess/connection.php');
@@ -65,8 +65,8 @@ if (isset($_POST['submit'])) {
     $old_passport = $_POST['old_passport'];
 
     // checking required fields
-    $req_fields = array('first_name', 'last_name', 'full_name', 'gender', 'birthday', 'current_passport', 'passport_expiring_date', 'visa_type', 'visa_expiring_date', 'contact_number', 'relationship', 'current_address', 'current_country', 'permanent_address', 'resident_country', 'emergency_contact', 'profile_photo', 'department', 'labour_category', 'join_date', 'note');
-   
+    $req_fields = array('first_name', 'last_name', 'full_name', 'gender', 'birthday', 'current_passport', 'passport_expiring_date', 'visa_type', 'visa_expiring_date', 'contact_number', 'relationship', 'current_address', 'current_country', 'permanent_address', 'resident_country', 'emergency_contact',  'department', 'labour_category', 'join_date');
+
     $errors = array_merge($errors, check_req_fields($req_fields));
 
     // checking max length
@@ -128,10 +128,10 @@ if (isset($_POST['submit'])) {
         $note = mysqli_real_escape_string($connection, $_POST['note']);
         $old_passport = mysqli_real_escape_string($connection, $_POST['old_passport']);
         $_POST = "";
- 
+
         $query = strtolower("INSERT INTO employees (first_name, last_name, full_name, email, gender, birthday, current_passport, passport_expiring_date, visa_type, visa_expiring_date,contact_number, relationship, current_address, current_country, permanent_address, resident_country, emergency_contact, profile_photo, department, labour_category, join_date, note, discontinuation_date, old_passport, created_by, is_active) 
         VALUES ('$first_name', '$last_name', '$full_name', '$email' , '$gender', '$birthday', '$current_passport', '$passport_expiring_date', '$visa_type', '$visa_expiring_date', '$contact_number' ,'$relationship', '$current_address', '$current_country', '$permanent_address', '$resident_country', '$emergency_contact', '$profile_photo', '$department', '$labour_category', '$join_date', '$note', '$discontinuation_date', '$old_passport', '$created_by', 0)");
-       $result = mysqli_query($connection, $query);
+        $result = mysqli_query($connection, $query);
 
         if ($result) {
             echo "Successfully insert data";
@@ -154,7 +154,9 @@ if (isset($_POST['submit'])) {
     <div class="row">
         <div class="col-lg-11 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card">
-                <?php if (!empty($errors)) { display_errors($errors); } ?>
+                <?php if (!empty($errors)) {
+                    display_errors($errors);
+                } ?>
                 <form action="" method="POST">
                     <div class="row mx-2">
                         <div class="col-md-6">
@@ -164,22 +166,19 @@ if (isset($_POST['submit'])) {
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">First Name</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="First Name"
-                                            name="first_name">
+                                        <input type="text" class="form-control" placeholder="First Name" name="first_name">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Last Name</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="Last Name"
-                                            name="last_name">
+                                        <input type="text" class="form-control" placeholder="Last Name" name="last_name">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Full Name</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="Full Name"
-                                            name="full_name">
+                                        <input type="text" class="form-control" placeholder="Full Name" name="full_name">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -194,17 +193,17 @@ if (isset($_POST['submit'])) {
                                         <select name="gender" class="info_select" style="border-radius: 5px;">
                                             <option selected>--Select Gender--</option>
                                             <?php
-                                                $query = "SELECT * FROM `gender` ORDER BY gender_id";
-                                                $gender_select = mysqli_query($connection, $query);
+                                            $query = "SELECT * FROM `gender` ORDER BY gender_id";
+                                            $gender_select = mysqli_query($connection, $query);
 
-                                                while ($gender = mysqli_fetch_array($gender_select, MYSQLI_ASSOC)) :;
-                                                ?>
-                                            <option value="<?php echo $gender["gender"]; ?>">
-                                                <?php echo strtoupper($gender["gender"]); ?>
-                                            </option>
+                                            while ($gender = mysqli_fetch_array($gender_select, MYSQLI_ASSOC)) :;
+                                            ?>
+                                                <option value="<?php echo $gender["gender"]; ?>">
+                                                    <?php echo strtoupper($gender["gender"]); ?>
+                                                </option>
                                             <?php
-                                                endwhile;
-                                                ?>
+                                            endwhile;
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
@@ -217,22 +216,19 @@ if (isset($_POST['submit'])) {
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Old Passport</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="Old Passport if necessory"
-                                            name="old_passport">
+                                        <input type="text" class="form-control" placeholder="Old Passport if necessory" name="old_passport">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Current Passport</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="Current Passport"
-                                            name="current_passport">
+                                        <input type="text" class="form-control" placeholder="Current Passport" name="current_passport">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Passport Expiring</label>
                                     <div class="col-sm-10">
-                                        <input type="date" id="passport_expiring_date" name="passport_expiring_date"
-                                            class="form-control" />
+                                        <input type="date" id="passport_expiring_date" name="passport_expiring_date" class="form-control" />
                                     </div>
                                 </div>
                                 <div class="row">
@@ -241,32 +237,30 @@ if (isset($_POST['submit'])) {
                                         <select name="visa_type" class="info_select" style="border-radius: 5px;">
                                             <option selected>--Select Visa Type--</option>
                                             <?php
-                                                $query = "SELECT * FROM `visa_type` ORDER BY visa_id";
-                                                $visa_result = mysqli_query($connection, $query);
+                                            $query = "SELECT * FROM `visa_type` ORDER BY visa_id";
+                                            $visa_result = mysqli_query($connection, $query);
 
-                                                while ($visa_types = mysqli_fetch_array($visa_result, MYSQLI_ASSOC)) :;
-                                                ?>
-                                            <option value="<?php echo $visa_types["visa_id"]; ?>">
-                                                <?php echo strtoupper($visa_types["visa_type"]); ?>
-                                            </option>
+                                            while ($visa_types = mysqli_fetch_array($visa_result, MYSQLI_ASSOC)) :;
+                                            ?>
+                                                <option value="<?php echo $visa_types["visa_id"]; ?>">
+                                                    <?php echo strtoupper($visa_types["visa_type"]); ?>
+                                                </option>
                                             <?php
-                                                endwhile;
-                                                ?>
+                                            endwhile;
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Visa Expiring</label>
                                     <div class="col-sm-10">
-                                        <input type="date" id="visa_expiring_date" name="visa_expiring_date"
-                                            class="form-control" />
+                                        <input type="date" id="visa_expiring_date" name="visa_expiring_date" class="form-control" />
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Contact Number</label>
                                     <div class="col-sm-10">
-                                        <input type="number" min="0" class="form-control" placeholder="Contact Number"
-                                            name="contact_number">
+                                        <input type="number" min="0" class="form-control" placeholder="Contact Number" name="contact_number">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -275,17 +269,17 @@ if (isset($_POST['submit'])) {
                                         <select name="relationship" class="info_select" style="border-radius: 5px;">
                                             <option selected>--Select relationship--</option>
                                             <?php
-                                                $query = "SELECT * FROM `relationship` ORDER BY relationship_id";
-                                                $relationship_states = mysqli_query($connection, $query);
+                                            $query = "SELECT * FROM `relationship` ORDER BY relationship_id";
+                                            $relationship_states = mysqli_query($connection, $query);
 
-                                                while ($relationships = mysqli_fetch_array($relationship_states, MYSQLI_ASSOC)) :;
-                                                ?>
-                                            <option value="<?php echo $relationships["relationship"]; ?>">
-                                                <?php echo strtoupper($relationships["relationship"]); ?>
-                                            </option>
+                                            while ($relationships = mysqli_fetch_array($relationship_states, MYSQLI_ASSOC)) :;
+                                            ?>
+                                                <option value="<?php echo $relationships["relationship"]; ?>">
+                                                    <?php echo strtoupper($relationships["relationship"]); ?>
+                                                </option>
                                             <?php
-                                                endwhile;
-                                                ?>
+                                            endwhile;
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
@@ -296,8 +290,7 @@ if (isset($_POST['submit'])) {
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Current Address</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="Current Address"
-                                            name="current_address">
+                                        <input type="text" class="form-control" placeholder="Current Address" name="current_address">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -306,25 +299,24 @@ if (isset($_POST['submit'])) {
                                         <select name="current_country" class="info_select" style="border-radius: 5px;">
                                             <option selected>--Select Country--</option>
                                             <?php
-                                                $query = "SELECT * FROM countries ORDER BY 'country_name' ASC";
-                                                $result = mysqli_query($connection, $query);
+                                            $query = "SELECT * FROM countries ORDER BY 'country_name' ASC";
+                                            $result = mysqli_query($connection, $query);
 
-                                                while ($countries = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                                ?>
-                                            <option value="<?php echo $countries["country_name"]; ?>">
-                                                <?php echo strtoupper($countries["country_name"]); ?>
-                                            </option>
+                                            while ($countries = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
+                                            ?>
+                                                <option value="<?php echo $countries["country_name"]; ?>">
+                                                    <?php echo strtoupper($countries["country_name"]); ?>
+                                                </option>
                                             <?php
-                                                endwhile;
-                                                ?>
+                                            endwhile;
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Permanent Address</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="Permanent Address"
-                                            name="permanent_address">
+                                        <input type="text" class="form-control" placeholder="Permanent Address" name="permanent_address">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -333,25 +325,24 @@ if (isset($_POST['submit'])) {
                                         <select name="resident_country" class="info_select" style="border-radius: 5px;">
                                             <option selected>--Select Country--</option>
                                             <?php
-                                                $query = "SELECT * FROM countries ORDER BY 'country_name' ASC";
-                                                $result = mysqli_query($connection, $query);
+                                            $query = "SELECT * FROM countries ORDER BY 'country_name' ASC";
+                                            $result = mysqli_query($connection, $query);
 
-                                                while ($resident_country = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                                ?>
-                                            <option value="<?php echo $resident_country["country_name"]; ?>">
-                                                <?php echo strtoupper($resident_country["country_name"]); ?>
-                                            </option>
+                                            while ($resident_country = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
+                                            ?>
+                                                <option value="<?php echo $resident_country["country_name"]; ?>">
+                                                    <?php echo strtoupper($resident_country["country_name"]); ?>
+                                                </option>
                                             <?php
-                                                endwhile;
-                                                ?>
+                                            endwhile;
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Emergency</label>
                                     <div class="col-sm-10">
-                                        <input type="number" min="1" class="form-control"
-                                            placeholder="Emergency Contact Number" name="emergency_contact">
+                                        <input type="number" min="1" class="form-control" placeholder="Emergency Contact Number" name="emergency_contact">
                                     </div>
                                 </div>
                             </fieldset>
@@ -365,10 +356,8 @@ if (isset($_POST['submit'])) {
                                 <legend class="reset">Image</legend>
                                 <picture class="d-flex">
                                     <source srcset="../../static/dist/img/1.jpg" type="image/svg+xml">
-                                    <img src="../../static/dist/img/1.jpg" class="img-fluid img-thumbnail" alt="..."
-                                        width="25%">
-                                    <input type="file" class="form-control-file" id="exampleFormControlFile1"
-                                        name="profile_photo">
+                                    <img src="../../static/dist/img/1.jpg" class="img-fluid img-thumbnail" alt="..." width="25%">
+                                    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="profile_photo">
                                 </picture>
                             </fieldset>
 
@@ -380,17 +369,17 @@ if (isset($_POST['submit'])) {
                                         <select name="department" class="info_select" style="border-radius: 5px;">
                                             <option selected>--Select Department--</option>
                                             <?php
-                                                $query = "SELECT * FROM departments ORDER BY `department` ASC";
-                                                $all_departments = mysqli_query($connection, $query);
+                                            $query = "SELECT * FROM departments ORDER BY `department` ASC";
+                                            $all_departments = mysqli_query($connection, $query);
 
-                                                while ($department = mysqli_fetch_array($all_departments, MYSQLI_ASSOC)) :;
-                                                ?>
-                                            <option value="<?php echo $department["department_id"]; ?>">
-                                                <?php echo strtoupper($department["department"]); ?>
-                                            </option>
+                                            while ($department = mysqli_fetch_array($all_departments, MYSQLI_ASSOC)) :;
+                                            ?>
+                                                <option value="<?php echo $department["department_id"]; ?>">
+                                                    <?php echo strtoupper($department["department"]); ?>
+                                                </option>
                                             <?php
-                                                endwhile;
-                                                ?>
+                                            endwhile;
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
@@ -400,17 +389,17 @@ if (isset($_POST['submit'])) {
                                         <select name="labour_category" class="info_select" style="border-radius: 5px;">
                                             <option selected>--Select Labour Category--</option>
                                             <?php
-                                                $query = "SELECT * FROM tbl_roles ORDER BY role ASC";
-                                                $result = mysqli_query($connection, $query);
+                                            $query = "SELECT * FROM tbl_roles ORDER BY role ASC";
+                                            $result = mysqli_query($connection, $query);
 
-                                                while ($categories = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
-                                                ?>
-                                            <option value="<?php echo $categories["role_id"]; ?>">
-                                                <?php echo strtoupper($categories["role"]); ?>
-                                            </option>
+                                            while ($categories = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
+                                            ?>
+                                                <option value="<?php echo $categories["role_id"]; ?>">
+                                                    <?php echo strtoupper($categories["role"]); ?>
+                                                </option>
                                             <?php
-                                                endwhile;
-                                                ?>
+                                            endwhile;
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
@@ -427,19 +416,15 @@ if (isset($_POST['submit'])) {
                             <fieldset class="reset">
                                 <legend class="reset">Special Note</legend>
                                 <div class="mb-3">
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                        placeholder="About Employee " name="note"></textarea>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="About Employee " name="note"></textarea>
                                 </div>
                             </fieldset>
 
 
                             <div class="mt-3 mb-3 text-center">
-                                <button type="submit" name="submit" class="btn btn-sm btn-success mx-2"><i
-                                        class="fa-solid fa-floppy-disk mx-1"></i>Save</button>
-                                <button class="btn btn-sm btn-warning mx-2"><i
-                                        class="fa-solid fa-broom mx-1"></i>Clear</button>
-                                <a href="hr_dashboard.php" class="btn btn-sm btn-danger mx-2"><i
-                                        class="fa-solid fa-xmark mx-1"></i>Close</a>
+                                <button type="submit" name="submit" class="btn btn-sm btn-success mx-2"><i class="fa-solid fa-floppy-disk mx-1"></i>Save</button>
+                                <button class="btn btn-sm btn-warning mx-2"><i class="fa-solid fa-broom mx-1"></i>Clear</button>
+                                <a href="hr_dashboard.php" class="btn btn-sm btn-danger mx-2"><i class="fa-solid fa-xmark mx-1"></i>Close</a>
                             </div>
                         </div>
 

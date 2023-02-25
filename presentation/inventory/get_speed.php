@@ -19,6 +19,3 @@
 	} else {
 		echo "<option>Error</option>";
 	}
-
-	
-?>

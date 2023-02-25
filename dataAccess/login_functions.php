@@ -74,7 +74,7 @@ function Login($role_id, $department){
     }
     // LCD Technician Redirect
     elseif ($department == 10) {
-        header('Location: presentation/performance/performance_record.php');
+        header('Location: presentation/performance/lcd_performance.php');
     }
     // bodywork Technician Redirect
     elseif ($department == 7) {
@@ -88,7 +88,7 @@ function Login($role_id, $department){
     elseif ($department == 8) {
         header('Location: presentation/performance/performance_record.php');
     } elseif ($department == 14) {
-        header('Location: presentation/performance/performance_record.php');
+        header('Location: presentation/performance/battery_performance.php');
     } elseif ($department == 22) {
         header('Location: presentation/performance/performance_record.php');
     }

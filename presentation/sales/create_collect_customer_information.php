@@ -22,19 +22,22 @@ if (!isset($_SESSION['user_id'])) {
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 
-if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 2) || ($role_id == 2 && $department == 18) || ($role_id == 5 && $department == 5)){
+if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 2) || ($role_id == 2 && $department == 18) || 
+    ($role_id == 5 && $department == 5) || ($role_id == 8 && $department == 5)){
 
 $username = $_SESSION['username'];
 $user_id = $_SESSION['user_id'];
 
-if(isset($_POST['add_customer'])){
-    $create_customer_country = $_POST['create_customer_country'];
-    $customer_name = $_POST['customer_name'];
-    $create_phone_code = $_POST['create_phone_code'];
-    $customer_whatsapp_number = trim($_POST['whatsapp']);
-    $platform1 = $_POST['platform1'];
-    $model_selling_buying = $_POST['model_selling_buying'];
-    $uae_pickup1 = $_POST['uae_pickup1'];
+// if(isset($_POST['add_customer'])){
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $create_customer_country = $_REQUEST['create_customer_country'];
+    $customer_name = $_REQUEST['customer_name'];
+    $create_phone_code = $_REQUEST['create_phone_code'];
+    $customer_whatsapp_number = trim($_REQUEST['whatsapp']);
+    $platform1 = $_REQUEST['platform1'];
+    $model_selling_buying = $_REQUEST['model_selling_buying'];
+    $uae_pickup1 = $_REQUEST['uae_pickup1'];
 
     $row = 0;
     $q1 = "SELECT id FROM sales_create_customer_informations WHERE customer_whatsapp_number = '$customer_whatsapp_number' AND customer_whatspp_phone_code = '$create_phone_code'";
@@ -345,7 +348,7 @@ foreach($run as $dx){
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <form method="POST">
+                                            <form method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
                                                 <tr>
                                                     <td>
                                                         <input type="text" class="form-control w-100"
@@ -408,7 +411,7 @@ foreach($run as $dx){
                                                             <option value="facebook">Facebook</option>
                                                             <option value="instgram">Instgram</option>
                                                             <option value="lazada">Lazada</option>
-                                                            <option value="shoppe">Shoppe</option>
+                                                            <option value="shopee">Shopee</option>
                                                             <option value="tokopedia">Tokopedia</option>
                                                             <option value="amazon.com">amazon.com</option>
                                                             <option value="amazon.uk">amazon.uk</option>
@@ -418,7 +421,9 @@ foreach($run as $dx){
                                                             <option value="kebuysell">Kebuysell</option>
                                                             <option value="kenyagroup">Kenya Group</option>
                                                             <option value="loozap">Loozap</option>
+                                                            <option value="website">Website</option>
                                                             <option value="jiji.co.ke">jiji.co.ke</option>
+                                                            <option value="olist">olist.ng</option>
                                                             <option value="jiji.ng">jiji.ng</option>
                                                             <option value="google">google</option>
                                                             <option value="pcexporters">Pc Exporters</option>
@@ -557,7 +562,8 @@ foreach($run as $dx){
                             $end_day = date('Y-m-d 23:59:59'); 
                             $i = 0;  
                             
-                            $query = "SELECT * FROM sales_create_customer_informations WHERE created_by = '$username' AND created_time BETWEEN '$start_day' AND '$end_day' ORDER BY created_time DESC";
+                            $query = "SELECT create_customer_country, customer_name, customer_whatspp_phone_code, customer_whatsapp_number, platform1, model_selling_buying, uae_pickup1, created_time 
+                                    FROM sales_create_customer_informations WHERE created_by = '$username' AND created_time BETWEEN '$start_day' AND '$end_day' ORDER BY created_time DESC";
                             $result = mysqli_query($connection, $query);
                             foreach($result as $row){
                                 $create_customer_country = $row['create_customer_country'];

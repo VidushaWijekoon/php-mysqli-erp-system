@@ -12,14 +12,6 @@ if (!isset($_SESSION['user_id'])) {
 
 ?>
 
-<div class="row m-2">
-    <div class="col-12 mt-3">
-        <a class="btn bg-gradient-info mx-2 text-white" type="button" href="./download_pricelist_excel.php">
-            <span class="mx-1">Download Price List CSV</span></a>
-    </div>
-</div>
-
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-3">

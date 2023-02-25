@@ -22,8 +22,9 @@ if (!isset($_SESSION['user_id'])) {
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 
-if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 2) || ($role_id == 2 && $department == 18) || ($role_id == 5 && $department == 5)){
-
+if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 2) || ($role_id == 2 && $department == 18) || 
+    ($role_id == 5 && $department == 5) || ($role_id == 8 && $department == 5)){
+        
 $username = $_SESSION['username'];
 $user_id = $_SESSION['user_id'];
 
@@ -454,7 +455,8 @@ if(isset($_POST['get_country'])){
 
                                         <?php      
                                             
-                                            $q_d = "SELECT * FROM sales_create_customer_informations WHERE create_customer_country = '{$gt_c}' AND created_by = '$username'";
+                                            $q_d = "SELECT customer_name, customer_whatspp_phone_code, customer_whatsapp_number, platform1, uae_pickup1, id, model_selling_buying
+                                                    FROM sales_create_customer_informations WHERE create_customer_country = '{$gt_c}' AND created_by = '$username'";
                                             $qd_run = mysqli_query($connection, $q_d);
                                             $test_id=0;
                                             foreach($qd_run as $qd_run){
@@ -465,11 +467,12 @@ if(isset($_POST['get_country'])){
                                                 $uae_pickup1 = $qd_run['uae_pickup1'];
                                                 $create_customer_id = $qd_run['id'];                                                                                                                                 
                                                 $model_selling_buying = $qd_run['model_selling_buying'];   
-                                                 $test_id= $create_customer_id;   
+                                                $test_id= $create_customer_id;   
                                                 $contact = $customer_whatspp_phone_code . $created_customer_whatsapp_number;                                                                                                                                                                           
                                          
-                                            $query1 = "SELECT * FROM sales_posting_to_customer 
-                                                                WHERE posting_customer_name = '$create_customer_name' AND posting_contact_number = '$contact'";
+                                            $query1 = "SELECT status, created_time, posting_customer_name, posting_contact_number, platform2, model_selling_and_buying1, posted_model_1, posted_model_2, customer_asking_model, customer_asking_price, uae_pickup2
+                                                    FROM sales_posting_to_customer 
+                                                    WHERE posting_customer_name = '$create_customer_name' AND posting_contact_number = '$contact'";
                                             $query_run2 = mysqli_query($connection, $query1);
                                             $post_status1 = 0;
                                             $created_posted_time = 0;
@@ -548,7 +551,7 @@ if(isset($_POST['get_country'])){
                                                 </td>
 
                                                 <td>
-                                                    <?php if(($x == '-7') || ($posted_model_1 == 0)) { ?>
+                                                    <?php if(($x <= '-4') || ($posted_model_1 == 0)) { ?>
                                                     <input type="text" class="form-control" name="posted_model_1"
                                                         placeholder="Posted Model 1">
                                                     <?php } else { ?>
@@ -558,7 +561,7 @@ if(isset($_POST['get_country'])){
                                                 </td>
 
                                                 <td>
-                                                    <?php if(($x == '-7') || ($posted_model_2 == 0)) { ?>
+                                                    <?php if(($x <= '-4') || ($posted_model_2 == 0)) { ?>
                                                     <input type="text" class="form-control" name="posted_model_2"
                                                         placeholder="Posted Model">
                                                     <?php } else { ?>
@@ -568,7 +571,7 @@ if(isset($_POST['get_country'])){
                                                 </td>
 
                                                 <td>
-                                                    <?php if(($x == '-7') || ($customer_asking_model == 0)) { ?>
+                                                    <?php if(($x <= '-4') || ($customer_asking_model == 0)) { ?>
                                                     <input type="text" class="form-control" name="customer_asking_model"
                                                         placeholder="Customer Asking Model">
                                                     <?php } else { ?>
@@ -577,13 +580,13 @@ if(isset($_POST['get_country'])){
                                                     <?php } ?>
                                                 </td>
                                                 <td>
-                                                    <?php if(($x == '-7') || ($customer_asking_price == 0)) { ?>
+                                                    <?php if(($x <= '-4') || ($customer_asking_price == 0)) { ?>
                                                     <input type="text" min="1" class="form-control"
-                                                        name="customer_asking_price" required
+                                                        name="customer_asking_price"
                                                         placeholder="Customer Asking Price">
                                                     <?php } else { ?>
                                                     <input type="text" min="1" class="form-control"
-                                                        name="customer_asking_price" required
+                                                        name="customer_asking_price"
                                                         value="<?php echo $customer_asking_price ?>" readonly>
                                                     <?php } ?>
                                                 </td>
@@ -633,7 +636,7 @@ if(isset($_POST['get_country'])){
                                                     <?php } ?>
                                                 </td>
                                                 <td>
-                                                    <?php if(($post_status1 == 0) || ($x == '-7')){ ?>
+                                                    <?php if(($post_status1 == 0) || ($x <= '-4')){ ?>
                                                     <div class="icheck-success d-inline">
                                                         <button class="btn btn-sm btn-primary px-2 mt-1" type="submit"
                                                             id="post" name="submit_post_to_customer"

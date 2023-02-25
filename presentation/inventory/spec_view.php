@@ -1,9 +1,9 @@
-<?php 
+<?php
 session_start();
-include_once('../../dataAccess/connection.php');
-include_once('../../dataAccess/functions.php');
-include_once('../../dataAccess/403.php');
-include_once('../includes/header.php');
+include_once '../../dataAccess/connection.php';
+include_once '../../dataAccess/functions.php';
+include_once '../../dataAccess/403.php';
+include_once '../includes/header.php';
 
 // checking if a user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -29,29 +29,26 @@ $brand = $_GET['brand'];
 
 <div class="col col-lg-12 justify-content-center m-auto">
     <div class="row">
-        <div class="col-lg-11 grid-margin stretch-card justify-content-center mx-auto mt-2">
+        <div class="col-lg-12 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <div class="card mt-3">
                 <div class="card-body"><input type="text" id="myInput" onkeyup="myFunction()"
                         placeholder="Search for names.." title="Type in a name">
                     <button onclick="exportToExcel('tblexportData', 'packing-details234')"
-                        class="btn bg-gradient-success mt-3 float-right">Export Table Data To Excel
+                        class="btn bg-gradient-success mt-3">Export Table Data To Excel
                         File</button>
                     <table id="example2" class="table table-bordered table-striped">
                         <table id="tblexportData" class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>No</th>
                                     <th>Device</th>
                                     <th>Brand</th>
-                                    <th>Series</th>
                                     <th>Model</th>
                                     <th>Processor</th>
                                     <th>Core</th>
                                     <th>Generation</th>
                                     <th>Speed</th>
                                     <th>Screen Size</th>
-                                    <th>Screen Resolution</th>
-                                    <th>Touch</th>
+                                    <th>Screen Type</th>
                                     <th>Optical</th>
                                     <th>RAM</th>
                                     <th>HDD</th>
@@ -59,56 +56,64 @@ $brand = $_GET['brand'];
                                     <th>MFG</th>
                                     <th>Inventory ID</th>
                                     <th>Battery Status</th>
+                                    <th>Wholesale Price</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                  $query = "SELECT * FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND send_to_production= '0' ";
-                                
-                                  $result = mysqli_query($connection, $query);
-                                  $i=0;
-                                foreach($result as $data){
-                                    $device = $data['device'];
-                                    $model = $data['model'];
-                                    $cpu = $data['core'];
-                                    $generation = $data['generation'];
-                                    $speed = $data['speed'];
-                                    $screen_size = $data['lcd_size'];
-                                    $screen_resolution = $data['screen_resolution'];
-                                    $screen_type = $data['touch_or_non_touch'];
-                                    $location = $data['location'];
-                                    $series = $data['series'];
-                                    $optical = $data['dvd'];
-                                    $processor = $data['processor'];
-                                    $location = $data['location'];
-                                    $mfg = $data['mfg'];
-                                    $inventory_id = $data['inventory_id'];
-                                    $battery=$data['battery'];
-                                    $i++; ?>
+
+$non_touch_wholesale_price = 0;
+$touch_wholesale_price = 0;
+$i = 0;
+
+$query = "SELECT * FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND send_to_production= '0' ";
+$result = mysqli_query($connection, $query);
+foreach ($result as $data) {
+    $device = $data['device'];
+    $model = $data['model'];
+    $cpu = $data['core'];
+    $generation = $data['generation'];
+    $speed = $data['speed'];
+    $screen_size = $data['lcd_size'];
+    $screen_type = $data['touch_or_non_touch'];
+    $location = $data['location'];
+    $optical = $data['dvd'];
+    $processor = $data['processor'];
+    $location = $data['location'];
+    $mfg = $data['mfg'];
+    $inventory_id = $data['inventory_id'];
+    $battery = $data['battery'];
+    $touch_wholesale_price = $data['touch_wholesale_price'];
+    $non_touch_wholesale_price = $data['non_touch_wholesale_price'];
+
+    ?>
                                 <tr>
-                                    <td><?php echo $i ?></td>
-                                    <td><?php echo$device ?></td>
-                                    <td><?php echo$brand ?></td>
-                                    <td><?php echo$series ?></td>
-                                    <td><?php echo$model?></td>
-                                    <td><?php echo$processor?></td>
-                                    <td><?php echo$cpu ?></td>
-                                    <td><?php echo$generation ?></td>
-                                    <td><?php echo$speed ?></td>
-                                    <td><?php echo$screen_size ?></td>
-                                    <td><?php echo$screen_resolution ?></td>
-                                    <td><?php echo$screen_type ?></td>
-                                    <td><?php echo$optical ?></td>
+                                    <td><?php echo $device ?></td>
+                                    <td><?php echo $brand ?></td>
+                                    <td><?php echo $model ?></td>
+                                    <td><?php echo $processor ?></td>
+                                    <td><?php echo $cpu ?></td>
+                                    <td><?php echo $generation ?></td>
+                                    <td><?php echo $speed ?></td>
+                                    <td><?php echo $screen_size ?></td>
+                                    <td><?php echo $screen_type ?></td>
+                                    <td><?php echo $optical ?></td>
                                     <td>8GB</td>
                                     <td>256GB</td>
-                                    <td><?php echo$location."-".$generation."-".$model ?></td>
+                                    <td><?php echo $location . "-" . $generation . "-" . $model ?>
+                                    </td>
                                     <td><?php echo $mfg ?></td>
-                                    <td><?php echo "ALSAKB".$inventory_id ?></td>
-                                    <td><?php if($battery == 'yes'){
-                                        echo"<div class='text-success'>$battery</div>";
-                                    }else{echo "<div class='text-danger'>$battery</div>";} ?></td>
+                                    <td><?php echo "ALSAKB" . $inventory_id ?></td>
+                                    <td>
+                                        <?php if ($battery == 'yes') {
+        echo "<div class='text-success'>$battery</div>";
+    } else {echo "<div class='text-danger'>$battery</div>";}?>
+                                    </td>
+                                    <td>
+                                        <?php if ($screen_type == 'yes') {echo $touch_wholesale_price;} elseif ($screen_type == 'no') {echo $non_touch_wholesale_price;}?>
+                                    </td>
                                 </tr>
-                                <?php } ?>
+                                <?php }?>
 
                             </tbody>
                         </table>

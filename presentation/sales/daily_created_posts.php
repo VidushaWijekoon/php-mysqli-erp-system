@@ -69,14 +69,14 @@ echo $username;
 
                                     $posting_customer_name = $count['posting_customer_name'];
                                     $posting_country = $count['choose_country'];
-                                    $posting_phone_code = $count['posting_phone_code'];
-                                    $posting_whatsapp_number = $count['posting_whatsapp_number'];
+                                    $posting_contact_number = $count['posting_contact_number'];
                                     $platform2 = $count['platform2'];
                                     $model_selling_and_buying1 = $count['model_selling_and_buying1'];
                                     $posted_model_1 = $count['posted_model_1'];
                                     $posted_model_2 = $count['posted_model_2'];
                                     $customer_asking_model = $count['customer_asking_model'];
                                     $customer_asking_price = $count['customer_asking_price'];
+                                    $uae_pickup2 = $count['uae_pickup2'];
                                     $posted_time = $count['created_time'];
                                     $i++
                                                                
@@ -85,13 +85,14 @@ echo $username;
                                 <td><?php echo $i ?></td>
                                 <td><?php echo $posting_customer_name ?></td>
                                 <td><?php echo $posting_country ?></td>
-                                <td><?php echo "+" . $posting_phone_code . ' ' . $posting_whatsapp_number ?></td>
+                                <td><?php echo "+". $posting_contact_number ?></td>
                                 <td><?php echo $platform2 ?></td>
                                 <td><?php echo $model_selling_and_buying1 ?></td>
                                 <td><?php echo $posted_model_1; ?></td>
                                 <td><?php echo $posted_model_2 ?></td>
                                 <td><?php echo $customer_asking_model ?></td>
                                 <td><?php echo $customer_asking_price ?></td>
+                                <td><?php if($uae_pickup2 == 'yes') {echo "yes"; } elseif($uae_pickup2 == 'no') {echo "no"; }?></td>
                                 <td><?php echo $posted_time ?></td>
 
                             </tr>

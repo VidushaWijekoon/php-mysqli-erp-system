@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
@@ -81,9 +81,9 @@ if (isset($_GET['emp_id'])) {
                     <form action="" method="GET">
                         <div class="input-group">
                             <span class="mt-1 mx-3" style="font-size: 14px;">Search :</span>
-                            <input type="search" name="search"
-                                value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" class="form-control"
-                                placeholder="Search data">
+                            <input type="search" name="search" value="<?php if (isset($_GET['search'])) {
+                                                                            echo $_GET['search'];
+                                                                        } ?>" class="form-control" placeholder="Search data">
                         </div>
                     </form>
                 </div>
@@ -106,71 +106,72 @@ if (isset($_GET['emp_id'])) {
                         </thead>
                         <tbody class="tbody_1">
 
-                            <?php 
+                            <?php
 
-                                if (isset($_GET['search'])) {
-                                    $filtervalues = $_GET['search'];
+                            if (isset($_GET['search'])) {
+                                $filtervalues = $_GET['search'];
 
                                 $query = "SELECT *,(departments.department) AS department_name FROM `employees` LEFT JOIN departments ON departments.department_id = employees.department 
                                 WHERE CONCAT(first_name, last_name, department, emp_id, birthday, current_passport, labour_category) LIKE '%$filtervalues%'
                                 ORDER BY emp_id ASC";
                                 $results = mysqli_query($connection, $query);
 
-                                     foreach ($results as $items) {
+                                foreach ($results as $items) {
 
-                                 ?>
+                            ?>
 
-                            <tr>
-                                <td class="text-capitalize"><?php echo $items['emp_id'] ?></td>
-                                <td class="text-capitalize"><?php echo $items['first_name'] ?></td>
-                                <td class="text-capitalize"><?php echo $items['last_name'] ?></td>
-                                <td class="text-capitalize"><?php echo $items['current_passport'] ?></td>
-                                <td class="text-capitalize"><?php echo $items['department_name'] ?></td>
-                                <td class="text-capitalize"><?php echo $items['gender'] ?></td>
-                                <td class="text-capitalize"><?php echo $items['resident_country'] ?></td>
-                                <td class="text-center">
-                                    <span class="badge badge-lg badge-info text-white p-1 px-3">Active</span>
-                                </td>
-                                <td class="text-capitalize"><?php echo $items['join_date'] ?></td>
-                                <td>
-                                    <?php 
-                                    echo "<a class='btn btn-xs bg-primary mx-2' href=\"employee_details.php?emp_id={$items['emp_id']}\"><i class='fas fa-eye'></i> </a>";
-                                    echo "<a class='btn btn-xs bg-warning mx-2' href=\"edit_employee.php?emp_id={$items['emp_id']}\"><i class='fa-solid fa-pen'></i> </a>";
-                                                                           
+                                    <tr>
+                                        <td class="text-capitalize"><?php echo $items['emp_id'] ?></td>
+                                        <td class="text-capitalize"><?php echo $items['first_name'] ?></td>
+                                        <td class="text-capitalize"><?php echo $items['last_name'] ?></td>
+                                        <td class="text-capitalize"><?php echo $items['current_passport'] ?></td>
+                                        <td class="text-capitalize"><?php echo $items['department_name'] ?></td>
+                                        <td class="text-capitalize"><?php echo $items['gender'] ?></td>
+                                        <td class="text-capitalize"><?php echo $items['resident_country'] ?></td>
+                                        <td class="text-center">
+                                            <span class="badge badge-lg badge-info text-white p-1 px-3">Active</span>
+                                        </td>
+                                        <td class="text-capitalize"><?php echo $items['join_date'] ?></td>
+                                        <td>
+                                            <?php
+                                            echo "<a class='btn btn-xs bg-primary mx-2' href=\"employee_details.php?emp_id={$items['emp_id']}\"><i class='fas fa-eye'></i> </a>";
+                                            echo "<a class='btn btn-xs bg-warning mx-2' href=\"edit_employee.php?emp_id={$items['emp_id']}\"><i class='fa-solid fa-pen'></i> </a>";
+
+                                            ?>
+                                        </td>
+                                    </tr>
+
+                                <?php }
+                            } else {
+                                $query = "SELECT *,(departments.department) AS department_name FROM `employees` LEFT JOIN departments ON departments.department_id = employees.department ";
+                                $results = mysqli_query($connection, $query);
+
+                                foreach ($results as $items) {
                                 ?>
-                                </td>
-                            </tr>
+
+                                    <tr>
+                                        <td class="text-capitalize"><?php echo $items['emp_id'] ?></td>
+                                        <td class="text-capitalize"><?php echo $items['first_name'] ?></td>
+                                        <td class="text-capitalize"><?php echo $items['last_name'] ?></td>
+                                        <td class="text-capitalize"><?php echo $items['current_passport'] ?></td>
+                                        <td class="text-capitalize"><?php echo $items['department'] ?></td>
+                                        <td class="text-capitalize"><?php echo $items['gender'] ?></td>
+                                        <td class="text-capitalize"><?php echo $items['resident_country'] ?></td>
+                                        <td class="text-center">
+                                            <span class="badge badge-lg badge-info text-white p-1 px-3">Active</span>
+                                        </td>
+                                        <td class="text-capitalize"><?php echo $items['join_date'] ?></td>
+                                        <td>
+                                            <?php
+                                            echo "<a class='btn btn-xs bg-primary mx-2' href=\"employee_details.php?emp_id={$items['emp_id']}\"><i class='fas fa-eye'></i> </a>";
+                                            echo "<a class='btn btn-xs bg-warning mx-2' href=\"edit_employee.php?emp_id={$items['emp_id']}\"><i class='fa-solid fa-pen'></i> </a>";
+
+                                            ?>
+                                        </td>
+                                    </tr>
 
                             <?php }
-                                }else{
-                                    $query = "SELECT *,(departments.department) AS department_name FROM `employees` LEFT JOIN departments ON departments.department_id = employees.department ";
-                                    $results = mysqli_query($connection, $query);
-
-                                        foreach ($results as $items) {
-                                    ?>
-
-                            <tr>
-                                <td class="text-capitalize"><?php echo $items['emp_id'] ?></td>
-                                <td class="text-capitalize"><?php echo $items['first_name'] ?></td>
-                                <td class="text-capitalize"><?php echo $items['last_name'] ?></td>
-                                <td class="text-capitalize"><?php echo $items['current_passport'] ?></td>
-                                <td class="text-capitalize"><?php echo $items['department'] ?></td>
-                                <td class="text-capitalize"><?php echo $items['gender'] ?></td>
-                                <td class="text-capitalize"><?php echo $items['resident_country'] ?></td>
-                                <td class="text-center">
-                                    <span class="badge badge-lg badge-info text-white p-1 px-3">Active</span>
-                                </td>
-                                <td class="text-capitalize"><?php echo $items['join_date'] ?></td>
-                                <td>
-                                    <?php 
-                                    echo "<a class='btn btn-xs bg-primary mx-2' href=\"employee_details.php?emp_id={$items['emp_id']}\"><i class='fas fa-eye'></i> </a>";
-                                    echo "<a class='btn btn-xs bg-warning mx-2' href=\"edit_employee.php?emp_id={$items['emp_id']}\"><i class='fa-solid fa-pen'></i> </a>";
-                                                                           
-                                ?>
-                                </td>
-                            </tr>
-
-                            <?php } } ?>
+                            } ?>
                         </tbody>
 
                     </table>
