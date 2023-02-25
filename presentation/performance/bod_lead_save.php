@@ -38,4 +38,8 @@ $query = "INSERT INTO `performance_record_table`(
     '$technician_id'
     )";
 $query_run = mysqli_query($connection, $query);
+<<<<<<< HEAD
+header('Location: bod_lead.php');
+=======
 header('Location: bod_teamlead.php');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45

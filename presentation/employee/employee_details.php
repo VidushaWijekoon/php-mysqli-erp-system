@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
@@ -34,7 +34,7 @@ $department = "";
 $labour_category = "";
 $join_date = "";
 $note = "";
- $old_passport = "";
+$old_passport = "";
 
 
 if (isset($_GET['emp_id'])) {
@@ -69,7 +69,7 @@ if (isset($_GET['emp_id'])) {
             $labour_category = $result['labour_category'];
             $join_date = $result['join_date'];
             $note = $result['note'];
-             $old_passport = $result['old_passport'];
+            $old_passport = $result['old_passport'];
         } else {
             // user not found
             header('Location: hr_employees.php?err=user_not_found');
@@ -102,92 +102,79 @@ if (isset($_GET['emp_id'])) {
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">First Name</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" readonly
-                                            <?php echo 'value="' . $first_name . '" ' ?>>
+                                        <input type="text" class="form-control" readonly <?php echo 'value="' . $first_name . '" ' ?>>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Last Name</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" readonly
-                                            <?php echo 'value="' . $last_name . '" ' ?>>
+                                        <input type="text" class="form-control" readonly <?php echo 'value="' . $last_name . '" ' ?>>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Full Name</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" readonly
-                                            <?php echo 'value="' . $full_name . '" ' ?>>
+                                        <input type="text" class="form-control" readonly <?php echo 'value="' . $full_name . '" ' ?>>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Email</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" readonly
-                                            <?php echo 'value="' . $email . '" ' ?>>
+                                        <input type="text" class="form-control" readonly <?php echo 'value="' . $email . '" ' ?>>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Gender</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" readonly
-                                            <?php echo 'value="' . $gender . '" ' ?>>
+                                        <input type="text" class="form-control" readonly <?php echo 'value="' . $gender . '" ' ?>>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Birthday</label>
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control" readonly
-                                            <?php echo 'value="' . $birthday . '" ' ?>>
+                                        <input type="date" class="form-control" readonly <?php echo 'value="' . $birthday . '" ' ?>>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Old Passport</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" readonly
-                                            <?php echo 'value="' . $old_passport . '" ' ?>>
+                                        <input type="text" class="form-control" readonly <?php echo 'value="' . $old_passport . '" ' ?>>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Current Passport</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" readonly
-                                            <?php echo 'value="' . $current_passport . '" ' ?>>
+                                        <input type="text" class="form-control" readonly <?php echo 'value="' . $current_passport . '" ' ?>>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Passport Expiring</label>
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control" readonly
-                                            <?php echo 'value="' . $passport_expiring_date . '" ' ?>>
+                                        <input type="date" class="form-control" readonly <?php echo 'value="' . $passport_expiring_date . '" ' ?>>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Visa Type</label>
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control" readonly
-                                            <?php echo 'value="' . $visa_type . '" ' ?>>
+                                        <input type="date" class="form-control" readonly <?php echo 'value="' . $visa_type . '" ' ?>>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Visa Expiring</label>
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control" readonly
-                                            <?php echo 'value="' . $visa_expiring_date . '" ' ?>>
+                                        <input type="date" class="form-control" readonly <?php echo 'value="' . $visa_expiring_date . '" ' ?>>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Contact Number</label>
                                     <div class="col-sm-10">
-                                        <input type="number" class="form-control" readonly
-                                            <?php echo 'value="' . $contact_number . '" ' ?>>
+                                        <input type="number" class="form-control" readonly <?php echo 'value="' . $contact_number . '" ' ?>>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label for="relationship" class="col-sm-2 col-form-label">Relationship</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" readonly
-                                            <?php echo 'value="' . $relationship . '" ' ?>>
+                                        <input type="text" class="form-control" readonly <?php echo 'value="' . $relationship . '" ' ?>>
                                     </div>
                                 </div>
                             </fieldset>
@@ -197,36 +184,31 @@ if (isset($_GET['emp_id'])) {
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Current Address</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" readonly
-                                            <?php echo 'value="' . $current_address . '" ' ?>>
+                                        <input type="text" class="form-control" readonly <?php echo 'value="' . $current_address . '" ' ?>>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Current Country</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" readonly
-                                            <?php echo 'value="' . $relationship . '" ' ?>>
+                                        <input type="text" class="form-control" readonly <?php echo 'value="' . $relationship . '" ' ?>>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Permanent Address</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" readonly
-                                            <?php echo 'value="' . $permanent_address . '" ' ?>>
+                                        <input type="text" class="form-control" readonly <?php echo 'value="' . $permanent_address . '" ' ?>>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label for="country" class="col-sm-2 col-form-label">Resident Country</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" readonly
-                                            <?php echo 'value="' . $resident_country . '" ' ?>>
+                                        <input type="text" class="form-control" readonly <?php echo 'value="' . $resident_country . '" ' ?>>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Emergency</label>
                                     <div class="col-sm-10">
-                                        <input type="number" class="form-control" readonly
-                                            <?php echo 'value="' . $emergency_contact . '" ' ?>>
+                                        <input type="number" class="form-control" readonly <?php echo 'value="' . $emergency_contact . '" ' ?>>
                                     </div>
                                 </div>
                             </fieldset>
@@ -240,10 +222,8 @@ if (isset($_GET['emp_id'])) {
                                 <legend class="reset">Image</legend>
                                 <picture class="d-flex">
                                     <source srcset="../../static/dist/img/1.jpg" type="image/svg+xml">
-                                    <img src="../../static/dist/img/1.jpg" class="img-fluid img-thumbnail" alt="..."
-                                        width="25%">
-                                    <input type="file" class="form-control-file" id="exampleFormControlFile1"
-                                        name="profile_photo">
+                                    <img src="../../static/dist/img/1.jpg" class="img-fluid img-thumbnail" alt="..." width="25%">
+                                    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="profile_photo">
                                 </picture>
                             </fieldset>
 
@@ -252,23 +232,20 @@ if (isset($_GET['emp_id'])) {
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Department</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" readonly
-                                            <?php echo 'value="' . $department . '" ' ?>>
+                                        <input type="text" class="form-control" readonly <?php echo 'value="' . $department . '" ' ?>>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Labour Category</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" readonly
-                                            <?php echo 'value="' . $labour_category . '" ' ?>>
+                                        <input type="text" class="form-control" readonly <?php echo 'value="' . $labour_category . '" ' ?>>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <label class="col-sm-2 col-form-label">Join Date</label>
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control" readonly
-                                            <?php echo 'value="' . $join_date . '" ' ?>>
+                                        <input type="date" class="form-control" readonly <?php echo 'value="' . $join_date . '" ' ?>>
                                     </div>
                                 </div>
 
@@ -277,8 +254,7 @@ if (isset($_GET['emp_id'])) {
                             <fieldset class="reset">
                                 <legend class="reset">Special Note</legend>
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" readonly
-                                        <?php echo 'value="' . $note . '" ' ?>>
+                                    <input type="text" class="form-control" readonly <?php echo 'value="' . $note . '" ' ?>>
 
                                 </div>
                             </fieldset>
@@ -294,41 +270,41 @@ if (isset($_GET['emp_id'])) {
 
 
 <style>
-textarea {
-    text-transform: uppercase;
-}
+    textarea {
+        text-transform: uppercase;
+    }
 
-select,
-input[type="text"],
-[type="number"],
-[type="email"],
-[type="date"],
-[type='password'] {
-    width: 100%;
-    height: 22px;
-    margin: inherit;
-    margin-top: 4px;
-    font-size: 10px;
-    text-transform: uppercase;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-    font-size: 12px;
-}
+    select,
+    input[type="text"],
+    [type="number"],
+    [type="email"],
+    [type="date"],
+    [type='password'] {
+        width: 100%;
+        height: 22px;
+        margin: inherit;
+        margin-top: 4px;
+        font-size: 10px;
+        text-transform: uppercase;
+        border: 1px solid #f1f1f1;
+        border-radius: 5px;
+        font-size: 12px;
+    }
 
-.custom-select {
-    font-size: 12px;
-}
+    .custom-select {
+        font-size: 12px;
+    }
 
-#exampleFormControlTextarea1 {
-    font-size: 12px;
-}
+    #exampleFormControlTextarea1 {
+        font-size: 12px;
+    }
 
-.form-control-file {
-    justify-content: center;
-    text-align: center;
-    margin: auto;
-    margin-left: 15px;
-}
+    .form-control-file {
+        justify-content: center;
+        text-align: center;
+        margin: auto;
+        margin-left: 15px;
+    }
 </style>
 
 <?php include_once('../includes/footer.php');  ?>

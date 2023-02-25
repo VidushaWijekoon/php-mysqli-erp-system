@@ -22,8 +22,12 @@ $end_time = date('Y-m-d 23:59:00');
 </div>
 <div class="container-fluid">
     <div class="row">
+<<<<<<< HEAD
+        <div class="col-lg-10 grid-margin stretch-card justify-content-center align-item-center mx-auto mt-2 text-uppercase">
+=======
         <div
             class="col-lg-10 grid-margin stretch-card justify-content-center align-item-center mx-auto mt-2 text-uppercase">
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
             <div class="col col-lg-10 justify-content-center  text-uppercase">
                 <table id="tblexportData" class="table table-striped">
                     <thead>
@@ -36,6 +40,112 @@ $end_time = date('Y-m-d 23:59:00');
                     </thead>
                     <tbody>
                         <?php
+<<<<<<< HEAD
+                        $query = "SELECT qr_number FROM performance_record_table  WHERE department_id='14'AND start_time between '$start_time' AND '$end_time' GROUP BY qr_number ORDER BY performance_id DESC";
+                        $sql1 = mysqli_query($connection, $query);
+                        foreach ($sql1 as $data) {
+                            $qr = $data['qr_number'];
+                        ?>
+                            <tr>
+                                <?php
+                                $query = "SELECT *,username FROM performance_record_table LEFT JOIN users ON users.user_id=performance_record_table.user_id WHERE performance_record_table.qr_number='$qr'";
+                                $sql = mysqli_query($connection, $query);
+                                $unlock = 0;
+                                $chargin1 = 0;
+                                $opencell = 0;
+                                $start_date = 0;
+                                $usr_unlock = 0;
+                                $usr_chargin1 = 0;
+                                $usr_opencell = 0;
+                                $sts_unlock = 0;
+                                $sts_chargin1 = 0;
+                                $sts_opencell = 0;
+                                foreach ($sql as $a) {
+
+                                    $qr_num = $a['qr_number'];
+                                    $start_date = $a['start_time'];
+                                    if ($a['job_description'] == 'Unlock') {
+                                        $unlock = 'Unlock';
+                                        $usr_unlock = $a['username'];
+                                        $sts_unlock = $a['status'];
+                                    }
+                                    if ($a['job_description'] == 'Chargin') {
+                                        $chargin1 = 'Chargin';
+                                        $usr_chargin1 = $a['username'];
+                                        $sts_chargin1 = $a['status'];
+                                    }
+                                    if ($a['job_description'] == 'Openning Battery And Cell Change') {
+                                        $opencell = 'Openning Battery And Cell Change';
+                                        $usr_opencell = $a['username'];
+                                        $sts_opencell = $a['status'];
+                                    }
+                                ?>
+                                <?php } ?>
+                                <td><?php echo $qr_num ?></td>
+                                <td><?php if ($unlock == 'Unlock') {
+                                        if ($sts_unlock == '0') {
+                                            echo "<div class='text-warning'>On Going </div>  /";
+                                            echo $usr_unlock;
+                                        } else {
+                                            echo "<div class='text-success'>Complete </div> /";
+                                            echo $usr_unlock;
+                                        }
+                                    } ?></td>
+                                <td><?php if ($chargin1 == 'Chargin') {
+                                        if ($sts_chargin1 == '0') {
+                                            echo "<div class='text-warning'>On Going </div>  /";
+                                            echo $usr_chargin1;
+                                        } else {
+                                            echo "<div class='text-success'>Complete </div> /";
+                                            echo $usr_chargin1;
+                                        }
+                                    } ?></td>
+                                <td><?php if ($opencell == 'Openning Battery And Cell Change') {
+                                        if ($sts_opencell == '0') {
+                                            echo "<div class='text-warning'>On Going </div>  /";
+                                            echo $usr_opencell;
+                                        } else {
+                                            echo "<div class='text-success'>Complete </div> /";
+                                            echo $usr_opencell;
+                                        }
+                                    } ?></td>
+                                <td>
+                                    <?php echo $start_date ?>
+                                </td>
+                                <?php $query1 = "SELECT status FROM `battery_request` WHERE `battery_p_n`='$qr_num'";
+                                $row = 0;
+                                $message = 0;
+                                $sql1 = mysqli_query($connection, $query1);
+                                $row = mysqli_num_rows($sql1);
+                                if ($row == 0) {
+                                    $message = "No Mention";
+                                } else {
+                                    $status = 0;
+                                    foreach ($sql1 as $dd) {
+                                        $status = $dd['status'];
+                                    }
+                                    if ($status == 2) {
+                                        $message = "Sent";
+                                    } else {
+                                        $message = "On Going";
+                                    }
+                                }
+                                ?>
+                                <td>
+                                    <?php
+                                    if ($message == 'Sent') {
+                                        echo "<div class='text-success'>" . $message . "</div> ";
+                                    } elseif ($message == 'On Going') {
+                                        echo "<div class='text-warning'>" . $message . "</div> ";
+                                    } else {
+                                        echo "<div class='text-danger'>" . $message . "</div> ";
+                                    }
+
+                                    ?>
+                                </td>
+                            </tr>
+                        <?php } ?>
+=======
 $query = "SELECT qr_number FROM performance_record_table  WHERE department_id='14'AND start_time between '$start_time' AND '$end_time' GROUP BY qr_number ORDER BY performance_id DESC";
 $sql1 = mysqli_query($connection, $query);
 foreach ($sql1 as $data) {
@@ -140,6 +250,7 @@ if ($message == 'Sent') {
                             </td>
                         </tr>
                         <?php }?>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                     </tbody>
             </div>
 

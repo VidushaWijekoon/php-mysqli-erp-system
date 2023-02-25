@@ -66,7 +66,11 @@ if (isset($_POST['search'])) {
     strtolower($search_number);
     $optical = '';
     $check = 1;
+<<<<<<< HEAD
+    $query = "SELECT * FROM `machine_from_supplier`  WHERE serial_no = '$search_number'AND add_to_wis='0'  ORDER BY machine_id DESC LIMIT 1";
+=======
     $query = "SELECT * FROM `machine_from_supplier`  WHERE serial_no = '$search_number'AND add_to_wis='0'";
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
     $query1 = mysqli_query($connection, $query);
     $start_print = 0;
     foreach ($query1 as $data) {
@@ -115,7 +119,11 @@ if (isset($_POST['search_mfg'])) {
     strtolower($search_number);
     $machine_id = 0;
     $optical = '';
+<<<<<<< HEAD
+    $query = "SELECT * FROM `machine_from_supplier`  WHERE  mfg LIKE '%$search_number%' AND add_to_wis='0'  ORDER BY machine_id DESC LIMIT 1";
+=======
     $query = "SELECT * FROM `machine_from_supplier`  WHERE  mfg LIKE '%$search_number%' AND add_to_wis='0'";
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
     $query1 = mysqli_query($connection, $query);
     $start_print = 0;
     foreach ($query1 as $data) {
@@ -203,7 +211,11 @@ if (isset($_POST['update_new'])) {
         if ($mfg == 'no mention') {
             $mfg = trim($_POST['mfg_1']);
         }
+<<<<<<< HEAD
+    } else {
+=======
     }else{
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
         $mfg = trim($_POST['mfg_1']);
     }
 
@@ -223,6 +235,23 @@ if (isset($_POST['update_new'])) {
     $_POST['brand'] = $brand;
     $ram = $_POST['ram'];
     $hdd_capacity = $_POST['hdd_capacity'];
+<<<<<<< HEAD
+
+    if ($optical == 'no' || $optical == 'yes') {
+
+    } else {
+        if ($brand == 'hp') {
+            if ($generation > 5) {
+                $optical = 'no';
+            } else {
+                $optical = 'yes';
+            }} else {
+            if ($generation > 5) {
+                $optical = 'no';
+            } else {
+                $optical = 'yes';
+            }
+=======
     
     if ($optical == 'no' || $optical == 'yes') {
 
@@ -238,6 +267,7 @@ if (isset($_POST['update_new'])) {
             } else {
                 $optical = 'yes';
             } 
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
         }
     }
     $query = "INSERT INTO `warehouse_information_sheet`(
@@ -1180,25 +1210,53 @@ if ($battery == 'yes') {
                                 <label class="col-sm-3 col-form-label">Optical</label>
                                 <div class="col-sm-8 w-75">
 
+<<<<<<< HEAD
+                                    <select name="optical" id="optical" class="form-control"
+                                        style="border-radius: 5px;">
+                                        <?php
+
+=======
                                 <select name="optical" id="optical" class="form-control"
                                         style="border-radius: 5px;">
                                     <?php
                                     
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 if ($exist == 'yes') {
     ?>
                                         <?php if ($optical == 'yes') {
         ?>
+<<<<<<< HEAD
+                                        <option selected value='<?php echo $optical ?>'>
+=======
                                         <option selected value='<?php $optical?>'>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                                             <?php echo $optical ?>
                                         </option>
                                         <option value='no'>No</option>
                                         <?php } elseif ($optical == 'no') {?>
+<<<<<<< HEAD
+                                        <option selected value='<?php echo $optical ?>'>
+=======
                                         <option selected value='<?php $optical?>'>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                                             <?php echo $optical ?>
                                         </option>
                                         <option value='yes'>Yes</option>
                                         <?php } elseif ($optical == 'no mention') {
         if ($generation > 5) {?>
+<<<<<<< HEAD
+                                        <option value='no'>No</option>
+                                        <option value='yes'>Yes</option>
+                                        <?php } else {?>
+                                        <option value='yes'>Yes</option>
+                                        <option value='no'>No</option>
+                                        <?php }
+    }?> <?php } else {?>
+                                        <option value='no'>No</option>
+                                        <option value='yes'>Yes</option>
+
+                                        <?php }?>
+=======
                                         <option  value='no'>No</option>
                                         <option value='yes'>Yes</option>
                                         <?php } else {?>
@@ -1210,6 +1268,7 @@ if ($exist == 'yes') {
                                         <option value='yes'>Yes</option>
                                    
                                     <?php }?>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                                     </select>
                                 </div>
                             </div>
@@ -1238,6 +1297,10 @@ if ($exist == 'yes') {
                                 </div>
                             </div>
                             <!-- <input type="hidden" name="mfg" value="<?php echo $mfg ?>"> -->
+<<<<<<< HEAD
+                            <!-- <input type="hidden" name="optical" value="<?php echo $optical ?>"> -->
+=======
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                             <input type="hidden" name="machine_id" value="<?php echo $search_number ?>">
                             <input type="hidden" name="ram" value="<?php echo $ram ?>">
                             <input type="hidden" name="hdd_capacity" value="<?php echo $hdd_capacity ?>">
@@ -1273,7 +1336,11 @@ $start = $last_id;
 $overText = $_POST['brand'] . "  " . $model;
 $a = trim($speed);
 $string = explode(" ", $a);
+<<<<<<< HEAD
+$secondPart = $core . " " . $a;
+=======
 $secondPart = $core . " " . $string[0];
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $downText = $generation . "-" . $model;
 $brand1 = trim($_POST['brand']);
 if ($brand1 == 'hp') {
@@ -1336,7 +1403,11 @@ if ($start_print == 1 || $id != 0) {
                                 <tr>
                                     <th style="width :400px">
                                         <div style="display:flex">
+<<<<<<< HEAD
+                                            <?php echo '<img src="temp/' . $code . '.png" style="width:350px; height:350px;margin: 0px 0 0 25px;">';?>
+=======
                                             <?php echo '<img src="temp/' . $code . '.png" style="width:350px; height:350px;margin: 0px 0 0 25px;">'; ?>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                                             <?php
 $text = $rack . "-" . $downText;
         ?>

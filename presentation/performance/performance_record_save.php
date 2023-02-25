@@ -17,7 +17,10 @@ $end_time = "0000-00-00";
 $performance_id = 0;
 $_POST['qr'] = '';
 $_POST['job_description'] = '';
+<<<<<<< HEAD
+=======
 $lcd_p_n = $_POST['pn_num'];
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $same_jd_count = 0;
 $status = 0;
 if ($scanned_qr != '0') {
@@ -25,6 +28,13 @@ if ($scanned_qr != '0') {
 } elseif ($scanned_mfg != 0) {
     $search_value = $scanned_mfg;
 }
+<<<<<<< HEAD
+if ($job_description == 'send to production' && $department_id == 2) {
+    $query = "UPDATE `warehouse_information_sheet` SET`send_to_production`='1' WHERE inventory_id='$scanned_qr'";
+    $sql = mysqli_query($connection, $query);
+}
+=======
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 if ($department_id == 14) {
     $query = "SELECT bat_id,status FROM battery_request WHERE battery_p_n='$search_value'";
 
@@ -42,6 +52,22 @@ if ($department_id == 14) {
         $sql = mysqli_query($connection, $query);
     }
 }
+<<<<<<< HEAD
+if ($department_id == 1) {
+    $query = "SELECT * FROM performance_record_table WHERE user_id ='$user_id'AND (qr_number ='$search_value') AND
+                job_description = '$job_description' ";
+} else {
+    $query = "SELECT * FROM performance_record_table WHERE qr_number ='$search_value' AND
+                job_description = '$job_description' ";
+}
+
+$query_run = mysqli_query($connection, $query);
+$row = mysqli_num_rows($query_run);
+
+if ($row == 0) {
+    $query = "SELECT * FROM performance_record_table WHERE user_id ='$user_id'AND (lcd_p_n_code ='$search_value') AND
+                job_description = '$job_description' ";
+=======
 $query = "SELECT * FROM performance_record_table WHERE user_id ='$user_id'AND (qr_number ='$search_value') AND
                 job_description = '$job_description' ";
 
@@ -51,6 +77,7 @@ $row = mysqli_num_rows($query_run);
 if ($row == 0) {
     $query = "SELECT * FROM performance_record_table WHERE user_id ='$user_id'AND (lcd_p_n_code ='$search_value') AND
                 job_description = '$job_description' ";
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
     $query_run = mysqli_query($connection, $query);
     $row = mysqli_num_rows($query_run);
     $lcd_p_n = $search_value;
@@ -90,8 +117,14 @@ if ($row == 0) {
         }
     }
 }
+<<<<<<< HEAD
+//update
+if ($end_time == "0000-00-00 00:00:00" && $same_jd_count == 1 && $status == 0) {
+
+=======
 
 if ($end_time == "0000-00-00 00:00:00" && $same_jd_count == 1 && $status == 0) {
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
     $working_time_in_seconds;
     $start_time = 0000 - 00 - 00;
     $query = "SELECT * FROM performance_record_table WHERE user_id ='$user_id'AND (qr_number ='$search_value') AND
@@ -122,14 +155,30 @@ if ($end_time == "0000-00-00 00:00:00" && $same_jd_count == 1 && $status == 0) {
                 status = 1
                 WHERE performance_id = $performance_id";
     $query_run = mysqli_query($connection, $query);
+<<<<<<< HEAD
+    if ($department_id == 9) {
+        $query22 = "UPDATE issue_laptops
+        SET
+        status = 2,
+        received_date = now()
+        WHERE alsakb_qr = $search_value";
+        $query_run22 = mysqli_query($connection, $query22);
+    }
+=======
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
     if ($department_id == 2) {
         header('Location: inventory_performance.php');
     } else {
         header('Location: performance_record.php');
     }
+<<<<<<< HEAD
+} elseif ($same_jd_count == 0) {
+
+=======
 
 } elseif ($same_jd_count == 0) {
 
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
     $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
     $start_date = $date1->format('Y-m-d H:i:s');
     $target = 0;
@@ -193,8 +242,13 @@ if ($end_time == "0000-00-00 00:00:00" && $same_jd_count == 1 && $status == 0) {
         } elseif ($job_description == "BIOS Lock Low Gen") {
             $target = 2.85;
         } elseif ($job_description == "No Power / No Display / Account Lock/ Ports Issue") {
+<<<<<<< HEAD
+            $target = 4;
+        }
+=======
             $target = 4;}
 
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
     } elseif ($department_id == 22) {
         if ($job_description == "Designing + Pasting") {
             $target = 7.5;
@@ -215,7 +269,12 @@ if ($end_time == "0000-00-00 00:00:00" && $same_jd_count == 1 && $status == 0) {
             if ($row != 0) {
                 $query = "SELECT qr_number FROM performance_record_table WHERE lcd_p_n_code='$scanned_qr' ";
                 $sql = mysqli_query($connection, $query);
+<<<<<<< HEAD
+                if (empty($sql)) {
+                } else {
+=======
                 if (empty($sql)) {} else {
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                     if ($lcd_p_n == 0) {
                         $lcd_p_n = $scanned_qr;
                     }
@@ -318,6 +377,15 @@ if ($end_time == "0000-00-00 00:00:00" && $same_jd_count == 1 && $status == 0) {
 
         header('Location: performance_record.php');
     }
+<<<<<<< HEAD
+} elseif ($end_time != "0000-00-00 00:00:00" && $same_jd_count == 1 && $status == 1) {
+?>
+    <script>
+        if (window.confirm('Already you completed this machine under this job description')) {
+            document.location = ' performance_record.php';
+        }
+    </script>
+=======
 
 } elseif ($end_time != "0000-00-00 00:00:00" && $same_jd_count == 1 && $status == 1) {
     ?>
@@ -326,6 +394,7 @@ if (window.confirm('Already you completed this machine under this job descriptio
     document.location = ' performance_record.php';
 }
 </script>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 <?php
 
 }

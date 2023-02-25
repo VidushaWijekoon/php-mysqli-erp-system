@@ -1,9 +1,9 @@
-<?php 
+<?php
 session_start();
-include_once('../../dataAccess/connection.php');
-include_once('../../dataAccess/functions.php');
-include_once('../../dataAccess/403.php');
-include_once('../includes/header.php');
+include_once '../../dataAccess/connection.php';
+include_once '../../dataAccess/functions.php';
+include_once '../../dataAccess/403.php';
+include_once '../includes/header.php';
 
 // checking if a user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -62,6 +62,57 @@ $brand = $_GET['brand'];
                             <tbody>
                                 <?php
 
+<<<<<<< HEAD
+$non_touch_wholesale_price = 0;
+$touch_wholesale_price = 0;
+$i = 0;
+
+$query = "SELECT * FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND send_to_production= '0' ";
+$result = mysqli_query($connection, $query);
+foreach ($result as $data) {
+    $device = $data['device'];
+    $model = $data['model'];
+    $cpu = $data['core'];
+    $generation = $data['generation'];
+    $speed = $data['speed'];
+    $screen_size = $data['lcd_size'];
+    $screen_type = $data['touch_or_non_touch'];
+    $location = $data['location'];
+    $optical = $data['dvd'];
+    $processor = $data['processor'];
+    $location = $data['location'];
+    $mfg = $data['mfg'];
+    $inventory_id = $data['inventory_id'];
+    $battery = $data['battery'];
+    $touch_wholesale_price = $data['touch_wholesale_price'];
+    $non_touch_wholesale_price = $data['non_touch_wholesale_price'];
+
+    ?>
+                                <tr>
+                                    <td><?php echo $device ?></td>
+                                    <td><?php echo $brand ?></td>
+                                    <td><?php echo $model ?></td>
+                                    <td><?php echo $processor ?></td>
+                                    <td><?php echo $cpu ?></td>
+                                    <td><?php echo $generation ?></td>
+                                    <td><?php echo $speed ?></td>
+                                    <td><?php echo $screen_size ?></td>
+                                    <td><?php echo $screen_type ?></td>
+                                    <td><?php echo $optical ?></td>
+                                    <td>8GB</td>
+                                    <td>256GB</td>
+                                    <td><?php echo $location . "-" . $generation . "-" . $model ?>
+                                    </td>
+                                    <td><?php echo $mfg ?></td>
+                                    <td><?php echo "ALSAKB" . $inventory_id ?></td>
+                                    <td>
+                                        <?php if ($battery == 'yes') {
+        echo "<div class='text-success'>$battery</div>";
+    } else {echo "<div class='text-danger'>$battery</div>";}?>
+                                    </td>
+                                    <td>
+                                        <?php if ($screen_type == 'yes') {echo $touch_wholesale_price;} elseif ($screen_type == 'no') {echo $non_touch_wholesale_price;}?>
+=======
                                     $non_touch_wholesale_price = 0;
                                     $touch_wholesale_price = 0;
                                     $i=0;
@@ -125,9 +176,10 @@ $brand = $_GET['brand'];
                                     <td>
                                         <?php if($screen_type == 'yes') { echo $touch_wholesale_price; }
                                               elseif($screen_type == 'no') { echo $non_touch_wholesale_price; } ?>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                                     </td>
                                 </tr>
-                                <?php } ?>
+                                <?php }?>
 
                             </tbody>
                         </table>

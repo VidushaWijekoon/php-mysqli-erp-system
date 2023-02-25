@@ -18,19 +18,64 @@ $user_role = $_SESSION['role_id'];
 $department_id = $_SESSION['department'];
 $updated = 0;
 $id = 0;
+<<<<<<< HEAD
+$endid = 0;
+
+//////////////////////////////////////////////////
+=======
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 if (empty($_GET['updated'])) {
 
 } else {
     $updated = $_GET['updated'];
+<<<<<<< HEAD
+}
+///////////////////////////////////////////////
+if (empty($_GET['id'])) {
+
+} else {
+    $id = $_GET['id'];
+}
+/////////////////////////////////////////
+if (empty($_GET['endid'])) {
+
+} else {
+    $endid = $_GET['endid'];
+}
+if ($updated != 0) {
+=======
     $id = $_GET['id'];
 }
 if ($updated == 'Remove LCD') {
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
     echo "<script>
     $(window).load(function() {
         $('#myModalremove').modal('show');
     });
     </script>";
 }
+<<<<<<< HEAD
+$alsakb = 0;
+if (empty($_GET['alsakb'])) {} else {
+    $alsakb = $_GET['alsakb'];
+    echo "<script>
+    $(window).load(function() {
+        $('#myModalnext').modal('show');
+    });
+    </script>";
+}
+$issue = 0;
+if (empty($_GET['issue'])) {
+
+} else {
+    $issue = $_GET['issue'];
+}
+$date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+date_default_timezone_set('Asia/Dubai');
+$timestamp2 = strtotime(date('Y-m-d 13:57:00'));
+$timestamp3 = strtotime(date('Y-m-d 18:17:00'));
+$timestamp4 = strtotime(date('Y-m-d 20:57:00'));
+=======
 if ($updated == 'Remove Polization Film') {
     echo "<script>
     $(window).load(function() {
@@ -65,6 +110,7 @@ date_default_timezone_set('Asia/Dubai');
 $timestamp2 = strtotime(date('Y-m-d 13:55:00'));
 $timestamp3 = strtotime(date('Y-m-d 18:15:00'));
 $timestamp4 = strtotime(date('Y-m-d 20:55:00'));
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 
 $_SESSION['expire1'] = $timestamp2;
 $_SESSION['expire2'] = $timestamp3;
@@ -77,11 +123,19 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
     echo "<p align='center'>Session has been destroyed!!";
     // session_start();
     header("Location: ../../index.php");
+<<<<<<< HEAD
+} elseif (strtotime(date('Y-m-d 14:59:00')) < $now && $now > $_SESSION['expire2'] && $now < strtotime(date('Y-m-d 18:15:50'))) {
+    session_destroy();
+    echo "<p align='center'>Session has been destroyed!!";
+    header("Location: ../../index.php");
+} elseif (strtotime(date('Y-m-d 18:44:00')) < $now && $now > $_SESSION['expire3'] && $now < strtotime(date('Y-m-d 20:55:50'))) {
+=======
 } elseif (strtotime(date('Y-m-d 14:59:00')) < $now && $now > $_SESSION['expire2'] && $now < strtotime(date('Y-m-d 18:15:00'))) {
     session_destroy();
     echo "<p align='center'>Session has been destroyed!!";
     header("Location: ../../index.php");
 } elseif (strtotime(date('Y-m-d 18:44:00')) < $now && $now > $_SESSION['expire3'] && $now < strtotime(date('Y-m-d 20:55:00'))) {
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
     session_destroy();
     echo "<p align='center'>Session has been destroyed!!";
     header("Location: ../../index.php");
@@ -139,9 +193,68 @@ $end_time = $date2;?>
             <!-- /.info-box -->
         </a>
     </div>
+<<<<<<< HEAD
+    <?php if ($user_role == 9) { ?>
+    <div class="col-12 col-sm-6 col-md-3 mt-3">
+        <div class="info-box">
+            <span class="info-box-icon bg-info elevation-1"><i class="fa-solid fa-warehouse"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Open Issue QTY From Inventory</span>
+                <span class="info-box-number">
+                    <?php
+     $sql="SELECT COUNT(alsakb_qr) as count FROM issue_laptops WHERE issue_type='1' ";
+      $query_run = mysqli_query($connection, $sql);
+      $count=0;
+      foreach($query_run as $a){
+        $count=$a['count'];
+      }
+    ?>
+                    <a href="lcd_issue_from_inv.php">
+                        <?php
+     $sql="SELECT COUNT(alsakb_qr) as count FROM issue_laptops WHERE issue_type='1' AND status='1'";
+      $query_run = mysqli_query($connection, $sql);
+      foreach($query_run as $a){
+        echo "<div style='font-size:26px'>". $a['count']." / ".$count."</div>";
+      }
+    ?>
+                    </a>
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <div class="col-12 col-sm-6 col-md-3 mt-3">
+        <div class="info-box">
+            <span class="info-box-icon bg-info elevation-1"><i class="fa-solid fa-warehouse"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text"> Completed QTY For Inventory</span>
+                <span class="info-box-number">
+
+                    <a href="lcd_completed_for_inventory.php">
+                        <?php
+     $sql2="SELECT COUNT(alsakb_qr) as count FROM issue_laptops WHERE issue_type='1' AND status='2'";
+      $query_run2 = mysqli_query($connection, $sql2);
+      foreach($query_run2 as $a){
+        echo "<div style='font-size:26px'>". $a['count']." / ".$count."</div>";
+      }
+    ?>
+                    </a>
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+</div>
+<?php } ?>
+=======
 </div>
 
 
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 <div class="col col-lg-12 justify-content-center m-auto text-uppercase">
     <div class="row ">
         <div class="col-lg-11 grid-margin stretch-card justify-content-center mx-auto ">
@@ -187,7 +300,12 @@ foreach ($query_run as $data) {
                                             </option>
 
                                             <?php
+<<<<<<< HEAD
+if ($department_id == 10) {
+    ?>
+=======
 if ($department_id == 10) {?>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 
                                             <option value="Remove LCD">Remove LCD</option>
                                             <option value="Install LCD">Install LCD</option>
@@ -200,6 +318,14 @@ if ($department_id == 10) {?>
                                             </option>
                                             <?php }?>
                                         </select>
+<<<<<<< HEAD
+                                    </div>
+                                </div>
+
+
+                                <div class=" row">
+                                    <label class="col-sm-4 col-form-label">Scan P/N OR Alsakb QR Code</label>
+=======
 
 
                                     </div>
@@ -218,6 +344,7 @@ if ($department_id == 10) {?>
                                 </div>
                                 <div class=" row">
                                     <label class="col-sm-4 col-form-label">Scan Alsakb QR Code</label>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                                     <div class="col-sm-8">
                                         <input class="w-75" style="color:black !important" type="text" id="qr" name="qr"
                                             placeholder=" scan qr code here">
@@ -296,7 +423,11 @@ foreach ($query_run as $data) {
                                     <?php
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 $date = $date1->format('Y-m-d 09:00:00');
+<<<<<<< HEAD
+$date2 = $date1->format('Y-m-d 13:55:50');
+=======
 $date2 = $date1->format('Y-m-d 13:55:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $duration = 0;
 $spend_time = 0;
 $query = "SELECT start_time  FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY performance_id ASC LIMIT 1";
@@ -346,7 +477,11 @@ if ($exist_record == 0) {
                                         <?php
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 $current_time = $date1->format('Y-m-d H:i:s');
+<<<<<<< HEAD
+$date = $date1->format('Y-m-d 13:55:50');
+=======
 $date = $date1->format('Y-m-d 13:55:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $remaining_time = (strtotime($date) - strtotime($current_time)) / 60;
 if ($remaining_time > 0) {
     echo " Remaining Time " . round($remaining_time) . " minute";
@@ -356,7 +491,11 @@ if ($remaining_time > 0) {
                                     <?php
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 $date = $date1->format('Y-m-d 13:30:00');
+<<<<<<< HEAD
+$date2 = $date1->format('Y-m-d 13:55:50');
+=======
 $date2 = $date1->format('Y-m-d 13:55:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $duration = 0;
 $spend_time = 0;
 $query = "SELECT end_time  FROM performance_record_table WHERE user_id=$user_id AND end_time between '$date'AND '$date2' ORDER BY performance_id DESC LIMIT 1";
@@ -364,7 +503,11 @@ $query_run = mysqli_query($connection, $query);
 $datetime_1 = '';
 $datetime_2 = '';
 foreach ($query_run as $data) {
+<<<<<<< HEAD
+    $datetime_1 = date('Y-m-d 13:55:50');
+=======
     $datetime_1 = date('Y-m-d 13:55:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
     $datetime_2 = $data['end_time'];
 }
 
@@ -406,7 +549,11 @@ if ($exist_record == 0) {
                                         03.05PM</label>
                                     <?php
 $date = date('Y-m-d 15:00:00');
+<<<<<<< HEAD
+$date2 = date('Y-m-d 18:15:50');
+=======
 $date2 = date('Y-m-d 18:15:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $query = "SELECT start_time  FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY performance_id ASC LIMIT 1";
 $query_run = mysqli_query($connection, $query);
 $datetime_1 = '';
@@ -456,7 +603,11 @@ if ($exist_record == 0) {
                                         <?php
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 $current_time = $date1->format('Y-m-d H:i:s');
+<<<<<<< HEAD
+$date = $date1->format('Y-m-d 18:15:50');
+=======
 $date = $date1->format('Y-m-d 18:15:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $date_old = $date1->format('Y-m-d 15:05:00');
 $remaining_time = (strtotime($date) - strtotime($current_time)) / 60;
 if ($remaining_time > 0 && $date_old < $current_time) {
@@ -468,7 +619,11 @@ if ($remaining_time > 0 && $date_old < $current_time) {
                                         <?php
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 $date = $date1->format('Y-m-d 15:45:00');
+<<<<<<< HEAD
+$date2 = $date1->format('Y-m-d 18:15:50');
+=======
 $date2 = $date1->format('Y-m-d 18:15:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $duration = 0;
 $spend_time = 0;
 $query = "SELECT end_time  FROM performance_record_table WHERE user_id=$user_id AND end_time between '$date'AND '$date2' ORDER BY performance_id DESC LIMIT 1";
@@ -476,7 +631,11 @@ $query_run = mysqli_query($connection, $query);
 $datetime_1 = '';
 $datetime_2 = '';
 foreach ($query_run as $data) {
+<<<<<<< HEAD
+    $datetime_1 = date('Y-m-d 18:15:50');
+=======
     $datetime_1 = date('Y-m-d 18:15:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
     $datetime_2 = $data['end_time'];
 }
 
@@ -520,7 +679,11 @@ if ($exist_record == 0) {
                                         <?php
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 $date = $date1->format('Y-m-d 18:40:00');
+<<<<<<< HEAD
+$date2 = $date1->format('Y-m-d 20:55:50');
+=======
 $date2 = $date1->format('Y-m-d 20:55:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $duration = 0;
 $spend_time = 0;
 $query = "SELECT start_time  FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY performance_id ASC LIMIT 1";
@@ -570,7 +733,11 @@ if ($exist_record == 0) {
                                             <?php
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 $current_time = $date1->format('Y-m-d H:i:s');
+<<<<<<< HEAD
+$date = $date1->format('Y-m-d 20:55:50');
+=======
 $date = $date1->format('Y-m-d 20:55:00');
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $remaining_time = (strtotime($date) - strtotime($current_time)) / 60;
 $date_old = $date1->format('Y-m-d 18:45:00');
 if ($remaining_time > 0 && $date_old < $current_time) {
@@ -653,6 +820,61 @@ foreach ($query_run as $data) {
     </div>
 </div>
 
+<<<<<<< HEAD
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<?php
+
+?>
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<div class="modal fade " id="myModalnext" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    data-backdrop="static" data-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content ">
+            <div class="modal-body ">
+                <div class="grid-margin  justify-content-center mx-auto mt-1">
+                    <div class="row">
+                        <div class="col-sm-12 ">
+                            <h2 class="col-lg-12 ">Please Scan the P/N here</h2>
+                        </div>
+                    </div>
+
+                    <form method='POST' action="lcd_performance_save.php">
+                        <div class="row ">
+                            <div class="col justify-content-center mx-auto">
+                                <input class="w-50 mx-auto" name='pn_num' type="text"
+                                    placeholder=" scan P/N Number here" />
+
+                                <input class="w-75" name='qr' type="text" style="display: none"
+                                    value="<?php echo $alsakb ?>" />
+                                <input class="w-75" name='job_description' style="display: none" type="text"
+                                    value="<?php echo "Remove LCD" ?>" />
+                                <input type="hidden" name="user_id" value="<?php echo $user_id ?>">
+                                <input type="hidden" name="user_role" value="<?php echo $user_role ?>">
+                                <input type="hidden" name="department_id" value="<?php echo $department_id ?>">
+                                <button type="submit" name="sbmt_endrmv" class="btn btn-default d-none ">
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<div class="modal fade " id="myModalremove" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    data-backdrop="static" data-keyboard="false" aria-hidden="true" this.KeyPreview=True:>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content ">
+
+            <div class="modal-body ">
+                <div class="grid-margin  justify-content-center mx-auto mt-1">
+                    <?php if ($updated == 'Remove LCD') {
+    if ($id != 0) {
+        ?>
+
+=======
 <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 <div class="modal fade " id="myModalremove" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     data-backdrop="static" data-keyboard="false" aria-hidden="true">
@@ -662,10 +884,35 @@ foreach ($query_run as $data) {
             <div class="modal-body ">
                 <div class="grid-margin  justify-content-center mx-auto mt-1">
                     <?php if ($update == 'Remove LCD') {?>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                     <form method="POST">
                         <div class="row">
                             <div class="col-sm-12 ">
                                 <h2 class="col-lg-12 ">Please Select The Problem</h2>
+<<<<<<< HEAD
+                            </div>
+                            <div class="col-sm-12 ">
+                                <h4 class="col-lg-8 ">Scratch (PGP) </h4>
+                                <input type="checkbox" id="scrtch" name="scrtch" value="1">
+                                <!-- <label class="label_values my-1" for="xeon">Yes -->
+                                <!-- <input type="radio" id="scrtch" name="scrtch" value="0" checked>
+                                    <label class="label_values my-1">No </label> -->
+                            </div>
+                            <div class="col-sm-12 ">
+                                <h4 class="col-lg-8 ">Spot (ZGP + SGP) </h4>
+                                <input type="checkbox" id="spt" name="spt" value="1">
+                                <!-- <label class="label_values my-1" for="xeon">Yes -->
+                                <!-- <input type="radio" id="spt" name="spt" value="0" checked>
+                                    <label class="label_values my-1">No </label> -->
+
+                            </div>
+                            <div class="col-sm-12 ">
+                                <h4 class="col-lg-8 ">Broken LCD</h4>
+                                <input type="checkbox" id="brkn" name="brkn" value="1">
+                                <!-- <label class="label_values my-1" for="xeon">Yes -->
+                                <!-- <input type="radio" id="brkn" name="brkn" value="0" checked>
+                                    <label class="label_values my-1">No </label> -->
+=======
 
 
                             </div>
@@ -699,24 +946,104 @@ foreach ($query_run as $data) {
                                 <label class="label_values my-1" for="xeon">Yes
                                     <input type="radio" id="brkn" name="brkn" value="0" checked>
                                     <label class="label_values my-1">No </label>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 
                             </div>
                             <div class="col-sm-12 ">
                                 <h4 class="col-lg-8 ">Yellow Shadow LCD </h4>
+<<<<<<< HEAD
+                                <input type="checkbox" id="ylwsdw" name="ylwsdw" value="1">
+                                <!-- <label class="label_values my-1" for="xeon">Yes -->
+                                <!-- <input type="radio" id="ylwsdw" name="ylwsdw" value="0" checked>
+                                    <label class="label_values my-1">No </label> -->
+=======
                                 <input type="radio" id="ylwsdw" name="ylwsdw" value="1">
                                 <label class="label_values my-1" for="xeon">Yes
                                     <input type="radio" id="ylwsdw" name="ylwsdw" value="0" checked>
                                     <label class="label_values my-1">No </label>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 
                             </div>
                             <div class="col-sm-12 ">
                                 <h4 class="col-lg-8 ">Bazel Broken</h4>
+<<<<<<< HEAD
+                                <input type="checkbox" id="bzlbrkn" name="bzlbrkn" value="1">
+                                <!-- <label class="label_values my-1" for="xeon">Yes -->
+                                <!-- <input type="radio" id="bzlbrkn" name="bzlbrkn" value="0" checked>
+                                    <label class="label_values my-1">No </label> -->
+
+                            </div>
+                            <?php
+                            $qr= $_GET['id'];
+                            $sql="SELECT lcd_broken,spot,scratch,yellowshadow FROM issue_laptops WHERE alsakb_qr ='$qr' AND issue_type=1 ";
+                            $query_run = mysqli_query($connection, $sql);
+                            $rows=0;
+                            $rows=mysqli_num_rows($query_run);
+                            if($rows==0){
+
+                            }else{
+                                echo "<div style='font-size:24px'>Motherboard Technician Mentioned Issue</div>";
+                                foreach($query_run as $data){
+                                $lcd_broken =$data['lcd_broken'];
+                                $spot =$data['spot'];
+                                $scratch =$data['scratch'];
+                                $yellowshadow =$data['yellowshadow'];
+                                }
+                                ?>
+                            <div class="col-sm-12 ">
+                                <h4 class="col-lg-8 ">Scratch (PGP) </h4>
+                                <?php
+                                if($scratch==1){
+                                    echo "<input type='checkbox' style='background-color:red' checked disabled>";
+                                }else{
+                                    echo "<input type='checkbox'  disabled >";
+                                }
+                                ?>
+                            </div>
+                            <div class="col-sm-12 ">
+                                <h4 class="col-lg-8 ">Spot (ZGP + SGP) </h4>
+                                <?php
+                                if($spot==1){
+                                    echo "<input type='checkbox' style='background-color:red' checked disabled>";
+                                }else{
+                                    echo "<input type='checkbox'  disabled>";
+                                }
+                                ?>
+
+                            </div>
+                            <div class="col-sm-12 ">
+                                <h4 class="col-lg-8 ">Broken LCD</h4>
+                                <?php
+                                if($lcd_broken==1){
+                                    echo "<input type='checkbox' style='background-color:red' checked disabled>";
+                                }else{
+                                    echo "<input type='checkbox'  disabled>";
+                                }
+                                ?>
+
+                            </div>
+                            <div class="col-sm-12 ">
+                                <h4 class="col-lg-8 ">Yellow Shadow LCD </h4>
+                                <?php
+                                if($yellowshadow==1){
+                                    echo "<input type='checkbox' checked disabled>";
+                                }else{
+                                    echo "<input type='checkbox'  disabled>";
+                                }
+                                ?>
+
+                            </div>
+                            <?php
+                            }
+                            ?>
+=======
                                 <input type="radio" id="bzlbrkn" name="bzlbrkn" value="1">
                                 <label class="label_values my-1" for="xeon">Yes
                                     <input type="radio" id="bzlbrkn" name="bzlbrkn" value="0" checked>
                                     <label class="label_values my-1">No </label>
 
                             </div>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                             <div class="col-sm-12 ">
                                 <h4 class="col-lg-12 " id="other">Next Step Remove LCD</h4>
                             </div>
@@ -724,11 +1051,228 @@ foreach ($query_run as $data) {
                             <div class="row col-sm-12">
                                 <button type="submit" name="sbmt_rmv" id="submit"
                                     class="btn btn-default bg-gradient-success btn-next col-lg-2 justify-content-center mx-auto ">
+<<<<<<< HEAD
+                                    Next
+=======
                                     Confirm
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                                 </button>
                             </div>
                         </div>
                     </form>
+<<<<<<< HEAD
+
+                    <?php
+if (isset($_POST['sbmt_rmv'])) {
+            $scrtch = $_POST['scrtch'];
+            $spt = $_POST['spt'];
+            $brkn = $_POST['brkn'];
+            $ylwsdw = $_POST['ylwsdw'];
+            $bzlbrkn = $_POST['bzlbrkn'];
+            $user_name = $_SESSION['username'];
+            $query = "INSERT INTO `lcd_issue`(
+                `alsakb_number`,
+                `scratch`,
+                `spot`,
+                `broken_lcd`,
+                `yellow_shadow`,
+                `bazel_broken`,
+                `created_user`
+            )
+            VALUES(
+                '$id',
+                '$scrtch',
+                '$spt',
+                '$brkn',
+                '$ylwsdw',
+                '$bzlbrkn',
+                '$user_name'
+            )";
+            $sql = mysqli_query($connection, $query);
+
+            header("Location: lcd_performance.php?alsakb='$id'");
+        }} elseif ($endid != 0) {?>
+                    <div class="row">
+                        <div class="col-sm-12 ">
+                            <h2 class="col-lg-12 "><?php echo $issue ?></h2>
+                        </div>
+                    </div>
+                    <div class="row col-sm-12">
+                        <a href="lcd_performance.php" id="clicking"
+                            class="btn btn-default bg-gradient-danger btn-next col-lg-2 justify-content-center mx-auto ">
+                            OK
+                        </a>
+                    </div>
+
+
+                    <?php }
+} elseif ($updated == 'Remove Polization Film') {
+    if ($id != 0) {
+        ?>
+                    <div class="row">
+                        <div class="col-sm-12 ">
+                            <h2 class="col-lg-12 ">Start the Remove Polization Film</h2>
+                        </div>
+                    </div>
+                    <div class="row col-sm-12">
+                        <a href="lcd_performance.php"
+                            class="btn btn-default bg-gradient-success btn-next col-lg-2 justify-content-center mx-auto ">
+                            OK
+                        </a>
+                    </div>
+                    <?php
+} elseif ($endid != 0) {
+        ?>
+                    <div class="row">
+                        <div class="col-sm-12 ">
+                            <h2 class="col-lg-12 ">Please Send to Fix LCD</h2>
+                        </div>
+                    </div>
+                    <div class="row col-sm-12">
+                        <a href="lcd_performance.php" type="submit"
+                            class="btn btn-default bg-gradient-success btn-next col-lg-2 justify-content-center mx-auto ">
+                            OK
+                        </a>
+                    </div>
+                    <?php
+}
+} elseif ($updated == 'Fixed Lcd') {
+    if ($id != 0) {
+        ?>
+
+                    <div class="row">
+                        <?php
+$query2 = "SELECT qr_number FROM performance_record_table  WHERE lcd_p_n_code='$id'";
+        $sql2 = mysqli_query($connection, $query2);
+        $qr = 0;
+        foreach ($sql2 as $bb) {
+            $qr = $bb['qr_number'];
+        }
+        $query1 = "SELECT * FROM lcd_issue WHERE alsakb_number='$qr'";
+        $sql1 = mysqli_query($connection, $query1);
+        $scratch = 0;
+        $spot = 0;
+        $broken_lcd = 0;
+        $yellow_shadow = 0;
+        foreach ($sql1 as $data) {
+            $scratch = $data['scratch'];
+            $spot = $data['spot'];
+            $broken_lcd = $data['broken_lcd'];
+            $yellow_shadow = $data['yellow_shadow'];
+        }
+        ?>
+                        <?php if ($scratch != 0 && $spot != 0) {
+            ?>
+                        <div class="col-sm-12 ">
+                            <h2 class="col-lg-12 "> Please Fix the Scratch And Spot Issue</h2>
+                        </div>
+                        <?php
+}?>
+                        <?php if ($scratch != 0) {
+            ?>
+                        <div class="col-sm-12 ">
+                            <h2 class="col-lg-12 ">Please Fix the Scratch Issue</h2>
+                        </div>
+                        <?php
+}?>
+                        <?php if ($spot != 0) {
+            ?>
+                        <div class="col-sm-12 ">
+                            <h2 class="col-lg-12 ">Please Fix the Spot Issue</h2>
+                        </div>
+                        <?php
+}?>
+
+
+                    </div>
+                    <div class="row col-sm-12">
+                        <a href="lcd_performance.php"
+                            class="btn btn-default bg-gradient-success btn-next col-lg-2 justify-content-center mx-auto ">
+                            OK
+                        </a>
+                    </div>
+                    <?php
+} elseif ($endid != 0) {
+        ?>
+                    <div class="row">
+                        <div class="col-sm-12 ">
+                            <h2 class="col-lg-12 ">Please Send Clean + Glue + Install Polization Film</h2>
+                        </div>
+                    </div>
+                    <div class="row col-sm-12">
+                        <a href="lcd_performance.php"
+                            class="btn btn-default bg-gradient-success btn-next col-lg-2 justify-content-center mx-auto ">
+                            OK
+                        </a>
+                    </div>
+                    <?php
+}
+
+} elseif ($updated == 'Clean+Glue+Install Polization Film') {
+    if ($id != 0) {
+        ?>
+                    <div class="row">
+                        <div class="col-sm-12 ">
+                            <h2 class="col-lg-12 ">Please Start Clean+Glue+Install Polization Film</h2>
+                        </div>
+                    </div>
+                    <div class="row col-sm-12">
+                        <a href="lcd_performance.php"
+                            class="btn btn-default bg-gradient-success btn-next col-lg-2 justify-content-center mx-auto ">
+                            OK
+                        </a>
+                    </div>
+                    <?php
+} elseif ($endid != 0) {
+        ?>
+                    <div class="row">
+                        <div class="col-sm-12 ">
+                            <h2 class="col-lg-12 ">Please Send to Install LCD</h2>
+                        </div>
+                    </div>
+                    <div class="row col-sm-12">
+                        <a href="lcd_performance.php"
+                            class="btn btn-default bg-gradient-success btn-next col-lg-2 justify-content-center mx-auto ">
+                            OK
+                        </a>
+                    </div>
+                    <?php
+}
+
+} elseif ($updated == 'Install LCD') {
+    if ($id != 0) {
+        ?>
+                    <div class="row">
+                        <div class="col-sm-12 ">
+                            <h2 class="col-lg-12 ">Please Start Install LCD</h2>
+                        </div>
+                    </div>
+                    <div class="row col-sm-12">
+                        <a href="lcd_performance.php"
+                            class="btn btn-default bg-gradient-success btn-next col-lg-2 justify-content-center mx-auto ">
+                            OK
+                        </a>
+                    </div>
+                    <?php
+} elseif ($endid != 0) {
+        ?>
+                    <div class="row">
+                        <div class="col-sm-12 ">
+                            <h2 class="col-lg-12 ">LCD Instalation Fully Complete </h2>
+                        </div>
+                    </div>
+                    <div class="row col-sm-12">
+                        <a href="lcd_performance.php"
+                            class="btn btn-default bg-gradient-success btn-next col-lg-2 justify-content-center mx-auto ">
+                            OK
+                        </a>
+                    </div>
+                    <?php
+}
+}?>
+                </div>
+            </div>
+=======
                     <?php }?>
                 </div>
 
@@ -765,6 +1309,7 @@ if (isset($_POST['sbmt_rmv'])) {
     header("Location: lcd_performance.php");
 }
 ?>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
         </div>
     </div>
 </div>
@@ -850,5 +1395,13 @@ $('#otherInput').keydown(function(e) {
         return false; // block form from being submitted yet
     }
 });
+<<<<<<< HEAD
+$(document).keypress(function(e) {
+    if ($("#myModalremove").hasClass('in') && (e.keycode == 13 || e.which == 13)) {
+        window.location.href = "lcd_performance.php";
+    }
+});
+=======
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 </script>
 <!-- ////////////////////////////////////////////////////////////////////////////////// -->

@@ -411,7 +411,7 @@ foreach($run as $dx){
                                                             <option value="facebook">Facebook</option>
                                                             <option value="instgram">Instgram</option>
                                                             <option value="lazada">Lazada</option>
-                                                            <option value="shoppe">Shoppe</option>
+                                                            <option value="shopee">Shopee</option>
                                                             <option value="tokopedia">Tokopedia</option>
                                                             <option value="amazon.com">amazon.com</option>
                                                             <option value="amazon.uk">amazon.uk</option>
@@ -421,6 +421,7 @@ foreach($run as $dx){
                                                             <option value="kebuysell">Kebuysell</option>
                                                             <option value="kenyagroup">Kenya Group</option>
                                                             <option value="loozap">Loozap</option>
+                                                            <option value="website">Website</option>
                                                             <option value="jiji.co.ke">jiji.co.ke</option>
                                                             <option value="olist">olist.ng</option>
                                                             <option value="jiji.ng">jiji.ng</option>

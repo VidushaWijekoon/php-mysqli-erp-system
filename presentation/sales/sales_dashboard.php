@@ -16,7 +16,10 @@ $department = $_SESSION['department'];
 
 if(($role_id == 1 && $department == 11) || ($role_id == 4 && $department == 2) || ($role_id == 2 && $department == 18) || 
     ($role_id == 5 && $department == 5) || ($role_id == 8 && $department == 5)){
+<<<<<<< HEAD
+=======
 
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $start_time = date('Y-m-d 00:00:00');
 $end_time = date('Y-m-d 23:59:59');
 

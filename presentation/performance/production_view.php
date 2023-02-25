@@ -1,9 +1,9 @@
-<?php 
+<?php
 session_start();
 include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
 include_once('../../dataAccess/403.php');
-include_once('../includes/header.php');?>
+include_once('../includes/header.php'); ?>
 
 <link rel="stylesheet" href="../../static/plugins/bootstrap-3.3.5-dist/css/bootstrap.min.css">
 <script src="../../static/plugins/jquery/1.11.3/jquery.min.js"></script>
@@ -13,9 +13,9 @@ include_once('../includes/header.php');?>
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
-$user_id =$_SESSION['user_id'];
-$user_role=$_SESSION['role_id'];
-$user_name=$_SESSION['username'];
+$user_id = $_SESSION['user_id'];
+$user_role = $_SESSION['role_id'];
+$user_name = $_SESSION['username'];
 ?>
 
 <div class="row page-titles">
@@ -29,28 +29,28 @@ $user_name=$_SESSION['username'];
         <div class="col-lg-11 grid-margin stretch-card justify-content-center mx-auto ">
             <div class="card mt-3">
                 <div class="card-body">
-                    <?php $query = "SELECT job_description FROM performance_record_table WHERE user_id ='$user_id' ORDER BY performance_id DESC LIMIT 1"; 
-                                $query_run = mysqli_query($connection,$query);
-                                $last_job='';
-                                foreach($query_run as $data){
-                                    $last_job = $data['job_description'];
-                                }
-                                ?>
+                    <?php $query = "SELECT job_description FROM performance_record_table WHERE user_id ='$user_id' ORDER BY performance_id DESC LIMIT 1";
+                    $query_run = mysqli_query($connection, $query);
+                    $last_job = '';
+                    foreach ($query_run as $data) {
+                        $last_job = $data['job_description'];
+                    }
+                    ?>
                     <h1> Name :
-                        <?php 
+                        <?php
 
-                        $emp_id=$_SESSION['epf'];
-                        $query="SELECT full_name FROM employees WHERE emp_id ='$emp_id'"; 
-                        $query_run = mysqli_query($connection,$query);
-                        foreach($query_run as $data){
+                        $emp_id = $_SESSION['epf'];
+                        $query = "SELECT full_name FROM employees WHERE emp_id ='$emp_id'";
+                        $query_run = mysqli_query($connection, $query);
+                        foreach ($query_run as $data) {
                             echo $data['full_name'];
                         } ?><br>
                         EmpID :<?php echo $_SESSION['epf'] ?><br>
                         Department :
-                        <?php $department_id =$_SESSION['department'];
-                        $query="SELECT department FROM departments WHERE department_id='$department_id'"; 
-                        $query_run=mysqli_query($connection,$query);
-                        foreach($query_run as $data){
+                        <?php $department_id = $_SESSION['department'];
+                        $query = "SELECT department FROM departments WHERE department_id='$department_id'";
+                        $query_run = mysqli_query($connection, $query);
+                        foreach ($query_run as $data) {
                             echo $data['department'];
                         }
                         ?>
@@ -66,28 +66,28 @@ $user_name=$_SESSION['username'];
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php 
-                                      $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-                                      $date = $date1->format('Y-m-d 00:00:00');
-                                          $date2 = $date1->format('Y-m-d 23:59:59');
-                                    $query = "SELECT user_id,qr_number,status FROM performance_record_table WHERE status='0' AND start_time between '$date'AND '$date2' AND department_id='1' GROUP BY user_id ";
-                                    $query_run =mysqli_query($connection,$query);
-                                        foreach($query_run as $data ){
-                                            $technician_id=$data['user_id'];
-                                            $technician_name='';
-                                            $query_name = "SELECT username FROM users WHERE user_id='$technician_id'";
-                                            $query_run =mysqli_query($connection,$query_name);
-                                        foreach($query_run as $a ){
-                                            $technician_name=$a['username'];
-                                        }
-                                            ?>
-                                    <tr>
-                                        <td><?php echo $technician_name; ?></td>
-                                        <td><?php echo $data['qr_number']; ?></td>
-                                        <td><?php echo "On Going"; ?></td>
-                                    </tr>
                                     <?php
+                                    $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+                                    $date = $date1->format('Y-m-d 00:00:00');
+                                    $date2 = $date1->format('Y-m-d 23:59:59');
+                                    $query = "SELECT user_id,qr_number,status FROM performance_record_table WHERE status='0' AND start_time between '$date'AND '$date2' AND department_id='1' GROUP BY user_id ";
+                                    $query_run = mysqli_query($connection, $query);
+                                    foreach ($query_run as $data) {
+                                        $technician_id = $data['user_id'];
+                                        $technician_name = '';
+                                        $query_name = "SELECT username FROM users WHERE user_id='$technician_id'";
+                                        $query_run = mysqli_query($connection, $query_name);
+                                        foreach ($query_run as $a) {
+                                            $technician_name = $a['username'];
                                         }
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $technician_name; ?></td>
+                                            <td><?php echo $data['qr_number']; ?></td>
+                                            <td><?php echo "On Going"; ?></td>
+                                        </tr>
+                                    <?php
+                                    }
                                     ?>
                                 </tbody>
                             </table>
@@ -101,33 +101,33 @@ $user_name=$_SESSION['username'];
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php 
-                                      $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-                                      $date = $date1->format('Y-m-d 00:00:00');
-                                          $date2 = $date1->format('Y-m-d 23:59:59');
+                                    <?php
+                                    $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+                                    $date = $date1->format('Y-m-d 00:00:00');
+                                    $date2 = $date1->format('Y-m-d 23:59:59');
                                     $query = "SELECT COUNT(performance_id) AS completed_count, user_id FROM performance_record_table WHERE status='1' AND start_time between '$date'AND '$date2' AND department_id='1' GROUP BY user_id ";
-                                    $query_run =mysqli_query($connection,$query);
-                                        foreach($query_run as $data ){
-                                            $technician_id=$data['user_id'];
-                                            $technician_name='';
-                                            $query_name = "SELECT full_name FROM employees 
+                                    $query_run = mysqli_query($connection, $query);
+                                    foreach ($query_run as $data) {
+                                        $technician_id = $data['user_id'];
+                                        $technician_name = '';
+                                        $query_name = "SELECT full_name FROM employees 
                                             LEFT JOIN users ON users.epf = employees.emp_id
                                             WHERE users.user_id='$technician_id'";
-                                            $query_run =mysqli_query($connection,$query_name);
-                                        foreach($query_run as $a ){
-                                            $technician_name=$a['full_name'];
+                                        $query_run = mysqli_query($connection, $query_name);
+                                        foreach ($query_run as $a) {
+                                            $technician_name = $a['full_name'];
                                         }
-                                        $user_id= $emp_id;
+                                        $user_id = $emp_id;
 
-                                        if($user_id != $technician_id){
-                                            ?>
-                                    <tr>
-                                        <td><?php echo $technician_name; ?></td>
-                                        <td><?php echo $data['completed_count']; ?></td>
-                                    </tr>
+                                        if ($user_id != $technician_id) {
+                                    ?>
+                                            <tr>
+                                                <td><?php echo $technician_name; ?></td>
+                                                <td><?php echo $data['completed_count']; ?></td>
+                                            </tr>
                                     <?php
                                         }
-                                        }
+                                    }
                                     ?>
 
                                 </tbody>
@@ -140,12 +140,13 @@ $user_name=$_SESSION['username'];
     </div>
 </div>
 <style>
-[type="text"] {
-    height: 22px;
-    margin-top: 4px;
-    font-size: 10px;
-    border: 1px solid #f1f1f1;
-    border-radius: 5px;
-    font-size: 12px;
-    padding: 10px;
-    font-family: "Poppins", sans-s
+    [type="text"] {
+        height: 22px;
+        margin-top: 4px;
+        font-size: 10px;
+        border: 1px solid #f1f1f1;
+        border-radius: 5px;
+        font-size: 12px;
+        padding: 10px;
+    }
+</style>

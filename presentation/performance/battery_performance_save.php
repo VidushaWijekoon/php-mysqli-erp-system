@@ -126,7 +126,10 @@ if ($end_time == "0000-00-00 00:00:00" && $same_jd_count == 1 && $status == 0) {
     $query_run = mysqli_query($connection, $query);
 
     header("Location: battery_performance.php?updated=$job_description&id=$search_value");
+<<<<<<< HEAD
+=======
 
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 } elseif ($same_jd_count == 0) {
 
     $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
@@ -164,6 +167,15 @@ if ($end_time == "0000-00-00 00:00:00" && $same_jd_count == 1 && $status == 0) {
     $query_run = mysqli_query($connection, $query);
 
     header('Location: battery_performance.php');
+<<<<<<< HEAD
+} elseif ($end_time != "0000-00-00 00:00:00" && $same_jd_count == 1 && $status == 1) {
+?>
+    <script>
+        if (window.confirm('Already you completed this machine under this job description')) {
+            document.location = ' battery_performance.php';
+        }
+    </script>
+=======
 
 } elseif ($end_time != "0000-00-00 00:00:00" && $same_jd_count == 1 && $status == 1) {
     ?>
@@ -172,6 +184,7 @@ if (window.confirm('Already you completed this machine under this job descriptio
     document.location = ' battery_performance.php';
 }
 </script>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 <?php
 
 }

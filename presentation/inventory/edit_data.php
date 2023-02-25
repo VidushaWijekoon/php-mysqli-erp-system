@@ -75,4 +75,3 @@ $location = $_POST['location'];
             QRcode::png($codeContents, $tempDir.''.$filename.'.png', QR_ECLEVEL_L, 5,1);
             $start_print=++$last_inventory_id;
             header("location: ./machine_from_supplier.php?id=$start_print");
-        ?>

@@ -8,6 +8,10 @@ $scanned_mfg = '0';
 $lcd_p_n = 0;
 $search_value;
 $scanned_qr = trim($_POST['qr']);
+<<<<<<< HEAD
+$scanned_qr = str_replace("'", '', $scanned_qr);
+=======
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $job_description = $_POST['job_description'];
 $user_id = trim($_POST['user_id']);
 $user_role = $_POST['user_role'];
@@ -25,6 +29,12 @@ if ($scanned_qr != '0') {
 } elseif ($scanned_mfg != 0) {
     $search_value = $scanned_mfg;
 }
+<<<<<<< HEAD
+
+$query = "SELECT * FROM performance_record_table WHERE user_id ='$user_id'AND (qr_number ='$search_value') AND
+                job_description = '$job_description' ";
+echo $query;
+=======
 if ($department_id == 14) {
     $query = "SELECT bat_id,status FROM battery_request WHERE battery_p_n='$search_value'";
 
@@ -45,6 +55,7 @@ if ($department_id == 14) {
 $query = "SELECT * FROM performance_record_table WHERE user_id ='$user_id'AND (qr_number ='$search_value') AND
                 job_description = '$job_description' ";
 
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 $query_run = mysqli_query($connection, $query);
 $row = mysqli_num_rows($query_run);
 
@@ -97,9 +108,17 @@ if ($end_time == "0000-00-00 00:00:00" && $same_jd_count == 1 && $status == 0) {
     $query = "SELECT * FROM performance_record_table WHERE user_id ='$user_id'AND (qr_number ='$search_value') AND
                 job_description = '$job_description' ";
     $query_run = mysqli_query($connection, $query);
+<<<<<<< HEAD
+    $test = 0;
     foreach ($query_run as $data) {
         $performance_id = $data['performance_id'];
         $start_time = $data['start_time'];
+        $test = $data['qr_number'];
+=======
+    foreach ($query_run as $data) {
+        $performance_id = $data['performance_id'];
+        $start_time = $data['start_time'];
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
     }
     $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
     $date = $date1->format('Y-m-d H:i:s');
@@ -122,8 +141,44 @@ if ($end_time == "0000-00-00 00:00:00" && $same_jd_count == 1 && $status == 0) {
                 status = 1
                 WHERE performance_id = $performance_id";
     $query_run = mysqli_query($connection, $query);
+<<<<<<< HEAD
+    $query1 = "SELECT * FROM lcd_issue WHERE alsakb_number='$test'";
+
+    $sql1 = mysqli_query($connection, $query1);
+    $query22 = "UPDATE issue_laptops
+    SET
+    status = 2,
+    received_date = now()
+    WHERE alsakb_qr = $test";
+$query_run22 = mysqli_query($connection, $query22);
+    $scratch = 0;
+    $spot = 0;
+    $broken_lcd = 0;
+    $yellow_shadow = 0;
+    foreach ($sql1 as $data) {
+        $scratch = $data['scratch'];
+        $spot = $data['spot'];
+        $broken_lcd = $data['broken_lcd'];
+        $yellow_shadow = $data['yellow_shadow'];
+    }
+    $issue = "";
+    if ($broken_lcd != 0) {
+        $issue = "Please Send the Broken Rack";
+    } elseif ($yellow_shadow != 0) {
+        $issue = "Please Send the Yellow Shadow Rack";
+    } elseif ($scratch != 0 && $spot != 0) {
+        $issue = "Please Send to Fix the Scratch And Spot Issue";
+    } elseif ($scratch != 0) {
+        $issue = "Please Send to Fix the Scratch Issue";
+    } elseif ($spot != 0) {
+        $issue = "Please Send to Fix the Spot Issue";
+    }
+
+    header("Location:lcd_performance.php?updated=$job_description&endid=$search_value&issue=$issue");
+=======
 
     header("Location:lcd_performance.php?end=$job_description&endid=$search_value");
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 } elseif ($same_jd_count == 0) {
 
     $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));

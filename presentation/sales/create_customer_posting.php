@@ -551,7 +551,11 @@ if(isset($_POST['get_country'])){
                                                 </td>
 
                                                 <td>
+<<<<<<< HEAD
+                                                    <?php if(($x <= '-4') || ($posted_model_1 == 0)) { ?>
+=======
                                                     <?php if(($x <= '-6') || ($posted_model_1 == 0)) { ?>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                                                     <input type="text" class="form-control" name="posted_model_1"
                                                         placeholder="Posted Model 1">
                                                     <?php } else { ?>
@@ -561,7 +565,11 @@ if(isset($_POST['get_country'])){
                                                 </td>
 
                                                 <td>
+<<<<<<< HEAD
+                                                    <?php if(($x <= '-4') || ($posted_model_2 == 0)) { ?>
+=======
                                                     <?php if(($x <= '-6') || ($posted_model_2 == 0)) { ?>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                                                     <input type="text" class="form-control" name="posted_model_2"
                                                         placeholder="Posted Model">
                                                     <?php } else { ?>
@@ -571,7 +579,11 @@ if(isset($_POST['get_country'])){
                                                 </td>
 
                                                 <td>
+<<<<<<< HEAD
+                                                    <?php if(($x <= '-4') || ($customer_asking_model == 0)) { ?>
+=======
                                                     <?php if(($x <= '-6') || ($customer_asking_model == 0)) { ?>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                                                     <input type="text" class="form-control" name="customer_asking_model"
                                                         placeholder="Customer Asking Model">
                                                     <?php } else { ?>
@@ -580,7 +592,11 @@ if(isset($_POST['get_country'])){
                                                     <?php } ?>
                                                 </td>
                                                 <td>
+<<<<<<< HEAD
+                                                    <?php if(($x <= '-4') || ($customer_asking_price == 0)) { ?>
+=======
                                                     <?php if(($x <= '-6') || ($customer_asking_price == 0)) { ?>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                                                     <input type="text" min="1" class="form-control"
                                                         name="customer_asking_price"
                                                         placeholder="Customer Asking Price">
@@ -636,7 +652,11 @@ if(isset($_POST['get_country'])){
                                                     <?php } ?>
                                                 </td>
                                                 <td>
+<<<<<<< HEAD
+                                                    <?php if(($post_status1 == 0) || ($x <= '-4')){ ?>
+=======
                                                     <?php if(($post_status1 == 0) || ($x <= '-6')){ ?>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                                                     <div class="icheck-success d-inline">
                                                         <button class="btn btn-sm btn-primary px-2 mt-1" type="submit"
                                                             id="post" name="submit_post_to_customer"

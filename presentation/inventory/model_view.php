@@ -1,9 +1,9 @@
-<?php 
+<?php
 session_start();
-include_once('../../dataAccess/connection.php');
-include_once('../../dataAccess/functions.php');
-include_once('../../dataAccess/403.php');
-include_once('../includes/header.php');
+include_once '../../dataAccess/connection.php';
+include_once '../../dataAccess/functions.php';
+include_once '../../dataAccess/403.php';
+include_once '../includes/header.php';
 
 // checking if a user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -55,6 +55,31 @@ $model = $_GET['model'];
                             <tbody class="table-body">
 
                                 <?php
+<<<<<<< HEAD
+// $model = null;
+$core = null;
+$in_total = null;
+$in_stock = null;
+$dispatch = null;
+$main_stock = null;
+$core = '';
+$generation = '';
+$i = 0;
+$a = 0;
+$touch_wholesale_price = 0;
+$non_touch_wholesale_price = 0;
+$query = "SELECT model,generation,core, COUNT(inventory_id) as in_total FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model = '$model'   GROUP BY core";
+
+$result = mysqli_query($connection, $query);
+foreach ($result as $data) {
+    $model = $data['model'];
+    $core = $data['core'];
+    $generation = $data['generation'];
+    $in_total = $data['in_total'];
+    $i++;
+    $a++;
+    echo "
+=======
                                 // $model = null;
                                 $core = null;
                                 $in_total = null;
@@ -78,6 +103,7 @@ $model = $_GET['model'];
                                     $i++;
                                     $a++;
                                     echo "
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                                     <tr class='cell-1' data-toggle='collapse'   >
                                     <td>$i</td>
                                     <td>$brand</td>
@@ -86,6 +112,57 @@ $model = $_GET['model'];
                                     <td>$generation</td>
                                     <td>$in_total</td>
                                     ";
+<<<<<<< HEAD
+    echo "<td>";
+    $query = "SELECT COUNT(inventory_id)as in_stock FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND send_to_production='0'";
+
+    $result = mysqli_query($connection, $query);
+    foreach ($result as $data) {
+        $in_stock = $data['in_stock'];
+
+    }
+    $query = "SELECT COUNT(inventory_id)as dispatch FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND send_to_production='1'";
+    $result = mysqli_query($connection, $query);
+    foreach ($result as $data) {
+        $dispatch = $data['dispatch'];
+    }
+    $available = $in_stock - $dispatch;
+    echo $in_stock;
+    echo "</td>
+                                    <td>";
+
+    echo $dispatch;
+    echo "
+                                    </td>";
+    echo "<td>";
+    $query = "SELECT non_touch_wholesale_price, COUNT(touch_or_non_touch)as touch_or_non_touch
+                                            FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND dispatch='0' AND touch_or_non_touch='yes'";
+
+    $result = mysqli_query($connection, $query);
+    foreach ($result as $data) {
+        $touch_or_non_touch = $data['touch_or_non_touch'];
+        $non_touch_wholesale_price = $data['non_touch_wholesale_price'];
+
+    }
+    echo $touch_or_non_touch;
+    echo "</td>";
+    $no_touch = $in_stock - $touch_or_non_touch;
+    echo "<td>" . $no_touch . "</td>";
+    echo "<td>" . $non_touch_wholesale_price . "</td>";
+
+    $query = "SELECT touch_wholesale_price, COUNT(battery)as battery FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model='$model'AND core='$core' AND dispatch='0' AND battery='no'";
+    $result = mysqli_query($connection, $query);
+    foreach ($result as $data) {
+        $battery = $data['battery'];
+        $touch_wholesale_price = $data['touch_wholesale_price'];
+
+    }
+    echo "<td>$touch_wholesale_price </td>";
+    echo "<td>$battery </td>";
+    echo "</td>";
+
+    echo "
+=======
                                     
                                 //     echo "<td>";
                                 //     $query = "SELECT  COUNT(inventory_id) as in_total FROM `warehouse_information_sheet` WHERE brand = '$brand' AND model= '$model' AND core='$core'";
@@ -145,12 +222,17 @@ $model = $_GET['model'];
                                     echo "</td>";
                                     
                                     echo "
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                                     <td class='text-center'>
-                                            <a class='btn btn-xs bg-primary ' 
+                                            <a class='btn btn-xs bg-primary '
                                                 href='spec_view.php?model=$model&brand=$brand&core=$core'><i class='fas fa-eye'></i>
                                             </a>
                                         </td>
                                 </tr>";
+<<<<<<< HEAD
+  ?>
+                                <?php }?>
+=======
                             //     <a class='btn btn-xs bg-primary ' 
                             //     href='spec_view.php?model=$model&brand=$brand'><i class='fas fa-eye'></i>
                             // </a>
@@ -200,6 +282,7 @@ $model = $_GET['model'];
                                      </tr>";
                                 } ?>
                                 <?php } ?>
+>>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                             </tbody>
                         </table>
                 </div>
@@ -251,4 +334,4 @@ $model = $_GET['model'];
 }
 </style>
 
-<?php include_once('../includes/footer.php');  ?>
+<?php include_once '../includes/footer.php';?>
