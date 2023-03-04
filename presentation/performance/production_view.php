@@ -148,5 +148,6 @@ $user_name = $_SESSION['username'];
         border-radius: 5px;
         font-size: 12px;
         padding: 10px;
+        font-family: "Poppins";
     }
 </style>

@@ -1,4 +1,4 @@
-<?php
+<?php 
 session_start();
 include_once('../../dataAccess/connection.php');
 include_once('../../dataAccess/functions.php');
@@ -22,18 +22,12 @@ if (!isset($_SESSION['user_id'])) {
 <div class="row m-2">
 
     <div class="col-12 mt-3">
-<<<<<<< HEAD
-        <a class="btn btn-info mx-2 text-white" type="button" href="create_employee.php"><i class="fa fa-plus"></i><span class="mx-1">Create Employee</span></a>
-        <a class="btn btn-primary mx-2 text-white" type="button" href="employees.php"><i class="fa-solid fa-users"></i><span class="mx-1">Employee List</span></a>
-        <a class="btn btn-primary mx-2 text-white" type="button" href="report.php"><i class="fa-solid fa-users"></i><span class="mx-1">Employee Task Report</span></a>
-=======
         <a class="btn btn-info mx-2 text-white" type="button" href="create_employee.php"><i class="fa fa-plus"></i><span
                 class="mx-1">Create Employee</span></a>
         <a class="btn btn-primary mx-2 text-white" type="button" href="employees.php"><i
                 class="fa-solid fa-users"></i><span class="mx-1">Employee List</span></a>
         <a class="btn btn-primary mx-2 text-white" type="button" href="report.php"><i
                 class="fa-solid fa-users"></i><span class="mx-1">Employee Task Report</span></a>
->>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
     </div>
 </div>
 
@@ -50,14 +44,14 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="info-box-number">
                     <?php
 
-                    $query = "SELECT `emp_id` FROM `employees`";
+                        $query = "SELECT `emp_id` FROM `employees`";
 
-                    if ($result = mysqli_query($connection, $query)) {
+                        if ($result = mysqli_query($connection, $query)) {
 
-                        // Return the number of rows in result set
-                        $rowcount = mysqli_num_rows($result);
-                    }
-                    echo "$rowcount";
+                            // Return the number of rows in result set
+                            $rowcount = mysqli_num_rows($result);
+                        }
+                            echo "$rowcount";
                     ?>
                 </span>
             </div>
@@ -75,14 +69,14 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="info-box-number">
                     <?php
 
-                    $query = "SELECT * FROM employees WHERE is_active = 0";
+                        $query = "SELECT * FROM employees WHERE is_active = 0";
 
-                    if ($result = mysqli_query($connection, $query)) {
+                        if ($result = mysqli_query($connection, $query)) {
 
-                        // Return the number of rows in result set
-                        $rowcount = mysqli_num_rows($result);
-                    }
-                    echo "$rowcount";
+                            // Return the number of rows in result set
+                            $rowcount = mysqli_num_rows($result);
+                        }
+                            echo "$rowcount";
                     ?>
                 </span>
             </div>
@@ -101,15 +95,15 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="info-box-number">
                     <?php
 
-                    $query = "SELECT `department` FROM users WHERE department = 4";
+                        $query = "SELECT `department` FROM users WHERE department = 4";
 
-                    if ($result = mysqli_query($connection, $query)) {
+                        if ($result = mysqli_query($connection, $query)) {
 
-                        // Return the number of rows in result set
-                        $rowcount = mysqli_num_rows($result);
-                    }
+                            // Return the number of rows in result set
+                            $rowcount = mysqli_num_rows($result);
+                        }
 
-                    ?>
+                        ?>
 
                     <?php echo "$rowcount"; ?>
                 </span>
@@ -139,15 +133,15 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="info-box-number">
                     <?php
 
-                    $query = "SELECT `visa_type` FROM `employees` WHERE visa_type = 3";
+                        $query = "SELECT `visa_type` FROM `employees` WHERE visa_type = 3";
 
-                    if ($result = mysqli_query($connection, $query)) {
+                        if ($result = mysqli_query($connection, $query)) {
 
-                        // Return the number of rows in result set
-                        $rowcount = mysqli_num_rows($result);
-                    }
+                            // Return the number of rows in result set
+                            $rowcount = mysqli_num_rows($result);
+                        }
 
-                    ?>
+                        ?>
 
                     <?php echo "$rowcount"; ?>
                 </span>
@@ -166,15 +160,15 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="info-box-number">
                     <?php
 
-                    $query = "SELECT `visa_type` FROM `employees` WHERE visa_type = 8";
+                        $query = "SELECT `visa_type` FROM `employees` WHERE visa_type = 8";
 
-                    if ($result = mysqli_query($connection, $query)) {
+                        if ($result = mysqli_query($connection, $query)) {
 
-                        // Return the number of rows in result set
-                        $rowcount = mysqli_num_rows($result);
-                    }
+                            // Return the number of rows in result set
+                            $rowcount = mysqli_num_rows($result);
+                        }
 
-                    ?>
+                        ?>
 
                     <?php echo "$rowcount"; ?>
                 </span>
@@ -194,15 +188,15 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="info-box-number">
                     <?php
 
-                    $query = "SELECT `visa_type` FROM `employees` WHERE visa_type = 11";
+                        $query = "SELECT `visa_type` FROM `employees` WHERE visa_type = 11";
 
-                    if ($result = mysqli_query($connection, $query)) {
+                        if ($result = mysqli_query($connection, $query)) {
 
-                        // Return the number of rows in result set
-                        $rowcount = mysqli_num_rows($result);
-                    }
+                            // Return the number of rows in result set
+                            $rowcount = mysqli_num_rows($result);
+                        }
 
-                    ?>
+                        ?>
 
                     <?php echo "$rowcount"; ?></span>
             </div>
@@ -222,15 +216,15 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="info-box-number">
                     <?php
 
-                    $query = "SELECT `visa_type` FROM `employees` WHERE visa_type = 9";
+                        $query = "SELECT `visa_type` FROM `employees` WHERE visa_type = 9";
 
-                    if ($result = mysqli_query($connection, $query)) {
+                        if ($result = mysqli_query($connection, $query)) {
 
-                        // Return the number of rows in result set
-                        $rowcount = mysqli_num_rows($result);
-                    }
+                            // Return the number of rows in result set
+                            $rowcount = mysqli_num_rows($result);
+                        }
 
-                    ?>
+                        ?>
 
                     <?php echo "$rowcount"; ?></span>
             </div>
@@ -259,14 +253,14 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="info-box-number">
                     <?php
 
-                    $query = "SELECT `department` FROM `employees` WHERE department = 20";
+                        $query = "SELECT `department` FROM `employees` WHERE department = 20";
 
-                    if ($result = mysqli_query($connection, $query)) {
+                        if ($result = mysqli_query($connection, $query)) {
 
-                        // Return the number of rows in result set
-                        $rowcount = mysqli_num_rows($result);
-                    }
-                    echo "$rowcount";
+                            // Return the number of rows in result set
+                            $rowcount = mysqli_num_rows($result);
+                        }
+                            echo "$rowcount";
                     ?>
                 </span>
             </div>
@@ -284,14 +278,14 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="info-box-number">
                     <?php
 
-                    $query = "SELECT `department` FROM `employees` WHERE department = 5";
+                        $query = "SELECT `department` FROM `employees` WHERE department = 5";
 
-                    if ($result = mysqli_query($connection, $query)) {
+                        if ($result = mysqli_query($connection, $query)) {
 
-                        // Return the number of rows in result set
-                        $rowcount = mysqli_num_rows($result);
-                    }
-                    echo "$rowcount";
+                            // Return the number of rows in result set
+                            $rowcount = mysqli_num_rows($result);
+                        }
+                            echo "$rowcount";
                     ?>
                 </span>
             </div>
@@ -310,14 +304,14 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="info-box-number">
                     <?php
 
-                    $query = "SELECT `department` FROM `employees` WHERE department = 4";
+                        $query = "SELECT `department` FROM `employees` WHERE department = 4";
 
-                    if ($result = mysqli_query($connection, $query)) {
+                        if ($result = mysqli_query($connection, $query)) {
 
-                        // Return the number of rows in result set
-                        $rowcount = mysqli_num_rows($result);
-                    }
-                    echo "$rowcount";
+                            // Return the number of rows in result set
+                            $rowcount = mysqli_num_rows($result);
+                        }
+                            echo "$rowcount";
                     ?>
             </div>
             <!-- /.info-box-content -->
@@ -336,14 +330,14 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="info-box-number">
                     <?php
 
-                    $query = "SELECT `department` FROM `employees` WHERE department = 16";
+                        $query = "SELECT `department` FROM `employees` WHERE department = 16";
 
-                    if ($result = mysqli_query($connection, $query)) {
+                        if ($result = mysqli_query($connection, $query)) {
 
-                        // Return the number of rows in result set
-                        $rowcount = mysqli_num_rows($result);
-                    }
-                    echo "$rowcount";
+                            // Return the number of rows in result set
+                            $rowcount = mysqli_num_rows($result);
+                        }
+                            echo "$rowcount";
                     ?>
                 </span>
             </div>
@@ -362,14 +356,14 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="info-box-number">
                     <?php
 
-                    $query = "SELECT `department` FROM `employees` WHERE department = 11";
+                        $query = "SELECT `department` FROM `employees` WHERE department = 11";
 
-                    if ($result = mysqli_query($connection, $query)) {
+                        if ($result = mysqli_query($connection, $query)) {
 
-                        // Return the number of rows in result set
-                        $rowcount = mysqli_num_rows($result);
-                    }
-                    echo "$rowcount";
+                            // Return the number of rows in result set
+                            $rowcount = mysqli_num_rows($result);
+                        }
+                            echo "$rowcount";
                     ?>
             </div>
             <!-- /.info-box-content -->
@@ -394,14 +388,14 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="info-box-number">
                     <?php
 
-                    $query = "SELECT `department` FROM `employees` WHERE department = 2";
+                        $query = "SELECT `department` FROM `employees` WHERE department = 2";
 
-                    if ($result = mysqli_query($connection, $query)) {
+                        if ($result = mysqli_query($connection, $query)) {
 
-                        // Return the number of rows in result set
-                        $rowcount = mysqli_num_rows($result);
-                    }
-                    echo "$rowcount";
+                            // Return the number of rows in result set
+                            $rowcount = mysqli_num_rows($result);
+                        }
+                            echo "$rowcount";
                     ?>
             </div>
             <!-- /.info-box-content -->
@@ -419,14 +413,14 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="info-box-number">
                     <?php
 
-                    $query = "SELECT `department` FROM `employees` WHERE department = 1";
+                        $query = "SELECT `department` FROM `employees` WHERE department = 1";
 
-                    if ($result = mysqli_query($connection, $query)) {
+                        if ($result = mysqli_query($connection, $query)) {
 
-                        // Return the number of rows in result set
-                        $rowcount = mysqli_num_rows($result);
-                    }
-                    echo "$rowcount";
+                            // Return the number of rows in result set
+                            $rowcount = mysqli_num_rows($result);
+                        }
+                            echo "$rowcount";
                     ?>
                 </span>
             </div>
@@ -444,14 +438,14 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="info-box-number">
                     <?php
 
-                    $query = "SELECT `department` FROM `employees` WHERE department = 9";
+                        $query = "SELECT `department` FROM `employees` WHERE department = 9";
 
-                    if ($result = mysqli_query($connection, $query)) {
+                        if ($result = mysqli_query($connection, $query)) {
 
-                        // Return the number of rows in result set
-                        $rowcount = mysqli_num_rows($result);
-                    }
-                    echo "$rowcount";
+                            // Return the number of rows in result set
+                            $rowcount = mysqli_num_rows($result);
+                        }
+                            echo "$rowcount";
                     ?>
                 </span>
             </div>
@@ -470,14 +464,14 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="info-box-number">
                     <?php
 
-                    $query = "SELECT `department` FROM `employees` WHERE department = 10";
+                        $query = "SELECT `department` FROM `employees` WHERE department = 10";
 
-                    if ($result = mysqli_query($connection, $query)) {
+                        if ($result = mysqli_query($connection, $query)) {
 
-                        // Return the number of rows in result set
-                        $rowcount = mysqli_num_rows($result);
-                    }
-                    echo "$rowcount";
+                            // Return the number of rows in result set
+                            $rowcount = mysqli_num_rows($result);
+                        }
+                            echo "$rowcount";
                     ?>
             </div>
             <!-- /.info-box-content -->
@@ -496,14 +490,14 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="info-box-number">
                     <?php
 
-                    $query = "SELECT `department` FROM `employees` WHERE department = 7";
+                        $query = "SELECT `department` FROM `employees` WHERE department = 7";
 
-                    if ($result = mysqli_query($connection, $query)) {
+                        if ($result = mysqli_query($connection, $query)) {
 
-                        // Return the number of rows in result set
-                        $rowcount = mysqli_num_rows($result);
-                    }
-                    echo "$rowcount";
+                            // Return the number of rows in result set
+                            $rowcount = mysqli_num_rows($result);
+                        }
+                            echo "$rowcount";
                     ?>
             </div>
             <!-- /.info-box-content -->
@@ -521,14 +515,14 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="info-box-number">
                     <?php
 
-                    $query = "SELECT `department` FROM `employees` WHERE department = 21";
+                        $query = "SELECT `department` FROM `employees` WHERE department = 21";
 
-                    if ($result = mysqli_query($connection, $query)) {
+                        if ($result = mysqli_query($connection, $query)) {
 
-                        // Return the number of rows in result set
-                        $rowcount = mysqli_num_rows($result);
-                    }
-                    echo "$rowcount";
+                            // Return the number of rows in result set
+                            $rowcount = mysqli_num_rows($result);
+                        }
+                            echo "$rowcount";
                     ?>
             </div>
             <!-- /.info-box-content -->
@@ -553,14 +547,14 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="info-box-number">
                     <?php
 
-                    $query = "SELECT `department` FROM `employees` WHERE department = 14";
+                        $query = "SELECT `department` FROM `employees` WHERE department = 14";
 
-                    if ($result = mysqli_query($connection, $query)) {
+                        if ($result = mysqli_query($connection, $query)) {
 
-                        // Return the number of rows in result set
-                        $rowcount = mysqli_num_rows($result);
-                    }
-                    echo "$rowcount";
+                            // Return the number of rows in result set
+                            $rowcount = mysqli_num_rows($result);
+                        }
+                            echo "$rowcount";
                     ?>
             </div>
             <!-- /.info-box-content -->
@@ -578,14 +572,14 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="info-box-number">
                     <?php
 
-                    $query = "SELECT `department` FROM `employees` WHERE department = 8";
+                        $query = "SELECT `department` FROM `employees` WHERE department = 8";
 
-                    if ($result = mysqli_query($connection, $query)) {
+                        if ($result = mysqli_query($connection, $query)) {
 
-                        // Return the number of rows in result set
-                        $rowcount = mysqli_num_rows($result);
-                    }
-                    echo "$rowcount";
+                            // Return the number of rows in result set
+                            $rowcount = mysqli_num_rows($result);
+                        }
+                            echo "$rowcount";
                     ?>
             </div>
             <!-- /.info-box-content -->
@@ -603,14 +597,14 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="info-box-number">
                     <?php
 
-                    $query = "SELECT `department` FROM `employees` WHERE department = 19";
+                        $query = "SELECT `department` FROM `employees` WHERE department = 19";
 
-                    if ($result = mysqli_query($connection, $query)) {
+                        if ($result = mysqli_query($connection, $query)) {
 
-                        // Return the number of rows in result set
-                        $rowcount = mysqli_num_rows($result);
-                    }
-                    echo "$rowcount";
+                            // Return the number of rows in result set
+                            $rowcount = mysqli_num_rows($result);
+                        }
+                            echo "$rowcount";
                     ?>
                 </span>
             </div>
@@ -628,14 +622,14 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="info-box-number">
                     <?php
 
-                    $query = "SELECT `department` FROM `employees` WHERE department = 13";
+                        $query = "SELECT `department` FROM `employees` WHERE department = 13";
 
-                    if ($result = mysqli_query($connection, $query)) {
+                        if ($result = mysqli_query($connection, $query)) {
 
-                        // Return the number of rows in result set
-                        $rowcount = mysqli_num_rows($result);
-                    }
-                    echo "$rowcount";
+                            // Return the number of rows in result set
+                            $rowcount = mysqli_num_rows($result);
+                        }
+                            echo "$rowcount";
                     ?>
                 </span>
             </div>

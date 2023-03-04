@@ -14,44 +14,9 @@ if (!isset($_SESSION['user_id'])) {
 
 $device = $_GET['device'];
 $brand = $_GET['brand'];
-$touch_wholesale_price = null;
-
-$query1 = "SELECT inventory_id, device, brand, model, core, processor FROM warehouse_information_sheet WHERE device = '$device' AND brand = '$brand' AND dispatch = '0'
-            GROUP BY device, brand, model ";
-$result = mysqli_query($connection, $query1);
-foreach($result as $x){
-    $device = $x['device'];
-    $brand = $x['brand'];
-    $model = $x['model'];
-}
-
-$query1 = "SELECT inventory_id, touch_wholesale_price FROM warehouse_information_sheet WHERE device = '$device' AND brand = '$brand' AND dispatch = '0' AND touch_wholesale_price = '0'";
-$result = mysqli_query($connection, $query1);
-$rowcount = mysqli_num_rows($result);
-
-$query2 = "SELECT inventory_id, touch_wholesale_price FROM warehouse_information_sheet WHERE device = '$device' AND brand = '$brand' AND dispatch = '0' AND non_touch_wholesale_price = '0'";
-$result1 = mysqli_query($connection, $query2);
-$xd = mysqli_num_rows($result1);
-
-// $sum =65;
-// $sum = $rowcount + $xd;
 
 ?>
 
-<div class="row m-2">
-    <div class="col-12 mt-3">
-        <a href="./new_items.php?device=<?php echo $device ?>&brand=<?php echo $brand ?>"
-            class="btn btn-primary position-relative float-right" style="margin-right: 13%;">
-            New Items
-            <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger"
-                style="top: -10px; font-size: 15px">
-                <?php if($rowcount > 99) { ?> 99+
-                <?php } else { echo $rowcount ; } ?>
-                <span class="visually-hidden"></span>
-            </span>
-        </a>
-    </div>
-</div>
 
 <div class="container-fluid">
     <div class="row">
@@ -67,7 +32,7 @@ $xd = mysqli_num_rows($result1);
                                 <th>#</th>
                                 <th>Device</th>
                                 <th>Brand</th>
-                                <th>Model</th>
+                                <th>Core</th>
                                 <th>Total QTY</th>
                                 <th>&nbsp;</th>
                             </tr>

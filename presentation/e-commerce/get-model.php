@@ -1,6 +1,6 @@
 <?php
 	$connection = mysqli_connect("localhost", "root", "", "wms");
-	if ( isset($_GET['brand']) ) {
+	if (isset($_GET['brand']) ) {
 
 		$brand = mysqli_real_escape_string($connection, $_GET['brand']);
 		$query 		= "SELECT DISTINCT model FROM warehouse_information_sheet WHERE brand = '{$brand}'";

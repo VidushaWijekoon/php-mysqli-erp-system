@@ -60,9 +60,7 @@ $username = $_GET['username'];
 
                                 $i = 0;
                             
-                                $query = "SELECT posting_customer_name, choose_country, posting_phone_code, posting_whatsapp_number, platform2, model_selling_and_buying1, 
-                                                posted_model_1, posted_model_2, customer_asking_model, customer_asking_price, created_time   
-                                        FROM sales_posting_to_customer WHERE created_by = '$username'
+                                $query = "SELECT * FROM sales_posting_to_customer WHERE created_by = '$username'
                                         AND MONTH(sales_posting_to_customer.created_time) = MONTH(now()) ORDER BY created_time DESC";
                                 $result_set = mysqli_query($connection, $query);
                                 foreach($result_set as $count){

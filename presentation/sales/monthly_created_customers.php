@@ -52,8 +52,7 @@ $username = $_GET['username'];
                         <tbody>
                             <?php 
                             
-                            $query_1 = "SELECT customer_name, create_customer_country, customer_whatspp_phone_code, customer_whatsapp_number, platform1, model_selling_buying, uae_pickup1, created_time  
-                                        FROM sales_create_customer_informations WHERE 
+                            $query_1 = "SELECT * FROM sales_create_customer_informations WHERE 
                             created_by = '$username' AND MONTH(sales_create_customer_informations.created_time) = MONTH(now()) ORDER BY created_time DESC";
                             $result = mysqli_query($connection, $query_1);
                             foreach($result as $row){
