@@ -169,35 +169,6 @@ $user_role = $_SESSION['role_id'];
 
                                 <div class="row">
                                     <label class="col-sm-12 col-form-label">Morning Session Start Time : 09.05AM</label>
-<<<<<<< HEAD
-=======
-                                    <?php  
-                                            $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-                                            $date = $date1->format('Y-m-d 09:00:00');
-                                          $date2 = $date1->format('Y-m-d 13:55:00');
-                                            $duration =0;
-                                            $spend_time =0;
-                                            $query ="SELECT start_time  FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY performance_id ASC LIMIT 1";
-                                            
-                                            $query_run = mysqli_query($connection,$query);
-                                            $datetime_1=''; 
-                                            $datetime_2 ='' ; 
-                                            foreach($query_run as $data){
-                                                $datetime_1 = date('Y-m-d 09:05:00'); 
-                                                $datetime_2 = $data['start_time']; 
-                                            } 
-                                            
-                                            $start_datetime = new DateTime($datetime_1); 
-                                            $diff = $start_datetime->diff(new DateTime($datetime_2));
-                                            if($datetime_2 !=''){
-                                            if ($datetime_2 < $datetime_1) {
-                                                
-                                               
-                                               ?>
-                                    <label class="col-sm-12 col-form-label text-success">You are Earlier :
-                                        <?php echo $diff->i.' Minutes' ?>
-                                        minute &#128525;</label>
->>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                                     <?php
                                     $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                     $date = $date1->format('Y-m-d 09:00:00');
@@ -247,36 +218,9 @@ $user_role = $_SESSION['role_id'];
 
                                     <label class="col-sm-12 col-form-label">Afternoon Session Start Time :
                                         03.05PM</label>
-<<<<<<< HEAD
-=======
-                                    <?php 
-                                            $date = date('Y-m-d 15:00:00');
-                                            $date2 = date('Y-m-d 18:15:00');
-                                            $query ="SELECT start_time  FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY performance_id ASC LIMIT 1";
-                                            $query_run = mysqli_query($connection,$query);
-                                            $datetime_1=''; 
-                                            $datetime_2 ='' ; 
-                                            foreach($query_run as $data){
-                                                $datetime_1 = date('Y-m-d 15:05:00'); 
-                                                $datetime_2 = $data['start_time']; 
-                                                
-                                            } 
-                                            
-                                            $start_datetime = new DateTime($datetime_1); 
-                                            $diff = $start_datetime->diff(new DateTime($datetime_2));
-                                            
-                                            if($datetime_2 !=''){
-                                            if ($datetime_2 < $datetime_1) {
-                                               
-                                                
-                                               ?>
-                                    <label class="col-sm-12 col-form-label text-success">You are Earlier :
-                                        <?php echo $diff->i.' Minutes' ?>
-                                        minute &#128525;</label>
->>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                                     <?php
                                     $date = date('Y-m-d 15:00:00');
-                                    $date2 = date('Y-m-d 18:15:50');
+                                    $date2 = date('Y-m-d 18:46:50');
                                     $query = "SELECT start_time  FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY performance_id ASC LIMIT 1";
                                     $query_run = mysqli_query($connection, $query);
                                     $datetime_1 = '';
@@ -309,7 +253,7 @@ $user_role = $_SESSION['role_id'];
                                         <?php
                                         $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                         $current_time = $date1->format('Y-m-d H:i:s');
-                                        $date = $date1->format('Y-m-d 18:15:50');
+                                        $date = $date1->format('Y-m-d 18:46:50');
                                         $date_old = $date1->format('Y-m-d 15:05:00');
                                         $remaining_time = (strtotime($date) - strtotime($current_time)) / 60;
                                         if ($remaining_time > 0 && $date_old < $current_time) {
@@ -318,33 +262,6 @@ $user_role = $_SESSION['role_id'];
                                         ?>
                                     </label>
                                     <label class="col-sm-12 col-form-label">Evening Session Start Time : 06.45PM</label>
-<<<<<<< HEAD
-=======
-                                    <?php  
-                                    $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-                                            $date = $date1->format('Y-m-d 18:40:00');
-                                            $date2 = $date1->format('Y-m-d 20:55:00');
-                                            $duration =0;
-                                            $spend_time =0;
-                                            $query ="SELECT start_time  FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY performance_id ASC LIMIT 1";
-                                            $query_run = mysqli_query($connection,$query);
-                                            $datetime_1 = ''; 
-                                                $datetime_2 = ''; 
-                                            foreach($query_run as $data){
-                                                $datetime_1 = date('Y-m-d 18:45:00'); 
-                                                $datetime_2 = $data['start_time']; 
-                                            } 
-                                            
-                                            $start_datetime = new DateTime($datetime_1); 
-                                            $diff = $start_datetime->diff(new DateTime($datetime_2));
-                                            if($datetime_2 !=''){
-                                            if ($datetime_2 < $datetime_1) {
-                                                
-                                               ?>
-                                    <label class="col-sm-12 col-form-label text-success">You are Earlier :
-                                        <?php echo $diff->i.' Minutes' ?>
-                                        minute &#128525;</label>
->>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                                     <?php
                                     $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                     $date = $date1->format('Y-m-d 18:40:00');
@@ -414,7 +331,6 @@ $user_role = $_SESSION['role_id'];
 
 
                                 <?php $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-<<<<<<< HEAD
                                 $date = $date1->format('Y-m-d 00:00:00');
                                 $date2 = $date1->format('Y-m-d 23:59:59');
                                 $i = -1;
@@ -450,41 +366,6 @@ $user_role = $_SESSION['role_id'];
                                     </tr>
                                 <?php $y = 0;
                                 } ?>
-=======
-                                        $date = $date1->format('Y-m-d 00:00:00');
-                                      $date2 = $date1->format('Y-m-d 23:59:59');
-                                      $i=-1;
-                                      $y=0;
-                                      $j=1;
-                                      $spend_time =0;
-                                    $query ="SELECT * FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY performance_id DESC";
-                                    
-                                    $query_run = mysqli_query($connection,$query);
-                                    $row = mysqli_num_rows($query_run);
-                                    foreach( $query_run as $data){
-                                        $i++;
-                                        $y= $row - $i;
-                                    ?>
-                                <tr>
-                                    <td><?php echo $data['job_description'] ?></td>
-
-                                    <td><?php 
-                                            echo $data['qr_number'];?></td>
-
-                                    <td><?php echo $data['start_time'] ?></td>
-                                    <td><?php echo $data['end_time'] ?></td>
-                                    <td><?php echo $data['spend_time']?></td>
-                                    <td><?php if( $data['end_time'] == '0000-00-00 00:00:00'){
-                                        echo "Not complete";
-                                    }else{
-                                         echo  $j; 
-                                         } ?></td>
-                                    <td><?php echo $data['target']; if( $data['end_time'] == '0000-00-00 00:00:00'){ ?>
-                                        <i class="fa-duotone fa-circle" style="color:#00ff14"></i><?php } ?>
-                                    </td>
-                                </tr>
-                                <?php $y = 0;} ?>
->>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 
                             </tbody>
                         </table>
@@ -513,7 +394,6 @@ if (isset($_POST['submit'])) {
     }
     $query = "SELECT * FROM performance_record_table WHERE user_id ='$user_id'AND (qr_number ='$search_value') AND
                 job_description = '$job_description' ";
-<<<<<<< HEAD
     $query_run = mysqli_query($connection, $query);
     foreach ($query_run as $data) {
         $performance_id = $data['performance_id'];
@@ -536,30 +416,6 @@ if (isset($_POST['submit'])) {
         $working_time_in_seconds;
         $start_time = 0000 - 00 - 00;
         $query = "SELECT * FROM performance_record_table WHERE user_id ='$user_id'AND (qr_number ='$search_value') AND
-=======
-                $query_run = mysqli_query($connection,$query);
-                foreach($query_run as $data){
-                $performance_id = $data['performance_id'];
-                $start_time = $data['start_time'];
-                $end_time = $data['end_time'];
-                $previous_job_description .= $data['job_description'].",";
-                }
-                $test =0;
-                $same_jd_count=0;
-                $test = explode(",",$previous_job_description);
-                foreach($test as $a){
-                if($a == $job_description){
-                $same_jd_count++;
-                }
-                }
-                
-               
-                if($end_time =="0000-00-00 00:00:00" && $same_jd_count==1 ){
-               
-                $working_time_in_seconds;
-                $start_time=0000-00-00;
-                $query = "SELECT * FROM performance_record_table WHERE user_id ='$user_id'AND (qr_number ='$search_value') AND
->>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                 job_description = '$job_description' ";
         $query_run = mysqli_query($connection, $query);
         foreach ($query_run as $data) {
@@ -576,7 +432,6 @@ if (isset($_POST['submit'])) {
                 `end_time` = '$date',
                 `spend_time` = '$duration'
                 WHERE performance_id = $performance_id";
-<<<<<<< HEAD
         echo $query;
         $query_run = mysqli_query($connection, $query);
         header('Location: performance_record.php');
@@ -587,18 +442,6 @@ if (isset($_POST['submit'])) {
         if ($department_id == 10) {
             //lcd target
             if ($_SESSION['role_id'] == 9) {
-=======
-                echo $query;
-                $query_run = mysqli_query($connection,$query);
-                header('Location: performance_record.php');
-                }elseif($same_jd_count==0){
-                $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-                $start_date = $date1->format('Y-m-d H:i:s');
-                $target = 0;
-                if($department_id ==10){
-                //lcd target
-                if($_SESSION['role_id'] == 9){
->>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
                 $target = 60;
             } elseif ($job_description == "Remove LCD") {
                 $target = 120;
@@ -634,32 +477,6 @@ if (isset($_POST['submit'])) {
         echo '<script>
                 alert("Already you completed this machine under this job description ")
                 </script>';
-<<<<<<< HEAD
-=======
-               
-                }
-                }
-    ?>
-<script>
-var time = new Date();
-var today = time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate() + " " + time.getHours() + ":" + time
-    .getMinutes() + ":" + time.getSeconds();
-document.getElementById("time").textContent = today;
-
-
-let searchbar = document.querySelector('input[name="qr"]');
-searchbar.focus();
-search.value = '';
-var otherInput;
-
-function checkOptions(select) {
-    otherInput = document.getElementById('lcd_p_n_code');
-    if (select.options[select.selectedIndex].value == "Remove LCD") {
-        otherInput.style.display = 'block';
-
-    } else {
-        otherInput.style.display = 'none';
->>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
     }
 }
 ?>

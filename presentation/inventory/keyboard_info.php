@@ -9,8 +9,8 @@ include_once '../includes/header.php';
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
-$pallet = 0;
-$pallet = $_GET['id'];
+$pallet=0;
+$pallet=$_GET['id'];
 ?>
 <div class="row">
     <div class="col-lg-10 grid-margin stretch-card justify-content-center mx-auto mt-2">
@@ -24,7 +24,7 @@ $pallet = $_GET['id'];
             </div>
 
             <div class="card-body">
-                <table class="table table-bordered table-striped">
+                <table  class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>Pallet No</th>
@@ -34,16 +34,16 @@ $pallet = $_GET['id'];
                     </thead>
                     <tbody>
                         <?php
-                        $query = "SELECT pallet_id,brand,SUM(qty)as qty FROM pallet_informations WHERE pallet_id='$pallet' AND category='Keyboard' GROUP BY brand ORDER BY qty DESC";
+                        $query="SELECT pallet_id,brand,SUM(qty)as qty FROM pallet_informations WHERE pallet_id='$pallet' AND category='Keyboard' GROUP BY brand ORDER BY qty DESC";
                         $query_run = mysqli_query($connection, $query);
-                        foreach ($query_run as $data) {
-                            $id = $data['pallet_id'];
-                            $qty = $data['qty'];
-                            $brand = $data['brand'];
+                        foreach($query_run as $data){
+                            $id=$data['pallet_id'];
+                            $qty=$data['qty'];
+                            $brand=$data['brand'];
                             echo "<tr>";
-                            echo "<td>$id</td>";
-                            echo "<td>$brand</td>";
-                            echo "<td>$qty</td>";
+                            echo"<td>$id</td>";
+                            echo"<td>$brand</td>";
+                            echo"<td>$qty</td>";
                             echo "</tr>";
                         }
                         ?>
@@ -57,4 +57,4 @@ $pallet = $_GET['id'];
     </div>
 </div>
 
-<?php include_once '../includes/footer.php'; ?>
+<?php include_once '../includes/footer.php';?>

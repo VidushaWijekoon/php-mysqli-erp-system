@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 ob_start();
 session_start();
@@ -57,5 +56,3 @@ $query = "INSERT INTO `performance_record_table`(
 $query_run = mysqli_query($connection, $query);
     }
 header('Location: performance_record.php');
-=======
->>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45

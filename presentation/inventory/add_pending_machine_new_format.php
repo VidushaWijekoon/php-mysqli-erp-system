@@ -8,56 +8,56 @@ include_once '../includes/header.php';
 ?>
 
 <style>
-    /* Scroll Bar Styles */
-    /* width */
-    ::-webkit-scrollbar {
-        height: 5px;
-    }
+/* Scroll Bar Styles */
+/* width */
+::-webkit-scrollbar {
+    height: 5px;
+}
 
-    /* Track */
-    ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-    }
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
 
-    /* Handle */
-    ::-webkit-scrollbar-thumb {
-        background: #888;
-    }
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
 
-    /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
 
-    /* ///////////// */
+/* ///////////// */
 
-    .excelUplorder {
-        /* margin-top: 10px; */
-        /* margin-left: 10px; */
-    }
+.excelUplorder {
+    /* margin-top: 10px; */
+    /* margin-left: 10px; */
+}
 
-    .tableSec {
-        overflow-x: auto;
-        height: 50vh;
-        overflow-y: auto;
-        background-color: #6c757d;
-    }
+.tableSec {
+    overflow-x: auto;
+    height: 50vh;
+    overflow-y: auto;
+    background-color: #6c757d;
+}
 
-    .detailTable table th {
-        text-align: center;
-    }
+.detailTable table th {
+    text-align: center;
+}
 </style>
 
 
-<?php
-$i = 0;
+<?php 
+ $i=0;
 if (isset($_POST['submit'])) {
     echo "inside submit";
     if ($_FILES['file']['name']) {
         $filename = explode('.', $_FILES['file']['name']);
         if ($filename[1] == 'csv') {
             $handle = fopen($_FILES['file']['tmp_name'], 'r');
-            echo "file";
+           echo "file";
             while ($data = fgetcsv($handle)) {
                 //handling csv file
                 $i++;
@@ -82,7 +82,7 @@ if (isset($_POST['submit'])) {
                 $notes = $data[18];
                 $touch_or_non_touch = $data[19];
                 $location = $data[20];
-                $finger_print = $data[21];
+                $finger_print =$data[21];
                 $bluetooth = $data[22];
                 $camera = $data[23];
                 $bios_lock = $data[24];
@@ -90,14 +90,14 @@ if (isset($_POST['submit'])) {
                 $hdd_capacity = $data[26];
                 $hdd_type = $data[27];
                 $graphic_brand = $data[28];
-                $graphic_capacity = $data[29];
+                $graphic_capacity =$data[29];
                 $os = $data[30];
-                strtolower($device);
-                strtolower($brand);
+                strtolower($device) ;
+                strtolower($brand) ;
                 strtolower($model);
                 strtolower($series);
                 strtolower($processor);
-                strtolower($core);
+                strtolower($core) ;
                 strtolower($generation);
                 strtolower($speed);
                 strtolower($dvd);
@@ -106,7 +106,7 @@ if (isset($_POST['submit'])) {
                 strtolower($finger_print);
                 strtolower($bluetooth);
                 strtolower($camera);
-                strtoupper($bios_lock);
+                strtoupper($bios_lock );
                 strtolower($ram);
                 strtolower($hdd_capacity);
                 strtolower($hdd_type);
@@ -143,9 +143,9 @@ if (isset($_POST['submit'])) {
                 $graphic_brand =  rtrim($graphic_brand);
                 $graphic_capacity =  rtrim($graphic_capacity);
                 $os = rtrim($os);
-
-                if ($i != 1) {
-                    $sql = strtolower("INSERT INTO machine_from_supplier(`supplier_name`,
+              
+if($i != 1){
+     $sql = strtolower("INSERT INTO machine_from_supplier(`supplier_name`,
      `cci_number`,
      `alsakb_qr_number`,
      `serial_no`,
@@ -205,13 +205,13 @@ if (isset($_POST['submit'])) {
                 '$graphic_brand',
                 '$graphic_capacity',
                 '$os')");
-
-                    mysqli_query($connection, $sql);
-                }
+     
+                mysqli_query($connection, $sql);
+}
             }
             fclose($handle);
             // echo '<script>alert("File Sucessfully imported")</script>';
-
+            
         }
     }
 } ?>
@@ -237,7 +237,8 @@ if (isset($_POST['submit'])) {
                         <form method="post" enctype="multipart/form-data">
                             <label>Select CSV File:</label><br>
                             <input class="btn btn-success mt-2" type="file" name="file">
-                            <input class="btn btn-success col-md-3 mt-2" type="submit" name="submit" value="Submit" style="height: 40px;">
+                            <input class="btn btn-success col-md-3 mt-2" type="submit" name="submit" value="Submit"
+                                style="height: 40px;">
                         </form>
 
                     </div>
@@ -281,42 +282,42 @@ if (isset($_POST['submit'])) {
                         </thead>
                         <tbody>
                             <!-- <tr> -->
-                            <?php
+                            <?php 
+                              
+                                // last insert id ganna
+                                $last_id = $connection->insert_id;
+                                $value = $last_id-($i-2);                                
 
-                            // last insert id ganna
-                            $last_id = $connection->insert_id;
-                            $value = $last_id - ($i - 2);
+                                $query = "SELECT * FROM machine_from_supplier WHERE machine_id BETWEEN $value AND $last_id";
+                                // echo $query; 
+                                // echo $i;                             
+                                
+                                $result = mysqli_query($connection, $query);
+                                foreach($result as $data){ 
+                                    // var_dump($data);
+                                    ?>
+                            <tr>
 
-                            $query = "SELECT * FROM machine_from_supplier WHERE machine_id BETWEEN $value AND $last_id";
-                            // echo $query; 
-                            // echo $i;                             
-
-                            $result = mysqli_query($connection, $query);
-                            foreach ($result as $data) {
-                                // var_dump($data);
-                            ?>
-                                <tr>
-
-                                    <td><?php echo $data['serial_no']; ?></td>
-                                    <td><?php echo $data['mfg']; ?></td>
-                                    <td><?php echo $data['device']; ?></td>
-                                    <td><?php echo $data['brand']; ?></td>
-                                    <td><?php echo $data['series']; ?></td>
-                                    <td><?php echo $data['model']; ?></td>
-                                    <td><?php echo $data['processor']; ?></td>
-                                    <td><?php echo $data['core']; ?></td>
-                                    <td><?php echo $data['generation']; ?></td>
-                                    <td><?php echo $data['speed']; ?></td>
-                                    <td><?php echo $data['battery']; ?></td>
-                                    <td><?php echo $data['touch_or_non_touch']; ?></td>
-                                    <td><?php echo $data['lcd_size']; ?></td>
-                                    <td><?php echo $data['bios_lock']; ?></td>
-                                    <td><?php echo $data['dvd']; ?></td>
-                                    <td><?php echo $data['supplier_name']; ?></td>
-                                </tr>
+                                <td><?php echo $data['serial_no'];?></td>
+                                <td><?php echo $data['mfg'];?></td>
+                                <td><?php echo $data['device'];?></td>
+                                <td><?php echo $data['brand'];?></td>
+                                <td><?php echo $data['series'];?></td>
+                                <td><?php echo $data['model'];?></td>
+                                <td><?php echo $data['processor'];?></td>
+                                <td><?php echo $data['core'];?></td>
+                                <td><?php echo $data['generation'];?></td>
+                                <td><?php echo $data['speed'];?></td>
+                                <td><?php echo $data['battery'];?></td>
+                                <td><?php echo $data['touch_or_non_touch'];?></td>
+                                <td><?php echo $data['lcd_size'];?></td>
+                                <td><?php echo $data['bios_lock'];?></td>
+                                <td><?php echo $data['dvd'];?></td>
+                                <td><?php echo $data['supplier_name'];?></td>
+                            </tr>
 
                             <?php }
-                            ?>
+                                ?>
 
                             <!-- </tr> -->
 

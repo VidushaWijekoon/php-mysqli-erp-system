@@ -45,3 +45,5 @@
 	// }elseif($brand=='fujitsu'){
 	// 	$query 	= "SELECT model FROM fujitsu_model ";
 	// }
+	
+?>

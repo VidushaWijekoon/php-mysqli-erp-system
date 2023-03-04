@@ -33,10 +33,7 @@ $shipping_state = null;
 $shipping_zip_code = null;
 $shipping_phone = null;
 
-$query_1 = "SELECT first_name, last_name, company_name, company_email, UAE_number, country, country_code, local_number, billing_attention, 
-                billing_country_region, billing_street1, billing_street2, billing_city, billing_state, billing_zip_code, billing_customer_phone_number, shipping_attention,
-                shipping_country_region, shipping_street1, shipping_street2, shipping_city, shipping_state, shipping_zip_code, shipping_customer_phone_number
-            FROM sales_customer_information WHERE customer_id = '$customer_id'";
+$query_1 = "SELECT * FROM sales_customer_information WHERE customer_id = '$customer_id'";
 $query_1_run = mysqli_query($connection, $query_1);
 foreach($query_1_run as $x){
     $first_name = $x['first_name'];
@@ -370,7 +367,7 @@ foreach($query_1_run as $x){
                                             <tbody>
                                                 <?php 
                                               
-                                        $query = "SELECT first_name, last_name, created_by, quatation_id, approval, status, approved_by  FROM sales_customer_information 
+                                        $query = "SELECT * FROM sales_customer_information 
                                             INNER JOIN sales_quatation_items ON sales_customer_information.customer_id = sales_quatation_items.customer_id
                                             WHERE sales_quatation_items.customer_id = '$customer_id' GROUP BY quatation_id ORDER BY quatation_id DESC";                                           
                                                 

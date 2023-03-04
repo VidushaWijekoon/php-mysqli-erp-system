@@ -1,4 +1,12 @@
 <?php 
+error_reporting (E_ALL ^ E_NOTICE);
+// Toggle this to change the setting
+define('DEBUG', true);
+
+// You want all errors to be triggered
+error_reporting(E_ALL);
+ 
+error_reporting(E_ERROR | E_PARSE);
 
 ob_start();
 session_start();
@@ -10,7 +18,6 @@ include_once('../includes/header.php');
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
-<<<<<<< HEAD
 ?>
 
 <link rel="stylesheet" href="../../static/plugins/bootstrap-3.3.5-dist/css/bootstrap.min.css">
@@ -201,21 +208,18 @@ if(isset($_POST['posting_modal'])){
 
 }
 
-=======
->>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
 
 ?>
 
 <div class="row page-titles">
-    <div class="col-md-5 align-self-center"><a href="./users_dashboard.php">
-            <i class="fa-regular fa-circle-left fa-2x m-2" style="color: #ced4da;"></i>
+    <div class="col-md-5 align-self-center"><a href="./sales_team_leader_dashboard.php">
+            <i class="fa-solid fa-home fa-2x m-2" style="color: #ced4da;"></i>
         </a>
     </div>
 </div>
 
 <div class="container-fluid">
     <div class="row">
-<<<<<<< HEAD
         <div class="col-lg-8 grid-margin stretch-card justify-content-center mx-auto mt-2">
             <form action="" method="POST">
                 <div class="row">
@@ -800,29 +804,315 @@ if(isset($_POST['posting_modal'])){
                         </tbody>
                     </table>
                 </div>
-=======
-        <div class="col-lg-6 grid-margin stretch-card justify-content-center mx-auto mt-2">
-            <div class="row">
-                <div class="col">
-                    <div class="d-block">
-                        <a href="btn btn-sm btn-">monday</a>
-                        <a href="btn btn-sm btn-">monday</a>
-                        <a href="btn btn-sm btn-">monday</a>
-                        <a href="btn btn-sm btn-">monday</a>
-                        <a href="btn btn-sm btn-">monday</a>
-                        <a href="btn btn-sm btn-">monday</a>
-                    </div>
-                </div>
->>>>>>> 569552d40ee2f789411c7a1010ccfc478522bf45
             </div>
-
-
-        </div>
-        <div class="col-lg-6 grid-margin stretch-card justify-content-center mx-auto mt-2">
-            sdsad
         </div>
     </div>
 </div>
+
+<!-- ============================================================== -->
+<!-- Create Modal  -->
+<!-- ============================================================== -->
+<div class="modal fade" id="create_search" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    data-backdrop="static" data-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <form action="" method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Create & Search Customer</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 10px">#</th>
+                                <th>Platform</th>
+                                <th>Search Key Word</th>
+                                <th>Target Customer QTY</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#</td>
+
+                                <td class="d-block">
+                                    <div class="icheck-primary">
+                                        <input type="checkbox" id="facebook" name="facebook" value="1">
+                                        <label class="label_values text-capitalize" for="facebook">Facebook</label>
+                                    </div>
+                                    <div class="icheck-primary">
+                                        <input type="checkbox" id="instagram" name="instagram" value="1">
+                                        <label class="label_values text-capitalize" for="instagram">Instagram</label>
+                                    </div>
+                                    <div class="icheck-primary">
+                                        <input type="checkbox" id="lazada" name="lazada" value="1">
+                                        <label class="label_values text-capitalize" for="lazada">lazada</label>
+                                    </div>
+                                    <div class="icheck-primary">
+                                        <input type="checkbox" id="shoppe" name="shoppe" value="1">
+                                        <label class="label_values text-capitalize" for="shoppe">Shoppe</label>
+                                    </div>
+                                    <div class="icheck-primary">
+                                        <input type="checkbox" id="tokopedia" name="tokopedia" value="1">
+                                        <label class="label_values text-capitalize" for="tokopedia">Tokopedia</label>
+                                    </div>
+                                    <div class="icheck-primary">
+                                        <input type="checkbox" id="amazon_com" name="amazon_com" value="1">
+                                        <label class="label_values text-capitalize" for="amazon_com">Amazon.com</label>
+                                    </div>
+                                    <div class="icheck-primary">
+                                        <input type="checkbox" id="amazon_uk" name="amazon_uk" value="1">
+                                        <label class="label_values text-capitalize" for="amazon_uk">Amazon.uk</label>
+                                    </div>
+                                    <div class="icheck-primary">
+                                        <input type="checkbox" id="tiktok" name="tiktok" value="1">
+                                        <label class="label_values text-capitalize" for="tiktok">Tiktok</label>
+                                    </div>
+                                    <div class="icheck-primary">
+                                        <input type="checkbox" id="jiji_ng" name="jiji_ng" value="1">
+                                        <label class="label_values text-capitalize" for="jiji_ng">Jiji.ng</label>
+                                    </div>
+                                    <div class="icheck-primary">
+                                        <input type="checkbox" id="jiji_co_ke" name="jiji_co_ke" value="1">
+                                        <label class="label_values text-capitalize" for="jiji_co_ke">Jiji.co.ke</label>
+                                    </div>
+                                    <div class="icheck-primary">
+                                        <input type="checkbox" id="google" name="google" value="1">
+                                        <label class="label_values text-capitalize" for="google">Google.com</label>
+                                    </div>
+                                    <div class="icheck-primary">
+                                        <input type="checkbox" id="pcexpoters" name="pcexpoters" value="1">
+                                        <label class="label_values text-capitalize" for="pcexpoters">PC
+                                            Exporters</label>
+                                    </div>
+                                    <div class="icheck-primary">
+                                        <input type="checkbox" id="jumia" name="jumia" value="1">
+                                        <label class="label_values text-capitalize" for="jumia">Jumia.Com</label>
+                                    </div>
+                                    <div class="icheck-primary">
+                                        <input type="checkbox" id="thebrokersite" name="thebrokersite" value="1">
+                                        <label class="label_values text-capitalize"
+                                            for="thebrokersite">thebrokersite.com</label>
+                                    </div>
+
+                                </td>
+                                <td id="myDIV1">
+                                    <input type="text" class="form-control" placeholder="Search Keyword 1"
+                                        name="search_keyword_1">
+                                    <input type="text" class="form-control" placeholder="Search Keyword 2"
+                                        name="search_keyword_2">
+                                    <input type="text" class="form-control" placeholder="Search Keyword 3"
+                                        name="search_keyword_3">
+                                    <input type="text" class="form-control" placeholder="Search Keyword 4"
+                                        name="search_keyword_4">
+                                    <input type="text" class="form-control" placeholder="Search Keyword 5"
+                                        name="search_keyword_5">
+
+                                </td>
+                                <td>
+                                    <input type="number" min='1' max='300' class="form-control" placeholder="Target QTY"
+                                        name="customer_target_qty" required>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" name="posting_customer_test" onclick="submitForm()"
+                        class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- Posting Modal -->
+<!-- ============================================================== -->
+<div class="modal fade" id="posting_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    data-backdrop="static" data-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form action="" method="POST">
+                <div class="modal-header">
+                    <h4 class="modal-title">Posting to Customer</h4>
+                    <ul class="nav nav-tabs" id="tab1" role="tablist">
+                        <li class="nav-item text-center" style="width: 150px;">
+                            <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill"
+                                href="#custom-tabs-four-customer" role="tab" aria-controls="custom-tabs-four-customer"
+                                aria-selected="true" style="color: #fff;">Customer</a>
+                            <input type="text" name="posting_customer1" value="customer" class="d-none">
+
+                        </li>
+                        <li class="nav-item text-center" style="width: 150px;">
+                            <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill"
+                                href="#custom-tabs-four-platform" role="tab" aria-controls="custom-tabs-four-platform"
+                                aria-selected="false" style="color: #fff;">Platform</a>
+                            <input type="text" name="posting_customer_platform" value="platform" class="d-none">
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-body">
+                    <div class="tab-content" id="custom-tabs-four-tabContent">
+                        <div class="tab-pane active" id="custom-tabs-four-customer" role="tabpanel"
+                            aria-labelledby="custom-tabs-four-customer-tab">
+                            <table class="table table-striped">
+                                <h5>Customer</h5>
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10px">#</th>
+                                        <th>Morning
+                                            <br>9.00A.M-2.00P.M
+                                        </th>
+                                        <th>Afternoon
+                                            <br>3.00A.M-6.15P.M
+                                        </th>
+                                        <th>Follow The Order
+                                            <br>6.45A.M-9.00P.M
+                                        </th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#</td>
+                                        <td>
+                                            <input type="text" class="form-control" placeholder="Model 1"
+                                                name="customer_create_model_1">
+                                            <input type="text" class="form-control" placeholder="Model 2"
+                                                name="customer_create_model_2">
+                                            <input type="text" class="form-control" placeholder="Model 3"
+                                                name="customer_create_model_3">
+                                            <input type="text" class="form-control" placeholder="Model 4"
+                                                name="customer_create_model_4">
+                                            <input type="text" class="form-control" placeholder="Model 5"
+                                                name="customer_create_model_5">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" placeholder="Model 1"
+                                                name="customer_create_model_6">
+                                            <input type="text" class="form-control" placeholder="Model 2"
+                                                name="customer_create_model_7">
+                                            <input type="text" class="form-control" placeholder="Model 3"
+                                                name="customer_create_model_8">
+                                            <input type="text" class="form-control" placeholder="Model 4"
+                                                name="customer_create_model_9">
+                                            <input type="text" class="form-control" placeholder="Model 5"
+                                                name="customer_create_model_10">
+                                        </td>
+                                        <td><span class="badge bg-danger">Please Follow the Order</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade show" id="custom-tabs-four-platform" role="tabpanel"
+                            aria-labelledby="custom-tabs-four-platform-tab">
+                            <table class="table table-striped">
+                                <h5>Platform</h5>
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10px">#</th>
+                                        <th>Platform</th>
+                                        <th>Morning
+                                            <br>9.00A.M-2.00P.M
+                                        </th>
+                                        <th>Afternoon
+                                            <br>3.00A.M-6.15P.M
+                                        </th>
+                                        <th>Follow The Order
+                                            <br>6.45A.M-9.00P.M
+                                        </th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#</td>
+                                        <td>
+                                            <div class="icheck-primary">
+                                                <input type="checkbox" id="thebrokersite1" name="thebrokersite1"
+                                                    value="1">
+                                                <label class="label_values text-capitalize"
+                                                    for="thebrokersite1">thebrokersite.com</label>
+                                            </div>
+                                            <div class="icheck-primary">
+                                                <input type="checkbox" id="pcexporters1" name="pcexporters1" value="1">
+                                                <label class="label_values text-capitalize"
+                                                    for="pcexporters1">pcexporters.com</label>
+                                            </div>
+                                            <div class="icheck-primary">
+                                                <input type="checkbox" id="facebook1" name="facebook1" value="1">
+                                                <label class="label_values text-capitalize"
+                                                    for="facebook1">facebook</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" placeholder="Model 1"
+                                                name="platform_create_model_1">
+                                            <input type="text" class="form-control" placeholder="Model 2"
+                                                name="platform_create_model_2">
+                                            <input type="text" class="form-control" placeholder="Model 3"
+                                                name="platform_create_model_3">
+                                            <input type="text" class="form-control" placeholder="Model 4"
+                                                name="platform_create_model_4">
+                                            <input type="text" class="form-control" placeholder="Model 5"
+                                                name="platform_create_model_5">
+                                        </td>
+
+                                        <td>
+                                            <input type="text" class="form-control" placeholder="Model 1"
+                                                name="platform_create_model_6">
+                                            <input type="text" class="form-control" placeholder="Model 2"
+                                                name="platform_create_model_7">
+                                            <input type="text" class="form-control" placeholder="Model 3"
+                                                name="platform_create_model_8">
+                                            <input type="text" class="form-control" placeholder="Model 4"
+                                                name="platform_create_model_9">
+                                            <input type="text" class="form-control" placeholder="Model 5"
+                                                name="platform_create_model_10">
+                                        </td>
+                                        <td><span class="badge bg-danger">Please Follow the Order</span></td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" name="posting_modal" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+[type="text"],
+[type="number"] {
+    height: 22px;
+    margin-top: 4px;
+    font-size: 10px;
+    border: 1px solid #f1f1f1;
+    border-radius: 5px;
+    font-size: 12px;
+    padding: 10px;
+    font-family: "Poppins", sans-serif;
+    color: #fff !important;
+}
+
+.day,
+[type="text"] {
+    color: #000 !important;
+}
+</style>
+
 
 
 <?php include_once('../includes/footer.php'); ?>

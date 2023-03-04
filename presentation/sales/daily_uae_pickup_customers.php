@@ -57,8 +57,7 @@ $username = $_GET['username'];
                             $start_time = date('Y-m-d 00:00:00');
                             $end_time = date('Y-m-d 23:59:59');
                             
-                            $query_1 = "SELECT customer_name, create_customer_country, customer_whatspp_phone_code, customer_whatsapp_number, platform1, model_selling_buying, uae_pickup1, created_time 
-                                        FROM sales_create_customer_informations WHERE created_by = '$username' AND uae_pickup1 = 'yes' AND created_time BETWEEN '$start_time' and '$end_time' ORDER BY created_time DESC";
+                            $query_1 = "SELECT * FROM sales_create_customer_informations WHERE created_by = '$username' AND uae_pickup1 = 'yes' AND created_time BETWEEN '$start_time' and '$end_time' ORDER BY created_time DESC";
                             $result = mysqli_query($connection, $query_1);
                             foreach($result as $row){
                                 

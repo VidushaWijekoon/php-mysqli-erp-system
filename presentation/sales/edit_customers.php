@@ -229,7 +229,7 @@ $customer_id = $_GET['customer_id'];
                                                                                         Country--
                                                                                     </option>
                                                                                     <?php
-                                                                                        $query = "SELECT country_name FROM countries ORDER BY 'country_name' ASC";
+                                                                                        $query = "SELECT * FROM countries ORDER BY 'country_name' ASC";
                                                                                         $result = mysqli_query($connection, $query);
 
                                                                                         while ($countries = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;
@@ -350,7 +350,7 @@ $customer_id = $_GET['customer_id'];
                                                                                         Country--
                                                                                     </option>
                                                                                     <?php 
-                                                                                        $query = "SELECT country_name FROM countries ORDER BY 'country_name' ASC";
+                                                                                        $query = "SELECT * FROM countries ORDER BY 'country_name' ASC";
                                                                                         $result = mysqli_query($connection, $query);
 
                                                                                         while ($countries = mysqli_fetch_array($result, MYSQLI_ASSOC)) :;

@@ -37,5 +37,3 @@ $query = "INSERT INTO `performance_record_table`(
     )";
     $query_run = mysqli_query($connection,$query);
     header('Location: distributor.php');
-
-?>

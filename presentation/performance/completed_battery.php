@@ -30,19 +30,19 @@ if (!isset($_SESSION['user_id'])) {
                 </thead>
                 <tbody>
                     <?php
-$date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-$date = $date1->format('Y-m-d 00:00:00');
-$date2 = $date1->format('Y-m-d 23:59:59');
-$query = "SELECT model,COUNT(bat_id)as count FROM battery_request WHERE status='1' AND completed_date between '$date' AND '$date2'";
-$sql = mysqli_query($connection, $query);
-foreach ($sql as $a) {
+                    $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+                    $date = $date1->format('Y-m-d 00:00:00');
+                    $date2 = $date1->format('Y-m-d 23:59:59');
+                    $query = "SELECT model,COUNT(bat_id)as count FROM battery_request WHERE status='1' AND completed_date between '$date' AND '$date2'";
+                    $sql = mysqli_query($connection, $query);
+                    foreach ($sql as $a) {
 
-    ?>
-                    <tr>
-                        <td><?php echo $a['model'] ?></td>
-                        <td><?php echo $a['count'] ?></td>
-                    </tr>
-                    <?php }?>
+                    ?>
+                        <tr>
+                            <td><?php echo $a['model'] ?></td>
+                            <td><?php echo $a['count'] ?></td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>
