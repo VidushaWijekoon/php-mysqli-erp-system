@@ -31,7 +31,7 @@ session_start();
 
   $con = mysqli_connect("localhost", "root", "", "wms");
   if (!$con) {
-    die('Could not connect: ' . mysqli_error($con));
+    // die('Could not connect: ' . mysqli_error($con));
   }
 
   mysqli_select_db($con, "wms");
