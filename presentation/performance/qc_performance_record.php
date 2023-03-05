@@ -65,11 +65,11 @@ if (strtotime(date('Y-m-d 09:00:00')) < $now && $now > $_SESSION['expire1'] && $
     echo "<p align='center'>Session has been destroyed!!";
 
     header("Location: ../../index.php");
-} elseif (strtotime(date('Y-m-d 15:00:00')) < $now && $now > $_SESSION['expire2'] && $now < strtotime(date('Y-m-d 18:46:50'))) {
+} elseif (strtotime(date('Y-m-d 15:00:00')) < $now && $now > $_SESSION['expire2'] && $now < strtotime(date('Y-m-d 19:10:00'))) {
     session_destroy();
     echo "<p align='center'>Session has been destroyed!!";
     header("Location: ../../index.php");
-} elseif (strtotime(date('Y-m-d 19:15:00')) < $now && $now > $_SESSION['expire3'] && $now < strtotime(date('Y-m-d 20:59:00'))) {
+} elseif (strtotime(date('Y-m-d 19:10:00')) < $now && $now > $_SESSION['expire3'] && $now < strtotime(date('Y-m-d 20:59:00'))) {
     session_destroy();
     echo "<p align='center'>Session has been destroyed!!";
     header("Location: ../../index.php");
@@ -458,21 +458,21 @@ if (strtotime(date('Y-m-d 09:00:00')) < $now && $now > $_SESSION['expire1'] && $
                                             $date = $date1->format('Y-m-d 18:46:50');
                                             $date_old = $date1->format('Y-m-d 15:05:00');
                                             $remaining_time = (strtotime($date) - strtotime($current_time)) / 60;
-                                            // if ($remaining_time > 0 && $date_old < $current_time) {
-                                            //     echo " Remaining Time " . round($remaining_time) . " minute";
-                                            // }
+                                            if ($remaining_time > 0 && $date_old < $current_time) {
+                                                // echo " Remaining Time " . round($remaining_time) . " minute";
+                                            }
                                             ?>
                                         </label>
                                         <label>
                                             <?php
                                             $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                             $date = $date1->format('Y-m-d 15:45:00');
-                                            $date2 = $date1->format('Y-m-d 18:46:00');
+                                            $date2 = $date1->format('Y-m-d 18:46:50');
                                             $duration = 0;
                                             $spend_time = 0;
                                             $query = "SELECT end_time  FROM performance_record_table WHERE user_id=$user_id AND end_time between '$date'AND '$date2' ORDER BY end_time DESC LIMIT 1";
                                             $query_run = mysqli_query($connection, $query);
-                                            $datetime_1;
+                                            $datetime_1 = '';
                                             $datetime_2 = '';
                                             foreach ($query_run as $data) {
                                                 $datetime_1 = date('Y-m-d 18:45:00');
@@ -481,113 +481,113 @@ if (strtotime(date('Y-m-d 09:00:00')) < $now && $now > $_SESSION['expire1'] && $
 
                                             $start_datetime = new DateTime($datetime_1);
                                             $diff = $start_datetime->diff(new DateTime($datetime_2));
-                                            $datetime1 = new DateTime($datetime_1);
-                                            $datetime2 = new DateTime($datetime_2);
-                                            $interval = $datetime1->diff($datetime2);
-
                                             if ($datetime_2 != '') {
+                                                $description = "tea session start";
+                                                $query = "SELECT track_id FROM time_track WHERE user_id='$user_id' AND description='$description' AND date between '$date'AND '$date2'";
+                                                $query_run_for_time = mysqli_query($connection, $query);
+                                                $exist_record = 0;
+                                                foreach ($query_run_for_time as $time) {
+                                                    $exist_record = $time['track_id'];
+                                                }
                                                 if ($datetime_2 < $datetime_1) {
-                                            ?>
 
+                                            ?>
                                                     <label class="col-sm-12 col-form-label text-danger">You are Earlier :
-                                                        <?php echo $interval->format('%H:%i:%s');
-                                                        echo " HH:MM:ss"; ?>
+                                                        <?php echo $diff->format('%H:%i:%s');
+                                                        echo " HH:MM:ss"; ?></label>
                                                     <?php
+                                                    if ($exist_record == 0) {
+                                                        $query = "INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','1')";
+                                                        $query_run = mysqli_query($connection, $query);
+                                                    }
                                                 } elseif ($datetime_2 > $datetime_1) {
                                                     ?>
-                                                        <label class="col-sm-12 col-form-label text-success">You are Late :
-                                                            <?php echo $interval->format('%H:%i:%s');
-                                                            echo " HH:MM:ss"; ?>
-                                                            &#128525;
-                                                        </label>
-                                                <?php }
+                                                    <label class="col-sm-12 col-form-label text-success">You are Late :
+                                                        <?php echo $diff->format('%H:%i:%s');
+                                                        echo " HH:MM:ss"; ?>&#128525;
+                                                    </label>
+                                            <?php
+                                                    if ($exist_record == 0) {
+                                                        $query = "INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','0')";
+                                                        $query_run = mysqli_query($connection, $query);
+                                                    }
+                                                }
                                             }
-                                                ?>
-                                                </lable>
-                                                <!-- ///////////////////////////////////////////////////////////////////////////////////////// -->
-                                                <label class="col-sm-12 col-form-label">Evening Session Start Time :
-                                                    07.15PM</label>
+                                            ?>
+                                            </lable>
+                                            <label class="col-sm-12 col-form-label">Evening Session Start Time :
+                                                07.15PM</label>
+                                            <?php
+                                            $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
+                                            $date = $date1->format('Y-m-d 19:10:00');
+                                            $date2 = $date1->format('Y-m-d 20:55:50');
+                                            $duration = 0;
+                                            $spend_time = 0;
+                                            $query = "SELECT start_time  FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY performance_id ASC LIMIT 1";
+                                            $query_run = mysqli_query($connection, $query);
+                                            $datetime_1 = '';
+                                            $datetime_2 = '';
+                                            foreach ($query_run as $data) {
+                                                $datetime_1 = date('Y-m-d 19:15:00');
+                                                $datetime_2 = $data['start_time'];
+                                            }
+
+                                            $start_datetime = new DateTime($datetime_1);
+                                            $diff = $start_datetime->diff(new DateTime($datetime_2));
+                                            if ($datetime_2 != '') {
+                                                $description = "evening session start";
+                                                $query = "SELECT track_id FROM time_track WHERE user_id='$user_id' AND description='$description' AND date between '$date'AND '$date2'";
+                                                $query_run_for_time = mysqli_query($connection, $query);
+                                                $exist_record = 0;
+                                                foreach ($query_run_for_time as $time) {
+                                                    $exist_record = $time['track_id'];
+                                                }
+                                                if ($datetime_2 < $datetime_1) {
+
+                                            ?>
+                                                    <label class="col-sm-12 col-form-label text-success">You are Earlier :
+                                                        <?php echo $diff->format('%H:%i:%s');
+                                                        echo " HH:MM:ss"; ?>
+                                                        &#128525;</label>
+                                                    <?php
+                                                    if ($exist_record == 0) {
+                                                        $query = "INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','1')";
+                                                        $query_run = mysqli_query($connection, $query);
+                                                    }
+                                                } else {
+                                                    ?>
+                                                    <label class="col-sm-12 col-form-label text-danger">You are Late :
+                                                        <?php echo $diff->format('%H:%i:%s');
+                                                        echo " HH:MM:ss"; ?>
+                                                    </label>
+                                            <?php
+                                                    if ($exist_record == 0) {
+                                                        $query = "INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','0')";
+                                                        $query_run = mysqli_query($connection, $query);
+                                                    }
+                                                }
+                                            }
+                                            ?>
+                                            <label class="col-sm-12 col-form-label">Evening Session End Time :
+                                                08.55PM
                                                 <?php
                                                 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-                                                $date = $date1->format('Y-m-d 18:40:00');
-                                                $date2 = $date1->format('Y-m-d 20:55:50');
-                                                $duration = 0;
-                                                $spend_time = 0;
+                                                $current_time = $date1->format('Y-m-d H:i:s');
+                                                $date = $date1->format('Y-m-d 20:57:00');
+                                                $datetime1 = new DateTime($current_time);
+                                                $datetime2 = new DateTime($date);
+                                                $interval = $datetime1->diff($datetime2);
 
-                                                $query_d = "SELECT start_time, end_time FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY start_time ASC LIMIT 1";
-                                                $query_run = mysqli_query($connection, $query_d);
-                                                foreach ($query_run as $data) {
-                                                    $start_time = $data['start_time'];
-                                                }
-
-                                                $query = "SELECT start_time, end_time FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY end_time DESC LIMIT 1";
-                                                $query_run = mysqli_query($connection, $query);
-                                                $datetime_1 = '';
-                                                $end_time = '';
-                                                foreach ($query_run as $data) {
-                                                    $datetime_1 = date('Y-m-d 19:15:00');
-                                                    $end_time = $data['end_time'];
-                                                }
-
-                                                $start_datetime = new DateTime($datetime_1);
-                                                $diff = $start_datetime->diff(new DateTime($start_time));
-
-                                                if ($end_time != '') {
-                                                    $description = "evening session start";
-                                                    $query = "SELECT track_id FROM time_track WHERE user_id='$user_id' AND description='$description' AND date between '$date'AND '$date2'";
-                                                    $query_run_for_time = mysqli_query($connection, $query);
-                                                    $exist_record = 0;
-                                                    foreach ($query_run_for_time as $time) {
-                                                        $exist_record = $time['track_id'];
-                                                    }
-                                                    if ($start_time < $start_datetime) {
-
-                                                ?>
-                                                        <label class="col-sm-12 col-form-label text-success">Early Scanned :
-                                                            <?php echo $diff->format('%H:%i:%s');
-                                                            echo " HH:MM:ss"; ?>
-                                                            &#128525;</label>
-                                                        <?php
-                                                        if ($exist_record == 0) {
-                                                            $query = "INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','1')";
-                                                            $query_run = mysqli_query($connection, $query);
-                                                        }
-                                                    } else {
-                                                        ?>
-                                                        <label class="col-sm-12 col-form-label text-danger">Late Scanned :
-                                                            <?php echo $diff->format('%H:%i:%s');
-                                                            echo " HH:MM:ss"; ?>
-                                                        </label>
-                                                <?php
-                                                        if ($exist_record == 0) {
-                                                            $query = "INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','0')";
-                                                            $query_run = mysqli_query($connection, $query);
-                                                        }
-                                                    }
+                                                $remaining_time = (strtotime($date) - strtotime($current_time)) / 60;
+                                                $date_old = $date1->format('Y-m-d 18:45:00');
+                                                if ($remaining_time > 0 && $date_old < $current_time) {
+                                                    // echo "</br>";
+                                                    // echo " Remaining Time ";
+                                                    // echo $interval->format('%H:%i');
+                                                    // echo " HH:MM";
                                                 }
                                                 ?>
-
-
-                                                <label class="col-sm-12 col-form-label">Evening Session End Time :
-                                                    08.55PM
-                                                    <?php
-                                                    $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-                                                    $current_time = $date1->format('Y-m-d H:i:s');
-                                                    $date = $date1->format('Y-m-d 20:57:00');
-                                                    $datetime1 = new DateTime($current_time);
-                                                    $datetime2 = new DateTime($date);
-                                                    $interval = $datetime1->diff($datetime2);
-
-                                                    $remaining_time = (strtotime($date) - strtotime($current_time)) / 60;
-                                                    $date_old = $date1->format('Y-m-d 18:45:00');
-                                                    if ($remaining_time > 0 && $date_old < $current_time) {
-                                                        // echo "</br>";
-                                                        // echo " Remaining Time ";
-                                                        // echo $interval->format('%H:%i');
-                                                        // echo " HH:MM";
-                                                    }
-                                                    ?>
-                                                </label>
+                                            </label>
 
                                 </div>
                             </div>

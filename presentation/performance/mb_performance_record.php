@@ -4,46 +4,30 @@ include_once '../../dataAccess/connection.php';
 include_once '../../dataAccess/functions.php';
 include_once '../../dataAccess/403.php';
 include_once '../includes/header.php';
+?>
+<link rel="stylesheet" href="../../static/plugins/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+<script src="../../static/plugins/jquery/1.11.3/jquery.min.js"></script>
+<script src="../../static/plugins/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+<?php
 // checking if a user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
 }
-$user_id = $_SESSION['user_id'];
-$user_role = $_SESSION['role_id'];
-$department_id = $_SESSION['department'];
-$query = "SELECT last_login FROM users WHERE user_id ='$user_id'";
-$query_run = mysqli_query($connection, $query);
-$last_login_time = '';
-foreach ($query_run as $data) {
-    $last_login_time = $data['last_login'];
-}
-
-$time = strtotime($last_login_time);
-$last_qr_number = '0';
-$time = strtotime($last_login_time) + 2;
-$date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-$date = $date1->format('Y-m-d H:i:s');
-$test = strtotime($date);
-if ($test < $time) {
-    $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-    $date = $date1->format('Y-m-d 00:00:00');
-    //  $date2 = $date1->format('Y-m-d 23:59:59');
-    $query = "SELECT qr_number FROM performance_record_table WHERE user_id ='$user_id'AND status ='0'AND start_time between '$date'AND '$last_login_time' ";
-    $query_run = mysqli_query($connection, $query);
-    if (empty($query_run)) {
-    } else {
-        foreach ($query_run as $data) {
-            $last_qr_number = $data['qr_number'];
-        }
-        if ($last_qr_number != '0') {
-            echo "<script>
+if (empty($_GET['id'])) {
+} else {
+    $qr_id = $_GET['id'];
+    $p_id = $_GET['p_id'];
+    echo "<script>
                                     $(window).load(function() {
                                         $('#myModal4').modal('show');
                                     });
                                     </script>";
-        }
-    }
 }
+$user_id = $_SESSION['user_id'];
+$user_role = $_SESSION['role_id'];
+$department_id = $_SESSION['department'];
+
+
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 date_default_timezone_set('Asia/Dubai');
 $timestamp1 = strtotime(date('Y-m-d 8:59:55'));
@@ -74,7 +58,7 @@ if (strtotime(date('Y-m-d 08:00:00')) < $now && $now > $_SESSION['expire0'] && $
     echo "<p align='center'>Session has been destroyed!!";
     // session_start();
     header("Location: ../../index.php");
-} elseif (strtotime(date('Y-m-d 15:00:00')) < $now && $now > $_SESSION['expire2'] && $now < strtotime(date('Y-m-d 18:46:50'))) {
+} elseif (strtotime(date('Y-m-d 15:00:00')) < $now && $now > $_SESSION['expire2'] && $now < strtotime(date('Y-m-d 18:146:50'))) {
     session_destroy();
     echo "<p align='center'>Session has been destroyed!!";
     header("Location: ../../index.php");
@@ -209,7 +193,7 @@ if (strtotime(date('Y-m-d 08:00:00')) < $now && $now > $_SESSION['expire0'] && $
                     <span class="info-box-text">Open Issue QTY From Inventory</span>
                     <span class="info-box-number">
                         <?php
-                        $sql = "SELECT COUNT(alsakb_qr) as count FROM issue_laptops WHERE issue_type2='1' ";
+                        $sql = "SELECT  COUNT(alsakb_qr) as count FROM issue_laptops WHERE issue_type2='1' ";
                         $query_run = mysqli_query($connection, $sql);
                         $count = 0;
                         foreach ($query_run as $a) {
@@ -219,7 +203,7 @@ if (strtotime(date('Y-m-d 08:00:00')) < $now && $now > $_SESSION['expire0'] && $
 
                         <a href="mb_issue_from_inv.php">
                             <?php
-                            $sql = "SELECT COUNT(alsakb_qr) as count FROM issue_laptops WHERE issue_type2='1' AND status='1'";
+                            $sql = "SELECT  COUNT(alsakb_qr) as count FROM issue_laptops WHERE issue_type2='1' AND status='1'";
                             $query_run = mysqli_query($connection, $sql);
                             foreach ($query_run as $a) {
                                 echo "<div style='font-size:26px'>" . $a['count'] . " / " . $count . "</div>";
@@ -373,7 +357,7 @@ if (strtotime(date('Y-m-d 08:00:00')) < $now && $now > $_SESSION['expire0'] && $
                             <!-- the style attribute here has display none initially, so it will be hidden by default -->
 
                             <div class="col-lg-6 grid-margin stretch-card justify-content-center mx-auto mt-2">
-                                <form method="POST" action="performance_record_save.php">
+                                <form method="POST" action="mb_performance_record_save.php">
                                     <div class="row">
                                         <label class="col-sm-4 col-form-label">Job Description</label>
                                         <div class="col-sm-8 mt-2">
@@ -382,66 +366,7 @@ if (strtotime(date('Y-m-d 08:00:00')) < $now && $now > $_SESSION['expire0'] && $
                                                 <option selected value="<?php echo $last_job ?>"><?php echo $last_job ?>
                                                 </option>
 
-                                                <?php if ($department_id == 1) {
-                                                    if ($_SESSION['role_id'] == 33) { ?>
-                                                        <option value="Hard Disk Copy">Hard Disk Copy
-                                                        </option>
-                                                        <option value="Put RAM + Hard Disk + Test">Put RAM + Hard Disk + Test
-                                                        </option>
-                                                        <option value="Combine+ Test">Combine + Test </option>
-                                                    <?php } elseif ($_SESSION['role_id'] == 9) { ?>
-                                                        <option value="received from inventory">Received From Inventory
-                                                        </option>
-                                                        <option value="send to production">Send to Production
-                                                        </option>
-                                                        <option value="LCD Combine">LCD Combine </option>
-                                                        <option value="Battery Combine">Battery Combine </option>
-                                                    <?php } else { ?>
-                                                        <option value="Put RAM + Hard Disk + Test">Put RAM + Hard Disk + Test
-                                                        </option>
-                                                        <option value="Combine+ Test">Combine + Test </option>
-                                                    <?php }
-                                                } elseif ($department_id == 10) { ?>
-
-                                                    <option value="Remove LCD">Remove LCD</option>
-                                                    <option value="Install LCD">Install LCD</option>
-                                                    <option value="Fixed Lcd">Fixed LCD </option>
-                                                    <option value="Remove Polization Film">Sorting+Remove Polization Film
-                                                    </option>
-                                                    <option value="Clean+Glue+Install Polization Film">Clean+Glue+Install
-                                                        Polization
-                                                        Film
-                                                    </option>
-                                                <?php } elseif ($department_id == 7 || $department_id == 13 || $department_id == 23 || $department_id == 22) { ?>
-                                                    <option value="Clean">Clean </option>
-                                                    <option value="Packing">Packing </option>
-                                                    <option value="Full Painting Packing">Full Painting Packing</option>
-                                                    <option value="Sanding">Sanding </option>
-                                                    <option value="Bodywork">Bodywork </option>
-                                                    <option value="Taping">Taping </option>
-                                                    <?php if ($user_id == 280) {
-                                                    ?>
-                                                        <option value="Low Generation">Low Generation</option>
-                                                        <option value="Full Painting">Full Painting A+C+D</option>
-                                                        <option value="Keyboard Lacker">Keyboard Lacker</option>
-                                                        <option value="A panel paint">A Panel Paint</option>
-                                                    <?php
-                                                    } ?>
-                                                <?php } elseif ($department_id == 7 || $department_id == 8) { ?>
-
-                                                    <option value="Low Generation">Low Generation</option>
-                                                    <option value="Full Painting">Full Painting A+C+D</option>
-                                                    <option value="Keyboard Lacker">Keyboard Lacker</option>
-                                                    <option value="A panel paint">A Panel Paint</option>
-                                                <?php } elseif ($department_id == 14) { ?>
-
-                                                    <option value="Unlock">Unlock </option>
-                                                    <option value="Chargin">Chargin </option>
-                                                    <option value="Openning Battery And Cell Change">Openning Battery And
-                                                        Cell
-                                                        Change
-                                                    </option>
-                                                <?php } elseif ($department_id == 9) { ?>
+                                                <?php if ($department_id == 9) { ?>
 
                                                     <option value="BIOS Lock High Gen">BIOS Lock High Gen</option>
                                                     <option value="BIOS Lock Low Gen">BIOS Lock Low Gen</option>
@@ -451,18 +376,6 @@ if (strtotime(date('Y-m-d 08:00:00')) < $now && $now > $_SESSION['expire0'] && $
                                                         Display
                                                         /
                                                         Account Lock/ Ports Issue</option>
-                                                <?php } elseif ($department_id == 13) { ?>
-
-                                                    <option value="Clean">Clean </option>
-                                                    <option value="Packing">Packing </option>
-                                                    <option value="Full Painting Packing">Full Painting Packing</option>
-                                                <?php } elseif ($department_id == 22) { ?>
-
-                                                    <option value="Designing + Pasting">Designing + Pasting </option>
-                                                    <option value="Pasting">Pasting </option>
-                                                <?php } elseif ($department_id == 23) { ?>
-
-                                                    <option value="Cleaning">Cleaning </option>
                                                 <?php } ?>
                                             </select>
 
@@ -513,28 +426,8 @@ if (strtotime(date('Y-m-d 08:00:00')) < $now && $now > $_SESSION['expire0'] && $
 
                                                 $query_run = mysqli_query($connection, $query);
                                                 $sum = 0;
-                                                if ($department_id == 1) {
-                                                    if ($user_role == 33) {
-                                                        $target = 400.00;
-                                                    } else {
-                                                        $target = 50;
-                                                    }
-                                                } elseif ($department_id == 10) {
-                                                    $target = 120;
-                                                } elseif ($department_id == 7) {
+                                                if ($department_id == 9) {
                                                     $target = 100;
-                                                } elseif ($department_id == 8) {
-                                                    $target = 200;
-                                                } elseif ($department_id == 14) {
-                                                    $target = 150;
-                                                } elseif ($department_id == 13) {
-                                                    $target = 200;
-                                                } elseif ($department_id == 9) {
-                                                    $target = 100;
-                                                } elseif ($department_id == 22) {
-                                                    $target = 150;
-                                                } elseif ($department_id == 23) {
-                                                    $target = 200;
                                                 }
                                                 foreach ($query_run as $data) {
                                                     $sum = $data['target_sum'];
@@ -551,33 +444,8 @@ if (strtotime(date('Y-m-d 08:00:00')) < $now && $now > $_SESSION['expire0'] && $
                                                 <?php $query = "SELECT SUM(target) as target_sum FROM performance_record_table WHERE user_id = $user_id AND end_time between '$date'AND '$date2' ";
                                                 $query_run = mysqli_query($connection, $query);
                                                 $sum = 0;
-                                                if ($department_id == 1) {
-                                                    if ($user_role == 33) {
-                                                        echo "Os Installation 1 point for 1 unit";
-                                                    } else {
-                                                        echo "1 point for 1 unit";
-                                                    }
-                                                } elseif ($department_id == 10) {
-                                                    if ($user_role == 9) {
-                                                        echo "Team Leader 2 point for 1 unit";
-                                                    } else {
-                                                        echo "Remove LCD 1 point/Install LCD 1 point/Fix LCD 4 point/Remove Polization Film  1 point/Install Polization Film  2 point";
-                                                    }
-                                                } elseif ($department_id == 7) {
-                                                    echo "Sanding 1.3 point per unit/Taping 1.3 point per unit/Bodywork 2.5 point per unit ";
-                                                } elseif ($department_id == 8) {
-                                                    echo "Low Generation 1 point per unit/High Generation 4 point per unit/A Panel Paint 1 point per unit/Keyboard Lacker 0.4 point per unit";
-                                                } elseif ($department_id == 14) {
-                                                    echo "Openning Battery And Cell Change 3 point per unit/Unlock And Chargine 1 point per unit";
-                                                } elseif ($department_id == 13) {
-                                                    echo "Clean 1 point per unit/Packing 1 point per unit/full painting packing 3.3 point per unit ";
-                                                } elseif ($department_id == 9) {
+                                                if ($department_id == 9) {
                                                     echo "BIOS Lock High Gen 1.66 point per unit/BIOS Lock Low Gen 2.85 point per unit/Other 4 point per unit ";
-                                                } elseif ($department_id == 22) {
-                                                    echo "Designing + Pasting 7.5 point per unit/ Sticker Pasting 1 point per unit";
-                                                } elseif ($department_id == 23) {
-                                                    echo "1 point per unit
-                                            ";
                                                 }
 
                                                 ?>
@@ -770,15 +638,15 @@ if (strtotime(date('Y-m-d 08:00:00')) < $now && $now > $_SESSION['expire0'] && $
                                             $date = $date1->format('Y-m-d 18:46:50');
                                             $date_old = $date1->format('Y-m-d 15:05:00');
                                             $remaining_time = (strtotime($date) - strtotime($current_time)) / 60;
-                                            // if ($remaining_time > 0 && $date_old < $current_time) {
-                                            //     echo " Remaining Time " . round($remaining_time) . " minute";
-                                            // }
+                                            if ($remaining_time > 0 && $date_old < $current_time) {
+                                                // echo " Remaining Time " . round($remaining_time) . " minute";
+                                            }
                                             ?>
                                         </label>
                                         <label>
                                             <?php
                                             $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-                                            $date = $date1->format('Y-m-d 17:45:00');
+                                            $date = $date1->format('Y-m-d 15:45:00');
                                             $date2 = $date1->format('Y-m-d 18:46:50');
                                             $duration = 0;
                                             $spend_time = 0;
@@ -816,8 +684,7 @@ if (strtotime(date('Y-m-d 08:00:00')) < $now && $now > $_SESSION['expire0'] && $
                                                     ?>
                                                     <label class="col-sm-12 col-form-label text-success">You are Late :
                                                         <?php echo $diff->format('%H:%i:%s');
-                                                        echo " HH:MM:ss"; ?>
-                                                        &#128525;
+                                                        echo " HH:MM:ss"; ?>&#128525;
                                                     </label>
                                             <?php
                                                     if ($exist_record == 0) {
@@ -833,7 +700,7 @@ if (strtotime(date('Y-m-d 08:00:00')) < $now && $now > $_SESSION['expire0'] && $
                                             <?php
                                             $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                             $date = $date1->format('Y-m-d 19:10:00');
-                                            $date2 = $date1->format('Y-m-d 20:55:00');
+                                            $date2 = $date1->format('Y-m-d 20:55:50');
                                             $duration = 0;
                                             $spend_time = 0;
                                             $query = "SELECT start_time  FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY performance_id ASC LIMIT 1";
@@ -941,11 +808,10 @@ if (strtotime(date('Y-m-d 08:00:00')) < $now && $now > $_SESSION['expire0'] && $
                                         <tr>
                                             <td><?php echo $data['job_description'] ?></td>
 
-                                            <td><?php if ($department_id == 10) {
-                                                    echo $data['qr_number'] . "/" . $data['lcd_p_n_code'];
-                                                } elseif ($department_id != 10) {
-                                                    echo $data['qr_number'];
-                                                } ?></td>
+                                            <td><?php
+
+                                                echo $data['qr_number'];
+                                                ?></td>
                                             <td><?php echo $data['start_time'] ?></td>
                                             <td><?php echo $data['end_time'] ?></td>
                                             <td><?php echo $data['spend_time'] ?></td>
@@ -954,9 +820,13 @@ if (strtotime(date('Y-m-d 08:00:00')) < $now && $now > $_SESSION['expire0'] && $
                                                 } else {
                                                     echo $j;
                                                 } ?></td>
-                                            <td><?php echo $data['target'];
-                                                if ($data['end_time'] == '0000-00-00 00:00:00') { ?>
-                                                    <i class="fa-duotone fa-circle" style="color:#00ff14"></i><?php } ?>
+                                            <td><?php
+                                                if ($data['target'] == 0.00) {
+                                                    echo $data['target'];
+                                                    echo " ( Rejected Item ) ";
+                                                } else {
+                                                    echo $data['target'];
+                                                } ?>
                                             </td>
                                         </tr>
                                     <?php $y = 0;
@@ -965,33 +835,7 @@ if (strtotime(date('Y-m-d 08:00:00')) < $now && $now > $_SESSION['expire0'] && $
                                 </tbody>
                             </table>
                         <?php }
-                        if ($department_id == 1 && $user_role == 9) { ?>
-                            <table id="tblexportData" class="table table-striped">
-                                <thead>
-                                    <th>Job Description</th>
-                                    <th>Scanned QR Code</th>
-                                    <th>Date Time</th>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-                                    $date = $date1->format('Y-m-d 00:00:00');
-                                    $date2 = $date1->format('Y-m-d 23:59:59');
-                                    $query = "SELECT job_description,qr_number,start_time FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY performance_id DESC";
-                                    $query_run = mysqli_query($connection, $query);
-                                    foreach ($query_run as $data) { ?>
-                                        <tr>
-                                            <td><?php echo $data['job_description'] ?></td>
-                                            <td><?php echo $data['qr_number'] ?></td>
-                                            <td><?php echo $data['start_time'] ?></td>
-                                        </tr>
-                                    <?php }
-                                    ?>
-
-                                </tbody>
-                                <table>
-                                <?php }
-                                ?>
+                        ?>
                     </div>
                 </div>
             </div>
@@ -1079,3 +923,47 @@ if (strtotime(date('Y-m-d 08:00:00')) < $now && $now > $_SESSION['expire0'] && $
         });
     </script>
     <!-- ////////////////////////////////////////////////////////////////////////////////// -->
+    <div class="modal fade " id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content ">
+                <div class="modal-header col-lg-12 ">
+                    Previous Work not Complete
+                </div>
+                <form method="POST">
+                    <div class="col-sm-12 ">
+                        <h4 class="col-lg-8 ">Fixed</h4>
+                        <input type="checkbox" id="fixed" name="fixed">
+                    </div>
+                    <div class="col-sm-12 ">
+                        <h4 class="col-lg-8 ">Can not Fixed</h4>
+                        <input type="checkbox" id="no_fixed" name="no_fixed">
+                    </div>
+                    <button type="submit" name="submit2" id="submit2" class="btn btn-default bg-gradient-success btn-next float-right"> Confirm
+                    </button>
+                </form>
+                <?php
+                if (isset($_POST['submit2'])) {
+                    if (empty($_POST['no_fixed'])) {
+                        header("Location: mb_performance_record.php");
+                    } else {
+                        $can_not_fixed = $_POST['no_fixed'];
+
+                        if ($can_not_fixed == 'on') {
+                            $can_not_fixed = "can not fix";
+                        }
+                        $sql = "UPDATE issue_laptops SET remark='$can_not_fixed' WHERE alsakb_qr='$qr_id'";
+                        $sql_run = mysqli_query($connection, $sql);
+                        echo $sql . "<br>";
+                        $sql = "UPDATE performance_record_table SET status ='3',target='0' WHERE performance_id='$p_id'";
+                        $sql_run = mysqli_query($connection, $sql);
+                        echo $sql . "<br>";
+                        $sql = "UPDATE warehouse_information_sheet SET remarks ='motherboard issue can not fix' WHERE inventory_id='$qr_id'";
+                        $sql_run = mysqli_query($connection, $sql);
+                        echo $sql . "<br>";
+                        header("Location: mb_performance_record.php");
+                    }
+                }
+                ?>
+            </div>
+        </div>
+    </div>

@@ -72,7 +72,7 @@ if (strtotime(date('Y-m-d 09:00:00')) < $now && $now > $_SESSION['expire1'] && $
     session_destroy();
     echo "<p align='center'>Session has been destroyed!!";
     header("Location: ../../index.php");
-} elseif (strtotime(date('Y-m-d 19:15:00')) < $now && $now > $_SESSION['expire3'] && $now < strtotime(date('Y-m-d 20:55:50'))) {
+} elseif (strtotime(date('Y-m-d 19:10:00')) < $now && $now > $_SESSION['expire3'] && $now < strtotime(date('Y-m-d 20:55:50'))) {
     session_destroy();
     echo "<p align='center'>Session has been destroyed!!";
     header("Location: ../../index.php");
@@ -298,7 +298,7 @@ if (strtotime(date('Y-m-d 09:00:00')) < $now && $now > $_SESSION['expire1'] && $
                                         03.05PM</label>
                                     <?php
                                     $date = date('Y-m-d 15:00:00');
-                                    $date2 = date('Y-m-d 18:46:50');
+                                    $date2 = date('Y-m-d 18:15:50');
                                     $query = "SELECT start_time  FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY performance_id ASC LIMIT 1";
                                     $query_run = mysqli_query($connection, $query);
                                     $datetime_1 = '';
@@ -342,11 +342,11 @@ if (strtotime(date('Y-m-d 09:00:00')) < $now && $now > $_SESSION['expire1'] && $
                                             }
                                         }
                                     } ?>
-                                    <label class="col-sm-12 col-form-label">Tea Break Start Time : 06.15PM
+                                    <label class="col-sm-12 col-form-label">Tea Break Start Time : 06.45PM
                                         <?php
                                         $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                         $current_time = $date1->format('Y-m-d H:i:s');
-                                        $date = $date1->format('Y-m-d 18:46:50');
+                                        $date = $date1->format('Y-m-d 18:15:50');
                                         $date_old = $date1->format('Y-m-d 15:05:00');
                                         $remaining_time = (strtotime($date) - strtotime($current_time)) / 60;
                                         if ($remaining_time > 0 && $date_old < $current_time) {
@@ -405,10 +405,10 @@ if (strtotime(date('Y-m-d 09:00:00')) < $now && $now > $_SESSION['expire1'] && $
                                         ?>
                                         </lable>
                                         <label class="col-sm-12 col-form-label">Evening Session Start Time :
-                                            06.45PM</label>
+                                            07.15PM</label>
                                         <?php
                                         $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-                                        $date = $date1->format('Y-m-d 18:40:00');
+                                        $date = $date1->format('Y-m-d 19:10:00');
                                         $date2 = $date1->format('Y-m-d 20:55:50');
                                         $duration = 0;
                                         $spend_time = 0;
@@ -417,7 +417,7 @@ if (strtotime(date('Y-m-d 09:00:00')) < $now && $now > $_SESSION['expire1'] && $
                                         $datetime_1 = '';
                                         $datetime_2 = '';
                                         foreach ($query_run as $data) {
-                                            $datetime_1 = date('Y-m-d 18:45:00');
+                                            $datetime_1 = date('Y-m-d 19:15:00');
                                             $datetime_2 = $data['start_time'];
                                         }
 
