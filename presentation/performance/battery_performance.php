@@ -653,17 +653,25 @@ if (strtotime(date('Y-m-d 09:00:00')) < $now && $now > $_SESSION['expire1'] && $
                                         $date2 = $date1->format('Y-m-d 20:55:50');
                                         $duration = 0;
                                         $spend_time = 0;
+
+                                        $query_d = "SELECT start_time, end_time FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY start_time ASC LIMIT 1";
+                                        $query_run = mysqli_query($connection, $query_d);
+                                        foreach ($query_run as $data) {
+                                            $start_time = $data['start_time'];
+                                        }
+
                                         $query = "SELECT start_time, end_time FROM performance_record_table WHERE user_id=$user_id AND start_time between '$date'AND '$date2' ORDER BY end_time DESC LIMIT 1";
                                         $query_run = mysqli_query($connection, $query);
                                         $datetime_1 = '';
                                         $end_time = '';
                                         foreach ($query_run as $data) {
-                                            $datetime_1 = date('Y-m-d 20:55:00');
+                                            $datetime_1 = date('Y-m-d 19:15:00');
                                             $end_time = $data['end_time'];
                                         }
 
                                         $start_datetime = new DateTime($datetime_1);
-                                        $diff = $start_datetime->diff(new DateTime($end_time));
+                                        $diff = $start_datetime->diff(new DateTime($start_time));
+
                                         if ($end_time != '') {
                                             $description = "evening session start";
                                             $query = "SELECT track_id FROM time_track WHERE user_id='$user_id' AND description='$description' AND date between '$date'AND '$date2'";
@@ -672,10 +680,10 @@ if (strtotime(date('Y-m-d 09:00:00')) < $now && $now > $_SESSION['expire1'] && $
                                             foreach ($query_run_for_time as $time) {
                                                 $exist_record = $time['track_id'];
                                             }
-                                            if ($end_time > $datetime_1) {
+                                            if ($start_time > $start_datetime) {
 
                                         ?>
-                                                <label class="col-sm-12 col-form-label" style="color: green !important">Extra Time :
+                                                <label class="col-sm-12 col-form-label text-success">Early Scanned :
                                                     <?php echo $diff->format('%H:%i:%s');
                                                     echo " HH:MM:ss"; ?>
                                                     &#128525;</label>
@@ -686,7 +694,7 @@ if (strtotime(date('Y-m-d 09:00:00')) < $now && $now > $_SESSION['expire1'] && $
                                                 }
                                             } else {
                                                 ?>
-                                                <label class="col-sm-12 col-form-label text-danger">You are Late :
+                                                <label class="col-sm-12 col-form-label text-danger">Late Scanned :
                                                     <?php echo $diff->format('%H:%i:%s');
                                                     echo " HH:MM:ss"; ?>
                                                 </label>
