@@ -381,7 +381,7 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
                                             }
                                         }
                                     } ?>
-                                    <label class="col-sm-12 col-form-label">Tea Break Start Time : 06.15PM
+                                    <label class="col-sm-12 col-form-label">Tea Break Start Time : 06.45PM
                                         <?php
                                         $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                         $current_time = $date1->format('Y-m-d H:i:s');
@@ -444,7 +444,7 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
                                         ?>
                                         </lable>
                                         <label class="col-sm-12 col-form-label">Evening Session Start Time :
-                                            06.45PM</label>
+                                            07.15PM</label>
                                         <?php
                                         $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                         $date = $date1->format('Y-m-d 18:40:00');

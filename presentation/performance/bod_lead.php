@@ -27,42 +27,21 @@ if (empty($_GET['user_id'])) {
     </script>";
     }
 }
+if(empty($_GET['technician_id'])){}else{
+    $technician_id=$_GET['technician_id'];
+    $start_time=$_GET['start_time'];
+    $qr_number=$_GET['qr_number'];
+    
+     echo "<script>
+    $(window).load(function() {
+        $('#myModal67').modal('show');
+    });
+    </script>";
+}
 $user_id = $_SESSION['user_id'];
 $user_role = $_SESSION['role_id'];
 $department_id = $_SESSION['department'];
-$query = "SELECT last_login FROM users WHERE user_id ='$user_id'";
-$query_run = mysqli_query($connection, $query);
-$last_login_time = '';
-foreach ($query_run as $data) {
-    $last_login_time = $data['last_login'];
-}
 
-$time = strtotime($last_login_time);
-$last_qr_number = '0';
-$time = strtotime($last_login_time) + 2;
-$date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-$date = $date1->format('Y-m-d H:i:s');
-$test = strtotime($date);
-if ($test < $time) {
-    $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-    $date = $date1->format('Y-m-d 00:00:00');
-    //  $date2 = $date1->format('Y-m-d 23:59:59');
-    $query = "SELECT qr_number FROM performance_record_table WHERE user_id ='$user_id'AND status ='0'AND start_time between '$date'AND '$last_login_time' ";
-    $query_run = mysqli_query($connection, $query);
-    if (empty($query_run)) {
-    } else {
-        foreach ($query_run as $data) {
-            $last_qr_number = $data['qr_number'];
-        }
-        if ($last_qr_number != '0') {
-            echo "<script>
-                                    $(window).load(function() {
-                                        $('#myModal4').modal('show');
-                                    });
-                                    </script>";
-        }
-    }
-}
 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
 date_default_timezone_set('Asia/Dubai');
 $timestamp2 = strtotime(date('Y-m-d 13:57:00'));
@@ -114,6 +93,25 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
         <!-- /.info-box -->
     </a>
 </div>
+<div class="col col-sm-6 col-md-3">
+    <?php
+        $date = date('Y-m-d 00:00:00');
+        $date2 = date('Y-m-d 23:59:59');
+        $start_time = $date;
+        $end_time = $date2; ?>
+    <a href="history_record.php">
+        <div class="info-box">
+            <span class="info-box-icon bg-info elevation-1"><i class="fa-solid fa-warehouse"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">History
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </a>
+</div>
 <div class="col col-lg-12 justify-content-center m-auto text-uppercase">
     <div class="row ">
         <div class="col-lg-11 grid-margin stretch-card justify-content-center mx-auto ">
@@ -155,7 +153,8 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
                                 <div class="row">
                                     <label class="col-sm-4 col-form-label">Job Description</label>
                                     <div class="col-sm-8 mt-2">
-                                        <select onchange="checkOptions(this)" name="job_description" class="info_select w-75" style="border-radius: 5px;">
+                                        <select onchange="checkOptions(this)" name="job_description"
+                                            class="info_select w-75" style="border-radius: 5px;">
 
                                             <option selected value="<?php echo $last_job ?>"><?php echo $last_job ?>
                                             </option>
@@ -171,7 +170,8 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
                                 <div class="row">
                                     <label class="col-sm-4 col-form-label">Technician ID</label>
                                     <div class="col-sm-8 mt-2">
-                                        <select onchange="checkOptions(this)" name="technician_id" class="info_select w-75" style="border-radius: 5px;">
+                                        <select onchange="checkOptions(this)" name="technician_id"
+                                            class="info_select w-75" style="border-radius: 5px;">
 
                                             <option selected value="<?php echo $last_technician ?>">
                                                 <?php echo $last_technician ?>
@@ -180,9 +180,9 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
                                             $sql_run = mysqli_query($connection, $query);
                                             foreach ($sql_run as $data) {
                                             ?>
-                                                <option value="<?php echo $data['username'] ?>">
-                                                    <?php echo $data['username'] ?>
-                                                </option>
+                                            <option value="<?php echo $data['username'] ?>">
+                                                <?php echo $data['username'] ?>
+                                            </option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -190,7 +190,8 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
                                 <div class=" row">
                                     <label class="col-sm-4 col-form-label">Scan QR Code OR MFG</label>
                                     <div class="col-sm-8">
-                                        <input class="w-75" style="color:black !important" type="text" id="qr" name="qr" placeholder=" scan qr code here">
+                                        <input class="w-75" style="color:black !important" type="text" id="qr" name="qr"
+                                            placeholder=" scan qr code here">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -219,7 +220,8 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
                                 <input type="hidden" name="user_id" value="<?php echo $user_id ?>">
                                 <input type="hidden" name="user_role" value="<?php echo $user_role ?>">
                                 <input type="hidden" name="department_id" value="<?php echo $department_id ?>">
-                                <button type="submit" name="submit" id="submit" class="btn mb-2 mt-4 btn-primary btn-sm  mx-auto text-center d-none"></button>
+                                <button type="submit" name="submit" id="submit"
+                                    class="btn mb-2 mt-4 btn-primary btn-sm  mx-auto text-center d-none"></button>
                             </form>
                             <div class="row">
                                 <label class="col-sm-6 col-form-label">Received QTY</label>
@@ -301,19 +303,19 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
                                         if ($datetime_2 < $datetime_1) {
 
                                     ?>
-                                            <label class="col-sm-12 col-form-label text-success">You are Earlier :
-                                                <?php echo $diff->i . ' Minutes' ?>
-                                                minute &#128525;</label>
-                                            <?php
+                                    <label class="col-sm-12 col-form-label text-success">You are Earlier :
+                                        <?php echo $diff->i . ' Minutes' ?>
+                                        minute &#128525;</label>
+                                    <?php
                                             if ($exist_record == 0) {
                                                 $query = "INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','1')";
                                                 $query_run = mysqli_query($connection, $query);
                                             }
                                         } else {
                                             ?>
-                                            <label class="col-sm-12 col-form-label text-danger">You are Late :
-                                                <?php echo $diff->h . ":" . $diff->i . ' Minutes' ?>
-                                                minute</label>
+                                    <label class="col-sm-12 col-form-label text-danger">You are Late :
+                                        <?php echo $diff->h . ":" . $diff->i . ' Minutes' ?>
+                                        minute</label>
                                     <?php
                                             if ($exist_record == 0) {
                                                 $query = "INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','0')";
@@ -361,18 +363,18 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
                                         if ($datetime_2 < $datetime_1) {
 
                                     ?>
-                                            <label class="col-sm-12 col-form-label text-danger">You are Earlier :
-                                                <?php echo $diff->i . ' Minutes' ?></label>
-                                            <?php
+                                    <label class="col-sm-12 col-form-label text-danger">You are Earlier :
+                                        <?php echo $diff->i . ' Minutes' ?></label>
+                                    <?php
                                             if ($exist_record == 0) {
                                                 $query = "INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','1')";
                                                 $query_run = mysqli_query($connection, $query);
                                             }
                                         } else {
                                             ?>
-                                            <label class="col-sm-12 col-form-label text-danger">You are Late :
-                                                <?php echo $diff->i . ' Minutes' ?>
-                                            </label>
+                                    <label class="col-sm-12 col-form-label text-danger">You are Late :
+                                        <?php echo $diff->i . ' Minutes' ?>
+                                    </label>
                                     <?php
                                             if ($exist_record == 0) {
                                                 $query = "INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','0')";
@@ -410,19 +412,19 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
                                         if ($datetime_2 < $datetime_1) {
 
                                     ?>
-                                            <label class="col-sm-12 col-form-label text-success">You are Earlier :
-                                                <?php echo $diff->i . ' Minutes' ?>
-                                                minute &#128525;</label>
-                                            <?php
+                                    <label class="col-sm-12 col-form-label text-success">You are Earlier :
+                                        <?php echo $diff->i . ' Minutes' ?>
+                                        minute &#128525;</label>
+                                    <?php
                                             if ($exist_record == 0) {
                                                 $query = "INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','1')";
                                                 $query_run = mysqli_query($connection, $query);
                                             }
                                         } else {
                                             ?>
-                                            <label class="col-sm-12 col-form-label text-danger">You are Late :
-                                                <?php echo $diff->i . ' Minutes'; ?>
-                                                minute</label>
+                                    <label class="col-sm-12 col-form-label text-danger">You are Late :
+                                        <?php echo $diff->i . ' Minutes'; ?>
+                                        minute</label>
                                     <?php
                                             if ($exist_record == 0) {
                                                 $query = "INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','0')";
@@ -430,11 +432,11 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
                                             }
                                         }
                                     } ?>
-                                    <label class="col-sm-12 col-form-label">Tea Break Start Time : 06.45PM
+                                    <label class="col-sm-12 col-form-label">Tea Break Start Time : 06.15PM
                                         <?php
                                         $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                         $current_time = $date1->format('Y-m-d H:i:s');
-                                        $date = $date1->format('Y-m-d 18:46:50');
+                                        $date = $date1->format('Y-m-d 18:45:50');
                                         $date_old = $date1->format('Y-m-d 15:05:00');
                                         $remaining_time = (strtotime($date) - strtotime($current_time)) / 60;
                                         // if ($remaining_time > 0 && $date_old < $current_time) {
@@ -446,7 +448,7 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
                                         <?php
                                         $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                         $date = $date1->format('Y-m-d 15:45:00');
-                                        $date2 = $date1->format('Y-m-d 18:46:50');
+                                        $date2 = $date1->format('Y-m-d 18:45:50');
                                         $duration = 0;
                                         $spend_time = 0;
                                         $query = "SELECT end_time  FROM performance_record_table WHERE user_id=$user_id AND end_time between '$date'AND '$date2' ORDER BY performance_id DESC LIMIT 1";
@@ -471,21 +473,21 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
                                             if ($datetime_2 < $datetime_1) {
 
                                         ?>
-                                                <label class="col-sm-12 col-form-label text-danger">You are Earlier :
-                                                    <?php echo $diff->format('%H:%i:%s');
+                                        <label class="col-sm-12 col-form-label text-danger">You are Earlier :
+                                            <?php echo $diff->format('%H:%i:%s');
                                                     echo " HH:MM:ss"; ?></label>
-                                                <?php
+                                        <?php
                                                 if ($exist_record == 0) {
                                                     $query = "INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','1')";
                                                     $query_run = mysqli_query($connection, $query);
                                                 }
                                             } elseif ($datetime_2 > $datetime_1) {
                                                 ?>
-                                                <label class="col-sm-12 col-form-label text-success">You are Late :
-                                                    <?php echo $diff->format('%H:%i:%s');
+                                        <label class="col-sm-12 col-form-label text-success">You are Late :
+                                            <?php echo $diff->format('%H:%i:%s');
                                                     echo " HH:MM:ss"; ?>
-                                                    &#128525;
-                                                </label>
+                                            &#128525;
+                                        </label>
                                         <?php
                                                 if ($exist_record == 0) {
                                                     $query = "INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','0')";
@@ -496,10 +498,10 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
                                         ?>
                                         </lable>
                                         <label class="col-sm-12 col-form-label">Evening Session Start Time :
-                                            07.15PM</label>
+                                            06.45PM</label>
                                         <?php
                                         $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
-                                        $date = $date1->format('Y-m-d 19:10:00');
+                                        $date = $date1->format('Y-m-d 18:40:00');
                                         $date2 = $date1->format('Y-m-d 20:55:50');
                                         $duration = 0;
                                         $spend_time = 0;
@@ -508,7 +510,7 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
                                         $datetime_1 = '';
                                         $datetime_2 = '';
                                         foreach ($query_run as $data) {
-                                            $datetime_1 = date('Y-m-d 19:15:00');
+                                            $datetime_1 = date('Y-m-d 18:45:00');
                                             $datetime_2 = $data['start_time'];
                                         }
 
@@ -525,19 +527,19 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
                                             if ($datetime_2 < $datetime_1) {
 
                                         ?>
-                                                <label class="col-sm-12 col-form-label text-success">You are Earlier :
-                                                    <?php echo $diff->i . ' Minutes' ?>
-                                                    minute &#128525;</label>
-                                                <?php
+                                        <label class="col-sm-12 col-form-label text-success">You are Earlier :
+                                            <?php echo $diff->i . ' Minutes' ?>
+                                            minute &#128525;</label>
+                                        <?php
                                                 if ($exist_record == 0) {
                                                     $query = "INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','1')";
                                                     $query_run = mysqli_query($connection, $query);
                                                 }
                                             } else {
                                                 ?>
-                                                <label class="col-sm-12 col-form-label text-danger">You are Late :
-                                                    <?php echo $diff->i . ' Minutes' ?>
-                                                    minute</label>
+                                        <label class="col-sm-12 col-form-label text-danger">You are Late :
+                                            <?php echo $diff->i . ' Minutes' ?>
+                                            minute</label>
                                         <?php
                                                 if ($exist_record == 0) {
                                                     $query = "INSERT INTO `time_track`( `user_id`, `description`, `time`, `status`) VALUES ('$user_id','$description','$diff->h:$diff->i','0')";
@@ -574,7 +576,7 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
 <div class="container-fluid">
 
     <div class='row'>
-        <div class="col col-lg-6 justify-content-center m-auto text-uppercase">
+        <div class="col col-lg-6 justify-content-center  text-uppercase">
             <table id="tblexportData" class="table table-striped">
                 <thead>
                     <th>Employee Name</th>
@@ -591,10 +593,11 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
                         $username = $data['username'];
                         $user_id = $data['user_id'];
                     ?>
-                        <tr>
-                            <td><a href="bod_lead.php?user_id=<?php echo $user_id ?>&username=<?php echo $username ?>"><?php echo $username; ?></a>
-                            </td>
-                            <td><?php
+                    <tr>
+                        <td><a
+                                href="bod_lead.php?user_id=<?php echo $user_id ?>&username=<?php echo $username ?>"><?php echo $username; ?></a>
+                        </td>
+                        <td><?php
                                 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                 $date = $date1->format('Y-m-d 00:00:00');
                                 $date2 = $date1->format('Y-m-d 23:59:59');
@@ -606,7 +609,7 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
                                     echo $a['technician_id'];
                                     $okkoma = $a['technician_id'];
                                 } ?></td>
-                            <td><?php
+                        <td><?php
                                 $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
                                 $date = $date1->format('Y-m-d 00:00:00');
                                 $date2 = $date1->format('Y-m-d 23:59:59');
@@ -617,9 +620,9 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
                                     echo $b['status1'];
                                     $iwara = $b['status1'];
                                 } ?></td>
-                            <td><?php $ithuru = $okkoma - $iwara;
+                        <td><?php $ithuru = $okkoma - $iwara;
                                 echo $ithuru; ?></td>
-                        </tr>
+                    </tr>
                     <?php }
                     ?>
 
@@ -670,9 +673,9 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
                     foreach ($query_run as $data) {
                         $received_qr = $data['qr_number'];
                     ?>
-                        <tr>
-                            <td><?php echo $received_qr ?></td>
-                            <?php
+                    <tr>
+                        <td><?php echo $received_qr ?></td>
+                        <?php
                             $query = "SELECT technician_id FROM performance_record_table WHERE qr_number='$received_qr' AND (job_description='send to Bodywork') AND start_time between '$date'AND '$date2' ORDER BY performance_id DESC";
                             $query_run1 = mysqli_query($connection, $query);
                             $technician_id = 'not distributed';
@@ -683,32 +686,32 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
                                 }
                             }
                             ?>
-                            <td><?php if ($technician_id == 'not distributed') {
+                        <td><?php if ($technician_id == 'not distributed') {
                                     echo "Not Scanned";
                                 } else {
                                     echo "<div class='text-success'>Scanned</div>";
                                 } ?></td>
-                            <?php $query = "SELECT status FROM performance_record_table WHERE qr_number='$received_qr' AND (job_description='Sanding' OR job_description='Taping' OR job_description='Bodywork' ) AND start_time between '$date'AND '$date2' ORDER BY performance_id DESC";
+                        <?php $query = "SELECT status FROM performance_record_table WHERE qr_number='$received_qr' AND (job_description='Sanding' OR job_description='Taping' OR job_description='Bodywork' ) AND start_time between '$date'AND '$date2' ORDER BY performance_id DESC";
                             $query_run1 = mysqli_query($connection, $query);
                             $status = 'not start';
                             foreach ($query_run1 as $status1) {
                                 $status = $status1['status'];
                             } ?>
-                            <td><?php if ($status == 0) {
+                        <td><?php if ($status == 0) {
                                     echo "<div class='text-warning'>On Going</div>";
                                 } elseif ($status == 1) {
                                     echo "<div class='text-success'>Completed</div>";
                                 } else {
                                     echo $status;
                                 } ?></td>
-                            <td><?php if ($technician_id == 'not distributed') {
+                        <td><?php if ($technician_id == 'not distributed') {
                                     echo $technician_id;
                                 } else {
                                     echo "<div class='text-success'>" . $technician_id . "<div>";
                                 } ?>
 
 
-                        </tr>
+                    </tr>
                     <?php }
                     ?>
 
@@ -739,7 +742,8 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
         </div>
     </div>
 </div>
-<div class="modal fade " id="myModal69" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+<div class="modal fade " id="myModal69" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    data-backdrop="static" data-keyboard="false" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content ">
             <div class="modal-header col-lg-12" style=" font-size: 30px;">
@@ -768,8 +772,8 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
                                 foreach ($query_run as $data) {
                                     $qr_number = $data['qr_number'];
                                 ?><tr>
-                                        <td><?php echo $qr_number; ?></td>
-                                        <?php
+                                    <td><?php echo $qr_number; ?></td>
+                                    <?php
                                         $query = "SELECT status,job_description FROM performance_record_table WHERE user_id='$test_id' AND qr_number='$qr_number' AND start_time between '$date'AND '$date2'";
                                         $query_run = mysqli_query($connection, $query);
                                         $status1 = 300;
@@ -779,16 +783,16 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
                                             $jd = $data['job_description'];
                                         }
                                         ?>
-                                        <td><?php if ($status1 == 1) {
+                                    <td><?php if ($status1 == 1) {
                                                 echo "Completed";
                                             } elseif ($status1 == 0) {
                                                 echo "On Going";
                                             } else {
                                                 echo "Not Start";
                                             } ?>
-                                        </td>
-                                        <td><?php echo $jd ?></td>
-                                    </tr>
+                                    </td>
+                                    <td><?php echo $jd ?></td>
+                                </tr>
                                 <?php
                                 }
                                 ?>
@@ -805,45 +809,60 @@ if (strtotime(date('Y-m-d 08:59:00')) < $now && $now > $_SESSION['expire1'] && $
 
     </div>
 </div>
+<div class="modal fade " id="myModal67" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    data-backdrop="static" data-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content ">
+            <div class="modal-header col-lg-12" style=" font-size: 30px;">
+
+                This PC Already Assign to <?php echo $technician_id ?> in day <?php echo $start_time ?>
+            </div>
+            <button data-dismiss="modal" class="close " type="button" area-label="close">
+                <div class="w-10">close</div>
+            </button>
+        </div>
+
+    </div>
+</div>
 <script>
-    var time = new Date();
-    var today = time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate() + " " + time.getHours() + ":" +
-        time
-        .getMinutes() + ":" + time.getSeconds();
-    document.getElementById("time").textContent = today;
+var time = new Date();
+var today = time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate() + " " + time.getHours() + ":" +
+    time
+    .getMinutes() + ":" + time.getSeconds();
+document.getElementById("time").textContent = today;
 
-    let searchbar = document.querySelector('input[name="qr"]');
-    searchbar.focus();
-    search.value = '';
+let searchbar = document.querySelector('input[name="qr"]');
+searchbar.focus();
+search.value = '';
 
-    var otherInput;
+var otherInput;
 
-    function checkOptions(select) {
-        otherInput = document.getElementById('lcd_p_n_code');
-        if (select.options[select.selectedIndex].value == "Remove LCD") {
-            otherInput.style.display = 'block';
+function checkOptions(select) {
+    otherInput = document.getElementById('lcd_p_n_code');
+    if (select.options[select.selectedIndex].value == "Remove LCD") {
+        otherInput.style.display = 'block';
 
-        } else {
-            otherInput.style.display = 'none';
-        }
+    } else {
+        otherInput.style.display = 'none';
     }
+}
 </script>
 
 <style>
-    [type="text"] {
-        height: 22px;
-        margin-top: 4px;
-        font-size: 10px;
-        border: 1px solid #f1f1f1;
-        border-radius: 5px;
-        font-size: 12px;
-        padding: 10px;
-        font-family: "Poppins", sans-serif;
-        color: #000 !important;
-    }
+[type="text"] {
+    height: 22px;
+    margin-top: 4px;
+    font-size: 10px;
+    border: 1px solid #f1f1f1;
+    border-radius: 5px;
+    font-size: 12px;
+    padding: 10px;
+    font-family: "Poppins", sans-serif;
+    color: #000 !important;
+}
 
-    .col-form-label {
-        font-size: 16px;
-    }
+.col-form-label {
+    font-size: 16px;
+}
 </style>
 <?php include_once '../includes/footer.php'; ?>

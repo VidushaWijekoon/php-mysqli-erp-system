@@ -419,6 +419,7 @@ if (strtotime(date('Y-m-d 08:00:00')) < $now && $now > $_SESSION['expire0'] && $
                                                     <option value="Sanding">Sanding </option>
                                                     <option value="Bodywork">Bodywork </option>
                                                     <option value="Taping">Taping </option>
+                                                    <option value="bodywork+sanding+taping">Bodywork+Sanding+Taping </option>
                                                     <?php if ($user_id == 280) {
                                                     ?>
                                                         <option value="Low Generation">Low Generation</option>
@@ -564,7 +565,7 @@ if (strtotime(date('Y-m-d 08:00:00')) < $now && $now > $_SESSION['expire0'] && $
                                                         echo "Remove LCD 1 point/Install LCD 1 point/Fix LCD 4 point/Remove Polization Film  1 point/Install Polization Film  2 point";
                                                     }
                                                 } elseif ($department_id == 7) {
-                                                    echo "Sanding 1.3 point per unit/Taping 1.3 point per unit/Bodywork 2.5 point per unit ";
+                                                    echo "Sanding 1.66 point per unit/Taping 1.66 point per unit/Bodywork 2.5 point per unit / Bodywork+Sanding+Taping 3.3";
                                                 } elseif ($department_id == 8) {
                                                     echo "Low Generation 1 point per unit/High Generation 4 point per unit/A Panel Paint 1 point per unit/Keyboard Lacker 0.4 point per unit";
                                                 } elseif ($department_id == 14) {

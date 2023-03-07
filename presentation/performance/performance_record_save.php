@@ -100,7 +100,7 @@ if ($row == 0) {
 }
 //update
 if ($end_time == "0000-00-00 00:00:00" && $same_jd_count == 1 && $status == 0) {
-   
+
     $working_time_in_seconds;
     $start_time = 0000 - 00 - 00;
     $query = "SELECT * FROM performance_record_table WHERE user_id ='$user_id'AND (qr_number ='$search_value') AND
@@ -131,20 +131,19 @@ if ($end_time == "0000-00-00 00:00:00" && $same_jd_count == 1 && $status == 0) {
                 status = 1
                 WHERE performance_id = $performance_id";
     $query_run = mysqli_query($connection, $query);
-    if($department_id ==9){
+    if ($department_id == 9) {
         $query22 = "UPDATE issue_laptops
         SET
         status = 2,
         received_date = now()
         WHERE alsakb_qr = $search_value";
-    $query_run22 = mysqli_query($connection, $query22);
+        $query_run22 = mysqli_query($connection, $query22);
     }
     if ($department_id == 2) {
         header('Location: inventory_performance.php');
     } else {
         header('Location: performance_record.php');
     }
-
 } elseif ($same_jd_count == 0) {
 
     $date1 = new DateTime('now', new DateTimeZone('Asia/Dubai'));
@@ -172,22 +171,24 @@ if ($end_time == "0000-00-00 00:00:00" && $same_jd_count == 1 && $status == 0) {
         }
     } elseif ($department_id == 7) {
         if ($job_description == "Sanding") {
-            $target = 1.30;
+            $target = 1.66;
         } elseif ($job_description == "Bodywork") {
             $target = 2.50;
         } elseif ($job_description == "Taping") {
-            $target = 1.30;
+            $target = 1.66;
+        } elseif ($job_description == "bodywork+sanding+taping") {
+            $target = 3.33;
         }
-        if($user_id== 280){
- if ($job_description == "Low Generation") {
-            $target = 1;
-        } elseif ($job_description == "Full Painting") {
-            $target = 4;
-        } elseif ($job_description == "Keyboard Lacker") {
-            $target = 0.4;
-        } elseif ($job_description == "A panel paint") {
-            $target = 1;
-        }
+        if ($user_id == 280) {
+            if ($job_description == "Low Generation") {
+                $target = 1;
+            } elseif ($job_description == "Full Painting") {
+                $target = 4;
+            } elseif ($job_description == "Keyboard Lacker") {
+                $target = 0.4;
+            } elseif ($job_description == "A panel paint") {
+                $target = 1;
+            }
         }
     } elseif ($department_id == 8) {
         if ($job_description == "Low Generation") {
@@ -221,8 +222,8 @@ if ($end_time == "0000-00-00 00:00:00" && $same_jd_count == 1 && $status == 0) {
         } elseif ($job_description == "BIOS Lock Low Gen") {
             $target = 2.85;
         } elseif ($job_description == "No Power / No Display / Account Lock/ Ports Issue") {
-            $target = 4;}
-
+            $target = 4;
+        }
     } elseif ($department_id == 22) {
         if ($job_description == "Designing + Pasting") {
             $target = 7.5;
@@ -243,7 +244,8 @@ if ($end_time == "0000-00-00 00:00:00" && $same_jd_count == 1 && $status == 0) {
             if ($row != 0) {
                 $query = "SELECT qr_number FROM performance_record_table WHERE lcd_p_n_code='$scanned_qr' ";
                 $sql = mysqli_query($connection, $query);
-                if (empty($sql)) {} else {
+                if (empty($sql)) {
+                } else {
                     if ($lcd_p_n == 0) {
                         $lcd_p_n = $scanned_qr;
                     }
@@ -344,14 +346,13 @@ if ($end_time == "0000-00-00 00:00:00" && $same_jd_count == 1 && $status == 0) {
 
         header('Location: performance_record.php');
     }
-
 } elseif ($end_time != "0000-00-00 00:00:00" && $same_jd_count == 1 && $status == 1) {
-    ?>
-<script>
-if (window.confirm('Already you completed this machine under this job description')) {
-    document.location = ' performance_record.php';
-}
-</script>
+?>
+    <script>
+        if (window.confirm('Already you completed this machine under this job description')) {
+            document.location = ' performance_record.php';
+        }
+    </script>
 <?php
 
 }
