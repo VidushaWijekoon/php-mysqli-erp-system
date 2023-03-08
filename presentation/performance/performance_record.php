@@ -419,6 +419,7 @@ if (strtotime(date('Y-m-d 08:00:00')) < $now && $now > $_SESSION['expire0'] && $
                                                     <option value="Sanding">Sanding </option>
                                                     <option value="Bodywork">Bodywork </option>
                                                     <option value="Taping">Taping </option>
+                                                    <option value="D Back Cover Taping">D Back Cover Taping</option>
                                                     <option value="bodywork+sanding+taping">Bodywork+Sanding+Taping </option>
                                                     <?php if ($user_id == 280) {
                                                     ?>

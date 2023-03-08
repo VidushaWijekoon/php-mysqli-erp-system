@@ -7,6 +7,7 @@ if (!isset($_SESSION['user_id'])) {
 $role_id = $_SESSION['role_id'];
 $department = $_SESSION['department'];
 $logged_in_id = $_SESSION['logged_in_id'];
+$username = $_SESSION['username'];
 if (isset($_POST['logged_out'])) {
     echo
     $query_2 = "UPDATE users_logged_in_time SET logged_out = CURRENT_TIMESTAMP WHERE logged_in_id = '{$logged_in_id}' LIMIT 1";
@@ -28,19 +29,14 @@ if (isset($_POST['logged_out'])) {
     <link rel="icon" type="image/x-icon" href="../../static/dist/img/alsakb logo.png">
 
     <!-- Google Font: Source Sans Pro -->
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet"> -->
-    <link rel="stylesheet" href="../../static/dist/fonts/Poppins-Regular.ttf">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../static/plugins/fontawesome-pro/css/all.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../static/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="../../static/dist/css/adminlte.css">
-    <!-- overlayScrollbars Side Navbar -->
-    <link rel="stylesheet" href="../../static/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+
     <!-- Customer CSS -->
     <link rel="stylesheet" href="../../static/dist/css/style.css">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="../../static/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!--  -->
     <link rel="stylesheet" href="../../static/plugins/select2/css/select2.min.css">
 
@@ -49,11 +45,6 @@ if (isset($_POST['logged_out'])) {
 
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
-
-        <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <div id="loader"></div>
-        </div>
 
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-dark">
@@ -66,26 +57,10 @@ if (isset($_POST['logged_out'])) {
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
-                    </a>
-                </li>
-                <li class="nav-item dropdown nav-user">
-                    <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../../static/dist/img/avatar4.png" alt="" class="user-avatar-md rounded-circle" width="30px"></a>
-                    <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
-                        <div class="nav-user-info bg-info">
-                            <h5 class="mb-0 text-white nav-user-name p-3 text-center text-capitalize">
-                                <?php echo $_SESSION['username']; ?>!</h5>
-                        </div>
-                        <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
-                        <a class="dropdown-item" href=""><i class="fas fa-cog mr-2"></i>Setting</a>
-                        <form action="" method="POST">
-                            <button class="dropdown-item" name="logged_out" type="submit"><i class="fas fa-power-off mr-2"></i>Logout</a>
-                        </form>
-                    </div>
-                </li>
+                <form action="" method="POST" style="margin: 0 5px 0 10px">
+                    <span class="mt-auto mt-1">Welcome <?php echo $username; ?>! <a href="../../logout.php?">Logout</a>
+                    </span>
+                </form>
             </ul>
         </nav>
         <!-- /.navbar -->

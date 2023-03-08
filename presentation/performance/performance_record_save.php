@@ -178,6 +178,8 @@ if ($end_time == "0000-00-00 00:00:00" && $same_jd_count == 1 && $status == 0) {
             $target = 1.66;
         } elseif ($job_description == "bodywork+sanding+taping") {
             $target = 3.33;
+        } elseif ($job_description == "D Back Cover Taping") {
+            $target = 1.66;
         }
         if ($user_id == 280) {
             if ($job_description == "Low Generation") {
